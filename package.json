@@ -2,7 +2,6 @@
   "name": "irminsul-gg",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://bcheung98.github.io/irminsul-gg",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -24,8 +23,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
