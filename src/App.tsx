@@ -54,7 +54,6 @@ function App() {
                                 <CardMedia
                                     sx={{ height: "270px" }}
                                     image={`${URL}/wallpapers/Genshin.png`}
-                                    title="Genshin Impact"
                                 />
                                 <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
                                     <Typography variant="h6" fontWeight="500">
@@ -73,7 +72,6 @@ function App() {
                                 <CardMedia
                                     sx={{ height: "270px" }}
                                     image={`${URL}/wallpapers/HSR.png`}
-                                    title="Honkai: Star Rail"
                                 />
                                 <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
                                     <Typography variant="h6" fontWeight="500">
@@ -89,7 +87,6 @@ function App() {
                                 <CardMedia
                                     sx={{ height: "270px" }}
                                     image={`${URL}/wallpapers/ZZZ.png`}
-                                    title="Zenless Zone Zero"
                                 />
                                 <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
                                     <Typography variant="h6" fontWeight="500">
@@ -108,7 +105,6 @@ function App() {
                                 <CardMedia
                                     sx={{ height: "270px" }}
                                     image={`${URL}/wallpapers/WutheringWaves.png`}
-                                    title="Wuthering Waves"
                                 />
                                 <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
                                     <Typography variant="h6" fontWeight="500">
