@@ -51,85 +51,115 @@ function App() {
                     px: 5,
                     pt: 15,
                     height: "100vh",
-                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(20, 20, 20, 1) 95%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(23, 46, 98, 1), rgba(73, 218, 243, 0.1) 50%, rgba(23, 46, 98, 1) 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover"
+                    backgroundSize: "100vw"
                 }}
             >
-                <Typography
+                <Box
                     sx={{
-                        color: `white`,
-                        fontSize: "24pt",
-                        fontFamily: "Rowdies"
+                        textAlign: "center",
+                        mb: "50px"
                     }}
                 >
-                    The database for gacha games.
-                </Typography>
-                <Grid container spacing={8} sx={{ my: "100px" }}>
-                    {
-                        websites.map((site, index) => (
-                            <Grid key={index} size="auto">
-                                <ButtonBase disableRipple href={site.href}>
-                                    {/* 
+                    <Typography
+                        sx={{
+                            color: `white`,
+                            fontSize: "24pt",
+                            fontFamily: "Rowdies"
+                        }}
+                    >
+                        The database for gacha games.
+                    </Typography>
+                    <Typography
+                        sx={{
+                            color: `white`,
+                            fontSize: "16pt",
+                            fontWeight: 300,
+                            fontFamily: "Rowdies"
+                        }}
+                    >
+                        Select a branch of Irminsul to view its database:
+                    </Typography>
+                </Box>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        mb: "100px"
+                    }}
+                >
+                    <Grid container spacing={5}>
+                        {
+                            websites.map((site, index) => (
+                                <Grid key={index} size="auto" sx={{ mx: "auto" }}>
+                                    <ButtonBase disableRipple href={site.href}>
+                                        {/* 
                                         I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
                                         but that resulted in some very tiny border clippings.
                                         You probably wouldn't notice if no one said anything,
                                         but it bothered me enough to spend an hour trying to fix it.
                                     */}
-                                    <Box
-                                        onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
-                                        onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
-                                    >
-                                        <Card
-                                            sx={{
-                                                borderRadius: "15px 15px 0px 0px",
-                                                backgroundColor: `rgb(15, 15, 15)`,
-                                            }}
-                                        >
-                                            <img
-                                                id={`${site.tag.toLowerCase()}-image`}
-                                                src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
-                                                alt={`${site.tag}`}
-                                                style={{
-                                                    position: "relative",
-                                                    zIndex: 0,
-                                                    width: "400px",
-                                                    transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`, // Base image transformation
-                                                    transition: "transform .2s"
-                                                }}
-                                            />
-                                        </Card>
                                         <Box
-                                            sx={{
-                                                position: "relative",
-                                                zIndex: 1,
-                                                p: 2,
-                                                mt: "-5px",
-                                                height: "32px",
-                                                borderTop: `5px solid rgb(168, 147, 105)`,
-                                                borderRadius: "0px 0px 15px 15px",
-                                                backgroundColor: `rgb(15, 15, 15)`,
-                                                color: `white`,
-                                                textAlign: "center"
-                                            }}
+                                            onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
+                                            onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
                                         >
-                                            <Typography
+                                            <Card
                                                 sx={{
-                                                    color: `white`,
-                                                    fontSize: "15pt",
-                                                    fontWeight: 300,
-                                                    fontFamily: "Rowdies"
+                                                    width: "400px",
+                                                    height: "225px",
+                                                    borderRadius: "15px 15px 0px 0px",
+                                                    backgroundColor: `rgb(15, 15, 15)`,
                                                 }}
                                             >
-                                                {site.title}
-                                            </Typography>
+                                                <img
+                                                    id={`${site.tag.toLowerCase()}-image`}
+                                                    src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
+                                                    alt={`${site.tag}`}
+                                                    style={{
+                                                        position: "relative",
+                                                        zIndex: 0,
+                                                        width: "400px",
+                                                        height: "auto",
+                                                        aspectRatio: "16 / 9",
+                                                        transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`,
+                                                        transition: "transform .2s"
+                                                    }}
+                                                />
+                                            </Card>
+                                            <Box
+                                                sx={{
+                                                    position: "relative",
+                                                    zIndex: 1,
+                                                    p: 2,
+                                                    mt: "-5px",
+                                                    height: "32px",
+                                                    borderTop: `5px solid rgb(168, 147, 105)`,
+                                                    borderRadius: "0px 0px 15px 15px",
+                                                    backgroundColor: `rgb(15, 15, 15)`,
+                                                    color: `white`,
+                                                    textAlign: "center"
+                                                }}
+                                            >
+                                                <Typography
+                                                    sx={{
+                                                        color: `white`,
+                                                        fontSize: "15pt",
+                                                        fontWeight: 300,
+                                                        fontFamily: "Rowdies"
+                                                    }}
+                                                >
+                                                    {site.title}
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </ButtonBase>
-                            </Grid>
-                        ))
-                    }
-                </Grid>
+                                    </ButtonBase>
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </Box>
             </Box>
         </React.Fragment>
     )
