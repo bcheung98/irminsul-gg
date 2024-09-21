@@ -1,36 +1,38 @@
 import React from "react"
-import { AppBar, Container, Toolbar, Typography, Box, ButtonBase, Card, CardMedia, CardContent, CardHeader, Avatar } from "@mui/material"
+import { AppBar, Toolbar, Typography, Box, ButtonBase, Card, CardHeader, Avatar } from "@mui/material"
 import Grid from "@mui/material/Grid2"
-
-const URL = "https://assets.irminsul.gg/main"
 
 function App() {
 
     return (
         <React.Fragment>
             <AppBar
-                position="static"
+                position="fixed"
                 sx={{
                     backgroundColor: `rgb(15, 15, 15)`,
-                    borderBottom: `1px solid gray`
+                    borderBottom: `1px solid rgb(168, 147, 105)`
                 }}
             >
-                <Container maxWidth="xl" sx={{ margin: 0 }}>
-                    <Toolbar disableGutters>
+                <Toolbar>
+                    <Box sx={{ mr: "45px" }} />
+                    <ButtonBase disableRipple href="/">
                         <CardHeader
                             avatar={
                                 <Avatar
-                                    src="https://irminsul.gg/logo512.png"
+                                    variant="square"
+                                    src="https://assets.irminsul.gg/main/icons/Irminsul.png"
                                     alt="irminsul.gg"
                                     sx={{
                                         height: "48px",
-                                        width: "48px"
+                                        width: "48px",
                                     }}
                                 />
                             }
                             title={
-                                <Typography variant="h6"
+                                <Typography
                                     sx={{
+                                        fontFamily: "Bungee, Roboto",
+                                        fontSize: "15pt",
                                         letterSpacing: ".1rem",
                                         color: `white`
                                     }}
@@ -40,100 +42,94 @@ function App() {
                             }
                             sx={{ px: 0 }}
                         />
-                    </Toolbar>
-                </Container>
+                    </ButtonBase>
+                </Toolbar>
             </AppBar>
             <Box
+                id="main"
                 sx={{
-                    p: 5,
+                    px: 5,
+                    pt: 15,
                     height: "100vh",
-                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 1) 90%), url(${URL}/wallpapers/Genshin.png)`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(20, 20, 20, 1) 95%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover"
                 }}
             >
-                <Typography variant="h6" sx={{ color: `white`, textAlign: "center", fontWeight: "500", mb: "100px" }}>
-                    A database for gacha games
-                </Typography>
-                <Box
+                <Typography
                     sx={{
-                        display: "block",
-                        width: "90%",
-                        mx: "auto"
+                        color: `white`,
+                        fontSize: "24pt",
+                        fontFamily: "Rowdies"
                     }}
                 >
-                    <Grid container spacing={5}>
-                        <Grid size={4}>
-                            <ButtonBase
-                                disableRipple
-                                href={`https://bcheung98.github.io/project-irminsul/`}
-                            >
-                                <Card sx={{ width: "480px", borderRadius: "15px", backgroundColor: `rgb(15, 15, 15)` }}>
-                                    <CardMedia
-                                        sx={{ height: "270px" }}
-                                        image={`${URL}/wallpapers/Genshin.png`}
-                                    />
-                                    <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
-                                        <Typography variant="h6" fontWeight="500">
-                                            Genshin Impact
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </ButtonBase>
-                        </Grid>
-                        <Grid size={4}>
-                            <ButtonBase
-                                disableRipple
-                                href={`https://bcheung98.github.io/project-stellaron/`}
-                            >
-                                <Card sx={{ width: "480px", borderRadius: "15px", backgroundColor: `rgb(15, 15, 15)` }}>
-                                    <CardMedia
-                                        sx={{ height: "270px" }}
-                                        image={`${URL}/wallpapers/HSR.png`}
-                                    />
-                                    <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
-                                        <Typography variant="h6" fontWeight="500">
-                                            Honkai: Star Rail
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </ButtonBase>
-                        </Grid>
-                        {/* <Grid size={4}>
-                        <ButtonBase disabled>
-                            <Card sx={{ width: "480px", borderRadius: "15px", backgroundColor: `rgb(15, 15, 15)` }}>
-                                <CardMedia
-                                    sx={{ height: "270px" }}
-                                    image={`${URL}/wallpapers/ZZZ.png`}
-                                />
-                                <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
-                                    <Typography variant="h6" fontWeight="500">
-                                        Zenless Zone Zero
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </ButtonBase>
-                    </Grid> */}
-                        <Grid size={4}>
-                            <ButtonBase
-                                disableRipple
-                                href={`https://bcheung98.github.io/project-tacetite/`}
-                            >
-                                <Card sx={{ width: "480px", borderRadius: "15px", backgroundColor: `rgb(15, 15, 15)` }}>
-                                    <CardMedia
-                                        sx={{ height: "270px" }}
-                                        image={`${URL}/wallpapers/WutheringWaves.png`}
-                                    />
-                                    <CardContent sx={{ backgroundColor: `rgb(15, 15, 15)`, color: `white`, textAlign: "center" }}>
-                                        <Typography variant="h6" fontWeight="500">
-                                            Wuthering Waves
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </ButtonBase>
-                        </Grid>
-                    </Grid>
-                </Box>
+                    The database for gacha games.
+                </Typography>
+                <Grid container spacing={8} sx={{ my: "100px" }}>
+                    {
+                        websites.map((site, index) => (
+                            <Grid key={index} size="auto">
+                                <ButtonBase disableRipple href={site.href}>
+                                    {/* 
+                                        I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
+                                        but that resulted in some very tiny border clippings.
+                                        You probably wouldn't notice if no one said anything,
+                                        but it bothered me enough to spend an hour trying to fix it.
+                                    */}
+                                    <Box
+                                        onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
+                                        onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
+                                    >
+                                        <Card
+                                            sx={{
+                                                borderRadius: "15px 15px 0px 0px",
+                                                backgroundColor: `rgb(15, 15, 15)`,
+                                            }}
+                                        >
+                                            <img
+                                                id={`${site.tag.toLowerCase()}-image`}
+                                                src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
+                                                alt={`${site.tag}`}
+                                                style={{
+                                                    position: "relative",
+                                                    zIndex: 0,
+                                                    width: "400px",
+                                                    transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`, // Base image transformation
+                                                    transition: "transform .2s"
+                                                }}
+                                            />
+                                        </Card>
+                                        <Box
+                                            sx={{
+                                                position: "relative",
+                                                zIndex: 1,
+                                                p: 2,
+                                                mt: "-5px",
+                                                height: "32px",
+                                                borderTop: `5px solid rgb(168, 147, 105)`,
+                                                borderRadius: "0px 0px 15px 15px",
+                                                backgroundColor: `rgb(15, 15, 15)`,
+                                                color: `white`,
+                                                textAlign: "center"
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    color: `white`,
+                                                    fontSize: "15pt",
+                                                    fontWeight: 300,
+                                                    fontFamily: "Rowdies"
+                                                }}
+                                            >
+                                                {site.title}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </ButtonBase>
+                            </Grid>
+                        ))
+                    }
+                </Grid>
             </Box>
         </React.Fragment>
     )
@@ -141,3 +137,45 @@ function App() {
 }
 
 export default App
+
+const websites = [
+    {
+        title: "Genshin Impact",
+        tag: "Genshin",
+        href: "https://bcheung98.github.io/project-irminsul/",
+        imageTransform: {
+            scale: 1.5,
+            translate: [0, 20]
+        }
+    },
+    {
+        title: "Honkai: Star Rail",
+        tag: "HSR",
+        href: "https://bcheung98.github.io/project-stellaron/",
+        imageTransform: {
+            scale: 1,
+            translate: [0, 0]
+        }
+    },
+    {
+        title: "Wuthering Waves",
+        tag: "WutheringWaves",
+        href: "https://bcheung98.github.io/project-tacetite/",
+        imageTransform: {
+            scale: 1,
+            translate: [0, 0]
+        }
+    }
+]
+
+const zoomOnHover = (mouseDirection: "enter" | "leave", tag: string, transformData: { scale: number, translate: number[] }) => {
+    let image = document.getElementById(`${tag.toLowerCase()}-image`)
+    if (image !== null) {
+        if (mouseDirection === "enter") {
+            image.style.transform = `scale(${transformData.scale + .1}) translate(${transformData.translate[0]}px, ${transformData.translate[1]}px)`
+        }
+        else {
+            image.style.transform = `scale(${transformData.scale}) translate(${transformData.translate[0]}px, ${transformData.translate[1]}px)`
+        }
+    }
+}
