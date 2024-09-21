@@ -172,7 +172,7 @@ const websites = [
     {
         title: "Genshin Impact",
         tag: "Genshin",
-        href: "https://bcheung98.github.io/project-irminsul/",
+        href: "https://genshin.irminsul.gg/",
         imageTransform: {
             scale: 1.5,
             translate: [0, 20]
