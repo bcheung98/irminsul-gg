@@ -51,7 +51,7 @@ function App() {
                     px: 5,
                     pt: 15,
                     height: "100vh",
-                    backgroundImage: `linear-gradient(to bottom, rgba(23, 46, 98, 1), rgba(73, 218, 243, 0.1) 50%, rgba(23, 46, 98, 1) 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(23, 46, 98, 1) 15%, rgba(73, 218, 243, 0.1) 50%, rgba(23, 46, 98, 1) 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "100vw"
                 }}
