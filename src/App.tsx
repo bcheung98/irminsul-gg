@@ -53,7 +53,7 @@ function App() {
                     height: "100vh",
                     backgroundImage: `linear-gradient(to bottom, rgba(23, 46, 98, 1) 15%, rgba(73, 218, 243, 0.1) 50%, rgba(23, 46, 98, 1) 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
-                    backgroundSize: "100vw"
+                    backgroundSize: "cover"
                 }}
             >
                 <Box
@@ -86,11 +86,10 @@ function App() {
                     sx={{
                         display: "flex",
                         justifyContent: "center",
-                        alignContent: "center",
-                        mb: "100px"
+                        alignContent: "center"
                     }}
                 >
-                    <Grid container spacing={5}>
+                    <Grid container spacing={5} sx={{ mb: "100px" }}>
                         {
                             websites.map((site, index) => (
                                 <Grid
@@ -214,7 +213,7 @@ const websites = [
     {
         title: "Honkai: Star Rail",
         tag: "HSR",
-        enabled: false,
+        enabled: true,
         href: "https://hsr.irminsul.gg/",
         imageTransform: {
             scale: 1,
