@@ -9,7 +9,7 @@ function App() {
             <AppBar
                 position="fixed"
                 sx={{
-                    backgroundColor: `rgb(15, 15, 15)`,
+                    backgroundColor: `rgb(0, 16, 32)`,
                     borderBottom: `1px solid rgb(168, 147, 105)`
                 }}
             >
@@ -93,17 +93,31 @@ function App() {
                     <Grid container spacing={5}>
                         {
                             websites.map((site, index) => (
-                                <Grid key={index} size="auto" sx={{ mx: "auto" }}>
-                                    <ButtonBase disableRipple href={site.href}>
+                                <Grid
+                                    key={index}
+                                    size="auto"
+                                    sx={{
+                                        mx: "auto",
+                                        borderRadius: "15px",
+                                        backgroundColor: `rgb(15, 15, 15)`,
+                                    }}
+                                >
+                                    <ButtonBase disableRipple href={site.enabled ? site.href : ""}>
                                         {/* 
-                                        I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
-                                        but that resulted in some very tiny border clippings.
-                                        You probably wouldn't notice if no one said anything,
-                                        but it bothered me enough to spend an hour trying to fix it.
-                                    */}
+                                            I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
+                                            but that resulted in some very tiny border clippings.
+                                            You probably wouldn't notice if no one said anything,
+                                            but it bothered me enough to spend an hour trying to fix it.
+                                        */}
                                         <Box
                                             onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
                                             onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
+                                            sx={
+                                                site.enabled ?
+                                                    { opacity: 1, cursor: "pointer" }
+                                                    :
+                                                    { opacity: 0.5, cursor: "auto" }
+                                            }
                                         >
                                             <Card
                                                 sx={{
@@ -132,26 +146,44 @@ function App() {
                                                 sx={{
                                                     position: "relative",
                                                     zIndex: 1,
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    textAlign: "center",
                                                     p: 2,
                                                     mt: "-5px",
-                                                    height: "32px",
+                                                    height: "40px",
                                                     borderTop: `5px solid rgb(168, 147, 105)`,
                                                     borderRadius: "0px 0px 15px 15px",
-                                                    backgroundColor: `rgb(15, 15, 15)`,
-                                                    color: `white`,
-                                                    textAlign: "center"
+                                                    backgroundColor: `rgb(0, 16, 32)`,
+                                                    color: `white`
                                                 }}
                                             >
-                                                <Typography
-                                                    sx={{
-                                                        color: `white`,
-                                                        fontSize: "15pt",
-                                                        fontWeight: 300,
-                                                        fontFamily: "Rowdies"
-                                                    }}
-                                                >
-                                                    {site.title}
-                                                </Typography>
+                                                <Box>
+                                                    <Typography
+                                                        sx={{
+                                                            color: `white`,
+                                                            fontSize: "15pt",
+                                                            fontWeight: 300,
+                                                            fontFamily: "Rowdies"
+                                                        }}
+                                                    >
+                                                        {site.title}
+                                                    </Typography>
+                                                    {
+                                                        !site.enabled &&
+                                                        <Typography
+                                                            sx={{
+                                                                color: `white`,
+                                                                fontSize: "12pt",
+                                                                fontWeight: 300,
+                                                                fontFamily: "Rowdies"
+                                                            }}
+                                                        >
+                                                            Coming soon!
+                                                        </Typography>
+                                                    }
+                                                </Box>
                                             </Box>
                                         </Box>
                                     </ButtonBase>
@@ -172,6 +204,7 @@ const websites = [
     {
         title: "Genshin Impact",
         tag: "Genshin",
+        enabled: true,
         href: "https://genshin.irminsul.gg/",
         imageTransform: {
             scale: 1.5,
@@ -181,7 +214,8 @@ const websites = [
     {
         title: "Honkai: Star Rail",
         tag: "HSR",
-        href: "https://bcheung98.github.io/project-stellaron/",
+        enabled: false,
+        href: "https://hsr.irminsul.gg/",
         imageTransform: {
             scale: 1,
             translate: [0, 0]
@@ -190,7 +224,8 @@ const websites = [
     {
         title: "Wuthering Waves",
         tag: "WutheringWaves",
-        href: "https://bcheung98.github.io/project-tacetite/",
+        enabled: false,
+        href: "https://wuwa.irminsul.gg/",
         imageTransform: {
             scale: 1,
             translate: [0, 0]
