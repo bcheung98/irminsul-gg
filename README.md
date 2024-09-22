@@ -1,4 +1,4 @@
-# [Irminsul.GG](https://irminsul.gg/)
+# **[Irminsul.GG](https://irminsul.gg/)**
 
 The database for gacha games.
 
