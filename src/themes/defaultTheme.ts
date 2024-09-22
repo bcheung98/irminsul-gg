@@ -4,6 +4,7 @@ export const defaultTheme = {
             styleOverrides: {
                 root: {
                     fontFamily: "Rowdies, Roboto, sans-serif",
+                    fontWeight: 300
                 }
             }
         },
@@ -25,10 +26,10 @@ export const defaultTheme = {
         color: "rgb(168, 147, 105)",
     },
     paper: {
-        backgroundColor: "rgb(15, 15, 15)",
+        backgroundColor: "rgb(0, 16, 32)",
     },
     card: {
-        backgroundColor: "rgb(15, 15, 15)",
+        backgroundColor: "rgb(0, 16, 32)",
     },
     text: {
         color: "white",
