@@ -2,10 +2,12 @@
 
 The database for gacha games.
 
-Irminsul.gg branches:
+---
 
-**[Genshin Impact](https://genshin.irminsul.gg/)**
+Irminsul.GG branches:
 
-**[Honkai: Star Rail](https://hsr.irminsul.gg/)**
+**Genshin Impact**: [Site](https://genshin.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-irminsul)
 
-**[Wuthering Waves](https://wuwa.irminsul.gg/)**
+**Honkai: Star Rail**: [Site](https://hsr.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-stellaron)
+
+**Wuthering Waves**: [Site](https://wuwa.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-tacetite)
