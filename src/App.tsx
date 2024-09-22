@@ -1,198 +1,170 @@
 import React from "react"
-import { AppBar, Toolbar, Typography, Box, ButtonBase, Card, CardHeader, Avatar } from "@mui/material"
+
+// Component imports
+import Nav from "./Nav"
+import BottomNav from "./BottomNav"
+
+// MUI imports
+import theme from "./themes/theme"
+import { ThemeProvider } from "@mui/material/styles"
+import { Typography, Box, ButtonBase, Card } from "@mui/material"
 import Grid from "@mui/material/Grid2"
 
 function App() {
 
     return (
-        <React.Fragment>
-            <AppBar
-                position="fixed"
-                sx={{
-                    backgroundColor: `rgb(0, 16, 32)`,
-                    borderBottom: `1px solid rgb(168, 147, 105)`
-                }}
-            >
-                <Toolbar>
-                    <Box sx={{ mr: "45px" }} />
-                    <ButtonBase disableRipple href="/">
-                        <CardHeader
-                            avatar={
-                                <Avatar
-                                    variant="square"
-                                    src="https://assets.irminsul.gg/main/icons/Irminsul.png"
-                                    alt="irminsul.gg"
-                                    sx={{
-                                        height: "48px",
-                                        width: "48px",
-                                    }}
-                                />
-                            }
-                            title={
-                                <Typography
-                                    sx={{
-                                        fontFamily: "Bungee, Roboto",
-                                        fontSize: "15pt",
-                                        letterSpacing: ".1rem",
-                                        color: `white`
-                                    }}
-                                >
-                                    Irminsul.GG
-                                </Typography>
-                            }
-                            sx={{ px: 0 }}
-                        />
-                    </ButtonBase>
-                </Toolbar>
-            </AppBar>
-            <Box
-                id="main"
-                sx={{
-                    px: 5,
-                    pt: 15,
-                    height: "100vh",
-                    backgroundImage: `linear-gradient(to bottom, rgba(23, 46, 98, 1) 15%, rgba(73, 218, 243, 0.1) 50%, rgba(23, 46, 98, 1) 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover"
-                }}
-            >
+        <ThemeProvider theme={theme}>
+            <React.Fragment>
+                <Nav />
                 <Box
+                    id="main"
                     sx={{
-                        textAlign: "center",
-                        mb: "50px"
+                        px: 5,
+                        pt: 15,
+                        minHeight: "100vh",
+                        backgroundImage: `linear-gradient(to bottom, ${theme.body.backgroundColor} 15%, rgba(73, 218, 243, 0.2) 50%, ${theme.body.backgroundColor} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "50% 50%"
                     }}
                 >
-                    <Typography
+                    <Box
                         sx={{
-                            color: `white`,
-                            fontSize: "24pt",
-                            fontFamily: "Rowdies"
+                            textAlign: "center",
+                            mb: "50px"
                         }}
                     >
-                        The database for gacha games.
-                    </Typography>
-                    <Typography
+                        <Typography
+                            sx={{
+                                color: `${theme.text.color}`,
+                                fontSize: "24pt",
+                                fontFamily: "Rowdies"
+                            }}
+                        >
+                            The database for gacha games.
+                        </Typography>
+                        <Typography
+                            sx={{
+                                color: `${theme.text.color}`,
+                                fontSize: "16pt",
+                                fontWeight: 300,
+                                fontFamily: "Rowdies"
+                            }}
+                        >
+                            Select a branch of Irminsul to view its database:
+                        </Typography>
+                    </Box>
+                    <Box
                         sx={{
-                            color: `white`,
-                            fontSize: "16pt",
-                            fontWeight: 300,
-                            fontFamily: "Rowdies"
+                            display: "flex",
+                            justifyContent: "center",
+                            alignContent: "center",
                         }}
                     >
-                        Select a branch of Irminsul to view its database:
-                    </Typography>
-                </Box>
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignContent: "center"
-                    }}
-                >
-                    <Grid container spacing={5} sx={{ mb: "100px" }}>
-                        {
-                            websites.map((site, index) => (
-                                <Grid
-                                    key={index}
-                                    size="auto"
-                                    sx={{
-                                        mx: "auto",
-                                        borderRadius: "15px",
-                                        backgroundColor: `rgb(15, 15, 15)`,
-                                    }}
-                                >
-                                    <ButtonBase disableRipple href={site.enabled ? site.href : ""}>
-                                        {/* 
-                                            I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
+                        <Grid container spacing={5} sx={{ mb: "100px" }}>
+                            {
+                                websites.map((site, index) => (
+                                    <Grid
+                                        key={index}
+                                        size="auto"
+                                        sx={{
+                                            mx: "auto",
+                                            borderRadius: "15px",
+                                            backgroundColor: `${theme.card.backgroundColor}`,
+                                        }}
+                                    >
+                                        <ButtonBase disableRipple href={site.enabled ? site.href : ""}>
+                                            {/* I know you can do the below using the other MUI Card components (like CardMedia, CardContent), 
                                             but that resulted in some very tiny border clippings.
                                             You probably wouldn't notice if no one said anything,
-                                            but it bothered me enough to spend an hour trying to fix it.
-                                        */}
-                                        <Box
-                                            onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
-                                            onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
-                                            sx={
-                                                site.enabled ?
-                                                    { opacity: 1, cursor: "pointer" }
-                                                    :
-                                                    { opacity: 0.5, cursor: "auto" }
-                                            }
-                                        >
-                                            <Card
-                                                sx={{
-                                                    width: "400px",
-                                                    height: "225px",
-                                                    borderRadius: "15px 15px 0px 0px",
-                                                    backgroundColor: `rgb(15, 15, 15)`,
-                                                }}
-                                            >
-                                                <img
-                                                    id={`${site.tag.toLowerCase()}-image`}
-                                                    src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
-                                                    alt={`${site.tag}`}
-                                                    style={{
-                                                        position: "relative",
-                                                        zIndex: 0,
-                                                        width: "400px",
-                                                        height: "auto",
-                                                        aspectRatio: "16 / 9",
-                                                        transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`,
-                                                        transition: "transform .2s"
-                                                    }}
-                                                />
-                                            </Card>
+                                            but it bothered me enough to spend an hour trying to fix it. */}
                                             <Box
-                                                sx={{
-                                                    position: "relative",
-                                                    zIndex: 1,
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    textAlign: "center",
-                                                    p: 2,
-                                                    mt: "-5px",
-                                                    height: "40px",
-                                                    borderTop: `5px solid rgb(168, 147, 105)`,
-                                                    borderRadius: "0px 0px 15px 15px",
-                                                    backgroundColor: `rgb(0, 16, 32)`,
-                                                    color: `white`
-                                                }}
+                                                onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
+                                                onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
+                                                sx={
+                                                    site.enabled ?
+                                                        { opacity: 1, cursor: "pointer" }
+                                                        :
+                                                        { opacity: 0.5, cursor: "auto" }
+                                                }
                                             >
-                                                <Box>
-                                                    <Typography
-                                                        sx={{
-                                                            color: `white`,
-                                                            fontSize: "15pt",
-                                                            fontWeight: 300,
-                                                            fontFamily: "Rowdies"
+                                                <Card
+                                                    sx={{
+                                                        width: "400px",
+                                                        height: "225px",
+                                                        borderRadius: "15px 15px 0px 0px",
+                                                        backgroundColor: `${theme.card.backgroundColor}`,
+                                                    }}
+                                                >
+                                                    <img
+                                                        id={`${site.tag.toLowerCase()}-image`}
+                                                        src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
+                                                        alt={`${site.tag}`}
+                                                        style={{
+                                                            position: "relative",
+                                                            zIndex: 0,
+                                                            width: "400px",
+                                                            height: "auto",
+                                                            aspectRatio: "16 / 9",
+                                                            transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`,
+                                                            transition: "transform .2s"
                                                         }}
-                                                    >
-                                                        {site.title}
-                                                    </Typography>
-                                                    {
-                                                        !site.enabled &&
+                                                    />
+                                                </Card>
+                                                <Box
+                                                    sx={{
+                                                        position: "relative",
+                                                        zIndex: 1,
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
+                                                        textAlign: "center",
+                                                        p: 2,
+                                                        mt: "-5px",
+                                                        height: "40px",
+                                                        borderTop: `5px solid ${theme.border.color}`,
+                                                        borderRadius: "0px 0px 15px 15px",
+                                                        backgroundColor: `${theme.appbar.backgroundColor}`,
+                                                        color: `${theme.text.color}`
+                                                    }}
+                                                >
+                                                    <Box>
                                                         <Typography
                                                             sx={{
-                                                                color: `white`,
-                                                                fontSize: "12pt",
+                                                                color: `${theme.text.color}`,
+                                                                fontSize: "15pt",
                                                                 fontWeight: 300,
                                                                 fontFamily: "Rowdies"
                                                             }}
                                                         >
-                                                            Coming soon!
+                                                            {site.title}
                                                         </Typography>
-                                                    }
+                                                        {
+                                                            !site.enabled &&
+                                                            <Typography
+                                                                sx={{
+                                                                    color: `${theme.text.color}`,
+                                                                    fontSize: "12pt",
+                                                                    fontWeight: 300,
+                                                                    fontFamily: "Rowdies"
+                                                                }}
+                                                            >
+                                                                Coming soon!
+                                                            </Typography>
+                                                        }
+                                                    </Box>
                                                 </Box>
                                             </Box>
-                                        </Box>
-                                    </ButtonBase>
-                                </Grid>
-                            ))
-                        }
-                    </Grid>
+                                        </ButtonBase>
+                                    </Grid>
+                                ))
+                            }
+                        </Grid>
+                    </Box>
                 </Box>
-            </Box>
-        </React.Fragment>
+                <BottomNav />
+            </React.Fragment>
+        </ThemeProvider>
     )
 
 }
@@ -223,7 +195,7 @@ const websites = [
     {
         title: "Wuthering Waves",
         tag: "WutheringWaves",
-        enabled: false,
+        enabled: true,
         href: "https://wuwa.irminsul.gg/",
         imageTransform: {
             scale: 1,
