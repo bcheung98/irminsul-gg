@@ -21,7 +21,7 @@ function App() {
                     pt: 15,
                     height: "100vh",
                     maxWidth: "100vw",
-                    backgroundImage: `linear-gradient(to bottom, ${theme.body.backgroundColor} 15%, rgba(73, 218, 243, 0.2) 50%, ${theme.body.backgroundColor} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                    backgroundImage: `linear-gradient(to bottom, ${theme.body.backgroundColor} 5%, rgba(73, 218, 243, 0.2) 50%, ${theme.body.backgroundColor} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "50% 50%"
