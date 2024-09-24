@@ -21,27 +21,22 @@ function About() {
         >
             <Box>
                 <Typography variant="h4" sx={{ mb: "30px" }}>Roadmap to 1.0</Typography>
-                <Typography>In the post below, I mentioned that I would like to polish some things up before a full 1.0 Version of the site. Here is the list of things I will aim to complete for 1.0:</Typography>
+                <Typography>In the post below, I mentioned that I would like to polish some things up before a full 1.0 Version of the site. There are two main things I will aim to complete for 1.0:</Typography>
                 <Typography component="span">
                     <ul>
                         <li>Visual touchups & theming
                             <ul>
-                                There's still a lot of styling adjustments I'd like to do to make the subsites look cleaner. Additionally, I'll be looking to add functionality switch between dark and light themes.
+                                There's still a lot of styling and layout adjustments I'd like to do to make the subsites look cleaner. Additionally, I'll be looking to add functionality switch between dark and light themes.
                             </ul>
                         </li>
                         <li>Mobile formatting
                             <ul>
-                                If you currently try to view the website on a phone, it will look...ugly. This is because I have not implemented mobile formatting yet. I would like to get done so mobile users can view the site without any issues.
-                            </ul>
-                        </li>
-                        <li>Framework upgrade (This one is a bit technical, and deals with a lot of internal site stuff)
-                            <ul>
-                                When I was learning React, I used a framework called "Create React App" (CRA), and since then, its what I have been using to create my websites. It has come to my attention that CRA has fallen out of favor in the web development circle for other better alternatives. Because of this, I will be looking to migrate the site from CRA to another React framework. I don't know which one just yet, but the two I have been looking at are Next.js and Vite.
+                                If you currently try to view the website on a phone, it will look...ugly. The reason it looks awful is because I have not implemented mobile formatting yet, and this is something I would like to get done so mobile users can view the site without any issues.
                             </ul>
                         </li>
                     </ul>
                 </Typography>
-                <Typography>I can't really give you an exact timeframe of when each of these milestones will be completed (because I suck at figuring out how long things will take), but I'll be extremely generous and say I'll have this all done by the end of the year. If it isn't done by then, I'll just say Soon™.</Typography><br />
+                <Typography>I can't really give you an exact timeframe of when each of these milestones will be completed (because I suck at figuring out how long things will take), but I'll be extremely generous and say I'll have this all done by the end of November. If it isn't done by then, I'll just say Soon™.</Typography><br />
                 <Typography>- BC (9/23/2024)</Typography>
             </Box>
             <Divider sx={{ my: "20px" }} />
