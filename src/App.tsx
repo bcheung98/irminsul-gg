@@ -35,9 +35,7 @@ function App() {
             })
             .catch(error => console.error(error))
     }, [])
-
-    console.log(websites)
-
+    
     return (
         <ThemeProvider theme={theme}>
             <Box
