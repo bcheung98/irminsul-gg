@@ -77,8 +77,8 @@ function App() {
                                             You probably wouldn't notice if no one said anything,
                                             but it bothered me enough to spend an hour trying to fix it. */}
                                         <Box
-                                            onMouseEnter={() => zoomOnHover("enter", site.tag, site.imageTransform)}
-                                            onMouseLeave={() => zoomOnHover("leave", site.tag, site.imageTransform)}
+                                            onMouseEnter={() => zoomOnHover("enter", site.tag, site.img)}
+                                            onMouseLeave={() => zoomOnHover("leave", site.tag, site.img)}
                                             sx={
                                                 site.enabled ?
                                                     { opacity: 1, cursor: "pointer" }
@@ -96,7 +96,7 @@ function App() {
                                             >
                                                 <img
                                                     id={`${site.tag.toLowerCase()}-image`}
-                                                    src={`https://assets.irminsul.gg/main/wallpapers/${site.tag}.png`}
+                                                    src={site.img.src}
                                                     alt={`${site.tag}`}
                                                     style={{
                                                         position: "relative",
@@ -104,7 +104,7 @@ function App() {
                                                         width: "400px",
                                                         height: "auto",
                                                         aspectRatio: "16 / 9",
-                                                        transform: `scale(${site.imageTransform.scale}) translate(${site.imageTransform.translate[0]}px, ${site.imageTransform.translate[1]}px)`,
+                                                        transform: `scale(${site.img.scale}) translate(${site.img.translate[0]}px, ${site.img.translate[1]}px)`,
                                                         transition: "transform .2s"
                                                     }}
                                                 />
@@ -171,7 +171,8 @@ const websites = [
         tag: "Genshin",
         enabled: true,
         href: "https://genshin.irminsul.gg/",
-        imageTransform: {
+        img: {
+            src: "https://assets.irminsul.gg/main/wallpapers/Genshin.png",
             scale: 1.5,
             translate: [0, 20]
         }
@@ -181,7 +182,8 @@ const websites = [
         tag: "HSR",
         enabled: true,
         href: "https://hsr.irminsul.gg/",
-        imageTransform: {
+        img: {
+            src: "https://assets.irminsul.gg/main/wallpapers/HSR.png",
             scale: 1,
             translate: [0, 0]
         }
@@ -191,21 +193,22 @@ const websites = [
         tag: "WutheringWaves",
         enabled: true,
         href: "https://wuwa.irminsul.gg/",
-        imageTransform: {
-            scale: 1,
+        img: {
+            src: "https://assets.irminsul.gg/main/wallpapers/WutheringWaves.png",
+            scale: 1.2,
             translate: [0, 0]
         }
     }
 ]
 
-const zoomOnHover = (mouseDirection: "enter" | "leave", tag: string, transformData: { scale: number, translate: number[] }) => {
+const zoomOnHover = (mouseDirection: "enter" | "leave", tag: string, img: { scale: number, translate: number[] }) => {
     let image = document.getElementById(`${tag.toLowerCase()}-image`)
     if (image !== null) {
         if (mouseDirection === "enter") {
-            image.style.transform = `scale(${transformData.scale + .1}) translate(${transformData.translate[0]}px, ${transformData.translate[1]}px)`
+            image.style.transform = `scale(${img.scale + .1}) translate(${img.translate[0]}px, ${img.translate[1]}px)`
         }
         else {
-            image.style.transform = `scale(${transformData.scale}) translate(${transformData.translate[0]}px, ${transformData.translate[1]}px)`
+            image.style.transform = `scale(${img.scale}) translate(${img.translate[0]}px, ${img.translate[1]}px)`
         }
     }
 }
