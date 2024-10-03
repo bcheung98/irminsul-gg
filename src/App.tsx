@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 // Component imports
 import Nav from "./Nav"
@@ -35,7 +35,7 @@ function App() {
             })
             .catch(error => console.error(error))
     }, [])
-    
+
     return (
         <ThemeProvider theme={theme}>
             <Box
