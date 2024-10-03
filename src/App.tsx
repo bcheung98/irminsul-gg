@@ -34,7 +34,9 @@ function App() {
                 setWebsites(data)
             })
             .catch(error => console.error(error))
-    }, [JSON.stringify(websites)])
+    }, [])
+
+    console.log(websites)
 
     return (
         <ThemeProvider theme={theme}>
