@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 // Component imports
 import Nav from "./Nav"
@@ -11,7 +11,30 @@ import { ThemeProvider } from "@mui/material/styles"
 import { Typography, Box, ButtonBase, Card } from "@mui/material"
 import Grid from "@mui/material/Grid2"
 
+type WebsiteData = {
+    title: string,
+    tag: string,
+    enabled: boolean,
+    href: string,
+    img: {
+        src: string,
+        scale: number,
+        translate: [number, number]
+    }
+}
+
 function App() {
+
+    const [websites, setWebsites] = useState([])
+
+    useEffect(() => {
+        fetch("https://api.irminsul.gg/websites.json")
+            .then(response => response.json())
+            .then((data) => {
+                setWebsites(data)
+            })
+            .catch(error => console.error(error))
+    }, [JSON.stringify(websites)])
 
     return (
         <ThemeProvider theme={theme}>
@@ -61,7 +84,7 @@ function App() {
                 >
                     <Grid container spacing={5} sx={{ mb: "300px", mx: "25px" }}>
                         {
-                            websites.map((site, index) => (
+                            websites.map((site: WebsiteData, index: number) => (
                                 <Grid
                                     key={index}
                                     size="auto"
@@ -164,42 +187,6 @@ function App() {
 }
 
 export default App
-
-const websites = [
-    {
-        title: "Genshin Impact",
-        tag: "Genshin",
-        enabled: true,
-        href: "https://genshin.irminsul.gg/",
-        img: {
-            src: "https://assets.irminsul.gg/main/wallpapers/Genshin.png",
-            scale: 1.5,
-            translate: [0, 20]
-        }
-    },
-    {
-        title: "Honkai: Star Rail",
-        tag: "HSR",
-        enabled: true,
-        href: "https://hsr.irminsul.gg/",
-        img: {
-            src: "https://assets.irminsul.gg/main/wallpapers/HSR.png",
-            scale: 1,
-            translate: [0, 0]
-        }
-    },
-    {
-        title: "Wuthering Waves",
-        tag: "WutheringWaves",
-        enabled: true,
-        href: "https://wuwa.irminsul.gg/",
-        img: {
-            src: "https://assets.irminsul.gg/main/wallpapers/WutheringWaves.png",
-            scale: 1.2,
-            translate: [0, 0]
-        }
-    }
-]
 
 const zoomOnHover = (mouseDirection: "enter" | "leave", tag: string, img: { scale: number, translate: number[] }) => {
     let image = document.getElementById(`${tag.toLowerCase()}-image`)
