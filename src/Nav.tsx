@@ -32,13 +32,13 @@ function Nav() {
                         title={
                             <Typography
                                 sx={{
-                                    fontFamily: "Bungee, Roboto",
+                                    fontFamily: "Rowdies, Roboto",
                                     fontSize: "16pt",
                                     letterSpacing: ".1rem",
                                     color: `${theme.text.color}`
                                 }}
                             >
-                                Irminsul.GG
+                                IRMINSUL.GG
                             </Typography>
                         }
                         sx={{ px: 0 }}
