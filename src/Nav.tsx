@@ -34,6 +34,7 @@ function Nav() {
                                 sx={{
                                     fontFamily: "Rowdies, Roboto",
                                     fontSize: "16pt",
+                                    fontWeight: 400,
                                     letterSpacing: ".1rem",
                                     color: `${theme.text.color}`
                                 }}
