@@ -8,7 +8,7 @@ import BottomNav from "./BottomNav"
 // MUI imports
 import theme from "./themes/theme"
 import { ThemeProvider } from "@mui/material/styles"
-import { Typography, Box, ButtonBase, Card } from "@mui/material"
+import { Typography, Box, ButtonBase, Card, Avatar } from "@mui/material"
 import Grid from "@mui/material/Grid2"
 
 type WebsiteData = {
@@ -54,17 +54,19 @@ function App() {
                 <Box
                     sx={{
                         textAlign: "center",
-                        mb: "50px"
+                        mb: "50px",
+                        mx: "50px",
                     }}
                 >
                     <Typography
+                        gutterBottom
                         sx={{
                             color: `${theme.text.color}`,
                             fontSize: "24pt",
                             fontWeight: 400
                         }}
                     >
-                        The database for gacha games.
+                        Welcome to IRMINSUL.GG!
                     </Typography>
                     <Typography
                         sx={{
@@ -72,7 +74,8 @@ function App() {
                             fontSize: "16pt"
                         }}
                     >
-                        Select a branch of Irminsul to view its database:
+                        <span style={{ fontWeight: 400 }}>IRMINSUL.GG</span> is a database and companion website for various gacha games.<br />
+                        Select a branch of Irminsul to get started:
                     </Typography>
                 </Box>
                 <Box
@@ -111,20 +114,21 @@ function App() {
                                         >
                                             <Card
                                                 sx={{
-                                                    width: "400px",
-                                                    height: "225px",
+                                                    width: { xs: "200px", sm: "300px", md: "400px" },
+                                                    height: "auto",
+                                                    aspectRatio: "16 / 9",
                                                     borderRadius: "15px 15px 0px 0px",
-                                                    backgroundColor: `${theme.card.backgroundColor}`,
+                                                    background: "none",
+                                                    overflow: "hidden"
                                                 }}
                                             >
-                                                <img
+                                                <Avatar
+                                                    variant="square"
                                                     id={`${site.tag.toLowerCase()}-image`}
                                                     src={site.img.src}
-                                                    alt={`${site.tag}`}
-                                                    style={{
-                                                        position: "relative",
-                                                        zIndex: 0,
-                                                        width: "400px",
+                                                    alt={site.tag}
+                                                    sx={{
+                                                        width: "100%",
                                                         height: "auto",
                                                         aspectRatio: "16 / 9",
                                                         transform: `scale(${site.img.scale}) translate(${site.img.translate[0]}px, ${site.img.translate[1]}px)`,
@@ -134,18 +138,13 @@ function App() {
                                             </Card>
                                             <Box
                                                 sx={{
-                                                    position: "relative",
-                                                    zIndex: 1,
                                                     display: "flex",
                                                     justifyContent: "center",
                                                     alignItems: "center",
                                                     textAlign: "center",
                                                     p: 2,
-                                                    mt: "-5px",
-                                                    height: "40px",
+                                                    height: { xs: "16px", sm: "24px", md: "32px" },
                                                     borderTop: `5px solid ${theme.border.color}`,
-                                                    borderRadius: "0px 0px 15px 15px",
-                                                    backgroundColor: `${theme.appbar.backgroundColor}`,
                                                     color: `${theme.text.color}`
                                                 }}
                                             >
@@ -153,7 +152,7 @@ function App() {
                                                     <Typography
                                                         sx={{
                                                             color: `${theme.text.color}`,
-                                                            fontSize: "15pt"
+                                                            fontSize: { xs: "12pt", sm: "14pt", md: "16pt" }
                                                         }}
                                                     >
                                                         {site.title}
@@ -163,7 +162,7 @@ function App() {
                                                         <Typography
                                                             sx={{
                                                                 color: `${theme.text.color}`,
-                                                                fontSize: "12pt"
+                                                                fontSize: { xs: "8pt", sm: "10pt", md: "12pt" }
                                                             }}
                                                         >
                                                             Coming soon!
