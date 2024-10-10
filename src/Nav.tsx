@@ -14,8 +14,8 @@ function Nav() {
                 borderBottom: `1px solid ${theme.border.color}`
             }}
         >
-            <Toolbar>
-                <Box sx={{ mr: "45px" }} />
+            <Toolbar sx={{ justifyContent: { xs: "center", sm: "left" }, }}>
+                <Box sx={{ mr: "45px", display: { xs: "none", sm: "block" } }} />
                 <ButtonBase disableRipple href="/">
                     <CardHeader
                         avatar={
@@ -36,7 +36,7 @@ function Nav() {
                                     fontSize: "16pt",
                                     fontWeight: 400,
                                     letterSpacing: ".1rem",
-                                    color: `${theme.text.color}`
+                                    color: `${theme.text.color}`,
                                 }}
                             >
                                 IRMINSUL.GG

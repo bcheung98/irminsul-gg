@@ -62,7 +62,7 @@ function App() {
                         gutterBottom
                         sx={{
                             color: `${theme.text.color}`,
-                            fontSize: "24pt",
+                            fontSize: { xs: "20pt", sm: "22pt", md: "24pt" },
                             fontWeight: 400
                         }}
                     >
@@ -71,7 +71,7 @@ function App() {
                     <Typography
                         sx={{
                             color: `${theme.text.color}`,
-                            fontSize: "16pt"
+                            fontSize: { xs: "12pt", sm: "14pt", md: "16pt" }
                         }}
                     >
                         <span style={{ fontWeight: 400 }}>IRMINSUL.GG</span> is a database and companion website for various gacha games.<br />
@@ -85,7 +85,7 @@ function App() {
                         alignContent: "center",
                     }}
                 >
-                    <Grid container spacing={5} sx={{ mb: "300px", mx: "25px" }}>
+                    <Grid container spacing={5} sx={{ mb: { xs: "100px", sm: "300px" }, mx: "25px" }}>
                         {
                             websites.map((site: WebsiteData, index: number) => (
                                 <Grid
@@ -180,7 +180,7 @@ function App() {
                 <About />
                 <BottomNav />
             </Box>
-        </ThemeProvider >
+        </ThemeProvider>
     )
 
 }
