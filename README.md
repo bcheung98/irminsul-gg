@@ -11,3 +11,29 @@ Irminsul.GG branches:
 - **Honkai: Star Rail**: [Site](https://hsr.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-stellaron)
 
 - **Wuthering Waves**: [Site](https://wuwa.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-tacetite)
+
+---
+
+## **Current Roadmap / TODOs**
+
+### All sites:
+- [ ] Functionality to switch between dark and light mode.
+- [ ] Create a consistent theme across all sites.
+
+### Genshin Impact:
+- [x] Current banners on home page.
+- [x] Add more specific timestamps to banner dates.
+- [ ] Enhance TCG deck builder.
+
+### HSR:
+- [ ] Convert site to TypeScript.
+- [ ] Mobile formatting.
+- [ ] Current banners on home page.
+- [ ] Revamp banner archive.
+
+### WuWa:
+- [ ] Mobile formatting.
+- [ ] Ascension materials on character and weapon page.
+- [ ] Complete ascension planner with EXP materials and total cost.
+- [ ] Current banners on home page.
+- [ ] Revamp banner archive.
