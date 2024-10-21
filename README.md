@@ -41,7 +41,7 @@ Irminsul.GG branches:
 ## **Known Issues**
 
 ### Genshin Impact:
-- [ ] Viewing the homepage and Banner Archive on iOS will break the page because iOS parses dates differently, resulting in a error.
-- [ ] A "flashbang" effect is present when opening a page on a new tab.
-- [ ] Colored list rows appear bugged on iOS.
+- [x] ~~Viewing the homepage and Banner Archive on iOS will break the page because iOS parses dates differently, resulting in a error~~.
+- [x] ~~A "flashbang" effect is present when opening a page on a new tab~~.
+- [x] ~~Colored list rows appear bugged on iOS~~.
 - [ ] List row content gets squished on smaller screen sizes.
