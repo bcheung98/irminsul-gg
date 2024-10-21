@@ -17,6 +17,7 @@ Irminsul.GG branches:
 ## **Current Roadmap / TODOs**
 
 ### All sites:
+- [ ] Create error pages for invalid URLs.
 - [ ] Functionality to switch between dark and light mode.
 - [ ] Create a consistent theme across all sites.
 
