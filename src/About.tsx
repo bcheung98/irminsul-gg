@@ -48,16 +48,6 @@ function About() {
                             <li>Search function in the Banner Archive has been enhanced.</li>
                         </ul>
                     </span>
-                    Known issues:
-                    <br />
-                    <span>
-                        <ul className="a">
-                            <li>Viewing the homepage and Banner Archive on iOS will break the page because iOS parses dates differently, resulting in an error.</li>
-                            <li>A "flashbang" effect is present when opening a page on a new tab.</li>
-                            <li>Colored list rows appear bugged on iOS.</li>
-                            <li>List row content gets squished on smaller screen sizes.</li>
-                        </ul>
-                    </span>
                     Mobile formatting and the other changes I made to the Genshin site will be implemented in the coming weeks!
                     <br /><br />
                     - BC (10/20/2024)
