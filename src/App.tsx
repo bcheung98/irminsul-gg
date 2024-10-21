@@ -62,8 +62,8 @@ function App() {
                         gutterBottom
                         sx={{
                             color: `${theme.text.color}`,
-                            fontSize: { xs: "20pt", sm: "22pt", md: "24pt" },
-                            fontWeight: 400
+                            fontSize: { xs: "26px", sm: "29.5px", md: "32px" },
+                            fontWeight: 400,
                         }}
                     >
                         Welcome to IRMINSUL.GG!
@@ -71,7 +71,7 @@ function App() {
                     <Typography
                         sx={{
                             color: `${theme.text.color}`,
-                            fontSize: { xs: "12pt", sm: "14pt", md: "16pt" }
+                            fontSize: { xs: "16px", sm: "19.5px", md: "22px" },
                         }}
                     >
                         <span style={{ fontWeight: 400 }}>IRMINSUL.GG</span> is a database and companion website for various gacha games.<br />
@@ -152,7 +152,7 @@ function App() {
                                                     <Typography
                                                         sx={{
                                                             color: `${theme.text.color}`,
-                                                            fontSize: { xs: "12pt", sm: "14pt", md: "16pt" }
+                                                            fontSize: { xs: "14px", sm: "17.5px", md: "20px" }
                                                         }}
                                                     >
                                                         {site.title}
@@ -162,7 +162,7 @@ function App() {
                                                         <Typography
                                                             sx={{
                                                                 color: `${theme.text.color}`,
-                                                                fontSize: { xs: "8pt", sm: "10pt", md: "12pt" }
+                                                                fontSize: { xs: "12px", sm: "15.5px", md: "18px" }
                                                             }}
                                                         >
                                                             Coming soon!

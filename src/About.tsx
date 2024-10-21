@@ -8,15 +8,17 @@ function About() {
 
     const header = {
         mb: { xs: "10px", sm: "20px" },
-        fontSize: { xs: "20px", sm: "24px" },
+        fontSize: { xs: "22px", sm: "27.5px", md: "30px" },
     }
     const body = {
-        fontSize: { xs: "12px", sm: "16px" },
+        fontSize: { xs: "10px", sm: "13.5px", md: "16px" },
         "ul.a": {
             pl: 2.5,
+            lineHeight: { xs: 2, sm: 1.5 },
         },
         "ul.b": {
             pl: { xs: 1, sm: 2.5 },
+            lineHeight: { xs: 2, sm: 1.5 },
         },
     }
 
@@ -24,7 +26,7 @@ function About() {
         <Box
             sx={{
                 display: "block",
-                width: { xs: "80%", sm: "60%" },
+                width: { xs: "80%", sm: "70%", md: "60%" },
                 mx: "auto",
                 mb: "100px",
                 p: { xs: 2, sm: 5 },
@@ -41,7 +43,6 @@ function About() {
                     Main changes (only on Genshin Impact site):
                     <span>
                         <ul className="a">
-                            <li>The current event banners are now displayed on the homepage.</li>
                             <li>Filters for the Character, Weapon, and TCG pages have been moved to a popup.</li>
                             <li>Adjusted the layout of the Banner Archive.</li>
                             <li>Search function in the Banner Archive has been enhanced.</li>
@@ -57,7 +58,7 @@ function About() {
                             <li>List row content gets squished on smaller screen sizes.</li>
                         </ul>
                     </span>
-                    Mobile formatting and the other changes I made to the Genshin site will be implemented to the other sites soon!
+                    Mobile formatting and the other changes I made to the Genshin site will be implemented in the coming weeks!
                     <br /><br />
                     - BC (10/20/2024)
                 </Typography>
@@ -84,12 +85,10 @@ function About() {
                             <ul className="b">
                                 There's still a lot of styling and layout adjustments I'd like to do to make the subsites look cleaner. Additionally, I'll be looking to add functionality switch between dark and light themes.
                             </ul>
-
                             <li>Mobile formatting</li>
                             <ul className="b">
                                 If you currently try to view the website on a phone, it will look...ugly. The reason it looks awful is because I have not implemented mobile formatting yet, and this is something I would like to get done so mobile users can view the site without any issues.
                             </ul>
-
                         </ul>
                     </span>
                     I can't really give you an exact timeframe of when each of these milestones will be completed (because I suck at figuring out how long things will take), but I'll be extremely generous and say I'll have this all done by the end of November. If it isn't done by then, I'll just say Soon™.
@@ -103,7 +102,7 @@ function About() {
                 <Typography sx={body} component="span">
                     Back in March 2021, when I was first learning how to make websites using React in a coding bootcamp, I decided that it would be a good idea to apply what I've learned to something I really enjoy. Of course, making a website for <a href="https://genshin.hoyoverse.com/en/home"><em>Genshin Impact</em></a>, which came out six months before, was the first thing that came to mind. I wanted to make a simple, single-page database website that showed all the characters and what materials they need to level up, and be able to filter them based off different attributes. At the time, there were only one or two other database websites that provided this kind of information for <em>Genshin Impact</em>, and popular sites such as <em>Project Amber</em> and <em>Hakush.in</em> didn't exist yet. Over the course of a week, I put together the website, and my creative brain named it "Genshin Impact Reference Sheet" (GIRS).
                     <br /><br />
-                    I kept updating the site as new characters were released, and when Version 2.0 of <em>Genshin Impact</em> released in July 2021, I decided to commemorate it with GIRS 2.0. GIRS 2.0 added a popup showing detailed character information displaying character talents and constellations, expanded filters, and a cleaner look from using Material UI. In addition, I implemnted react-redux to help centralize the application state of the site. Once again, I kept updating the site with each new character release, and over time added more features such as tables for character stats, ascension, talent scaling, and levelling.<br /><br />
+                    I kept updating the site as new characters were released, and when Version 2.0 of <em>Genshin Impact</em> released in July 2021, I decided to commemorate it with GIRS 2.0. GIRS 2.0 added a popup showing detailed character information displaying character talents and constellations, expanded filters, and a cleaner look from using Material UI. In addition, I implemented react-redux to help centralize the application state of the site. Once again, I kept updating the site with each new character release, and over time added more features such as tables for character stats, ascension, talent scaling, and levelling.<br /><br />
                     Sometime in the middle of 2022, I wanted to add client-side routing to the site to enable multi-page browsing; this would allow me to add dedicated pages for characters, a section for view weapons, and much more. It was the last thing I needed to turn my little passion project into a full website, and my goal for GIRS 3.0. However, due to a limitation of GitHub Pages and React Router, I was unable to implement this.
                     <br /><br />
                     In January 2023, I found a script that got around GitHub Pages' limitation, and after figuring out how it works, began to work on implementing it to my site. I added pages for weapons, banners, and the newly-released TCG game mode. After finishing GIRS 3.0 revamp, I decided to name the website "Project Irminsul", after <em>Genshin Impact</em>'s <a href="https://genshin-impact.fandom.com/wiki/Irminsul">world tree</a> that serves as a <u>repository for all of the information</u> of the game's universe.
