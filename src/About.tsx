@@ -48,7 +48,7 @@ function About() {
                             <li>Search function in the Banner Archive has been enhanced.</li>
                         </ul>
                     </span>
-                    Mobile formatting and the other changes I made to the Genshin site will be implemented in the coming weeks!
+                    Mobile formatting and the other changes I made to the Genshin site will be implemented to the HSR and WuWa sites in the coming weeks!
                     <br /><br />
                     - BC (10/20/2024)
                 </Typography>
