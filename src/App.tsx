@@ -11,7 +11,7 @@ import { ThemeProvider } from "@mui/material/styles"
 import { Typography, Box, ButtonBase, Card, Avatar } from "@mui/material"
 import Grid from "@mui/material/Grid2"
 
-type WebsiteData = {
+interface WebsiteData {
     title: string,
     tag: string,
     enabled: boolean,
@@ -25,7 +25,7 @@ type WebsiteData = {
 
 function App() {
 
-    const [websites, setWebsites] = useState([])
+    const [websites, setWebsites] = useState<WebsiteData[]>([])
 
     useEffect(() => {
         fetch("https://api.irminsul.gg/websites.json")
@@ -42,12 +42,13 @@ function App() {
                 id="main"
                 sx={{
                     pt: 15,
-                    height: "100vh",
+                    height: "auto",
                     maxWidth: "100vw",
                     backgroundImage: `linear-gradient(to bottom, ${theme.body.backgroundColor} 5%, rgba(73, 218, 243, 0.2) 50%, ${theme.body.backgroundColor} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
-                    backgroundPosition: "50% 50%"
+                    backgroundPosition: "50% 25%",
+                    backgroundAttachment: "fixed"
                 }}
             >
                 <Nav />
@@ -87,7 +88,7 @@ function App() {
                 >
                     <Grid container spacing={5} sx={{ mb: { xs: "100px", sm: "300px" }, mx: "25px" }}>
                         {
-                            websites.map((site: WebsiteData, index: number) => (
+                            websites.map((site, index) => (
                                 <Grid
                                     key={index}
                                     size="auto"
