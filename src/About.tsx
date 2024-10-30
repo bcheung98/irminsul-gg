@@ -36,6 +36,15 @@ function About() {
             }}
         >
             <Box>
+                <Typography sx={header}>HSR mobile formatting done!</Typography>
+                <Typography sx={body} component="span">
+                    Mobile formatting has been finished for the HSR site! Only WuWa left.
+                    <br /><br />
+                    - BC (10/30/2024)
+                </Typography>
+            </Box>
+            <Divider sx={{ my: "20px" }} />
+            <Box>
                 <Typography sx={header}>Phase 1 of mobile formatting done!</Typography>
                 <Typography sx={body} component="span">
                     Mobile formatting has been finished for the Genshin Impact site!<br />
