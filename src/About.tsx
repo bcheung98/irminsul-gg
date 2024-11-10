@@ -44,6 +44,7 @@ function About() {
                     - BC (11/9/2024)
                 </Typography>
             </Box>
+            <Divider sx={{ my: "20px" }} />
             <Box>
                 <Typography sx={header}>HSR mobile formatting done!</Typography>
                 <Typography sx={body} component="span">
