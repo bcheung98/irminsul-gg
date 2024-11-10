@@ -2,7 +2,7 @@
 
 ![Irminsul](https://assets.irminsul.gg/main/icons/Irminsul.png)
 
-The database for gacha games.
+IRMINSUL.GG is a database and companion website for various gacha games.
 
 Irminsul.GG branches:
 
@@ -21,28 +21,25 @@ Irminsul.GG branches:
 - [ ] Functionality to switch between dark and light mode.
 - [ ] Create a consistent theme across all sites.
 
-### Genshin Impact:
+### Genshin:
 - [x] Current banners on home page.
 - [x] Add more specific timestamps to banner dates.
 - [ ] Enhance TCG deck builder.
 
 ### HSR:
-- [ ] Convert site to TypeScript.
-- [ ] Mobile formatting.
-- [ ] Current banners on home page.
-- [ ] Revamp banner archive.
+- [x] Convert site to TypeScript.
+- [x] Mobile formatting.
+- [x] Current banners on home page.
+- [x] Revamp banner archive.
 
 ### WuWa:
-- [ ] Mobile formatting.
-- [ ] Ascension materials on character and weapon page.
-- [ ] Complete ascension planner with EXP materials and total cost.
-- [ ] Current banners on home page.
-- [ ] Revamp banner archive.
+- [x] Mobile formatting.
+- [x] Ascension materials on character and weapon page.
+- [x] Complete ascension planner with EXP materials and total cost.
+- [x] Current banners on home page.
+- [x] Revamp banner archive.
 
 ## **Known Issues**
 
-### Genshin Impact:
-- [x] ~~Viewing the homepage and Banner Archive on iOS will break the page because iOS parses dates differently, resulting in a error~~.
-- [x] ~~A "flashbang" effect is present when opening a page on a new tab~~.
-- [x] ~~Colored list rows appear bugged on iOS~~.
+### All sites:
 - [ ] List row content gets squished on smaller screen sizes.

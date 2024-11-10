@@ -1,6 +1,5 @@
 // MUI imports 
-import { useTheme } from "@mui/material/styles"
-import { Box, Typography, Divider } from "@mui/material"
+import { useTheme, Box, Typography, Divider } from "@mui/material"
 
 function About() {
 
@@ -36,6 +35,16 @@ function About() {
             }}
         >
             <Box>
+                <Typography sx={header}>WuWa mobile formatting done!</Typography>
+                <Typography sx={body} component="span">
+                    Mobile formatting has been finished for the WuWa site!
+                    <br /><br />
+                    I will do some final touchups for all the sites before calling Version 1.0 done! I will be adding the theme switcher after 1.0.
+                    <br /><br />
+                    - BC (11/9/2024)
+                </Typography>
+            </Box>
+            <Box>
                 <Typography sx={header}>HSR mobile formatting done!</Typography>
                 <Typography sx={body} component="span">
                     Mobile formatting has been finished for the HSR site! Only WuWa left.
@@ -45,10 +54,10 @@ function About() {
             </Box>
             <Divider sx={{ my: "20px" }} />
             <Box>
-                <Typography sx={header}>Phase 1 of mobile formatting done!</Typography>
+                <Typography sx={header}>Genshin mobile formatting done!</Typography>
                 <Typography sx={body} component="span">
-                    Mobile formatting has been finished for the Genshin Impact site!<br />
-                    <br />
+                    Mobile formatting has been finished for the Genshin Impact site!
+                    <br /><br />
                     Main changes (only on Genshin Impact site):
                     <span>
                         <ul className="a">
