@@ -8,7 +8,7 @@ import BottomNav from "./BottomNav"
 // MUI imports
 import theme from "./themes/theme"
 import { ThemeProvider } from "@mui/material/styles"
-import { Typography, Box, ButtonBase, Card, Avatar } from "@mui/material"
+import { Typography, Box, ButtonBase, Card } from "@mui/material"
 import Grid from "@mui/material/Grid2"
 
 interface WebsiteData {
@@ -28,6 +28,7 @@ function App() {
     const [websites, setWebsites] = useState<WebsiteData[]>([])
 
     useEffect(() => {
+        // https://api.irminsul.gg/websites.json
         fetch("https://api.irminsul.gg/websites.json")
             .then(response => response.json())
             .then((data) => {
@@ -123,17 +124,24 @@ function App() {
                                                     overflow: "hidden"
                                                 }}
                                             >
-                                                <Avatar
-                                                    variant="square"
+                                                <img
                                                     id={`${site.tag.toLowerCase()}-image`}
                                                     src={site.img.src}
                                                     alt={site.tag}
-                                                    sx={{
+                                                    style={{
                                                         width: "100%",
                                                         height: "auto",
                                                         aspectRatio: "16 / 9",
                                                         transform: `scale(${site.img.scale}) translate(${site.img.translate[0]}px, ${site.img.translate[1]}px)`,
                                                         transition: "transform .2s"
+                                                    }}
+                                                    onError={(e: any) => {
+                                                        site.img.scale = 1
+                                                        site.img.translate[0] = 0
+                                                        site.img.translate[1] = 0
+                                                        e.target.src = `https://assets.irminsul.gg/main/wallpapers/${site.tag.toLowerCase()}/${site.tag}.png`
+                                                        e.target.style.transform = `scale(${site.img.scale}) translate(${site.img.translate[0]}px, ${site.img.translate[1]}px)`
+                                                        e.onError = null
                                                     }}
                                                 />
                                             </Card>
@@ -192,7 +200,7 @@ const zoomOnHover = (mouseDirection: "enter" | "leave", tag: string, img: { scal
     let image = document.getElementById(`${tag.toLowerCase()}-image`)
     if (image !== null) {
         if (mouseDirection === "enter") {
-            image.style.transform = `scale(${img.scale + .1}) translate(${img.translate[0]}px, ${img.translate[1]}px)`
+            image.style.transform = `scale(${img.scale + .075}) translate(${img.translate[0]}px, ${img.translate[1]}px)`
         }
         else {
             image.style.transform = `scale(${img.scale}) translate(${img.translate[0]}px, ${img.translate[1]}px)`
