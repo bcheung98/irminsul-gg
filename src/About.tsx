@@ -35,7 +35,7 @@ function About() {
             }}
         >
             <Box>
-                <Typography sx={header}>Irminsul.GG Verion 1.0 is here! (and what's next...)</Typography>
+                <Typography sx={header}>Irminsul.GG Version 1.0 is here! (and what's next...)</Typography>
                 <Typography sx={body} component="span">
                     After spending much more time than needed trying to make the site "perfect", I am finally ready to say that Version 1.0 of Irminsul.GG is complete! I know there's a lot of little things that still need to be polished, there might be things that are straight up broken (hopefully that's not the case), and there's still a lot of features I would like to add, but I feel like the site is in a state where I can proudly say I've reached the milestones I wanted to back when I first released the site near the end of September.
                     <br /><br />
