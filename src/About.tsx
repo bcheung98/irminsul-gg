@@ -35,6 +35,17 @@ function About() {
             }}
         >
             <Box>
+                <Typography sx={header}>Zenless Zone Zero site is up!</Typography>
+                <Typography sx={body} component="span">
+                    The first version of the Zenless Zone Zero site is done! Currently, only the character and weapon browser, and the ascension planner are available, but I will gradually be adding more features later.
+                    <br /><br />
+                    The ZZZ site is also a preview of the entire site renovation project. The features, appearance, and layout of the ZZZ site will eventually be applied to all the other sites once I finish the bulk of the ZZZ site.
+                    <br /><br />
+                    - BC (12/13/2024)
+                </Typography>
+            </Box>
+            <Divider sx={{ my: "20px" }} />
+            <Box>
                 <Typography sx={header}>Irminsul.GG Version 1.0 is here! (and what's next...)</Typography>
                 <Typography sx={body} component="span">
                     After spending much more time than needed trying to make the site "perfect", I am finally ready to say that Version 1.0 of Irminsul.GG is complete! I know there's a lot of little things that still need to be polished, there might be things that are straight up broken (hopefully that's not the case), and there's still a lot of features I would like to add, but I feel like the site is in a state where I can proudly say I've reached the milestones I wanted to back when I first released the site near the end of September.
