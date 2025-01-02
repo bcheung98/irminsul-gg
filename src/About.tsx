@@ -35,6 +35,25 @@ function About() {
             }}
         >
             <Box>
+                <Typography sx={header}>Happy New Year - WuWa and ZZZ sites have been updated!</Typography>
+                <Typography sx={body} component="span">
+                    Happy 2025! I'm happy to announce that the site renovation project for the Wuthering Waves site has been completed, just in time for the Version 2.0 update! In addition, the Zenless Zone Zero site has all of its major features completed.
+                    <br /><br />
+                    Here's all the major changes from the site renovation project:
+                    <ul>
+                        <li>Updated and polished the appearance and some functions of the site.</li>
+                        <li>Made a new color theme that will serve as the base for all the other sites.</li>
+                        <li>Added various settings including a theme and page width switcher.</li>
+                    </ul>
+                    Up next for site renovation is the Honkai: Star Rail site. I will hope to have that complete before the Version 3.0 update of HSR.
+                    <br /><br />
+                    Hope everyone has a wonderful 2025!
+                    <br /><br />
+                    - BC (1/1/2025)
+                </Typography>
+            </Box>
+            <Divider sx={{ my: "20px" }} />
+            <Box>
                 <Typography sx={header}>Zenless Zone Zero site is up!</Typography>
                 <Typography sx={body} component="span">
                     The first version of the Zenless Zone Zero site is done! Currently, only the character and weapon browser, and the ascension planner are available, but I will gradually be adding more features later.
