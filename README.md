@@ -22,32 +22,22 @@ Irminsul.GG branches:
 - [ ] Create error pages for invalid URLs.
 - [ ] Functionality to switch between dark and light mode.
 - [ ] Create a consistent theme across all sites.
-- [ ] Update codebase to meet new quality standards.
 
 ### Genshin:
-- [x] Current banners on home page.
-- [x] Add more specific timestamps to banner dates.
+- [ ] Update codebase to meet new quality standards.
 - [ ] Enhance TCG deck builder.
 
 ### HSR:
-- [x] Convert site to TypeScript.
-- [x] Mobile formatting.
-- [x] Current banners on home page.
-- [x] Revamp banner archive.
+- [ ] Update codebase to meet new quality standards.
 
 ### ZZZ:
-- [ ] Drive Disc Browser
-- [ ] Bangboo Browser
-- [ ] Banner Archive
+- [x] Drive Disc Browser
+- [x] Bangboo Browser
+- [x] Banner Archive
 
 ### WuWa:
-- [x] Mobile formatting.
-- [x] Ascension materials on character and weapon page.
-- [x] Complete ascension planner with EXP materials and total cost.
-- [x] Current banners on home page.
-- [x] Revamp banner archive.
+- [x] Update codebase to meet new quality standards.
 
 ## **Known Issues**
 
-### All sites:
-- [ ] List row content gets squished on smaller screen sizes.
+None (as far as I know)
