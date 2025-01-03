@@ -1,0 +1,20 @@
+.logo {
+    will-change: filter;
+    transition: filter 300ms;
+}
+
+.logo.github:hover {
+    filter: drop-shadow(0 0 7px #ebeef5aa);
+}
+
+.logo.vite:hover {
+    filter: drop-shadow(0 0 7px #646cffaa);
+}
+
+.logo.react:hover {
+    filter: drop-shadow(0 0 7px #61dafbaa);
+}
+
+.logo.mui:hover {
+    filter: drop-shadow(0 0 7px #0073e6aa);
+}
