@@ -18,7 +18,7 @@ import {
 import { zoomImageOnHover } from "helpers/utils";
 
 // Type imports
-import { Website } from "types/website";
+import { Website } from "types/common";
 
 interface WebsiteCardProps {
     site: Website;
