@@ -10,33 +10,26 @@ Irminsul.GG branches:
 
 - **Honkai: Star Rail**: [Site](https://hsr.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-stellaron)
 
-- **Zenless Zone Zero**: [Site](https://zzz.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-phaethon)
-
 - **Wuthering Waves**: [Site](https://wuwa.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-tacetite)
+
+- **Zenless Zone Zero**: [Site](https://zzz.irminsul.gg/) | [Repo](https://github.com/bcheung98/project-phaethon)
 
 ---
 
 ## **Current Roadmap / TODOs**
-
-### All sites:
-- [ ] Create error pages for invalid URLs.
-- [ ] Functionality to switch between dark and light mode.
-- [ ] Create a consistent theme across all sites.
 
 ### Genshin:
 - [ ] Update codebase to meet new quality standards.
 - [ ] Enhance TCG deck builder.
 
 ### HSR:
-- [ ] Update codebase to meet new quality standards.
+- [x] Update codebase to meet new quality standards.
 
 ### ZZZ:
-- [x] Drive Disc Browser
-- [x] Bangboo Browser
-- [x] Banner Archive
+- None
 
 ### WuWa:
-- [x] Update codebase to meet new quality standards.
+- None
 
 ## **Known Issues**
 
