@@ -19,11 +19,11 @@ Irminsul.GG branches:
 ## **Current Roadmap / TODOs**
 
 ### Genshin:
-- [ ] Update codebase to meet new quality standards.
+- [x] Update codebase to meet new quality standards.
 - [ ] Enhance TCG deck builder.
 
 ### HSR:
-- [x] Update codebase to meet new quality standards.
+- None
 
 ### ZZZ:
 - None
