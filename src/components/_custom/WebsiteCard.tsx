@@ -30,9 +30,9 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
 
     const borderRadius = "16px";
 
-    const { title, tag, enabled, gameVersion, imgTransform } = site;
-    const scale = imgTransform?.scale || 1;
-    const translate = imgTransform?.translate || [0, 0];
+    const { title, tag, enabled, gameVersion } = site;
+    const scale = 1;
+    const translate = [0, 0];
 
     const tagLower = tag.toLowerCase();
 
@@ -47,7 +47,7 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
                 direction,
                 id: `${id}-img`,
                 baseScale: scale,
-                zoom: 1.075,
+                zoom: 1.0325,
                 translate: `translate(${translate[0]}px, ${translate[1]}px`,
             });
     };
