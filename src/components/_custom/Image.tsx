@@ -1,5 +1,8 @@
 import { CSSProperties, SyntheticEvent } from "react";
 
+// Component imports
+import { StyledTooltip } from "styled/StyledTooltip";
+
 // MUI imports
 import { TooltipProps } from "@mui/material";
 import { combineStyles, zoomImageOnHover } from "helpers/utils";
@@ -24,6 +27,8 @@ function Image({
     id = src,
     loading = "lazy",
     style,
+    tooltip = "",
+    tooltipArrow = "top",
     zoomOnHover = false,
     onClick,
 }: ImageProps) {
@@ -43,20 +48,22 @@ function Image({
     };
 
     return (
-        <img
-            src={src}
-            alt={alt}
-            id={id}
-            loading={loading}
-            style={imgStyle}
-            onError={(event: SyntheticEvent<HTMLImageElement, Event>) => {
-                event.currentTarget.src = fallbackSrc;
-                onerror = null;
-            }}
-            onClick={onClick}
-            onMouseEnter={() => handleHover("enter")}
-            onMouseLeave={() => handleHover("leave")}
-        />
+        <StyledTooltip title={tooltip} arrow placement={tooltipArrow}>
+            <img
+                src={src}
+                alt={alt}
+                id={id}
+                loading={loading}
+                style={imgStyle}
+                onError={(event: SyntheticEvent<HTMLImageElement, Event>) => {
+                    event.currentTarget.src = fallbackSrc;
+                    onerror = null;
+                }}
+                onClick={onClick}
+                onMouseEnter={() => handleHover("enter")}
+                onMouseLeave={() => handleHover("leave")}
+            />
+        </StyledTooltip>
     );
 }
 
