@@ -1,12 +1,19 @@
 // Component imports
 import Websites from "./Websites";
+import Calender from "./Calender";
 import Blog from "./Blog";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import { Stack } from "@mui/material";
 
+// Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectWebsites } from "reducers/website";
+
 function Home() {
+    const websites = useAppSelector(selectWebsites);
+
     return (
         <>
             <Stack spacing={1} sx={{ textAlign: "center", my: "48px" }}>
@@ -20,8 +27,11 @@ function Home() {
                     Select a branch of Irminsul to get started:
                 </Text>
             </Stack>
-            <Websites />
-            <Blog />
+            <Stack spacing={32} alignItems="center">
+                <Websites websites={websites} />
+                <Calender websites={websites} />
+                <Blog />
+            </Stack>
         </>
     );
 }

@@ -33,7 +33,7 @@ function Blog() {
     }, []);
 
     return (
-        <Container maxWidth="lg" disableGutters sx={{ mt: "256px" }}>
+        <Container maxWidth="lg" disableGutters>
             <Paper
                 sx={{
                     backgroundColor: theme.background(2),

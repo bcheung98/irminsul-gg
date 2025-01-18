@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 // Component imports
 import WebsiteCard from "custom/WebsiteCard";
 
@@ -10,19 +8,7 @@ import Grid from "@mui/material/Grid2";
 // Type imports
 import { Website } from "types/common";
 
-function Websites() {
-    const [websites, setWebsites] = useState<Website[]>([]);
-
-    useEffect(() => {
-        // https://api.irminsul.gg/main/websites.json
-        fetch("https://api.irminsul.gg/main/websites.json")
-            .then((response) => response.json())
-            .then((data) => {
-                setWebsites(data);
-            })
-            .catch((error) => console.error(error));
-    }, []);
-
+function Websites({ websites }: { websites: Website[] }) {
     return (
         <Container maxWidth="xl" disableGutters>
             <Grid container spacing={4}>

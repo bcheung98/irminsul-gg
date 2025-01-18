@@ -36,3 +36,7 @@ ul {
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(125, 125, 125);
 }
+
+:root {
+    --fc-border-color: rgb(168, 147, 105);
+}
