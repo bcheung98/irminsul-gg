@@ -20,7 +20,7 @@ import { fetchBanners } from "rtk/fetchData";
 import { EventSourceObject, Website } from "types/common";
 import { createEventSourceObject } from "helpers/createEventSourceObject";
 
-function Calender({ websites }: { websites: Website[] }) {
+function Calendar({ websites }: { websites: Website[] }) {
     const theme = useTheme();
 
     const dispatch = useAppDispatch();
@@ -94,7 +94,7 @@ function Calender({ websites }: { websites: Website[] }) {
                     }}
                 >
                     <TextStyled variant="h4-styled" gutterBottom>
-                        Gacha Calender
+                        Gacha Calendar
                     </TextStyled>
                     <Box>
                         <TextStyled gutterBottom sx={{ textAlign: "center" }}>
@@ -127,7 +127,7 @@ function Calender({ websites }: { websites: Website[] }) {
     );
 }
 
-export default Calender;
+export default Calendar;
 
 function filterGames(events: EventSourceObject[], filters: string[]) {
     return events.filter((event) => filters.includes(event.tag.split("/")[0]));
