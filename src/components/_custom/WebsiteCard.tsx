@@ -58,7 +58,7 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
         width: "100%",
         height: "auto",
         borderRadius: borderRadius,
-        background: theme.appbar.backgroundColor,
+        background: `linear-gradient(to bottom, transparent, ${theme.appbar.backgroundColor} 50%)`,
     };
 
     const cardStyle: SxProps = {
