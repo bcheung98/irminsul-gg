@@ -12,7 +12,9 @@ import { useAppSelector } from "helpers/hooks";
 import { selectWebsites } from "reducers/website";
 
 function Home() {
-    const websites = useAppSelector(selectWebsites);
+    const websites = [...useAppSelector(selectWebsites)].sort((a, b) =>
+        a.title.localeCompare(b.title)
+    );
 
     return (
         <>
