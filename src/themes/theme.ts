@@ -29,6 +29,16 @@ export function getTheme(name: string) {
                     },
                 },
             },
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        color: theme.appbar.color,
+                        fontFamily: theme.font.styled.family,
+                        fontWeight: theme.font.styled.weight,
+                        textTransform: "none",
+                    },
+                },
+            },
             MuiIconButton: {
                 styleOverrides: {
                     root: {

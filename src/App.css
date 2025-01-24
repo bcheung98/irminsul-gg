@@ -18,3 +18,7 @@
 .logo.mui:hover {
     filter: drop-shadow(0 0 7px #0073e6aa);
 }
+
+.logo.kofi:hover {
+    filter: drop-shadow(0 0 7px #ff5a16aa);
+}

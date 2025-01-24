@@ -70,6 +70,36 @@ function NavBottom() {
                     >
                         {bottomText}
                     </TextStyled>
+                    <FlexBox
+                        sx={{
+                            display: { xs: "flex", sm: "none" },
+                            flexWrap: "wrap",
+                            rowGap: "8px",
+                        }}
+                    >
+                        <TextStyled
+                            variant="body2-styled"
+                            sx={{ color: textColor }}
+                        >
+                            Support me on Ko-Fi:
+                        </TextStyled>
+                        <IconButton
+                            disableRipple
+                            href="https://ko-fi.com/bcheung"
+                            target="_blank"
+                            rel="noopener"
+                            color="inherit"
+                            sx={iconButtonStyle}
+                            className="logo kofi"
+                        >
+                            <Avatar
+                                variant="square"
+                                src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
+                                alt="Ko-fi logo"
+                                sx={{ height: "22px", width: "auto" }}
+                            />
+                        </IconButton>
+                    </FlexBox>
                     <Box>
                         <FlexBox gap="16px">
                             <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
