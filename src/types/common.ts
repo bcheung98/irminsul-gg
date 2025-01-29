@@ -3,6 +3,11 @@ export interface Website {
     tag: string;
     enabled: boolean;
     gameVersion: string;
+    color: string;
+}
+
+export interface WebsiteColorInfo {
+    [game: string]: string;
 }
 
 export interface Post {
@@ -11,11 +16,19 @@ export interface Post {
     date: string;
 }
 
-export interface Banner {
+interface Version {
     version: string;
     subVersion: string;
     start: string;
     end: string;
+}
+
+export interface VersionInfo extends Version {
+    characters: string[];
+    futureVersion?: boolean;
+}
+
+export interface Banner extends Version {
     fiveStars: string[];
     fourStars: string[];
 }
@@ -28,10 +41,8 @@ export interface EventObject {
     start?: string;
     end?: string;
     extendedProps?: {
-        fiveStars?: string[];
-        fourStars?: string[];
+        characters?: string[];
     };
-    rrule?: {};
 }
 
 export interface EventSourceObject {

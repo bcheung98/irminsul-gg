@@ -1,6 +1,6 @@
 // Component imports
 import Websites from "./Websites";
-// import Calendar from "./Calendar";
+import Calendar from "./Calendar";
 import Blog from "./Blog";
 import { Text, TextStyled } from "styled/StyledTypography";
 
@@ -31,7 +31,7 @@ function Home() {
             </Stack>
             <Stack spacing={32} alignItems="center">
                 <Websites websites={websites} />
-                {/* <Calendar websites={websites} /> */}
+                <Calendar websites={websites} />
                 <Blog />
             </Stack>
         </>

@@ -15,10 +15,10 @@ import { useTheme, Container, Paper, Toolbar, Box } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 import { selectBanners } from "reducers/banner";
 import { fetchBanners } from "rtk/fetchData";
+import { createEventSourceObject } from "helpers/createEventSourceObject";
 
 // Type imports
-import { EventSourceObject, Website } from "types/common";
-import { createEventSourceObject } from "helpers/createEventSourceObject";
+import { EventSourceObject, Website, WebsiteColorInfo } from "types/common";
 
 function Calendar({ websites }: { websites: Website[] }) {
     const theme = useTheme();
@@ -26,7 +26,9 @@ function Calendar({ websites }: { websites: Website[] }) {
     const dispatch = useAppDispatch();
 
     const buttons = [] as CustomToggleButtonProps[];
+    const colors: WebsiteColorInfo = {};
     websites.forEach((website) => {
+        colors[website.tag] = website.color;
         if (website.enabled) {
             buttons.push({
                 value: website.tag.toLowerCase(),
@@ -67,7 +69,7 @@ function Calendar({ websites }: { websites: Website[] }) {
     const banners = useAppSelector(selectBanners);
 
     const eventSources = useMemo(
-        () => filterGames(createEventSourceObject(banners), filters),
+        () => filterGames(createEventSourceObject(banners, colors), filters),
         [banners, filters]
     );
 
