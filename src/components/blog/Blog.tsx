@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import parse from "html-react-parser";
 
 // Component imports
+import MainContentBox from "custom/MainContentBox";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
 import {
     useTheme,
-    Container,
-    Paper,
+    useMediaQuery,
     Stack,
     Divider,
     Card,
+    LinearProgress,
 } from "@mui/material";
 
 // Type imports
@@ -19,6 +20,7 @@ import { Post } from "types/common";
 
 function Blog() {
     const theme = useTheme();
+    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 
     const [posts, setPosts] = useState<Post[]>([]);
 
@@ -33,41 +35,37 @@ function Blog() {
     }, []);
 
     return (
-        <Container maxWidth="lg" disableGutters>
-            <Paper
-                sx={{
-                    backgroundColor: theme.background(2),
-                    p: 3,
-                    borderRadius: "16px",
-                }}
-            >
-                <Stack spacing={3} divider={<Divider />}>
-                    {posts.map((post, index) => (
+        <MainContentBox
+            title="Latest Updates"
+            contentProps={{ padding: matches_up_sm ? "24px" : "16px" }}
+        >
+            <Stack spacing={{ xs: 2, sm: 3 }} divider={<Divider />}>
+                {posts.length > 0 ? (
+                    posts.map((post, index) => (
                         <Card
                             key={index}
                             sx={{
-                                backgroundColor: theme.background(2, "light"),
+                                backgroundColor: theme.background(1, "light"),
                                 p: 2,
                             }}
                         >
-                            <TextStyled
-                                variant="h4-styled"
-                                sx={{ fontWeight: 400 }}
-                            >
+                            <TextStyled variant="h6-styled">
                                 {post.title}
                             </TextStyled>
                             <br />
-                            <Text component="span">
+                            <Text component="span" variant="body2">
                                 {parse(post.description)}
                             </Text>
                             <br />
                             <br />
-                            <Text>{`-BC (${post.date})`}</Text>
+                            <Text>{`- BC (${post.date})`}</Text>
                         </Card>
-                    ))}
-                </Stack>
-            </Paper>
-        </Container>
+                    ))
+                ) : (
+                    <LinearProgress color="info" />
+                )}
+            </Stack>
+        </MainContentBox>
     );
 }
 

@@ -17,7 +17,6 @@ import {
     Divider,
     IconButton,
     Avatar,
-    Container,
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -55,139 +54,109 @@ function NavBottom() {
             elevation={0}
             sx={{ backgroundColor: "transparent", borderWidth: 0 }}
         >
-            <Container maxWidth="lg" disableGutters>
-                <Toolbar
-                    sx={{
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        gap: "8px",
-                        py: "8px",
-                    }}
-                >
-                    <TextStyled
-                        variant="body2-styled"
-                        sx={{ color: textColor }}
-                    >
-                        {bottomText}
-                    </TextStyled>
-                    <FlexBox
-                        sx={{
-                            display: { xs: "flex", sm: "none" },
-                            flexWrap: "wrap",
-                            rowGap: "8px",
-                        }}
-                    >
-                        <TextStyled
-                            variant="body2-styled"
-                            sx={{ color: textColor }}
-                        >
-                            Support me on Ko-Fi:
-                        </TextStyled>
-                        <IconButton
-                            disableRipple
-                            href="https://ko-fi.com/bcheung"
-                            target="_blank"
-                            rel="noopener"
-                            color="inherit"
-                            sx={iconButtonStyle}
-                            className="logo kofi"
-                        >
-                            <Avatar
-                                variant="square"
-                                src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
-                                alt="Ko-fi logo"
-                                sx={{ height: "22px", width: "27.36px" }}
-                            />
-                        </IconButton>
-                    </FlexBox>
-                    <Box>
-                        <FlexBox gap="16px">
-                            <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
-                                <TextStyled
-                                    variant="body2-styled"
-                                    sx={{ color: textColor }}
-                                >
-                                    GitHub:
-                                </TextStyled>
+            <Toolbar
+                sx={{
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: "8px",
+                    py: "8px",
+                    width: {
+                        xs: "100%",
+                        lg: "75%",
+                    },
+                    mx: "auto",
+                }}
+            >
+                <TextStyled variant="body2-styled" sx={{ color: textColor }}>
+                    {bottomText}
+                </TextStyled>
+                <Box>
+                    <FlexBox gap="16px">
+                        <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
+                            <TextStyled
+                                variant="body2-styled"
+                                sx={{ color: textColor }}
+                            >
+                                GitHub:
+                            </TextStyled>
+                            <IconButton
+                                disableRipple
+                                href={`https://github.com/bcheung98/${githubURL}`}
+                                target="_blank"
+                                rel="noopener"
+                                color="inherit"
+                                sx={{ color: textColor }}
+                                className="logo github"
+                            >
+                                <GitHubIcon sx={svgStyle} />
+                            </IconButton>
+                        </FlexBox>
+                        <Divider
+                            orientation="vertical"
+                            flexItem
+                            sx={{ my: "4px" }}
+                        />
+                        <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
+                            <TextStyled
+                                variant="body2-styled"
+                                sx={{ color: textColor }}
+                            >
+                                Made with:
+                            </TextStyled>
+                            <Box>
                                 <IconButton
                                     disableRipple
-                                    href={`https://github.com/bcheung98/${githubURL}`}
+                                    href="https://vite.dev"
                                     target="_blank"
                                     rel="noopener"
                                     color="inherit"
-                                    sx={{ color: textColor }}
-                                    className="logo github"
+                                    sx={iconButtonStyle}
+                                    className="logo vite"
                                 >
-                                    <GitHubIcon sx={svgStyle} />
+                                    <Avatar
+                                        variant="square"
+                                        src={viteLogo}
+                                        alt="Vite logo"
+                                        sx={svgStyle}
+                                    />
                                 </IconButton>
-                            </FlexBox>
-                            <Divider
-                                orientation="vertical"
-                                flexItem
-                                sx={{ my: "4px" }}
-                            />
-                            <FlexBox sx={{ flexWrap: "wrap", rowGap: "8px" }}>
-                                <TextStyled
-                                    variant="body2-styled"
-                                    sx={{ color: textColor }}
+                                <IconButton
+                                    disableRipple
+                                    href="https://react.dev"
+                                    target="_blank"
+                                    rel="noopener"
+                                    color="inherit"
+                                    sx={iconButtonStyle}
+                                    className="logo react"
                                 >
-                                    Made with:
-                                </TextStyled>
-                                <Box>
-                                    <IconButton
-                                        disableRipple
-                                        href="https://vite.dev"
-                                        target="_blank"
-                                        rel="noopener"
-                                        color="inherit"
-                                        sx={iconButtonStyle}
-                                        className="logo vite"
-                                    >
-                                        <Avatar
-                                            variant="square"
-                                            src={viteLogo}
-                                            alt="Vite logo"
-                                            sx={svgStyle}
-                                        />
-                                    </IconButton>
-                                    <IconButton
-                                        disableRipple
-                                        href="https://react.dev"
-                                        target="_blank"
-                                        rel="noopener"
-                                        color="inherit"
-                                        sx={iconButtonStyle}
-                                        className="logo react"
-                                    >
-                                        <Avatar
-                                            variant="square"
-                                            src={reactLogo}
-                                            alt="React logo"
-                                            sx={svgStyle}
-                                        />
-                                    </IconButton>
-                                    <IconButton
-                                        disableRipple
-                                        href="https://mui.com"
-                                        target="_blank"
-                                        rel="noopener"
-                                        color="inherit"
-                                        sx={iconButtonStyle}
-                                        className="logo mui"
-                                    >
-                                        <Avatar
-                                            variant="square"
-                                            src={muiLogo}
-                                            alt="MUI logo"
-                                            sx={svgStyle}
-                                        />
-                                    </IconButton>
-                                </Box>
-                            </FlexBox>
+                                    <Avatar
+                                        variant="square"
+                                        src={reactLogo}
+                                        alt="React logo"
+                                        sx={svgStyle}
+                                    />
+                                </IconButton>
+                                <IconButton
+                                    disableRipple
+                                    href="https://mui.com"
+                                    target="_blank"
+                                    rel="noopener"
+                                    color="inherit"
+                                    sx={iconButtonStyle}
+                                    className="logo mui"
+                                >
+                                    <Avatar
+                                        variant="square"
+                                        src={muiLogo}
+                                        alt="MUI logo"
+                                        sx={svgStyle}
+                                    />
+                                </IconButton>
+                            </Box>
                         </FlexBox>
-                    </Box>
-                </Toolbar>
-            </Container>
+                    </FlexBox>
+                </Box>
+            </Toolbar>
         </AppBar>
     );
 }

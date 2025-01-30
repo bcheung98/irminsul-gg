@@ -8,7 +8,7 @@ import NavBottom from "./nav/NavBottom";
 // MUI imports
 import { useTheme, Box } from "@mui/material";
 
-function RootLayout() {
+function Layout() {
     const theme = useTheme();
 
     const location = useLocation().pathname;
@@ -28,7 +28,10 @@ function RootLayout() {
                 sx={{
                     display: "flex",
                     backgroundColor: theme.background(0),
-                    backgroundImage: `linear-gradient(to bottom, ${backgroundImageColors[0]} 5%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                    backgroundImage: {
+                        xs: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%)`,
+                        sm: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                    },
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "50% 25%",
@@ -39,10 +42,16 @@ function RootLayout() {
                 <Box sx={{ minWidth: "0vw", width: "100vw" }}>
                     <Box
                         sx={{
-                            pt: "16px",
-                            pb: "64px",
+                            px: "24px",
+                            pt: { xs: "48px", sm: "96px" },
+                            pb: "96px",
                             mt: "64px",
                             minHeight: "100vh",
+                            width: {
+                                xs: "100%",
+                                lg: "75%",
+                            },
+                            mx: "auto",
                         }}
                     >
                         <Outlet />
@@ -54,4 +63,4 @@ function RootLayout() {
     );
 }
 
-export default RootLayout;
+export default Layout;

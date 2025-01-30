@@ -3,7 +3,7 @@ import Websites from "./Websites";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -15,8 +15,8 @@ function Home() {
     );
 
     return (
-        <Box sx={{ px: "24px" }}>
-            <Stack spacing={1} sx={{ textAlign: "center", my: "48px" }}>
+        <Stack spacing={6}>
+            <Stack spacing={1} sx={{ textAlign: "center" }}>
                 <TextStyled variant="h4" sx={{ fontWeight: 400 }}>
                     Welcome to IRMINSUL.GG!
                 </TextStyled>
@@ -28,7 +28,7 @@ function Home() {
                 </Text>
             </Stack>
             <Websites websites={websites} />
-        </Box>
+        </Stack>
     );
 }
 

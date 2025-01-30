@@ -10,7 +10,7 @@ import { Website } from "types/common";
 
 function Websites({ websites }: { websites: Website[] }) {
     return (
-        <Container maxWidth="xl" disableGutters>
+        <Container maxWidth="xl" disableGutters sx={{ px: { xs: 2, lg: 0 } }}>
             <Grid container spacing={4}>
                 {websites.map((site) => (
                     <Grid key={site.tag} size={{ xs: 12, sm: 6, md: 3 }}>
