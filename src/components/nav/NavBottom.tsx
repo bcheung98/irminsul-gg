@@ -96,7 +96,7 @@ function NavBottom() {
                                 variant="square"
                                 src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
                                 alt="Ko-fi logo"
-                                sx={{ height: "22px", width: "auto" }}
+                                sx={{ height: "22px", width: "27.36px" }}
                             />
                         </IconButton>
                     </FlexBox>
