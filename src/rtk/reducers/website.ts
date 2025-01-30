@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { startAppListening } from "helpers/hooks";
 import { fetchWebsites, LoadingStatus } from "rtk/fetchData";
 import { Website } from "types/common";
 
@@ -7,9 +8,11 @@ export interface WebsiteState {
     websites: Website[];
 }
 
+const storedWebsites = localStorage.getItem("data/websites") || "null";
+
 const initialState: WebsiteState = {
     status: "idle",
-    websites: [],
+    websites: storedWebsites !== "null" ? JSON.parse(storedWebsites) : [],
 };
 
 export const websiteSlice = createSlice({
@@ -21,7 +24,10 @@ export const websiteSlice = createSlice({
             state.status = "pending";
         });
         builder.addCase(fetchWebsites.fulfilled, (state, action) => {
-            state.websites = action.payload;
+            let payload = action.payload;
+            if (JSON.stringify(payload) !== storedWebsites) {
+                state.websites = payload;
+            }
             state.status = "success";
         });
         builder.addCase(fetchWebsites.rejected, (state) => {
@@ -36,3 +42,14 @@ export const websiteSlice = createSlice({
 export const { selectWebsites } = websiteSlice.selectors;
 
 export default websiteSlice.reducer;
+
+startAppListening({
+    actionCreator: fetchWebsites.fulfilled,
+    effect: (action) => {
+        let payload = action.payload;
+        const data = JSON.stringify(payload);
+        if (data !== storedWebsites) {
+            localStorage.setItem("data/websites", data);
+        }
+    },
+});
