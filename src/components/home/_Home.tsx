@@ -1,11 +1,10 @@
 // Component imports
 import Websites from "./Websites";
-import Calendar from "./Calendar";
 import Blog from "./Blog";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -17,7 +16,7 @@ function Home() {
     );
 
     return (
-        <>
+        <Box sx={{ px: "24px" }}>
             <Stack spacing={1} sx={{ textAlign: "center", my: "48px" }}>
                 <TextStyled variant="h4" sx={{ fontWeight: 400 }}>
                     Welcome to IRMINSUL.GG!
@@ -31,10 +30,9 @@ function Home() {
             </Stack>
             <Stack spacing={32} alignItems="center">
                 <Websites websites={websites} />
-                <Calendar websites={websites} />
                 <Blog />
             </Stack>
-        </>
+        </Box>
     );
 }
 

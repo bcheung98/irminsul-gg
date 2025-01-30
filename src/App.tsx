@@ -1,8 +1,9 @@
 import { useEffect } from "react";
+import { BrowserRouter } from "react-router";
 import "App.css";
 
 // Component imports
-import RootLayout from "components/_RootLayout";
+import RouteConfig from "components/nav/RouteConfig";
 
 // MUI imports
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -22,10 +23,12 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <RootLayout />
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <RouteConfig />
+            </ThemeProvider>
+        </BrowserRouter>
     );
 }
 
