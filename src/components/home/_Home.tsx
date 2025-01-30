@@ -1,6 +1,5 @@
 // Component imports
 import Websites from "./Websites";
-import Blog from "./Blog";
 import { Text, TextStyled } from "styled/StyledTypography";
 
 // MUI imports
@@ -28,10 +27,7 @@ function Home() {
                     Select a branch of Irminsul to get started:
                 </Text>
             </Stack>
-            <Stack spacing={32} alignItems="center">
-                <Websites websites={websites} />
-                <Blog />
-            </Stack>
+            <Websites websites={websites} />
         </Box>
     );
 }
