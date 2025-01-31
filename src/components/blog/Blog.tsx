@@ -19,6 +19,19 @@ import {
 import { Post } from "types/common";
 
 function Blog() {
+    const documentTitle = `Blog - Irminsul.GG`;
+    const documentDesc = `The latest updates from Irminsul.GG`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
+
     const theme = useTheme();
     const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 

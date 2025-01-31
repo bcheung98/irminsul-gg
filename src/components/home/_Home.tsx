@@ -10,6 +10,19 @@ import { useAppSelector } from "helpers/hooks";
 import { selectWebsites } from "reducers/website";
 
 function Home() {
+    const documentTitle = `Irminsul.GG`;
+    const documentDesc = `A database and companion website for various gacha games`;
+    document.title = documentTitle;
+    document
+        .querySelector('meta[property="og:title"]')
+        ?.setAttribute("content", documentTitle);
+    document
+        .querySelector('meta[property="description"]')
+        ?.setAttribute("content", documentDesc);
+    document
+        .querySelector('meta[property="og:description"]')
+        ?.setAttribute("content", documentDesc);
+
     const websites = [...useAppSelector(selectWebsites)].sort((a, b) =>
         a.title.localeCompare(b.title)
     );
