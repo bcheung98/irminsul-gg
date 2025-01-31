@@ -1,24 +1,44 @@
 // Component imports
 import Image from "custom/Image";
+import RouterLink from "./RouterLink";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { ButtonBase, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
-function Logo({ href = "/" }: { href?: string }) {
+function Logo({
+    size = "48px",
+    href = "/",
+    showText = true,
+}: {
+    size?: string;
+    href?: string;
+    showText?: boolean;
+}) {
     return (
-        <ButtonBase disableRipple disableTouchRipple href={href}>
+        <RouterLink to={href}>
             <Stack direction="row" spacing={2}>
                 <Image
                     src="https://assets.irminsul.gg/main/icons/Irminsul.png"
                     alt="IRMINSUL.GG"
-                    style={{ width: "48px", height: "48px" }}
+                    style={{ width: size, height: size }}
                 />
-                <TextStyled variant="sitename" sx={{ lineHeight: "48px" }}>
-                    IRMINSUL.GG
-                </TextStyled>
+                {showText && (
+                    <TextStyled
+                        variant="sitename"
+                        sx={{
+                            lineHeight: size,
+                            display: {
+                                "@": "none",
+                                "@300": "block",
+                            },
+                        }}
+                    >
+                        IRMINSUL.GG
+                    </TextStyled>
+                )}
             </Stack>
-        </ButtonBase>
+        </RouterLink>
     );
 }
 

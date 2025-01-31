@@ -46,6 +46,17 @@ export function getTheme(name: string) {
                     },
                 },
             },
+            MuiMenu: {
+                styleOverrides: {
+                    paper: {
+                        backgroundColor: theme.menu.primary,
+                    },
+                    list: {
+                        backgroundColor: theme.menu.primary,
+                        color: theme.text.primary,
+                    },
+                },
+            },
             MuiTypography: {
                 defaultProps: {
                     variantMapping: {
@@ -61,10 +72,16 @@ export function getTheme(name: string) {
         typography: {
             sitename: {
                 fontFamily: "Rowdies, Inter !important",
-                fontSize: "1.25rem",
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: "1rem",
+                    letterSpacing: ".075rem",
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: "1.25rem",
+                    letterSpacing: ".1rem",
+                },
                 fontWeight: "400 !important",
-                color: "rgb(255, 255, 255) !important",
-                letterSpacing: ".1rem",
+                color: theme.appbar.color,
             },
             h4: {
                 [theme.breakpoints.up("xs")]: {
