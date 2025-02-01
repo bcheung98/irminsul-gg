@@ -1,4 +1,4 @@
-import "./calender.css";
+import "./Calendar.css";
 import { BaseSyntheticEvent, useEffect, useMemo, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -88,13 +88,9 @@ function Calendar({ websites }: { websites: Website[] }) {
                     backgroundColor: theme.palette.error.dark,
                 }}
             >
-                <TextStyled>
+                <TextStyled sx={{ textAlign: "center" }}>
                     Hello! If you're reading this it means you have stumbled
-                    across a secret page that is currently WIP and is being
-                    tested.
-                    <br />
-                    Please be aware there might be some things that are broken
-                    on this page.
+                    across a secret page that is currently WIP.
                 </TextStyled>
             </Box>
             <Box>
