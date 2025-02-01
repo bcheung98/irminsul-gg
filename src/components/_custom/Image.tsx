@@ -56,7 +56,7 @@ function Image({
                 loading={loading}
                 style={imgStyle}
                 onError={(event: SyntheticEvent<HTMLImageElement, Event>) => {
-                    event.currentTarget.src = fallbackSrc;
+                    event.currentTarget.src = `https://assets.irminsul.gg/main/${fallbackSrc}.png`;
                     onerror = null;
                 }}
                 onClick={onClick}
