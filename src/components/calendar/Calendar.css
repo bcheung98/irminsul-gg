@@ -8,6 +8,8 @@
     --fc-button-hover-border-color: rgb(233, 194, 39);
     --fc-button-active-bg-color: rgb(0, 16, 32);
     --fc-button-active-border-color: rgb(233, 194, 39);
+
+    --fc-event-selected-overlay-color: rgba(0, 0, 0, 0);
 }
 
 @media (min-width: 0px) {
