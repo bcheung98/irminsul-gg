@@ -10,6 +10,8 @@
     --fc-button-active-border-color: rgb(233, 194, 39);
 
     --fc-event-selected-overlay-color: rgba(0, 0, 0, 0);
+
+    --fc-today-bg-color: rgba(40, 115, 255, 0.25);
 }
 
 @media (min-width: 0px) {
@@ -17,7 +19,7 @@
         font-size: 1.25rem !important;
     }
     .fc-button {
-        font-size: 0.875rem !important;
+        font-size: 0.75rem !important;
     }
     .fc-scrollgrid {
         border-left-width: 0px !important;
@@ -28,15 +30,21 @@
     .fc-scrollgrid-section > th {
         border-width: 0px;
     }
-    .fc-icon {
-        line-height: 14px;
-    }
     .fc-event-title-container {
         font-size: 0.625rem;
     }
     .fc-col-header-cell-cushion {
         font-size: 0.75rem !important;
         font-weight: 300;
+    }
+    .fc-icon-chevron-left,
+    .fc-icon-chevron-right {
+        padding: 4px 0px;
+        line-height: 4px;
+        font-size: 0.875rem !important;
+    }
+    .fc .fc-daygrid-day-frame {
+        min-height: 96px;
     }
 }
 
@@ -45,7 +53,7 @@
         font-size: 1.5rem !important;
     }
     .fc-button {
-        font-size: 1rem !important;
+        font-size: 0.875rem !important;
     }
     .fc-scrollgrid {
         border-left-width: 1px !important;
@@ -59,9 +67,6 @@
         border-width: 1px;
         border-radius: 8px 8px 0px 0px !important;
     }
-    .fc-icon {
-        line-height: 16px;
-    }
     .fc-event-title-container {
         font-size: 0.875rem;
         padding: 0px 4px;
@@ -69,6 +74,15 @@
     .fc-col-header-cell-cushion {
         font-size: 0.875rem !important;
         font-weight: 300;
+    }
+    .fc-icon-chevron-left,
+    .fc-icon-chevron-right {
+        padding: 4px 0px;
+        line-height: 2px !important;
+        font-size: 1rem !important;
+    }
+    .fc .fc-daygrid-day-frame {
+        min-height: 116px;
     }
 }
 
@@ -98,7 +112,17 @@
     padding: 0px 16px;
 }
 
-.fc-icon-chevron-left,
-.fc-icon-chevron-right {
-    padding: 0px;
+.fc-col-header-cell {
+    padding: 4px !important;
+    user-select: none;
+}
+
+.fc .fc-daygrid-day-top {
+    padding: 4px;
+    display: block;
+    text-align: center;
+}
+
+.fc .fc-daygrid-day-frame {
+    user-select: none;
 }

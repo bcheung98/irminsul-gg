@@ -242,7 +242,7 @@ function Calendar({ websites }: { websites: Website[] }) {
                                 ref={calendarRef}
                                 plugins={[dayGridPlugin]}
                                 initialView="dayGridMonth"
-                                height="80vh"
+                                height="auto"
                                 buttonText={{ today: "Today" }}
                                 eventSources={eventSources}
                                 eventOrder="tag"
