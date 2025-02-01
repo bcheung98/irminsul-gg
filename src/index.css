@@ -12,7 +12,7 @@ code {
         monospace;
 }
 
-a {
+span > a {
     color: rgb(30, 175, 255);
 }
 
@@ -35,8 +35,4 @@ ul {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(125, 125, 125);
-}
-
-:root {
-    --fc-border-color: rgb(168, 147, 105);
 }

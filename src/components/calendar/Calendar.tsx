@@ -1,7 +1,7 @@
+import "./calender.css";
 import { BaseSyntheticEvent, useEffect, useMemo, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import rrulePlugin from "@fullcalendar/rrule";
 
 // Component imports
 import Image from "custom/Image";
@@ -9,7 +9,7 @@ import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
 
 // MUI imports
-import { useTheme, Container, Paper, Toolbar, Box } from "@mui/material";
+import { useTheme, useMediaQuery, alpha, Toolbar, Box } from "@mui/material";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
@@ -22,6 +22,7 @@ import { EventSourceObject, Website, WebsiteColorInfo } from "types/common";
 
 function Calendar({ websites }: { websites: Website[] }) {
     const theme = useTheme();
+    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
 
     const dispatch = useAppDispatch();
 
@@ -37,9 +38,8 @@ function Calendar({ websites }: { websites: Website[] }) {
                         src={`game-icons/${website.tag}`}
                         alt={website.tag}
                         style={{
-                            width: "40px",
+                            width: matches_up_md ? "40px" : "32px",
                             borderRadius: "4px",
-                            padding: "0px",
                         }}
                         tooltip={website.title}
                     />
@@ -74,32 +74,46 @@ function Calendar({ websites }: { websites: Website[] }) {
     );
 
     return (
-        <Container maxWidth="xl" disableGutters>
-            <Paper
+        <Box
+            sx={{
+                color: theme.text.primary,
+                fontFamily: theme.font.styled.family,
+                fontWeight: theme.font.styled.weight,
+                borderBottom: `1px solid ${theme.border.color.primary}`,
+            }}
+        >
+            <Box
                 sx={{
-                    backgroundColor: theme.background(2),
-                    p: 3,
-                    borderRadius: "16px",
-                    color: theme.text.primary,
-                    fontFamily: theme.font.styled.family,
-                    fontWeight: theme.font.styled.weight,
+                    p: 2,
+                    backgroundColor: theme.palette.error.dark,
                 }}
             >
+                <TextStyled>
+                    Hello! If you're reading this it means you have stumbled
+                    across a secret page that is currently WIP and is being
+                    tested.
+                    <br />
+                    Please be aware there might be some things that are broken
+                    on this page.
+                </TextStyled>
+            </Box>
+            <Box>
                 <Toolbar
                     disableGutters
                     sx={{
+                        backgroundColor: theme.background(2),
+                        borderBottom: `1px solid ${theme.border.color.primary}`,
                         flexGrow: 1,
                         flexWrap: "wrap",
-                        justifyContent: { xs: "center", sm: "space-between" },
-                        rowGap: "8px",
-                        mb: "16px",
+                        justifyContent: "space-between",
+                        gap: "8px",
+                        px: { xs: 1, sm: 2, md: 3 },
+                        py: 1,
                     }}
                 >
-                    <TextStyled variant="h4-styled" gutterBottom>
-                        Gacha Calendar
-                    </TextStyled>
+                    <TextStyled variant="h5-styled">Gacha Calendar</TextStyled>
                     <Box>
-                        <TextStyled gutterBottom sx={{ textAlign: "center" }}>
+                        <TextStyled gutterBottom>
                             Click to toggle games
                         </TextStyled>
                         <ToggleButtons
@@ -113,19 +127,36 @@ function Calendar({ websites }: { websites: Website[] }) {
                         />
                     </Box>
                 </Toolbar>
-                <FullCalendar
-                    plugins={[dayGridPlugin, rrulePlugin]}
-                    initialView="dayGridMonth"
-                    contentHeight="70vh"
-                    buttonText={{ today: "Today" }}
-                    eventSources={eventSources}
-                    eventOrder="tag"
-                    eventOrderStrict={true}
-                    eventDisplay="block"
-                    displayEventTime={false}
-                />
-            </Paper>
-        </Container>
+                <Box
+                    sx={{
+                        px: { xs: 0, sm: 2, md: 3 },
+                        pt: 2,
+                        pb: 8,
+                        backgroundColor: alpha(theme.background(1), 0.88),
+                        backdropFilter: "blur(4px)",
+                    }}
+                >
+                    <FullCalendar
+                        plugins={[dayGridPlugin]}
+                        initialView="dayGridMonth"
+                        height="auto"
+                        buttonText={{ today: "Today" }}
+                        eventSources={eventSources}
+                        eventOrder="tag"
+                        eventOrderStrict={true}
+                        eventDisplay="block"
+                        displayEventTime={false}
+                        titleFormat={{
+                            month: matches_up_md ? "long" : "short",
+                            year: "numeric",
+                        }}
+                        dayHeaderFormat={{
+                            weekday: matches_up_md ? "short" : "narrow",
+                        }}
+                    />
+                </Box>
+            </Box>
+        </Box>
     );
 }
 
