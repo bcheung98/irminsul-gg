@@ -14,7 +14,6 @@ import Image from "custom/Image";
 import CalendarEventPopup, { EventPopupInfo } from "./CalendarEventPopup";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
-import { StyledTooltip } from "styled/StyledTooltip";
 
 // MUI imports
 import {
@@ -26,9 +25,10 @@ import {
     Dialog,
     IconButton,
     Stack,
+    Collapse,
+    AppBar,
+    Container,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
 
@@ -67,19 +67,26 @@ function Calendar({ websites }: { websites: Website[] }) {
                             borderRadius: "4px",
                         }}
                         tooltip={website.title}
-                        tooltipArrow="left"
+                        tooltipArrow="bottom"
                     />
                 ),
             });
         }
     });
 
-    const [filters, setSiteFilters] = useState<string[]>([]);
+    const storedFilters = localStorage.getItem("calendar/filters") || "null";
+    const [filters, setSiteFilters] = useState<string[]>(
+        storedFilters !== "null" ? JSON.parse(storedFilters) : []
+    );
     const handleFilterChange = (
         _: BaseSyntheticEvent,
         newSiteFilters: string[]
     ) => {
         setSiteFilters(newSiteFilters);
+        const jsonFilters = JSON.stringify(newSiteFilters);
+        if (jsonFilters !== storedFilters) {
+            localStorage.setItem("calendar/filters", jsonFilters);
+        }
     };
 
     useEffect(() => {
@@ -89,7 +96,9 @@ function Calendar({ websites }: { websites: Website[] }) {
                 // dispatch(fetchBanners({ tag: website.tag, type: "weapon" }));
             }
         });
-        setSiteFilters(buttons.map((button) => button.value as string));
+        if (storedFilters === "null") {
+            setSiteFilters(buttons.map((button) => button.value as string));
+        }
     }, [websites]);
 
     const banners = useAppSelector(selectBanners);
@@ -135,16 +144,18 @@ function Calendar({ websites }: { websites: Website[] }) {
         }
     };
 
-    const [showButtons, setShowButtons] = useState(true);
-    const toggleShowButtons = () => {
-        setShowButtons(!showButtons);
-    };
-
-    const baseIconStyle = {
-        width: "32px",
-        height: "32px",
-        padding: "4px",
-        transition: "transform 0.25s",
+    const storedDropdownOpen =
+        localStorage.getItem("calendar/dropdown") || "null";
+    const [dropdownOpen, setDropdownOpen] = useState<boolean>(
+        storedDropdownOpen !== "null" ? JSON.parse(storedDropdownOpen) : true
+    );
+    const toggleDropdownOpen = () => {
+        const newState = !dropdownOpen;
+        const jsonDropdownOpen = JSON.stringify(newState);
+        if (jsonDropdownOpen !== storedDropdownOpen) {
+            localStorage.setItem("calendar/dropdown", jsonDropdownOpen);
+        }
+        setDropdownOpen(newState);
     };
 
     return (
@@ -157,136 +168,120 @@ function Calendar({ websites }: { websites: Website[] }) {
                     borderBottom: `1px solid ${theme.border.color.primary}`,
                 }}
             >
-                <Box
+                <AppBar
+                    position="relative"
                     sx={{
-                        p: 1,
-                        backgroundColor: theme.palette.error.dark,
+                        borderColor: theme.appbar.selectedHover,
+                        px: { xs: 1, sm: 2, md: 3 },
                     }}
                 >
-                    <TextStyled sx={{ textAlign: "center" }}>
-                        Hello! If you're reading this it means you have stumbled
-                        across a secret page that is currently WIP.
-                    </TextStyled>
-                </Box>
-                <Box>
-                    <Toolbar
-                        variant="dense"
-                        disableGutters
-                        sx={{
-                            backgroundColor: theme.background(2),
-                            borderBottom: `1px solid ${theme.border.color.primary}`,
-                            flexGrow: 1,
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                            gap: "8px",
-                            px: { xs: 1, sm: 2, md: 3 },
-                            py: 1,
-                        }}
-                    >
-                        <Stack direction="row" spacing={2} alignItems="center">
-                            <TextStyled variant="h5-styled">
-                                Gacha Calendar
-                            </TextStyled>
-                            <StyledTooltip
-                                title="Release dates of all future updates are subject to change"
-                                arrow
-                                placement="right"
-                            >
-                                <InfoIcon />
-                            </StyledTooltip>
-                        </Stack>
-                        <IconButton
-                            onClick={toggleShowButtons}
-                            disableRipple
-                            disableTouchRipple
-                        >
-                            {matches_up_sm ? (
-                                <MenuOpenIcon
-                                    sx={{
-                                        ...baseIconStyle,
-                                        ...{
-                                            transform: showButtons
-                                                ? "rotateY(0deg)"
-                                                : "rotateY(180deg)",
-                                        },
-                                    }}
-                                />
-                            ) : (
-                                <ExpandMoreIcon
-                                    sx={{
-                                        ...baseIconStyle,
-                                        ...{
-                                            transform: showButtons
-                                                ? "rotateZ(0deg)"
-                                                : "rotateZ(180deg)",
-                                        },
-                                    }}
-                                />
-                            )}
-                        </IconButton>
-                    </Toolbar>
-                    <Grid
-                        container
-                        spacing={{ xs: 1, sm: 2, md: 3 }}
-                        direction={{ xs: "column-reverse", sm: "row" }}
-                        sx={{
-                            px: { xs: 0, sm: 2, md: 3 },
-                            pt: 2,
-                            pb: 8,
-                            backgroundColor: alpha(theme.background(1), 0.88),
-                            backdropFilter: "blur(4px)",
-                        }}
-                    >
-                        <Grid size={{ sm: "grow" }}>
-                            <FullCalendar
-                                ref={calendarRef}
-                                plugins={[dayGridPlugin]}
-                                initialView="dayGridMonth"
-                                height="auto"
-                                buttonText={{ today: "Today" }}
-                                eventSources={eventSources}
-                                eventOrder="tag"
-                                eventOrderStrict={true}
-                                eventDisplay="block"
-                                displayEventTime={false}
-                                titleFormat={{
-                                    month: matches_up_sm ? "long" : "short",
-                                    year: "numeric",
-                                }}
-                                dayHeaderFormat={{
-                                    weekday: matches_up_sm ? "short" : "narrow",
-                                }}
-                                eventClick={(info) => handleEventClick(info)}
-                                eventMouseEnter={(info) =>
-                                    handleEventHover(info, "enter")
-                                }
-                                eventMouseLeave={(info) =>
-                                    handleEventHover(info, "leave")
-                                }
-                            />
-                        </Grid>
-                        <Grid
-                            size="auto"
+                    <Container maxWidth="xl" disableGutters>
+                        <Toolbar
+                            variant="dense"
+                            disableGutters
                             sx={{
-                                px: { xs: 1, sm: 0 },
-                                display: showButtons ? "flex" : "none",
-                                mt: { sm: "56px" },
+                                justifyContent: "space-between",
                             }}
                         >
-                            <ToggleButtons
-                                color="primary"
-                                orientation={
-                                    matches_up_sm ? "vertical" : "horizontal"
-                                }
-                                buttons={buttons}
-                                value={filters}
-                                onChange={handleFilterChange}
-                                highlightOnHover={false}
-                                padding={0}
-                                spacing={4}
+                            <TextStyled variant="h6-styled">
+                                Gacha Calendar
+                            </TextStyled>
+                            <IconButton
+                                onClick={toggleDropdownOpen}
+                                disableRipple
+                                disableTouchRipple
+                                sx={{ p: 0 }}
+                            >
+                                <ExpandMoreIcon
+                                    sx={{
+                                        width: "32px",
+                                        height: "32px",
+                                        p: "4px",
+                                        transform: dropdownOpen
+                                            ? "rotateX(180deg)"
+                                            : "rotateX(0deg)",
+                                        transition: "transform 0.25s",
+                                    }}
+                                />
+                            </IconButton>
+                        </Toolbar>
+                        <Collapse in={dropdownOpen} timeout="auto">
+                            <Stack sx={{ pb: 1 }}>
+                                <TextStyled
+                                    variant="body2-styled"
+                                    gutterBottom
+                                    sx={{ px: 0.5 }}
+                                >
+                                    Click to filter games
+                                </TextStyled>
+                                <ToggleButtons
+                                    color="primary"
+                                    orientation={
+                                        matches_up_sm
+                                            ? "horizontal"
+                                            : "horizontal"
+                                    }
+                                    buttons={buttons}
+                                    value={filters}
+                                    onChange={handleFilterChange}
+                                    padding={0}
+                                    spacing={4}
+                                />
+                            </Stack>
+                        </Collapse>
+                    </Container>
+                </AppBar>
+                <Box
+                    sx={{
+                        minHeight: "100vh",
+                        px: { xs: 0, sm: 2, md: 3 },
+                        pt: 2,
+                        pb: 8,
+                        backgroundColor: alpha(theme.background(0), 0.75),
+                    }}
+                >
+                    <Container maxWidth="xl" disableGutters>
+                        <FullCalendar
+                            ref={calendarRef}
+                            plugins={[dayGridPlugin]}
+                            initialView="dayGridMonth"
+                            height="auto"
+                            buttonText={{ today: "Today" }}
+                            eventSources={eventSources}
+                            eventOrder="title"
+                            eventOrderStrict={true}
+                            eventDisplay="block"
+                            displayEventTime={false}
+                            titleFormat={{
+                                month: matches_up_sm ? "long" : "short",
+                                year: "numeric",
+                            }}
+                            dayHeaderFormat={{
+                                weekday: matches_up_sm ? "short" : "narrow",
+                            }}
+                            eventClick={(info) => handleEventClick(info)}
+                            eventMouseEnter={(info) =>
+                                handleEventHover(info, "enter")
+                            }
+                            eventMouseLeave={(info) =>
+                                handleEventHover(info, "leave")
+                            }
+                        />
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            sx={{ mt: 2, px: { xs: 1, sm: 0 } }}
+                            alignItems="center"
+                        >
+                            <InfoIcon
+                                fontSize={matches_up_sm ? "medium" : "small"}
                             />
-                        </Grid>
-                    </Grid>
+                            <TextStyled>
+                                Please note that the dates of all future updates
+                                are subject to change
+                            </TextStyled>
+                        </Stack>
+                    </Container>
                 </Box>
             </Box>
             <Dialog

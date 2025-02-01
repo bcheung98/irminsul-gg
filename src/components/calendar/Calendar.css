@@ -11,12 +11,16 @@
 
     --fc-event-selected-overlay-color: rgba(0, 0, 0, 0);
 
-    --fc-today-bg-color: rgba(40, 115, 255, 0.25);
+    --fc-today-bg-color: rgba(26, 106, 255, 0.25);
 }
 
 @media (min-width: 0px) {
+    .fc-header-toolbar {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
     .fc-toolbar-title {
-        font-size: 1.25rem !important;
+        font-size: 1rem !important;
     }
     .fc-button {
         font-size: 0.75rem !important;
@@ -49,11 +53,18 @@
 }
 
 @media (min-width: 600px) {
+    .fc-header-toolbar {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
     .fc-toolbar-title {
-        font-size: 1.5rem !important;
+        font-size: 1.25rem !important;
     }
     .fc-button {
         font-size: 0.875rem !important;
+    }
+    .fc-daygrid {
+        border-radius: 8px;
     }
     .fc-scrollgrid {
         border-left-width: 1px !important;
@@ -86,11 +97,6 @@
     }
 }
 
-.fc-header-toolbar {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
 .fc-toolbar-title,
 .fc-button {
     font-weight: 300 !important;
@@ -110,6 +116,11 @@
 
 .fc .fc-today-button {
     padding: 0px 16px;
+}
+
+.fc-daygrid {
+    background-color: rgba(8, 32, 72, 0.75);
+    backdrop-filter: blur(4px);
 }
 
 .fc-col-header-cell {
