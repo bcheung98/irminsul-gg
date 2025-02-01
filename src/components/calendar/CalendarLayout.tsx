@@ -7,7 +7,7 @@ function CalendarLayout() {
     return (
         <Box
             sx={{
-                mt: { xs: "56px", md: "64px" },
+                mt: { xs: "56px", sm: "64px" },
                 minHeight: "100vh",
                 width: "100%",
             }}

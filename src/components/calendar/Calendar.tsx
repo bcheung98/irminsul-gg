@@ -1,5 +1,11 @@
 import "./Calendar.css";
-import { BaseSyntheticEvent, useEffect, useMemo, useState } from "react";
+import {
+    BaseSyntheticEvent,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
@@ -8,6 +14,7 @@ import Image from "custom/Image";
 import CalendarEventPopup, { EventPopupInfo } from "./CalendarEventPopup";
 import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
 import { TextStyled } from "styled/StyledTypography";
+import { StyledTooltip } from "styled/StyledTooltip";
 
 // MUI imports
 import {
@@ -17,7 +24,13 @@ import {
     Toolbar,
     Box,
     Dialog,
+    IconButton,
+    Stack,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import InfoIcon from "@mui/icons-material/Info";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
@@ -36,6 +49,8 @@ function Calendar({ websites }: { websites: Website[] }) {
 
     const dispatch = useAppDispatch();
 
+    const calendarRef = useRef<FullCalendar>(null);
+
     const buttons = [] as CustomToggleButtonProps[];
     const colors: WebsiteColorInfo = {};
     websites.forEach((website) => {
@@ -52,6 +67,7 @@ function Calendar({ websites }: { websites: Website[] }) {
                             borderRadius: "4px",
                         }}
                         tooltip={website.title}
+                        tooltipArrow="left"
                     />
                 ),
             });
@@ -119,6 +135,18 @@ function Calendar({ websites }: { websites: Website[] }) {
         }
     };
 
+    const [showButtons, setShowButtons] = useState(true);
+    const toggleShowButtons = () => {
+        setShowButtons(!showButtons);
+    };
+
+    const baseIconStyle = {
+        width: "32px",
+        height: "32px",
+        padding: "4px",
+        transition: "transform 0.25s",
+    };
+
     return (
         <>
             <Box
@@ -131,7 +159,7 @@ function Calendar({ websites }: { websites: Website[] }) {
             >
                 <Box
                     sx={{
-                        p: 2,
+                        p: 1,
                         backgroundColor: theme.palette.error.dark,
                     }}
                 >
@@ -142,6 +170,7 @@ function Calendar({ websites }: { websites: Website[] }) {
                 </Box>
                 <Box>
                     <Toolbar
+                        variant="dense"
                         disableGutters
                         sx={{
                             backgroundColor: theme.background(2),
@@ -154,15 +183,101 @@ function Calendar({ websites }: { websites: Website[] }) {
                             py: 1,
                         }}
                     >
-                        <TextStyled variant="h5-styled">
-                            Gacha Calendar
-                        </TextStyled>
-                        <Box>
-                            <TextStyled gutterBottom>
-                                Click to toggle games
+                        <Stack direction="row" spacing={2} alignItems="center">
+                            <TextStyled variant="h5-styled">
+                                Gacha Calendar
                             </TextStyled>
+                            <StyledTooltip
+                                title="Release dates of all future updates are subject to change"
+                                arrow
+                                placement="right"
+                            >
+                                <InfoIcon />
+                            </StyledTooltip>
+                        </Stack>
+                        <IconButton
+                            onClick={toggleShowButtons}
+                            disableRipple
+                            disableTouchRipple
+                        >
+                            {matches_up_sm ? (
+                                <MenuOpenIcon
+                                    sx={{
+                                        ...baseIconStyle,
+                                        ...{
+                                            transform: showButtons
+                                                ? "rotateY(0deg)"
+                                                : "rotateY(180deg)",
+                                        },
+                                    }}
+                                />
+                            ) : (
+                                <ExpandMoreIcon
+                                    sx={{
+                                        ...baseIconStyle,
+                                        ...{
+                                            transform: showButtons
+                                                ? "rotateZ(0deg)"
+                                                : "rotateZ(180deg)",
+                                        },
+                                    }}
+                                />
+                            )}
+                        </IconButton>
+                    </Toolbar>
+                    <Grid
+                        container
+                        spacing={{ xs: 1, sm: 2, md: 3 }}
+                        direction={{ xs: "column-reverse", sm: "row" }}
+                        sx={{
+                            px: { xs: 0, sm: 2, md: 3 },
+                            pt: 2,
+                            pb: 8,
+                            backgroundColor: alpha(theme.background(1), 0.88),
+                            backdropFilter: "blur(4px)",
+                        }}
+                    >
+                        <Grid size={{ sm: "grow" }}>
+                            <FullCalendar
+                                ref={calendarRef}
+                                plugins={[dayGridPlugin]}
+                                initialView="dayGridMonth"
+                                height="80vh"
+                                buttonText={{ today: "Today" }}
+                                eventSources={eventSources}
+                                eventOrder="tag"
+                                eventOrderStrict={true}
+                                eventDisplay="block"
+                                displayEventTime={false}
+                                titleFormat={{
+                                    month: matches_up_sm ? "long" : "short",
+                                    year: "numeric",
+                                }}
+                                dayHeaderFormat={{
+                                    weekday: matches_up_sm ? "short" : "narrow",
+                                }}
+                                eventClick={(info) => handleEventClick(info)}
+                                eventMouseEnter={(info) =>
+                                    handleEventHover(info, "enter")
+                                }
+                                eventMouseLeave={(info) =>
+                                    handleEventHover(info, "leave")
+                                }
+                            />
+                        </Grid>
+                        <Grid
+                            size="auto"
+                            sx={{
+                                px: { xs: 1, sm: 0 },
+                                display: showButtons ? "flex" : "none",
+                                mt: { sm: "56px" },
+                            }}
+                        >
                             <ToggleButtons
                                 color="primary"
+                                orientation={
+                                    matches_up_sm ? "vertical" : "horizontal"
+                                }
                                 buttons={buttons}
                                 value={filters}
                                 onChange={handleFilterChange}
@@ -170,44 +285,8 @@ function Calendar({ websites }: { websites: Website[] }) {
                                 padding={0}
                                 spacing={4}
                             />
-                        </Box>
-                    </Toolbar>
-                    <Box
-                        sx={{
-                            px: { xs: 0, sm: 2, md: 3 },
-                            pt: 2,
-                            pb: 8,
-                            backgroundColor: alpha(theme.background(1), 0.88),
-                            backdropFilter: "blur(4px)",
-                            minHeight: "75vh",
-                        }}
-                    >
-                        <FullCalendar
-                            plugins={[dayGridPlugin]}
-                            initialView="dayGridMonth"
-                            height="auto"
-                            buttonText={{ today: "Today" }}
-                            eventSources={eventSources}
-                            eventOrder="tag"
-                            eventOrderStrict={true}
-                            eventDisplay="block"
-                            displayEventTime={false}
-                            titleFormat={{
-                                month: matches_up_sm ? "long" : "short",
-                                year: "numeric",
-                            }}
-                            dayHeaderFormat={{
-                                weekday: matches_up_sm ? "short" : "narrow",
-                            }}
-                            eventClick={(info) => handleEventClick(info)}
-                            eventMouseEnter={(info) =>
-                                handleEventHover(info, "enter")
-                            }
-                            eventMouseLeave={(info) =>
-                                handleEventHover(info, "leave")
-                            }
-                        />
-                    </Box>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
             <Dialog
