@@ -36,6 +36,7 @@ interface Version {
 
 export interface VersionInfo extends Version {
     characters: string[];
+    currentVersion?: boolean;
     futureVersion?: boolean;
 }
 

@@ -18,6 +18,7 @@ export interface EventPopupInfo {
     end?: string;
     characters: string[];
     urls: WebsiteURLInfo;
+    futureVersion?: boolean;
 }
 
 interface CalendarEventPopupProps {
@@ -34,7 +35,7 @@ function CalendarEventPopup({ onClose, info }: CalendarEventPopupProps) {
     const theme = useTheme();
     const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const { tag, title, characters, urls, start, end } = info;
+    const { tag, title, characters, urls, start, end, futureVersion } = info;
 
     const imgSize = matches_up_sm ? "48px" : "40px";
 
@@ -78,59 +79,56 @@ function CalendarEventPopup({ onClose, info }: CalendarEventPopupProps) {
                 headerProps={{ wrap: false }}
                 contentProps={{ padding: "16px" }}
             >
+                <TextStyled sx={{ mb: "16px" }}>
+                    {`${start} - ${end}${futureVersion ? " (Tentative)" : ""}`}
+                </TextStyled>
                 {characters.length > 0 && (
-                    <>
-                        <TextStyled sx={{ mb: "16px" }}>
-                            {start} - {end}
-                        </TextStyled>
-                        <Stack spacing={2}>
-                            {characters.map((char, index) => (
-                                <Stack
-                                    key={index}
-                                    spacing={2}
-                                    direction="row"
-                                    alignItems="center"
+                    <Stack spacing={2}>
+                        {characters.map((char, index) => (
+                            <Stack
+                                key={index}
+                                spacing={2}
+                                direction="row"
+                                alignItems="center"
+                            >
+                                <RouterLink
+                                    to={getURL({ tag, char })}
+                                    openInNewTab
                                 >
-                                    <RouterLink
-                                        to={getURL({ tag, char })}
-                                        openInNewTab
+                                    <Image
+                                        src={getImgSrc({ tag, char })}
+                                        alt={char}
+                                        style={{
+                                            width: imgSize,
+                                            height: imgSize,
+                                            backgroundColor: theme.background(
+                                                2,
+                                                "light"
+                                            ),
+                                            border: `2px solid ${theme.border.color.primary}`,
+                                            borderRadius: "4px",
+                                        }}
+                                    />
+                                </RouterLink>
+                                <RouterLink
+                                    to={getURL({ tag, char })}
+                                    openInNewTab
+                                >
+                                    <TextStyled
+                                        sx={{
+                                            cursor: "pointer",
+                                            "&:hover": {
+                                                color: theme.text.selected,
+                                                textDecoration: "underline",
+                                            },
+                                        }}
                                     >
-                                        <Image
-                                            src={getImgSrc({ tag, char })}
-                                            alt={char}
-                                            style={{
-                                                width: imgSize,
-                                                height: imgSize,
-                                                backgroundColor:
-                                                    theme.background(
-                                                        2,
-                                                        "light"
-                                                    ),
-                                                border: `2px solid ${theme.border.color.primary}`,
-                                                borderRadius: "4px",
-                                            }}
-                                        />
-                                    </RouterLink>
-                                    <RouterLink
-                                        to={getURL({ tag, char })}
-                                        openInNewTab
-                                    >
-                                        <TextStyled
-                                            sx={{
-                                                cursor: "pointer",
-                                                "&:hover": {
-                                                    color: theme.text.selected,
-                                                    textDecoration: "underline",
-                                                },
-                                            }}
-                                        >
-                                            {char}
-                                        </TextStyled>
-                                    </RouterLink>
-                                </Stack>
-                            ))}
-                        </Stack>
-                    </>
+                                        {char}
+                                    </TextStyled>
+                                </RouterLink>
+                            </Stack>
+                        ))}
+                    </Stack>
                 )}
             </MainContentBox>
         </Box>

@@ -26,6 +26,7 @@ function CalendarEvent({
         tag,
         version = "0.0",
         subVersion = "0.0.0",
+        currentVersion,
         futureVersion,
         start,
         end,
@@ -33,14 +34,12 @@ function CalendarEvent({
         color,
     } = eventInfo.event.extendedProps as EventObjectExtendedProps;
 
-    const opacity = isPast ? 0.5 : 1;
+    const opacity = currentVersion || !isPast ? 1 : 0.5;
     const backgroundColor = !futureVersion ? color : alpha(color, 0.25);
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = () => {
-        if (!futureVersion) {
-            setDialogOpen(true);
-        }
+        setDialogOpen(true);
     };
     const handleDialogClose = () => {
         setDialogOpen(false);
@@ -63,11 +62,14 @@ function CalendarEvent({
                     px: { xs: 0.25, sm: 1 },
                     backgroundColor: backgroundColor,
                     opacity: opacity,
-                    cursor: !futureVersion ? "pointer" : "default",
+                    cursor: "pointer",
                     "&:hover, &:focus": {
-                        outline: !futureVersion
-                            ? `2px solid rgb(200, 200, 200)`
-                            : "none",
+                        // outline: !futureVersion
+                        //     ? `2px solid rgb(200, 200, 200)`
+                        //     : "none",
+                        backgroundColor: futureVersion
+                            ? alpha(color, 0.5)
+                            : alpha(color, 0.75),
                     },
                 }}
             >
@@ -98,6 +100,7 @@ function CalendarEvent({
                         urls,
                         start,
                         end,
+                        futureVersion,
                     }}
                 />
             </Dialog>

@@ -1,5 +1,5 @@
 import { createVersionInfo } from "./createVersionInfo";
-import { createDateObject } from "./dates";
+import { createDateObject, isCurrentBanner } from "./dates";
 import { objectKeys } from "./utils";
 import {
     BannerList,
@@ -26,27 +26,24 @@ export function createEventSourceObject({
                     game,
                 });
                 versions.forEach((version) => {
+                    const start = createDateObject({
+                        date: version.start,
+                    });
+                    const end = createDateObject({
+                        date: version.end,
+                    });
                     events.push({
                         title: `${game} ${version.subVersion}`,
-                        start: createDateObject({
-                            date: version.start,
-                        }).obj.toISOString(),
-                        end: showDuration
-                            ? createDateObject({
-                                  date: version.end,
-                              }).obj.toISOString()
-                            : undefined,
+                        start: start.obj.toISOString(),
+                        end: showDuration ? end.obj.toISOString() : undefined,
                         extendedProps: {
                             tag: game,
                             version: version.version,
                             subVersion: version.subVersion,
+                            currentVersion: isCurrentBanner(start.obj, end.obj),
                             futureVersion: version.futureVersion,
-                            start: createDateObject({
-                                date: version.start,
-                            }).date,
-                            end: createDateObject({
-                                date: version.end,
-                            }).date,
+                            start: start.date,
+                            end: end.date,
                             characters: version.characters,
                             color: colors[game] || "dodgerblue",
                         },
