@@ -30,8 +30,10 @@ _Check respective repos for more preview images_!
 
 ## **Current Roadmap / TODOs**
 
+### All sites:
+- [ ] Have planner save character/weapon info after leaving page.
+
 ### Genshin:
-- [x] Update codebase to meet new quality standards.
 - [ ] Enhance TCG deck builder.
 
 ### HSR:
