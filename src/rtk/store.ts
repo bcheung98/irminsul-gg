@@ -3,11 +3,13 @@ import { listenerMiddleware } from "./middleware";
 
 import websiteReducer from "reducers/website";
 import bannerReducer from "reducers/banner";
+import calendarReducer from "reducers/calendar";
 
 const store = configureStore({
     reducer: {
         websites: websiteReducer,
         banners: bannerReducer,
+        calendar: calendarReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().prepend(listenerMiddleware.middleware),

@@ -9,7 +9,9 @@
     --fc-button-active-bg-color: rgb(0, 16, 32);
     --fc-button-active-border-color: rgb(233, 194, 39);
 
-    --fc-event-selected-overlay-color: rgba(0, 0, 0, 0);
+    --fc-event-bg-color: transparent;
+    --fc-event-border-color: transparent;
+    --fc-event-selected-overlay-color: transparent;
 
     --fc-today-bg-color: rgba(26, 106, 255, 0.25);
 }
@@ -93,7 +95,7 @@
         font-size: 1rem !important;
     }
     .fc .fc-daygrid-day-frame {
-        min-height: 116px;
+        min-height: 120px;
     }
 }
 
@@ -136,4 +138,10 @@
 
 .fc .fc-daygrid-day-frame {
     user-select: none;
+}
+
+.fc-daygrid-day-events {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
 }

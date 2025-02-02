@@ -1,5 +1,9 @@
 // Component imports
+import CalendarSettings from "./CalendarSettings";
 import Calendar from "./Calendar";
+
+// MUI imports
+import { useTheme, Box } from "@mui/material";
 
 // Helper imports
 import { useAppSelector } from "helpers/hooks";
@@ -19,11 +23,25 @@ function CalendarRoot() {
         .querySelector('meta[property="og:description"]')
         ?.setAttribute("content", documentDesc);
 
+    const theme = useTheme();
+
     const websites = [...useAppSelector(selectWebsites)].sort((a, b) =>
         a.title.localeCompare(b.title)
     );
 
-    return <Calendar websites={websites} />;
+    return (
+        <Box
+            sx={{
+                color: theme.text.primary,
+                fontFamily: theme.font.styled.family,
+                fontWeight: theme.font.styled.weight,
+                borderBottom: `1px solid ${theme.border.color.primary}`,
+            }}
+        >
+            <CalendarSettings websites={websites} />
+            <Calendar websites={websites} />
+        </Box>
+    );
 }
 
 export default CalendarRoot;

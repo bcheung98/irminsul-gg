@@ -5,56 +5,59 @@ import {
     BannerList,
     EventObject,
     EventSourceObject,
-    VersionInfo,
     WebsiteColorInfo,
 } from "types/common";
 
-export function createEventSourceObject(
-    banners: BannerList,
-    colors: WebsiteColorInfo
-) {
+export function createEventSourceObject({
+    banners,
+    colors,
+    showDuration,
+}: {
+    banners: BannerList;
+    colors: WebsiteColorInfo;
+    showDuration: boolean;
+}) {
     const eventSources: EventSourceObject[] = objectKeys(banners)
         .map((game) => {
             return objectKeys(banners[game]).map((type) => {
                 const events: EventObject[] = [];
-                const color = colors[game] || "dodgerblue";
                 const versions = createVersionInfo({
                     banners: banners[game][type],
                     game,
                 });
                 versions.forEach((version) => {
                     events.push({
-                        tag: game,
-                        title: formatVersionTitle(game, version),
+                        title: `${game} ${version.subVersion}`,
                         start: createDateObject({
                             date: version.start,
                         }).obj.toISOString(),
-                        // end: createDateObject({
-                        //     date: version.end,
-                        // }).obj.toISOString(),
+                        end: showDuration
+                            ? createDateObject({
+                                  date: version.end,
+                              }).obj.toISOString()
+                            : undefined,
                         extendedProps: {
+                            tag: game,
+                            version: version.version,
+                            subVersion: version.subVersion,
+                            futureVersion: version.futureVersion,
+                            start: createDateObject({
+                                date: version.start,
+                            }).date,
+                            end: createDateObject({
+                                date: version.end,
+                            }).date,
                             characters: version.characters,
+                            color: colors[game] || "dodgerblue",
                         },
                     });
                 });
                 return {
                     events: events,
                     tag: `${game.toLowerCase()}/${type}s`,
-                    color: color,
-                    textColor: `#fff`,
                 };
             });
         })
         .flat();
     return eventSources;
-}
-
-function formatVersionTitle(game: string, version: VersionInfo) {
-    let title = `${game} ${version.version} Phase ${
-        version.subVersion.split(".").slice(-1)[0]
-    }`;
-    if (version.futureVersion) {
-        title += ` (Tentative)`;
-    }
-    return title;
 }

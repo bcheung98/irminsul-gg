@@ -4,6 +4,17 @@ export interface Website {
     enabled: boolean;
     gameVersion: string;
     color: string;
+    urls: WebsiteURLInfo;
+}
+
+export interface WebsiteURLInfo {
+    characters: URLInfo;
+    weapons: URLInfo;
+}
+
+export interface URLInfo {
+    icon: string;
+    href: string;
 }
 
 export interface WebsiteColorInfo {
@@ -36,18 +47,18 @@ export interface Banner extends Version {
 export type BannerList = Record<string, Partial<Record<string, Banner[]>>>;
 
 export interface EventObject {
-    tag: string;
     title: string;
     start?: string;
     end?: string;
-    extendedProps?: {
-        characters?: string[];
-    };
+    extendedProps?: EventObjectExtendedProps;
 }
 
 export interface EventSourceObject {
     events: EventObject[];
     tag: string;
-    color?: string;
-    textColor?: string;
+}
+
+export interface EventObjectExtendedProps extends Partial<VersionInfo> {
+    tag: string;
+    color: string;
 }
