@@ -7,6 +7,7 @@ import { useTheme, Card, AppBar, Toolbar, Box } from "@mui/material";
 interface HeaderProps {
     dense?: boolean;
     padding?: string | number;
+    wrap?: boolean;
 }
 
 interface ContentProps {
@@ -32,6 +33,7 @@ function MainContentBox({
     headerProps = {
         dense: true,
         padding: "8px 16px",
+        wrap: true,
     },
     contentProps = {
         padding: "24px",
@@ -55,9 +57,9 @@ function MainContentBox({
                     variant={headerProps.dense ? "dense" : "regular"}
                     disableGutters
                     sx={{
-                        p: headerProps.padding,
+                        p: headerProps.padding || "8px 16px",
                         flexGrow: 1,
-                        flexWrap: "wrap",
+                        flexWrap: headerProps.wrap ? "wrap" : "nowrap",
                         justifyContent: "space-between",
                         rowGap: "8px",
                     }}
