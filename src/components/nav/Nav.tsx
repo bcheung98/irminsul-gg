@@ -54,10 +54,10 @@ export interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    // {
-    //     text: "Calendar",
-    //     link: "/calendar",
-    // },
+    {
+        text: "Calendar",
+        link: "/calendar",
+    },
     {
         text: "Blog",
         link: "/blog",
