@@ -98,13 +98,37 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
                             >
                                 <Image
                                     src={imgSrc}
-                                    fallbackSrc={`https://assets.irminsul.gg/main/wallpapers/${tagLower}/${tag}.png`}
+                                    fallbackSrc={`wallpapers/${tagLower}/${tag}`}
                                     alt={tag}
                                     id={`${id}-img`}
                                     style={imageStyle}
                                 />
                             </ButtonBase>
                         </Box>
+                        {!enabled && (
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    zIndex: 5,
+                                    top: "-4%",
+                                    right: "-8px",
+                                    backgroundColor: `rgb(192, 120, 0)`,
+                                    borderRadius: "8px",
+                                    border: `2px solid rgb(230, 184, 44)`,
+                                    px: 1,
+                                    boxShadow: `inset 0 0 8px rgb(230, 184, 44)`,
+                                }}
+                            >
+                                <TextStyled
+                                    sx={{
+                                        userSelect: "none",
+                                        color: `rgb(255, 255, 130)`,
+                                    }}
+                                >
+                                    Coming soon!
+                                </TextStyled>
+                            </Box>
+                        )}
                         <Box
                             sx={{
                                 display: "flex",
@@ -128,8 +152,6 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
                                     }}
                                 >
                                     {title}
-                                    <br />
-                                    {!enabled && "(Coming soon!)"}
                                 </TextStyled>
                             </ButtonBase>
                         </Box>
