@@ -12,26 +12,28 @@
 
 - [**Zenless Zone Zero**](https://zzz.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-phaethon))
 
+- [**Arknights: Endfield**](https://endfield.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-talos))
+
 ## **Previews**
 
 _Check respective repos for more preview images_!
 
 **Genshin Impact**:
-![preview](https://github.com/user-attachments/assets/627b0249-c648-48a0-bfb6-defd1a1380a9)
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/genshin/preview.png)
 
 **Honkai: Star Rail**:
-![preview](https://github.com/user-attachments/assets/f45fb53e-ddc8-446c-88ce-3af02925ba04)
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/hsr/preview.png)
 
 **Wuthering Waves**:
-![preview](https://github.com/user-attachments/assets/ce42e9b5-ccdc-4cd3-822b-d4ccde87d313)
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/wuwa/preview.png)
 
 **Zenless Zone Zero**:
-![preview](https://github.com/user-attachments/assets/3aed4664-a005-4968-b0a5-152363311798)
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/zzz/preview.png)
 
 ## **Current Roadmap / TODOs**
 
 ### All sites:
-- [ ] Have planner save character/weapon info after leaving page.
+- [x] Have planner save character/weapon info after leaving page.
 
 ### Genshin:
 - [ ] Enhance TCG deck builder.
