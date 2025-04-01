@@ -69,9 +69,14 @@ export const navStyles = (location: string) => ({
         (link = ""): SxProps<Theme> =>
         (theme) => ({
             color: link === location ? theme.text.selected : theme.appbar.color,
+            textShadow:
+                link === location
+                    ? `${theme.text.selected} 1px 1px 16px`
+                    : "none",
             transition: "color 0.25s",
             "&:hover": {
                 color: theme.text.selected,
+                textShadow: `${theme.text.selected} 1px 1px 8px`,
             },
         }),
     listItem: (): SxProps<Theme> => (theme) => ({
@@ -80,10 +85,12 @@ export const navStyles = (location: string) => ({
             "&:hover": {
                 backgroundColor: theme.menu.hover,
                 color: theme.text.selected,
+                textShadow: `${theme.text.selected} 1px 1px 8px`,
             },
             "&.Mui-focusVisible, &.Mui-selected": {
                 backgroundColor: theme.menu.hover,
                 color: theme.text.selected,
+                textShadow: `${theme.text.selected} 1px 1px 8px`,
                 "&:hover": {
                     backgroundColor: theme.menu.hover,
                 },
