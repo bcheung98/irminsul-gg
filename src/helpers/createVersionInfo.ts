@@ -2,6 +2,7 @@ import { Banner, VersionInfo } from "types/common";
 
 export function createVersionInfo({
     banners,
+    game,
 }: {
     banners?: Banner[];
     game: string;
@@ -32,9 +33,13 @@ export function createVersionInfo({
     let startTime, startUTC, endTime, endUTC;
     for (let i = 0; i < 20; i++) {
         start.setDate(end.getDate() + 1);
-        end.setDate(end.getDate() + 21);
+        if (lastVersion.subVersion.endsWith(".1")) {
+            end.setDate(end.getDate() + 42);
+        } else {
+            end.setDate(end.getDate() + 21);
+        }
         if (i % 2 === 0) {
-            version = incrementVersion(version);
+            version = incrementVersion(version, game);
             startTime = "11:00:00";
             startUTC = " UTC+8";
             endTime = "17:59:59";
@@ -61,7 +66,7 @@ export function createVersionInfo({
     return versions;
 }
 
-function incrementVersion(version: string) {
+function incrementVersion(version: string, game: string) {
     const arr = version.split(".");
     let main = parseInt(arr[0]);
     let sub = parseInt(arr[1]);
@@ -71,5 +76,12 @@ function incrementVersion(version: string) {
         main += 1;
         sub = 0;
     }
-    return `${main}.${sub}`;
+    const versionNumber = `${main}.${sub}`;
+
+    // Game specific adjustments
+    if (game === "ZZZ" && versionNumber === "1.8") {
+        return "2.0";
+    }
+
+    return versionNumber;
 }
