@@ -22,6 +22,10 @@ function App() {
         dispatch(fetchWebsites());
     }, []);
 
+    console.log(
+        `MKCLXYKCM\nOZBLLCZAN\nBFIKCLELC\nCDMNXLQZZ\nGILFCQOGI\nWXTDQWLBL\nSZIBIWIVC\nFWLLGCWAL\n`
+    );
+
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
