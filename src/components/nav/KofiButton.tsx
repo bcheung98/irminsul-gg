@@ -28,7 +28,7 @@ function KofiButton() {
             disableElevation
             startIcon={KofiImg}
             sx={{
-                backgroundColor: theme.palette.info.dark,
+                backgroundColor: "#CE3833",
                 color: theme.text.primary,
                 height: "32px",
             }}
