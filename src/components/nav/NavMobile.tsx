@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 // Component imports
 import Image from "custom/Image";
 import Logo from "./Logo";
+import DiscordButton from "./DiscordButton";
 import KofiButton from "components/nav/KofiButton";
 import RouterLink from "./RouterLink";
 import { TextStyled } from "styled/StyledTypography";
@@ -64,9 +65,14 @@ function NavMobile({ navItems, linkItems }: NavProps) {
             >
                 <Toolbar sx={{ justifyContent: "space-between" }}>
                     <Box>
-                        <Logo href="/" size={matches_up_sm ? "48px" : "40px"} />
+                        <Logo
+                            href="/"
+                            size={matches_up_sm ? "48px" : "40px"}
+                            showText={matches_up_sm}
+                        />
                     </Box>
                     <Stack direction="row" spacing={1} alignItems="center">
+                        <DiscordButton />
                         <KofiButton />
                         <IconButton
                             onClick={toggleMenuState}

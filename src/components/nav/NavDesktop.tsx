@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 // Component imports
 import Image from "custom/Image";
 import Logo from "./Logo";
+import DiscordButton from "./DiscordButton";
 import KofiButton from "components/nav/KofiButton";
 import RouterLink from "./RouterLink";
 import { FlexBox } from "styled/StyledBox";
@@ -163,7 +164,7 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                         ))}
                     </FlexBox>
                 </FlexBox>
-                <FlexBox columnGap="32px">
+                <FlexBox columnGap="24px">
                     <ScrollTopDesktop>
                         <Button
                             variant="contained"
@@ -183,6 +184,7 @@ function NavDesktop({ navItems, linkItems }: NavProps) {
                             Back to Top
                         </Button>
                     </ScrollTopDesktop>
+                    <DiscordButton />
                     <KofiButton />
                 </FlexBox>
             </Toolbar>
