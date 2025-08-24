@@ -24,13 +24,14 @@ function CalendarEvent({
     const { isPast } = eventInfo;
     const {
         tag,
+        type,
         version = "0.0",
         subVersion = "0.0.0",
         currentVersion,
         futureVersion,
         start,
         end,
-        characters = [],
+        rateUps = [],
         color,
     } = eventInfo.event.extendedProps as EventObjectExtendedProps;
 
@@ -47,11 +48,18 @@ function CalendarEvent({
 
     const { urls } = websites.find((website) => website.tag === tag)!;
 
-    const parseSubVersion = `Phase ${subVersion.split(".").slice(-1)[0]}`;
-    const shortTitle = `${tag} ${version} ${parseSubVersion}`;
-    const longTitle = `${
-        matches_up_sm ? "Version" : ""
-    } ${version} - ${parseSubVersion}`;
+    let shortTitle = "";
+    let longTitle = "";
+
+    if (tag === "Uma") {
+        shortTitle = `${tag} ${type} Scout`;
+    } else {
+        const parseSubVersion = `Phase ${subVersion.split(".").slice(-1)[0]}`;
+        shortTitle = `${tag} ${version} ${parseSubVersion}`;
+        longTitle = `${
+            matches_up_sm ? "Version" : ""
+        } ${version} - ${parseSubVersion}`;
+    }
 
     return (
         <>
@@ -80,6 +88,7 @@ function CalendarEvent({
                             xs: "0.625rem !important",
                             sm: "0.75rem !important",
                         },
+                        textTransform: "capitalize",
                     }}
                 >
                     {`${futureVersion ? "* " : ""}${shortTitle}`}
@@ -95,8 +104,9 @@ function CalendarEvent({
                     onClose={handleDialogClose}
                     info={{
                         tag,
+                        type,
                         title: longTitle,
-                        characters,
+                        rateUps,
                         urls,
                         start,
                         end,

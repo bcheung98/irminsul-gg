@@ -47,7 +47,7 @@ function CalendarSettings({ websites }: { websites: Website[] }) {
     const colors: WebsiteColorInfo = {};
     websites.forEach((website) => {
         colors[website.tag] = website.color;
-        if (website.enabled) {
+        if (website.enabled && !["Endfield"].includes(website.tag)) {
             buttons.push({
                 value: website.tag.toLowerCase(),
                 icon: (

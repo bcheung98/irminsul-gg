@@ -9,7 +9,11 @@ import RouteConfig from "components/nav/RouteConfig";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 
 // Helper imports
-import { fetchWebsites } from "rtk/fetchData";
+import {
+    fetchUmaCharacters,
+    fetchUmaSupports,
+    fetchWebsites,
+} from "rtk/fetchData";
 import { useAppDispatch } from "helpers/hooks";
 import { getTheme } from "themes/theme";
 
@@ -20,6 +24,8 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchWebsites());
+        dispatch(fetchUmaCharacters());
+        dispatch(fetchUmaSupports());
     }, []);
 
     console.log(

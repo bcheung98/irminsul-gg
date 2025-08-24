@@ -1,4 +1,5 @@
 import { Banner, VersionInfo } from "types/common";
+import { UmaBanner, UmaVersionInfo } from "types/uma";
 
 export function createVersionInfo({
     banners,
@@ -21,7 +22,7 @@ export function createVersionInfo({
                 subVersion: banner.subVersion,
                 start: banner.start,
                 end: banner.end,
-                characters: characters,
+                rateUps: characters,
             });
         }
     });
@@ -57,12 +58,38 @@ export function createVersionInfo({
                 start.toISOString().split("T")[0]
             } ${startTime}${startUTC}`,
             end: `${end.toISOString().split("T")[0]} ${endTime}${endUTC}`,
-            characters: [],
+            rateUps: [],
             futureVersion: true,
         });
         start = new Date(end);
         end = new Date(end);
     }
+    return versions;
+}
+
+export function createUmaVersionInfo({
+    banners,
+}: {
+    banners?: UmaBanner[];
+    game: string;
+}) {
+    const versions: UmaVersionInfo[] = [];
+    const versionKeys: number[] = [];
+    banners?.forEach((banner) => {
+        if (!versionKeys.includes(banner.id) && banner.start !== "") {
+            versionKeys.push(banner.id);
+            versions.push({
+                id: banner.id,
+                version: "",
+                subVersion: "",
+                start: banner.start,
+                end: banner.end,
+                startJP: banner.startJP,
+                endJP: banner.endJP,
+                rateUps: banner.rateUps,
+            });
+        }
+    });
     return versions;
 }
 

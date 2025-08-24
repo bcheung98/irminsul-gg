@@ -8,8 +8,7 @@ export interface Website {
 }
 
 export interface WebsiteURLInfo {
-    characters: URLInfo;
-    weapons: URLInfo;
+    [key: string]: URLInfo;
 }
 
 export interface URLInfo {
@@ -27,7 +26,7 @@ export interface Post {
     date: string;
 }
 
-interface Version {
+export interface Version {
     version: string;
     subVersion: string;
     start: string;
@@ -35,7 +34,7 @@ interface Version {
 }
 
 export interface VersionInfo extends Version {
-    characters: string[];
+    rateUps: (string | number)[];
     currentVersion?: boolean;
     futureVersion?: boolean;
 }
@@ -61,5 +60,6 @@ export interface EventSourceObject {
 
 export interface EventObjectExtendedProps extends Partial<VersionInfo> {
     tag: string;
+    type: string;
     color: string;
 }

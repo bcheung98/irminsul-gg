@@ -47,7 +47,7 @@ function Calendar({ websites }: { websites: Website[] }) {
     const colors: WebsiteColorInfo = {};
     websites.forEach((website) => {
         colors[website.tag] = website.color;
-        if (website.enabled) {
+        if (website.enabled && !["Endfield"].includes(website.tag)) {
             buttons.push({
                 value: website.tag.toLowerCase(),
                 icon: (
@@ -73,9 +73,11 @@ function Calendar({ websites }: { websites: Website[] }) {
 
     useEffect(() => {
         websites.forEach((website) => {
-            if (website.enabled) {
+            if (website.enabled && !["Endfield"].includes(website.tag)) {
                 dispatch(fetchBanners({ tag: website.tag, type: "character" }));
-                // dispatch(fetchBanners({ tag: website.tag, type: "weapon" }));
+            }
+            if (website.enabled && website.tag === "Uma") {
+                dispatch(fetchBanners({ tag: website.tag, type: "support" }));
             }
         });
     }, [websites]);

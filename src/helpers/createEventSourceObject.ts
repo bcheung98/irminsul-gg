@@ -1,4 +1,5 @@
-import { createVersionInfo } from "./createVersionInfo";
+import { UmaBanner } from "types/uma";
+import { createUmaVersionInfo, createVersionInfo } from "./createVersionInfo";
 import { createDateObject, isCurrentBanner } from "./dates";
 import { objectKeys } from "./utils";
 import {
@@ -21,10 +22,18 @@ export function createEventSourceObject({
         .map((game) => {
             return objectKeys(banners[game]).map((type) => {
                 const events: EventObject[] = [];
-                const versions = createVersionInfo({
-                    banners: banners[game][type],
-                    game,
-                });
+                const versions =
+                    game === "Uma"
+                        ? createUmaVersionInfo({
+                              banners: banners[game][
+                                  type
+                              ] as unknown as UmaBanner[],
+                              game,
+                          })
+                        : createVersionInfo({
+                              banners: banners[game][type],
+                              game,
+                          });
                 versions.forEach((version) => {
                     const start = createDateObject({
                         date: version.start,
@@ -38,13 +47,14 @@ export function createEventSourceObject({
                         end: showDuration ? end.obj.toISOString() : undefined,
                         extendedProps: {
                             tag: game,
+                            type: type,
                             version: version.version,
                             subVersion: version.subVersion,
                             currentVersion: isCurrentBanner(start.obj, end.obj),
                             futureVersion: version.futureVersion,
                             start: start.date,
                             end: end.date,
-                            characters: version.characters,
+                            rateUps: version.rateUps,
                             color: colors[game] || "dodgerblue",
                         },
                     });
@@ -55,6 +65,7 @@ export function createEventSourceObject({
                 };
             });
         })
-        .flat();
+        .flat()
+        .sort((a, b) => a.tag.localeCompare(b.tag));
     return eventSources;
 }
