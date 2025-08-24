@@ -14,6 +14,8 @@
 
 - [**Arknights: Endfield**](https://endfield.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-talos))
 
+- [**Umamusume: Pretty Derby**](https://uma.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-uma))
+
 ## **Previews**
 
 _Check respective repos for more preview images_!
@@ -29,27 +31,6 @@ _Check respective repos for more preview images_!
 
 **Zenless Zone Zero**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/zzz/preview.png)
-
-## **Current Roadmap / TODOs**
-
-### All sites:
-- [x] Have planner save character/weapon info after leaving page.
-
-### Genshin:
-- [ ] Enhance TCG deck builder.
-
-### HSR:
-- None
-
-### ZZZ:
-- None
-
-### WuWa:
-- None
-
-## **Known Issues**
-
-None (as far as I know)
 
 ---
 
