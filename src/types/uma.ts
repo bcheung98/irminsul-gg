@@ -20,4 +20,7 @@ export interface UmaItemData {
     id: number;
     name: string;
     title: string;
+    outfit?: string;
+    rarity: number;
+    specialty?: string;
 }

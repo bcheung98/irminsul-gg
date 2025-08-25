@@ -64,18 +64,26 @@ function CalendarEventPopup({ onClose, info }: CalendarEventPopupProps) {
         }/${char.split(" ").join("_")}.png`;
     }
 
+    const umaRanks = ["R", "SR", "SSR"];
+
     function getUmaName(id: number) {
         let item: UmaItemData | undefined;
+        let name = "";
+        let title = "";
         if (type === "character") {
             item = umaCharacters.find((i) => id === i.id);
         } else {
             item = umaSupports.find((i) => id === i.id);
         }
-        let name = "";
-        let title = "";
         if (item) {
             name = item.name;
-            title = item.title;
+            if (type === "character") {
+                title = `${name} (${item.outfit || "Original"})`;
+            } else {
+                title = `${name} (${umaRanks[item.rarity - 3]} ${
+                    item.specialty
+                })`;
+            }
         }
         return [name, title];
     }
@@ -161,7 +169,7 @@ function CalendarEventPopup({ onClose, info }: CalendarEventPopupProps) {
                                         alt={`${char}`}
                                         style={{
                                             width: imgSize,
-                                            height: imgSize,
+                                            height: "auto",
                                             backgroundColor:
                                                 tag === "Uma"
                                                     ? "transparent"
@@ -199,7 +207,7 @@ function CalendarEventPopup({ onClose, info }: CalendarEventPopupProps) {
                                         }}
                                     >
                                         {tag === "Uma"
-                                            ? `${getUmaName(char as number)[0]}`
+                                            ? `${getUmaName(char as number)[1]}`
                                             : char}
                                     </TextStyled>
                                 </RouterLink>
