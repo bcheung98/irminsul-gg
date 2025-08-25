@@ -16,7 +16,7 @@ export function createEventSourceObject({
 }: {
     banners: BannerList;
     colors: WebsiteColorInfo;
-    showDuration: boolean;
+    showDuration: { [game: string]: boolean };
 }) {
     const eventSources: EventSourceObject[] = objectKeys(banners)
         .map((game) => {
@@ -44,7 +44,9 @@ export function createEventSourceObject({
                     events.push({
                         title: `${game} ${version.subVersion}`,
                         start: start.obj.toISOString(),
-                        end: showDuration ? end.obj.toISOString() : undefined,
+                        end: showDuration[game]
+                            ? end.obj.toISOString()
+                            : undefined,
                         extendedProps: {
                             tag: game,
                             type: type,

@@ -1,88 +1,76 @@
 import "./Calendar.css";
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 // Component imports
 import Image from "custom/Image";
-import ToggleButtons, { CustomToggleButtonProps } from "custom/ToggleButtons";
-import { FlexBox } from "styled/StyledBox";
+import MainContentBox from "custom/MainContentBox";
 import { TextStyled } from "styled/StyledTypography";
 import { StyledSwitch } from "styled/StyledSwitch";
 
 // MUI imports
 import {
     useTheme,
-    useMediaQuery,
     Toolbar,
     IconButton,
+    Dialog,
     Stack,
-    Collapse,
     AppBar,
     Container,
+    Box,
+    Divider,
+    Card,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SettingsIcon from "@mui/icons-material/Settings";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
 
 // Type imports
-import { Website, WebsiteColorInfo } from "types/common";
+import { Website } from "types/common";
 import {
-    selectDisplay,
-    selectFilters,
-    setDisplay,
-    setFilters,
+    selectSettings,
+    setFullDuration,
+    setGameEnabled,
+    setSettings,
 } from "reducers/calendar";
+import { objectKeys } from "helpers/utils";
 
 function CalendarSettings({ websites }: { websites: Website[] }) {
     const theme = useTheme();
-    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
-    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
 
     const dispatch = useAppDispatch();
 
-    const filters = useAppSelector(selectFilters);
-    const displayFull = useAppSelector(selectDisplay);
+    const settings = useAppSelector(selectSettings);
 
-    const buttons = [] as CustomToggleButtonProps[];
-    const colors: WebsiteColorInfo = {};
+    const [settingsOpen, setSettingsOpen] = useState(false);
+    const handleSettingsOpen = () => {
+        setSettingsOpen(true);
+    };
+    const handleSettingsClose = () => {
+        dispatch(setSettings(settings));
+        setSettingsOpen(false);
+    };
+
+    const games: { name: string; tag: string; icon: React.ReactNode }[] = [];
     websites.forEach((website) => {
-        colors[website.tag] = website.color;
         if (website.enabled && !["Endfield"].includes(website.tag)) {
-            buttons.push({
-                value: website.tag.toLowerCase(),
+            games.push({
+                name: website.title,
+                tag: website.tag,
                 icon: (
                     <Image
                         src={`game-icons/${website.tag}`}
                         alt={website.tag}
                         style={{
-                            width: matches_up_md ? "36px" : "32px",
+                            width: "32px",
                             borderRadius: "4px",
                         }}
-                        tooltip={website.title}
-                        tooltipArrow="bottom"
                     />
                 ),
             });
         }
     });
-
-    const storedDropdownOpen =
-        localStorage.getItem("calendar/dropdown") || "null";
-    const [dropdownOpen, setDropdownOpen] = useState<boolean>(
-        storedDropdownOpen !== "null" ? JSON.parse(storedDropdownOpen) : true
-    );
-    const toggleDropdownOpen = () => {
-        const newState = !dropdownOpen;
-        const jsonDropdownOpen = JSON.stringify(newState);
-        if (jsonDropdownOpen !== storedDropdownOpen) {
-            localStorage.setItem("calendar/dropdown", jsonDropdownOpen);
-        }
-        setDropdownOpen(newState);
-    };
-
-    const handleSelect = () => {
-        dispatch(setDisplay());
-    };
 
     return (
         <AppBar
@@ -102,72 +90,128 @@ function CalendarSettings({ websites }: { websites: Website[] }) {
                 >
                     <TextStyled variant="h6-styled">Gacha Calendar</TextStyled>
                     <IconButton
-                        onClick={toggleDropdownOpen}
                         disableRipple
                         disableTouchRipple
-                        sx={{ p: 0 }}
-                    >
-                        <ExpandMoreIcon
-                            sx={{
-                                width: "32px",
-                                height: "32px",
-                                p: "4px",
-                                transform: dropdownOpen
-                                    ? "rotateX(180deg)"
-                                    : "rotateX(0deg)",
-                                transition: "transform 0.25s",
-                            }}
-                        />
-                    </IconButton>
-                </Toolbar>
-                <Collapse in={dropdownOpen} timeout="auto">
-                    <FlexBox
+                        onClick={handleSettingsOpen}
                         sx={{
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                            gap: "8px",
-                            pb: 1,
+                            borderRadius: "8px",
+                            px: "2px",
+                            width: "36px",
+                            height: "36px",
+                            color: theme.appbar.color,
+                            "&:hover": {
+                                backgroundColor: theme.appbar.hover,
+                            },
                         }}
                     >
-                        <Stack>
-                            <TextStyled
-                                variant="body2-styled"
-                                gutterBottom
-                                sx={{ px: 0.5 }}
-                            >
-                                Filter games
-                            </TextStyled>
-                            <ToggleButtons
-                                color="primary"
-                                buttons={buttons}
-                                value={filters}
-                                onChange={(
-                                    _: BaseSyntheticEvent,
-                                    newValues: string[]
-                                ) => dispatch(setFilters(newValues))}
-                                padding={0}
-                                spacing={4}
-                            />
-                        </Stack>
-                        <FlexBox>
-                            <StyledSwitch
-                                checked={displayFull}
-                                onChange={handleSelect}
-                                switchColor={theme.palette.info.main}
-                                size={matches_up_sm ? "medium" : "small"}
-                                sx={{ mt: "3px" }}
-                            />
-                            <TextStyled
-                                variant="body2-styled"
-                                sx={{ color: theme.appbar.color }}
-                            >
-                                Show full duration
-                            </TextStyled>
-                        </FlexBox>
-                    </FlexBox>
-                </Collapse>
+                        <SettingsIcon />
+                    </IconButton>
+                </Toolbar>
             </Container>
+            <Dialog
+                open={settingsOpen}
+                onClose={handleSettingsClose}
+                maxWidth="xs"
+                fullWidth
+                disableScrollLock
+            >
+                <Box sx={{ overflowY: "auto" }}>
+                    {objectKeys(settings).length > 0 && (
+                        <MainContentBox
+                            title="Settings"
+                            actions={
+                                <IconButton
+                                    disableRipple
+                                    onClick={handleSettingsClose}
+                                    sx={{ color: theme.appbar.color }}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                            }
+                            contentProps={{ padding: "16px" }}
+                        >
+                            <Stack spacing={2} divider={<Divider />}>
+                                {games.map((game) => (
+                                    <Stack key={game.tag} spacing={1}>
+                                        <Stack
+                                            spacing={1}
+                                            direction="row"
+                                            alignItems="center"
+                                        >
+                                            {game.icon}
+                                            <TextStyled>{game.name}</TextStyled>
+                                        </Stack>
+                                        <Card>
+                                            <Stack
+                                                direction="row"
+                                                alignItems="center"
+                                                justifyContent="space-between"
+                                                sx={{
+                                                    px: 1,
+                                                    backgroundColor:
+                                                        theme.background(
+                                                            0,
+                                                            "light"
+                                                        ),
+                                                }}
+                                            >
+                                                <TextStyled variant="body2-styled">
+                                                    Show banners
+                                                </TextStyled>
+                                                <StyledSwitch
+                                                    checked={
+                                                        settings[game.tag]
+                                                            .enabled
+                                                    }
+                                                    onChange={() =>
+                                                        dispatch(
+                                                            setGameEnabled({
+                                                                game: game.tag,
+                                                            })
+                                                        )
+                                                    }
+                                                    color="info"
+                                                />
+                                            </Stack>
+                                            <Stack
+                                                direction="row"
+                                                alignItems="center"
+                                                justifyContent="space-between"
+                                                sx={{
+                                                    px: 1,
+                                                    backgroundColor:
+                                                        theme.background(
+                                                            0,
+                                                            "dark"
+                                                        ),
+                                                }}
+                                            >
+                                                <TextStyled variant="body2-styled">
+                                                    Show full duration
+                                                </TextStyled>
+                                                <StyledSwitch
+                                                    checked={
+                                                        settings[game.tag]
+                                                            .fullDuration
+                                                    }
+                                                    onChange={() =>
+                                                        dispatch(
+                                                            setFullDuration({
+                                                                game: game.tag,
+                                                            })
+                                                        )
+                                                    }
+                                                    color="info"
+                                                />
+                                            </Stack>
+                                        </Card>
+                                    </Stack>
+                                ))}
+                            </Stack>
+                        </MainContentBox>
+                    )}
+                </Box>
+            </Dialog>
         </AppBar>
     );
 }

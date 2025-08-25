@@ -1,77 +1,81 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { startAppListening } from "helpers/hooks";
-import { Region } from "helpers/dates";
 
-export interface CalendarState {
-    filters: string[];
-    server: Region;
-    display: boolean;
+interface GameSettings {
+    enabled: boolean;
+    server: string;
+    fullDuration: boolean;
 }
 
-const storedFilters = localStorage.getItem("calendar/filters") || "null";
-const storedServer = localStorage.getItem("calendar/server") || "null";
-const storedDisplay = localStorage.getItem("calendar/display") || "null";
+export interface CalendarSettings {
+    [game: string]: GameSettings;
+}
 
-const initialState: CalendarState = {
-    filters: storedFilters !== "null" ? JSON.parse(storedFilters) : ["NULL"],
-    server: storedServer !== "null" ? JSON.parse(storedServer) : "NA",
-    display: storedDisplay !== "null" ? JSON.parse(storedDisplay) : false,
-};
+localStorage.removeItem("calendar/display");
+localStorage.removeItem("calendar/dropdown");
+localStorage.removeItem("calendar/filters");
+const storedSettings = localStorage.getItem("calendar/settings") || "{}";
+
+const initialState: CalendarSettings = JSON.parse(storedSettings);
 
 export const calendarSlice = createSlice({
     name: "calendar",
     initialState,
     reducers: {
-        setFilters: (state, action: PayloadAction<string[]>) => {
-            state.filters = action.payload;
+        setSettings: (state, action: PayloadAction<CalendarSettings>) => {
+            Object.assign(state, action.payload);
         },
-        setServer: (state, action: PayloadAction<Region>) => {
-            state.server = action.payload;
+        setGameSettings: (
+            state,
+            action: PayloadAction<{ game: string; settings: GameSettings }>
+        ) => {
+            state[action.payload.game] = action.payload.settings;
         },
-        setDisplay: (state) => {
-            state.display = !state.display;
+        setGameEnabled: (state, action: PayloadAction<{ game: string }>) => {
+            state[action.payload.game].enabled =
+                !state[action.payload.game].enabled;
+        },
+        setServer: (
+            state,
+            action: PayloadAction<{ game: string; server: string }>
+        ) => {
+            state[action.payload.game].server = action.payload.server;
+        },
+        setFullDuration: (state, action: PayloadAction<{ game: string }>) => {
+            state[action.payload.game].fullDuration =
+                !state[action.payload.game].fullDuration;
         },
     },
     selectors: {
-        selectFilters: (state): string[] => state.filters,
-        selectServer: (state): Region => state.server,
-        selectDisplay: (state): boolean => state.display,
+        selectSettings: (state): CalendarSettings => state,
     },
 });
 
-export const { setFilters, setServer, setDisplay } = calendarSlice.actions;
+export const {
+    setSettings,
+    setGameSettings,
+    setGameEnabled,
+    setServer,
+    setFullDuration,
+} = calendarSlice.actions;
 
-export const { selectFilters, selectServer, selectDisplay } =
-    calendarSlice.selectors;
+export const { selectSettings } = calendarSlice.selectors;
 
 export default calendarSlice.reducer;
 
 startAppListening({
-    actionCreator: setFilters,
+    actionCreator: setSettings,
     effect: (action) => {
-        const data = JSON.stringify(action.payload);
-        if (data !== storedFilters) {
-            localStorage.setItem("calendar/filters", data);
-        }
+        localStorage.setItem(
+            "calendar/settings",
+            JSON.stringify(action.payload)
+        );
+        window.dispatchEvent(new Event("storage"));
     },
 });
 
-startAppListening({
-    actionCreator: setServer,
-    effect: (action) => {
-        const data = JSON.stringify(action.payload);
-        if (data !== storedServer) {
-            localStorage.setItem("calendar/server", data);
-        }
-    },
-});
-
-startAppListening({
-    actionCreator: setDisplay,
-    effect: (_, currentState) => {
-        const data = JSON.stringify(currentState.getState().calendar.display);
-        if (data !== storedDisplay) {
-            localStorage.setItem("calendar/display", data);
-        }
-    },
+window.addEventListener("storage", (event) => {
+    if (event.key === "calendar/settings") {
+        window.location.reload();
+    }
 });

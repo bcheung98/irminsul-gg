@@ -22,13 +22,19 @@ import InfoIcon from "@mui/icons-material/Info";
 
 // Helper imports
 import { useAppDispatch, useAppSelector } from "helpers/hooks";
+import { createSelector } from "@reduxjs/toolkit";
 import { selectBanners } from "reducers/banner";
 import { fetchBanners } from "rtk/fetchData";
 import { createEventSourceObject } from "helpers/createEventSourceObject";
 
 // Type imports
 import { EventSourceObject, Website, WebsiteColorInfo } from "types/common";
-import { selectDisplay, selectFilters, setFilters } from "reducers/calendar";
+import {
+    CalendarSettings,
+    selectSettings,
+    setGameSettings,
+} from "reducers/calendar";
+import { objectKeys } from "helpers/utils";
 
 function Calendar({ websites }: { websites: Website[] }) {
     const theme = useTheme();
@@ -40,8 +46,23 @@ function Calendar({ websites }: { websites: Website[] }) {
     const calendarRef = useRef<FullCalendar>(null);
 
     const banners = useAppSelector(selectBanners);
-    const filters = useAppSelector(selectFilters);
-    const showDuration = useAppSelector(selectDisplay);
+    const settings = useAppSelector(selectSettings);
+    const filterGamesSelector = createSelector([selectSettings], (game) => {
+        const res: { [game: string]: boolean } = {};
+        Object.entries(game).map(
+            ([game, value]) => (res[game.toLowerCase()] = value.enabled)
+        );
+        return res;
+    });
+    const filters = filterGamesSelector({ calendar: settings });
+    const showDurationSelector = createSelector([selectSettings], (game) => {
+        const res: { [game: string]: boolean } = {};
+        Object.entries(game).map(
+            ([game, value]) => (res[game] = value.fullDuration)
+        );
+        return res;
+    });
+    const showDuration = showDurationSelector({ calendar: settings });
 
     const buttons = [] as CustomToggleButtonProps[];
     const colors: WebsiteColorInfo = {};
@@ -64,23 +85,52 @@ function Calendar({ websites }: { websites: Website[] }) {
                 ),
             });
         }
-        if (filters.includes("NULL")) {
-            dispatch(
-                setFilters(buttons.map((button) => button.value as string))
-            );
-        }
     });
 
     useEffect(() => {
-        websites.forEach((website) => {
-            if (website.enabled && !["Endfield"].includes(website.tag)) {
-                dispatch(fetchBanners({ tag: website.tag, type: "character" }));
-            }
-            if (website.enabled && website.tag === "Uma") {
-                dispatch(fetchBanners({ tag: website.tag, type: "support" }));
-            }
-        });
-    }, [websites]);
+        const defaultSettings: CalendarSettings = {};
+        if (objectKeys(settings).length === 0) {
+            websites.forEach((website) => {
+                defaultSettings[website.tag] = {
+                    enabled: true,
+                    server: "NA",
+                    fullDuration: false,
+                };
+            });
+            localStorage.setItem(
+                "calendar/settings",
+                JSON.stringify(defaultSettings)
+            );
+            Object.entries(defaultSettings).forEach(([game, settings]) => {
+                dispatch(setGameSettings({ game, settings }));
+            });
+        }
+    }, [websites, JSON.stringify(settings)]);
+
+    useEffect(() => {
+        if (objectKeys(settings).length > 0) {
+            websites.forEach((website) => {
+                if (
+                    website.enabled &&
+                    settings[website.tag].enabled &&
+                    !["Endfield"].includes(website.tag)
+                ) {
+                    dispatch(
+                        fetchBanners({ tag: website.tag, type: "character" })
+                    );
+                }
+                if (
+                    website.enabled &&
+                    settings[website.tag].enabled &&
+                    website.tag === "Uma"
+                ) {
+                    dispatch(
+                        fetchBanners({ tag: website.tag, type: "support" })
+                    );
+                }
+            });
+        }
+    }, [websites, settings]);
 
     const eventSources = useMemo(
         () =>
@@ -88,7 +138,7 @@ function Calendar({ websites }: { websites: Website[] }) {
                 createEventSourceObject({ banners, colors, showDuration }),
                 filters
             ),
-        [banners, filters, showDuration]
+        [banners, settings]
     );
 
     return (
@@ -144,6 +194,11 @@ function Calendar({ websites }: { websites: Website[] }) {
 
 export default Calendar;
 
-function filterGames(events: EventSourceObject[], filters: string[]) {
-    return events.filter((event) => filters.includes(event.tag.split("/")[0]));
+function filterGames(
+    events: EventSourceObject[],
+    filters: { [game: string]: boolean }
+) {
+    return events.filter(
+        (event) => filters[event.tag.split("/")[0].toLowerCase()]
+    );
 }
