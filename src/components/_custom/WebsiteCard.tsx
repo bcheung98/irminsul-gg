@@ -16,9 +16,11 @@ import {
 
 // Helper imports
 import { zoomImageOnHover } from "helpers/utils";
+import { useAppDispatch } from "helpers/hooks";
 
 // Type imports
 import { Website } from "types/common";
+import { setBackground } from "reducers/layout";
 
 interface WebsiteCardProps {
     site: Website;
@@ -27,6 +29,8 @@ interface WebsiteCardProps {
 
 function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
     const theme = useTheme();
+
+    const dispatch = useAppDispatch();
 
     const borderRadius = "16px";
 
@@ -42,7 +46,7 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
     const imgSrc = `wallpapers/${tagLower}/${tag}_${gameVersion}`;
 
     const handleHover = (direction: "enter" | "leave") => {
-        enabled &&
+        if (enabled) {
             zoomImageOnHover({
                 direction,
                 id: `${id}-img`,
@@ -50,6 +54,13 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
                 zoom: 1.0325,
                 translate: `translate(${translate[0]}px, ${translate[1]}px`,
             });
+            if (direction === "enter") {
+                dispatch(setBackground({ background: tag }));
+            }
+            // else {
+            //     dispatch(setBackground({ background: "Irminsul" }));
+            // }
+        }
     };
 
     const rootStyle: SxProps = {
@@ -85,17 +96,14 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
         <Card sx={rootStyle} elevation={2}>
             {!loading ? (
                 <>
-                    <Card elevation={0} sx={cardStyle}>
-                        <Box
+                    <ButtonBase disableRipple disableTouchRipple href={href}>
+                        <Card
+                            elevation={0}
+                            sx={cardStyle}
                             onMouseEnter={() => handleHover("enter")}
                             onMouseLeave={() => handleHover("leave")}
-                            sx={imageContainerStyle}
                         >
-                            <ButtonBase
-                                disableRipple
-                                disableTouchRipple
-                                href={href}
-                            >
+                            <Box sx={imageContainerStyle}>
                                 <Image
                                     src={imgSrc}
                                     fallbackSrc={`wallpapers/${tagLower}/${tag}`}
@@ -103,59 +111,54 @@ function WebsiteCard({ site, loading = false }: WebsiteCardProps) {
                                     id={`${id}-img`}
                                     style={imageStyle}
                                 />
-                            </ButtonBase>
-                        </Box>
-                        {!enabled && (
+                            </Box>
+                            {!enabled && (
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        zIndex: 5,
+                                        top: "-4%",
+                                        right: "-8px",
+                                        backgroundColor: `rgb(192, 120, 0)`,
+                                        borderRadius: "8px",
+                                        border: `2px solid rgb(230, 184, 44)`,
+                                        px: 1,
+                                        boxShadow: `inset 0 0 8px rgb(230, 184, 44)`,
+                                    }}
+                                >
+                                    <TextStyled
+                                        sx={{
+                                            userSelect: "none",
+                                            color: `rgb(255, 255, 130)`,
+                                        }}
+                                    >
+                                        Coming soon!
+                                    </TextStyled>
+                                </Box>
+                            )}
                             <Box
                                 sx={{
-                                    position: "absolute",
-                                    zIndex: 5,
-                                    top: "-4%",
-                                    right: "-8px",
-                                    backgroundColor: `rgb(192, 120, 0)`,
-                                    borderRadius: "8px",
-                                    border: `2px solid rgb(230, 184, 44)`,
-                                    px: 1,
-                                    boxShadow: `inset 0 0 8px rgb(230, 184, 44)`,
+                                    display: "flex",
+                                    p: "8px",
+                                    borderTop: `4px solid ${theme.border.color.primary}`,
                                 }}
                             >
-                                <TextStyled
-                                    sx={{
-                                        userSelect: "none",
-                                        color: `rgb(255, 255, 130)`,
-                                    }}
-                                >
-                                    Coming soon!
-                                </TextStyled>
+                                <Box sx={{ mx: "auto" }}>
+                                    <TextStyled
+                                        sx={{
+                                            color: theme.appbar.color,
+                                            textAlign: "center",
+                                            cursor: enabled
+                                                ? "pointer"
+                                                : "auto",
+                                        }}
+                                    >
+                                        {title}
+                                    </TextStyled>
+                                </Box>
                             </Box>
-                        )}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                p: "8px",
-                                borderTop: `4px solid ${theme.border.color.primary}`,
-                            }}
-                        >
-                            <ButtonBase
-                                disableRipple
-                                disableTouchRipple
-                                href={href}
-                                sx={{ mx: "auto" }}
-                            >
-                                <TextStyled
-                                    onMouseEnter={() => handleHover("enter")}
-                                    onMouseLeave={() => handleHover("leave")}
-                                    sx={{
-                                        color: theme.appbar.color,
-                                        textAlign: "center",
-                                        cursor: enabled ? "pointer" : "auto",
-                                    }}
-                                >
-                                    {title}
-                                </TextStyled>
-                            </ButtonBase>
-                        </Box>
-                    </Card>
+                        </Card>
+                    </ButtonBase>
                 </>
             ) : (
                 <Skeleton variant="rounded" sx={rootStyle} />

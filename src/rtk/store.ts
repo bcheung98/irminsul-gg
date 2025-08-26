@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { listenerMiddleware } from "./middleware";
 
+import layoutReducer from "reducers/layout";
 import websiteReducer from "reducers/website";
 import bannerReducer from "reducers/banner";
 import calendarReducer from "reducers/calendar";
@@ -8,6 +9,7 @@ import umaReducer from "reducers/uma";
 
 const store = configureStore({
     reducer: {
+        layout: layoutReducer,
         websites: websiteReducer,
         banners: bannerReducer,
         calendar: calendarReducer,

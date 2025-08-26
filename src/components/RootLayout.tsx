@@ -8,6 +8,10 @@ import NavBottom from "./nav/NavBottom";
 // MUI imports
 import { useTheme, Box } from "@mui/material";
 
+// Helper imports
+import { useAppSelector } from "helpers/hooks";
+import { selectBackground } from "reducers/layout";
+
 function RootLayout() {
     const theme = useTheme();
 
@@ -16,8 +20,10 @@ function RootLayout() {
         window.scrollTo(0, 0);
     }, [location]);
 
+    const tag = useAppSelector(selectBackground);
+
     const backgroundImageColors = [
-        "rgb(23, 46, 98)",
+        `rgba(23, 46, 98, 0.75)`,
         "rgba(73, 218, 243, 0.2)",
     ];
 
@@ -30,16 +36,24 @@ function RootLayout() {
                     backgroundColor: theme.background(0),
                     backgroundImage: {
                         xs: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%)`,
-                        sm: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%), url(https://assets.irminsul.gg/main/images/Irminsul.png)`,
+                        sm: `url(https://assets.irminsul.gg/main/backgrounds/${tag}.png)`,
                     },
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundPosition: "50% 25%",
                     backgroundAttachment: "fixed",
+                    transition: "all 0.1s ease-in-out 0.1s",
+                    WebkitTransition: "all 0.1s ease-in-out 0.1s",
                 }}
             >
                 <Nav />
-                <Box sx={{ minWidth: "0vw", width: "100vw" }}>
+                <Box
+                    sx={{
+                        minWidth: "0vw",
+                        width: "100vw",
+                        backgroundImage: `linear-gradient(to bottom, ${backgroundImageColors[0]} 10%, ${backgroundImageColors[1]} 50%, ${backgroundImageColors[0]} 100%)`,
+                    }}
+                >
                     <Outlet />
                     <NavBottom />
                 </Box>
