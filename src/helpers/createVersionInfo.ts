@@ -94,21 +94,41 @@ export function createUmaVersionInfo({
 }
 
 function incrementVersion(version: string, game: string) {
-    const arr = version.split(".");
-    let main = parseInt(arr[0]);
-    let sub = parseInt(arr[1]);
-    if (sub < 8) {
-        sub += 1;
+    let main: number | string;
+    let sub: number | string;
+    let versionNumber: string;
+    // Genshin specific
+    if (game === "Genshin" && version.startsWith("Luna")) {
+        const arr = version.split(" ");
+        main = arr[0];
+        const index = numerals.findIndex((i) => i === arr[1]);
+        sub = numerals[index + 1];
+        versionNumber = `${main} ${sub}`;
     } else {
-        main += 1;
-        sub = 0;
+        const arr = version.split(".");
+        main = parseInt(arr[0]);
+        sub = parseInt(arr[1]);
+        if (sub < 8) {
+            sub += 1;
+        } else {
+            main += 1;
+            sub = 0;
+        }
+        versionNumber = `${main}.${sub}`;
     }
-    const versionNumber = `${main}.${sub}`;
 
     // Game specific adjustments
+    if (game === "Genshin" && versionNumber === "6.0") {
+        return "Luna I";
+    }
+    if (game === "Genshin" && versionNumber === "Luna X") {
+        return "6.0";
+    }
     if (game === "ZZZ" && versionNumber === "1.8") {
         return "2.0";
     }
 
     return versionNumber;
 }
+
+const numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
