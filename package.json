@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "cmd.exe /c start chrome.exe http://localhost:8080 & next dev --port 8080 --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint"
