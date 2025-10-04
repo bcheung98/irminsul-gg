@@ -15,7 +15,9 @@
         "@mui/icons-material": "^7.3.4",
         "@mui/material": "^7.3.4",
         "@mui/material-nextjs": "^7.3.3",
+        "@next/eslint-plugin-next": "^15.5.4",
         "@reduxjs/toolkit": "^2.9.0",
+        "eslint-plugin-react": "^7.37.5",
         "next": "15.5.4",
         "react": "19.1.0",
         "react-dom": "19.1.0",
@@ -29,6 +31,7 @@
         "@types/react-dom": "^19",
         "eslint": "^9",
         "eslint-config-next": "15.5.4",
+        "eslint-config-prettier": "^10.1.8",
         "typescript": "^5"
     }
 }
