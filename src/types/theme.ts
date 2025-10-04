@@ -33,15 +33,9 @@ declare module "@mui/material/styles" {
     interface TypographyVariantsOptions extends TypographyVariantsOptionsType {}
 }
 
-type StyledTypographyVariants = {
-    [Property in TypographyVariant as `${string & Property}-styled`]: true;
-};
-
-type NewTypographyVariants = {
+type TypographyOverrides = {
     sitename: true;
 };
-
-type TypographyOverrides = StyledTypographyVariants & NewTypographyVariants;
 
 type TypographyVariantsType = {
     [Property in keyof TypographyOverrides]: React.CSSProperties;
