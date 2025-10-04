@@ -12,14 +12,158 @@ export const themeNames = themeList.map((t) => t.name);
 export default function getTheme(name: string) {
     let theme =
         themeList[themeList.findIndex((theme) => theme.name === name)].data;
-        
+
     const baseThemeData = {
-        palette: {
-            background: {
-                default: theme.background(0),
-                paper: theme.background(1),
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 425,
+                md: 768,
+                lg: 1024,
+                xl: 1440,
             },
-            mode: "dark",
+        },
+        components: {
+            // MuiUseMediaQuery: {
+            //     defaultProps: {
+            //         noSsr: true,
+            //     },
+            // },
+            MuiAppBar: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: theme.appbar.backgroundColor.main,
+                        borderWidth: "0 0 1px 0",
+                        borderStyle: "solid",
+                        borderColor: theme.border.color.primary,
+                    },
+                },
+            },
+            MuiButtonBase: {
+                defaultProps: {
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                },
+            },
+            MuiIconButton: {
+                defaultProps: {
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                },
+                styleOverrides: {
+                    root: {
+                        color: theme.text.primary,
+                    },
+                },
+            },
+            MuiTypography: {
+                defaultProps: {
+                    variantMapping: {
+                        h4: "h4",
+                        h5: "h5",
+                        h6: "h6",
+                        body1: "p",
+                        body2: "p",
+                        subtitle1: "p",
+                        subtitle2: "p",
+                    },
+                },
+                styleOverrides: {
+                    root: {
+                        color: theme.text.primary,
+                        fontWeight: theme.font.weight.primary,
+                    },
+                },
+            },
+        },
+        typography: {
+            sitename: {
+                fontFamily: "Rowdies, Inter !important",
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: "1rem",
+                    letterSpacing: ".075rem",
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: "1.25rem",
+                    letterSpacing: ".1rem",
+                },
+                fontWeight: "400 !important",
+                color: "rgb(255, 255, 255) !important",
+            },
+            h4: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h4.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h4.sm),
+                },
+            },
+            h5: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h5.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h5.sm),
+                },
+            },
+            h6: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h6.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h6.sm),
+                },
+            },
+            body1: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body1.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body1.sm
+                    ),
+                },
+            },
+            subtitle1: {
+                ...theme.typography.body1,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle1.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle1.sm
+                    ),
+                },
+            },
+            body2: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body2.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body2.sm
+                    ),
+                },
+            },
+            subtitle2: {
+                ...theme.typography.body2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle2.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle2.sm
+                    ),
+                },
+            },
         },
     };
 
