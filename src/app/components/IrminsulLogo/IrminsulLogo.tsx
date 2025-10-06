@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 
 // Component imports
-import { Text } from "@/components/Text/";
+import Image from "@/components/Image";
 import FlexBox from "@/components/FlexBox";
+import { Text } from "@/components/Text/";
 
 // MUI imports
 import ButtonBase from "@mui/material/ButtonBase";
@@ -21,10 +21,9 @@ export default function IrminsulLogo({
         <ButtonBase href={href} LinkComponent={Link}>
             <FlexBox spacing={2} sx={{ height: size }}>
                 <Image
-                    src="https://assets.irminsul.gg/main/icons/Irminsul.png"
+                    src="main/icons/Irminsul"
                     alt="IRMINSUL.GG"
-                    width={size}
-                    height={size}
+                    size={size}
                 />
                 {showText && (
                     <Text
