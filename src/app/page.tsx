@@ -1,6 +1,12 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// Component imports
+import LandingText from "./components/LandingText";
+import Websites from "./components/Websites";
 
 export default function Home() {
-    return <></>;
+    return (
+        <>
+            <LandingText />
+            <Websites />
+        </>
+    );
 }
