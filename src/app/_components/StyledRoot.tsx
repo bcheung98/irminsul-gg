@@ -1,0 +1,90 @@
+"use client";
+
+import useSWR from "swr";
+
+// Component imports
+import StoreProvider from "../StoreProvider";
+import NavBar from "./NavBar";
+import NavBarBottom from "./NavBar/NavBarBottom";
+
+// MUI imports
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+
+// Helper imports
+import getTheme from "@/themes/theme";
+import { WebsiteContext } from "@/app/context";
+
+// Type imports
+import { Website } from "@/types/website";
+
+const url = "https://api.irminsul.gg/main/websites.json";
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+export default function StyledRoot({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    const theme = getTheme("Dark");
+
+    const { data, error, isLoading } = useSWR(url, fetcher);
+
+    const websites: Website[] = [];
+    if (!isLoading && !error) {
+        data.forEach((website: Website) => {
+            website.enabled && websites.push(website);
+        });
+    }
+
+    const background = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%)`;
+    const backgroundImage = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%), url(${theme.backgroundImageURL})`;
+
+    return (
+        <StoreProvider>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Box id="back-to-top-anchor" />
+                <Toolbar variant="dense" />
+                <Box
+                    sx={{
+                        display: "flex",
+                        backgroundColor: theme.background(0),
+                        backgroundImage: {
+                            xs: background,
+                            sm: backgroundImage,
+                        },
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "50% 25%",
+                        backgroundAttachment: "fixed",
+                    }}
+                >
+                    <WebsiteContext value={websites}>
+                        <NavBar />
+                        <Box
+                            sx={{
+                                minWidth: "0vw",
+                                width: "100vw",
+                                backgroundColor: background,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    minHeight: "100vh",
+                                    width: "100%",
+                                    mx: "auto",
+                                }}
+                            >
+                                {children}
+                            </Box>
+                            <NavBarBottom />
+                        </Box>
+                    </WebsiteContext>
+                </Box>
+            </ThemeProvider>
+        </StoreProvider>
+    );
+}
