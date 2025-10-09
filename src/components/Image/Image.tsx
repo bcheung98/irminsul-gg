@@ -5,6 +5,10 @@ import { default as NextImage } from "next/image";
 import { Tooltip } from "../Tooltip/";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+// Helper imports
 import { combineStyles, zoomImageOnHover } from "@/helpers/utils";
 
 // Type imports
@@ -26,12 +30,15 @@ export default function Image({
     onClick,
     useNext = false,
 }: ImageProps) {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("md"));
+
     let fill = false;
     let [width, height]: (number | undefined)[] = [undefined, undefined];
     if (size) {
         if (Array.isArray(size)) [width, height] = size;
         else width = height = size;
-        if (responsive) {
+        if (matches && responsive) {
             width = width - width * responsiveSize;
             height = height - height * responsiveSize;
         }
@@ -51,7 +58,7 @@ export default function Image({
     const imgStyle = combineStyles(defaultImageStyle, style);
 
     const handleHover = (direction: "enter" | "leave") => {
-        zoomOnHover && zoomImageOnHover({ direction, id });
+        zoomOnHover && zoomImageOnHover({ direction, id, zoom: 1.05 });
     };
 
     function onError(event: SyntheticEvent<HTMLImageElement, Event>) {

@@ -1,0 +1,62 @@
+// Component imports
+import NavLink from "../NavLink";
+import Image from "../Image";
+
+// MUI imports
+import { useTheme } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import ButtonBase from "@mui/material/ButtonBase";
+
+// Helper imports
+import { getRarityColor } from "@/app/(games)/genshin/_helpers/rarityColors";
+
+// Type imports
+import { InfoAvatarProps } from "./InfoAvatar.types";
+import { Tooltip } from "../Tooltip";
+
+export default function InfoAvatar({
+    tag,
+    name,
+    displayName,
+    rarity = 3,
+    size = 64,
+    background,
+    disableZoomOnHover,
+    url = "icons",
+    componentID = `${tag}/${name.toLocaleLowerCase()}`,
+}: InfoAvatarProps) {
+    const theme = useTheme();
+
+    const href = `/${tag}/${name.toLocaleLowerCase()}`;
+
+    return (
+        <Tooltip title={displayName} arrow placement="top">
+            <Card
+                elevation={0}
+                sx={{
+                    position: "relative",
+                    width: size,
+                    height: size,
+                    border: `${
+                        theme.infoAvatar.border.width
+                    }px solid ${getRarityColor(rarity)}`,
+                    borderRadius: theme.infoAvatar.border.radius,
+                    backgroundImage:
+                        background ||
+                        `url(https://assets.irminsul.gg/genshin/backgrounds/Background_${rarity}_Star.png)`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                }}
+            >
+                <ButtonBase href={href} LinkComponent={NavLink}>
+                    <Image
+                        src={`${tag}/${url}/${name}`}
+                        size={size - theme.infoAvatar.border.width * 2}
+                        id={`${componentID}-infoAvatar`}
+                        zoomOnHover={!disableZoomOnHover}
+                    />
+                </ButtonBase>
+            </Card>
+        </Tooltip>
+    );
+}
