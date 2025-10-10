@@ -81,3 +81,39 @@ export function pxToInt(num: string | number) {
         return Number(num.slice(0, -2));
     }
 }
+
+export function zoomImageOnHover({
+    direction,
+    id,
+    baseScale = 1,
+    zoom = 1.1,
+    translate = "translate(0px, 0px)",
+}: {
+    direction: "enter" | "leave";
+    id: string;
+    baseScale?: number;
+    zoom?: number;
+    translate?: string;
+}) {
+    const image = document.getElementById(id);
+    if (image !== null) {
+        if (direction === "enter") {
+            image.style.transition = "transform .2s";
+            image.style.transform = `scale(${zoom}) ${translate}`;
+        } else {
+            image.style.transition = "transform .2s";
+            image.style.transform = `scale(${baseScale}) ${translate}`;
+        }
+    }
+}
+
+export function combineStyles(
+    style1: React.CSSProperties,
+    style2: React.CSSProperties | undefined
+) {
+    return style2 ? { ...style1, ...style2 } : style1;
+}
+
+export function convertNametoURL(name: string) {
+    return name.toLocaleLowerCase().split(" ").join("-");
+}
