@@ -28,6 +28,11 @@ export default function Breadcrumbs({
 
     const items = navItems[game];
 
+    const title =
+        document
+            .querySelector('meta[name="breadcrumb"]')
+            ?.getAttribute("content") || "";
+
     return (
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
             <NavLink href={`/${game}`}>
@@ -52,8 +57,7 @@ export default function Breadcrumbs({
                 >
                     <TextLabel
                         title={
-                            items.find((i) => item === i.href)?.title ||
-                            toTitleCase(item)
+                            items.find((i) => item === i.href)?.title || title
                         }
                         titleProps={{
                             variant: "body2",

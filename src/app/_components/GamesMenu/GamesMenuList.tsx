@@ -1,30 +1,56 @@
 import { useContext } from "react";
-import Image from "@/components/Image";
-import Link from "next/link";
 
 // Component imports
-import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
+import NavLink from "@/components/NavLink";
 
 // MUI imports
-import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import ButtonBase from "@mui/material/ButtonBase";
+import Box from "@mui/material/Box";
 
 // Helper imports
 import { WebsiteContext } from "@/app/context";
 
 export default function GamesMenuList() {
+    const theme = useTheme();
+
     const websites = useContext(WebsiteContext);
 
-    return websites
-        .sort((a, b) => a.title.localeCompare(b.title))
-        .map((website, index) => (
-            <MenuItem key={index} disableRipple sx={{ gap: "16px" }}>
-                <Image
-                    src={`main/game-icons/${website.tag}`}
-                    alt={website.title}
-                    size={32}
-                    style={{ borderRadius: "4px" }}
-                />
-                <Text variant="subtitle1">{website.title}</Text>
-            </MenuItem>
-        ));
+    return (
+        <Stack spacing={0.5}>
+            {websites
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map((website, index) => (
+                    <ButtonBase
+                        key={index}
+                        href={`/${website.tag.toLocaleLowerCase()}`}
+                        sx={{ display: "flex" }}
+                        LinkComponent={NavLink}
+                    >
+                        <Box
+                            sx={{
+                                p: "4px 16px",
+                                "&:hover": {
+                                    backgroundColor:
+                                        theme.drawer.backgroundColor.hover,
+                                },
+                            }}
+                        >
+                            <TextLabel
+                                icon={`main/game-icons/${website.tag}`}
+                                iconProps={{ size: 32 }}
+                                title={website.title}
+                                titleProps={{
+                                    variant: "subtitle1",
+                                    defaultCursor: "pointer",
+                                }}
+                                spacing={2}
+                            />
+                        </Box>
+                    </ButtonBase>
+                ))}
+        </Stack>
+    );
 }

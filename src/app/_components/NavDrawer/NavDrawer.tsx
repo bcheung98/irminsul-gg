@@ -5,17 +5,18 @@ import { usePathname } from "next/navigation";
 // Component imports
 import NavLink from "@/components/NavLink";
 import TextLabel from "@/components/TextLabel";
+import Tooltip from "@/components/Tooltip";
 import { Drawer } from "./DrawerRoot";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { navItems } from "../NavDrawer/navItems";
-import Box from "@mui/material/Box";
 
 export default function NavDrawer({ open }: { open: boolean }) {
     const theme = useTheme();
@@ -32,9 +33,7 @@ export default function NavDrawer({ open }: { open: boolean }) {
             sx={{
                 boxSizing: "content-box",
                 "& .MuiDrawer-paper": {
-                    borderRight: open
-                        ? `1px solid ${theme.border.color.primary}`
-                        : "none",
+                    borderRight: `1px solid ${theme.border.color.primary}`,
                     backgroundColor: theme.drawer.backgroundColor.main,
                 },
             }}
@@ -48,26 +47,32 @@ export default function NavDrawer({ open }: { open: boolean }) {
                         href={`/${game}/${item.href}`}
                         LinkComponent={NavLink}
                     >
-                        <Box
-                            sx={{
-                                p: "4px 24px",
-                                "&:hover": {
-                                    backgroundColor:
-                                        theme.drawer.backgroundColor.hover,
-                                },
-                            }}
+                        <Tooltip
+                            title={!open ? item.title : ""}
+                            arrow
+                            placement="right"
                         >
-                            <TextLabel
-                                icon={`${game}/${item.icon}`}
-                                iconProps={{ size: 28 }}
-                                title={item.title}
-                                titleProps={{
-                                    color: theme.drawer.color.primary,
-                                    defaultCursor: "pointer",
+                            <Box
+                                sx={{
+                                    p: "4px 24px",
+                                    "&:hover": {
+                                        backgroundColor:
+                                            theme.drawer.backgroundColor.hover,
+                                    },
                                 }}
-                                spacing={2}
-                            />
-                        </Box>
+                            >
+                                <TextLabel
+                                    icon={`${game}/${item.icon}`}
+                                    iconProps={{ size: 28 }}
+                                    title={open ? item.title : ""}
+                                    titleProps={{
+                                        color: theme.drawer.color.primary,
+                                        defaultCursor: "pointer",
+                                    }}
+                                    spacing={2}
+                                />
+                            </Box>
+                        </Tooltip>
                     </ButtonBase>
                 ))}
             </Stack>

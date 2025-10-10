@@ -1,8 +1,8 @@
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 
-const widthOpen = 240; // px
-const widthClose = 0; // px
+const widthOpen = 251; // px
+const widthClose = 76; // px
 
 const openedMixin = (theme: Theme): CSSObject => ({
     width: widthOpen,

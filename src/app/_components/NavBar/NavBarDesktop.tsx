@@ -12,7 +12,6 @@ import NavDrawer from "../NavDrawer";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
@@ -25,7 +24,6 @@ import { navBarStyles } from "./NavBar.styles";
 
 export default function NavBarDesktop() {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
     const pathname = usePathname();
     const websites = useContext(WebsiteContext);
@@ -41,7 +39,7 @@ export default function NavBarDesktop() {
             website.enabled && tags.push(website.tag.toLocaleLowerCase())
     );
 
-    const [drawerOpen, setDrawerOpen] = useState(matches);
+    const [drawerOpen, setDrawerOpen] = useState(true);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
     };

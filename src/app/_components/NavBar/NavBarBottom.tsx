@@ -55,10 +55,7 @@ export default function NavBarBottom() {
                     flexWrap: "wrap",
                     gap: "8px",
                     py: "8px",
-                    width: {
-                        xs: "100%",
-                        lg: "75%",
-                    },
+                    width: "100%",
                     mx: "auto",
                 }}
             >
