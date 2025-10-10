@@ -3,7 +3,7 @@
 import { useContext } from "react";
 
 // Component imports
-import WebsiteCard from "./WebsiteCard";
+import WebsiteCard from "../WebsiteCard";
 
 // MUI imports
 import Container from "@mui/material/Container";

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 // Component imports
 import NavLink from "@/components/NavLink/";
 import TextLabel from "@/components/TextLabel";
@@ -9,7 +11,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
 import { navItems } from "../NavDrawer/navItems";
-import { toTitleCase } from "@/helpers/utils";
+import { convertNametoURL } from "@/utils/";
+import { DataContext } from "@/app/context";
 
 // Type imports
 import { Website } from "@/types/website";
@@ -28,10 +31,17 @@ export default function Breadcrumbs({
 
     const items = navItems[game];
 
-    const title =
-        document
-            .querySelector('meta[name="breadcrumb"]')
-            ?.getAttribute("content") || "";
+    const data = useContext(DataContext);
+
+    function getCurrentData(item: string) {
+        const d = data.find(
+            (d) =>
+                convertNametoURL(d.name) === item ||
+                convertNametoURL(d.fullName) === item
+        );
+        if (d) return d.fullName || d.name;
+        else return "";
+    }
 
     return (
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
@@ -57,7 +67,8 @@ export default function Breadcrumbs({
                 >
                     <TextLabel
                         title={
-                            items.find((i) => item === i.href)?.title || title
+                            items.find((i) => item === i.href)?.title ||
+                            getCurrentData(item)
                         }
                         titleProps={{
                             variant: "body2",

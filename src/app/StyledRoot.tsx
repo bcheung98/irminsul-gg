@@ -1,11 +1,12 @@
 "use client";
 
 import useSWR from "swr";
+import { usePathname } from "next/navigation";
 
 // Component imports
-import StoreProvider from "../StoreProvider";
-import NavBar from "./NavBar";
-import NavBarBottom from "./NavBar/NavBarBottom";
+import StoreProvider from "./StoreProvider";
+import NavBar from "@/components/NavBar";
+import NavBarBottom from "@/components/NavBar/NavBarBottom";
 
 // MUI imports
 import { CssBaseline } from "@mui/material";
@@ -15,12 +16,12 @@ import Toolbar from "@mui/material/Toolbar";
 
 // Helper imports
 import getTheme from "@/themes/theme";
-import { WebsiteContext } from "@/app/context";
+import { urls } from "@/lib/fetchData";
+import { WebsiteContext, DataContext } from "@/app/context";
 
 // Type imports
 import { Website } from "@/types/website";
 
-const url = "https://api.irminsul.gg/main/websites.json";
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function StyledRoot({
@@ -30,14 +31,35 @@ export default function StyledRoot({
 }>) {
     const theme = getTheme("Dark");
 
-    const { data, error, isLoading } = useSWR(url, fetcher);
+    const pathname = usePathname().split("/").slice(1, 3).join("/");
 
-    const websites: Website[] = [];
-    if (!isLoading && !error) {
-        data.forEach((website: Website) => {
-            website.enabled && websites.push(website);
-        });
+    function getWebsites() {
+        const { data, error, isLoading } = useSWR(
+            "https://api.irminsul.gg/main/websites.json",
+            fetcher
+        );
+
+        const websites: Website[] = [];
+        if (!isLoading && !error) {
+            data.forEach((website: Website) => {
+                website.enabled && websites.push(website);
+            });
+        }
+        return websites;
     }
+
+    function getCurrentData() {
+        const { data, error, isLoading } = useSWR(urls[pathname], fetcher);
+
+        let currentData: any[] = [];
+        if (!isLoading && !error) {
+            currentData = data;
+        }
+        return currentData;
+    }
+
+    const websites = getWebsites();
+    const data = getCurrentData();
 
     const background = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%)`;
     const backgroundImage = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%), url(${theme.backgroundImageURL})`;
@@ -63,25 +85,27 @@ export default function StyledRoot({
                     }}
                 >
                     <WebsiteContext value={websites}>
-                        <NavBar />
-                        <Box
-                            sx={{
-                                minWidth: "0vw",
-                                width: "100vw",
-                                backgroundColor: background,
-                            }}
-                        >
+                        <DataContext value={data}>
+                            <NavBar />
                             <Box
                                 sx={{
-                                    minHeight: "100vh",
-                                    width: "100%",
-                                    mx: "auto",
+                                    minWidth: "0vw",
+                                    width: "100vw",
+                                    backgroundColor: background,
                                 }}
                             >
-                                {children}
+                                <Box
+                                    sx={{
+                                        minHeight: "100vh",
+                                        width: "100%",
+                                        mx: "auto",
+                                    }}
+                                >
+                                    {children}
+                                </Box>
+                                <NavBarBottom />
                             </Box>
-                            <NavBarBottom />
-                        </Box>
+                        </DataContext>
                     </WebsiteContext>
                 </Box>
             </ThemeProvider>

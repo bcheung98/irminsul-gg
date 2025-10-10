@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Helper imports
-import { combineStyles, zoomImageOnHover } from "@/helpers/utils";
+import { combineStyles, zoomImageOnHover } from "@/utils/utils";
 
 // Type imports
 import { ImageProps } from "./Image.types";

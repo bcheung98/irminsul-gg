@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { convertNametoURL } from "@/helpers/utils";
+import { convertNametoURL } from "@/utils/utils";
 import { getRarityColor } from "@/app/(games)/genshin/_helpers/rarityColors";
 
 // Type imports
