@@ -17,9 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GenshinCharactersPage() {
-    const characters = await getDataSet<GenshinCharacter>(
-        "https://api.irminsul.gg/genshin/characters.json"
-    );
+    const characters = await getDataSet<GenshinCharacter>("genshin/characters");
 
     return (
         <Suspense fallback={<Loader />}>
