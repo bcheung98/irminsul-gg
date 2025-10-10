@@ -1,3 +1,6 @@
+// Component imports
+import Page404 from "./_components/Page404";
+
 export default function PageNotFound() {
-    return <></>;
+    return <Page404 />;
 }
