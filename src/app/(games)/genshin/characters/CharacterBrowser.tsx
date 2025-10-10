@@ -1,0 +1,49 @@
+"use client";
+
+// Component imports
+import InfoCard from "@/components/InfoCard";
+import InfoAvatar from "@/components/InfoAvatar/";
+
+// MUI imports
+import Grid from "@mui/material/Grid";
+
+// Type imports
+import { GenshinCharacter } from "../_types/character";
+
+export default function CharacterBrowser({
+    characters,
+}: {
+    characters: GenshinCharacter[];
+}) {
+    return (
+        <>
+            <Grid container spacing={3}>
+                {characters.map((character) => (
+                    <InfoCard
+                        tag="genshin/characters"
+                        key={character.id}
+                        name={character.name}
+                        displayName={character.fullName}
+                        rarity={character.rarity}
+                        badgeLeft={{
+                            element: character.element,
+                            weaponType: character.weapon,
+                        }}
+                    />
+                ))}
+            </Grid>
+            {/* <Grid container spacing={3}>
+                {characters.map((character) => (
+                    <InfoAvatar
+                        tag="genshin/characters"
+                        key={character.id}
+                        name={character.name}
+                        displayName={character.fullName}
+                        rarity={character.rarity}
+                        url="avatars"
+                    />
+                ))}
+            </Grid> */}
+        </>
+    );
+}
