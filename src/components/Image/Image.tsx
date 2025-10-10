@@ -2,7 +2,7 @@ import { CSSProperties, SyntheticEvent } from "react";
 import { default as NextImage } from "next/image";
 
 // Component imports
-import { Tooltip } from "../Tooltip/";
+import Tooltip from "../Tooltip/";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

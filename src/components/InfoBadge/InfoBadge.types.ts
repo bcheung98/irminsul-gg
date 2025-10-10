@@ -17,6 +17,7 @@ export interface InfoBadgeData {
     element?: string;
     weapon?: string;
     weaponType?: string;
+    rarity?: number;
     subStat?: string;
     path?: string;
     specialty?: string;

@@ -8,7 +8,7 @@ interface TooltipProps extends MuiTooltipProps {
     fontSize?: number;
 }
 
-export const Tooltip = styled(({ className, ...props }: TooltipProps) => (
+const Tooltip = styled(({ className, ...props }: TooltipProps) => (
     <MuiTooltip
         {...props}
         arrow
@@ -27,3 +27,5 @@ export const Tooltip = styled(({ className, ...props }: TooltipProps) => (
         maxWidth: "none",
     },
 }));
+
+export default Tooltip;

@@ -1,39 +1,36 @@
 import Box from "@mui/material/Box";
 import { FlexBoxProps, FlexBoxSpacing, FlexBoxWrap } from "./FlexBox.types";
 
-export default function FlexBox(props: FlexBoxProps) {
-    const { children, sx, ...rest } = props;
-
-    let wrap: FlexBoxWrap;
-    if (!props.wrap) wrap = "nowrap";
-    else if (props.wrap) wrap = "wrap";
-    else if (props.wrap === "reverse") wrap = "wrap-reverse";
-    else wrap = props.wrap;
+export default function FlexBox({ children, sx, spacing, wrap }: FlexBoxProps) {
+    let flexWrap: FlexBoxWrap;
+    if (!wrap) flexWrap = "nowrap";
+    else if (wrap) flexWrap = "wrap";
+    else if (wrap === "reverse") flexWrap = "wrap-reverse";
+    else flexWrap = wrap;
 
     let rowSpacing: FlexBoxSpacing;
     let columnSpacing: FlexBoxSpacing;
-    if (props.spacing) {
-        if (Array.isArray(props.spacing)) {
-            [rowSpacing, columnSpacing] = props.spacing;
+    if (spacing) {
+        if (Array.isArray(spacing)) {
+            [rowSpacing, columnSpacing] = spacing;
         } else {
-            rowSpacing = props.spacing;
-            columnSpacing = props.spacing;
+            rowSpacing = spacing;
+            columnSpacing = spacing;
         }
     }
     // else {
-    //     rowSpacing = props.rowSpacing;
-    //     columnSpacing = props.columnSpacing;
+    //     rowSpacing = rowSpacing;
+    //     columnSpacing = columnSpacing;
     // }
 
     return (
         <Box
             display="flex"
             alignItems="center"
-            flexWrap={wrap}
+            flexWrap={flexWrap}
             rowGap={rowSpacing}
             columnGap={columnSpacing}
             sx={sx}
-            {...rest}
         >
             {children}
         </Box>

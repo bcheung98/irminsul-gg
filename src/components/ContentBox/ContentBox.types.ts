@@ -16,7 +16,7 @@ export interface ContentProps {
 export interface ContentBoxProps {
     component?: React.ElementType;
     children?: React.ReactNode;
-    title?: string | React.ReactNode;
+    header?: string | React.ReactNode;
     actions?: React.ReactNode;
     headerProps?: HeaderProps;
     contentProps?: ContentProps;

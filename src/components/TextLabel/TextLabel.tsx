@@ -17,6 +17,7 @@ export default function TextLabel({
     titleProps,
     subtitleProps,
     spacing,
+    textSpacing,
     isLink,
 }: TextLabelProps) {
     const theme = useTheme();
@@ -31,11 +32,12 @@ export default function TextLabel({
                         borderRadius: iconProps?.borderRadius || "4px",
                         padding: iconProps?.padding || 0,
                     }}
+                    tooltip={iconProps?.tooltip}
                 />
             ) : (
                 icon
             )}
-            <Stack>
+            <Stack spacing={textSpacing || 0}>
                 <Text
                     variant={titleProps?.variant || "body1"}
                     sx={{
@@ -45,7 +47,7 @@ export default function TextLabel({
                             textDecoration: isLink ? "underline" : "none",
                             cursor: isLink
                                 ? "pointer"
-                                : titleProps?.defaultCursor || "default",
+                                : titleProps?.defaultCursor || "inherit",
                         },
                     }}
                 >

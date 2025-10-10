@@ -14,7 +14,7 @@ import { ContentBoxProps } from "./ContentBox.types";
 export default function ContentBox({
     component = "div",
     children,
-    title = "",
+    header = "",
     actions,
     headerProps = {
         dense: true,
@@ -36,8 +36,9 @@ export default function ContentBox({
                         theme.contentBox.backgroundColor.main,
                     0.75
                 ),
-                border: theme.contentBox.border,
-                borderRadius: theme.contentBox.borderRadius,
+                borderWidth: theme.contentBox.border.width,
+                borderColor: theme.contentBox.border.color,
+                borderRadius: theme.contentBox.border.radius,
                 backdropFilter: "blur(4px)",
             }}
         >
@@ -45,10 +46,15 @@ export default function ContentBox({
                 position="static"
                 sx={{
                     backgroundColor: theme.contentBox.backgroundColor.header,
+                    borderBottomWidth: children ? 1 : 0,
                 }}
             >
                 <Toolbar
-                    variant={headerProps.dense ? "dense" : "regular"}
+                    variant={
+                        headerProps.dense || typeof header !== "string"
+                            ? "dense"
+                            : "regular"
+                    }
                     disableGutters
                     sx={{
                         p: headerProps.padding,
@@ -58,28 +64,30 @@ export default function ContentBox({
                         gap: "8px",
                     }}
                 >
-                    {typeof title === "string" ? (
+                    {typeof header === "string" ? (
                         <Text
                             variant={headerProps.textVariant}
                             sx={{ color: theme.contentBox.color.header }}
                         >
-                            {title}
+                            {header}
                         </Text>
                     ) : (
-                        <>{title}</>
+                        <>{header}</>
                     )}
                     {actions}
                 </Toolbar>
             </AppBar>
-            <Box
-                sx={{
-                    m: contentProps.padding,
-                    overflowX: contentProps.overflowX,
-                }}
-                component={component}
-            >
-                {children}
-            </Box>
+            {children && (
+                <Box
+                    sx={{
+                        m: contentProps.padding,
+                        overflowX: contentProps.overflowX,
+                    }}
+                    component={component}
+                >
+                    {children}
+                </Box>
+            )}
         </Card>
     );
 }

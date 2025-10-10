@@ -1,6 +1,7 @@
 // Component imports
 import NavLink from "../NavLink";
 import Image from "../Image";
+import Tooltip from "../Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -8,26 +9,26 @@ import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
+import { convertNametoURL } from "@/helpers/utils";
 import { getRarityColor } from "@/app/(games)/genshin/_helpers/rarityColors";
 
 // Type imports
 import { InfoAvatarProps } from "./InfoAvatar.types";
-import { Tooltip } from "../Tooltip";
 
 export default function InfoAvatar({
     tag,
     name,
-    displayName,
+    displayName = name,
     rarity = 3,
     size = 64,
     background,
     disableZoomOnHover,
     url = "icons",
-    componentID = `${tag}/${name.toLocaleLowerCase()}`,
+    componentID,
 }: InfoAvatarProps) {
     const theme = useTheme();
 
-    const href = `/${tag}/${name.toLocaleLowerCase()}`;
+    const href = `/${tag}/${convertNametoURL(name)}`;
 
     return (
         <Tooltip title={displayName} arrow placement="top">
@@ -52,7 +53,9 @@ export default function InfoAvatar({
                     <Image
                         src={`${tag}/${url}/${name}`}
                         size={size - theme.infoAvatar.border.width * 2}
-                        id={`${componentID}-infoAvatar`}
+                        id={`${
+                            componentID || convertNametoURL(name)
+                        }-infoAvatar`}
                         zoomOnHover={!disableZoomOnHover}
                     />
                 </ButtonBase>

@@ -13,7 +13,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { zoomImageOnHover } from "@/helpers/utils";
+import { convertNametoURL, zoomImageOnHover } from "@/helpers/utils";
 
 // Type imports
 import { InfoCardProps } from "./InfoCard.types";
@@ -21,24 +21,24 @@ import { InfoCardProps } from "./InfoCard.types";
 export default function InfoCard({
     tag,
     name,
-    displayName,
+    displayName = name,
     rarity = 3,
     size = 128,
     background,
     disableZoomOnHover,
     url = "avatars",
-    componentID = `${tag}/${name.toLocaleLowerCase()}`,
+    componentID,
     badgeLeft,
     badgeRight,
 }: InfoCardProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const id = `${componentID}-infoCard`;
+    const id = `${componentID || convertNametoURL(name)}-infoCard`;
 
     const [game, type] = tag.split("/");
 
-    const href = `/${tag}/${name.toLocaleLowerCase()}`;
+    const href = `/${tag}/${convertNametoURL(name)}`;
 
     let imgSize = size;
     if (matches) {
@@ -83,7 +83,12 @@ export default function InfoCard({
                         />
                     </Box>
                     <Box sx={styles.textContainer()}>
-                        <Text variant="body2" sx={styles.text()}>
+                        <Text
+                            variant={
+                                displayName.length > 13 ? "subtitle2" : "body2"
+                            }
+                            sx={styles.text()}
+                        >
                             {displayName}
                         </Text>
                     </Box>

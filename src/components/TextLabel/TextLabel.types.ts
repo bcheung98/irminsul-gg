@@ -5,6 +5,7 @@ export interface IconProps {
     size?: ImageSize;
     borderRadius?: string;
     padding?: string | number;
+    tooltip?: string;
 }
 
 export interface TitleProps {
@@ -21,5 +22,6 @@ export interface TextLabelProps {
     subtitle?: React.ReactNode;
     subtitleProps?: TitleProps;
     spacing?: number;
+    textSpacing?: number;
     isLink?: boolean;
 }
