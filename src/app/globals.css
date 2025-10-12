@@ -1,8 +1,7 @@
 body {
     margin: 0;
-    padding-right: 0 !important;
     background-color: transparent;
-    font-family: "Segoe UI", Roboto, Helvetica, sans-serif;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -14,4 +13,14 @@ a {
 
 span > a {
     color: rgb(30, 175, 255);
+}
+
+#background-image {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    scale: 1.05;
 }

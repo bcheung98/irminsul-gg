@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 // Component imports
 import StoreProvider from "./StoreProvider";
+import Image from "@/components/Image";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 
@@ -45,7 +46,7 @@ export default function StyledRoot({
                 website.enabled && websites.push(website);
             });
         }
-        return websites;
+        return { websites, websiteStatus: isLoading };
     }
 
     function getCurrentData() {
@@ -55,52 +56,24 @@ export default function StyledRoot({
         if (!isLoading && !error) {
             currentData = data;
         }
-        return currentData;
+        return { data: currentData, dataStatus: isLoading };
     }
 
-    const websites = getWebsites();
-    const data = getCurrentData();
-
-    const background = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%)`;
-    const backgroundImage = `linear-gradient(to bottom, ${theme.backgroundImageColors[0]} 10%, ${theme.backgroundImageColors[1]} 50%, ${theme.backgroundImageColors[0]} 100%), url(${theme.backgroundImageURL})`;
+    const { websites } = getWebsites();
+    const { data } = getCurrentData();
 
     return (
         <StoreProvider>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Box id="back-to-top-anchor" />
-                <Toolbar variant="dense" />
-                <Box
-                    sx={{
-                        display: "flex",
-                        backgroundColor: theme.background(0),
-                        backgroundImage: {
-                            xs: background,
-                            sm: backgroundImage,
-                        },
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        backgroundPosition: "50% 25%",
-                        backgroundAttachment: "fixed",
-                    }}
-                >
+                <Toolbar variant="dense" id="back-to-top-anchor" />
+                <Image src={theme.backgroundImageURL} id="background-image" />
+                <Box sx={{ display: "flex" }}>
                     <WebsiteContext value={websites}>
                         <DataContext value={data}>
                             <NavBar />
-                            <Box
-                                sx={{
-                                    minWidth: "0vw",
-                                    width: "100vw",
-                                    backgroundColor: background,
-                                }}
-                            >
-                                <Box
-                                    sx={{
-                                        minHeight: "100vh",
-                                        width: "100%",
-                                        mx: "auto",
-                                    }}
-                                >
+                            <Box sx={{ position: "relative", width: "100vw" }}>
+                                <Box sx={{ minHeight: "100vh" }}>
                                     {children}
                                 </Box>
                                 <NavBarBottom />
