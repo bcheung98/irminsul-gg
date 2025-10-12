@@ -78,9 +78,8 @@ export default function NavBarDesktop() {
                     <Toolbar
                         variant="dense"
                         sx={{
+                            width: "100vw",
                             borderTop: `1px solid ${theme.border.color.primary}`,
-                            backgroundColor: theme.appbar.backgroundColor.main,
-                            backdropFilter: "blur(4px)",
                             gap: "32px",
                         }}
                     >

@@ -19,9 +19,9 @@ export interface TitleProps {
 export interface TextLabelProps {
     icon?: string | React.ReactNode;
     iconProps?: IconProps;
-    title: string | number;
+    title?: string | number | React.ReactNode;
     titleProps?: TitleProps;
-    subtitle?: string | number;
+    subtitle?: string | number | React.ReactNode;
     subtitleProps?: TitleProps;
     spacing?: number;
     textSpacing?: number;
