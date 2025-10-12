@@ -1,8 +1,8 @@
-import { InfoBadgeDataKey } from "@/components/InfoBadge/InfoBadge.types";
+import { AttributeDataKey } from "@/types/_common";
 
 export function getDataIconURL(
     game: string,
-    key: InfoBadgeDataKey,
+    key: AttributeDataKey,
     value = ""
 ) {
     let src = "";
