@@ -1,7 +1,6 @@
-import { SxProps } from "@mui/material";
+import { SxProps, TypographyVariant } from "@mui/material";
 import { themeNames } from "@/themes/theme";
 import { darkThemeData } from "@/themes/darkTheme";
-import { TypographyVariant } from "@mui/material/styles";
 
 export type ThemeNames = (typeof themeNames)[number];
 
@@ -33,9 +32,17 @@ declare module "@mui/material/styles" {
     interface TypographyVariantsOptions extends TypographyVariantsOptionsType {}
 }
 
-type TypographyOverrides = {
-    sitename: true;
+type StyledTypographyVariants = {
+    [Property in TypographyVariant as `${string & Property}-styled`]: true;
 };
+
+type NewTypographyVariants = {
+    sitename: true;
+    body3: true;
+    subtitle3: true;
+};
+
+type TypographyOverrides = StyledTypographyVariants & NewTypographyVariants;
 
 type TypographyVariantsType = {
     [Property in keyof TypographyOverrides]: React.CSSProperties;

@@ -5,6 +5,7 @@ export interface Website {
     gameVersion: string;
     color: string;
     urls: WebsiteURLInfo;
+    dev: string;
 }
 
 export interface WebsiteURLInfo {
