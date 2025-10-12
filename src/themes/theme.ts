@@ -39,6 +39,16 @@ export default function getTheme(name: string) {
                     },
                 },
             },
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        color: theme.appbar.color.primary,
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: theme.font.weight.primary,
+                        textTransform: "none",
+                    },
+                },
+            },
             MuiButtonBase: {
                 defaultProps: {
                     disableRipple: true,
@@ -64,8 +74,10 @@ export default function getTheme(name: string) {
                         h6: "h6",
                         body1: "p",
                         body2: "p",
+                        body3: "p",
                         subtitle1: "p",
                         subtitle2: "p",
+                        subtitle3: "p",
                     },
                 },
                 styleOverrides: {
@@ -127,7 +139,6 @@ export default function getTheme(name: string) {
                 },
             },
             subtitle1: {
-                ...theme.typography.body1,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle1.xs
@@ -152,7 +163,6 @@ export default function getTheme(name: string) {
                 },
             },
             subtitle2: {
-                ...theme.typography.body2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle2.xs
@@ -164,8 +174,40 @@ export default function getTheme(name: string) {
                     ),
                 },
             },
+            body3: {
+                ...theme.typography.body2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body3.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.body3.sm
+                    ),
+                },
+            },
+            subtitle3: {
+                ...theme.typography.subtitle2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle3.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle3.sm
+                    ),
+                },
+            },
         },
     };
 
     return createTheme(theme, baseThemeData);
 }
+
+export const variantMap = {
+    primary: 0,
+    secondary: 1,
+    tertiary: 2,
+};
