@@ -5,7 +5,8 @@ import DataIcon from "../DataIcon/DataIcon";
 import Stack from "@mui/material/Stack";
 
 // Type imports
-import { InfoBadgeDataKey, InfoBadgeProps } from "./InfoBadge.types";
+import { InfoBadgeProps } from "./InfoBadge.types";
+import { AttributeDataKey } from "@/types/_common";
 
 export default function InfoBadge({
     data,
@@ -20,7 +21,7 @@ export default function InfoBadge({
                 <DataIcon
                     key={key}
                     game={game}
-                    property={key as InfoBadgeDataKey}
+                    property={key as AttributeDataKey}
                     value={value}
                     styles={styles.icon}
                 />

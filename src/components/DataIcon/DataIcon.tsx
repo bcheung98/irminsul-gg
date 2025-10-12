@@ -8,11 +8,11 @@ import { CSSProperties } from "@mui/material/styles";
 import { getDataIconURL } from "@/helpers/dataIcon";
 
 // Type imports
-import type { InfoBadgeDataKey } from "../InfoBadge/InfoBadge.types";
+import { AttributeDataKey } from "@/types/_common";
 
 export interface DataIconProps {
     game: string;
-    property: InfoBadgeDataKey;
+    property: AttributeDataKey;
     value: string;
     styles: CSSProperties;
 }

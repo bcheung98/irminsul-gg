@@ -34,7 +34,7 @@ export default function ContentBox({
                 backgroundColor: alpha(
                     contentProps.backgroundColor ||
                         theme.contentBox.backgroundColor.main,
-                    0.75
+                    0.95
                 ),
                 borderWidth: theme.contentBox.border.width,
                 borderColor: theme.contentBox.border.color,

@@ -4,17 +4,20 @@ import parse from "html-react-parser";
 
 // Component imports
 import Image from "../Image";
-import ContentBox from "../ContentBox/ContentBox";
 import FlexBox from "../FlexBox";
+import ContentDialog from "../ContentDialog";
+import TabList from "../TabList/TabList";
+import TabSelector from "../TabSelector";
+import TabPanel from "../TabPanel";
 import Text from "../Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import Fade from "@mui/material/Fade";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -29,9 +32,13 @@ export default function CharacterSplash({
     outfits: CharacterOutfit[];
 }) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const game = usePathname().split("/")[1];
+
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const handleDialogOpen = () => {
+        setDialogOpen(true);
+    };
 
     const [tabValue, setTabValue] = useState(0);
     const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
@@ -105,7 +112,7 @@ export default function CharacterSplash({
                     <Button
                         variant="contained"
                         color="primary"
-                        // onClick={handleDialogOpen}
+                        onClick={handleDialogOpen}
                         disableRipple
                     >
                         View Outfits
@@ -119,6 +126,67 @@ export default function CharacterSplash({
                     </IconButton>
                 </FlexBox>
             </Card>
+            <ContentDialog
+                open={dialogOpen}
+                setOpen={setDialogOpen}
+                header="Outfits"
+                contentProps={{ padding: 0 }}
+            >
+                <TabList value={tabValue} onChange={handleTabChange}>
+                    {outfits.map((outfit, index) => (
+                        <TabSelector
+                            key={index}
+                            icon={
+                                <Image
+                                    src={
+                                        index === 0
+                                            ? `${game}/characters/icons/${name}`
+                                            : `${game}/characters/outfits/icon/${outfit.name}`
+                                    }
+                                    size={64}
+                                    responsive
+                                    style={{
+                                        border: `2px solid ${theme.border.color.primary}`,
+                                        borderRadius: "4px",
+                                        backgroundImage: `url(https://assets.irminsul.gg/genshin/backgrounds/Background_${outfit.rarity}_Star.png)`,
+                                        backgroundSize: "contain",
+                                    }}
+                                />
+                            }
+                        />
+                    ))}
+                </TabList>
+                {outfits.map((outfit, index) => (
+                    <TabPanel key={index} index={index} value={tabValue}>
+                        <Box sx={{ minHeight: "96px" }}>
+                            <Text variant="h6" gutterBottom>
+                                {outfit.displayName || outfit.name}
+                            </Text>
+                            <Text
+                                sx={{
+                                    color: theme.text.description,
+                                }}
+                            >
+                                {parse(outfit.description)}
+                            </Text>
+                        </Box>
+                        <Fade in={index === tabValue} timeout={500}>
+                            <Card elevation={0} sx={{ minHeight: "600px" }}>
+                                <Image
+                                    src={imgSrcSplash}
+                                    alt={outfit.name}
+                                    style={{
+                                        width: "100%",
+                                        minHeight: "600px",
+                                        objectFit: "cover",
+                                        overflowClipMargin: "unset",
+                                    }}
+                                />
+                            </Card>
+                        </Fade>
+                    </TabPanel>
+                ))}
+            </ContentDialog>
         </>
     );
 }

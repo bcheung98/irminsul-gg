@@ -19,11 +19,18 @@ export default function TextLabel({
     spacing,
     textSpacing,
     isLink,
+    alignItems = "center",
+    justifyContent = "left",
 }: TextLabelProps) {
     const theme = useTheme();
 
     return (
-        <Stack direction="row" spacing={spacing || 1} alignItems="center">
+        <Stack
+            direction="row"
+            spacing={spacing || 1}
+            alignItems={alignItems}
+            justifyContent={justifyContent}
+        >
             {typeof icon === "string" ? (
                 <Image
                     src={icon}
@@ -39,6 +46,7 @@ export default function TextLabel({
             )}
             <Stack spacing={textSpacing || 0}>
                 <Text
+                    component={titleProps?.component || "span"}
                     variant={titleProps?.variant || "body1"}
                     sx={{
                         color: titleProps?.color || theme.text.primary,

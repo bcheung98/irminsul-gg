@@ -85,7 +85,7 @@ export default function InfoCard({
                     <Box sx={styles.textContainer()}>
                         <Text
                             variant={
-                                displayName.length > 13 ? "subtitle2" : "body2"
+                                displayName.length > 13 ? "body3" : "body2"
                             }
                             sx={styles.text()}
                         >

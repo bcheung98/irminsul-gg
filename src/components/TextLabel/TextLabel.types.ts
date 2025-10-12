@@ -1,5 +1,6 @@
 import { TypographyVariant } from "@mui/material/styles";
 import { ImageSize } from "../Image/Image.types";
+import { StackProps } from "@mui/material/Stack";
 
 export interface IconProps {
     size?: ImageSize;
@@ -9,6 +10,7 @@ export interface IconProps {
 }
 
 export interface TitleProps {
+    component?: React.ElementType;
     variant?: TypographyVariant;
     color?: string;
     defaultCursor?: string;
@@ -17,11 +19,13 @@ export interface TitleProps {
 export interface TextLabelProps {
     icon?: string | React.ReactNode;
     iconProps?: IconProps;
-    title: React.ReactNode;
+    title: string | number;
     titleProps?: TitleProps;
-    subtitle?: React.ReactNode;
+    subtitle?: string | number;
     subtitleProps?: TitleProps;
     spacing?: number;
     textSpacing?: number;
     isLink?: boolean;
+    alignItems?: StackProps["alignItems"];
+    justifyContent?: StackProps["justifyContent"];
 }
