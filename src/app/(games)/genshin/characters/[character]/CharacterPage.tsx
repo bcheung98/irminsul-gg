@@ -25,7 +25,8 @@ export default function CharacterPage({
             title={character.title}
             icon={`genshin/elements/${character.element}`}
             description={character.description}
-            data={{
+            stats={character.stats}
+            attributes={{
                 element: character.element,
                 weapon: character.weapon,
                 rarity: character.rarity,

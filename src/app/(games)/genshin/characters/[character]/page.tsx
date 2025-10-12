@@ -39,7 +39,7 @@ export default async function GenshinCharacterPage({ params }: Props) {
 
     return (
         <Suspense fallback={<Loader />}>
-            {charData && <CharacterPage character={charData} />}
+            <CharacterPage character={charData} />
         </Suspense>
     );
 }
