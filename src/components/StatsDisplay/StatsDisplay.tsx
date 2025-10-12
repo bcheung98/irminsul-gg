@@ -1,0 +1,60 @@
+import { BaseSyntheticEvent, useEffect, useState } from "react";
+
+// Component imports
+import Text from "../Text";
+import StatsTable from "../StatsTable";
+
+// MUI imports
+import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+
+// Helper imports
+import { getStats } from "./StatsDisplay.utils";
+import { useTextColor } from "@/utils/useTextColor";
+
+// Type imports
+import { StatsDisplayProps } from "./StatsDisplay.types";
+import { SkillDisplay } from "@/types/_common";
+
+export default function StatsDisplay({
+    game,
+    stats,
+    attributes,
+}: StatsDisplayProps) {
+    const theme = useTheme();
+
+    const { levels, data } = getStats({ stats, attributes })[game];
+
+    const textColor = useTextColor(theme.text);
+
+    const [mode] = useState<SkillDisplay>("slider");
+
+    return (
+        <Stack spacing={1}>
+            <Text variant="h6">Stats</Text>
+            <StatsTable
+                mode={mode}
+                levels={levels}
+                data={data}
+                orientation="column"
+                sliderProps={{
+                    initialValue: 14,
+                    sx: {
+                        minWidth: "100px",
+                        maxWidth: "50%",
+                        ml: "8px",
+                        color: textColor(game, attributes.element),
+                    },
+                }}
+                tableProps={{
+                    sx: {
+                        width:
+                            mode === "slider"
+                                ? { xs: "100%", sm: "50%" }
+                                : "100%",
+                    },
+                }}
+            />
+        </Stack>
+    );
+}
