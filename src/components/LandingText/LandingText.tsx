@@ -4,17 +4,22 @@
 import Text from "@/components/Text";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 export default function LandingText() {
+    const theme = useTheme();
+
     return (
-        <Stack spacing={1} sx={{ mt: "96px", textAlign: "center" }}>
-            <Text variant="h4" sx={{ fontWeight: 400 }}>
+        <Stack spacing={1}>
+            <Text variant="h4" sx={{ fontWeight: theme.font.weight.home }}>
                 Welcome to IRMINSUL.GG!
             </Text>
             <Text variant="h6">
-                <span style={{ fontWeight: 400 }}>IRMINSUL.GG</span> is a
-                database and companion website for various gacha games.
+                <span style={{ fontWeight: theme.font.weight.home }}>
+                    IRMINSUL.GG
+                </span>{" "}
+                is a database and companion website for various gacha games.
                 <br />
                 Select a branch of Irminsul to get started:
             </Text>

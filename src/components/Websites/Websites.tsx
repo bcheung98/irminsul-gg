@@ -16,7 +16,7 @@ export default function Websites() {
     const websites = useContext(WebsiteContext);
 
     return (
-        <Container maxWidth="xl" disableGutters sx={{ mt: 6, px: 6 }}>
+        <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
             <Grid container spacing={4}>
                 {websites
                     .sort((a, b) => a.title.localeCompare(b.title))
