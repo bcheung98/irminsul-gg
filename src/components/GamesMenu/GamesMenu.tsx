@@ -41,14 +41,14 @@ export default function GamesMenu() {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleMenuClose}
-                disableScrollLock
+                onClick={handleMenuClose}
                 sx={{
                     "& .MuiMenu-paper": {
                         border: `1px solid ${theme.appbar.backgroundColor.hover}`,
                         borderRadius: "8px",
                     },
                     "& .MuiMenu-list": {
-                        backgroundColor: theme.background(2, "light"),
+                        backgroundColor: theme.background(1),
                     },
                 }}
             >
