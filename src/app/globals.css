@@ -15,6 +15,11 @@ span > a {
     color: rgb(30, 175, 255);
 }
 
+ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
 #background-image {
     object-fit: cover;
     width: 100vw;

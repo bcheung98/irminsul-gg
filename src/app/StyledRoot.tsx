@@ -72,8 +72,14 @@ export default function StyledRoot({
                     <WebsiteContext value={websites}>
                         <DataContext value={data}>
                             <NavBar />
-                            <Box sx={{ position: "relative", width: "100vw" }}>
-                                <Box sx={{ minHeight: "100vh" }}>
+                            <Box
+                                sx={{
+                                    position: "relative",
+                                    minWidth: "0vw",
+                                    width: "100vw",
+                                }}
+                            >
+                                <Box sx={{ width: "100%", minHeight: "100vh" }}>
                                     {children}
                                 </Box>
                                 <NavBarBottom />
