@@ -23,6 +23,7 @@ export interface VoiceActorData {
 export type AttributeDataKey = keyof AttributeData;
 
 export interface AttributeData {
+    name?: string;
     element?: string;
     weapon?: string;
     weaponType?: string;
@@ -31,4 +32,5 @@ export interface AttributeData {
     path?: string;
     specialty?: string;
     cost?: string;
+    arkhe?: string;
 }
