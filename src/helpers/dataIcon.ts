@@ -20,6 +20,10 @@ export function getDataIconURL(
             src = `genshin/icons/ascension_stats/${value}`;
             tooltip = value;
         }
+        if (key === "arkhe") {
+            src = `genshin/tcg/icons/factions/${value}`;
+            tooltip = value;
+        }
     }
     return { src, tooltip };
 }

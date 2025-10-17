@@ -117,3 +117,7 @@ export function combineStyles(
 export function convertNametoURL(name: string) {
     return name.toLocaleLowerCase().split(" ").join("-");
 }
+
+export function splitJoin(string: string, split = " ", join = "_") {
+    return string.split(split).join(join);
+}
