@@ -8,7 +8,7 @@ import InfoAvatar from "@/components/InfoAvatar/";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { GenshinCharacter } from "../_types/character";
+import { GenshinCharacter } from "@/types/genshin/character";
 
 export default function CharacterBrowser({
     characters,

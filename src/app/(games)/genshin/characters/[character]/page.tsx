@@ -10,7 +10,7 @@ import { convertNametoURL } from "@/utils/utils";
 
 // Type imports
 import type { Metadata } from "next";
-import { GenshinCharacter } from "../../_types/character";
+import { GenshinCharacter } from "@/types/genshin/character";
 
 interface Props {
     params: Promise<{ character: string }>;

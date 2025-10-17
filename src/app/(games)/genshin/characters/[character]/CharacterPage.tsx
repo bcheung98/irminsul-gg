@@ -3,13 +3,14 @@
 // Component imports
 import CharacterSplash from "@/components/CharacterSplash/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo/CharacterInfo";
+import CharacterSkills from "@/components/CharacterSkills/CharacterSkills";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { GenshinCharacter } from "../../_types/character";
+import { GenshinCharacter } from "@/types/genshin/character";
 
 export default function CharacterPage({
     character,
@@ -26,10 +27,12 @@ export default function CharacterPage({
             icon={`genshin/elements/${character.element}`}
             description={character.description}
             stats={character.stats}
+            materials={character.materials}
             attributes={{
                 element: character.element,
-                weapon: character.weapon,
+                weaponType: character.weapon,
                 rarity: character.rarity,
+                arkhe: character.arkhe,
             }}
         />
     );
@@ -44,6 +47,16 @@ export default function CharacterPage({
                     <Stack spacing={2}>{info}</Stack>
                 </Grid>
             </Grid>
+            <CharacterSkills
+                title="Combat Talents"
+                skills={character.skills}
+                materials={character.materials}
+                attributes={{
+                    name: character.name,
+                    element: character.element,
+                    weaponType: character.weapon,
+                }}
+            />
         </Stack>
     );
 }
