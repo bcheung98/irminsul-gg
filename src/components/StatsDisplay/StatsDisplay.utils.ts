@@ -1,5 +1,5 @@
 import { StatsDisplayProps } from "./StatsDisplay.types";
-import { characterAscensionStatScalings } from "@/app/(games)/genshin/_data/characterAscensionStats";
+import { characterAscensionStatScalings } from "@/data/genshin/characterAscensionStats";
 
 type Props = Omit<StatsDisplayProps, "game">;
 type StatsData = {

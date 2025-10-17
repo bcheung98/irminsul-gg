@@ -107,10 +107,7 @@ export default function StatsTable({
                                   <Table.Row key={i}>
                                       <Table.Cell
                                           align="left"
-                                          label={{
-                                              title: row[0],
-                                              icon: "genshin/icons/ascension_stats/DEF",
-                                          }}
+                                          label={{ title: row[0] }}
                                           padding="8px 16px"
                                       />
                                       <Table.Cell

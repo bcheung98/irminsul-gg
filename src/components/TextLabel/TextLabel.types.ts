@@ -27,5 +27,5 @@ export interface TextLabelProps {
     textSpacing?: number;
     isLink?: boolean;
     alignItems?: StackProps["alignItems"];
-    justifyContent?: StackProps["justifyContent"];
+    justifyContent?: "left" | "center" | "right";
 }

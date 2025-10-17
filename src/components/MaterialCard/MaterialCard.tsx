@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 // Helper imports
 import { splitJoin } from "@/utils";
 import { materialCardStyles } from "./MaterialCard.styles";
-import { useMaterials } from "@/utils/useMaterials";
+import { useMaterials } from "@/helpers/useMaterials";
 
 export interface MaterialCardProps {
     id?: number;

@@ -62,6 +62,7 @@ export default function Image({
     };
 
     function onError(event: SyntheticEvent<HTMLImageElement, Event>) {
+        console.warn(`Failed to load image ${src}`);
         event.currentTarget.src = `https://assets.irminsul.gg/${fallbackSrc}.png`;
         onerror = null;
     }

@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { getStats } from "./StatsDisplay.utils";
-import { useTextColor } from "@/utils/useTextColor";
+import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
 import { StatsDisplayProps } from "./StatsDisplay.types";

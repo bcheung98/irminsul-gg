@@ -10,7 +10,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { convertNametoURL } from "@/utils/utils";
-import { getRarityColor } from "@/app/(games)/genshin/_helpers/rarityColors";
+import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 // Type imports
 import { InfoAvatarProps } from "./InfoAvatar.types";

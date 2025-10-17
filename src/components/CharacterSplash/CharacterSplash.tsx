@@ -6,9 +6,7 @@ import parse from "html-react-parser";
 import Image from "../Image";
 import FlexBox from "../FlexBox";
 import ContentDialog from "../ContentDialog";
-import TabList from "../TabList/TabList";
-import TabSelector from "../TabSelector";
-import TabPanel from "../TabPanel";
+import { default as Tabs } from "../Tabs";
 import Text from "../Text";
 
 // MUI imports
@@ -132,9 +130,9 @@ export default function CharacterSplash({
                 header="Outfits"
                 contentProps={{ padding: 0 }}
             >
-                <TabList value={tabValue} onChange={handleTabChange}>
+                <Tabs.List value={tabValue} onChange={handleTabChange}>
                     {outfits.map((outfit, index) => (
-                        <TabSelector
+                        <Tabs.Selector
                             key={index}
                             icon={
                                 <Image
@@ -155,9 +153,9 @@ export default function CharacterSplash({
                             }
                         />
                     ))}
-                </TabList>
+                </Tabs.List>
                 {outfits.map((outfit, index) => (
-                    <TabPanel key={index} index={index} value={tabValue}>
+                    <Tabs.Panel key={index} index={index} value={tabValue}>
                         <Box sx={{ minHeight: "96px" }}>
                             <Text variant="h6" gutterBottom>
                                 {outfit.displayName || outfit.name}
@@ -184,7 +182,7 @@ export default function CharacterSplash({
                                 />
                             </Card>
                         </Fade>
-                    </TabPanel>
+                    </Tabs.Panel>
                 ))}
             </ContentDialog>
         </>

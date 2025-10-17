@@ -50,6 +50,7 @@ export default function TextLabel({
                     variant={titleProps?.variant || "body1"}
                     sx={{
                         color: titleProps?.color || theme.text.primary,
+                        textAlign: justifyContent,
                         "&:hover": {
                             color: isLink ? theme.text.selected : "global",
                             textDecoration: isLink ? "underline" : "none",

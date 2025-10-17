@@ -1,5 +1,5 @@
 import { CSSProperties, SxProps, Theme } from "@mui/material/styles";
-import { getRarityColor } from "@/app/(games)/genshin/_helpers/rarityColors";
+import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 interface InfoCardStylesProps {
     game: string;

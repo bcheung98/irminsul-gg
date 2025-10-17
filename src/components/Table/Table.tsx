@@ -41,7 +41,7 @@ export const Body = TableBody;
 export function Head({
     data,
     align = "center",
-    textVariant = "subtitle1",
+    textVariant = "body1",
 }: HeadProps) {
     const theme = useTheme();
 
@@ -90,7 +90,7 @@ export function Cell({
             <TextLabel
                 title={title}
                 titleProps={{
-                    variant: label.titleProps?.variant || "subtitle2",
+                    variant: label.titleProps?.variant || "body2",
                 }}
                 icon={icon}
                 justifyContent={align}
