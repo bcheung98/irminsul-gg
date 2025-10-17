@@ -44,11 +44,13 @@ const textColors = {
     description: "rgb(205, 205, 205)",
 };
 
+const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
+
 export const darkThemeData = {
     name: "Dark",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
-    backgroundImageColors: ["rgb(23, 46, 98)", "rgba(73, 218, 243, 0.2)"],
+    backgroundImageColors: ["rgba(23, 46, 98, 0)", "rgba(73, 218, 243, 0)"],
     backgroundImageURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
     backgroundImageAlpha: 0.75,
     palette: {
@@ -77,6 +79,7 @@ export const darkThemeData = {
             primary: 300,
             element: 300,
             highlight: 300,
+            home: 400,
         },
         sizes: {
             h3: {
@@ -100,24 +103,24 @@ export const darkThemeData = {
                 sm: 16,
             },
             subtitle1: {
-                xs: 14,
-                sm: 16,
+                xs: 13,
+                sm: 15,
             },
             body2: {
                 xs: 12,
                 sm: 14,
             },
             subtitle2: {
-                xs: 12,
-                sm: 14,
+                xs: 11,
+                sm: 13,
             },
             body3: {
-                xs: 11,
-                sm: 13,
+                xs: 10,
+                sm: 12,
             },
             subtitle3: {
-                xs: 11,
-                sm: 13,
+                xs: 9,
+                sm: 11,
             },
         },
     },
@@ -204,6 +207,31 @@ export const darkThemeData = {
             width: 0,
             color: borderColors.primary,
         },
+        color: {
+            primary: textColors.primary,
+        },
+    },
+    iconBackground: {
+        primary: iconBackgrounds[0],
+        secondary: iconBackgrounds[1],
+    },
+    materialCard: {
+        backgroundColor: {
+            main: appbarColors[0],
+            label: appbarColors[0],
+        },
+        border: {
+            radius: 4,
+            width: 0,
+            color: borderColors.primary,
+        },
+        imageBorder: {
+            radius: 4,
+            width: 0,
+            color: borderColors.primary,
+        },
+        backgroundImage: (rarity: number) =>
+            `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
         color: {
             primary: textColors.primary,
         },

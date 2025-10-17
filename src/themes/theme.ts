@@ -3,15 +3,12 @@
 import { createTheme } from "@mui/material/styles";
 import { darkTheme } from "./darkTheme";
 
-export const themeList = [
-    { name: "Dark", label: "Default", data: darkTheme },
-] as const;
+export const themeList = [darkTheme] as const;
 
 export const themeNames = themeList.map((t) => t.name);
 
 export default function getTheme(name: string) {
-    let theme =
-        themeList[themeList.findIndex((theme) => theme.name === name)].data;
+    let theme = themeList[themeList.findIndex((theme) => theme.name === name)];
 
     const baseThemeData = {
         breakpoints: {
@@ -69,14 +66,7 @@ export default function getTheme(name: string) {
             MuiTypography: {
                 defaultProps: {
                     variantMapping: {
-                        h4: "h4",
-                        h5: "h5",
-                        h6: "h6",
-                        body1: "p",
-                        body2: "p",
                         body3: "p",
-                        subtitle1: "p",
-                        subtitle2: "p",
                         subtitle3: "p",
                     },
                 },
