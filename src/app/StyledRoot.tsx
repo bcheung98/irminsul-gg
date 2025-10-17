@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 // Component imports
 import StoreProvider from "./StoreProvider";
-import Image from "@/components/Image";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 
@@ -67,7 +66,7 @@ export default function StyledRoot({
             <ThemeProvider theme={theme}>
                 <CssBaseline />
                 <Toolbar variant="dense" id="back-to-top-anchor" />
-                <Image src={theme.backgroundImageURL} id="background-image" />
+                <img src={theme.backgroundImageURL} id="background-image" />
                 <Box sx={{ display: "flex" }}>
                     <WebsiteContext value={websites}>
                         <DataContext value={data}>
