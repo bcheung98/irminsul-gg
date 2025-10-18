@@ -1,9 +1,10 @@
 "use client";
 
 // Component imports
-import CharacterSplash from "@/components/CharacterSplash/CharacterSplash";
-import CharacterInfo from "@/components/CharacterInfo/CharacterInfo";
-import CharacterSkills from "@/components/CharacterSkills/CharacterSkills";
+import CharacterSplash from "@/components/CharacterSplash";
+import CharacterInfo from "@/components/CharacterInfo";
+import CharacterSkills from "@/components/CharacterSkills";
+import CharacterPassives from "@/components/_genshin/CharacterPassives";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -55,6 +56,13 @@ export default function CharacterPage({
                     name: character.name,
                     element: character.element,
                     weaponType: character.weapon,
+                }}
+            />
+            <CharacterPassives
+                passives={character.passives}
+                attributes={{
+                    name: character.name,
+                    element: character.element,
                 }}
             />
         </Stack>
