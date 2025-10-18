@@ -16,10 +16,12 @@ export default function SkillIcon({
     icon,
     attributes,
     selected,
+    borderWidth = "2px",
 }: {
     icon: string;
     attributes?: AttributeData;
     selected?: boolean;
+    borderWidth?: string;
 }) {
     const theme = useTheme();
 
@@ -34,7 +36,7 @@ export default function SkillIcon({
             style={{
                 padding: "4px",
                 backgroundColor: theme.iconBackground.primary,
-                borderWidth: selected ? "thick" : "3px",
+                borderWidth: selected ? "thick" : borderWidth,
                 borderStyle: selected ? "double" : "solid",
                 borderColor: textColor(game, attributes?.element),
                 borderRadius: "64px",
