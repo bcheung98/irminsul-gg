@@ -57,10 +57,13 @@ export default function CharacterSkillScaling({
                             }}
                             tableProps={{
                                 sx: {
-                                    width: "100%",
+                                    width:
+                                        mode === "slider"
+                                            ? { sm: "100%", md: "50%" }
+                                            : "max-content",
                                     maxWidth:
                                         mode === "slider"
-                                            ? "max-content"
+                                            ? { lg: "550px" }
                                             : "100%",
                                     mt: "8px",
                                 },
