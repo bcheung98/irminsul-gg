@@ -17,6 +17,7 @@ import { skillKeys } from "@/data/skills";
 // Type imports
 import { GenshinCharacterPassive } from "@/types/genshin/character";
 import { AttributeData } from "@/types/_common";
+import { splitJoin } from "@/utils";
 
 interface CharacterPassivesProps {
     passives: GenshinCharacterPassive[];
@@ -30,7 +31,9 @@ export default function CharacterPassives({
     const theme = useTheme();
 
     function getIconURL(key: string) {
-        return `genshin/characters/talents/${attributes.name?.toLocaleLowerCase()}_${key}passive`;
+        return `genshin/characters/talents/${splitJoin(
+            attributes.name
+        ).toLocaleLowerCase()}_${key}passive`;
     }
 
     return (

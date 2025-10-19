@@ -11,7 +11,7 @@ import CharacterSkillTab from "./CharacterSkillTab";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { objectKeys } from "@/utils";
+import { objectKeys, splitJoin } from "@/utils";
 import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
@@ -37,7 +37,10 @@ export default function CharacterSkills({
     function getIconURL(key: string | number) {
         return key === "attack"
             ? `${game}/weapons/icons/${attributes.weaponType}`
-            : `${game}/characters/talents/${name.toLowerCase()}_${key}`;
+            : `${game}/characters/talents/${splitJoin(
+                  name,
+                  "-"
+              ).toLowerCase()}_${key}`;
     }
 
     return (

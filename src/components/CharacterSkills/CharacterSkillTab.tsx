@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 // Helper imports
+import { splitJoin } from "@/utils";
 import { skillKeys, skillIconURLs } from "@/data/skills";
 import { useTextColor } from "@/helpers/useTextColor";
 import { parseSkillDescription } from "@/helpers/parseSkillDescription";
@@ -111,7 +112,10 @@ export default function CharacterSkillTab({
 
 function formatSkillIconURL(url: string, attributes: AttributeData, index = 0) {
     if (attributes.name) {
-        url = url.replace("{name}", attributes.name.toLocaleLowerCase());
+        url = url.replace(
+            "{name}",
+            splitJoin(attributes.name, "-", "_").toLocaleLowerCase()
+        );
     }
     if (attributes.weaponType) {
         url = url.replace("{weaponType}", attributes.weaponType);
