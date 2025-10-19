@@ -5,6 +5,7 @@ import CharacterSplash from "@/components/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_genshin/CharacterPassives";
+import CharacterUpgrades from "@/components/CharacterUpgrades";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -60,6 +61,14 @@ export default function CharacterPage({
             />
             <CharacterPassives
                 passives={character.passives}
+                attributes={{
+                    name: character.name,
+                    element: character.element,
+                }}
+            />
+            <CharacterUpgrades
+                title="Constellation"
+                upgrades={character.constellation}
                 attributes={{
                     name: character.name,
                     element: character.element,
