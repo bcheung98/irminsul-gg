@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 // Component imports
-import CharacterBrowser from "./CharacterBrowser";
+import CharacterGallery from "./CharacterGallery";
 import Loader from "@/components/Loader";
 
 // Helper imports
@@ -21,7 +21,7 @@ export default async function GenshinCharactersPage() {
 
     return (
         <Suspense fallback={<Loader />}>
-            <CharacterBrowser characters={characters} />
+            <CharacterGallery characters={characters} />
         </Suspense>
     );
 }
