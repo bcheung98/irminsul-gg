@@ -18,20 +18,21 @@ import { variantMap } from "@/themes/theme";
 import { TextLabelProps } from "../TextLabel/TextLabel.types";
 import { ColorVariants } from "@/types/theme";
 
-interface RowProps {
+export interface RowProps {
     color?: ColorVariants;
 }
 
-interface HeadProps {
+export interface HeadProps {
     data: (string | number)[];
     align?: "left" | "center" | "right";
     textVariant?: TypographyVariant;
 }
 
-interface CellProps {
+export interface CellProps {
     label: TextLabelProps;
     align?: "left" | "center" | "right";
     padding?: string;
+    borderColor?: string;
 }
 
 export const Container = TableContainer;
@@ -75,17 +76,20 @@ export function Cell({
     label,
     align = "center",
     padding = "4px 16px",
+    borderColor,
 }: CellProps) {
+    const theme = useTheme();
+
     let { title, icon } = label;
     if (typeof label.title === "string") {
         [title, icon] = label.title.split("|");
     }
     return (
         <TableCell
-            sx={(theme) => ({
-                borderColor: theme.border.color.primary,
+            sx={{
+                borderColor: borderColor || theme.border.color.primary,
                 p: padding,
-            })}
+            }}
         >
             <TextLabel
                 title={title}
