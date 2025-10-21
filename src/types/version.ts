@@ -1,3 +1,5 @@
+import { VoiceActorData } from "./_common";
+
 export interface Version {
     version: string;
 }
@@ -5,3 +7,5 @@ export interface Version {
 export interface VersionWithDate extends Version {
     date: string;
 }
+
+export interface UmaVersion extends VoiceActorData {}
