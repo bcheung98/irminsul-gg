@@ -6,8 +6,8 @@ import parse from "html-react-parser";
 import Image from "../Image";
 import FlexBox from "../FlexBox";
 import ContentDialog from "../ContentDialog";
-import { default as Tabs } from "../Tabs";
 import Text from "../Text";
+import { default as Tabs } from "../Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -15,7 +15,6 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import Fade from "@mui/material/Fade";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -81,17 +80,26 @@ export default function CharacterSplash({
                     height: "auto",
                 }}
             >
-                <Image
-                    src={imgSrcSplash}
-                    style={{
-                        width: "100%",
-                        height: "600px",
-                        objectFit: "cover",
-                        overflowClipMargin: "unset", // removes "crispy" effect from `object-fit: cover`
-                        borderBottom: `1px solid ${theme.border.color.primary}`,
-                        backgroundColor: theme.background(2),
-                    }}
-                />
+                {outfits.map((_, index) => (
+                    <Tabs.Panel
+                        key={index}
+                        index={index}
+                        value={tabValue}
+                        padding={0}
+                    >
+                        <Image
+                            src={imgSrcSplash}
+                            style={{
+                                width: "100%",
+                                height: "600px",
+                                objectFit: "cover",
+                                overflowClipMargin: "unset", // removes "crispy" effect from `object-fit: cover`
+                                borderBottom: `1px solid ${theme.border.color.primary}`,
+                                backgroundColor: theme.background(2),
+                            }}
+                        />
+                    </Tabs.Panel>
+                ))}
                 <FlexBox
                     sx={{
                         alignItems: "center",
@@ -129,8 +137,13 @@ export default function CharacterSplash({
                 setOpen={setDialogOpen}
                 header="Outfits"
                 contentProps={{ padding: 0 }}
+                maxWidth={false}
             >
-                <Tabs.List value={tabValue} onChange={handleTabChange}>
+                <Tabs.List
+                    value={tabValue}
+                    onChange={handleTabChange}
+                    showIndicator
+                >
                     {outfits.map((outfit, index) => (
                         <Tabs.Selector
                             key={index}
@@ -155,7 +168,12 @@ export default function CharacterSplash({
                     ))}
                 </Tabs.List>
                 {outfits.map((outfit, index) => (
-                    <Tabs.Panel key={index} index={index} value={tabValue}>
+                    <Tabs.Panel
+                        key={index}
+                        index={index}
+                        value={tabValue}
+                        timeout={500}
+                    >
                         <Box sx={{ minHeight: "96px" }}>
                             <Text variant="h6" gutterBottom>
                                 {outfit.displayName || outfit.name}
@@ -168,20 +186,16 @@ export default function CharacterSplash({
                                 {parse(outfit.description)}
                             </Text>
                         </Box>
-                        <Fade in={index === tabValue} timeout={500}>
-                            <Card elevation={0} sx={{ minHeight: "600px" }}>
-                                <Image
-                                    src={imgSrcSplash}
-                                    alt={outfit.name}
-                                    style={{
-                                        width: "100%",
-                                        minHeight: "600px",
-                                        objectFit: "cover",
-                                        overflowClipMargin: "unset",
-                                    }}
-                                />
-                            </Card>
-                        </Fade>
+                        <Image
+                            src={imgSrcSplash}
+                            alt={outfit.name}
+                            style={{
+                                width: "100%",
+                                minHeight: "600px",
+                                objectFit: "cover",
+                                overflowClipMargin: "unset",
+                            }}
+                        />
                     </Tabs.Panel>
                 ))}
             </ContentDialog>

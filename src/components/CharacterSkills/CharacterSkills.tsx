@@ -9,8 +9,6 @@ import { default as Tabs } from "../Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Fade from "@mui/material/Fade";
-import Box from "@mui/material/Box";
 
 // Helper imports
 import { objectKeys, splitJoin } from "@/utils";
@@ -72,17 +70,12 @@ export default function CharacterSkills({
                     value={tabValue}
                     padding="8px 24px 16px"
                 >
-                    <Fade in={index === tabValue} timeout={250} unmountOnExit>
-                        {/* Use Box here because it can hold a ref */}
-                        <Box>
-                            <CharacterSkillTab
-                                skill={skills[key]}
-                                skillKey={`${key}`}
-                                materials={materials}
-                                attributes={attributes}
-                            />
-                        </Box>
-                    </Fade>
+                    <CharacterSkillTab
+                        skill={skills[key]}
+                        skillKey={`${key}`}
+                        materials={materials}
+                        attributes={attributes}
+                    />
                 </Tabs.Panel>
             ))}
         </ContentBox>
