@@ -1,9 +1,10 @@
+import { GameData } from "@/types";
 import {
     GenshinCharacterPassiveType,
     GenshinSkillKey,
 } from "@/types/genshin/character";
 
-export const skillKeys = {
+export const skillKeys: GameData<Record<string, string>> = {
     genshin: {
         attack: "Normal Attack",
         skill: "Elemental Skill",
@@ -11,14 +12,14 @@ export const skillKeys = {
         altsprint: "Alternate Sprint",
         a1: "1st Ascension Passive",
         a4: "4th Ascension Passive",
-        util: "Utility Passive",
+        util: "Passive Talent",
         nightsoul: "Night Realm's Gift Passive",
         moon: "Moonsign Benediction",
-        "": "Passive",
+        "": "Passive Talent",
     } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
 };
 
-export const skillIconURLs = {
+export const skillIconURLs: GameData<Record<string, string>> = {
     genshin: {
         attack: "genshin/weapons/icons/{weaponType}",
         skill: "genshin/characters/talents/{name}_skill",

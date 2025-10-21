@@ -1,18 +1,15 @@
+import { GameData } from "@/types";
 import { CostArray, CostValue } from "@/types/costs";
 import {
     getCharacterLevelCost,
     getCharacterSkillCost,
 } from "./genshin/getLevelUpCosts";
 
-interface ICosts {
-    [game: string]: Costs;
-}
-
 interface Costs {
     [tag: string]: (args: any) => { [key: string]: CostValue };
 }
 
-export const costs: ICosts = {
+export const costs: GameData<Costs> = {
     genshin: {
         characterLevel: getCharacterLevelCost,
         characterSkill: getCharacterSkillCost,

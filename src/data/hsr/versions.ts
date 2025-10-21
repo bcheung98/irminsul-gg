@@ -1,4 +1,6 @@
-export const hsrVersions = [
+import { VersionInfo } from "@/types/version";
+
+export const hsrVersions: VersionInfo[] = [
     { version: "3.6", name: "Back to Earth in Evernight" },
     { version: "3.5", name: "Before Their Deaths" },
     { version: "3.4", name: "For the Sun is Set to Die" },

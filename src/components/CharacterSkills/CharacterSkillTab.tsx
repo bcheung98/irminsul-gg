@@ -40,7 +40,7 @@ export default function CharacterSkillTab({
     }
 
     const skillIconURL = formatSkillIconURL(
-        skillIconURLs[game as keyof typeof skillIconURLs][skillKey],
+        skillIconURLs[game][skillKey],
         attributes
     );
 
@@ -49,7 +49,7 @@ export default function CharacterSkillTab({
             <Stack spacing={3}>
                 <Box>
                     <Text sx={{ mb: "8px", color: theme.text.header }}>
-                        {skillKeys[game as keyof typeof skillKeys][skillKey]}
+                        {skillKeys[game][skillKey]}
                     </Text>
                     <Stack spacing={2}>
                         {skill?.map((skl, index) => (

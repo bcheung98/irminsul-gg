@@ -1,8 +1,8 @@
-export const genshinVersions = [
-    {
-        version: "Luna I",
-        name: "A Dance of Snowy Tides and Hoarfrost Groves",
-    },
+import { VersionInfo } from "@/types/version";
+
+export const genshinVersions: VersionInfo[] = [
+    { version: "Luna II", name: "An Elegy for Faded Moonlight" },
+    { version: "Luna I", name: "A Dance of Snowy Tides and Hoarfrost Groves" },
     { version: "5.8", name: "Sunspray Summer Resort" },
     { version: "5.7", name: "A Space and Time for You" },
     { version: "5.6", name: "Paralogism" },
@@ -11,10 +11,7 @@ export const genshinVersions = [
     { version: "5.3", name: "Incandescent Ode of Resurrection" },
     { version: "5.2", name: "Tapestry of Spirit and Flame" },
     { version: "5.1", name: "The Rainbow Destined to Burn" },
-    {
-        version: "5.0",
-        name: "Flowers Resplendent on the Sun-Scorched Sojourn",
-    },
+    { version: "5.0", name: "Flowers Resplendent on the Sun-Scorched Sojourn" },
     { version: "4.8", name: "Summertide Scales and Tales" },
     { version: "4.7", name: "An Everlasting Dream Intertwined" },
     { version: "4.6", name: "Two Worlds Aflame, the Crimson Night Fades" },
