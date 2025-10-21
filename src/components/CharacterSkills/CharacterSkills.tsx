@@ -44,7 +44,7 @@ export default function CharacterSkills({
     }
 
     return (
-        <ContentBox header={title} contentProps={{ padding: 0 }}>
+        <ContentBox header={title} contentProps={{ padding: "8px 0px" }}>
             <Tabs.List
                 value={tabValue}
                 onChange={handleTabChange}
@@ -68,7 +68,7 @@ export default function CharacterSkills({
                     key={key}
                     index={index}
                     value={tabValue}
-                    padding="16px 24px"
+                    padding="8px 24px 16px"
                 >
                     <CharacterSkillTab
                         skill={skills[key]}
