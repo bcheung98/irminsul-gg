@@ -1,14 +1,16 @@
-import { BaseSyntheticEvent, CSSProperties, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
 import ContentBox from "../ContentBox";
-import { default as Tabs } from "../Tabs";
 import SkillIcon from "../SkillIcon";
 import CharacterSkillTab from "./CharacterSkillTab";
+import { default as Tabs } from "../Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
 
 // Helper imports
 import { objectKeys, splitJoin } from "@/utils";
@@ -70,12 +72,17 @@ export default function CharacterSkills({
                     value={tabValue}
                     padding="8px 24px 16px"
                 >
-                    <CharacterSkillTab
-                        skill={skills[key]}
-                        skillKey={`${key}`}
-                        materials={materials}
-                        attributes={attributes}
-                    />
+                    <Fade in={index === tabValue} timeout={250} unmountOnExit>
+                        {/* Use Box here because it can hold a ref */}
+                        <Box>
+                            <CharacterSkillTab
+                                skill={skills[key]}
+                                skillKey={`${key}`}
+                                materials={materials}
+                                attributes={attributes}
+                            />
+                        </Box>
+                    </Fade>
                 </Tabs.Panel>
             ))}
         </ContentBox>
