@@ -3,7 +3,10 @@ import { usePathname } from "next/navigation";
 
 // Component imports
 import Text from "../Text";
+import TextLabel from "../TextLabel";
 import SkillIcon from "../SkillIcon";
+import CharacterSkillScaling from "./CharacterSkillScaling";
+import CharacterSkillLevelUp from "./CharacterSkillLevelUp";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -18,9 +21,8 @@ import { parseSkillDescription } from "@/helpers/parseSkillDescription";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
-import TextLabel from "../TextLabel";
+
 import { AttributeData } from "@/types/_common";
-import CharacterSkillScaling from "./CharacterSkillScaling";
 
 export default function CharacterSkillTab({
     skill,
@@ -99,11 +101,18 @@ export default function CharacterSkillTab({
                         ))}
                     </Stack>
                 </Box>
-                <Stack>
+                <Stack spacing={2}>
                     <CharacterSkillScaling
                         skill={skill}
                         color={textColor(game, attributes?.element)}
                     />
+                    {!["altsprint"].includes(skillKey) && (
+                        <CharacterSkillLevelUp
+                            game={game}
+                            materials={materials}
+                            color={textColor(game, attributes.element)}
+                        />
+                    )}
                 </Stack>
             </Stack>
         </>

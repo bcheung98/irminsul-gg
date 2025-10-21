@@ -12,6 +12,31 @@ import {
     weaponXPMaterials,
 } from "./materials/xpMaterials";
 
+const otherMaterials: Material[] = [
+    {
+        id: 202,
+        category: "credits",
+        name: "Mora",
+        tag: "Mora",
+        rarity: 3,
+        imgURL: "genshin/materials/Mora",
+        release: {
+            version: "1.0",
+        },
+    },
+    {
+        id: 104319,
+        category: "crown",
+        name: "Crown of Insight",
+        tag: "Crown",
+        rarity: 5,
+        imgURL: "genshin/materials/Crown_of_Insight",
+        release: {
+            version: "1.0",
+        },
+    },
+];
+
 export const genshinMaterials: Material[] = [
     bossMaterials,
     commonMaterials,
@@ -23,4 +48,5 @@ export const genshinMaterials: Material[] = [
     weeklyBossMaterials,
     characterXPMaterials,
     weaponXPMaterials,
+    otherMaterials,
 ].flat();

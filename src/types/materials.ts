@@ -12,4 +12,5 @@ export interface Material {
     rarity?: number;
     source?: string;
     release: Version;
+    imgURL?: string;
 }

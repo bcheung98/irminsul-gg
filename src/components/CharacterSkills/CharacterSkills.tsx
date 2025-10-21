@@ -72,7 +72,7 @@ export default function CharacterSkills({
                 >
                     <CharacterSkillTab
                         skill={skills[key]}
-                        skillKey={key}
+                        skillKey={`${key}`}
                         materials={materials}
                         attributes={attributes}
                     />

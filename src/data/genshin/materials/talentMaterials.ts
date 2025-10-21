@@ -1,7 +1,7 @@
 export const talentMaterials = [
     {
         id: 0,
-        category: "talentBook",
+        category: "talent",
         name: "Freedom",
         tag: "Freedom",
         rarity: 1,
@@ -12,7 +12,7 @@ export const talentMaterials = [
     },
     {
         id: 104301,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Freedom",
         tag: "Freedom1",
         rarity: 2,
@@ -23,7 +23,7 @@ export const talentMaterials = [
     },
     {
         id: 104302,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Freedom",
         tag: "Freedom2",
         rarity: 3,
@@ -34,7 +34,7 @@ export const talentMaterials = [
     },
     {
         id: 104303,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Freedom",
         tag: "Freedom3",
         rarity: 4,
@@ -45,7 +45,7 @@ export const talentMaterials = [
     },
     {
         id: 1,
-        category: "talentBook",
+        category: "talent",
         name: "Resistance",
         tag: "Resistance",
         rarity: 1,
@@ -56,7 +56,7 @@ export const talentMaterials = [
     },
     {
         id: 104304,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Resistance",
         tag: "Resistance1",
         rarity: 2,
@@ -67,7 +67,7 @@ export const talentMaterials = [
     },
     {
         id: 104305,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Resistance",
         tag: "Resistance2",
         rarity: 3,
@@ -78,7 +78,7 @@ export const talentMaterials = [
     },
     {
         id: 104306,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Resistance",
         tag: "Resistance3",
         rarity: 4,
@@ -89,7 +89,7 @@ export const talentMaterials = [
     },
     {
         id: 2,
-        category: "talentBook",
+        category: "talent",
         name: "Ballad",
         tag: "Ballad",
         rarity: 1,
@@ -100,7 +100,7 @@ export const talentMaterials = [
     },
     {
         id: 104307,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Ballad",
         tag: "Ballad1",
         rarity: 2,
@@ -111,7 +111,7 @@ export const talentMaterials = [
     },
     {
         id: 104308,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Ballad",
         tag: "Ballad2",
         rarity: 3,
@@ -122,7 +122,7 @@ export const talentMaterials = [
     },
     {
         id: 104309,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Ballad",
         tag: "Ballad3",
         rarity: 4,
@@ -133,7 +133,7 @@ export const talentMaterials = [
     },
     {
         id: 3,
-        category: "talentBook",
+        category: "talent",
         name: "Prosperity",
         tag: "Prosperity",
         rarity: 1,
@@ -144,7 +144,7 @@ export const talentMaterials = [
     },
     {
         id: 104310,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Prosperity",
         tag: "Prosperity1",
         rarity: 2,
@@ -155,7 +155,7 @@ export const talentMaterials = [
     },
     {
         id: 104311,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Prosperity",
         tag: "Prosperity2",
         rarity: 3,
@@ -166,7 +166,7 @@ export const talentMaterials = [
     },
     {
         id: 104312,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Prosperity",
         tag: "Prosperity3",
         rarity: 4,
@@ -177,7 +177,7 @@ export const talentMaterials = [
     },
     {
         id: 4,
-        category: "talentBook",
+        category: "talent",
         name: "Diligence",
         tag: "Diligence",
         rarity: 1,
@@ -188,7 +188,7 @@ export const talentMaterials = [
     },
     {
         id: 104313,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Diligence",
         tag: "Diligence1",
         rarity: 2,
@@ -199,7 +199,7 @@ export const talentMaterials = [
     },
     {
         id: 104314,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Diligence",
         tag: "Diligence2",
         rarity: 3,
@@ -210,7 +210,7 @@ export const talentMaterials = [
     },
     {
         id: 104315,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Diligence",
         tag: "Diligence3",
         rarity: 4,
@@ -221,7 +221,7 @@ export const talentMaterials = [
     },
     {
         id: 5,
-        category: "talentBook",
+        category: "talent",
         name: "Gold",
         tag: "Gold",
         rarity: 1,
@@ -232,7 +232,7 @@ export const talentMaterials = [
     },
     {
         id: 104316,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Gold",
         tag: "Gold1",
         rarity: 2,
@@ -243,7 +243,7 @@ export const talentMaterials = [
     },
     {
         id: 104317,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Gold",
         tag: "Gold2",
         rarity: 3,
@@ -254,7 +254,7 @@ export const talentMaterials = [
     },
     {
         id: 104318,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Gold",
         tag: "Gold3",
         rarity: 4,
@@ -265,7 +265,7 @@ export const talentMaterials = [
     },
     {
         id: 6,
-        category: "talentBook",
+        category: "talent",
         name: "Transience",
         tag: "Transience",
         rarity: 1,
@@ -276,7 +276,7 @@ export const talentMaterials = [
     },
     {
         id: 104320,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Transience",
         tag: "Transience1",
         rarity: 2,
@@ -287,7 +287,7 @@ export const talentMaterials = [
     },
     {
         id: 104321,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Transience",
         tag: "Transience2",
         rarity: 3,
@@ -298,7 +298,7 @@ export const talentMaterials = [
     },
     {
         id: 104322,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Transience",
         tag: "Transience3",
         rarity: 4,
@@ -309,7 +309,7 @@ export const talentMaterials = [
     },
     {
         id: 7,
-        category: "talentBook",
+        category: "talent",
         name: "Elegance",
         tag: "Elegance",
         rarity: 1,
@@ -320,7 +320,7 @@ export const talentMaterials = [
     },
     {
         id: 104323,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Elegance",
         tag: "Elegance1",
         rarity: 2,
@@ -331,7 +331,7 @@ export const talentMaterials = [
     },
     {
         id: 104324,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Elegance",
         tag: "Elegance2",
         rarity: 3,
@@ -342,7 +342,7 @@ export const talentMaterials = [
     },
     {
         id: 104325,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Elegance",
         tag: "Elegance3",
         rarity: 4,
@@ -353,7 +353,7 @@ export const talentMaterials = [
     },
     {
         id: 8,
-        category: "talentBook",
+        category: "talent",
         name: "Light",
         tag: "Light",
         rarity: 1,
@@ -364,7 +364,7 @@ export const talentMaterials = [
     },
     {
         id: 104326,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Light",
         tag: "Light1",
         rarity: 2,
@@ -375,7 +375,7 @@ export const talentMaterials = [
     },
     {
         id: 104327,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Light",
         tag: "Light2",
         rarity: 3,
@@ -386,7 +386,7 @@ export const talentMaterials = [
     },
     {
         id: 104328,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Light",
         tag: "Light3",
         rarity: 4,
@@ -397,7 +397,7 @@ export const talentMaterials = [
     },
     {
         id: 9,
-        category: "talentBook",
+        category: "talent",
         name: "Admonition",
         tag: "Admonition",
         rarity: 1,
@@ -408,7 +408,7 @@ export const talentMaterials = [
     },
     {
         id: 104329,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Admonition",
         tag: "Admonition1",
         rarity: 2,
@@ -419,7 +419,7 @@ export const talentMaterials = [
     },
     {
         id: 104330,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Admonition",
         tag: "Admonition2",
         rarity: 3,
@@ -430,7 +430,7 @@ export const talentMaterials = [
     },
     {
         id: 104331,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Admonition",
         tag: "Admonition3",
         rarity: 4,
@@ -441,7 +441,7 @@ export const talentMaterials = [
     },
     {
         id: 10,
-        category: "talentBook",
+        category: "talent",
         name: "Ingenuity",
         tag: "Ingenuity",
         rarity: 1,
@@ -452,7 +452,7 @@ export const talentMaterials = [
     },
     {
         id: 104332,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Ingenuity",
         tag: "Ingenuity1",
         rarity: 2,
@@ -463,7 +463,7 @@ export const talentMaterials = [
     },
     {
         id: 104333,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Ingenuity",
         tag: "Ingenuity2",
         rarity: 3,
@@ -474,7 +474,7 @@ export const talentMaterials = [
     },
     {
         id: 104334,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Ingenuity",
         tag: "Ingenuity3",
         rarity: 4,
@@ -485,7 +485,7 @@ export const talentMaterials = [
     },
     {
         id: 11,
-        category: "talentBook",
+        category: "talent",
         name: "Praxis",
         tag: "Praxis",
         rarity: 1,
@@ -496,7 +496,7 @@ export const talentMaterials = [
     },
     {
         id: 104335,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Praxis",
         tag: "Praxis1",
         rarity: 2,
@@ -507,7 +507,7 @@ export const talentMaterials = [
     },
     {
         id: 104336,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Praxis",
         tag: "Praxis2",
         rarity: 3,
@@ -518,7 +518,7 @@ export const talentMaterials = [
     },
     {
         id: 104337,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Praxis",
         tag: "Praxis3",
         rarity: 4,
@@ -529,7 +529,7 @@ export const talentMaterials = [
     },
     {
         id: 12,
-        category: "talentBook",
+        category: "talent",
         name: "Equity",
         tag: "Equity",
         rarity: 1,
@@ -540,7 +540,7 @@ export const talentMaterials = [
     },
     {
         id: 104338,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Equity",
         tag: "Equity1",
         rarity: 2,
@@ -551,7 +551,7 @@ export const talentMaterials = [
     },
     {
         id: 104339,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Equity",
         tag: "Equity2",
         rarity: 3,
@@ -562,7 +562,7 @@ export const talentMaterials = [
     },
     {
         id: 104340,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Equity",
         tag: "Equity3",
         rarity: 4,
@@ -573,7 +573,7 @@ export const talentMaterials = [
     },
     {
         id: 13,
-        category: "talentBook",
+        category: "talent",
         name: "Justice",
         tag: "Justice",
         rarity: 1,
@@ -584,7 +584,7 @@ export const talentMaterials = [
     },
     {
         id: 104341,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Justice",
         tag: "Justice1",
         rarity: 2,
@@ -595,7 +595,7 @@ export const talentMaterials = [
     },
     {
         id: 104342,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Justice",
         tag: "Justice2",
         rarity: 3,
@@ -606,7 +606,7 @@ export const talentMaterials = [
     },
     {
         id: 104343,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Justice",
         tag: "Justice3",
         rarity: 4,
@@ -617,7 +617,7 @@ export const talentMaterials = [
     },
     {
         id: 14,
-        category: "talentBook",
+        category: "talent",
         name: "Order",
         tag: "Order",
         rarity: 1,
@@ -628,7 +628,7 @@ export const talentMaterials = [
     },
     {
         id: 104344,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Order",
         tag: "Order1",
         rarity: 2,
@@ -639,7 +639,7 @@ export const talentMaterials = [
     },
     {
         id: 104345,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Order",
         tag: "Order2",
         rarity: 3,
@@ -650,7 +650,7 @@ export const talentMaterials = [
     },
     {
         id: 104346,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Order",
         tag: "Order3",
         rarity: 4,
@@ -661,7 +661,7 @@ export const talentMaterials = [
     },
     {
         id: 15,
-        category: "talentBook",
+        category: "talent",
         name: "Contention",
         tag: "Contention",
         rarity: 1,
@@ -672,7 +672,7 @@ export const talentMaterials = [
     },
     {
         id: 104347,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Contention",
         tag: "Contention1",
         rarity: 2,
@@ -683,7 +683,7 @@ export const talentMaterials = [
     },
     {
         id: 104348,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Contention",
         tag: "Contention2",
         rarity: 3,
@@ -694,7 +694,7 @@ export const talentMaterials = [
     },
     {
         id: 104349,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Contention",
         tag: "Contention3",
         rarity: 4,
@@ -705,7 +705,7 @@ export const talentMaterials = [
     },
     {
         id: 16,
-        category: "talentBook",
+        category: "talent",
         name: "Kindling",
         tag: "Kindling",
         rarity: 1,
@@ -716,7 +716,7 @@ export const talentMaterials = [
     },
     {
         id: 104350,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Kindling",
         tag: "Kindling1",
         rarity: 2,
@@ -727,7 +727,7 @@ export const talentMaterials = [
     },
     {
         id: 104351,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Kindling",
         tag: "Kindling2",
         rarity: 3,
@@ -738,7 +738,7 @@ export const talentMaterials = [
     },
     {
         id: 104352,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Kindling",
         tag: "Kindling3",
         rarity: 4,
@@ -749,7 +749,7 @@ export const talentMaterials = [
     },
     {
         id: 17,
-        category: "talentBook",
+        category: "talent",
         name: "Conflict",
         tag: "Conflict",
         rarity: 1,
@@ -760,7 +760,7 @@ export const talentMaterials = [
     },
     {
         id: 104353,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Conflict",
         tag: "Conflict1",
         rarity: 2,
@@ -771,7 +771,7 @@ export const talentMaterials = [
     },
     {
         id: 104354,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Conflict",
         tag: "Conflict2",
         rarity: 3,
@@ -782,7 +782,7 @@ export const talentMaterials = [
     },
     {
         id: 104355,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Conflict",
         tag: "Conflict3",
         rarity: 4,
@@ -793,7 +793,7 @@ export const talentMaterials = [
     },
     {
         id: 18,
-        category: "talentBook",
+        category: "talent",
         name: "Moonlight",
         tag: "Moonlight",
         rarity: 1,
@@ -804,7 +804,7 @@ export const talentMaterials = [
     },
     {
         id: 104356,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Moonlight",
         tag: "Moonlight1",
         rarity: 2,
@@ -815,7 +815,7 @@ export const talentMaterials = [
     },
     {
         id: 104357,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Moonlight",
         tag: "Moonlight2",
         rarity: 3,
@@ -826,7 +826,7 @@ export const talentMaterials = [
     },
     {
         id: 104358,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Moonlight",
         tag: "Moonlight3",
         rarity: 4,
@@ -837,7 +837,7 @@ export const talentMaterials = [
     },
     {
         id: 19,
-        category: "talentBook",
+        category: "talent",
         name: "Elysium",
         tag: "Elysium",
         rarity: 1,
@@ -848,7 +848,7 @@ export const talentMaterials = [
     },
     {
         id: 104359,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Elysium",
         tag: "Elysium1",
         rarity: 2,
@@ -859,7 +859,7 @@ export const talentMaterials = [
     },
     {
         id: 104360,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Elysium",
         tag: "Elysium2",
         rarity: 3,
@@ -870,7 +870,7 @@ export const talentMaterials = [
     },
     {
         id: 104361,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Elysium",
         tag: "Elysium3",
         rarity: 4,
@@ -881,7 +881,7 @@ export const talentMaterials = [
     },
     {
         id: 20,
-        category: "talentBook",
+        category: "talent",
         name: "Vagrancy",
         tag: "Vagrancy",
         rarity: 1,
@@ -892,7 +892,7 @@ export const talentMaterials = [
     },
     {
         id: 104362,
-        category: "talentBook",
+        category: "talent",
         name: "Teachings of Vagrancy",
         tag: "Vagrancy1",
         rarity: 2,
@@ -903,7 +903,7 @@ export const talentMaterials = [
     },
     {
         id: 104363,
-        category: "talentBook",
+        category: "talent",
         name: "Guide to Vagrancy",
         tag: "Vagrancy2",
         rarity: 3,
@@ -914,7 +914,7 @@ export const talentMaterials = [
     },
     {
         id: 104364,
-        category: "talentBook",
+        category: "talent",
         name: "Philosophies of Vagrancy",
         tag: "Vagrancy3",
         rarity: 4,

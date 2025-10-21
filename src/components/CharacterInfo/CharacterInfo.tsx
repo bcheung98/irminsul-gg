@@ -125,8 +125,10 @@ export default function CharacterInfo(props: CharacterInfoProps) {
                 <LevelUpCosts
                     text="Ascension"
                     tag={`${game}/level`}
+                    type="characterLevel"
                     materials={props.materials}
                     color={textColor(game, props.attributes.element)}
+                    element={props.attributes.element}
                 />
             </Stack>
         </ContentBox>

@@ -1,7 +1,7 @@
 export const weeklyBossMaterials = [
     {
         id: 113003,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Dvalin's Plume",
         tag: "Dvalin's Plume",
         rarity: 5,
@@ -12,7 +12,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113004,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Dvalin's Claw",
         tag: "Dvalin's Claw",
         rarity: 5,
@@ -23,7 +23,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113005,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Dvalin's Sigh",
         tag: "Dvalin's Sigh",
         rarity: 5,
@@ -34,7 +34,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113006,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Tail of Boreas",
         tag: "Tail of Boreas",
         rarity: 5,
@@ -45,7 +45,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113007,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Ring of Boreas",
         tag: "Ring of Boreas",
         rarity: 5,
@@ -56,7 +56,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113008,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Spirit Locket of Boreas",
         tag: "Spirit Locket of Boreas",
         rarity: 5,
@@ -67,7 +67,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113013,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Tusk of Monoceros Caeli",
         tag: "Tusk of Monoceros Caeli",
         rarity: 5,
@@ -78,7 +78,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113014,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Shard of a Foul Legacy",
         tag: "Shard of a Foul Legacy",
         rarity: 5,
@@ -89,7 +89,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113015,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Shadow of the Warrior",
         tag: "Shadow of the Warrior",
         rarity: 5,
@@ -100,7 +100,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113017,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Dragon Lord's Crown",
         tag: "Dragon Lord's Crown",
         rarity: 5,
@@ -111,7 +111,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113018,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Bloodjade Branch",
         tag: "Bloodjade Branch",
         rarity: 5,
@@ -122,7 +122,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113019,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Gilded Scale",
         tag: "Gilded Scale",
         rarity: 5,
@@ -133,7 +133,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113025,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Molten Moment",
         tag: "Molten Moment",
         rarity: 5,
@@ -144,7 +144,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113026,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Hellfire Butterfly",
         tag: "Hellfire Butterfly",
         rarity: 5,
@@ -155,7 +155,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113027,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Ashen Heart",
         tag: "Ashen Heart",
         rarity: 5,
@@ -166,7 +166,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113032,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Mudra of the Malefic General",
         tag: "Mudra of the Malefic General",
         rarity: 5,
@@ -177,7 +177,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113033,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Tears of the Calamitous God",
         tag: "Tears of the Calamitous God",
         rarity: 5,
@@ -188,7 +188,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113034,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "The Meaning of Aeons",
         tag: "The Meaning of Aeons",
         rarity: 5,
@@ -199,7 +199,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113041,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Puppet Strings",
         tag: "Puppet Strings",
         rarity: 5,
@@ -210,7 +210,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113042,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Mirror of Mushin",
         tag: "Mirror of Mushin",
         rarity: 5,
@@ -221,7 +221,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113043,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Daka's Bell",
         tag: "Daka's Bell",
         rarity: 5,
@@ -232,7 +232,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113046,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Worldspan Fern",
         tag: "Worldspan Fern",
         rarity: 5,
@@ -243,7 +243,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113047,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Primordial Greenbloom",
         tag: "Primordial Greenbloom",
         rarity: 5,
@@ -254,7 +254,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113048,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Everamber",
         tag: "Everamber",
         rarity: 5,
@@ -265,7 +265,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113054,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Lightless Silk String",
         tag: "Lightless Silk String",
         rarity: 5,
@@ -276,7 +276,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113055,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Lightless Eye of the Maelstrom",
         tag: "Lightless Eye of the Maelstrom",
         rarity: 5,
@@ -287,7 +287,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113056,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Lightless Mass",
         tag: "Lightless Mass",
         rarity: 5,
@@ -298,7 +298,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113060,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Fading Candle",
         tag: "Fading Candle",
         rarity: 5,
@@ -309,7 +309,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113061,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Silken Feather",
         tag: "Silken Feather",
         rarity: 5,
@@ -320,7 +320,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113062,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Denial and Judgment",
         tag: "Denial and Judgment",
         rarity: 5,
@@ -331,7 +331,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113068,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Eroded Horn",
         tag: "Eroded Horn",
         rarity: 5,
@@ -342,7 +342,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113069,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Eroded Sunfire",
         tag: "Eroded Sunfire",
         rarity: 5,
@@ -353,7 +353,7 @@ export const weeklyBossMaterials = [
     },
     {
         id: 113070,
-        category: "weeklyBoss",
+        category: "weekly",
         name: "Eroded Scale-Feather",
         tag: "Eroded Scale-Feather",
         rarity: 5,

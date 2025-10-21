@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { JSX, useState } from "react";
 
 // Component imports
 import MaterialCard from "../MaterialCard";
@@ -16,31 +16,40 @@ import Grid from "@mui/material/Grid";
 // Helper imports
 import { objectKeys } from "@/utils";
 import levelData from "@/data/levels";
+import { costs } from "@/helpers/costs";
 
 // Type imports
 import { Materials } from "@/types/materials";
 
 interface LevelUpCostsProps {
     tag: string;
+    type: string;
     materials: Materials;
     text?: string;
     color?: string;
     iconSize?: number;
     threshold?: string;
+    element?: string;
 }
 
 export default function LevelUpCosts({
     tag,
+    type,
     materials,
     text = "",
     color,
-    iconSize = 64,
+    iconSize = 60,
     threshold = "@100",
+    element,
 }: LevelUpCostsProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
     const [game, key] = tag.split("/");
+
+    if (game === "genshin" && element) {
+        materials = { ...materials, gemstone: element };
+    }
 
     const levels = levelData[game](key);
     const minDistance = 1;
@@ -98,6 +107,31 @@ export default function LevelUpCosts({
         />
     );
 
+    const materialCosts = costs[game][type]({
+        start: values[0],
+        stop: values[1],
+        selected: true,
+        withXP: false,
+        materials: materials,
+    });
+
+    const materialArray: JSX.Element[] = [];
+    objectKeys(materialCosts).forEach((key) =>
+        Object.entries(materialCosts[key]).forEach(
+            ([material, cost]) =>
+                cost &&
+                materialArray.push(
+                    <MaterialCard
+                        key={Number(material)}
+                        game={game}
+                        material={Number(material)}
+                        cost={cost}
+                        size={iconSize}
+                    />
+                )
+        )
+    );
+
     return (
         <Stack spacing={1}>
             <Text variant="h6">{text}</Text>
@@ -107,15 +141,7 @@ export default function LevelUpCosts({
                     spacing={2}
                     sx={{ mb: levels.length > 0 ? "16px" : "0px" }}
                 >
-                    {objectKeys(materials).map((material, index) => (
-                        <MaterialCard
-                            key={index}
-                            game={game}
-                            name={`${materials[material]}`}
-                            cost={0}
-                            size={iconSize}
-                        />
-                    ))}
+                    {materialArray.map((card) => card)}
                 </Grid>
                 {levels.length > 0 && (
                     <LevelUpSlider
