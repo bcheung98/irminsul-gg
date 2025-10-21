@@ -129,6 +129,7 @@ export default function getTheme(name: string) {
                 },
             },
             subtitle1: {
+                lineHeight: theme.typography.body1.lineHeight,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle1.xs
@@ -153,6 +154,7 @@ export default function getTheme(name: string) {
                 },
             },
             subtitle2: {
+                lineHeight: theme.typography.body2.lineHeight,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle2.xs
