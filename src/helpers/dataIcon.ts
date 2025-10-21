@@ -1,28 +1,30 @@
 import { AttributeDataKey } from "@/types/_common";
 
-export function getDataIconURL(
-    game: string,
-    key: AttributeDataKey,
-    value = ""
-) {
+interface Props {
+    game: string;
+    key: AttributeDataKey;
+    value?: string | number;
+}
+
+export function getDataIconURL({ game, key, value }: Props) {
     let src = "";
     let tooltip = "";
     if (game === "genshin") {
         if (key === "element") {
             src = `genshin/elements/${value}`;
-            tooltip = value;
+            tooltip = `${value}`;
         }
         if (key === "weapon" || key === "weaponType") {
             src = `genshin/weapons/icons/${value}`;
-            tooltip = value;
+            tooltip = `${value}`;
         }
         if (key === "subStat") {
             src = `genshin/icons/ascension_stats/${value}`;
-            tooltip = value;
+            tooltip = `${value}`;
         }
         if (key === "arkhe") {
             src = `genshin/tcg/icons/factions/${value}`;
-            tooltip = value;
+            tooltip = `Arkhe: ${value}`;
         }
     }
     return { src, tooltip };

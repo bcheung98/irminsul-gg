@@ -23,6 +23,6 @@ export default function DataIcon({
     value,
     styles,
 }: DataIconProps) {
-    const { src, tooltip } = getDataIconURL(game, property, value);
+    const { src, tooltip } = getDataIconURL({ game, key: property, value });
     return <Image src={src} tooltip={tooltip} style={styles} />;
 }

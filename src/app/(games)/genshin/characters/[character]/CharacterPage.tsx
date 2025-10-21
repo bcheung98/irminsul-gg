@@ -13,29 +13,32 @@ import Grid from "@mui/material/Grid";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
+import { AttributeData } from "@/types/_common";
 
 export default function CharacterPage({
     character,
 }: {
     character: GenshinCharacter;
 }) {
+    const attributes: AttributeData = {
+        name: character.name,
+        displayName: character.fullName,
+        title: character.title,
+        description: character.description,
+        element: character.element,
+        weaponType: character.weapon,
+        rarity: character.rarity,
+        arkhe: character.arkhe,
+    };
+
     const splash = (
         <CharacterSplash name={character.name} outfits={character.outfits} />
     );
     const info = (
         <CharacterInfo
-            name={character.fullName}
-            title={character.title}
-            icon={`genshin/elements/${character.element}`}
-            description={character.description}
             stats={character.stats}
             materials={character.materials}
-            attributes={{
-                element: character.element,
-                weaponType: character.weapon,
-                rarity: character.rarity,
-                arkhe: character.arkhe,
-            }}
+            attributes={attributes}
         />
     );
 
@@ -53,26 +56,16 @@ export default function CharacterPage({
                 title="Combat Talents"
                 skills={character.skills}
                 materials={character.materials}
-                attributes={{
-                    name: character.name,
-                    element: character.element,
-                    weaponType: character.weapon,
-                }}
+                attributes={attributes}
             />
             <CharacterPassives
                 passives={character.passives}
-                attributes={{
-                    name: character.name,
-                    element: character.element,
-                }}
+                attributes={attributes}
             />
             <CharacterUpgrades
                 title="Constellation"
                 upgrades={character.constellation}
-                attributes={{
-                    name: character.name,
-                    element: character.element,
-                }}
+                attributes={attributes}
             />
         </Stack>
     );
