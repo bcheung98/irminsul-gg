@@ -5,13 +5,14 @@ import Tabs, { TabsProps } from "@mui/material/Tabs";
 
 interface CustomTabsProps extends TabsProps {
     tabcolor?: string;
+    showIndicator?: boolean;
 }
 
 export default function TabList(props: CustomTabsProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const { children, value, onChange, sx, ...other } = props;
+    const { children, value, onChange, sx, showIndicator, ...other } = props;
 
     return (
         <Tabs
@@ -36,7 +37,7 @@ export default function TabList(props: CustomTabsProps) {
                         opacity: 0.3,
                     },
                     "& .MuiTabs-indicatorSpan": {
-                        width: "100%",
+                        width: showIndicator ? "100%" : "0",
                         backgroundColor:
                             props.tabcolor || theme.border.color.primary,
                     },
