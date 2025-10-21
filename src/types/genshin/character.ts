@@ -7,7 +7,11 @@ import {
     GenshinNation,
 } from "./_common";
 import { VersionWithDate } from "@/types/version";
-import { CharacterOutfit, CharacterStats } from "@/types/character";
+import {
+    CharacterOutfit,
+    CharacterStats,
+    CharacterUpgrades,
+} from "@/types/character";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 import { GenshinCharacterMaterials } from "./materials";
 import { CharacterSkills, Skill, SkillKeywords } from "../skill";
@@ -27,6 +31,7 @@ export interface GenshinCharacter extends BaseData {
     stats: GenshinCharacterStats;
     materials: GenshinCharacterMaterials;
     description: string;
+    constellationName: string;
     birthday: string;
     gender: "Male" | "Female";
     nation: GenshinNation;
@@ -63,8 +68,7 @@ export interface GenshinCharacterStats extends CharacterStats {
     em: number[];
 }
 
-export interface GenshinCharacterConstellations {
-    name: string;
+export interface GenshinCharacterConstellations extends CharacterUpgrades {
     c1: Skill;
     c2: Skill;
     c3: Skill;
@@ -73,7 +77,5 @@ export interface GenshinCharacterConstellations {
     c6: Skill;
 }
 
-export type GenshinCharacterConstellationKey = Exclude<
-    keyof GenshinCharacterConstellations,
-    "name"
->;
+export type GenshinCharacterConstellationKey =
+    keyof GenshinCharacterConstellations;
