@@ -5,7 +5,7 @@ import Text from "../Text";
 import { TypographyVariant } from "@mui/material/styles";
 
 // Helper imports
-import { range } from "@/utils/utils";
+import { range } from "@/utils";
 
 export default function RarityStars({
     rarity = 3,

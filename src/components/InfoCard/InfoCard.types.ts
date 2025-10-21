@@ -1,4 +1,4 @@
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 import { InfoAvatarProps } from "../InfoAvatar/InfoAvatar.types";
 
 export interface InfoCardProps extends InfoAvatarProps {

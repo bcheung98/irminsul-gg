@@ -21,7 +21,7 @@ import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 
 export default function CharacterSkillTab({
     skill,

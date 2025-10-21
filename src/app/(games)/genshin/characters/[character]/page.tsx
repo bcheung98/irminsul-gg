@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
-import { convertNametoURL } from "@/utils/utils";
+import { convertNametoURL } from "@/utils";
 
 // Type imports
 import type { Metadata } from "next";

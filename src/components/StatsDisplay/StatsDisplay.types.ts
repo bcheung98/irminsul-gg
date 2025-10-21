@@ -1,4 +1,4 @@
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 import { GenshinCharacterStats } from "@/types/genshin/character";
 
 export type TCharacterStats = GenshinCharacterStats;

@@ -1,4 +1,4 @@
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 import { SxProps, Theme, CSSProperties } from "@mui/material/styles";
 
 export interface InfoBadgeProps {

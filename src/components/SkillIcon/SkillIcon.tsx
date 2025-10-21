@@ -10,7 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 
 export default function SkillIcon({
     icon,

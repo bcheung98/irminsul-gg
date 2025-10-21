@@ -8,7 +8,7 @@ import { CSSProperties } from "@mui/material/styles";
 import { getDataIconURL } from "@/helpers/dataIcon";
 
 // Type imports
-import { AttributeDataKey } from "@/types/_common";
+import { AttributeDataKey } from "@/types";
 
 export interface DataIconProps {
     game: string;

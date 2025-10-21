@@ -1,4 +1,4 @@
-import type { Server } from "@/types/_common";
+import type { Server } from "@/types";
 
 const months = [
     "January",

@@ -18,7 +18,7 @@ import { objectKeys, splitJoin } from "@/utils";
 
 // Type imports
 import type { CharacterUpgrades } from "@/types/character";
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 
 interface CharacterUpgradesProps {
     title?: string;

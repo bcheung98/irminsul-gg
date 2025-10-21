@@ -1,4 +1,4 @@
-import { VoiceActorData } from "./_common";
+import { VoiceActorData } from ".";
 
 export interface Version {
     version: string;

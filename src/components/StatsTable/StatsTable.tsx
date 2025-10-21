@@ -13,7 +13,7 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 
 // Type imports
-import { Orientation, SkillDisplay } from "@/types/_common";
+import { Orientation, SkillDisplay } from "@/types";
 
 interface StatsTableProps {
     mode?: SkillDisplay;

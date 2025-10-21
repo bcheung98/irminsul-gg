@@ -13,7 +13,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { convertNametoURL, zoomImageOnHover } from "@/utils/utils";
+import { convertNametoURL, zoomImageOnHover } from "@/utils";
 
 // Type imports
 import { InfoCardProps } from "./InfoCard.types";

@@ -11,7 +11,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
 import { navItems } from "../NavDrawer/navItems";
-import { convertNametoURL } from "@/utils/";
+import { convertNametoURL } from "@/utils";
 import { DataContext } from "@/app/context";
 
 // Type imports

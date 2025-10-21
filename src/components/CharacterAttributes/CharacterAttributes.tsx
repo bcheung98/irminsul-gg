@@ -16,7 +16,7 @@ import Divider from "@mui/material/Divider";
 import { getDataIconURL } from "@/helpers/dataIcon";
 
 // Type imports
-import { AttributeData, AttributeDataKey, GameData } from "@/types/_common";
+import { AttributeData, AttributeDataKey, GameData } from "@/types";
 
 export default function CharacterAttributes(props: AttributeData) {
     const game = usePathname().split("/")[1];

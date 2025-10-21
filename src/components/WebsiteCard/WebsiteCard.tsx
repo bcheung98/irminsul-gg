@@ -12,7 +12,7 @@ import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { zoomImageOnHover } from "@/utils/utils";
+import { zoomImageOnHover } from "@/utils";
 
 // Type imports
 import { Website } from "@/types/website";

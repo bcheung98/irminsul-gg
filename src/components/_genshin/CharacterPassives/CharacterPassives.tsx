@@ -17,7 +17,7 @@ import { skillKeys } from "@/data/skills";
 
 // Type imports
 import { GenshinCharacterPassive } from "@/types/genshin/character";
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 
 interface CharacterPassivesProps {
     passives: GenshinCharacterPassive[];

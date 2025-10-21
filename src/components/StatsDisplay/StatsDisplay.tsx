@@ -14,7 +14,7 @@ import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
 import { StatsDisplayProps } from "./StatsDisplay.types";
-import { SkillDisplay } from "@/types/_common";
+import { SkillDisplay } from "@/types";
 
 export default function StatsDisplay({
     game,

@@ -1,4 +1,4 @@
-import { AttributeDataKey } from "@/types/_common";
+import { AttributeDataKey } from "@/types";
 
 interface Props {
     game: string;

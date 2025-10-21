@@ -10,7 +10,7 @@ import Card from "@mui/material/Card";
 import DateObject from "@/helpers/dates";
 
 // Type imports
-import { AttributeDataMisc, GameData } from "@/types/_common";
+import { AttributeDataMisc, GameData } from "@/types";
 
 export default function CharacterInfoMisc(props: AttributeDataMisc) {
     const game = usePathname().split("/")[1];

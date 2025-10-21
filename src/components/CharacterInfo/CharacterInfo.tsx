@@ -14,7 +14,7 @@ import Stack from "@mui/material/Stack";
 import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
-import { AttributeData } from "@/types/_common";
+import { AttributeData } from "@/types";
 import { Materials } from "@/types/materials";
 import { TCharacterStats } from "../StatsDisplay/StatsDisplay.types";
 

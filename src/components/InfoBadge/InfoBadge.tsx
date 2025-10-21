@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 
 // Type imports
 import { InfoBadgeProps } from "./InfoBadge.types";
-import { AttributeDataKey } from "@/types/_common";
+import { AttributeDataKey } from "@/types";
 
 export default function InfoBadge({
     data,

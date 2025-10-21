@@ -1,11 +1,11 @@
-import { BaseData, VoiceActorData } from "@/types/_common";
+import { BaseData, VoiceActorData } from "@/types";
 import {
     GenshinRarity,
     GenshinElement,
     GenshinArkhe,
     GenshinWeaponType,
     GenshinNation,
-} from "./_common";
+} from ".";
 import { VersionWithDate } from "@/types/version";
 import {
     CharacterOutfit,

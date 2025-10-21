@@ -14,7 +14,7 @@ import Grid from "@mui/material/Grid";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
-import { AttributeData, AttributeDataMisc } from "@/types/_common";
+import { AttributeData, AttributeDataMisc } from "@/types";
 
 export default function CharacterPage({
     character,
