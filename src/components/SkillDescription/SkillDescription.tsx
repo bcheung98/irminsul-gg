@@ -5,10 +5,14 @@ import parse, {
     domToReact,
     DOMNode,
 } from "html-react-parser";
-import { useTheme, TypographyProps } from "@mui/material";
-import { useTextColor } from "./useTextColor";
 
-export function parseSkillDescription({
+// MUI imports
+import { useTheme } from "@mui/material";
+
+// Helper imports
+import { useTextColor } from "@/helpers/useTextColor";
+
+export default function SkillDescription({
     game,
     description,
     targetClassName = "text-value",
@@ -18,7 +22,6 @@ export function parseSkillDescription({
 }: {
     game: string;
     description: string;
-    textVariant?: TypographyProps["variant"];
     targetClassName?: string;
     newClassName?: string;
     onClick?: (event: BaseSyntheticEvent) => void;

@@ -1,8 +1,9 @@
 // Component imports
-import ContentBox from "../../ContentBox";
+import ContentBox from "@/components/ContentBox";
 import SkillCard from "@/components/SkillCard";
 import SkillIcon from "@/components/SkillIcon";
-import TextLabel from "../../TextLabel";
+import SkillDescription from "@/components/SkillDescription";
+import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
 
 // MUI imports
@@ -11,13 +12,12 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { parseSkillDescription } from "@/helpers/parseSkillDescription";
+import { splitJoin } from "@/utils";
 import { skillKeys } from "@/data/skills";
 
 // Type imports
 import { GenshinCharacterPassive } from "@/types/genshin/character";
 import { AttributeData } from "@/types/_common";
-import { splitJoin } from "@/utils";
 
 interface CharacterPassivesProps {
     passives: GenshinCharacterPassive[];
@@ -63,12 +63,13 @@ export default function CharacterPassives({
                                 />
                                 <Text
                                     component="span"
+                                    variant="subtitle1"
                                     sx={{ color: theme.text.description }}
                                 >
-                                    {parseSkillDescription({
-                                        game: "genshin",
-                                        description: passive.description,
-                                    })}
+                                    <SkillDescription
+                                        game="genshin"
+                                        description={passive.description}
+                                    />
                                 </Text>
                             </Stack>
                         </SkillCard>

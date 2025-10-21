@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Text from "../Text";
 import TextLabel from "../TextLabel";
 import SkillIcon from "../SkillIcon";
+import SkillDescription from "../SkillDescription";
 import CharacterSkillScaling from "./CharacterSkillScaling";
 import CharacterSkillLevelUp from "./CharacterSkillLevelUp";
 
@@ -17,11 +18,9 @@ import Box from "@mui/material/Box";
 import { splitJoin } from "@/utils";
 import { skillKeys, skillIconURLs } from "@/data/skills";
 import { useTextColor } from "@/helpers/useTextColor";
-import { parseSkillDescription } from "@/helpers/parseSkillDescription";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
-
 import { AttributeData } from "@/types/_common";
 
 export default function CharacterSkillTab({
@@ -78,23 +77,24 @@ export default function CharacterSkillTab({
                                     />
                                     <Text
                                         component="span"
+                                        variant="subtitle1"
                                         sx={{ color: theme.text.description }}
                                     >
-                                        {parseSkillDescription({
-                                            game: game,
-                                            description: skl.description,
-                                        })}
+                                        <SkillDescription
+                                            game={game}
+                                            description={skl.description}
+                                        />
                                     </Text>
                                 </Stack>
                                 {skl.splash && (
                                     <Text
-                                        variant="subtitle1"
+                                        variant="body2"
                                         sx={{ fontStyle: "italic" }}
                                     >
-                                        {parseSkillDescription({
-                                            game: game,
-                                            description: skl.splash,
-                                        })}
+                                        <SkillDescription
+                                            game={game}
+                                            description={skl.splash}
+                                        />
                                     </Text>
                                 )}
                             </Stack>

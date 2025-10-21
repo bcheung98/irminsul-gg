@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import ContentBox from "../ContentBox";
 import SkillCard from "../SkillCard";
 import SkillIcon from "../SkillIcon";
+import SkillDescription from "../SkillDescription";
 import TextLabel from "../TextLabel";
 import Text from "../Text";
 
@@ -14,7 +15,6 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { objectKeys, splitJoin } from "@/utils";
-import { parseSkillDescription } from "@/helpers/parseSkillDescription";
 
 // Type imports
 import type { CharacterUpgrades } from "@/types/character";
@@ -82,13 +82,15 @@ export default function CharacterUpgrades({
                                     />
                                     <Text
                                         component="span"
+                                        variant="subtitle1"
                                         sx={{ color: theme.text.description }}
                                     >
-                                        {parseSkillDescription({
-                                            game: "genshin",
-                                            description:
-                                                upgrades[key].description,
-                                        })}
+                                        <SkillDescription
+                                            game="genshin"
+                                            description={
+                                                upgrades[key].description
+                                            }
+                                        />
                                     </Text>
                                 </Stack>
                             </SkillCard>
