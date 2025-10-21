@@ -53,6 +53,12 @@ export const darkThemeData = {
     backgroundImageColors: ["rgba(23, 46, 98, 0)", "rgba(73, 218, 243, 0)"],
     backgroundImageURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
     backgroundImageAlpha: 0.75,
+    irminsulLogo: {
+        imgURL: "logo_red",
+        filter: "brightness(1) invert(0)",
+        textBackground: textColors.primary,
+        textBackgroundHover: textColors.selected,
+    },
     palette: {
         background: {
             default: backgroundColors[0].main,
