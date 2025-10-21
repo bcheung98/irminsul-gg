@@ -1,0 +1,73 @@
+import { usePathname } from "next/navigation";
+
+// Component imports
+import * as Table from "../Table";
+
+// MUI imports
+import Card from "@mui/material/Card";
+
+// Helper imports
+import DateObject from "@/helpers/dates";
+
+// Type imports
+import { AttributeDataMisc, GameData } from "@/types/_common";
+
+export default function CharacterInfoMisc(props: AttributeDataMisc) {
+    const game = usePathname().split("/")[1];
+
+    const rows = getRows(props)[game];
+
+    const cellProps = {
+        borderColor: "transparent",
+        padding: "2px 16px",
+    };
+
+    return (
+        <Table.Container component={Card} sx={{ py: "8px" }}>
+            <Table.Root size="small">
+                <Table.Body>
+                    {rows.map((row) => (
+                        <Table.Row key={row.key} color="secondary">
+                            <Table.Cell
+                                align="left"
+                                label={{ title: row.key }}
+                                {...cellProps}
+                            />
+                            <Table.Cell
+                                align="right"
+                                label={{ title: row.value }}
+                                {...cellProps}
+                            />
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table.Root>
+        </Table.Container>
+    );
+}
+
+function getRows(
+    attributes: AttributeDataMisc
+): GameData<{ key: string; value: string | undefined }[]> {
+    const releaseDate = attributes.release?.date
+        ? new DateObject(attributes.release.date).string
+        : "";
+    const releaseVersion = attributes.release?.version;
+
+    return {
+        genshin: [
+            { key: "Constellation", value: attributes.constellationName },
+            { key: "Nation", value: attributes.nation },
+            { key: "Birthday", value: attributes.birthday },
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
+    };
+}

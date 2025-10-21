@@ -3,6 +3,7 @@
 // Component imports
 import CharacterSplash from "@/components/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo";
+import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_genshin/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
@@ -13,7 +14,7 @@ import Grid from "@mui/material/Grid";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
-import { AttributeData } from "@/types/_common";
+import { AttributeData, AttributeDataMisc } from "@/types/_common";
 
 export default function CharacterPage({
     character,
@@ -31,10 +32,19 @@ export default function CharacterPage({
         arkhe: character.arkhe,
     };
 
+    const attributesMisc: AttributeDataMisc = {
+        constellationName: character.constellationName,
+        nation: character.nation,
+        birthday: character.birthday,
+        release: character.release,
+        voiceActors: character.voiceActors,
+    };
+
     const splash = (
         <CharacterSplash name={character.name} outfits={character.outfits} />
     );
-    const info = (
+
+    const infoMain = (
         <CharacterInfo
             stats={character.stats}
             materials={character.materials}
@@ -42,15 +52,18 @@ export default function CharacterPage({
         />
     );
 
+    const infoMisc = <CharacterInfoMisc {...attributesMisc} />;
+
     return (
         <Stack spacing={2}>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
                 <Grid size={4}>
-                    <Stack spacing={2}>{splash}</Stack>
+                    <Stack spacing={2}>
+                        {splash}
+                        {infoMisc}
+                    </Stack>
                 </Grid>
-                <Grid size="grow">
-                    <Stack spacing={2}>{info}</Stack>
-                </Grid>
+                <Grid size="grow">{infoMain}</Grid>
             </Grid>
             <CharacterSkills
                 title="Combat Talents"
