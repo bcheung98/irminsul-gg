@@ -23,6 +23,7 @@ export default function ContentDialog({
     header = "",
     headerProps,
     contentProps,
+    ...other
 }: ContentDialogProps) {
     const theme = useTheme();
 
@@ -33,6 +34,8 @@ export default function ContentDialog({
             maxWidth={maxWidth}
             fullWidth
             keepMounted
+            scroll="body"
+            {...other}
         >
             <Box sx={{ overflowY: "auto" }}>
                 <ContentBox
