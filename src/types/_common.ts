@@ -20,10 +20,11 @@ export interface VoiceActorData {
     jp: string;
 }
 
-export type AttributeDataKey = keyof AttributeData;
-
 export interface AttributeData {
     name?: string;
+    displayName?: string;
+    title?: string;
+    description?: string;
     element?: string;
     weapon?: string;
     weaponType?: string;
@@ -32,5 +33,11 @@ export interface AttributeData {
     path?: string;
     specialty?: string;
     cost?: string;
-    arkhe?: string;
+    arkhe?: string | string[];
+}
+
+export type AttributeDataKey = keyof AttributeData;
+
+export interface GameData<T> {
+    [game: string]: T;
 }
