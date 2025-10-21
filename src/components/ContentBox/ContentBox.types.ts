@@ -20,4 +20,5 @@ export interface ContentBoxProps {
     actions?: React.ReactNode;
     headerProps?: HeaderProps;
     contentProps?: ContentProps;
+    elevation?: number;
 }

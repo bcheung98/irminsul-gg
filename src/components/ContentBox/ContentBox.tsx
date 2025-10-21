@@ -25,6 +25,7 @@ export default function ContentBox({
         padding: "16px",
         overflowX: "visible",
     },
+    elevation,
 }: ContentBoxProps) {
     const theme = useTheme();
 
@@ -41,6 +42,7 @@ export default function ContentBox({
                 borderRadius: theme.contentBox.border.radius,
                 backdropFilter: "blur(4px)",
             }}
+            elevation={elevation ?? 2}
         >
             <AppBar
                 position="static"
