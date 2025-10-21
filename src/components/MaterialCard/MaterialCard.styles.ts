@@ -13,13 +13,16 @@ export const materialCardStyles = ({
         backgroundColor: theme.materialCard.backgroundColor.main,
         width: size,
     }),
-    image: (theme: Theme): CSSProperties => ({
-        width: size,
-        height: size,
-        backgroundImage: theme.materialCard.backgroundImage(rarity),
-        backgroundSize: "contain",
-        borderRadius: theme.materialCard.imageBorder.radius,
-    }),
+    image: (theme: Theme): CSSProperties => {
+        const r = theme.materialCard.imageBorder.radius;
+        return {
+            width: size,
+            height: size,
+            backgroundImage: theme.materialCard.backgroundImage(rarity),
+            backgroundSize: "contain",
+            borderRadius: `${r}px ${r}px 0 0`,
+        };
+    },
     label:
         (): SxProps<Theme> =>
         (theme): CSSProperties => ({
