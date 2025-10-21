@@ -108,7 +108,6 @@ export default function CharacterSkillTab({
                     />
                     {!["altsprint"].includes(skillKey) && (
                         <CharacterSkillLevelUp
-                            game={game}
                             materials={materials}
                             color={textColor(game, attributes.element)}
                         />

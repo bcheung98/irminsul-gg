@@ -1,4 +1,5 @@
-import { JSX, useState } from "react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Component imports
 import MaterialCard from "../MaterialCard";
@@ -22,10 +23,10 @@ import { costs } from "@/helpers/costs";
 import { Materials } from "@/types/materials";
 
 interface LevelUpCostsProps {
-    tag: string;
-    type: string;
+    levelKey: string;
+    costKey: string;
     materials: Materials;
-    text?: string;
+    title?: string;
     color?: string;
     iconSize?: number;
     threshold?: string;
@@ -33,10 +34,10 @@ interface LevelUpCostsProps {
 }
 
 export default function LevelUpCosts({
-    tag,
-    type,
+    levelKey,
+    costKey,
     materials,
-    text = "",
+    title = "",
     color,
     iconSize = 60,
     threshold = "@100",
@@ -45,13 +46,13 @@ export default function LevelUpCosts({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const [game, key] = tag.split("/");
+    const game = usePathname().split("/")[1];
 
     if (game === "genshin" && element) {
         materials = { ...materials, gemstone: element };
     }
 
-    const levels = levelData[game](key);
+    const levels = levelData[game](levelKey);
     const minDistance = 1;
     const maxValue = levels.length;
     const [values, setValues] = useState([1, maxValue]);
@@ -79,7 +80,7 @@ export default function LevelUpCosts({
         value: index + 1,
         label: (
             <Text
-                variant={values.includes(index + 1) ? "body1" : "body2"}
+                variant={values.includes(index + 1) ? "subtitle1" : "subtitle2"}
                 sx={{
                     userSelect: "none",
                     opacity: values.includes(index + 1)
@@ -107,7 +108,7 @@ export default function LevelUpCosts({
         />
     );
 
-    const materialCosts = costs[game][type]({
+    const materialCosts = costs[game][costKey]({
         start: values[0],
         stop: values[1],
         selected: true,
@@ -115,7 +116,7 @@ export default function LevelUpCosts({
         materials: materials,
     });
 
-    const materialArray: JSX.Element[] = [];
+    const materialArray: React.ReactNode[] = [];
     objectKeys(materialCosts).forEach((key) =>
         Object.entries(materialCosts[key]).forEach(
             ([material, cost]) =>
@@ -134,7 +135,7 @@ export default function LevelUpCosts({
 
     return (
         <Stack spacing={1}>
-            <Text variant="h6">{text}</Text>
+            <Text variant="h6">{title}</Text>
             <Box sx={{ containerType: "inline-size" }}>
                 <Grid
                     container
