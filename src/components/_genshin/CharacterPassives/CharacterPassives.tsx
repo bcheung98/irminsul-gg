@@ -52,11 +52,9 @@ export default function CharacterPassives({
                                     }
                                     title={passive.name}
                                     titleProps={{ variant: "h6" }}
-                                    subtitle={
-                                        <i>{skillKeys.genshin[passive.type]}</i>
-                                    }
+                                    subtitle={skillKeys.genshin[passive.type]}
                                     subtitleProps={{
-                                        color: theme.text.primary,
+                                        color: theme.text.header,
                                         variant: "body1",
                                     }}
                                     spacing={2}

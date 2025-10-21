@@ -65,19 +65,10 @@ export default function CharacterUpgrades({
                                                 attributes={attributes}
                                             />
                                         }
-                                        title={upgrades[key].name}
+                                        title={`${index + 1}. ${
+                                            upgrades[key].name
+                                        }`}
                                         titleProps={{ variant: "h6" }}
-                                        subtitle={
-                                            <i>
-                                                {key
-                                                    .toLocaleString()
-                                                    .toLocaleUpperCase()}
-                                            </i>
-                                        }
-                                        subtitleProps={{
-                                            color: theme.text.primary,
-                                            variant: "body1",
-                                        }}
                                         spacing={2}
                                     />
                                     <Text

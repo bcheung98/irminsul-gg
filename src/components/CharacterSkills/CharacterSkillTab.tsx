@@ -48,7 +48,7 @@ export default function CharacterSkillTab({
         <>
             <Stack spacing={3}>
                 <Box>
-                    <Text sx={{ mb: "8px", fontStyle: "italic" }}>
+                    <Text sx={{ mb: "8px", color: theme.text.header }}>
                         {skillKeys[game as keyof typeof skillKeys][skillKey]}
                     </Text>
                     <Stack spacing={2}>
