@@ -36,6 +36,7 @@ export default function MaterialCard({
         tag,
         category,
         rarity: rarity = 3,
+        source,
         imgURL,
     } = materials(material);
 
@@ -45,6 +46,9 @@ export default function MaterialCard({
     const fontSize =
         costLength < 8 ? size / 4 - 4 : size / 4 - (costLength - 4);
 
+    let tooltip = name;
+    if (source) tooltip += ` (${source})`;
+
     return (
         <Card sx={styles.root()}>
             <Image
@@ -53,7 +57,7 @@ export default function MaterialCard({
                 }
                 size={size}
                 style={styles.image(theme)}
-                tooltip={name}
+                tooltip={tooltip}
             />
             <Box sx={styles.label()}>
                 <Text
