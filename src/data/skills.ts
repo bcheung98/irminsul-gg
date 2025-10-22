@@ -15,6 +15,7 @@ export const skillKeys: GameData<Record<string, string>> = {
         util: "Passive Talent",
         nightsoul: "Night Realm's Gift Passive",
         moon: "Moonsign Benediction",
+        witch: "Witch's Eve Rite",
         "": "Passive Talent",
     } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
 };
