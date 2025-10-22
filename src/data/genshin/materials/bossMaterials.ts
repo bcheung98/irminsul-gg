@@ -344,8 +344,8 @@ export const bossMaterials = [
     {
         id: 113077,
         category: "boss",
-        tag: "Lightbearing Wings",
-        name: "Lightbearing Wings",
+        tag: "Lightbearing Scale-Feather",
+        name: "Lightbearing Scale-Feather",
         source: "Radiant Moonfly",
         rarity: 4,
         release: { version: "Luna I" },
@@ -367,5 +367,14 @@ export const bossMaterials = [
         source: "Frostnight Herra",
         rarity: 4,
         release: { version: "Luna II" },
+    },
+    {
+        id: 113080,
+        category: "boss",
+        tag: "Cyclic Military Kuuvahki Core",
+        name: "Cyclic Military Kuuvahki Core",
+        source: "Super-Heavy Landrover: Mechanized Fortresses",
+        rarity: 4,
+        release: { version: "Luna III" },
     },
 ];
