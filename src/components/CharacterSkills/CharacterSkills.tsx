@@ -58,6 +58,7 @@ export default function CharacterSkills({
                                 icon={getIconURL(key)}
                                 attributes={attributes}
                                 selected={index === tabValue}
+                                borderWidth="3px"
                             />
                         }
                     />
@@ -71,7 +72,6 @@ export default function CharacterSkills({
                     padding="8px 24px 16px"
                 >
                     <CharacterSkillTab
-                        skill={skills[key]}
                         skillKey={`${key}`}
                         materials={materials}
                         attributes={attributes}

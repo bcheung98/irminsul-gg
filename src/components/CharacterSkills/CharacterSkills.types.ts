@@ -19,7 +19,6 @@ export interface CharacterSkillsProps extends SkillProps {
 }
 
 export interface CharacterSkillProps extends SkillProps {
-    skill?: Skill | Skill[];
     skillKey: string;
 }
 

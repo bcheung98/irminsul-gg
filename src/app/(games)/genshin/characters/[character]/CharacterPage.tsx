@@ -9,10 +9,6 @@ import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_genshin/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
 
-// MUI imports
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 import { AttributeData, AttributeDataMisc } from "@/types";
