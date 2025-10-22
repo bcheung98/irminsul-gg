@@ -30,7 +30,6 @@ export default function ContentDialog({
     return (
         <Dialog
             open={open}
-            onClose={() => setOpen(false)}
             maxWidth={maxWidth}
             fullWidth
             keepMounted
@@ -38,21 +37,23 @@ export default function ContentDialog({
             {...other}
         >
             <Box sx={{ overflowY: "auto" }}>
-                <ContentBox
-                    header={header}
-                    actions={
-                        <IconButton
-                            onClick={() => setOpen(false)}
-                            sx={{ color: theme.contentBox.color.header }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                    }
-                    headerProps={headerProps}
-                    contentProps={contentProps}
-                >
-                    {children}
-                </ContentBox>
+                {open && (
+                    <ContentBox
+                        header={header}
+                        actions={
+                            <IconButton
+                                onClick={() => setOpen(false)}
+                                sx={{ color: theme.contentBox.color.header }}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        }
+                        headerProps={headerProps}
+                        contentProps={contentProps}
+                    >
+                        {children}
+                    </ContentBox>
+                )}
             </Box>
         </Dialog>
     );
