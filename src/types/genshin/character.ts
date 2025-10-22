@@ -14,7 +14,7 @@ import {
 } from "@/types/character";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 import { GenshinCharacterMaterials } from "./materials";
-import { CharacterSkills, Skill, SkillKeywords } from "../skill";
+import { CharacterSkills, Skill, SkillKeyword } from "../skill";
 
 export interface GenshinCharacter extends BaseData {
     displayName: string;
@@ -27,7 +27,7 @@ export interface GenshinCharacter extends BaseData {
     skills: GenshinCharacterSkills;
     passives: GenshinCharacterPassive[];
     constellation: GenshinCharacterConstellations;
-    keywords?: SkillKeywords[];
+    keywords?: SkillKeyword[];
     stats: GenshinCharacterStats;
     materials: GenshinCharacterMaterials;
     description: string;
@@ -57,6 +57,7 @@ export type GenshinCharacterPassiveType =
     | "util"
     | "nightsoul"
     | "moon"
+    | "witch"
     | "";
 
 export interface GenshinCharacterPassive extends Skill {

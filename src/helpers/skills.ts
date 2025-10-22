@@ -1,4 +1,6 @@
-import { AttributeData } from "@/types";
+import { AttributeData, GameData } from "@/types";
+import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
+import getGenshinSkillKeyword from "./genshin/getSkillKeyword";
 
 export function formatSkillIconURL(
     url: string,
@@ -15,4 +17,21 @@ export function formatSkillIconURL(
         url += `${index}`;
     }
     return url;
+}
+
+export interface GetSkillKeywordProps {
+    tag: any;
+    skills?: CharacterSkillsList;
+    keywords?: SkillKeyword[];
+    attributes: AttributeData;
+}
+
+type UseSkillKeywordFn = (
+    args: GetSkillKeywordProps
+) => SkillKeyword | undefined;
+
+export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
+    return {
+        genshin: getGenshinSkillKeyword,
+    };
 }

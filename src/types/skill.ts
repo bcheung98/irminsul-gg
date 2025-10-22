@@ -16,6 +16,10 @@ export interface CharacterSkillsList {
     [key: string]: Skill[] | undefined;
 }
 
-export interface SkillKeywords {
-    [tag: string]: Skill;
+export interface SkillKeyword {
+    tag: string;
+    name?: string;
+    type?: string;
+    icon?: string;
+    description: string;
 }

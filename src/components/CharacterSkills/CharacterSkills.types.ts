@@ -1,21 +1,16 @@
 import { AttributeData } from "@/types";
-import {
-    CharacterSkills,
-    CharacterSkillsList,
-    Skill,
-    SkillKeywords,
-} from "@/types/skill";
+import { Skill, SkillKeyword } from "@/types/skill";
 import { Materials } from "@/types/materials";
 
 interface SkillProps {
     materials: Materials;
-    keywords?: SkillKeywords[];
+    keywords?: SkillKeyword[];
     attributes: AttributeData;
 }
 
 export interface CharacterSkillsProps extends SkillProps {
     title?: string;
-    skills: CharacterSkills | CharacterSkillsList;
+    keys: string[];
 }
 
 export interface CharacterSkillProps extends SkillProps {

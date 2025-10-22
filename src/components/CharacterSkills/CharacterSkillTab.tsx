@@ -2,6 +2,8 @@ import { BaseSyntheticEvent, useState, useContext } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
+import ContentDialog from "../ContentDialog";
+import KeywordPopup from "../KeywordPopup";
 import Text from "../Text";
 import TextLabel from "../TextLabel";
 import SkillIcon from "../SkillIcon";
@@ -15,18 +17,18 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 // Helper imports
-import { objectKeys, splitJoin } from "@/utils";
-import { skillKeys, skillIconURLs } from "@/data/skills";
 import { useTextColor } from "@/helpers/useTextColor";
+import { skillKeys, skillIconURLs } from "@/data/skills";
+import { formatSkillIconURL, useSkillKeyword } from "@/helpers/skills";
 import { SkillContext } from "@/app/context";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
-import { AttributeData } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
+import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 
 export default function CharacterSkillTab({
     skillKey,
+    keywords,
     materials,
     attributes,
 }: CharacterSkillProps) {
@@ -36,6 +38,8 @@ export default function CharacterSkillTab({
 
     const textColor = useTextColor(theme.text);
 
+    const getSkillKeyword = useSkillKeyword()[game];
+
     const skillIconURL = formatSkillIconURL(
         skillIconURLs[game][skillKey],
         attributes
@@ -44,16 +48,33 @@ export default function CharacterSkillTab({
     const skillsContext = useContext(SkillContext);
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
-        skills = objectKeys(skillsContext)
-            .filter((key) => objectKeys(skillKeys[game]).includes(`${key}`))
-            .reduce((obj: CharacterSkillsList, key) => {
-                obj[`${key}`] = skillsContext[key];
-                return obj;
-            }, {});
+        skills = skillsContext;
     }
+
+    const [currentKeyword, setCurrentKeyword] = useState<SkillKeyword | null>(
+        null
+    );
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const handleDialogOpen = (event: BaseSyntheticEvent) => {
+        const keyword = getSkillKeyword({
+            tag: event.target.className.split("-")[1],
+            skills: skills,
+            keywords: keywords,
+            attributes: attributes,
+        });
+        if (keyword) {
+            setCurrentKeyword(keyword);
+            setDialogOpen(true);
+        }
+    };
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+        setCurrentKeyword(null);
+    };
 
     if (skills) {
         const skill = skills[skillKey];
+
         return (
             <>
                 <Stack spacing={3}>
@@ -72,7 +93,6 @@ export default function CharacterSkillTab({
                                                         skl.icon || skillIconURL
                                                     }
                                                     attributes={attributes}
-                                                    size={48}
                                                 />
                                             }
                                             title={skl.name}
@@ -97,6 +117,7 @@ export default function CharacterSkillTab({
                                             <SkillDescription
                                                 game={game}
                                                 description={skl.description}
+                                                onClick={handleDialogOpen}
                                             />
                                         </Text>
                                     </Stack>
@@ -128,25 +149,25 @@ export default function CharacterSkillTab({
                         )}
                     </Stack>
                 </Stack>
+                <ContentDialog
+                    open={dialogOpen}
+                    setOpen={setDialogOpen}
+                    onClose={handleDialogClose}
+                    header={
+                        currentKeyword?.type
+                            ? "Related Talents"
+                            : "Related effects"
+                    }
+                    maxWidth="md"
+                >
+                    <KeywordPopup
+                        keyword={currentKeyword}
+                        attributes={attributes}
+                    />
+                </ContentDialog>
             </>
         );
     } else {
         return <></>;
     }
-}
-
-function formatSkillIconURL(url: string, attributes: AttributeData, index = 0) {
-    if (attributes.name) {
-        url = url.replace(
-            "{name}",
-            splitJoin(attributes.name, "-", "_").toLocaleLowerCase()
-        );
-    }
-    if (attributes.weaponType) {
-        url = url.replace("{weaponType}", attributes.weaponType);
-    }
-    if (index > 0) {
-        url += `${index}`;
-    }
-    return url;
 }

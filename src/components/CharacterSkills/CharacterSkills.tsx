@@ -11,15 +11,17 @@ import { default as Tabs } from "../Tabs";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { objectKeys, splitJoin } from "@/utils";
 import { useTextColor } from "@/helpers/useTextColor";
+import { skillIconURLs } from "@/data/skills";
+import { formatSkillIconURL } from "@/helpers/skills";
 
 // Type imports
 import { CharacterSkillsProps } from "./CharacterSkills.types";
 
 export default function CharacterSkills({
     title,
-    skills,
+    keys,
+    keywords,
     materials,
     attributes,
 }: CharacterSkillsProps) {
@@ -34,15 +36,6 @@ export default function CharacterSkills({
         setTabValue(newValue);
     };
 
-    function getIconURL(key: string | number) {
-        return key === "attack"
-            ? `${game}/weapons/icons/${attributes.weaponType}`
-            : `${game}/characters/talents/${splitJoin(
-                  name,
-                  "-"
-              ).toLowerCase()}_${key}`;
-    }
-
     return (
         <ContentBox header={title} contentProps={{ padding: "8px 0px" }}>
             <Tabs.List
@@ -50,12 +43,15 @@ export default function CharacterSkills({
                 onChange={handleTabChange}
                 tabcolor={textColor(game, attributes.element)}
             >
-                {objectKeys(skills).map((key, index) => (
+                {keys.map((key, index) => (
                     <Tabs.Selector
                         key={key}
                         icon={
                             <SkillIcon
-                                icon={getIconURL(key)}
+                                icon={formatSkillIconURL(
+                                    skillIconURLs[game][key],
+                                    attributes
+                                )}
                                 attributes={attributes}
                                 selected={index === tabValue}
                                 borderWidth="3px"
@@ -64,7 +60,7 @@ export default function CharacterSkills({
                     />
                 ))}
             </Tabs.List>
-            {objectKeys(skills).map((key, index) => (
+            {keys.map((key, index) => (
                 <Tabs.Panel
                     key={key}
                     index={index}
@@ -72,7 +68,8 @@ export default function CharacterSkills({
                     padding="8px 24px 16px"
                 >
                     <CharacterSkillTab
-                        skillKey={`${key}`}
+                        skillKey={key}
+                        keywords={keywords}
                         materials={materials}
                         attributes={attributes}
                     />

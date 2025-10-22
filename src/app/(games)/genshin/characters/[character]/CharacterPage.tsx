@@ -70,17 +70,18 @@ export default function CharacterPage({
         >
             <CharacterSkills
                 title="Combat Talents"
-                skills={character.skills}
+                keys={Object.keys(character.skills)}
+                keywords={character.keywords}
                 materials={character.materials}
                 attributes={attributes}
             />
             <CharacterPassives
-                passives={character.passives}
+                keywords={character.keywords}
                 attributes={attributes}
             />
             <CharacterUpgrades
                 title="Constellation"
-                upgrades={character.constellation}
+                keywords={character.keywords}
                 attributes={attributes}
             />
         </CharacterPageRoot>

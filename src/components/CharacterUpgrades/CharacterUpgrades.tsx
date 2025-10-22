@@ -1,12 +1,15 @@
+import { BaseSyntheticEvent, useContext, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
 import ContentBox from "../ContentBox";
+import ContentDialog from "@/components/ContentDialog";
+import KeywordPopup from "@/components/KeywordPopup";
+import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
 import SkillCard from "../SkillCard";
 import SkillIcon from "../SkillIcon";
 import SkillDescription from "../SkillDescription";
-import TextLabel from "../TextLabel";
-import Text from "../Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -14,80 +17,141 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { objectKeys, splitJoin } from "@/utils";
+import { splitJoin } from "@/utils";
+import { useSkillKeyword } from "@/helpers/skills";
+import { SkillContext } from "@/app/context";
 
 // Type imports
 import type { CharacterUpgrades } from "@/types/character";
-import { AttributeData } from "@/types";
+import { AttributeData, GameData } from "@/types";
+import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 
 interface CharacterUpgradesProps {
     title?: string;
     actions?: React.ReactNode;
-    upgrades: CharacterUpgrades;
+    keywords?: SkillKeyword[];
     attributes: AttributeData;
 }
 
 export default function CharacterUpgrades({
     title,
     actions,
-    upgrades,
+    keywords,
     attributes,
 }: CharacterUpgradesProps) {
     const theme = useTheme();
 
     const game = usePathname().split("/")[1];
 
-    const upgradeNames: { [key: string]: string } = {
+    const getSkillKeyword = useSkillKeyword()[game];
+
+    const upgradeNames: GameData<string> = {
         genshin: "constellations",
         hsr: "eidolons",
         wuwa: "resonanceChains",
         zzz: "mindscapes",
     };
 
-    function getIconURL(key: string | number) {
+    const upgradeURLs: GameData<string> = {
+        genshin: "c",
+        hsr: "e",
+        wuwa: "c",
+        zzz: "",
+    };
+
+    function getIconURL(index: number) {
         return `${game}/characters/${upgradeNames[game]}/${splitJoin(
             attributes.name
-        ).toLocaleLowerCase()}_${key}`;
+        ).toLocaleLowerCase()}_${upgradeURLs[game]}${index + 1}`;
     }
 
-    return (
-        <ContentBox header={title} actions={actions}>
-            <Grid container spacing={3}>
-                {objectKeys(upgrades).map(
-                    (key, index) =>
-                        key !== "name" && (
+    const skillsContext = useContext(SkillContext);
+    let skills: CharacterSkillsList | undefined;
+    if (skillsContext) {
+        skills = skillsContext;
+    }
+
+    const [currentKeyword, setCurrentKeyword] = useState<SkillKeyword | null>(
+        null
+    );
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const handleDialogOpen = (event: BaseSyntheticEvent) => {
+        const keyword = getSkillKeyword({
+            tag: event.target.className.split("-")[1],
+            skills: skills,
+            keywords: keywords,
+            attributes: attributes,
+        });
+        if (keyword) {
+            setCurrentKeyword(keyword);
+            setDialogOpen(true);
+        }
+    };
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+        setCurrentKeyword(null);
+    };
+
+    if (skills?.upgrades) {
+        const upgrades = skills.upgrades;
+
+        return (
+            <>
+                <ContentBox header={title} actions={actions}>
+                    <Grid container spacing={3}>
+                        {upgrades.map((upgrade, index) => (
                             <SkillCard key={index}>
                                 <Stack spacing={1}>
                                     <TextLabel
                                         icon={
-                                            <SkillIcon
-                                                icon={getIconURL(key)}
-                                                attributes={attributes}
-                                            />
+                                            game !== "zzz" && (
+                                                <SkillIcon
+                                                    icon={getIconURL(index)}
+                                                    attributes={attributes}
+                                                />
+                                            )
                                         }
-                                        title={`${index + 1}. ${
-                                            upgrades[key].name
-                                        }`}
+                                        title={`${index + 1}. ${upgrade.name}`}
                                         titleProps={{ variant: "h6" }}
                                         spacing={2}
                                     />
                                     <Text
                                         component="span"
                                         variant="subtitle1"
-                                        sx={{ color: theme.text.description }}
+                                        sx={{
+                                            color: theme.text.description,
+                                        }}
                                     >
                                         <SkillDescription
-                                            game="genshin"
-                                            description={
-                                                upgrades[key].description
-                                            }
+                                            game={game}
+                                            description={upgrade.description}
+                                            onClick={handleDialogOpen}
                                         />
                                     </Text>
                                 </Stack>
                             </SkillCard>
-                        )
-                )}
-            </Grid>
-        </ContentBox>
-    );
+                        ))}
+                    </Grid>
+                </ContentBox>
+                <ContentDialog
+                    open={dialogOpen}
+                    setOpen={setDialogOpen}
+                    onClose={handleDialogClose}
+                    header={
+                        currentKeyword?.type
+                            ? "Related Talents"
+                            : "Related effects"
+                    }
+                    maxWidth="md"
+                >
+                    <KeywordPopup
+                        keyword={currentKeyword}
+                        attributes={attributes}
+                    />
+                </ContentDialog>
+            </>
+        );
+    } else {
+        return <></>;
+    }
 }
