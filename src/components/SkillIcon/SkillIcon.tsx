@@ -16,11 +16,15 @@ export default function SkillIcon({
     icon,
     attributes,
     selected,
+    size = 48,
+    responsiveSize = 1 / 6,
     borderWidth = "2px",
 }: {
     icon: string;
     attributes?: AttributeData;
     selected?: boolean;
+    size?: number;
+    responsiveSize?: number;
     borderWidth?: string;
 }) {
     const theme = useTheme();
@@ -32,7 +36,7 @@ export default function SkillIcon({
     return (
         <Image
             src={icon}
-            size={48}
+            size={size}
             style={{
                 padding: "4px",
                 backgroundColor: theme.iconBackground.primary,
@@ -46,7 +50,7 @@ export default function SkillIcon({
                 transition: "box-shadow 250ms",
             }}
             responsive
-            responsiveSize={1 / 6}
+            responsiveSize={responsiveSize}
         />
     );
 }
