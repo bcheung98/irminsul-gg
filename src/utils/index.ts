@@ -1,3 +1,19 @@
+type O = Record<string | number, any>;
+
+export function objectKeys<T extends O>(obj: T) {
+    type Keys = Array<keyof T>;
+    return Object.keys(obj) as Keys;
+}
+
+export function objectFilter<T extends O>(obj: T, keys: (keyof T)[]) {
+    return Object.keys(obj)
+        .filter((key) => keys.includes(key))
+        .reduce((obj: O, key) => {
+            obj[key] = obj[key];
+            return obj;
+        }, {});
+}
+
 export function range(len: number): number[];
 export function range(start: number, stop: number, step?: number): number[];
 export function range(a: number, b?: number, step = 1): number[] {
@@ -11,10 +27,6 @@ export function range(a: number, b?: number, step = 1): number[] {
         arr = [...Array(a).keys()].map((i) => i);
     }
     return arr;
-}
-
-export function objectKeys<T extends {}>(obj: T) {
-    return Object.keys(obj) as Array<keyof T>;
 }
 
 export function sortBy(
