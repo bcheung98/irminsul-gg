@@ -30,6 +30,7 @@ export default function ContentDialog({
     return (
         <Dialog
             open={open}
+            onClose={() => setOpen(false)}
             maxWidth={maxWidth}
             fullWidth
             keepMounted
