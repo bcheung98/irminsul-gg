@@ -26,5 +26,12 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         skill: "genshin/characters/talents/{name}_skill",
         burst: "genshin/characters/talents/{name}_burst",
         altsprint: "genshin/characters/talents/{name}_altsprint",
+        a1: "genshin/characters/talents/{name}_a1passive",
+        a4: "genshin/characters/talents/{name}_a4passive",
+        util: "genshin/characters/talents/{name}_utilpassive",
+        nightsoul: "genshin/characters/talents/{name}_nightsoulpassive",
+        moon: "genshin/characters/talents/{name}_moonpassive",
+        witch: "genshin/characters/talents/{name}_witchpassive",
+        "": "genshin/characters/talents/{name}_passive",
     } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
 };
