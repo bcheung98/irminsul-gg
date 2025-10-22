@@ -1,6 +1,7 @@
 "use client";
 
 // Component imports
+import CharacterPageRoot from "@/components/CharacterPageRoot";
 import CharacterSplash from "@/components/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
@@ -15,6 +16,7 @@ import Grid from "@mui/material/Grid";
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 import { AttributeData, AttributeDataMisc } from "@/types";
+import { CharacterSkillsList } from "@/types/skill";
 
 export default function CharacterPage({
     character,
@@ -40,11 +42,23 @@ export default function CharacterPage({
         voiceActors: character.voiceActors,
     };
 
-    const splash = (
+    const skills: CharacterSkillsList = {};
+
+    Object.entries(character.skills).forEach(([key, skill]) => {
+        if (skill) skills[key] = [skill];
+    });
+    skills.passives = character.passives;
+    skills.upgrades = Object.values(character.constellation).map(
+        (upgrade) => upgrade
+    );
+
+    const Splash = (
         <CharacterSplash name={character.name} outfits={character.outfits} />
     );
 
-    const infoMain = (
+    const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
+
+    const InfoMain = (
         <CharacterInfo
             stats={character.stats}
             materials={character.materials}
@@ -52,19 +66,12 @@ export default function CharacterPage({
         />
     );
 
-    const infoMisc = <CharacterInfoMisc {...attributesMisc} />;
-
     return (
-        <Stack spacing={2}>
-            <Grid container spacing={2}>
-                <Grid size={4}>
-                    <Stack spacing={2}>
-                        {splash}
-                        {infoMisc}
-                    </Stack>
-                </Grid>
-                <Grid size="grow">{infoMain}</Grid>
-            </Grid>
+        <CharacterPageRoot
+            skills={skills}
+            leftColumn={[Splash, InfoMisc]}
+            rightColumn={[InfoMain]}
+        >
             <CharacterSkills
                 title="Combat Talents"
                 skills={character.skills}
@@ -80,6 +87,6 @@ export default function CharacterPage({
                 upgrades={character.constellation}
                 attributes={attributes}
             />
-        </Stack>
+        </CharacterPageRoot>
     );
 }
