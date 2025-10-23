@@ -25,7 +25,8 @@ export function useGame() {
 }
 
 export function useGameTag() {
-    return useContext(GameContext).tag as Game;
+    const context = useGame();
+    return (context ? context.tag : "") as Game;
 }
 
 export function useDataContext() {
