@@ -1,6 +1,5 @@
 // Component imports
-import DataIcon from "../DataIcon/DataIcon";
-import Text from "../Text";
+import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -8,7 +7,6 @@ import Box from "@mui/material/Box";
 
 // Type imports
 import { InfoChipProps } from "./InfoChip.types";
-import TextLabel from "../TextLabel";
 
 export default function InfoChip(props: InfoChipProps) {
     const theme = useTheme();
@@ -18,11 +16,14 @@ export default function InfoChip(props: InfoChipProps) {
     return (
         <Box
             sx={{
+                display: "flex",
                 backgroundColor:
                     chipProps?.background || theme.palette.tertiary.main,
                 borderRadius: "16px",
                 width: "max-content",
                 p: chipProps?.padding ?? "4px 16px",
+                minHeight: { xs: "24px", md: "32px" },
+                alignItems: "center",
             }}
         >
             <TextLabel titleProps={{ variant: "body2" }} {...props} />
