@@ -20,7 +20,7 @@ import { useGame, useGameList, useGameTag } from "@/app/context";
 export default function Page404() {
     const theme = useTheme();
 
-    const [src, setSrc] = useState("");
+    const [imgURL, setImgURL] = useState("");
 
     const websites = useGameList();
     const game = useGame();
@@ -29,20 +29,26 @@ export default function Page404() {
     const href = game ? `/${pathname}` : "/";
 
     useEffect(() => {
-        const i = getRandomInt(0, websites.length - 1);
-        const n = getRandomInt(1, 5);
-        const tag = game ? pathname : websites[i].tag;
-        setSrc(`${tag}/emotes/error${n}`);
+        const a = getRandomInt(0, websites.length - 1);
+        const b = getRandomInt(1, 5);
+        const tag = game ? pathname : websites[a].tag;
+        setImgURL(`${tag}/emotes/error${b}`);
     }, []);
 
     return (
         <Stack
             alignItems="center"
-            spacing={2}
+            spacing={6}
             sx={{ mt: "96px", textAlign: "center" }}
         >
-            {src ? (
-                <Image src={src} alt="404" size={256} />
+            <Stack spacing={2}>
+                <Text variant="h4">404</Text>
+                <Text variant="h6">
+                    The page you were looking for was not recorded in Irminsul.
+                </Text>
+            </Stack>
+            {imgURL ? (
+                <Image src={imgURL} alt="404" size={256} />
             ) : (
                 <FlexBox sx={{ height: 256 }}>
                     <CircularProgress
@@ -51,10 +57,6 @@ export default function Page404() {
                     />
                 </FlexBox>
             )}
-            <Text variant="h4">404</Text>
-            <Text variant="h6">
-                The page you were looking for was not recorded in Irminsul.
-            </Text>
             <Button LinkComponent={Link} href={href} variant="contained">
                 <Text
                     variant="h6"
