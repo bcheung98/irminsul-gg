@@ -42,6 +42,7 @@ export default function IrminsulLogo({
                     <Text
                         variant="sitename"
                         sx={{
+                            userSelect: "none",
                             lineHeight: `${size}px`,
                             display: {
                                 "@": "none",
