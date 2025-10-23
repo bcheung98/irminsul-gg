@@ -2,11 +2,10 @@ import { useState } from "react";
 
 // Component imports
 import GamesMenuList from "./GamesMenuList";
-import Tooltip from "@/components/Tooltip";
+import NavButton from "@/components/NavButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 
@@ -24,22 +23,17 @@ export default function GamesMenu() {
 
     return (
         <>
-            <Tooltip title="Games" placement="right">
-                <IconButton
-                    onClick={handleMenuOpen}
-                    sx={{
-                        px: 0,
-                        color: open
-                            ? theme.text.selected
-                            : theme.appbar.color.primary,
-                        "&:hover": {
-                            color: theme.text.selected,
-                        },
-                    }}
-                >
-                    <AppsIcon />
-                </IconButton>
-            </Tooltip>
+            <NavButton
+                onClick={handleMenuOpen}
+                title="Games"
+                sx={{
+                    color: open
+                        ? theme.text.selected
+                        : theme.appbar.color.primary,
+                }}
+            >
+                <AppsIcon />
+            </NavButton>
             <Menu
                 anchorEl={anchorEl}
                 open={open}

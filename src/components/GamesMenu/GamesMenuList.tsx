@@ -25,8 +25,10 @@ export default function GamesMenuList({
     const gameTag = useGameTag();
     const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
 
-    const index = games.findIndex((game) => game.tag === gameTag);
-    index > -1 && games.unshift(games.splice(index, 1)[0]);
+    if (gameTag) {
+        const index = games.findIndex((game) => game.tag === gameTag);
+        index > -1 && games.unshift(games.splice(index, 1)[0]);
+    }
 
     return (
         <Stack spacing={1}>
