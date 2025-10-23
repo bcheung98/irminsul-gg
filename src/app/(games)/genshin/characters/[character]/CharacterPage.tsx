@@ -8,6 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_genshin/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import BetaTag from "@/components/BetaTag";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
@@ -65,6 +66,7 @@ export default function CharacterPage({
     return (
         <CharacterPageRoot
             skills={skills}
+            header={BetaTag({ version: character.release.version })}
             leftColumn={[Splash, InfoMisc]}
             rightColumn={[InfoMain]}
         >
