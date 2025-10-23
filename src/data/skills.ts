@@ -18,6 +18,10 @@ export const skillKeys: GameData<Record<string, string>> = {
         witch: "Witch's Eve Rite",
         "": "Passive Talent",
     } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
+    hsr: {},
+    wuwa: {},
+    zzz: {},
+    uma: {},
 };
 
 export const skillIconURLs: GameData<Record<string, string>> = {
@@ -34,4 +38,8 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         witch: "genshin/characters/talents/{name}_witchpassive",
         "": "genshin/characters/talents/{name}_passive",
     } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
+    hsr: {},
+    wuwa: {},
+    zzz: {},
+    uma: {},
 };

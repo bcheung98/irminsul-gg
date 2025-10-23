@@ -14,6 +14,10 @@ export const costs: GameData<Costs> = {
         characterLevel: getCharacterLevelCost,
         characterSkill: getCharacterSkillCost,
     },
+    hsr: {},
+    wuwa: {},
+    zzz: {},
+    uma: {},
 };
 
 export function calculateCosts(costs: CostArray, start: number, stop: number) {

@@ -1,4 +1,5 @@
 import { servers } from "@/helpers/dates";
+import { gameNames } from "@/data/games";
 import { UmaVersion, VersionWithDate } from "./version";
 
 // Taken from:
@@ -52,6 +53,15 @@ export interface AttributeDataMisc {
 
 export type AttributeDataMiscKey = keyof AttributeDataMisc;
 
-export interface GameData<T> {
-    [game: string]: T;
+export type Game = (typeof gameNames)[number];
+
+export interface GameInfo {
+    tag: string;
+    name: string;
+    shortName: string;
+    enabled: boolean;
+    color: string;
+    dev: string;
 }
+
+export type GameData<T> = Record<Game, T>;

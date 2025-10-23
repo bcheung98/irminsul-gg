@@ -1,7 +1,7 @@
-import { AttributeDataKey } from "@/types";
+import { AttributeDataKey, Game } from "@/types";
 
 interface Props {
-    game: string;
+    game: Game;
     key: AttributeDataKey;
     value?: string | number;
 }

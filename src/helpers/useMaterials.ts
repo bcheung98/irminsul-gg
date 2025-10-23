@@ -11,6 +11,18 @@ export function useMaterials(
 ): GameData<(material: string | number) => Material> {
     return {
         genshin: getGenshinMaterial(showUnreleasedContent),
+        hsr: function (material: string | number): Material {
+            throw new Error("Function not implemented.");
+        },
+        wuwa: function (material: string | number): Material {
+            throw new Error("Function not implemented.");
+        },
+        zzz: function (material: string | number): Material {
+            throw new Error("Function not implemented.");
+        },
+        uma: function (material: string | number): Material {
+            throw new Error("Function not implemented.");
+        },
     };
 }
 
@@ -19,5 +31,17 @@ export function useMaterialsCategory(
 ): GameData<(category: GenshinMaterialCategory) => Material[]> {
     return {
         genshin: getGenshinMaterialCategory(showUnreleasedContent),
+        hsr: function (category: GenshinMaterialCategory): Material[] {
+            throw new Error("Function not implemented.");
+        },
+        wuwa: function (category: GenshinMaterialCategory): Material[] {
+            throw new Error("Function not implemented.");
+        },
+        zzz: function (category: GenshinMaterialCategory): Material[] {
+            throw new Error("Function not implemented.");
+        },
+        uma: function (category: GenshinMaterialCategory): Material[] {
+            throw new Error("Function not implemented.");
+        },
     };
 }
