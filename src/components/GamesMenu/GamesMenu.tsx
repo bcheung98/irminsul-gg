@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // Component imports
 import GamesMenuList from "./GamesMenuList";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -23,36 +24,37 @@ export default function GamesMenu() {
 
     return (
         <>
-            <IconButton
-                onClick={handleMenuOpen}
-                sx={{
-                    px: 0,
-                    color: open
-                        ? theme.text.selected
-                        : theme.appbar.color.primary,
-                    "&:hover": {
-                        color: theme.text.selected,
-                    },
-                }}
-            >
-                <AppsIcon />
-            </IconButton>
+            <Tooltip title="Games" placement="right">
+                <IconButton
+                    onClick={handleMenuOpen}
+                    sx={{
+                        px: 0,
+                        color: open
+                            ? theme.text.selected
+                            : theme.appbar.color.primary,
+                        "&:hover": {
+                            color: theme.text.selected,
+                        },
+                    }}
+                >
+                    <AppsIcon />
+                </IconButton>
+            </Tooltip>
             <Menu
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleMenuClose}
-                onClick={handleMenuClose}
                 sx={{
                     "& .MuiMenu-paper": {
                         border: `1px solid ${theme.appbar.backgroundColor.hover}`,
                         borderRadius: "8px",
                     },
                     "& .MuiMenu-list": {
-                        backgroundColor: theme.background(1),
+                        backgroundColor: theme.background(2, "light"),
                     },
                 }}
             >
-                <GamesMenuList />
+                <GamesMenuList handleClose={handleMenuClose} />
             </Menu>
         </>
     );
