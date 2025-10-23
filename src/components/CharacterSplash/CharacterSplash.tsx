@@ -156,12 +156,12 @@ export default function CharacterSplash({
                                             ? `${game}/characters/icons/${name}`
                                             : `${game}/characters/outfits/icon/${outfit.name}`
                                     }
-                                    size={64}
+                                    size={72}
                                     responsive
                                     style={{
                                         border: `2px solid ${theme.border.color.primary}`,
                                         borderRadius: "4px",
-                                        backgroundImage: `url(https://assets.irminsul.gg/genshin/backgrounds/Background_${outfit.rarity}_Star.png)`,
+                                        backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${outfit.rarity}_Star.png)`,
                                         backgroundSize: "contain",
                                     }}
                                 />
@@ -181,9 +181,8 @@ export default function CharacterSplash({
                                 {outfit.displayName || outfit.name}
                             </Text>
                             <Text
-                                sx={{
-                                    color: theme.text.description,
-                                }}
+                                variant="subtitle1"
+                                sx={{ color: theme.text.description }}
                             >
                                 {parse(outfit.description)}
                             </Text>
