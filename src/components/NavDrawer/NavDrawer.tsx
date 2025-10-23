@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 // Component imports
 import NavLink from "@/components/NavLink";
 import TextLabel from "@/components/TextLabel";
@@ -20,9 +22,19 @@ import { navItems } from "@/data/navItems";
 export default function NavDrawer({ open }: { open: boolean }) {
     const theme = useTheme();
 
+    const pathname = usePathname();
     const game = useGameTag();
 
     const items = navItems[game] || [];
+
+    const textStyles = (href: string) => {
+        return pathname.includes(`/${game}/${href}`)
+            ? {
+                  color: theme.text.selected,
+                  textShadow: `${theme.text.selected} 1px 1px 16px`,
+              }
+            : { color: theme.drawer.color.primary, textShadow: "none" };
+    };
 
     return (
         <Drawer
@@ -63,10 +75,7 @@ export default function NavDrawer({ open }: { open: boolean }) {
                                     icon={`${game}/${item.icon}`}
                                     iconProps={{ size: 28 }}
                                     title={open ? item.title : ""}
-                                    titleProps={{
-                                        color: theme.drawer.color.primary,
-                                        defaultCursor: "pointer",
-                                    }}
+                                    titleProps={{ sx: textStyles(item.href) }}
                                     spacing={2}
                                 />
                             </Box>
