@@ -3,13 +3,14 @@ import Stack from "@mui/material/Stack";
 import Grid, { GridProps } from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
+type Node = React.ReactNode | React.ReactNode[] | undefined;
 type Size = GridProps["size"];
 
 export interface InfoPageRootProps {
-    header?: React.ReactNode;
-    leftColumn?: React.ReactNode[];
-    rightColumn?: React.ReactNode[];
-    children?: React.ReactNode;
+    header?: Node;
+    leftColumn?: Node;
+    rightColumn?: Node;
+    children?: Node;
     columnSizes?: [Size, Size];
 }
 
@@ -22,32 +23,34 @@ export default function InfoPageRoot({
 }: InfoPageRootProps) {
     const [sizeLeft, sizeRight] = columnSizes;
 
+    const renderElements = (elements: Node) => {
+        return Array.isArray(elements)
+            ? elements.map((element, index) => <Box key={index}>{element}</Box>)
+            : elements;
+    };
+
     return (
         <Stack spacing={2}>
-            {header}
+            {renderElements(header)}
             {(leftColumn || rightColumn) && (
                 <Grid container spacing={2}>
                     {leftColumn && (
                         <Grid size={sizeLeft}>
                             <Stack spacing={2}>
-                                {leftColumn.map((element, index) => (
-                                    <Box key={index}>{element}</Box>
-                                ))}
+                                {renderElements(leftColumn)}
                             </Stack>
                         </Grid>
                     )}
                     {rightColumn && (
                         <Grid size={sizeRight}>
                             <Stack spacing={2}>
-                                {rightColumn.map((element, index) => (
-                                    <Box key={index}>{element}</Box>
-                                ))}
+                                {renderElements(rightColumn)}
                             </Stack>
                         </Grid>
                     )}
                 </Grid>
             )}
-            {children}
+            {renderElements(children)}
         </Stack>
     );
 }
