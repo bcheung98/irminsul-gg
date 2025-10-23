@@ -36,8 +36,11 @@ export default function TextLabel({
                     src={icon}
                     size={iconProps?.size || 24}
                     style={{
-                        borderRadius: iconProps?.borderRadius || "4px",
-                        padding: iconProps?.padding || 0,
+                        ...{
+                            borderRadius: iconProps?.borderRadius || "4px",
+                            padding: iconProps?.padding || 0,
+                        },
+                        ...iconProps?.styles,
                     }}
                     tooltip={iconProps?.tooltip}
                     responsive
@@ -51,15 +54,18 @@ export default function TextLabel({
                     component={titleProps?.component || "span"}
                     variant={titleProps?.variant || "body1"}
                     sx={{
-                        color: titleProps?.color || theme.text.primary,
-                        textAlign: justifyContent,
-                        "&:hover": {
-                            color: isLink ? theme.text.selected : "global",
-                            textDecoration: isLink ? "underline" : "none",
-                            cursor: isLink
-                                ? "pointer"
-                                : titleProps?.defaultCursor || "inherit",
+                        ...{
+                            color: titleProps?.color || theme.text.primary,
+                            textAlign: justifyContent,
+                            "&:hover": {
+                                color: isLink ? theme.text.selected : "global",
+                                textDecoration: isLink ? "underline" : "none",
+                                cursor: isLink
+                                    ? "pointer"
+                                    : titleProps?.defaultCursor || "inherit",
+                            },
                         },
+                        ...titleProps?.sx,
                     }}
                 >
                     {title}

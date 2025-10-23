@@ -1,4 +1,8 @@
-import { TypographyVariant } from "@mui/material/styles";
+import {
+    CSSProperties,
+    SxProps,
+    TypographyVariant,
+} from "@mui/material/styles";
 import { ImageSize } from "../Image/Image.types";
 import { StackProps } from "@mui/material/Stack";
 
@@ -7,6 +11,7 @@ export interface IconProps {
     borderRadius?: string;
     padding?: string | number;
     tooltip?: string;
+    styles?: CSSProperties;
 }
 
 export interface TitleProps {
@@ -14,6 +19,7 @@ export interface TitleProps {
     variant?: TypographyVariant;
     color?: string;
     defaultCursor?: string;
+    sx?: SxProps;
 }
 
 export interface TextLabelProps {
