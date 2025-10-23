@@ -1,9 +1,10 @@
 // Component imports
-import Image from "../Image";
-import Text from "../Text";
+import Image from "@/components/Image";
+import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 
@@ -12,9 +13,12 @@ import { splitJoin } from "@/utils";
 import { materialCardStyles } from "./MaterialCard.styles";
 import { useMaterials } from "@/helpers/useMaterials";
 
+// Type imports
+import { Game } from "@/types";
+
 export interface MaterialCardProps {
     id?: number;
-    game: string;
+    game: Game;
     material: string | number;
     cost: number;
     size?: number;
@@ -28,6 +32,13 @@ export default function MaterialCard({
     size = 56,
 }: MaterialCardProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+    let imgSize = size;
+    const responsiveSize = 1 / 15;
+    if (matches) {
+        imgSize = imgSize - imgSize * responsiveSize;
+    }
 
     const materials = useMaterials()[game];
 
@@ -40,25 +51,29 @@ export default function MaterialCard({
         imgURL,
     } = materials(material);
 
-    const styles = materialCardStyles({ rarity, size });
+    const styles = materialCardStyles({ rarity, size: imgSize });
 
     const costLength = cost.toLocaleString().length;
     const fontSize =
-        costLength < 8 ? size / 4 - 4 : size / 4 - (costLength - 4);
+        costLength < 8 ? imgSize / 4 - 4 : imgSize / 4 - (costLength - 4);
 
     let tooltip = name;
     if (source) tooltip += ` (${source})`;
 
     return (
         <Card sx={styles.root()}>
-            <Image
-                src={
-                    imgURL || `${game}/materials/${category}/${splitJoin(tag)}`
-                }
-                size={size}
-                style={styles.image(theme)}
-                tooltip={tooltip}
-            />
+            <Box sx={styles.imageContainer(theme)}>
+                <Image
+                    src={
+                        imgURL ||
+                        `${game}/materials/${category}/${splitJoin(tag)}`
+                    }
+                    size={size}
+                    tooltip={tooltip}
+                    responsive
+                    responsiveSize={responsiveSize}
+                />
+            </Box>
             <Box sx={styles.label()}>
                 <Text
                     variant="body2"

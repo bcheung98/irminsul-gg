@@ -13,11 +13,11 @@ export const materialCardStyles = ({
         backgroundColor: theme.materialCard.backgroundColor.main,
         width: size,
     }),
-    image: (theme: Theme): CSSProperties => {
+    imageContainer: (theme: Theme): CSSProperties => {
         const r = theme.materialCard.imageBorder.radius;
         return {
+            display: "flex",
             width: size,
-            height: size,
             backgroundImage: theme.materialCard.backgroundImage(rarity),
             backgroundSize: "contain",
             borderRadius: `${r}px ${r}px 0 0`,
@@ -26,7 +26,7 @@ export const materialCardStyles = ({
     label:
         (): SxProps<Theme> =>
         (theme): CSSProperties => ({
-            padding: "0px 0px 4px",
+            padding: "4px",
             textAlign: "center",
             backgroundColor: theme.materialCard.backgroundColor.label,
         }),
