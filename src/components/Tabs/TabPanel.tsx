@@ -14,7 +14,7 @@ export default function TabPanel(props: TabPanelProps) {
     const { children, index, value, padding, timeout, ...other } = props;
 
     return (
-        <Fade in={index === value} timeout={timeout || 250}>
+        <Fade in={index === value} timeout={timeout ?? 250}>
             <div hidden={value !== index} {...other}>
                 {value === index && (
                     <Box sx={{ p: padding ?? "16px" }}>{children}</Box>
