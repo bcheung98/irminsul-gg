@@ -10,6 +10,10 @@ import CharacterPassives from "@/components/_genshin/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
 import BetaTag from "@/components/BetaTag";
 
+// MUI imports
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 import { AttributeData, AttributeDataMisc } from "@/types";
@@ -20,6 +24,10 @@ export default function CharacterPage({
 }: {
     character: GenshinCharacter;
 }) {
+    const theme = useTheme();
+    const matches_up_lg = useMediaQuery(theme.breakpoints.up("lg"));
+    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
+
     const attributes: AttributeData = {
         name: character.name,
         displayName: character.fullName,
@@ -30,7 +38,6 @@ export default function CharacterPage({
         rarity: character.rarity,
         arkhe: character.arkhe,
     };
-
     const attributesMisc: AttributeDataMisc = {
         constellationName: character.constellationName,
         nation: character.nation,
@@ -40,7 +47,6 @@ export default function CharacterPage({
     };
 
     const skills: CharacterSkillsList = {};
-
     Object.entries(character.skills).forEach(([key, skill]) => {
         if (skill) skills[key] = [skill];
     });
@@ -63,29 +69,52 @@ export default function CharacterPage({
         />
     );
 
+    const Skills = (
+        <CharacterSkills
+            title="Combat Talents"
+            keys={Object.keys(character.skills)}
+            keywords={character.keywords}
+            materials={character.materials}
+            attributes={attributes}
+        />
+    );
+
+    const Passives = (
+        <CharacterPassives
+            keywords={character.keywords}
+            attributes={attributes}
+        />
+    );
+
+    const Upgrades = (
+        <CharacterUpgrades
+            title="Constellation"
+            keywords={character.keywords}
+            attributes={attributes}
+        />
+    );
+
+    const header = <BetaTag version={character.release.version} />;
+
+    const leftColumn = [];
+    if (matches_up_md) leftColumn.push(Splash);
+    if (matches_up_lg) leftColumn.push(InfoMisc);
+
+    const rightColumn = [];
+    if (matches_up_md) rightColumn.push(InfoMain);
+
+    const children = [Skills, Passives, Upgrades];
+    if (!matches_up_lg) children.unshift(InfoMisc);
+    if (!matches_up_md) children.unshift(InfoMain, Splash);
+
     return (
         <CharacterPageRoot
             skills={skills}
-            header={BetaTag({ version: character.release.version })}
-            leftColumn={[Splash, InfoMisc]}
-            rightColumn={[InfoMain]}
+            header={header}
+            leftColumn={leftColumn}
+            rightColumn={rightColumn}
         >
-            <CharacterSkills
-                title="Combat Talents"
-                keys={Object.keys(character.skills)}
-                keywords={character.keywords}
-                materials={character.materials}
-                attributes={attributes}
-            />
-            <CharacterPassives
-                keywords={character.keywords}
-                attributes={attributes}
-            />
-            <CharacterUpgrades
-                title="Constellation"
-                keywords={character.keywords}
-                attributes={attributes}
-            />
+            {children}
         </CharacterPageRoot>
     );
 }
