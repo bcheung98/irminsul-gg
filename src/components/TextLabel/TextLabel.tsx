@@ -1,6 +1,6 @@
 // Component imports
-import Image from "../Image";
-import Text from "../Text/";
+import Image from "@/components/Image";
+import Text from "@/components/Text/";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -40,6 +40,8 @@ export default function TextLabel({
                         padding: iconProps?.padding || 0,
                     }}
                     tooltip={iconProps?.tooltip}
+                    responsive
+                    responsiveSize={0.2}
                 />
             ) : (
                 icon
