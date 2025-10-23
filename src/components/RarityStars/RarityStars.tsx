@@ -1,5 +1,5 @@
 // Component imports
-import Text from "../Text";
+import Text from "@/components/Text";
 
 // MUI imports
 import { TypographyVariant } from "@mui/material/styles";
@@ -25,6 +25,7 @@ export default function RarityStars({
             sx={(theme) => ({
                 color: color || theme.text.star,
                 userSelect: "none",
+                lineHeight: theme.typography[variant].fontSize,
             })}
         >
             {range(rarity).map((_) => star)}

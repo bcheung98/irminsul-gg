@@ -21,7 +21,7 @@ export default function InfoChip(props: InfoChipProps) {
                     chipProps?.background || theme.palette.tertiary.main,
                 borderRadius: "16px",
                 width: "max-content",
-                p: chipProps?.padding ?? "4px 16px",
+                p: chipProps?.padding ?? "0px 16px",
                 minHeight: { xs: "24px", md: "32px" },
                 alignItems: "center",
             }}
