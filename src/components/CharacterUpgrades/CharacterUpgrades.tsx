@@ -1,5 +1,4 @@
-import { BaseSyntheticEvent, useContext, useState } from "react";
-import { usePathname } from "next/navigation";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import ContentBox from "../ContentBox";
@@ -7,9 +6,9 @@ import ContentDialog from "@/components/ContentDialog";
 import KeywordPopup from "@/components/KeywordPopup";
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
-import SkillCard from "../SkillCard";
-import SkillIcon from "../SkillIcon";
-import SkillDescription from "../SkillDescription";
+import SkillCard from "@/components/SkillCard";
+import SkillIcon from "@/components/SkillIcon";
+import SkillDescription from "@/components/SkillDescription";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -17,9 +16,9 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import { useGameTag, useSkillContext } from "@/app/context";
 import { splitJoin } from "@/utils";
 import { useSkillKeyword } from "@/helpers/skills";
-import { SkillContext } from "@/app/context";
 
 // Type imports
 import type { CharacterUpgrades } from "@/types/character";
@@ -41,7 +40,7 @@ export default function CharacterUpgrades({
 }: CharacterUpgradesProps) {
     const theme = useTheme();
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const getSkillKeyword = useSkillKeyword()[game];
 
@@ -50,6 +49,7 @@ export default function CharacterUpgrades({
         hsr: "eidolons",
         wuwa: "resonanceChains",
         zzz: "mindscapes",
+        uma: "",
     };
 
     const upgradeURLs: GameData<string> = {
@@ -57,6 +57,7 @@ export default function CharacterUpgrades({
         hsr: "e",
         wuwa: "c",
         zzz: "",
+        uma: "",
     };
 
     function getIconURL(index: number) {
@@ -65,7 +66,7 @@ export default function CharacterUpgrades({
         ).toLocaleLowerCase()}_${upgradeURLs[game]}${index + 1}`;
     }
 
-    const skillsContext = useContext(SkillContext);
+    const skillsContext = useSkillContext();
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
         skills = skillsContext;

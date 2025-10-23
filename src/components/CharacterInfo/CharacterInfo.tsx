@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 // Component imports
 import ContentBox from "../ContentBox";
 import StatsDisplay from "../StatsDisplay";
@@ -12,6 +10,7 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { useTextColor } from "@/helpers/useTextColor";
+import { useGameTag } from "@/app/context";
 
 // Type imports
 import { AttributeData } from "@/types";
@@ -29,7 +28,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
 
     const textColor = useTextColor(theme.text);
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     return (
         <ContentBox

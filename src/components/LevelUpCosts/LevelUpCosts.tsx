@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 
 // Component imports
 import MaterialCard from "../MaterialCard";
@@ -15,6 +14,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
+import { useGameTag } from "@/app/context";
 import { objectKeys } from "@/utils";
 import levelData from "@/data/levels";
 import { costs } from "@/helpers/costs";
@@ -46,7 +46,7 @@ export default function LevelUpCosts({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     if (game === "genshin" && element) {
         materials = { ...materials, gemstone: element };

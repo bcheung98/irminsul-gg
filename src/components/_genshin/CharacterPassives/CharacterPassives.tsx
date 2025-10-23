@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useContext, useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import ContentBox from "@/components/ContentBox";
@@ -16,10 +16,10 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import { useSkillContext } from "@/app/context";
 import { splitJoin } from "@/utils";
 import { skillKeys } from "@/data/skills";
 import { useSkillKeyword } from "@/helpers/skills";
-import { SkillContext } from "@/app/context";
 
 // Type imports
 import { GenshinCharacterPassive } from "@/types/genshin/character";
@@ -45,7 +45,7 @@ export default function CharacterPassives({
         ).toLocaleLowerCase()}_${key}passive`;
     }
 
-    const skillsContext = useContext(SkillContext);
+    const skillsContext = useSkillContext();
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
         skills = skillsContext;

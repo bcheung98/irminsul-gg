@@ -1,5 +1,4 @@
 import { BaseSyntheticEvent, useState } from "react";
-import { usePathname } from "next/navigation";
 
 // Component imports
 import ContentBox from "../ContentBox";
@@ -11,6 +10,7 @@ import { default as Tabs } from "../Tabs";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
+import { useGameTag } from "@/app/context";
 import { useTextColor } from "@/helpers/useTextColor";
 import { skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL } from "@/helpers/skills";
@@ -27,7 +27,7 @@ export default function CharacterSkills({
 }: CharacterSkillsProps) {
     const theme = useTheme();
 
-    const [_, game, __, name] = usePathname().split("/");
+    const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
 

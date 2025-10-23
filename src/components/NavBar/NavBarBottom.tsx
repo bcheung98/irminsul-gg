@@ -1,8 +1,5 @@
 "use client";
 
-import { useContext } from "react";
-import { usePathname } from "next/navigation";
-
 // Component imports
 import Text from "@/components/Text";
 
@@ -11,25 +8,16 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 
 // Helper imports
-import { WebsiteContext } from "@/app/context";
+import { useGame } from "@/app/context";
 
 export default function NavBarBottom() {
-    const websites = useContext(WebsiteContext);
-    const pathname = usePathname().split("/").slice(1)[0];
+    const game = useGame();
 
     let text1 = "";
     let text2 = "";
 
-    const tags: string[] = [];
-    websites.forEach(
-        (website) =>
-            website.enabled && tags.push(website.tag.toLocaleLowerCase())
-    );
-
-    if (tags.length > 0 && tags.includes(pathname)) {
-        text1 = text2 = websites.find(
-            (website) => website.tag.toLocaleLowerCase() === pathname
-        )!.dev;
+    if (game) {
+        text1 = text2 = game.dev;
     } else {
         text1 = "the developers of the games featured";
         text2 = "their respective developers";
@@ -59,7 +47,7 @@ export default function NavBarBottom() {
                     mx: "auto",
                 }}
             >
-                {tags.length > 0 && <Text variant="body2">{navText}</Text>}
+                <Text variant="body2">{navText}</Text>
             </Toolbar>
         </AppBar>
     );

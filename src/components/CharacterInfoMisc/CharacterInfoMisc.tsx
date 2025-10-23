@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 // Component imports
 import * as Table from "../Table";
 
@@ -8,12 +6,13 @@ import Card from "@mui/material/Card";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
+import { useGameTag } from "@/app/context";
 
 // Type imports
 import { AttributeDataMisc, GameData } from "@/types";
 
 export default function CharacterInfoMisc(props: AttributeDataMisc) {
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const rows = getRows(props)[game];
 
@@ -69,5 +68,9 @@ function getRows(
                 value: attributes.voiceActors?.jp,
             },
         ],
+        hsr: [],
+        wuwa: [],
+        zzz: [],
+        uma: [],
     };
 }

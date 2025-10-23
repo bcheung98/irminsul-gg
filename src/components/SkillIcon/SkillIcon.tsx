@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 // Component imports
 import Image from "../Image";
 
@@ -7,6 +5,7 @@ import Image from "../Image";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
+import { useGameTag } from "@/app/context";
 import { useTextColor } from "@/helpers/useTextColor";
 
 // Type imports
@@ -29,7 +28,7 @@ export default function SkillIcon({
 }) {
     const theme = useTheme();
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
 

@@ -15,14 +15,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
 // Helper imports
+import { GameListContext, DataContext, GameContext } from "@/app/context";
 import getTheme from "@/themes/theme";
 import { urls } from "@/lib/fetchData";
-import { WebsiteContext, DataContext } from "@/app/context";
+import { games } from "@/data/games";
 
 // Type imports
-import { Website } from "@/types/website";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+import { Game, GameInfo } from "@/types";
 
 export default function StyledRoot({
     children,
@@ -31,25 +30,14 @@ export default function StyledRoot({
 }>) {
     const theme = getTheme("Dark");
 
-    const pathname = usePathname().split("/").slice(1, 3).join("/");
-
-    function getWebsites() {
-        const { data, error, isLoading } = useSWR(
-            "https://api.irminsul.gg/main/websites.json",
-            fetcher
-        );
-
-        const websites: Website[] = [];
-        if (!isLoading && !error) {
-            data.forEach((website: Website) => {
-                website.enabled && websites.push(website);
-            });
-        }
-        return { websites, websiteStatus: isLoading };
-    }
+    const pathname = usePathname().split("/");
+    const gameTag = pathname[1];
+    const url = pathname.slice(1, 3).join("/");
 
     function getCurrentData() {
-        const { data, error, isLoading } = useSWR(urls[pathname], fetcher);
+        const { data, error, isLoading } = useSWR(urls[url], (url: string) =>
+            fetch(url).then((r) => r.json())
+        );
 
         let currentData: any[] = [];
         if (!isLoading && !error) {
@@ -58,7 +46,7 @@ export default function StyledRoot({
         return { data: currentData, dataStatus: isLoading };
     }
 
-    const { websites } = getWebsites();
+    const websites = Object.values(games).map((game) => game) as GameInfo[];
     const { data } = getCurrentData();
 
     return (
@@ -68,23 +56,30 @@ export default function StyledRoot({
                 <Toolbar variant="dense" id="back-to-top-anchor" />
                 <img src={theme.backgroundImageURL} id="background-image" />
                 <Box sx={{ display: "flex" }}>
-                    <WebsiteContext value={websites}>
-                        <DataContext value={data}>
-                            <NavBar />
-                            <Box
-                                sx={{
-                                    position: "relative",
-                                    minWidth: "0vw",
-                                    width: "100vw",
-                                }}
-                            >
-                                <Box sx={{ width: "100%", minHeight: "100vh" }}>
-                                    {children}
+                    <GameListContext value={websites}>
+                        <GameContext value={games[gameTag as Game]}>
+                            <DataContext value={data}>
+                                <NavBar />
+                                <Box
+                                    sx={{
+                                        position: "relative",
+                                        minWidth: "0vw",
+                                        width: "100vw",
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            minHeight: "100vh",
+                                        }}
+                                    >
+                                        {children}
+                                    </Box>
+                                    <NavBarBottom />
                                 </Box>
-                                <NavBarBottom />
-                            </Box>
-                        </DataContext>
-                    </WebsiteContext>
+                            </DataContext>
+                        </GameContext>
+                    </GameListContext>
                 </Box>
             </ThemeProvider>
         </StoreProvider>

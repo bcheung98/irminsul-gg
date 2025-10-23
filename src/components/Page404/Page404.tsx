@@ -1,45 +1,39 @@
 "use client";
 
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 // Component imports
 import Image from "@/components/Image";
 import Text from "@/components/Text";
+import FlexBox from "@/components/FlexBox";
 
 // MUI imports
 import { useTheme, getContrastRatio } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
-import { WebsiteContext } from "@/app/context";
+import { useGame, useGameList, useGameTag } from "@/app/context";
 
 export default function Page404() {
     const theme = useTheme();
 
-    const [n, setRandomNumber] = useState(1);
+    const [src, setSrc] = useState("");
+
+    const websites = useGameList();
+    const game = useGame();
+    const pathname = useGameTag();
+
+    const href = game ? `/${pathname}` : "/";
 
     useEffect(() => {
-        setRandomNumber(getRandomInt(1, 5));
+        const i = getRandomInt(0, websites.length - 1);
+        const n = getRandomInt(1, 5);
+        const tag = game ? pathname : websites[i].tag;
+        setSrc(`${tag}/emotes/error${n}`);
     }, []);
-
-    const websites = useContext(WebsiteContext);
-    const pathname = usePathname().split("/").slice(1)[0];
-    const tags: string[] = [];
-    websites.forEach(
-        (website) =>
-            website.enabled && tags.push(website.tag.toLocaleLowerCase())
-    );
-
-    const game = tags.includes(pathname)
-        ? pathname
-        : tags[getRandomInt(0, tags.length - 1)];
-
-    const href = tags.includes(pathname) ? `/${pathname}` : "/";
-
-    const imgURL = `${game}/emotes/error${n}`;
 
     return (
         <Stack
@@ -47,7 +41,16 @@ export default function Page404() {
             spacing={2}
             sx={{ mt: "96px", textAlign: "center" }}
         >
-            {game && <Image src={imgURL} alt="404" size={256} />}
+            {src ? (
+                <Image src={src} alt="404" size={256} />
+            ) : (
+                <FlexBox sx={{ height: 256 }}>
+                    <CircularProgress
+                        size="64px"
+                        sx={{ color: theme.text.primary }}
+                    />
+                </FlexBox>
+            )}
             <Text variant="h4">404</Text>
             <Text variant="h6">
                 The page you were looking for was not recorded in Irminsul.

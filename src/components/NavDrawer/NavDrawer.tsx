@@ -1,7 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 // Component imports
 import NavLink from "@/components/NavLink";
 import TextLabel from "@/components/TextLabel";
@@ -16,13 +14,13 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { navItems } from "../NavDrawer/navItems";
+import { useGameTag } from "@/app/context";
+import { navItems } from "@/data/navItems";
 
 export default function NavDrawer({ open }: { open: boolean }) {
     const theme = useTheme();
 
-    const pathname = usePathname();
-    const game = pathname.split("/")[1];
+    const game = useGameTag();
 
     const items = navItems[game] || [];
 

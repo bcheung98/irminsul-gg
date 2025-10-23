@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import NavLink from "@/components/NavLink";
@@ -11,17 +9,17 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Box from "@mui/material/Box";
 
 // Helper imports
-import { WebsiteContext } from "@/app/context";
+import { useGameList } from "@/app/context";
 
 export default function GamesMenuList() {
     const theme = useTheme();
 
-    const websites = useContext(WebsiteContext);
+    const games = useGameList();
 
     return (
         <Stack spacing={0.5}>
-            {websites
-                .sort((a, b) => a.title.localeCompare(b.title))
+            {games
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .map((website, index) => (
                     <ButtonBase
                         key={index}
@@ -39,9 +37,9 @@ export default function GamesMenuList() {
                             }}
                         >
                             <TextLabel
-                                icon={`main/game-icons/${website.tag}`}
+                                icon={`main/game-icons/${website.shortName}`}
                                 iconProps={{ size: 32 }}
-                                title={website.title}
+                                title={website.name}
                                 titleProps={{
                                     variant: "subtitle1",
                                     defaultCursor: "pointer",

@@ -1,13 +1,12 @@
 import { BaseSyntheticEvent, useState } from "react";
-import { usePathname } from "next/navigation";
 import parse from "html-react-parser";
 
 // Component imports
-import Image from "../Image";
-import FlexBox from "../FlexBox";
-import ContentDialog from "../ContentDialog";
-import Text from "../Text";
-import { default as Tabs } from "../Tabs";
+import Image from "@/components/Image";
+import FlexBox from "@/components/FlexBox";
+import ContentDialog from "@/components/ContentDialog";
+import Text from "@/components/Text";
+import { default as Tabs } from "@/components/Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -17,6 +16,9 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+
+// Helper imports
+import { useGameTag } from "@/app/context";
 
 // Type imports
 import { CharacterOutfit } from "@/types/character";
@@ -30,7 +32,7 @@ export default function CharacterSplash({
 }) {
     const theme = useTheme();
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = () => {

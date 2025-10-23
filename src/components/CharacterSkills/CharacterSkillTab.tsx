@@ -1,5 +1,4 @@
-import { BaseSyntheticEvent, useState, useContext } from "react";
-import { usePathname } from "next/navigation";
+import { BaseSyntheticEvent, useState } from "react";
 
 // Component imports
 import ContentDialog from "../ContentDialog";
@@ -17,10 +16,10 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 // Helper imports
+import { useGameTag, useSkillContext } from "@/app/context";
 import { useTextColor } from "@/helpers/useTextColor";
 import { skillKeys, skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL, useSkillKeyword } from "@/helpers/skills";
-import { SkillContext } from "@/app/context";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
@@ -34,7 +33,7 @@ export default function CharacterSkillTab({
 }: CharacterSkillProps) {
     const theme = useTheme();
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
 
@@ -45,7 +44,7 @@ export default function CharacterSkillTab({
         attributes
     );
 
-    const skillsContext = useContext(SkillContext);
+    const skillsContext = useSkillContext();
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
         skills = skillsContext;

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { usePathname } from "next/navigation";
 
 // Component imports
 import NavLink from "@/components/NavLink/";
@@ -10,36 +10,30 @@ import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
-import { navItems } from "../NavDrawer/navItems";
 import { convertNametoURL } from "@/utils";
-import { DataContext } from "@/app/context";
+import { navItems } from "@/data/navItems";
+import { useDataContext } from "@/app/context";
 
 // Type imports
-import { Website } from "@/types/website";
+import { Game, GameInfo } from "@/types";
 
-export default function Breadcrumbs({
-    website,
-    pathname,
-}: {
-    website: Website;
-    pathname: string;
-}) {
+export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const theme = useTheme();
 
-    const path = pathname.split("/");
-    const game = path[1];
+    const pathname = usePathname().split("/");
+    const game = pathname[1] as Game;
 
     const items = navItems[game];
 
-    const data = useContext(DataContext);
+    const dataContext = useDataContext();
 
     function getCurrentData(item: string) {
-        const d = data.find(
+        const data = dataContext.find(
             (d) =>
                 convertNametoURL(d.name) === item ||
                 convertNametoURL(d.fullName) === item
         );
-        if (d) return d.fullName || d.name;
+        if (data) return data.fullName || data.name;
         else return "";
     }
 
@@ -47,23 +41,23 @@ export default function Breadcrumbs({
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
             <NavLink href={`/${game}`}>
                 <TextLabel
-                    icon={`main/game-icons/${website.tag}`}
-                    title={website.title}
+                    icon={`main/game-icons/${website.shortName}`}
+                    title={website.name}
                     titleProps={{
                         variant: "body2",
                         color:
-                            path.length > 2
+                            pathname.length > 2
                                 ? theme.appbar.color.primary
                                 : theme.text.selected,
                     }}
-                    isLink={path.length > 2}
+                    isLink={pathname.length > 2}
                 />
             </NavLink>
-            {path.slice(2).map((item, index) => (
+            {pathname.slice(2).map((item, index) => (
                 <NavLink
                     key={index}
-                    href={`/${game}/${path.slice(2, index + 3).join("/")}`}
-                    disabled={index + 2 === path.length - 1}
+                    href={`/${game}/${pathname.slice(2, index + 3).join("/")}`}
+                    disabled={index + 2 === pathname.length - 1}
                 >
                     <TextLabel
                         title={
@@ -73,11 +67,11 @@ export default function Breadcrumbs({
                         titleProps={{
                             variant: "body2",
                             color:
-                                index + 2 !== path.length - 1
+                                index + 2 !== pathname.length - 1
                                     ? theme.appbar.color.primary
                                     : theme.text.selected,
                         }}
-                        isLink={index + 2 !== path.length - 1}
+                        isLink={index + 2 !== pathname.length - 1}
                     />
                 </NavLink>
             ))}

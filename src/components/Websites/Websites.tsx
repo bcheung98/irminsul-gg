@@ -1,7 +1,5 @@
 "use client";
 
-import { useContext } from "react";
-
 // Component imports
 import WebsiteCard from "../WebsiteCard";
 
@@ -10,19 +8,19 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
-import { WebsiteContext } from "@/app/context";
+import { useGameList } from "@/app/context";
 
 export default function Websites() {
-    const websites = useContext(WebsiteContext);
+    const games = useGameList();
 
     return (
         <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
             <Grid container spacing={4}>
-                {websites
-                    .sort((a, b) => a.title.localeCompare(b.title))
+                {games
+                    .sort((a, b) => a.name.localeCompare(b.name))
                     .map((website) => (
                         <Grid key={website.tag} size={{ xs: 12, sm: 6, md: 3 }}>
-                            <WebsiteCard website={website} />
+                            <WebsiteCard game={website} />
                         </Grid>
                     ))}
             </Grid>

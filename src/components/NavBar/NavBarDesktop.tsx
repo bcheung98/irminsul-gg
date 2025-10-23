@@ -1,7 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 // Component imports
 import IrminsulLogo from "../IrminsulLogo";
@@ -19,25 +18,13 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 // Helper imports
-import { WebsiteContext } from "@/app/context";
+import { useGame } from "@/app/context";
 import { navBarStyles } from "./NavBar.styles";
 
 export default function NavBarDesktop() {
     const theme = useTheme();
 
-    const pathname = usePathname();
-    const websites = useContext(WebsiteContext);
-
-    const currentGame = pathname.split("/")[1];
-    const currentWebsite = websites.find(
-        (website) => website.tag.toLocaleLowerCase() === currentGame
-    );
-
-    const tags: string[] = [];
-    websites.forEach(
-        (website) =>
-            website.enabled && tags.push(website.tag.toLocaleLowerCase())
-    );
+    const game = useGame();
 
     const [drawerOpen, setDrawerOpen] = useState(true);
     const toggleDrawerState = () => {
@@ -45,8 +32,6 @@ export default function NavBarDesktop() {
     };
 
     const drawerStyles = navBarStyles({ drawerOpen });
-
-    const render = tags.length > 0 && tags.includes(currentGame);
 
     return (
         <>
@@ -74,7 +59,7 @@ export default function NavBarDesktop() {
                         <GamesMenu />
                     </FlexBox>
                 </Toolbar>
-                {render && (
+                {game && (
                     <Toolbar
                         variant="dense"
                         sx={{
@@ -91,16 +76,11 @@ export default function NavBarDesktop() {
                         >
                             <MenuIcon sx={drawerStyles.menuIcon()} />
                         </IconButton>
-                        {currentWebsite && (
-                            <Breadcrumbs
-                                website={currentWebsite}
-                                pathname={pathname}
-                            />
-                        )}
+                        {game && <Breadcrumbs website={game} />}
                     </Toolbar>
                 )}
             </AppBar>
-            {render && <NavDrawer open={drawerOpen} />}
+            {game && <NavDrawer open={drawerOpen} />}
         </>
     );
 }

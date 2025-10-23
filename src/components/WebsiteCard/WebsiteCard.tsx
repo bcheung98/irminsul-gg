@@ -13,25 +13,27 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { zoomImageOnHover } from "@/utils";
+import versions from "@/data/versions";
 
 // Type imports
-import { Website } from "@/types/website";
+import { Game, GameInfo } from "@/types";
 
-export default function WebsiteCard({ website }: { website: Website }) {
+export default function WebsiteCard({ game }: { game: GameInfo }) {
     const theme = useTheme();
+
+    const { tag, name, shortName, enabled } = game;
+
+    const version = versions[tag as Game][0].version;
 
     const borderRadius = "16px";
 
-    const { title, tag, enabled, gameVersion } = website;
     const scale = 1;
     const translate = [0, 0];
 
-    const tagLower = tag.toLowerCase();
-
     const id = `${tag.split(" ").join("")}-websiteCard`;
 
-    const href = enabled ? `/${tagLower}` : "";
-    const imgSrc = `main/wallpapers/${tagLower}/${tag}_${gameVersion}`;
+    const href = enabled ? `/${tag}` : "";
+    const imgSrc = `main/wallpapers/${tag}/${shortName}_${version}`;
 
     const handleHover = (direction: "enter" | "leave") => {
         if (enabled) {
@@ -87,7 +89,7 @@ export default function WebsiteCard({ website }: { website: Website }) {
                     <Box sx={imageContainerStyle}>
                         <Image
                             src={imgSrc}
-                            fallbackSrc={`main/wallpapers/${tagLower}/${tag}`}
+                            fallbackSrc={`main/wallpapers/${tag}/${shortName}`}
                             alt={tag}
                             id={`${id}-img`}
                             style={imageStyle}
@@ -108,7 +110,7 @@ export default function WebsiteCard({ website }: { website: Website }) {
                                     cursor: enabled ? "pointer" : "auto",
                                 }}
                             >
-                                {title}
+                                {name}
                             </Text>
                         </Box>
                     </Box>

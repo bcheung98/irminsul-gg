@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 // Component imports
 import Text from "../Text";
 import TextLabel from "../TextLabel";
@@ -12,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
+import { useGameTag } from "@/app/context";
 import { skillKeys } from "@/data/skills";
 
 // Type imports
@@ -27,7 +26,7 @@ export default function KeywordPopup({
 }) {
     const theme = useTheme();
 
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     return (
         <>

@@ -1,4 +1,3 @@
-import { usePathname } from "next/navigation";
 import parse from "html-react-parser";
 
 // Component imports
@@ -14,12 +13,13 @@ import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { getDataIconURL } from "@/helpers/dataIcon";
+import { useGameTag } from "@/app/context";
 
 // Type imports
 import { AttributeData, AttributeDataKey, GameData } from "@/types";
 
 export default function CharacterAttributes(props: AttributeData) {
-    const game = usePathname().split("/")[1];
+    const game = useGameTag();
 
     const { ...attributes } = props;
 
@@ -80,4 +80,8 @@ export default function CharacterAttributes(props: AttributeData) {
 
 const gameAttributes: GameData<AttributeDataKey[]> = {
     genshin: ["rarity", "element", "weaponType", "arkhe"],
+    hsr: [],
+    wuwa: [],
+    zzz: [],
+    uma: [],
 };
