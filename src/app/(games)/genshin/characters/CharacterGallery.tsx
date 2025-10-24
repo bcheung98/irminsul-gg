@@ -5,6 +5,7 @@ import InfoCard from "@/components/InfoCard";
 import InfoAvatar from "@/components/InfoAvatar/";
 
 // MUI imports
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 // Type imports
@@ -16,7 +17,7 @@ export default function CharacterGallery({
     characters: GenshinCharacter[];
 }) {
     return (
-        <>
+        <Box sx={{ px: { xs: 2, md: 0 } }}>
             <Grid container spacing={3}>
                 {characters.map((character) => (
                     <InfoCard
@@ -44,6 +45,6 @@ export default function CharacterGallery({
                     />
                 ))}
             </Grid> */}
-        </>
+        </Box>
     );
 }

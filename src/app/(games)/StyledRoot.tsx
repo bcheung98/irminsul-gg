@@ -12,7 +12,7 @@ export default function StyledRoot({
     return (
         <>
             <Toolbar variant="dense" />
-            <Box sx={{ p: "24px" }}>{children}</Box>
+            <Box sx={{ px: { xs: 1, md: 3 }, py: 3 }}>{children}</Box>
         </>
     );
 }
