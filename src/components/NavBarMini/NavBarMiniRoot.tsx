@@ -14,7 +14,6 @@ export default function NavBarMiniRoot({
             variant="dense"
             sx={(theme) => ({
                 containerType: "inline-size",
-                borderTop: `1px solid ${theme.border.color.primary}`,
                 gap: "32px",
                 zIndex: theme.zIndex.drawer + 1,
                 alignItems: "center",
