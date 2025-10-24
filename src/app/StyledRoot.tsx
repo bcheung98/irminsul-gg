@@ -30,9 +30,10 @@ export default function StyledRoot({
 }>) {
     const theme = getTheme("Dark");
 
-    const pathname = usePathname().split("/");
-    const gameTag = pathname[1];
-    const url = pathname.slice(1, 3).join("/");
+    const pathname = usePathname();
+    const pathSplit = pathname.split("/");
+    const gameTag = pathSplit[1];
+    const url = pathSplit.slice(1, 3).join("/");
 
     function getCurrentData() {
         const { data, error, isLoading } = useSWR(urls[url], (url: string) =>
@@ -55,11 +56,11 @@ export default function StyledRoot({
                 <CssBaseline />
                 <Toolbar variant="dense" id="back-to-top-anchor" />
                 <img src={theme.backgroundImageURL} id="background-image" />
-                <Box sx={{ display: "flex" }}>
-                    <GameListContext value={websites}>
-                        <GameContext value={games[gameTag as Game]}>
-                            <DataContext value={data}>
-                                <NavBar />
+                <GameListContext value={websites}>
+                    <GameContext value={games[gameTag as Game]}>
+                        <DataContext value={data}>
+                            <NavBar />
+                            <Box sx={{ display: "flex" }}>
                                 <Box
                                     sx={{
                                         position: "relative",
@@ -75,12 +76,12 @@ export default function StyledRoot({
                                     >
                                         {children}
                                     </Box>
-                                    <NavBarBottom />
+                                    {pathname === "/" && <NavBarBottom />}
                                 </Box>
-                            </DataContext>
-                        </GameContext>
-                    </GameListContext>
-                </Box>
+                            </Box>
+                        </DataContext>
+                    </GameContext>
+                </GameListContext>
             </ThemeProvider>
         </StoreProvider>
     );

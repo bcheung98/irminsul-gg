@@ -38,6 +38,8 @@ export default function NavBarBottom() {
             sx={{ backgroundColor: "transparent", borderWidth: 0 }}
         >
             <Toolbar
+                variant="dense"
+                disableGutters
                 sx={{
                     justifyContent: "space-between",
                     flexWrap: "wrap",
