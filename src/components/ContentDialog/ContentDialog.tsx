@@ -44,7 +44,14 @@ export default function ContentDialog({
                         actions={
                             <IconButton
                                 onClick={() => setOpen(false)}
-                                sx={{ color: theme.contentBox.color.header }}
+                                sx={{
+                                    color: theme.contentBox.color.header,
+                                    p: 0.5,
+                                    "&:hover": {
+                                        backgroundColor:
+                                            theme.drawer.backgroundColor.hover,
+                                    },
+                                }}
                             >
                                 <CloseIcon />
                             </IconButton>
