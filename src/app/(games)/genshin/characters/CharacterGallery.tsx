@@ -17,7 +17,7 @@ export default function CharacterGallery({
     characters: GenshinCharacter[];
 }) {
     return (
-        <Box sx={{ px: { xs: 2, md: 0 } }}>
+        <Box sx={{ px: { md: 1 } }}>
             <Grid container spacing={3}>
                 {characters.map((character) => (
                     <InfoCard

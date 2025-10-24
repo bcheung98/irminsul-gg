@@ -38,7 +38,11 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
     };
 
     return (
-        <Stack className="nav-mobile" spacing={1} sx={{ py: "16px" }}>
+        <Stack
+            className="nav-mobile"
+            spacing={1}
+            sx={{ py: { xs: "8px", lg: "16px" } }}
+        >
             {items.map((item, index) => (
                 <ButtonBase
                     key={index}
