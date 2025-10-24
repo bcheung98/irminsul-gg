@@ -1,7 +1,7 @@
 "use client";
 
 import { Rowdies } from "next/font/google";
-import { createTheme, alpha } from "@mui/material";
+import { createTheme } from "@mui/material";
 import { getThemeBackgroundColors } from "@/helpers/styles";
 import { Shade } from "@/types/theme";
 
@@ -154,7 +154,7 @@ export const darkThemeData = {
     },
     appbar: {
         backgroundColor: {
-            main: alpha(appbarColors[0], 0.95),
+            main: appbarColors[0],
             hover: appbarColors[1],
             selectedHover: appbarColors[2],
         },
