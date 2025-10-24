@@ -1,6 +1,7 @@
 // Component imports
 import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
+import Settings from "../Settings/Settings";
 import FlexBox from "@/components/FlexBox";
 import NavButton from "@/components/NavButton";
 
@@ -10,7 +11,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function NavBar() {
     return (
@@ -55,9 +55,7 @@ export default function NavBar() {
                             <CalendarMonthIcon />
                         </NavButton>
                     </FlexBox>
-                    <NavButton title="Settings" sx={{ p: 0.5 }}>
-                        <SettingsIcon />
-                    </NavButton>
+                    <Settings />
                 </FlexBox>
             </Toolbar>
         </AppBar>
