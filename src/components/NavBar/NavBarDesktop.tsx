@@ -3,19 +3,16 @@
 import { useState } from "react";
 
 // Component imports
-import IrminsulLogo from "../IrminsulLogo";
-import GamesMenu from "../GamesMenu";
-import FlexBox from "@/components/FlexBox";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import NavDrawer from "../NavDrawer";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import NavBarContent from "./NavBarContent";
+import NavDrawer from "@/components/NavDrawer";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 // Helper imports
 import { useGame } from "@/app/context";
@@ -31,7 +28,7 @@ export default function NavBarDesktop() {
         setDrawerOpen(!drawerOpen);
     };
 
-    const drawerStyles = navBarStyles({ drawerOpen });
+    const drawerStyles = navBarStyles({ open: drawerOpen });
 
     return (
         <>
@@ -42,23 +39,7 @@ export default function NavBarDesktop() {
                     zIndex: theme.zIndex.drawer + 1,
                 }}
             >
-                <Toolbar
-                    variant="dense"
-                    sx={{
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <FlexBox spacing={2}>
-                        <IrminsulLogo />
-                        <Divider
-                            orientation="vertical"
-                            flexItem
-                            sx={{ my: "4px" }}
-                        />
-                        <GamesMenu />
-                    </FlexBox>
-                </Toolbar>
+                <NavBarContent />
                 {game && (
                     <Toolbar
                         variant="dense"
@@ -70,11 +51,9 @@ export default function NavBarDesktop() {
                     >
                         <IconButton
                             onClick={toggleDrawerState}
-                            disableRipple
-                            disableTouchRipple
                             sx={drawerStyles.menuButton()}
                         >
-                            <MenuIcon sx={drawerStyles.menuIcon()} />
+                            <MenuOpenIcon sx={drawerStyles.menuIcon()} />
                         </IconButton>
                         {game && <Breadcrumbs website={game} />}
                     </Toolbar>

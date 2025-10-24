@@ -22,7 +22,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `${widthClose}px`,
 });
 
-export const Drawer = styled(MuiDrawer, {
+const NavDrawerRoot = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
     width: widthOpen,
@@ -46,3 +46,5 @@ export const Drawer = styled(MuiDrawer, {
         },
     ],
 }));
+
+export default NavDrawerRoot;

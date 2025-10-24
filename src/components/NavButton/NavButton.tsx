@@ -32,9 +32,10 @@ export default function NavButton({
 
     const defaultStyles = {
         px: 0,
-        color: pathname.includes(href)
-            ? theme.text.selected
-            : theme.text.primary,
+        color:
+            href && pathname.includes(href)
+                ? theme.text.selected
+                : theme.text.primary,
         fontSize: 0,
         "&:hover": {
             color: theme.text.selected,

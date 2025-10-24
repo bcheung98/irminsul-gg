@@ -6,6 +6,7 @@ import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
@@ -19,6 +20,7 @@ import { Game, GameInfo } from "@/types";
 
 export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const pathname = usePathname().split("/");
     const game = pathname[1] as Game;
@@ -41,8 +43,8 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
             <NavLink href={`/${game}`}>
                 <TextLabel
-                    icon={`main/game-icons/${website.shortName}`}
-                    title={website.name}
+                    icon={matches && `main/game-icons/${website.shortName}`}
+                    title={matches ? website.name : website.shortName}
                     titleProps={{
                         variant: "body2",
                         color:

@@ -1,43 +1,35 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 // Component imports
-import NavLink from "@/components/NavLink";
-import TextLabel from "@/components/TextLabel";
-import Tooltip from "@/components/Tooltip";
-import { Drawer } from "./DrawerRoot";
+import NavDrawerRoot from "./NavDrawerRoot";
+import NavDrawerMenu from "./NavDrawerMenu";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Toolbar from "@mui/material/Toolbar";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
+import { DrawerProps } from "@mui/material/Drawer";
 
 // Helper imports
 import { useGameTag } from "@/app/context";
 import { navItems } from "@/data/navItems";
 
-export default function NavDrawer({ open }: { open: boolean }) {
+interface NavDrawerProps {
+    open?: boolean;
+    onClose?: DrawerProps["onClose"];
+}
+
+export default function NavDrawer({ open }: NavDrawerProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-    const pathname = usePathname();
     const game = useGameTag();
-
     const items = navItems[game] || [];
 
-    const textStyles = (href: string) => {
-        return pathname.includes(`/${game}/${href}`)
-            ? {
-                  color: theme.text.selected,
-                  textShadow: `${theme.text.selected} 1px 1px 16px`,
-              }
-            : { color: theme.drawer.color.primary, textShadow: "none" };
-    };
+    const DrawerMenu = <NavDrawerMenu open={open} items={items} />;
 
-    return (
-        <Drawer
+    return matches ? (
+        <NavDrawerRoot
             variant="permanent"
             open={open}
             sx={{
@@ -50,39 +42,9 @@ export default function NavDrawer({ open }: { open: boolean }) {
         >
             <Toolbar variant="dense" />
             <Toolbar variant="dense" />
-            <Stack spacing={1} sx={{ py: "16px" }}>
-                {items.map((item, index) => (
-                    <ButtonBase
-                        key={index}
-                        href={`/${game}/${item.href}`}
-                        LinkComponent={NavLink}
-                    >
-                        <Tooltip
-                            title={!open ? item.title : ""}
-                            arrow
-                            placement="right"
-                        >
-                            <Box
-                                sx={{
-                                    p: "4px 24px",
-                                    "&:hover": {
-                                        backgroundColor:
-                                            theme.drawer.backgroundColor.hover,
-                                    },
-                                }}
-                            >
-                                <TextLabel
-                                    icon={`${game}/${item.icon}`}
-                                    iconProps={{ size: 28 }}
-                                    title={open ? item.title : ""}
-                                    titleProps={{ sx: textStyles(item.href) }}
-                                    spacing={2}
-                                />
-                            </Box>
-                        </Tooltip>
-                    </ButtonBase>
-                ))}
-            </Stack>
-        </Drawer>
+            {DrawerMenu}
+        </NavDrawerRoot>
+    ) : (
+        DrawerMenu
     );
 }
