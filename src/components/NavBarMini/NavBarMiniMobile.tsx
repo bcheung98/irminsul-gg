@@ -4,14 +4,14 @@ import { useState } from "react";
 import NavBarMiniRoot from "./NavBarMiniRoot";
 import NavDrawer from "@/components/NavDrawer";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import MenuCloseIcon from "@/components/MenuCloseIcon";
 
 // MUI imports
 import Box from "@mui/material/Box";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Backdrop from "@mui/material/Backdrop";
 import AppBar from "@mui/material/AppBar";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import MenuCloseIcon from "@/components/MenuCloseIcon";
 
 // Helper imports
 import { useGame } from "@/app/context";
@@ -37,27 +37,33 @@ export default function NavBarMiniMobile() {
 
     return (
         <Box sx={{ display: { xs: "block", lg: "none" } }}>
-            <ClickAwayListener onClickAway={handleMenuClose}>
-                <AppBar sx={styles.root()}>
-                    <NavBarMiniRoot onKeyDown={handleMenuKeyDown}>
-                        {game && <Breadcrumbs website={game} />}
-                        <IconButton onClick={toggleMenuState}>
-                            <MenuCloseIcon open={menuOpen} />
-                        </IconButton>
-                    </NavBarMiniRoot>
-                    <Collapse
-                        in={menuOpen}
-                        timeout="auto"
-                        sx={(theme) => ({
-                            borderTop: `1px solid ${theme.border.color.secondary}`,
-                            maxHeight: "50vh",
-                            overflowY: "auto !important",
-                        })}
-                    >
-                        <NavDrawer open={menuOpen} />
-                    </Collapse>
-                </AppBar>
-            </ClickAwayListener>
+            <AppBar sx={styles.root()}>
+                <NavBarMiniRoot onKeyDown={handleMenuKeyDown}>
+                    {game && <Breadcrumbs website={game} />}
+                    <IconButton onClick={toggleMenuState}>
+                        <MenuCloseIcon open={menuOpen} />
+                    </IconButton>
+                </NavBarMiniRoot>
+                <Collapse
+                    in={menuOpen}
+                    timeout="auto"
+                    onClick={handleMenuClose}
+                    sx={(theme) => ({
+                        borderTop: `1px solid ${theme.border.color.secondary}`,
+                        maxHeight: "50vh",
+                        overflowY: "auto !important",
+                    })}
+                >
+                    <NavDrawer open={menuOpen} />
+                </Collapse>
+            </AppBar>
+            <Backdrop
+                open={menuOpen}
+                onClick={handleMenuClose}
+                sx={(theme) => ({
+                    zIndex: theme.zIndex.drawer,
+                })}
+            />
         </Box>
     );
 }
