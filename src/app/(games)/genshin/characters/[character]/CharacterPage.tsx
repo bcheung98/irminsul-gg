@@ -111,8 +111,8 @@ export default function CharacterPage({
         <CharacterPageRoot
             skills={skills}
             header={header}
-            leftColumn={leftColumn}
-            rightColumn={rightColumn}
+            leftColumn={leftColumn.length > 0 && leftColumn}
+            rightColumn={rightColumn.length > 0 && rightColumn}
         >
             {children}
         </CharacterPageRoot>
