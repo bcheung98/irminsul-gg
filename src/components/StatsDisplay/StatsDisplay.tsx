@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import Text from "../Text";
@@ -11,6 +11,8 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { getStats } from "./StatsDisplay.utils";
 import { useTextColor } from "@/helpers/styles";
+import { useStore } from "@/hooks/useStore";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 
 // Type imports
 import { StatsDisplayProps } from "./StatsDisplay.types";
@@ -27,10 +29,16 @@ export default function StatsDisplay({
 
     const textColor = useTextColor(theme.text);
 
-    const [mode] = useState<SkillDisplay>("slider");
+    const currentStatDisplay =
+        useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
+    const [mode, setMode] = useState<SkillDisplay>(currentStatDisplay);
+
+    useEffect(() => {
+        setMode(currentStatDisplay);
+    }, [currentStatDisplay]);
 
     return (
-        <Stack spacing={1}>
+        <Stack spacing={mode === "slider" ? 1 : 0}>
             <Text variant="h6">Stats</Text>
             <StatsTable
                 mode={mode}

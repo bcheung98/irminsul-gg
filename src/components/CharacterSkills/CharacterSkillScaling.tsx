@@ -1,29 +1,40 @@
+import { useEffect, useState } from "react";
+
 // Component imports
-import Dropdown from "../Dropdown";
-import StatsTable from "../StatsTable";
-import Text from "../Text";
+import Dropdown from "@/components/Dropdown";
+import StatsTable from "@/components/StatsTable";
+import Text from "@/components/Text";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { range } from "@/utils";
+import { useStore } from "@/hooks/useStore";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 
 // Type imports
 import { CharacterSkillScalingProps } from "./CharacterSkills.types";
+import { SkillDisplay } from "@/types";
 
 export default function CharacterSkillScaling({
     skill,
     color,
     index = 0,
 }: CharacterSkillScalingProps) {
-    const mode = "slider";
-
     if (skill && !Array.isArray(skill)) {
         skill = [skill];
     }
 
     const maxLevel = 15;
+
+    const currentStatDisplay =
+        useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
+    const [mode, setMode] = useState<SkillDisplay>(currentStatDisplay);
+
+    useEffect(() => {
+        setMode(currentStatDisplay);
+    }, [currentStatDisplay]);
 
     return (
         <Dropdown
