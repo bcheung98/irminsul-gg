@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 import { objectKeys } from "@/utils";
 import levelData from "@/data/levels";
 import { costs } from "@/helpers/costs";

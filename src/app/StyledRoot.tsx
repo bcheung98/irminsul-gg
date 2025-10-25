@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
 // Helper imports
-import { GameListContext, DataContext, GameContext } from "@/app/context";
+import { GameListContext, DataContext, GameContext } from "@/context";
 import getTheme from "@/themes/theme";
 import { urls } from "@/lib/fetchData";
 import { games } from "@/data/games";

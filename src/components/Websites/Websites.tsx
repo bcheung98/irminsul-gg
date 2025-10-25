@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
-import { useGameList } from "@/app/context";
+import { useGameList } from "@/context";
 
 export default function Websites() {
     const games = useGameList();

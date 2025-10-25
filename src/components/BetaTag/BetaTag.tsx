@@ -5,7 +5,7 @@ import Text from "@/components/Text";
 import Card from "@mui/material/Card";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 import { isUreleasedContent } from "@/helpers/isUnreleasedContent";
 
 export default function BetaTag({ version }: { version: string }) {

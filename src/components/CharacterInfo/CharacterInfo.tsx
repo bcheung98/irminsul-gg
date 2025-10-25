@@ -9,8 +9,8 @@ import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { useTextColor } from "@/helpers/useTextColor";
-import { useGameTag } from "@/app/context";
+import { useTextColor } from "@/helpers/styles";
+import { useGameTag } from "@/context";
 
 // Type imports
 import { AttributeData } from "@/types";

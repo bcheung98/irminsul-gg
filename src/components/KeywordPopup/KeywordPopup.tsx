@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 import { skillKeys } from "@/data/skills";
 
 // Type imports

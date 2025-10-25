@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 // Helper imports
 import { splitJoin } from "@/utils";
 import { materialCardStyles } from "./MaterialCard.styles";
-import { useMaterials } from "@/helpers/useMaterials";
+import { useMaterials } from "@/helpers/materials";
 
 // Type imports
 import { Game } from "@/types";

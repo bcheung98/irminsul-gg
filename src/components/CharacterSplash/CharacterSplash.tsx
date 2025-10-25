@@ -18,7 +18,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 
 // Type imports
 import { CharacterOutfit } from "@/types/character";

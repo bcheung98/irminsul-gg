@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
-import { useGame, useGameList, useGameTag } from "@/app/context";
+import { useGame, useGameList, useGameTag } from "@/context";
 
 export default function Page404() {
     const theme = useTheme();

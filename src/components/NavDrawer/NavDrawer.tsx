@@ -11,7 +11,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { DrawerProps } from "@mui/material/Drawer";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 import { navItems } from "@/data/navItems";
 
 interface NavDrawerProps {

@@ -13,7 +13,7 @@ import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { getDataIconURL } from "@/helpers/dataIcon";
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 
 // Type imports
 import { AttributeData, AttributeDataKey, GameData } from "@/types";

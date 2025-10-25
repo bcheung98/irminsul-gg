@@ -16,7 +16,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { useSkillContext } from "@/app/context";
+import { useSkillContext } from "@/context";
 import { splitJoin } from "@/utils";
 import { skillKeys } from "@/data/skills";
 import { useSkillKeyword } from "@/helpers/skills";

@@ -11,7 +11,7 @@ import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
-import { useDataContext } from "@/app/context";
+import { useDataContext } from "@/context";
 import { convertNametoURL } from "@/utils";
 import { navItems } from "@/data/navItems";
 

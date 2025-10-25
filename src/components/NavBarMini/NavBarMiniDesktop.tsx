@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 // Helper imports
-import { useGame } from "@/app/context";
+import { useGame } from "@/context";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniDesktop() {

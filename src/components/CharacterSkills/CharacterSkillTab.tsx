@@ -16,8 +16,8 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 // Helper imports
-import { useGameTag, useSkillContext } from "@/app/context";
-import { useTextColor } from "@/helpers/useTextColor";
+import { useGameTag, useSkillContext } from "@/context";
+import { useTextColor } from "@/helpers/styles";
 import { skillKeys, skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL, useSkillKeyword } from "@/helpers/skills";
 

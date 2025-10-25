@@ -14,7 +14,7 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 
 // Helper imports
-import { useGame } from "@/app/context";
+import { useGame } from "@/context";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniMobile() {

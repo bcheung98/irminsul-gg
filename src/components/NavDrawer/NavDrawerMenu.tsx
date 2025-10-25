@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 import { NavItem } from "@/data/navItems";
 
 interface NavDrawerMenuProps {

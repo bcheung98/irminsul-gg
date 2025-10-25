@@ -13,7 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 // Helper imports
-import { useGameList, useGameTag } from "@/app/context";
+import { useGameList, useGameTag } from "@/context";
 
 export default function GamesMenuList({
     handleClose,

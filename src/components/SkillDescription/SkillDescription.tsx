@@ -10,7 +10,7 @@ import parse, {
 import { useTheme } from "@mui/material";
 
 // Helper imports
-import { useTextColor } from "@/helpers/useTextColor";
+import { useTextColor } from "@/helpers/styles";
 
 export default function SkillDescription({
     game,

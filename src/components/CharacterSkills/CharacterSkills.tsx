@@ -10,8 +10,8 @@ import { default as Tabs } from "../Tabs";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
-import { useTextColor } from "@/helpers/useTextColor";
+import { useGameTag } from "@/context";
+import { useTextColor } from "@/helpers/styles";
 import { skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL } from "@/helpers/skills";
 

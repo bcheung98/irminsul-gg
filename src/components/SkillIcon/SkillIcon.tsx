@@ -5,8 +5,8 @@ import Image from "../Image";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { useGameTag } from "@/app/context";
-import { useTextColor } from "@/helpers/useTextColor";
+import { useGameTag } from "@/context";
+import { useTextColor } from "@/helpers/styles";
 
 // Type imports
 import { AttributeData } from "@/types";

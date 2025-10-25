@@ -1,5 +1,5 @@
 // Helper imports
-import { SkillContext } from "@/app/context";
+import { SkillContext } from "@/context";
 
 // Type imports
 import { CharacterSkillsList } from "@/types/skill";

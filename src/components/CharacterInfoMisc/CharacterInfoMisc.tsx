@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
-import { useGameTag } from "@/app/context";
+import { useGameTag } from "@/context";
 
 // Type imports
 import { AttributeDataMisc, GameData } from "@/types";

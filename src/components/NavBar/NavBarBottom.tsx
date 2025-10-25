@@ -8,7 +8,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 
 // Helper imports
-import { useGame } from "@/app/context";
+import { useGame } from "@/context";
 
 export default function NavBarBottom() {
     const game = useGame();
