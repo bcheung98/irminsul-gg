@@ -1,7 +1,8 @@
 // Component imports
 import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
-import Settings from "../Settings/Settings";
+import SiteSearch from "@/components/SiteSearch";
+import Settings from "@/components/Settings";
 import FlexBox from "@/components/FlexBox";
 import NavButton from "@/components/NavButton";
 
@@ -55,7 +56,10 @@ export default function NavBar() {
                             <CalendarMonthIcon />
                         </NavButton>
                     </FlexBox>
-                    <Settings />
+                    <FlexBox spacing={2}>
+                        <SiteSearch />
+                        <Settings />
+                    </FlexBox>
                 </FlexBox>
             </Toolbar>
         </AppBar>
