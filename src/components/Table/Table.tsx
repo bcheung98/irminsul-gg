@@ -1,5 +1,5 @@
 // Component imports
-import TextLabel from "../TextLabel";
+import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import { useTheme, TypographyVariant } from "@mui/material/styles";
@@ -15,7 +15,7 @@ import TableCell from "@mui/material/TableCell";
 import { variantMap } from "@/themes/theme";
 
 // Type imports
-import { TextLabelProps } from "../TextLabel/TextLabel.types";
+import { TextLabelProps } from "@/components/TextLabel/TextLabel.types";
 import { ColorVariants } from "@/types/theme";
 
 export interface RowProps {
@@ -42,7 +42,7 @@ export const Body = TableBody;
 export function Head({
     data,
     align = "center",
-    textVariant = "body1",
+    textVariant = "subtitle1",
 }: HeadProps) {
     const theme = useTheme();
 
