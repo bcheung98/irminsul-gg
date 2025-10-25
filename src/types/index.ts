@@ -1,19 +1,14 @@
 import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
-import { UmaVersion, VersionWithDate } from "./version";
+import { UmaVersion, Version, VersionWithDate } from "./version";
 
 // General
-export interface BaseData {
-    id: number | string;
-    name: string;
-}
 export type Orientation = "row" | "column";
 export type SortOrder = "asc" | "desc";
 export interface VoiceActorData {
     en: string;
     jp: string;
 }
-
 // Taken from:
 // https://medium.com/xgeeks/typescript-utility-keyof-nested-object-fa3e457ef2b2
 export type NestedKeyOf<T extends object> = {
@@ -21,6 +16,15 @@ export type NestedKeyOf<T extends object> = {
         ? `${K}` | keyof T[K]
         : `${K}`;
 }[keyof T & (string | number)];
+
+// General data
+export interface BaseData {
+    id: number | string;
+    name: string;
+}
+export interface BaseDataWithRelease extends BaseData {
+    release: Version;
+}
 
 // Attribute data
 export interface AttributeData {
