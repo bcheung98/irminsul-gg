@@ -1,12 +1,13 @@
 // Component imports
-import ContentBox from "../ContentBox";
-import StatsDisplay from "../StatsDisplay";
-import LevelUpCosts from "../LevelUpCosts";
-import CharacterAttributes from "../CharacterAttributes";
+import ContentBox from "@/components/ContentBox";
+import StatsDisplay from "@/components/StatsDisplay";
+import LevelUpCosts from "@/components/LevelUpCosts";
+import CharacterAttributes from "@/components/CharacterAttributes";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useTextColor } from "@/helpers/styles";
@@ -15,7 +16,7 @@ import { useGameTag } from "@/context";
 // Type imports
 import { AttributeData } from "@/types";
 import { Materials } from "@/types/materials";
-import { TCharacterStats } from "../StatsDisplay/StatsDisplay.types";
+import { TCharacterStats } from "@/components/StatsDisplay/StatsDisplay.types";
 
 interface CharacterInfoProps {
     stats: TCharacterStats;
@@ -36,7 +37,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
             headerProps={{ padding: "16px 24px" }}
             contentProps={{ padding: "16px 24px" }}
         >
-            <Stack spacing={2}>
+            <Stack spacing={2} divider={<Divider />}>
                 <StatsDisplay
                     game={game}
                     stats={props.stats}
