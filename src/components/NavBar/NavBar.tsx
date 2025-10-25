@@ -13,7 +13,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
+// Helper imports
+import { useGameTag } from "@/context";
+
 export default function NavBar() {
+    const game = useGameTag();
+
     return (
         <AppBar
             position="fixed"
@@ -57,7 +62,7 @@ export default function NavBar() {
                         </NavButton>
                     </FlexBox>
                     <FlexBox spacing={{ xs: 0, sm: 2 }}>
-                        <SiteSearch />
+                        {game && <SiteSearch />}
                         <Settings />
                     </FlexBox>
                 </FlexBox>
