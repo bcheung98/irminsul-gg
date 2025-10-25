@@ -64,6 +64,23 @@ export default function getTheme(id: number) {
                     },
                 },
             },
+            MuiSelect: {
+                styleOverrides: {
+                    icon: {
+                        color: theme.text.primary,
+                    },
+                },
+            },
+            MuiSlider: {
+                defaultProps: {
+                    color: "info",
+                },
+            },
+            MuiSwitch: {
+                defaultProps: {
+                    color: "info",
+                },
+            },
             MuiTypography: {
                 defaultProps: {
                     variantMapping: {
