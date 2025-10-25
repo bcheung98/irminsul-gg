@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // Component imports
 import NavButton from "@/components/NavButton";
@@ -13,6 +13,10 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import SettingsIcon from "@mui/icons-material/Settings";
 
+// Helper imports
+import { useStore } from "@/hooks";
+import { useSettingsStore } from "@/stores/useSettingsStore";
+
 export default function Settings() {
     const theme = useTheme();
 
@@ -20,7 +24,24 @@ export default function Settings() {
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
+        if (
+            !newOpen &&
+            unreleasedContentOld.current !== settings?.showUnreleasedContent
+        ) {
+            if (window) window.dispatchEvent(new Event("storage"));
+        }
     };
+
+    const settings = useStore(useSettingsStore, (state) => state);
+    const unreleasedContentOld = useRef(settings?.showUnreleasedContent);
+
+    useEffect(() => {
+        window.addEventListener("storage", (event) => {
+            if (event.key === "v2/settings") {
+                window.location.reload();
+            }
+        });
+    }, [open]);
 
     return (
         <>
