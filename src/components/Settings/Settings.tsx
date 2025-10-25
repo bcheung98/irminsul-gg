@@ -26,14 +26,14 @@ export default function Settings() {
         setOpen(newOpen);
         if (
             !newOpen &&
-            unreleasedContentOld.current !== settings?.showUnreleasedContent
+            unreleasedContentOld.current !== settings?.hideUnreleasedContent
         ) {
             if (window) window.dispatchEvent(new Event("storage"));
         }
     };
 
     const settings = useStore(useSettingsStore, (state) => state);
-    const unreleasedContentOld = useRef(settings?.showUnreleasedContent);
+    const unreleasedContentOld = useRef(settings?.hideUnreleasedContent);
 
     useEffect(() => {
         window.addEventListener("storage", (event) => {

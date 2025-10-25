@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { isUreleasedContent } from "@/helpers/isUnreleasedContent";
+import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 export default function BetaTag({ version }: { version: string }) {
     const game = useGameTag();
@@ -16,7 +16,7 @@ export default function BetaTag({ version }: { version: string }) {
             ? "This content is only available on the JP server!"
             : "Viewing beta content, all content is subject to change!";
 
-    if (!isUreleasedContent(version, game)) {
+    if (!isUnreleasedContent(version, game)) {
         return (
             <Card
                 sx={(theme) => ({

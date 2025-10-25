@@ -8,6 +8,12 @@ import InfoAvatar from "@/components/InfoAvatar";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
+// Helper imports
+import { useGameTag } from "@/context";
+import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
+import { useStore } from "@/hooks";
+import { useSettingsStore } from "@/stores/useSettingsStore";
+
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 
@@ -16,8 +22,21 @@ export default function CharacterGallery({
 }: {
     characters: GenshinCharacter[];
 }) {
+    const game = useGameTag();
+
+    const hideUnreleasedContent = useStore(
+        useSettingsStore,
+        (state) => state.hideUnreleasedContent
+    );
+
+    characters = filterUnreleasedContent(
+        hideUnreleasedContent,
+        characters,
+        game
+    );
+
     return (
-        <Box sx={{ px: { md: 1 } }}>
+        <Box sx={{ px: 1 }}>
             <Grid container spacing={3}>
                 {characters.map((character) => (
                     <InfoCard

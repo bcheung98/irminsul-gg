@@ -35,7 +35,7 @@ export default function SettingsList() {
     const {
         theme: themeIndex,
         statDisplay,
-        showUnreleasedContent,
+        hideUnreleasedContent,
         setTheme,
         setStatDisplay,
         toggleUnreleasedContent,
@@ -107,7 +107,7 @@ export default function SettingsList() {
                         </IconButton>
                     </Stack>
                     <Switch
-                        checked={showUnreleasedContent}
+                        checked={hideUnreleasedContent}
                         onChange={() => toggleUnreleasedContent()}
                     />
                 </Box>

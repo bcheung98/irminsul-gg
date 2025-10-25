@@ -7,7 +7,7 @@ export interface SettingsState {
     theme: number;
     statDisplay: SkillDisplay;
     server: Server;
-    showUnreleasedContent: boolean;
+    hideUnreleasedContent: boolean;
 }
 
 export interface SettingsActions {
@@ -23,7 +23,7 @@ export const initialState: SettingsState = {
     theme: 0,
     statDisplay: "slider",
     server: "NA",
-    showUnreleasedContent: false,
+    hideUnreleasedContent: true,
 };
 
 export const useSettingsStore = create(
@@ -41,7 +41,7 @@ export const useSettingsStore = create(
             },
             toggleUnreleasedContent: function () {
                 return set((state) => ({
-                    showUnreleasedContent: !state.showUnreleasedContent,
+                    hideUnreleasedContent: !state.hideUnreleasedContent,
                 }));
             },
         }),

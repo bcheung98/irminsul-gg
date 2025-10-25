@@ -1,4 +1,4 @@
-import { isUreleasedContent } from "@/helpers/isUnreleasedContent";
+import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { genshinMaterials } from "@/data/genshin/materials";
 import { GenshinMaterialCategory } from "@/types/genshin/materials";
 import { Material } from "@/types/materials";
@@ -13,18 +13,18 @@ const defaultMaterial: Material = {
     },
 };
 
-function getMaterials(showUnreleasedContent: boolean) {
+function getMaterials(hideUnreleasedContent: boolean) {
     let materials = genshinMaterials;
-    if (!showUnreleasedContent) {
+    if (hideUnreleasedContent) {
         materials = materials.filter((material) =>
-            isUreleasedContent(material.release.version, "genshin")
+            isUnreleasedContent(material.release.version, "genshin")
         );
     }
     return materials;
 }
 
-export function getGenshinMaterial(showUnreleasedContent = true) {
-    let materials = getMaterials(showUnreleasedContent);
+export function getGenshinMaterial(hideUnreleasedContent = false) {
+    let materials = getMaterials(hideUnreleasedContent);
     return (material: string | number) => {
         if (typeof material === "number") {
             return (
@@ -40,8 +40,8 @@ export function getGenshinMaterial(showUnreleasedContent = true) {
     };
 }
 
-export function getGenshinMaterialCategory(showUnreleasedContent = true) {
-    let materials = getMaterials(showUnreleasedContent);
+export function getGenshinMaterialCategory(hideUnreleasedContent = false) {
+    let materials = getMaterials(hideUnreleasedContent);
     return (category: GenshinMaterialCategory) => {
         return materials.filter((material) => material.category === category);
     };
