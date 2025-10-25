@@ -1,8 +1,8 @@
 // Component imports
-import Image from "../Image";
-import NavLink from "../NavLink";
-import Text from "../Text";
-import InfoBadge from "../InfoBadge/";
+import Image from "@/components/Image";
+import NavLink from "@/components/NavLink";
+import Text from "@/components/Text";
+import InfoBadge from "@/components/InfoBadge";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

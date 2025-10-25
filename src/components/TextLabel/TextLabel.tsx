@@ -1,6 +1,6 @@
 // Component imports
 import Image from "@/components/Image";
-import Text from "@/components/Text/";
+import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

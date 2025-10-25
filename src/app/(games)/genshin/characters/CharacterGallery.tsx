@@ -2,7 +2,7 @@
 
 // Component imports
 import InfoCard from "@/components/InfoCard";
-import InfoAvatar from "@/components/InfoAvatar/";
+import InfoAvatar from "@/components/InfoAvatar";
 
 // MUI imports
 import Box from "@mui/material/Box";
