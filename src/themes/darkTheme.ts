@@ -49,6 +49,7 @@ const textColors = {
 const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
 
 export const darkThemeData = {
+    id: 0,
     name: "Dark",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),

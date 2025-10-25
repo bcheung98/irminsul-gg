@@ -28,7 +28,7 @@ export default function StyledRoot({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const theme = getTheme("Dark");
+    const theme = getTheme(0);
 
     const pathname = usePathname();
     const pathSplit = pathname.split("/");
