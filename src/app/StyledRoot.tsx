@@ -4,7 +4,6 @@ import useSWR from "swr";
 import { usePathname } from "next/navigation";
 
 // Component imports
-import StoreProvider from "./StoreProvider";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 
@@ -19,6 +18,7 @@ import { GameListContext, DataContext, GameContext } from "@/app/context";
 import getTheme from "@/themes/theme";
 import { urls } from "@/lib/fetchData";
 import { games } from "@/data/games";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 
 // Type imports
 import { Game, GameInfo } from "@/types";
@@ -28,7 +28,9 @@ export default function StyledRoot({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const theme = getTheme(0);
+    const { theme: themeIndex } = useSettingsStore((state) => state);
+
+    const theme = getTheme(themeIndex);
 
     const pathname = usePathname();
     const pathSplit = pathname.split("/");
@@ -51,38 +53,36 @@ export default function StyledRoot({
     const { data } = getCurrentData();
 
     return (
-        <StoreProvider>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Toolbar variant="dense" id="back-to-top-anchor" />
-                <img src={theme.backgroundImageURL} id="background-image" />
-                <GameListContext value={websites}>
-                    <GameContext value={games[gameTag as Game]}>
-                        <DataContext value={data}>
-                            <NavBar />
-                            <Box sx={{ display: "flex" }}>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Toolbar variant="dense" id="back-to-top-anchor" />
+            <img src={theme.backgroundImageURL} id="background-image" />
+            <GameListContext value={websites}>
+                <GameContext value={games[gameTag as Game]}>
+                    <DataContext value={data}>
+                        <NavBar />
+                        <Box sx={{ display: "flex" }}>
+                            <Box
+                                sx={{
+                                    position: "relative",
+                                    minWidth: "0vw",
+                                    width: "100vw",
+                                }}
+                            >
                                 <Box
                                     sx={{
-                                        position: "relative",
-                                        minWidth: "0vw",
-                                        width: "100vw",
+                                        width: "100%",
+                                        minHeight: "100vh",
                                     }}
                                 >
-                                    <Box
-                                        sx={{
-                                            width: "100%",
-                                            minHeight: "100vh",
-                                        }}
-                                    >
-                                        {children}
-                                    </Box>
-                                    {pathname === "/" && <NavBarBottom />}
+                                    {children}
                                 </Box>
+                                {pathname === "/" && <NavBarBottom />}
                             </Box>
-                        </DataContext>
-                    </GameContext>
-                </GameListContext>
-            </ThemeProvider>
-        </StoreProvider>
+                        </Box>
+                    </DataContext>
+                </GameContext>
+            </GameListContext>
+        </ThemeProvider>
     );
 }
