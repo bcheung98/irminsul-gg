@@ -44,7 +44,7 @@ export default function NavBar() {
                     />
                 </FlexBox>
                 <FlexBox
-                    spacing={2}
+                    spacing={{ xs: 1, sm: 2 }}
                     sx={{
                         width: "100%",
                         justifyContent: { xs: "right", sm: "space-between" },
@@ -56,7 +56,7 @@ export default function NavBar() {
                             <CalendarMonthIcon />
                         </NavButton>
                     </FlexBox>
-                    <FlexBox spacing={2}>
+                    <FlexBox spacing={{ xs: 0, sm: 2 }}>
                         <SiteSearch />
                         <Settings />
                     </FlexBox>
