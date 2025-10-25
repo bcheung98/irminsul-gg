@@ -1,11 +1,13 @@
 import { SxProps, TypographyVariant } from "@mui/material";
 import { themeNames } from "@/themes/theme";
 import { darkThemeData } from "@/themes/darkTheme";
+import { nextThemeData } from "@/themes/nextTheme";
 
 export type ThemeNames = (typeof themeNames)[number];
 
 type DarkTheme = typeof darkThemeData;
-type ThemeData = DarkTheme;
+type ModernTheme = typeof nextThemeData;
+type ThemeData = DarkTheme & ModernTheme;
 
 export type CustomTheme = {
     [Key in keyof ThemeData]: ThemeData[Key];
