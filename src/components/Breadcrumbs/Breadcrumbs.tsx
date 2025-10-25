@@ -52,6 +52,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                                 ? theme.appbar.color.primary
                                 : theme.text.selected,
                         sx: {
+                            userSelect: "none",
                             textShadow:
                                 pathname.length > 2
                                     ? "none"
@@ -79,6 +80,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                                     ? theme.appbar.color.primary
                                     : theme.text.selected,
                             sx: {
+                                userSelect: "none",
                                 textShadow:
                                     index + 2 !== pathname.length - 1
                                         ? "none"
