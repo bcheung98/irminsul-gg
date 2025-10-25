@@ -18,6 +18,7 @@ export default function NavBarMiniRoot({
                 zIndex: theme.zIndex.drawer + 1,
                 alignItems: "center",
                 justifyContent: "space-between",
+                minHeight: "36px",
             })}
             onKeyDown={onKeyDown}
         >

@@ -49,7 +49,7 @@ export default function NavBarMiniMobile() {
                     timeout="auto"
                     onClick={handleMenuClose}
                     sx={(theme) => ({
-                        borderTop: `1px solid ${theme.border.color.secondary}`,
+                        borderTop: `1px solid ${theme.appbar.backgroundColor.selectedHover}`,
                         maxHeight: "50vh",
                         overflowY: "auto !important",
                     })}

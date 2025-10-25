@@ -14,8 +14,8 @@ export const navBarMiniStyles = (open?: boolean) => {
         }),
         menuButton: (): SxProps<Theme> => (theme) => ({
             borderRadius: "4px",
-            width: "28px",
-            height: "28px",
+            width: "24px",
+            height: "24px",
             color: theme.drawer.color.primary,
             backgroundColor: {
                 lg: open ? theme.palette.info.main : "transparent",
@@ -29,6 +29,8 @@ export const navBarMiniStyles = (open?: boolean) => {
             },
         }),
         menuIcon: (): SxProps => ({
+            width: "22.5px",
+            height: "22.5px",
             transform: open ? "rotateY(0deg)" : "rotateY(180deg)",
             transition: "transform 0.25s",
         }),
