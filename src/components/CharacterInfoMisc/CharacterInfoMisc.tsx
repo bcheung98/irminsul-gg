@@ -34,7 +34,7 @@ export default function CharacterInfoMisc(props: AttributeDataMisc) {
                             />
                             <Table.Cell
                                 align="right"
-                                label={{ title: row.value }}
+                                label={{ title: row.value || "???" }}
                                 {...cellProps}
                             />
                         </Table.Row>
@@ -68,9 +68,39 @@ function getRows(
                 value: attributes.voiceActors?.jp,
             },
         ],
-        hsr: [],
-        wuwa: [],
-        zzz: [],
+        hsr: [
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
+        wuwa: [
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
+        zzz: [
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
         uma: [],
     };
 }
