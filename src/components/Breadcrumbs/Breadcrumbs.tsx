@@ -46,7 +46,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                     icon={matches && `main/game-icons/${website.shortName}`}
                     title={matches ? website.name : website.shortName}
                     titleProps={{
-                        variant: "body2",
+                        variant: matches ? "body2" : "subtitle2",
                         color:
                             pathname.length > 2
                                 ? theme.appbar.color.primary
@@ -73,7 +73,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                             getCurrentData(item)
                         }
                         titleProps={{
-                            variant: "body2",
+                            variant: matches ? "body2" : "subtitle2",
                             color:
                                 index + 2 !== pathname.length - 1
                                     ? theme.appbar.color.primary
