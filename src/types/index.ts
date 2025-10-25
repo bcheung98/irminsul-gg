@@ -2,6 +2,18 @@ import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
 import { UmaVersion, VersionWithDate } from "./version";
 
+// General
+export interface BaseData {
+    id: number | string;
+    name: string;
+}
+export type Orientation = "row" | "column";
+export type SortOrder = "asc" | "desc";
+export interface VoiceActorData {
+    en: string;
+    jp: string;
+}
+
 // Taken from:
 // https://medium.com/xgeeks/typescript-utility-keyof-nested-object-fa3e457ef2b2
 export type NestedKeyOf<T extends object> = {
@@ -10,22 +22,7 @@ export type NestedKeyOf<T extends object> = {
         : `${K}`;
 }[keyof T & (string | number)];
 
-export type Orientation = "row" | "column";
-export type SortOrder = "asc" | "desc";
-export type SkillDisplay = "slider" | "table";
-
-export type Server = keyof typeof servers;
-
-export interface BaseData {
-    id: number | string;
-    name: string;
-}
-
-export interface VoiceActorData {
-    en: string;
-    jp: string;
-}
-
+// Attribute data
 export interface AttributeData {
     name?: string;
     displayName?: string;
@@ -39,9 +36,7 @@ export interface AttributeData {
     cost?: string;
     arkhe?: string | string[];
 }
-
 export type AttributeDataKey = keyof AttributeData;
-
 export interface AttributeDataMisc {
     constellationName?: string;
     nation?: string;
@@ -50,11 +45,10 @@ export interface AttributeDataMisc {
     release?: VersionWithDate;
     releaseUma?: UmaVersion;
 }
-
 export type AttributeDataMiscKey = keyof AttributeDataMisc;
 
+// Game data
 export type Game = (typeof gameNames)[number];
-
 export interface GameInfo {
     tag: string;
     name: string;
@@ -63,5 +57,8 @@ export interface GameInfo {
     color: string;
     dev: string;
 }
-
 export type GameData<T> = Record<Game, T>;
+
+// Settings
+export type SkillDisplay = "slider" | "table";
+export type Server = keyof typeof servers;
