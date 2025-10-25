@@ -2,8 +2,9 @@
 
 import { createTheme } from "@mui/material/styles";
 import { darkTheme } from "./darkTheme";
+import { nextTheme } from "./nextTheme";
 
-export const themeList = [darkTheme] as const;
+export const themeList = [darkTheme, nextTheme] as const;
 
 export const themeNames = themeList.map((t) => t.name);
 

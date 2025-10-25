@@ -1,15 +1,15 @@
 "use client";
 
-import { Rowdies } from "next/font/google";
+import { Inter } from "next/font/google";
 import { createTheme } from "@mui/material";
 import { getThemeBackgroundColors } from "@/helpers/styles";
 import { Shade } from "@/types/theme";
 
-const font = Rowdies({
+const font = Inter({
     weight: ["300", "400", "700"],
     subsets: ["latin"],
     display: "swap",
-    variable: "--font-rowdies",
+    variable: "--font-inter",
 });
 
 const appbarColors = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
@@ -49,9 +49,9 @@ const textColors = {
 
 const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
 
-export const darkThemeData = {
-    id: 0,
-    name: "Dark",
+export const nextThemeData = {
+    id: 1,
+    name: "Modern",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
     backgroundImageColors: ["rgba(23, 46, 98, 0)", "rgba(73, 218, 243, 0)"],
@@ -86,9 +86,9 @@ export const darkThemeData = {
     },
     font: {
         weight: {
-            primary: 300,
-            element: 300,
-            highlight: 300,
+            primary: 600,
+            element: 600,
+            highlight: 600,
             home: 400,
         },
         sizes: {
@@ -259,4 +259,4 @@ export const darkThemeData = {
     },
 };
 
-export const darkTheme = createTheme(darkThemeData);
+export const nextTheme = createTheme(nextThemeData);
