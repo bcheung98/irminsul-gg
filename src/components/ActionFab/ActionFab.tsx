@@ -25,6 +25,7 @@ interface ActionFabProps {
         bottom?: string | number;
         left?: string | number;
     };
+    zIndex?: number;
 }
 
 function ActionFab({
@@ -40,6 +41,7 @@ function ActionFab({
         top: 100,
         right: 20,
     },
+    zIndex,
 }: ActionFabProps) {
     const trigger = useScrollTrigger({
         disableHysteresis: !hysteresis,
@@ -48,7 +50,10 @@ function ActionFab({
 
     return (
         <Fade in={trigger}>
-            <Box onClick={action} sx={[{ position: "fixed" }, { ...position }]}>
+            <Box
+                onClick={action}
+                sx={[{ position: "fixed", zIndex: zIndex }, { ...position }]}
+            >
                 <Tooltip title={tooltip} arrow placement={tooltipArrow}>
                     <Fab
                         color={color}
@@ -56,14 +61,18 @@ function ActionFab({
                         disableRipple
                         sx={{
                             width: "100%",
+                            height: "100%",
                             p: 1,
-                            borderRadius: "4px",
+                            borderRadius: "8px",
                             color: "white",
                         }}
                     >
                         {icon || <KeyboardArrowLeftIcon />}
                         {label && (
-                            <Text variant="subtitle1" sx={{ ml: "4px" }}>
+                            <Text
+                                variant="subtitle1"
+                                sx={{ ml: "4px", textTransform: "none" }}
+                            >
                                 {label}
                             </Text>
                         )}
