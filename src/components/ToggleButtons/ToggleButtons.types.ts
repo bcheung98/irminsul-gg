@@ -4,6 +4,7 @@ import { ToggleButtonGroupProps } from "@mui/material/ToggleButtonGroup";
 export interface ToggleButtonProps extends MuiToggleButtonProps {
     icon?: React.ReactNode;
     label?: React.ReactNode;
+    tooltip?: React.ReactNode;
     padding?: number | string;
     highlightOnHover?: boolean;
 }

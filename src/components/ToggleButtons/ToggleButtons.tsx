@@ -1,23 +1,26 @@
 // Component imports
 import Text from "@/components/Text";
+import Tooltip from "@/components/Tooltip";
 import { ToggleButtonRoot, ToggleButtonGroupRoot } from "./ToggleButtonsRoot";
 
 // Type imports
 import { ToggleButtonProps, ToggleButtonsProps } from "./ToggleButtons.types";
 
 export function ToggleButton(props: ToggleButtonProps) {
-    const { icon, label, color } = props;
+    const { icon, label, tooltip, color } = props;
 
     return (
-        <ToggleButtonRoot {...props} color={color}>
-            {icon}
-            <Text
-                variant="body2-styled"
-                sx={{ color: "white", textTransform: "none" }}
-            >
-                {label}
-            </Text>
-        </ToggleButtonRoot>
+        <Tooltip title={tooltip} placement="top">
+            <ToggleButtonRoot {...props} color={color}>
+                {icon}
+                <Text
+                    variant="body2-styled"
+                    sx={{ color: "white", textTransform: "none" }}
+                >
+                    {label}
+                </Text>
+            </ToggleButtonRoot>
+        </Tooltip>
     );
 }
 
