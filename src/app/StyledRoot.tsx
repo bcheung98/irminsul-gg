@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation";
 // Component imports
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
+import ActionFab from "@/components/ActionFab";
 
 // MUI imports
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 // Helper imports
 import { GameListContext, DataContext, GameContext } from "@/context";
@@ -52,6 +54,19 @@ export default function StyledRoot({
     const websites = Object.values(games).map((game) => game) as GameInfo[];
     const { data } = getCurrentData();
 
+    const scrollToTop = (event: React.MouseEvent<HTMLDivElement>) => {
+        const anchor = (
+            (event.target as HTMLDivElement).ownerDocument || document
+        ).querySelector("#back-to-top-anchor");
+
+        if (anchor) {
+            anchor.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        }
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -83,6 +98,14 @@ export default function StyledRoot({
                     </DataContext>
                 </GameContext>
             </GameListContext>
+            <ActionFab
+                position={{ bottom: 50, left: 18 }}
+                action={scrollToTop}
+                icon={<KeyboardArrowUpIcon />}
+                tooltip="Scroll to top"
+                tooltipArrow="right"
+                zIndex={theme.zIndex.drawer + 1}
+            />
         </ThemeProvider>
     );
 }
