@@ -30,7 +30,7 @@ export default function InfoPageRoot({
     };
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{ pt: 2 }}>
             {renderElements(header)}
             {(leftColumn || rightColumn) && (
                 <Grid container spacing={2}>

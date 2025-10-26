@@ -61,7 +61,7 @@ export default function NavBar() {
                             <CalendarMonthIcon />
                         </NavButton>
                     </FlexBox>
-                    <FlexBox spacing={{ xs: 0, sm: 2 }}>
+                    <FlexBox spacing={{ xs: 0, sm: 2, lg: 4 }}>
                         {game && <SiteSearch />}
                         <Settings />
                     </FlexBox>

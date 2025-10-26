@@ -45,7 +45,7 @@ export default function NavBarBottom() {
                     flexWrap: "wrap",
                     gap: "8px",
                     py: "8px",
-                    width: "100%",
+                    width: game !== undefined ? "100%" : "75%",
                     mx: "auto",
                 }}
             >
