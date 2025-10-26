@@ -1,5 +1,5 @@
 // Component imports
-import InfoGalleryDrawerHeader from "./InfoGalleryDrawerHeader";
+import FilterDrawerHeader from "./FilterDrawerHeader";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -7,13 +7,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Drawer from "@mui/material/Drawer";
 
 // Type imports
-import { InfoGalleryDrawerProps } from "./InfoGalleryDrawer.types";
+import { FilterDrawerProps } from "./FilterDrawer.types";
 
-export default function InfoGalleryDrawerDesktop({
+export default function FilterDrawerDesktop({
     open,
     component,
     toggleDrawer,
-}: InfoGalleryDrawerProps) {
+}: FilterDrawerProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -45,7 +45,7 @@ export default function InfoGalleryDrawerDesktop({
                       }
             }
         >
-            <InfoGalleryDrawerHeader
+            <FilterDrawerHeader
                 toggleDrawer={toggleDrawer}
                 component={component}
             />

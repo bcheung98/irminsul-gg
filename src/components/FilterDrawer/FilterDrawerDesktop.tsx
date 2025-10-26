@@ -1,26 +1,26 @@
 // Component imports
-import InfoGalleryDrawerRoot from "./InfoGalleryDrawerRoot";
+import FilterDrawerRoot from "./FilterDrawerRoot";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import InfoGalleryDrawerHeader from "./InfoGalleryDrawerHeader";
+import FilterDrawerHeader from "./FilterDrawerHeader";
 
 // Type imports
-import { InfoGalleryDrawerProps } from "./InfoGalleryDrawer.types";
+import { FilterDrawerProps } from "./FilterDrawer.types";
 
 const width = 360; // px
 
-export default function InfoGalleryDrawerDesktop({
+export default function FilterDrawerDesktop({
     open,
     component,
     toggleDrawer,
-}: InfoGalleryDrawerProps) {
+}: FilterDrawerProps) {
     const theme = useTheme();
 
     return (
-        <InfoGalleryDrawerRoot
+        <FilterDrawerRoot
             variant="permanent"
             anchor="right"
             open={open}
@@ -37,10 +37,10 @@ export default function InfoGalleryDrawerDesktop({
                 },
             }}
         >
-            <InfoGalleryDrawerHeader
+            <FilterDrawerHeader
                 toggleDrawer={toggleDrawer}
                 component={component}
             />
-        </InfoGalleryDrawerRoot>
+        </FilterDrawerRoot>
     );
 }

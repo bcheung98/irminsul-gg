@@ -22,7 +22,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: width,
 });
 
-const InfoGalleryDrawerRoot = styled(MuiDrawer, {
+const FilterDrawerRoot = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
     width: width,
@@ -47,4 +47,4 @@ const InfoGalleryDrawerRoot = styled(MuiDrawer, {
     ],
 }));
 
-export default InfoGalleryDrawerRoot;
+export default FilterDrawerRoot;

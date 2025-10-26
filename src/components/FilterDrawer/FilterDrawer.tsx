@@ -1,8 +1,8 @@
 import { usePathname } from "next/navigation";
 
 // Component imports
-import DrawerDesktop from "./InfoGalleryDrawerDesktop";
-import DrawerMobile from "./InfoGalleryDrawerMobile";
+import DrawerDesktop from "./FilterDrawerDesktop";
+import DrawerMobile from "./FilterDrawerMobile";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -11,7 +11,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 // Helper imports
 import { useDrawerStore } from "@/stores/useDrawerStore";
 
-export default function InfoGalleryDrawer() {
+export default function FilterDrawer() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("lg"));
 

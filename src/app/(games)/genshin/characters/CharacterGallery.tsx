@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { useSearchValue, useStore, useView } from "@/hooks";
+import { useStore, useView } from "@/hooks";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 
@@ -35,12 +35,9 @@ export default function CharacterGallery({
         game
     );
 
-    const { searchValue, handleInputChange } = useSearchValue();
     const { view, handleView } = useView("icon");
 
     const params = {
-        searchValue,
-        handleInputChange,
         view,
         handleView,
     };

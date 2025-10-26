@@ -15,6 +15,7 @@ export const GameListContext = createContext<GameInfo[]>([]);
 export const GameContext = createContext<GameInfo>(defaultGameInfo);
 export const DataContext = createContext<any[]>([]);
 export const SkillContext = createContext<CharacterSkillsList | null>(null);
+export const SearchContext = createContext<string>("");
 
 export function useGameList() {
     return useContext(GameListContext);
@@ -35,4 +36,8 @@ export function useDataContext() {
 
 export function useSkillContext() {
     return useContext(SkillContext);
+}
+
+export function useSearchContext() {
+    return useContext(SearchContext);
 }
