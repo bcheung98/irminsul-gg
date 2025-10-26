@@ -3,6 +3,7 @@
 // Component imports
 import NavBarMini from "@/components/NavBarMini";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
+import InfoGalleryDrawer from "@/components/InfoGalleryDrawer";
 
 // MUI imports
 import Box from "@mui/material/Box";
@@ -38,6 +39,7 @@ export default function StyledRoot({
                     <NavBarBottom />
                 </Box>
             </Box>
+            <InfoGalleryDrawer />
         </Box>
     );
 }

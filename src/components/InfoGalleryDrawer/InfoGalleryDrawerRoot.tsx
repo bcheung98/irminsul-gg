@@ -1,16 +1,16 @@
-import { styled, Theme, CSSObject } from "@mui/material/styles";
+// MUI imports
+import { styled, CSSObject, Theme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 
-const widthOpen = 240; // px
-const widthClose = 76; // px
+const width = 360; // px
 
 const openedMixin = (theme: Theme): CSSObject => ({
-    width: widthOpen,
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
     }),
     overflowX: "hidden",
+    width: width,
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -19,13 +19,13 @@ const closedMixin = (theme: Theme): CSSObject => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: `${widthClose}px`,
+    width: width,
 });
 
-const NavDrawerRoot = styled(MuiDrawer, {
+const InfoGalleryDrawerRoot = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
-    width: widthOpen,
+    width: width,
     flexShrink: 0,
     whiteSpace: "nowrap",
     boxSizing: "border-box",
@@ -47,4 +47,4 @@ const NavDrawerRoot = styled(MuiDrawer, {
     ],
 }));
 
-export default NavDrawerRoot;
+export default InfoGalleryDrawerRoot;
