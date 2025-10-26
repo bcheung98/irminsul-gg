@@ -1,17 +1,17 @@
 "use client";
 
 // Component imports
+import InfoGallery from "@/components/InfoGallery";
 import InfoCard from "@/components/InfoCard";
 import InfoAvatar from "@/components/InfoAvatar";
 
 // MUI imports
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useSearchValue, useStore, useView } from "@/hooks";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { useStore } from "@/hooks";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 
 // Type imports
@@ -35,35 +35,48 @@ export default function CharacterGallery({
         game
     );
 
+    const { searchValue, handleInputChange } = useSearchValue();
+    const { view, handleView } = useView("icon");
+
+    const params = {
+        searchValue,
+        handleInputChange,
+        view,
+        handleView,
+    };
+
     return (
-        <Box sx={{ px: 1 }}>
-            <Grid container spacing={3}>
-                {characters.map((character) => (
-                    <InfoCard
-                        tag="genshin/characters"
-                        key={character.id}
-                        name={character.name}
-                        displayName={character.fullName}
-                        rarity={character.rarity}
-                        badgeLeft={{
-                            element: character.element,
-                            weaponType: character.weapon,
-                        }}
-                    />
-                ))}
-            </Grid>
-            {/* <Grid container spacing={3}>
-                {characters.map((character) => (
-                    <InfoAvatar
-                        tag="genshin/characters"
-                        key={character.id}
-                        name={character.name}
-                        displayName={character.fullName}
-                        rarity={character.rarity}
-                        url="avatars"
-                    />
-                ))}
-            </Grid> */}
-        </Box>
+        <InfoGallery title="Characters" {...params}>
+            {view === "icon" && (
+                <Grid container spacing={3}>
+                    {characters.map((character) => (
+                        <InfoCard
+                            tag="genshin/characters"
+                            key={character.id}
+                            name={character.name}
+                            displayName={character.fullName}
+                            rarity={character.rarity}
+                            badgeLeft={{
+                                element: character.element,
+                                weaponType: character.weapon,
+                            }}
+                        />
+                    ))}
+                </Grid>
+            )}
+            {view === "card" && (
+                <Grid container spacing={3}>
+                    {characters.map((character) => (
+                        <InfoAvatar
+                            tag="genshin/characters"
+                            key={character.id}
+                            name={character.name}
+                            displayName={character.fullName}
+                            rarity={character.rarity}
+                        />
+                    ))}
+                </Grid>
+            )}
+        </InfoGallery>
     );
 }

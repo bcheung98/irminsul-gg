@@ -5,6 +5,7 @@ import { UmaVersion, Version, VersionWithDate } from "./version";
 // General
 export type Orientation = "row" | "column";
 export type SortOrder = "asc" | "desc";
+export type GalleryView = "icon" | "card" | "table";
 export interface VoiceActorData {
     en: string;
     jp: string;

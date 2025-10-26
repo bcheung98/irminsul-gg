@@ -5,7 +5,6 @@ import NavBarMini from "@/components/NavBarMini";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 
 // MUI imports
-import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
@@ -18,14 +17,14 @@ export default function StyledRoot({
         <Box sx={{ display: "flex" }}>
             <NavBarMini />
             <Box
-                sx={(theme) => ({
+                sx={{
                     px: { xs: 1, md: 2 },
-                    py: 8,
+                    py: 5,
+                    pb: 8,
                     minWidth: "0vw",
                     width: "100vw",
                     minHeight: "100vh",
-                    backgroundColor: alpha(theme.background(0), 0.5),
-                })}
+                }}
             >
                 {children}
                 <Toolbar variant="dense" />
