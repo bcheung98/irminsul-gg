@@ -14,7 +14,7 @@ export function ToggleButton(props: ToggleButtonProps) {
             <ToggleButtonRoot {...props} color={color}>
                 {icon}
                 <Text
-                    variant="body2-styled"
+                    variant="subtitle1"
                     sx={{ color: "white", textTransform: "none" }}
                 >
                     {label}
