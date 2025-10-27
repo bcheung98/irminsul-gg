@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // Component imports
 import Text from "@/components/Text";
@@ -16,9 +16,11 @@ import TableRowsIcon from "@mui/icons-material/TableRows";
 import TuneIcon from "@mui/icons-material/Tune";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
+// Helper imports
+import { useDrawerStore } from "@/stores/useDrawerStore";
+
 // Type imports
 import { InfoGalleryButtonProps, InfoGalleryProps } from "./InfoGallery.types";
-import { useDrawerStore } from "@/stores/useDrawerStore";
 
 export default function InfoGalleryHeader({
     title,
@@ -31,16 +33,17 @@ export default function InfoGalleryHeader({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-    const {
-        rightDrawerOpen,
-        toggleRightDrawer,
-        toggleRightDrawerMobile,
-    } = useDrawerStore();
+    const { rightDrawerOpen, toggleRightDrawer, toggleRightDrawerMobile } =
+        useDrawerStore();
 
     useEffect(() => {
         toggleRightDrawer();
         toggleRightDrawerMobile();
     }, [matches]);
+
+    const toggleDrawerState = () => {
+        matches ? toggleRightDrawer() : toggleRightDrawerMobile();
+    };
 
     return (
         <Grid container spacing={2}>
@@ -67,9 +70,7 @@ export default function InfoGalleryHeader({
             </Grid>
             <Grid size={{ xs: 12, sm: "auto" }}>
                 <Button
-                    onClick={
-                        matches ? toggleRightDrawer : toggleRightDrawerMobile
-                    }
+                    onClick={toggleDrawerState}
                     variant="contained"
                     color="primary"
                     disableElevation

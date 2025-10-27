@@ -6,8 +6,8 @@ export interface DrawerState {
 }
 
 export interface DrawerActions {
-    toggleRightDrawer: () => void;
-    toggleRightDrawerMobile: () => void;
+    toggleRightDrawer: (open?: boolean) => void;
+    toggleRightDrawerMobile: (open?: boolean) => void;
 }
 
 export type DrawerStore = DrawerState & DrawerActions;
@@ -19,12 +19,14 @@ export const initialState: DrawerState = {
 
 export const useDrawerStore = create<DrawerStore>((set) => ({
     ...initialState,
-    toggleRightDrawer: function () {
-        return set((state) => ({ rightDrawerOpen: !state.rightDrawerOpen }));
-    },
-    toggleRightDrawerMobile: function () {
+    toggleRightDrawer: function (open) {
         return set((state) => ({
-            rightDrawerMobileOpen: !state.rightDrawerMobileOpen,
+            rightDrawerOpen: open ?? !state.rightDrawerOpen,
+        }));
+    },
+    toggleRightDrawerMobile: function (open) {
+        return set((state) => ({
+            rightDrawerMobileOpen: open ?? !state.rightDrawerMobileOpen,
         }));
     },
 }));

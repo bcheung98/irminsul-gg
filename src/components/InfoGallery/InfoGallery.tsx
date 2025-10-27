@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 // Component imports
 import InfoGalleryHeader from "./InfoGalleryHeader";
 import ActionFab from "@/components/ActionFab";
@@ -16,12 +18,16 @@ import { InfoGalleryProps } from "./InfoGallery.types";
 
 export default function InfoGallery(props: InfoGalleryProps) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("md"));
+    const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-    const { toggleRightDrawer } = useDrawerStore();
-    const toggleDrawerState = () => {
-        toggleRightDrawer();
+    const { toggleRightDrawer, toggleRightDrawerMobile } = useDrawerStore();
+    const toggleDrawerState = (open?: boolean) => {
+        matches ? toggleRightDrawer(open) : toggleRightDrawerMobile(open);
     };
+
+    useEffect(() => {
+        toggleDrawerState(matches);
+    }, [matches]);
 
     return (
         <>

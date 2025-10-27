@@ -30,13 +30,13 @@ export default function FilterDrawer() {
     return matches ? (
         <DrawerDesktop
             open={rightDrawerOpen}
-            toggleDrawer={toggleRightDrawer}
+            toggleDrawer={() => toggleRightDrawer()}
             component={component}
         />
     ) : (
         <DrawerMobile
             open={rightDrawerMobileOpen}
-            toggleDrawer={toggleRightDrawerMobile}
+            toggleDrawer={() => toggleRightDrawerMobile()}
             component={component}
         />
     );
