@@ -26,6 +26,9 @@ export interface BaseData {
 export interface BaseDataWithRelease extends BaseData {
     release: Version;
 }
+export interface Filters {
+    [key: string]: (string | number)[];
+}
 
 // Attribute data
 export interface AttributeData {

@@ -1,5 +1,7 @@
 "use client";
 
+import { BaseSyntheticEvent, useState, useMemo } from "react";
+
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
 import InfoCard from "@/components/InfoCard";
@@ -13,6 +15,8 @@ import { useGameTag } from "@/context";
 import { useStore, useView } from "@/hooks";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useFilterStore } from "@/stores/useFilterStore";
+import { filterItems } from "@/helpers/filters";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
@@ -23,6 +27,8 @@ export default function CharacterGallery({
     characters: GenshinCharacter[];
 }) {
     const game = useGameTag();
+
+    const filters = useFilterStore()["genshin/character"];
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
@@ -35,18 +41,30 @@ export default function CharacterGallery({
         game
     );
 
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = (event: BaseSyntheticEvent) => {
+        setSearchValue(event.target.value);
+    };
+
     const { view, handleView } = useView("icon");
 
     const params = {
         view,
         handleView,
+        searchValue,
+        handleInputChange,
     };
+
+    const currentCharacters = useMemo(
+        () => filterItems(characters, filters, searchValue),
+        [characters, filters, searchValue]
+    );
 
     return (
         <InfoGallery title="Characters" {...params}>
             {view === "icon" && (
                 <Grid container spacing={3}>
-                    {characters.map((character) => (
+                    {currentCharacters.map((character) => (
                         <InfoCard
                             tag="genshin/characters"
                             key={character.id}
@@ -63,7 +81,7 @@ export default function CharacterGallery({
             )}
             {view === "card" && (
                 <Grid container spacing={3}>
-                    {characters.map((character) => (
+                    {currentCharacters.map((character) => (
                         <InfoAvatar
                             tag="genshin/characters"
                             key={character.id}

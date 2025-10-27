@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 // Component imports
 import Text from "@/components/Text";
 import ToggleButtons from "@/components/ToggleButtons";
+import SearchBar from "@/components/SearchBar";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -24,12 +25,17 @@ export default function InfoGalleryHeader({
     buttons = defaultButtons,
     view,
     handleView,
+    searchValue,
+    handleInputChange,
 }: InfoGalleryProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-    const { rightDrawerOpen, toggleRightDrawer, toggleRightDrawerMobile } =
-        useDrawerStore();
+    const {
+        rightDrawerOpen,
+        toggleRightDrawer,
+        toggleRightDrawerMobile,
+    } = useDrawerStore();
 
     useEffect(() => {
         toggleRightDrawer();
@@ -49,6 +55,14 @@ export default function InfoGalleryHeader({
                     exclusive
                     onChange={handleView}
                     highlightOnHover={false}
+                />
+            </Grid>
+            <Grid size={{ xs: 12, sm: "auto" }}>
+                <SearchBar
+                    placeholder="Search"
+                    value={searchValue}
+                    onChange={handleInputChange}
+                    sx={{ height: "32px" }}
                 />
             </Grid>
             <Grid size={{ xs: 12, sm: "auto" }}>

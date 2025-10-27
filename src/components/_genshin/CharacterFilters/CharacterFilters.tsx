@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
 
 // Component imports
 import Dropdown from "@/components/Dropdown";
@@ -10,8 +10,9 @@ import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { createFilterButtons } from "@/helpers/filters";
 import { elements } from "@/data/genshin/common";
+import { createFilterButtons } from "@/helpers/filters";
+import { useFilterStore } from "@/stores/useFilterStore";
 
 // Type imports
 import {
@@ -20,14 +21,15 @@ import {
     GenshinWeaponType,
 } from "@/types/genshin";
 import { CharacterAscensionStat } from "@/types/genshin/character";
+import { Filters } from "@/types";
 
-interface CharacterFilterState {
+export interface GenshinCharacterFilterState extends Filters {
     element: GenshinElement[];
     weaponType: GenshinWeaponType[];
     rarity: GenshinRarity[];
 }
 
-const initialState: CharacterFilterState = {
+const initialState: GenshinCharacterFilterState = {
     element: [],
     weaponType: [],
     rarity: [],
@@ -36,7 +38,9 @@ const initialState: CharacterFilterState = {
 export default function CharacterFilters() {
     const theme = useTheme();
 
-    const filterGroups = (filters: CharacterFilterState) => ({
+    const setFilterState = useFilterStore().setFilterState;
+
+    const filterGroups = (filters: GenshinCharacterFilterState) => ({
         element: {
             name: "Element",
             value: filters.element,
@@ -46,28 +50,24 @@ export default function CharacterFilters() {
         },
     });
 
-    const [searchValue, setSearchValue] = useState("");
-    const handleInputChange = (event: BaseSyntheticEvent) => {
-        setSearchValue(event.target.value);
-    };
     const [filters, setFilters] = useState(initialState);
 
     const { element } = filterGroups(filters);
 
-    const activeFilters =
-        Object.values(filters).flat().length > 0 || searchValue !== "";
+    const activeFilters = Object.values(filters).flat().length > 0;
 
     const clearFilters = () => {
         setFilters(initialState);
-        setSearchValue("");
     };
 
     const params = {
         clearFilters,
         activeFilters,
-        searchValue,
-        handleInputChange,
     };
+
+    useEffect(() => {
+        setFilterState("genshin/character", filters);
+    }, [filters]);
 
     return (
         <Stack spacing={2}>
