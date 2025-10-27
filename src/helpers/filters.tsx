@@ -1,19 +1,27 @@
 import { Dispatch, SetStateAction } from "react";
-import Image from "@/components/Image";
-import { Filters } from "@/types";
+import TextLabel from "@/components/TextLabel";
+import { FilterButtons, Filters } from "@/types";
 
-export function createFilterButtons<T extends string>(
-    items: readonly T[],
-    url: string
-) {
+export function createFilterButtons<T extends string | number>({
+    items,
+    url,
+    label,
+}: {
+    items: readonly T[];
+    url?: string;
+    label?: React.ReactNode;
+}): FilterButtons[] {
     return items.map((item) => ({
         value: item,
         icon: url && (
-            <Image
-                src={`${url}/${item}`}
-                alt={`${item}`}
-                style={{ width: "32px", padding: "4px", borderRadius: "4px" }}
-                tooltip={item}
+            <TextLabel
+                icon={`${url}/${item}`}
+                iconProps={{
+                    size: 32,
+                    padding: "4px",
+                    tooltip: !label ? `${item}` : "",
+                }}
+                title={label}
             />
         ),
     }));
@@ -38,6 +46,16 @@ export function filterItems<T extends Record<string, any>>(
     if (!filters) return items;
     if (filters.element.length > 0) {
         items = items.filter((item) => filters.element.includes(item.element));
+    }
+    if (filters.weaponType.length > 0) {
+        items = items.filter(
+            (item) =>
+                filters.weaponType.includes(item.weapon) ||
+                filters.weaponType.includes(item.weaponType)
+        );
+    }
+    if (filters.rarity.length > 0) {
+        items = items.filter((item) => filters.rarity.includes(item.rarity));
     }
     if (searchValue) {
         items = items.filter(

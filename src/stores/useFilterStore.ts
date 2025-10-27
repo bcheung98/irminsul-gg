@@ -16,6 +16,13 @@ export const genshinFilters: GenshinCharacterFilterState = {
     element: [],
     weaponType: [],
     rarity: [],
+    ascStat: [],
+    talentBook: [],
+    commonMat: [],
+    bossMat: [],
+    weeklyBossMat: [],
+    localMat: [],
+    nation: [],
 };
 
 export const initialState: FilterState = {

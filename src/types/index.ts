@@ -80,6 +80,12 @@ export type FilterGroups = Record<string, FilterGroup>;
 export interface FilterGroup {
     name: string;
     value: (string | number)[];
-    buttons: ReturnType<typeof createFilterButtons>;
+    buttons: FilterButtons[];
     onChange: (...args: any) => any;
+    padding?: string | number;
+}
+export interface FilterButtons {
+    value: string | number;
+    icon?: React.ReactNode;
+    label?: React.ReactNode;
 }
