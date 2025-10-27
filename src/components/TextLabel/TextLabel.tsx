@@ -31,54 +31,62 @@ export default function TextLabel({
             alignItems={alignItems}
             justifyContent={justifyContent}
         >
-            {typeof icon === "string" ? (
-                <Image
-                    src={icon}
-                    size={iconProps?.size || 24}
-                    style={{
-                        ...{
-                            borderRadius: iconProps?.borderRadius || "4px",
-                            padding: iconProps?.padding || 0,
-                        },
-                        ...iconProps?.styles,
-                    }}
-                    tooltip={iconProps?.tooltip}
-                    responsive
-                    responsiveSize={0.2}
-                />
-            ) : (
-                icon
-            )}
-            <Stack spacing={textSpacing || 0}>
-                <Text
-                    component={titleProps?.component || "span"}
-                    variant={titleProps?.variant || "body1"}
-                    sx={{
-                        ...{
-                            color: titleProps?.color || theme.text.primary,
-                            textAlign: justifyContent,
-                            "&:hover": {
-                                color: isLink ? theme.text.selected : "global",
-                                textDecoration: isLink ? "underline" : "none",
-                                cursor: isLink
-                                    ? "pointer"
-                                    : titleProps?.defaultCursor || "inherit",
+            {icon &&
+                (typeof icon === "string" ? (
+                    <Image
+                        src={icon}
+                        size={iconProps?.size || 24}
+                        style={{
+                            ...{
+                                borderRadius: iconProps?.borderRadius || "4px",
+                                padding: iconProps?.padding || 0,
                             },
-                        },
-                        ...titleProps?.sx,
-                    }}
-                >
-                    {title}
-                </Text>
-                {subtitle && (
+                            ...iconProps?.styles,
+                        }}
+                        tooltip={iconProps?.tooltip}
+                        responsive
+                        responsiveSize={0.2}
+                    />
+                ) : (
+                    icon
+                ))}
+            {(title || subtitle) && (
+                <Stack spacing={textSpacing || 0}>
                     <Text
-                        variant={subtitleProps?.variant || "body2"}
-                        sx={{ color: subtitleProps?.color || "inherit" }}
+                        component={titleProps?.component || "span"}
+                        variant={titleProps?.variant || "body1"}
+                        sx={{
+                            ...{
+                                color: titleProps?.color || theme.text.primary,
+                                textAlign: justifyContent,
+                                "&:hover": {
+                                    color: isLink
+                                        ? theme.text.selected
+                                        : "global",
+                                    textDecoration: isLink
+                                        ? "underline"
+                                        : "none",
+                                    cursor: isLink
+                                        ? "pointer"
+                                        : titleProps?.defaultCursor ||
+                                          "inherit",
+                                },
+                            },
+                            ...titleProps?.sx,
+                        }}
                     >
-                        {subtitle}
+                        {title}
                     </Text>
-                )}
-            </Stack>
+                    {subtitle && (
+                        <Text
+                            variant={subtitleProps?.variant || "body2"}
+                            sx={{ color: subtitleProps?.color || "inherit" }}
+                        >
+                            {subtitle}
+                        </Text>
+                    )}
+                </Stack>
+            )}
         </Stack>
     );
 }
