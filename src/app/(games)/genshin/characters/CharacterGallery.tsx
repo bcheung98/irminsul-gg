@@ -1,6 +1,7 @@
 "use client";
 
 import { BaseSyntheticEvent, useState, useMemo } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
@@ -28,7 +29,9 @@ export default function CharacterGallery({
 }) {
     const game = useGameTag();
 
-    const filters = useFilterStore()["genshin/character"];
+    const filters = useFilterStore(
+        useShallow((state) => state["genshin/character"])
+    );
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
@@ -60,38 +63,47 @@ export default function CharacterGallery({
         [characters, filters, searchValue]
     );
 
+    const renderGallery = () => {
+        switch (view) {
+            case "icon":
+            default:
+                return (
+                    <Grid container spacing={3}>
+                        {currentCharacters.map((character) => (
+                            <InfoCard
+                                tag="genshin/characters"
+                                key={character.id}
+                                name={character.name}
+                                displayName={character.fullName}
+                                rarity={character.rarity}
+                                badgeLeft={{
+                                    element: character.element,
+                                    weaponType: character.weapon,
+                                }}
+                            />
+                        ))}
+                    </Grid>
+                );
+            case "card":
+                return (
+                    <Grid container spacing={3}>
+                        {currentCharacters.map((character) => (
+                            <InfoAvatar
+                                tag="genshin/characters"
+                                key={character.id}
+                                name={character.name}
+                                displayName={character.fullName}
+                                rarity={character.rarity}
+                            />
+                        ))}
+                    </Grid>
+                );
+        }
+    };
+
     return (
         <InfoGallery title="Characters" {...params}>
-            {view === "icon" && (
-                <Grid container spacing={3}>
-                    {currentCharacters.map((character) => (
-                        <InfoCard
-                            tag="genshin/characters"
-                            key={character.id}
-                            name={character.name}
-                            displayName={character.fullName}
-                            rarity={character.rarity}
-                            badgeLeft={{
-                                element: character.element,
-                                weaponType: character.weapon,
-                            }}
-                        />
-                    ))}
-                </Grid>
-            )}
-            {view === "card" && (
-                <Grid container spacing={3}>
-                    {currentCharacters.map((character) => (
-                        <InfoAvatar
-                            tag="genshin/characters"
-                            key={character.id}
-                            name={character.name}
-                            displayName={character.fullName}
-                            rarity={character.rarity}
-                        />
-                    ))}
-                </Grid>
-            )}
+            {renderGallery()}
         </InfoGallery>
     );
 }
