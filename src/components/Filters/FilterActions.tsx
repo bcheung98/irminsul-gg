@@ -4,15 +4,15 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
-interface FilterDrawerActionsProps {
+interface FilterActionsProps {
     clearFilters: () => void;
     activeFilters: boolean;
 }
 
-export default function FilterDrawerActions({
+export default function FilterActions({
     clearFilters,
     activeFilters,
-}: FilterDrawerActionsProps) {
+}: FilterActionsProps) {
     const theme = useTheme();
 
     return (

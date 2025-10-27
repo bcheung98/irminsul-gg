@@ -1,6 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
 import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
 import { UmaVersion, Version, VersionWithDate } from "./version";
+import { createFilterButtons } from "@/helpers/filters";
 
 // General
 export type Orientation = "row" | "column";
@@ -25,9 +27,6 @@ export interface BaseData {
 }
 export interface BaseDataWithRelease extends BaseData {
     release: Version;
-}
-export interface Filters {
-    [key: string]: (string | number)[];
 }
 
 // Attribute data
@@ -70,3 +69,17 @@ export type GameData<T> = Record<Game, T>;
 // Settings
 export type SkillDisplay = "slider" | "table";
 export type Server = keyof typeof servers;
+
+// Filters
+export type Filters = Record<string, (string | number)[]>;
+export interface FilterGroupsProps<T> {
+    filters: T;
+    setFilters: Dispatch<SetStateAction<T>>;
+}
+export type FilterGroups = Record<string, FilterGroup>;
+export interface FilterGroup {
+    name: string;
+    value: (string | number)[];
+    buttons: ReturnType<typeof createFilterButtons>;
+    onChange: (...args: any) => any;
+}

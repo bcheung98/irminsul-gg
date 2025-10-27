@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import Image from "@/components/Image";
 import { Filters } from "@/types";
 
@@ -16,6 +17,17 @@ export function createFilterButtons<T extends string>(
             />
         ),
     }));
+}
+
+export function filterActions<T>(
+    initialState: T,
+    filters: Filters,
+    setFilters: Dispatch<SetStateAction<T>>
+) {
+    return {
+        clearFilters: () => setFilters(initialState),
+        activeFilters: Object.values(filters).flat().length > 0,
+    };
 }
 
 export function filterItems<T extends Record<string, any>>(
@@ -37,6 +49,6 @@ export function filterItems<T extends Record<string, any>>(
                 item.fullName.toLowerCase().includes(searchValue.toLowerCase())
         );
     }
-    
+
     return items;
 }
