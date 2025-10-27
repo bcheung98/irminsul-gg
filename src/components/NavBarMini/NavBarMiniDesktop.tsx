@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FlexBox from "@/components/FlexBox";
 
 // MUI imports
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -17,9 +18,11 @@ import { useGame } from "@/context";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniDesktop() {
+    const matches = useMediaQuery((theme) => theme.breakpoints.up("xl"));
+
     const game = useGame();
 
-    const [drawerOpen, setDrawerOpen] = useState(true);
+    const [drawerOpen, setDrawerOpen] = useState(matches);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
     };
