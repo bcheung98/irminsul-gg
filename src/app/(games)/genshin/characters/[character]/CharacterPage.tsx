@@ -15,9 +15,9 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Type imports
-import { GenshinCharacter } from "@/types/genshin/character";
 import { AttributeData, AttributeDataMisc } from "@/types";
 import { CharacterSkillsList } from "@/types/skill";
+import { GenshinCharacter } from "@/types/genshin/character";
 
 export default function CharacterPage({
     character,
@@ -102,10 +102,10 @@ export default function CharacterPage({
 
     const rightColumn = [];
     if (matches_up_md) rightColumn.push(InfoMain);
+    if (matches_up_md && !matches_up_lg) rightColumn.push(InfoMisc);
 
     const children = [Skills, Passives, Upgrades];
-    if (!matches_up_lg) children.unshift(InfoMisc);
-    if (!matches_up_md) children.unshift(InfoMain, Splash);
+    if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (
         <CharacterPageRoot
