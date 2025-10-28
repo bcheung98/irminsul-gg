@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Component imports
 import NavBarMiniRoot from "./NavBarMiniRoot";
@@ -18,7 +18,7 @@ import { useGame } from "@/context";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniDesktop() {
-    const matches = useMediaQuery((theme) => theme.breakpoints.up("xl"));
+    const matches = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
     const game = useGame();
 
@@ -28,6 +28,10 @@ export default function NavBarMiniDesktop() {
     };
 
     const styles = navBarMiniStyles(drawerOpen);
+
+    useEffect(() => {
+        setDrawerOpen(matches);
+    }, [matches]);
 
     return (
         <Box sx={{ display: { xs: "none", lg: "block" } }}>

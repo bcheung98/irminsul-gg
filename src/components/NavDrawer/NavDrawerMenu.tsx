@@ -8,7 +8,7 @@ import Tooltip from "@/components/Tooltip";
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 
@@ -38,43 +38,50 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
     };
 
     return (
-        <Stack className="nav-mobile" spacing={1} sx={{ py: { xs: 1, lg: 0 } }}>
+        <Grid
+            container
+            className="nav-mobile"
+            spacing={1}
+            sx={{ p: { xs: 1, lg: 0 } }}
+        >
             {items.map((item, index) => (
-                <ButtonBase
-                    key={index}
-                    href={`/${game}/${item.href}`}
-                    LinkComponent={NavLink}
-                >
-                    <Tooltip
-                        title={!open ? item.title : ""}
-                        arrow
-                        placement="right"
+                <Grid key={index} size={{ xs: 12, sm: 3, lg: 12 }}>
+                    <ButtonBase
+                        href={`/${game}/${item.href}`}
+                        LinkComponent={NavLink}
                     >
-                        <Box
-                            sx={{
-                                p: { xs: "4px 16px", sm: "4px 24px" },
-                                "&:hover": {
-                                    backgroundColor:
-                                        theme.drawer.backgroundColor.hover,
-                                },
-                            }}
+                        <Tooltip
+                            title={!open ? item.title : ""}
+                            arrow
+                            placement="right"
                         >
-                            <TextLabel
-                                icon={`${game}/${item.icon}`}
-                                iconProps={{ size: 28 }}
-                                title={open ? item.title : ""}
-                                titleProps={{
-                                    sx: textStyles(item.href),
-                                    variant: matches
-                                        ? "subtitle1"
-                                        : "subtitle2",
+                            <Box
+                                sx={{
+                                    p: { xs: "4px 16px", sm: "4px 24px" },
+                                    borderRadius: { xs: "4px", lg: 0 },
+                                    "&:hover": {
+                                        backgroundColor:
+                                            theme.drawer.backgroundColor.hover,
+                                    },
                                 }}
-                                spacing={2}
-                            />
-                        </Box>
-                    </Tooltip>
-                </ButtonBase>
+                            >
+                                <TextLabel
+                                    icon={`${game}/${item.icon}`}
+                                    iconProps={{ size: 28 }}
+                                    title={open ? item.title : ""}
+                                    titleProps={{
+                                        sx: textStyles(item.href),
+                                        variant: matches
+                                            ? "subtitle1"
+                                            : "subtitle2",
+                                    }}
+                                    spacing={2}
+                                />
+                            </Box>
+                        </Tooltip>
+                    </ButtonBase>
+                </Grid>
             ))}
-        </Stack>
+        </Grid>
     );
 }

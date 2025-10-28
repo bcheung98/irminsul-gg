@@ -14,11 +14,12 @@ export default function NavBarMiniRoot({
             variant="dense"
             sx={(theme) => ({
                 containerType: "inline-size",
-                gap: "32px",
+                gap: "24px",
                 zIndex: theme.zIndex.drawer + 1,
                 alignItems: "center",
-                justifyContent: "space-between",
                 minHeight: "36px",
+                flexDirection: { xs: "row-reverse", md: "row" },
+                justifyContent: { xs: "space-between", md: "left" },
             })}
             onKeyDown={onKeyDown}
         >

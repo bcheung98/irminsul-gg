@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Component imports
 import NavBarMiniRoot from "./NavBarMiniRoot";
 import NavDrawer from "@/components/NavDrawer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import MenuCloseIcon from "@/components/MenuCloseIcon";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import AppBar from "@mui/material/AppBar";
@@ -18,7 +21,11 @@ import { useGame } from "@/context";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniMobile() {
+    const theme = useTheme();
+
     const game = useGame();
+
+    const pathname = usePathname();
 
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleMenuState = () => {
@@ -35,24 +42,40 @@ export default function NavBarMiniMobile() {
 
     const styles = navBarMiniStyles();
 
+    useEffect(() => {
+        handleMenuClose();
+    }, [pathname]);
+
     return (
         <Box sx={{ display: { xs: "block", lg: "none" } }}>
             <AppBar sx={styles.root()}>
                 <NavBarMiniRoot onKeyDown={handleMenuKeyDown}>
+                    <Tooltip title={!menuOpen ? "Open menu" : "Close menu"}>
+                        <IconButton
+                            onClick={toggleMenuState}
+                            sx={{
+                                p: 0.5,
+                                mr: 0.5,
+                                "&:hover": {
+                                    backgroundColor:
+                                        theme.drawer.backgroundColor.hover,
+                                },
+                            }}
+                        >
+                            <MenuCloseIcon open={menuOpen} />
+                        </IconButton>
+                    </Tooltip>
                     {game && <Breadcrumbs website={game} />}
-                    <IconButton onClick={toggleMenuState}>
-                        <MenuCloseIcon open={menuOpen} />
-                    </IconButton>
                 </NavBarMiniRoot>
                 <Collapse
                     in={menuOpen}
                     timeout="auto"
-                    onClick={handleMenuClose}
-                    sx={(theme) => ({
+                    sx={{
                         borderTop: `1px solid ${theme.appbar.backgroundColor.selectedHover}`,
-                        maxHeight: "50vh",
-                        overflowY: "auto !important",
-                    })}
+                        maxHeight: "50%",
+                        overflowY: "auto",
+                        scrollbarWidth: "none",
+                    }}
                 >
                     <NavDrawer open={menuOpen} />
                 </Collapse>
@@ -60,9 +83,7 @@ export default function NavBarMiniMobile() {
             <Backdrop
                 open={menuOpen}
                 onClick={handleMenuClose}
-                sx={(theme) => ({
-                    zIndex: theme.zIndex.drawer,
-                })}
+                sx={{ zIndex: theme.zIndex.drawer }}
             />
         </Box>
     );
