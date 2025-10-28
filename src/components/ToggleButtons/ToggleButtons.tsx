@@ -14,8 +14,11 @@ export function ToggleButton(props: ToggleButtonProps) {
             <ToggleButtonRoot {...props} color={color}>
                 {icon}
                 <Text
-                    variant="subtitle1"
-                    sx={{ color: "white", textTransform: "none" }}
+                    variant="subtitle2"
+                    sx={(theme) => ({
+                        color: theme.text.primary,
+                        textTransform: "none",
+                    })}
                 >
                     {label}
                 </Text>
