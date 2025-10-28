@@ -37,7 +37,7 @@ export default function InfoGallery(props: InfoGalleryProps) {
             </Stack>
             <ActionFab
                 action={toggleDrawerState}
-                icon={<TuneIcon />}
+                icon={<TuneIcon fontSize="small" />}
                 tooltip="Open filters"
                 tooltipArrow="left"
             />
