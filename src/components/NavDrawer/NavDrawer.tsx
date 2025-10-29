@@ -33,7 +33,6 @@ export default function NavDrawer({ open }: NavDrawerProps) {
             variant="permanent"
             open={open}
             sx={{
-                boxSizing: "content-box",
                 "& .MuiDrawer-paper": {
                     borderRight: `1px solid ${theme.border.color.primary}`,
                     backgroundColor: theme.drawer.backgroundColor.main,

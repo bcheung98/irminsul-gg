@@ -29,7 +29,7 @@ export default function IrminsulLogo({
 
     return (
         <ButtonBase href={href} LinkComponent={NavLink}>
-            <FlexBox spacing={2} sx={{ height: size }}>
+            <FlexBox spacing={1.5} sx={{ height: size }}>
                 <Image
                     src={`main/logo/${imgURL}`}
                     alt="IRMINSUL.GG"

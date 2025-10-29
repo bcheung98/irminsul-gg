@@ -34,9 +34,11 @@ export default function NavBar() {
         >
             <Toolbar
                 variant="dense"
+                disableGutters
                 sx={{
                     alignItems: "center",
                     justifyContent: { xs: "space-between", sm: "left" },
+                    px: 2,
                     gap: 2,
                 }}
             >
