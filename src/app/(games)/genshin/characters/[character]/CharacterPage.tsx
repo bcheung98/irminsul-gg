@@ -34,26 +34,21 @@ export default function CharacterPage({
         title: character.title,
         description: character.description,
         element: character.element,
-        weaponType: character.weapon,
+        weaponType: character.weaponType,
         rarity: character.rarity,
         arkhe: character.arkhe,
     };
     const attributesMisc: AttributeDataMisc = {
-        constellationName: character.constellationName,
+        constellation: character.constellation,
         nation: character.nation,
         birthday: character.birthday,
         release: character.release,
         voiceActors: character.voiceActors,
     };
 
-    const skills: CharacterSkillsList = {};
-    Object.entries(character.skills).forEach(([key, skill]) => {
-        if (skill) skills[key] = [skill];
-    });
+    const skills: CharacterSkillsList = { ...character.skills };
     skills.passives = character.passives;
-    skills.upgrades = Object.values(character.constellation).map(
-        (upgrade) => upgrade
-    );
+    skills.upgrades = character.upgrades;
 
     const Splash = (
         <CharacterSplash name={character.name} outfits={character.outfits} />

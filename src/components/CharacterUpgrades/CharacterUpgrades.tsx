@@ -21,7 +21,6 @@ import { splitJoin } from "@/utils";
 import { useSkillKeyword } from "@/helpers/skills";
 
 // Type imports
-import type { CharacterUpgrades } from "@/types/character";
 import { AttributeData, GameData } from "@/types";
 import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 
@@ -112,7 +111,7 @@ export default function CharacterUpgrades({
                                                 />
                                             )
                                         }
-                                        title={`${index + 1}. ${upgrade.name}`}
+                                        title={`${upgrade.index}. ${upgrade.name}`}
                                         titleProps={{ variant: "h6" }}
                                         spacing={2}
                                     />

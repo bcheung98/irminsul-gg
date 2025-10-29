@@ -7,6 +7,7 @@ export interface Materials {
 export interface Material {
     id: number;
     name: string;
+    displayName?: string;
     tag?: string;
     category: string;
     rarity?: number;

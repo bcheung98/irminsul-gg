@@ -48,10 +48,8 @@ export function filterItems<T extends Record<string, any>>(
         items = items.filter((item) => filters.element.includes(item.element));
     }
     if (filters.weaponType.length > 0) {
-        items = items.filter(
-            (item) =>
-                filters.weaponType.includes(item.weapon) ||
-                filters.weaponType.includes(item.weaponType)
+        items = items.filter((item) =>
+            filters.weaponType.includes(item.weaponType)
         );
     }
     if (filters.rarity.length > 0) {

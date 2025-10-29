@@ -1,9 +1,9 @@
 export type LoadingStatus = "idle" | "pending" | "success" | "error";
 
 export const urls: { [key: string]: string } = {
-    "genshin/characters": "https://api.irminsul.gg/genshin/characters.json",
-    "genshin/weapons": "https://api.irminsul.gg/genshin/weapons.json",
-    "genshin/artifacts": "https://api.irminsul.gg/genshin/artifacts.json",
+    "genshin/characters": "https://api.irminsul.gg/v2/genshin/characters.json",
+    "genshin/weapons": "https://api.irminsul.gg/v2/genshin/weapons.json",
+    "genshin/artifacts": "https://api.irminsul.gg/v2/genshin/artifacts.json",
 };
 
 export async function getDataSet<T>(url: string): Promise<T[]> {

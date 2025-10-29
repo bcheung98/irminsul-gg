@@ -78,7 +78,7 @@ export default function CharacterGallery({
                                 rarity={character.rarity}
                                 badgeLeft={{
                                     element: character.element,
-                                    weaponType: character.weapon,
+                                    weaponType: character.weaponType,
                                 }}
                             />
                         ))}

@@ -1,5 +1,3 @@
-import { Skill } from "./skill";
-
 export interface CharacterStats {
     hp: number[];
     atk: number[];
@@ -11,8 +9,4 @@ export interface CharacterOutfit {
     displayName?: string;
     rarity: number;
     description: string;
-}
-
-export interface CharacterUpgrades {
-    [key: string]: Skill;
 }

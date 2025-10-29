@@ -44,6 +44,7 @@ export default function MaterialCard({
 
     const {
         name,
+        displayName,
         tag,
         category,
         rarity: rarity = 3,
@@ -57,7 +58,7 @@ export default function MaterialCard({
     const fontSize =
         costLength < 8 ? imgSize / 4 - 4 : imgSize / 4 - (costLength - 4);
 
-    let tooltip = name;
+    let tooltip = displayName || name;
     if (source) tooltip += ` (${source})`;
 
     return (

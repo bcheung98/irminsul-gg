@@ -7,14 +7,10 @@ import {
     GenshinNation,
 } from ".";
 import { VersionWithDate } from "@/types/version";
-import {
-    CharacterOutfit,
-    CharacterStats,
-    CharacterUpgrades,
-} from "@/types/character";
+import { CharacterOutfit, CharacterStats } from "@/types/character";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 import { GenshinCharacterMaterials } from "./materials";
-import { CharacterSkills, Skill, SkillKeyword } from "../skill";
+import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
 
 export interface GenshinCharacter extends BaseData {
     displayName: string;
@@ -22,16 +18,16 @@ export interface GenshinCharacter extends BaseData {
     title: string;
     rarity: GenshinRarity;
     element: GenshinElement;
-    arkhe?: GenshinArkhe;
-    weapon: GenshinWeaponType;
+    arkhe?: GenshinArkhe[];
+    weaponType: GenshinWeaponType;
     skills: GenshinCharacterSkills;
     passives: GenshinCharacterPassive[];
-    constellation: GenshinCharacterConstellations;
+    upgrades: Skill[];
     keywords?: SkillKeyword[];
     stats: GenshinCharacterStats;
     materials: GenshinCharacterMaterials;
     description: string;
-    constellationName: string;
+    constellation: string;
     birthday: string;
     gender: "Male" | "Female";
     nation: GenshinNation;
@@ -42,11 +38,11 @@ export interface GenshinCharacter extends BaseData {
 
 export type CharacterAscensionStat = keyof typeof characterAscensionStats;
 
-export interface GenshinCharacterSkills extends CharacterSkills {
-    attack: Skill;
-    skill: Skill;
-    burst: Skill;
-    altsprint?: Skill;
+export interface GenshinCharacterSkills extends CharacterSkillsList {
+    attack: Skill[];
+    skill: Skill[];
+    burst: Skill[];
+    altsprint?: Skill[];
 }
 
 export type GenshinSkillKey = keyof GenshinCharacterSkills;
@@ -68,15 +64,3 @@ export interface GenshinCharacterStats extends CharacterStats {
     ascensionStat: CharacterAscensionStat;
     em: number[];
 }
-
-export interface GenshinCharacterConstellations extends CharacterUpgrades {
-    c1: Skill;
-    c2: Skill;
-    c3: Skill;
-    c4: Skill;
-    c5: Skill;
-    c6: Skill;
-}
-
-export type GenshinCharacterConstellationKey =
-    keyof GenshinCharacterConstellations;

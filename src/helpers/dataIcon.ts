@@ -14,7 +14,7 @@ export function getDataIconURL({ game, key, value }: Props) {
             src = `genshin/elements/${value}`;
             tooltip = `${value}`;
         }
-        if (key === "weapon" || key === "weaponType") {
+        if (key === "weaponType") {
             src = `genshin/weapons/icons/${value}`;
             tooltip = `${value}`;
         }
@@ -24,7 +24,7 @@ export function getDataIconURL({ game, key, value }: Props) {
         }
         if (key === "arkhe") {
             src = `genshin/tcg/icons/factions/${value}`;
-            tooltip = `Arkhe: ${value}`;
+            tooltip = `${value}`;
         }
     }
     return { src, tooltip };

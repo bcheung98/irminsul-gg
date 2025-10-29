@@ -6,10 +6,8 @@ export interface Skill {
     icon?: string;
     showIcon?: boolean;
     scaling?: string[][];
-}
-
-export interface CharacterSkills {
-    [key: string]: Skill | undefined;
+    version?: string;
+    index?: number;
 }
 
 export interface CharacterSkillsList {

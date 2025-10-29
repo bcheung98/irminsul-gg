@@ -362,4 +362,40 @@ export const weeklyBossMaterials = [
             version: "5.3",
         },
     },
+    {
+        id: 113073,
+        category: "weekly",
+        name: "Ascended Sample Knight",
+        displayName: "Ascended Sample: Knight",
+        tag: "Ascended Sample Knight",
+        rarity: 5,
+        source: "The Game Before the Gate",
+        release: {
+            version: "5.6",
+        },
+    },
+    {
+        id: 113074,
+        category: "weekly",
+        name: "Ascended Sample Rook",
+        displayName: "Ascended Sample: Rook",
+        tag: "Ascended Sample Rook",
+        rarity: 5,
+        source: "The Game Before the Gate",
+        release: {
+            version: "5.6",
+        },
+    },
+    {
+        id: 113075,
+        category: "weekly",
+        name: "Ascended Sample Queen",
+        displayName: "Ascended Sample: Queen",
+        tag: "Ascended Sample Queen",
+        rarity: 5,
+        source: "The Game Before the Gate",
+        release: {
+            version: "5.6",
+        },
+    },
 ];

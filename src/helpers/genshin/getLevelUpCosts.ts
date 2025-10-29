@@ -44,15 +44,15 @@ export function getCharacterLevelCost({
         characterXP1,
         characterXP2,
         characterXP3,
-        bossMat,
-        localMat,
+        boss,
+        local,
         gemstone1,
         gemstone2,
         gemstone3,
         gemstone4,
-        commonMat1,
-        commonMat2,
-        commonMat3,
+        common1,
+        common2,
+        common3,
     ] = range(0, objectKeys(costs).length, 0);
     if (selected) {
         [
@@ -60,15 +60,15 @@ export function getCharacterLevelCost({
             characterXP1,
             characterXP2,
             characterXP3,
-            bossMat,
-            localMat,
+            boss,
+            local,
             gemstone1,
             gemstone2,
             gemstone3,
             gemstone4,
-            commonMat1,
-            commonMat2,
-            commonMat3,
+            common1,
+            common2,
+            common3,
         ] = calculateCosts(costs, start, stop);
     }
 
@@ -81,11 +81,11 @@ export function getCharacterLevelCost({
             104002: characterXP2,
             104003: characterXP3,
         },
-        bossMat: {
-            [mats(materials.bossMat).id]: bossMat,
+        boss: {
+            [mats(materials.boss).id]: boss,
         },
-        localMat: {
-            [mats(materials.localMat).id]: localMat,
+        local: {
+            [mats(materials.local).id]: local,
         },
         gemstone: {
             [mats(`${materials.gemstone}1`).id]: gemstone1,
@@ -93,10 +93,10 @@ export function getCharacterLevelCost({
             [mats(`${materials.gemstone}3`).id]: gemstone3,
             [mats(`${materials.gemstone}4`).id]: gemstone4,
         },
-        commonMat: {
-            [mats(`${materials.commonMat}1`).id]: commonMat1,
-            [mats(`${materials.commonMat}2`).id]: commonMat2,
-            [mats(`${materials.commonMat}3`).id]: commonMat3,
+        common: {
+            [mats(`${materials.common}1`).id]: common1,
+            [mats(`${materials.common}2`).id]: common2,
+            [mats(`${materials.common}3`).id]: common3,
         },
     };
 }
@@ -113,26 +113,26 @@ export function getCharacterSkillCost({
 
     let [
         credits,
-        weeklyBossMat,
+        weekly,
         crown,
-        talentBook1,
-        talentBook2,
-        talentBook3,
-        commonMat1,
-        commonMat2,
-        commonMat3,
+        talent1,
+        talent2,
+        talent3,
+        common1,
+        common2,
+        common3,
     ] = range(0, objectKeys(costs).length, 0);
     if (selected) {
         [
             credits,
-            weeklyBossMat,
+            weekly,
             crown,
-            talentBook1,
-            talentBook2,
-            talentBook3,
-            commonMat1,
-            commonMat2,
-            commonMat3,
+            talent1,
+            talent2,
+            talent3,
+            common1,
+            common2,
+            common3,
         ] = calculateCosts(costs, start, stop);
     }
 
@@ -140,21 +140,21 @@ export function getCharacterSkillCost({
         credits: {
             202: credits,
         },
-        weeklyBossMat: {
-            [mats(materials.weeklyBossMat).id]: weeklyBossMat,
+        weekly: {
+            [mats(materials.weekly).id]: weekly,
         },
         crown: {
             104319: crown,
         },
-        talentBook: {
-            [mats(`${materials.talentBook}1`).id]: talentBook1,
-            [mats(`${materials.talentBook}2`).id]: talentBook2,
-            [mats(`${materials.talentBook}3`).id]: talentBook3,
+        talent: {
+            [mats(`${materials.talent}1`).id]: talent1,
+            [mats(`${materials.talent}2`).id]: talent2,
+            [mats(`${materials.talent}3`).id]: talent3,
         },
-        commonMat: {
-            [mats(`${materials.commonMat}1`).id]: commonMat1,
-            [mats(`${materials.commonMat}2`).id]: commonMat2,
-            [mats(`${materials.commonMat}3`).id]: commonMat3,
+        common: {
+            [mats(`${materials.common}1`).id]: common1,
+            [mats(`${materials.common}2`).id]: common2,
+            [mats(`${materials.common}3`).id]: common3,
         },
     };
 }
@@ -180,16 +180,16 @@ export function getWeaponLevelCost({
         weaponXP1,
         weaponXP2,
         weaponXP3,
-        weaponAscensionMat1,
-        weaponAscensionMat2,
-        weaponAscensionMat3,
-        weaponAscensionMat4,
-        eliteMat1,
-        eliteMat2,
-        eliteMat3,
-        commonMat1,
-        commonMat2,
-        commonMat3,
+        weapon1,
+        weapon2,
+        weapon3,
+        weapon4,
+        elite1,
+        elite2,
+        elite3,
+        common1,
+        common2,
+        common3,
     ] = range(0, objectKeys(costs).length, 0);
     if (selected) {
         [
@@ -197,16 +197,16 @@ export function getWeaponLevelCost({
             weaponXP1,
             weaponXP2,
             weaponXP3,
-            weaponAscensionMat1,
-            weaponAscensionMat2,
-            weaponAscensionMat3,
-            weaponAscensionMat4,
-            eliteMat1,
-            eliteMat2,
-            eliteMat3,
-            commonMat1,
-            commonMat2,
-            commonMat3,
+            weapon1,
+            weapon2,
+            weapon3,
+            weapon4,
+            elite1,
+            elite2,
+            elite3,
+            common1,
+            common2,
+            common3,
         ] = calculateCosts(costs, start, stop);
     }
     return {
@@ -218,21 +218,21 @@ export function getWeaponLevelCost({
             104012: weaponXP2,
             104013: weaponXP3,
         },
-        weaponAscensionMat: {
-            [mats(`${materials.weaponAscensionMat}1`).id]: weaponAscensionMat1,
-            [mats(`${materials.weaponAscensionMat}2`).id]: weaponAscensionMat2,
-            [mats(`${materials.weaponAscensionMat}3`).id]: weaponAscensionMat3,
-            [mats(`${materials.weaponAscensionMat}4`).id]: weaponAscensionMat4,
+        weapon: {
+            [mats(`${materials.weapon}1`).id]: weapon1,
+            [mats(`${materials.weapon}2`).id]: weapon2,
+            [mats(`${materials.weapon}3`).id]: weapon3,
+            [mats(`${materials.weapon}4`).id]: weapon4,
         },
-        eliteMat: {
-            [mats(`${materials.eliteMat}1`).id]: eliteMat1,
-            [mats(`${materials.eliteMat}2`).id]: eliteMat2,
-            [mats(`${materials.eliteMat}3`).id]: eliteMat3,
+        elite: {
+            [mats(`${materials.elite}1`).id]: elite1,
+            [mats(`${materials.elite}2`).id]: elite2,
+            [mats(`${materials.elite}3`).id]: elite3,
         },
-        commonMat: {
-            [mats(`${materials.commonMat}1`).id]: commonMat1,
-            [mats(`${materials.commonMat}2`).id]: commonMat2,
-            [mats(`${materials.commonMat}3`).id]: commonMat3,
+        common: {
+            [mats(`${materials.common}1`).id]: common1,
+            [mats(`${materials.common}2`).id]: common2,
+            [mats(`${materials.common}3`).id]: common3,
         },
     };
 }

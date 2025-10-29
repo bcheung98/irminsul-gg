@@ -4,15 +4,15 @@ export type GenshinMaterialCategory =
     | "credits"
     | "characterXP"
     | "weaponXP"
-    | "bossMat"
-    | "weeklyBossMat"
+    | "boss"
+    | "weekly"
     | "crown"
     | "gemstone"
-    | "localMat"
-    | "talentBook"
-    | "commonMat"
-    | "weaponAscensionMat"
-    | "eliteMat";
+    | "local"
+    | "talent"
+    | "common"
+    | "weapon"
+    | "elite";
 
 export type GenshinMaterials = {
     [Category in GenshinMaterialCategory as Category]: string | number;
@@ -23,14 +23,9 @@ export type GenshinCharacterMaterials =
     | Required<
           Pick<
               GenshinMaterials,
-              | "talentBook"
-              | "commonMat"
-              | "localMat"
-              | "bossMat"
-              | "weeklyBossMat"
-              | "gemstone"
+              "talent" | "common" | "local" | "boss" | "weekly" | "gemstone"
           >
       >;
 export type GenshinWeaponMaterials = Required<
-    Pick<GenshinMaterials, "weaponAscensionMat" | "eliteMat" | "commonMat">
+    Pick<GenshinMaterials, "weapon" | "elite" | "common">
 >;

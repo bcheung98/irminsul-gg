@@ -26,7 +26,7 @@ export default function InfoChip(props: InfoChipProps) {
                 alignItems: "center",
             }}
         >
-            <TextLabel titleProps={{ variant: "body2" }} {...props} />
+            <TextLabel titleProps={{ variant: "subtitle2" }} {...props} />
         </Box>
     );
 }

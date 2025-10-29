@@ -55,7 +55,7 @@ function getRows(
 
     return {
         genshin: [
-            { key: "Constellation", value: attributes.constellationName },
+            { key: "Constellation", value: attributes.constellation },
             { key: "Nation", value: attributes.nation },
             { key: "Birthday", value: attributes.birthday },
             { key: "Release", value: `${releaseDate} (${releaseVersion})` },

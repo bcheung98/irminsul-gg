@@ -1,11 +1,11 @@
 import parse from "html-react-parser";
 
 // Component imports
-import FlexBox from "../FlexBox";
-import InfoChip from "../InfoChip";
-import RarityStars from "../RarityStars";
-import TextLabel from "../TextLabel";
-import Text from "../Text";
+import FlexBox from "@/components/FlexBox";
+import InfoChip from "@/components/InfoChip";
+import RarityStars from "@/components/RarityStars";
+import TextLabel from "@/components/TextLabel";
+import Text from "@/components/Text";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -45,7 +45,9 @@ export default function CharacterAttributes(props: AttributeData) {
 
         return values.map((value) => {
             const { src, tooltip } = getDataIconURL({ game, key, value });
-            return <InfoChip key={key} icon={src} title={tooltip} />;
+            return (
+                <InfoChip key={`${key}-${value}`} icon={src} title={tooltip} />
+            );
         });
     }
 

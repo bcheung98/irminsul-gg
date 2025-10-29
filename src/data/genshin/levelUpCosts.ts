@@ -6,29 +6,29 @@ export const characterLevel = {
     characterXP1: [0, 1, 0, 4, 0, 0, 0, 0, 0, 1, 0, 2, 0, 4],
     characterXP2: [0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0, 2, 0, 0],
     characterXP3: [0, 6, 0, 28, 0, 29, 0, 42, 0, 59, 0, 80, 0, 171],
-    bossMat: [0, 0, 0, 0, 2, 0, 4, 0, 8, 0, 12, 0, 20, 0],
-    localMat: [0, 0, 3, 0, 10, 0, 20, 0, 30, 0, 45, 0, 60, 0],
+    boss: [0, 0, 0, 0, 2, 0, 4, 0, 8, 0, 12, 0, 20, 0],
+    local: [0, 0, 3, 0, 10, 0, 20, 0, 30, 0, 45, 0, 60, 0],
     gemstone1: [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     gemstone2: [0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0, 0, 0, 0],
     gemstone3: [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0],
     gemstone4: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0],
-    commonMat1: [0, 0, 3, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    commonMat2: [0, 0, 0, 0, 0, 0, 12, 0, 18, 0, 0, 0, 0, 0],
-    commonMat3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 24, 0],
+    common1: [0, 0, 3, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    common2: [0, 0, 0, 0, 0, 0, 12, 0, 18, 0, 0, 0, 0, 0],
+    common3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 24, 0],
 };
 
 export const characterSkill = {
     credits: [
         0, 12500, 17500, 25000, 30000, 37500, 120000, 260000, 450000, 700000,
     ],
-    weeklyBossMat: [0, 0, 0, 0, 0, 0, 1, 1, 2, 2],
+    weekly: [0, 0, 0, 0, 0, 0, 1, 1, 2, 2],
     crown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    talentBook1: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
-    talentBook2: [0, 0, 2, 4, 6, 9, 0, 0, 0, 0],
-    talentBook3: [0, 0, 0, 0, 0, 0, 4, 6, 12, 16],
-    commonMat1: [0, 6, 0, 0, 0, 0, 0, 0, 0, 0],
-    commonMat2: [0, 0, 3, 4, 6, 9, 0, 0, 0, 0],
-    commonMat3: [0, 0, 0, 0, 0, 0, 4, 6, 9, 12],
+    talent1: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+    talent2: [0, 0, 2, 4, 6, 9, 0, 0, 0, 0],
+    talent3: [0, 0, 0, 0, 0, 0, 4, 6, 12, 16],
+    common1: [0, 6, 0, 0, 0, 0, 0, 0, 0, 0],
+    common2: [0, 0, 3, 4, 6, 9, 0, 0, 0, 0],
+    common3: [0, 0, 0, 0, 0, 0, 4, 6, 9, 12],
 };
 
 export const weaponLevel = (rarity: number) => {
@@ -38,16 +38,16 @@ export const weaponLevel = (rarity: number) => {
         weaponXP1: weaponCosts.weaponXP1[index],
         weaponXP2: weaponCosts.weaponXP2[index],
         weaponXP3: weaponCosts.weaponXP3[index],
-        weaponAscensionMat1: weaponCosts.weaponAscensionMat1[index],
-        weaponAscensionMat2: weaponCosts.weaponAscensionMat2[index],
-        weaponAscensionMat3: weaponCosts.weaponAscensionMat3[index],
-        weaponAscensionMat4: weaponCosts.weaponAscensionMat4[index],
-        eliteMat1: weaponCosts.eliteMat1[index],
-        eliteMat2: weaponCosts.eliteMat2[index],
-        eliteMat3: weaponCosts.eliteMat3[index],
-        commonMat1: weaponCosts.commonMat1[index],
-        commonMat2: weaponCosts.commonMat2[index],
-        commonMat3: weaponCosts.commonMat3[index],
+        weapon1: weaponCosts.weapon1[index],
+        weapon2: weaponCosts.weapon2[index],
+        weapon3: weaponCosts.weapon3[index],
+        weapon4: weaponCosts.weapon4[index],
+        elite1: weaponCosts.elite1[index],
+        elite2: weaponCosts.elite2[index],
+        elite3: weaponCosts.elite3[index],
+        common1: weaponCosts.common1[index],
+        common2: weaponCosts.common2[index],
+        common3: weaponCosts.common3[index],
     };
 };
 
@@ -89,70 +89,70 @@ const weaponCosts = {
         [0, 8, 0, 40, 0, 38, 0, 56, 0, 79, 0, 106, 0, 234],
         [0, 12, 0, 60, 0, 57, 0, 85, 0, 118, 0, 160, 0, 351],
     ],
-    weaponAscensionMat1: [
+    weapon1: [
         [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    weaponAscensionMat2: [
+    weapon2: [
         [0, 0, 0, 0, 1, 0, 2, 0, 0, 0],
         [0, 0, 0, 0, 1, 0, 3, 0, 0, 0],
         [0, 0, 0, 0, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 5, 0, 9, 0, 0, 0, 0, 0, 0, 0],
     ],
-    weaponAscensionMat3: [
+    weapon3: [
         [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 9, 0, 0, 0],
     ],
-    weaponAscensionMat4: [
+    weapon4: [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0],
     ],
-    eliteMat1: [
+    elite1: [
         [0, 0, 1, 0, 4, 0, 0, 0, 0, 0],
         [0, 0, 1, 0, 5, 0, 0, 0, 0, 0],
         [0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 3, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 5, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    eliteMat2: [
+    elite2: [
         [0, 0, 0, 0, 0, 0, 2, 0, 4, 0],
         [0, 0, 0, 0, 0, 0, 3, 0, 5, 0],
         [0, 0, 0, 0, 0, 0, 4, 0, 8, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 6, 0, 12, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 9, 0, 18, 0, 0, 0, 0, 0],
     ],
-    eliteMat3: [
+    elite3: [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 12, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 18, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 27, 0],
     ],
-    commonMat1: [
+    common1: [
         [0, 0, 1, 0, 2, 0, 0, 0, 0, 0],
         [0, 0, 1, 0, 4, 0, 0, 0, 0, 0],
         [0, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 3, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ],
-    commonMat2: [
+    common2: [
         [0, 0, 0, 0, 0, 0, 2, 0, 3, 0],
         [0, 0, 0, 0, 0, 0, 3, 0, 4, 0],
         [0, 0, 0, 0, 0, 0, 4, 0, 6, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 6, 0, 9, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 9, 0, 14, 0, 0, 0, 0, 0],
     ],
-    commonMat3: [
+    common3: [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 8, 0],
