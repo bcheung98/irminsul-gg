@@ -5,11 +5,13 @@ import { FilterButtons, Filters } from "@/types";
 export function createFilterButtons<T extends string | number>({
     items,
     url,
-    label,
+    getTooltip,
+    getLabel,
 }: {
     items: readonly T[];
     url?: string;
-    label?: React.ReactNode;
+    getTooltip?: (args?: any) => string;
+    getLabel?: (args?: any) => string;
 }): FilterButtons[] {
     return items.map((item) => ({
         value: item,
@@ -19,9 +21,10 @@ export function createFilterButtons<T extends string | number>({
                 iconProps={{
                     size: 32,
                     padding: "4px",
-                    tooltip: !label ? `${item}` : "",
+                    tooltip:
+                        getTooltip !== undefined ? getTooltip(item) : `${item}`,
                 }}
-                title={label}
+                title={getLabel !== undefined && getLabel(item)}
             />
         ),
     }));
@@ -54,6 +57,39 @@ export function filterItems<T extends Record<string, any>>(
     }
     if (filters.rarity.length > 0) {
         items = items.filter((item) => filters.rarity.includes(item.rarity));
+    }
+    if (filters.ascStat.length > 0) {
+        items = items.filter((item) =>
+            filters.ascStat.includes(item.stats.ascensionStat)
+        );
+    }
+    if (filters.talentBook.length > 0) {
+        items = items.filter((item) =>
+            filters.talentBook.includes(`${item.materials.talent}3`)
+        );
+    }
+    if (filters.commonMat.length > 0) {
+        items = items.filter((item) =>
+            filters.commonMat.includes(item.materials.common)
+        );
+    }
+    if (filters.bossMat.length > 0) {
+        items = items.filter((item) =>
+            filters.bossMat.includes(item.materials.boss)
+        );
+    }
+    if (filters.weeklyBossMat.length > 0) {
+        items = items.filter((item) =>
+            filters.weeklyBossMat.includes(item.materials.weekly)
+        );
+    }
+    if (filters.localMat.length > 0) {
+        items = items.filter((item) =>
+            filters.localMat.includes(item.materials.local)
+        );
+    }
+    if (filters.nation.length > 0) {
+        items = items.filter((item) => filters.nation.includes(item.nation));
     }
     if (searchValue) {
         items = items.filter(

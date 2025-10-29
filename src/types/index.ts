@@ -83,6 +83,7 @@ export interface FilterGroup {
     buttons: FilterButtons[];
     onChange: (...args: any) => any;
     padding?: string | number;
+    width?: string;
 }
 export interface FilterButtons {
     value: string | number;

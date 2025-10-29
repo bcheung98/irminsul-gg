@@ -32,6 +32,7 @@ export default function FilterButtons({ filter }: FilterButtonsProps) {
                 onChange={filter.onChange}
                 spacing={4}
                 padding={filter.padding ?? 0}
+                width={filter.width}
             />
         </Dropdown>
     );

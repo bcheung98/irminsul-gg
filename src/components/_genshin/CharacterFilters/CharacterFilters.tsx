@@ -39,7 +39,7 @@ export default function CharacterFilters() {
     const [filters, setFilters] = useState(genshinFilters);
     const actions = filterActions(genshinFilters, filters, setFilters);
 
-    const { element, weaponType, rarity } = filterGroups({
+    const groups = filterGroups({
         filters,
         setFilters,
     })[game];
@@ -48,7 +48,5 @@ export default function CharacterFilters() {
         setFilterState("genshin/character", filters);
     }, [filters]);
 
-    return (
-        <FilterRoot actions={actions} filters={[element, weaponType, rarity]} />
-    );
+    return <FilterRoot actions={actions} filters={Object.values(groups)} />;
 }
