@@ -369,7 +369,7 @@ export const weeklyBossMaterials = [
         displayName: "Ascended Sample: Knight",
         tag: "Ascended Sample Knight",
         rarity: 5,
-        source: "The Game Before the Gate",
+        source: "The Game Before The Gate",
         release: {
             version: "5.6",
         },
@@ -381,7 +381,7 @@ export const weeklyBossMaterials = [
         displayName: "Ascended Sample: Rook",
         tag: "Ascended Sample Rook",
         rarity: 5,
-        source: "The Game Before the Gate",
+        source: "The Game Before The Gate",
         release: {
             version: "5.6",
         },
@@ -393,7 +393,7 @@ export const weeklyBossMaterials = [
         displayName: "Ascended Sample: Queen",
         tag: "Ascended Sample Queen",
         rarity: 5,
-        source: "The Game Before the Gate",
+        source: "The Game Before The Gate",
         release: {
             version: "5.6",
         },

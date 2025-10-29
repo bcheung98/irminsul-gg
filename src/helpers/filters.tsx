@@ -1,32 +1,63 @@
 import { Dispatch, SetStateAction } from "react";
 import TextLabel from "@/components/TextLabel";
-import { FilterButtons, Filters } from "@/types";
+import { FilterButtons, Filters, GroupFilterButtons } from "@/types";
+
+interface CreateButtonProps {
+    url?: string;
+    groupUrl?: string;
+    getURL?: (args?: any) => string;
+    getTooltip?: (args?: any) => string;
+    getLabel?: (args?: any) => string;
+}
+
+interface CreateFilterButtonsProps<T extends string | number>
+    extends CreateButtonProps {
+    items: readonly T[];
+}
 
 export function createFilterButtons<T extends string | number>({
     items,
     url,
+    getURL,
     getTooltip,
     getLabel,
-}: {
-    items: readonly T[];
-    url?: string;
-    getTooltip?: (args?: any) => string;
-    getLabel?: (args?: any) => string;
-}): FilterButtons[] {
-    return items.map((item) => ({
-        value: item,
-        icon: url && (
-            <TextLabel
-                icon={`${url}/${item}`}
-                iconProps={{
-                    size: 32,
-                    padding: "4px",
-                    tooltip:
-                        getTooltip !== undefined ? getTooltip(item) : `${item}`,
-                }}
-                title={getLabel !== undefined && getLabel(item)}
-            />
-        ),
+}: CreateFilterButtonsProps<T>): FilterButtons[] {
+    return items.map((item) => {
+        const src = getURL !== undefined ? getURL(item) : item;
+        return {
+            value: item,
+            icon: url && (
+                <TextLabel
+                    icon={`${url}/${src}`}
+                    iconProps={{
+                        size: 32,
+                        padding: "4px",
+                        tooltip:
+                            getTooltip !== undefined
+                                ? getTooltip(item)
+                                : `${item}`,
+                    }}
+                    title={getLabel !== undefined && getLabel(item)}
+                />
+            ),
+        };
+    });
+}
+
+interface CreateGroupFilterButtonsProps<T extends string | number>
+    extends CreateButtonProps {
+    groupItems: Record<string, readonly T[]>;
+}
+
+export function createGroupedFilterButtons<T extends string | number>({
+    groupItems,
+    groupUrl,
+    url,
+}: CreateGroupFilterButtonsProps<T>): GroupFilterButtons[] {
+    return Object.entries(groupItems).map(([key, values]) => ({
+        buttons: createFilterButtons({ items: values, url }),
+        icon: `${groupUrl}/${key}`,
+        label: key,
     }));
 }
 

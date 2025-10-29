@@ -84,9 +84,15 @@ export interface FilterGroup {
     onChange: (...args: any) => any;
     padding?: string | number;
     width?: string;
+    groupButtons?: GroupFilterButtons[];
 }
 export interface FilterButtons {
     value: string | number;
     icon?: React.ReactNode;
     label?: React.ReactNode;
+}
+export interface GroupFilterButtons {
+    buttons: FilterButtons[];
+    icon?: string;
+    label?: string;
 }
