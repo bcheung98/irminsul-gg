@@ -1,15 +1,13 @@
 import { VersionInfo } from "@/types/version";
 
 export const hsrVersions: VersionInfo[] = [
+    { version: "3.7", name: "As Tomorrow Became Yesterday" },
     { version: "3.6", name: "Back to Earth in Evernight" },
     { version: "3.5", name: "Before Their Deaths" },
     { version: "3.4", name: "For the Sun is Set to Die" },
     { version: "3.3", name: "The Fall at Dawn's Rise" },
     { version: "3.2", name: "Through the Petals in the Land of Repose" },
-    {
-        version: "3.1",
-        name: "Light Slips the Gate, Shadow Greets the Throne",
-    },
+    { version: "3.1", name: "Light Slips the Gate, Shadow Greets the Throne" },
     { version: "3.0", name: "Paean of Era Nova" },
     { version: "2.7", name: "A New Venture on the Eighth Dawn" },
     { version: "2.6", name: "Annals of Pinecany's Mappou Age" },
