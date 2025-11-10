@@ -247,6 +247,17 @@ export const nextThemeData = {
             primary: textColors.primary,
         },
     },
+    menu: {
+        backgroundColor: {
+            primary: backgroundColors[0].dark,
+            hover: backgroundColors[0].light,
+            selected: backgroundColors[1].dark,
+            selectedHover: backgroundColors[1].light,
+        },
+        color: {
+            primary: textColors.primary,
+        },
+    },
     table: {
         backgroundColor: {
             header: appbarColors[0],
