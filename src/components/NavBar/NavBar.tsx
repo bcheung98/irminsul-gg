@@ -66,15 +66,13 @@ export default function NavBar() {
                         </NavButton>
                     </FlexBox>
                     <FlexBox spacing={{ xs: 1, md: 3 }}>
-                        {game && (
-                            <FlexBox
-                                spacing={2}
-                                sx={{ display: { xs: "none", md: "flex" } }}
-                            >
-                                <KofiButton />
-                                <DiscordButton />
-                            </FlexBox>
-                        )}
+                        <FlexBox
+                            spacing={2}
+                            sx={{ display: { xs: "none", md: "flex" } }}
+                        >
+                            <DiscordButton />
+                            <KofiButton />
+                        </FlexBox>
                         {game && <SiteSearch />}
                         <Settings />
                     </FlexBox>
