@@ -31,14 +31,15 @@ export default function NavButton({
     const pathname = usePathname();
 
     const defaultStyles = {
-        px: 0,
+        p: 0.5,
         color:
             href && pathname.includes(href)
                 ? theme.text.selected
                 : theme.text.primary,
         fontSize: 0,
+        borderRadius: "8px",
         "&:hover": {
-            color: theme.text.selected,
+            backgroundColor: theme.appbar.backgroundColor.selectedHover,
         },
     };
 

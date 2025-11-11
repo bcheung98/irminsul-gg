@@ -46,7 +46,7 @@ export default function IrminsulLogo({
                             lineHeight: `${size}px`,
                             display: {
                                 "@": "none",
-                                "@350": "block",
+                                "@450": "block",
                             },
                             background: textBackground,
                             backgroundClip: "text",

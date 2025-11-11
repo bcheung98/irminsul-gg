@@ -27,9 +27,9 @@ export default function GamesMenu() {
                 onClick={handleMenuOpen}
                 title="Games"
                 sx={{
-                    color: open
-                        ? theme.text.selected
-                        : theme.appbar.color.primary,
+                    backgroundColor: open
+                        ? theme.appbar.backgroundColor.selectedHover
+                        : "transparent",
                 }}
             >
                 <AppsIcon />

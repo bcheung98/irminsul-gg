@@ -1,12 +1,12 @@
 // Component imports
 import Text from "@/components/Text";
+import NavButton from "@/components/NavButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function SiteSearchRoot({
@@ -15,7 +15,7 @@ export default function SiteSearchRoot({
     handleSearchOpen: () => void;
 }) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
         <>
@@ -64,24 +64,16 @@ export default function SiteSearchRoot({
                         "&:hover": {
                             backgroundColor: theme.drawer.backgroundColor.hover,
                         },
+                        display: { xs: "none", md: "flex" },
                     }}
                 />
             ) : (
-                <IconButton
+                <NavButton
                     onClick={handleSearchOpen}
-                    sx={{
-                        borderRadius: "8px",
-                        px: "2px",
-                        width: "36px",
-                        height: "36px",
-                        color: theme.text.primary,
-                        "&:hover": {
-                            color: theme.text.selected,
-                        },
-                    }}
+                    sx={{ display: { md: "none" } }}
                 >
                     <SearchIcon />
-                </IconButton>
+                </NavButton>
             )}
         </>
     );

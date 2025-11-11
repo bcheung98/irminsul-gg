@@ -2,9 +2,12 @@
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
 import NavLink from "@/components/NavLink";
+import DiscordButton from "@/components/DiscordButton";
+import KofiButton from "@/components/KofiButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 import Box from "@mui/material/Box";
@@ -21,6 +24,7 @@ export default function GamesMenuList({
     handleClose: () => void;
 }) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const gameTag = useGameTag();
     const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
@@ -31,7 +35,12 @@ export default function GamesMenuList({
     }
 
     return (
-        <Stack spacing={1}>
+        <Stack
+            spacing={1}
+            divider={
+                <Divider sx={{ borderColor: theme.border.color.secondary }} />
+            }
+        >
             <Stack
                 direction="row"
                 sx={{
@@ -61,7 +70,6 @@ export default function GamesMenuList({
                     />
                 </IconButton>
             </Stack>
-            <Divider sx={{ borderColor: theme.border.color.secondary }} />
             <Stack spacing={0.5}>
                 {games.map((game, index) => (
                     <ButtonBase
@@ -111,6 +119,12 @@ export default function GamesMenuList({
                     </ButtonBase>
                 ))}
             </Stack>
+            {!matches && (
+                <Stack spacing={1} sx={{ p: "4px 16px" }}>
+                    <DiscordButton />
+                    <KofiButton />
+                </Stack>
+            )}
         </Stack>
     );
 }

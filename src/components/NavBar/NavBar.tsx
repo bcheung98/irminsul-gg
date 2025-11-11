@@ -1,6 +1,8 @@
 // Component imports
 import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
+import DiscordButton from "@/components/DiscordButton";
+import KofiButton from "@/components/KofiButton";
 import SiteSearch from "@/components/SiteSearch";
 import Settings from "@/components/Settings";
 import FlexBox from "@/components/FlexBox";
@@ -51,19 +53,28 @@ export default function NavBar() {
                     />
                 </FlexBox>
                 <FlexBox
-                    spacing={{ xs: 1, sm: 2 }}
+                    spacing={1}
                     sx={{
                         width: "100%",
                         justifyContent: { xs: "right", sm: "space-between" },
                     }}
                 >
-                    <FlexBox spacing={2}>
+                    <FlexBox spacing={1}>
                         <GamesMenu />
                         <NavButton title="Calendar" href="/calendar">
                             <CalendarMonthIcon />
                         </NavButton>
                     </FlexBox>
-                    <FlexBox spacing={{ xs: 0, sm: 2, lg: 4 }}>
+                    <FlexBox spacing={{ xs: 1, md: 3 }}>
+                        {game && (
+                            <FlexBox
+                                spacing={2}
+                                sx={{ display: { xs: "none", md: "flex" } }}
+                            >
+                                <KofiButton />
+                                <DiscordButton />
+                            </FlexBox>
+                        )}
                         {game && <SiteSearch />}
                         <Settings />
                     </FlexBox>
