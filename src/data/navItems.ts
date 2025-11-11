@@ -9,6 +9,11 @@ export interface NavItem {
 export const navItems: GameData<NavItem[]> = {
     genshin: [
         {
+            icon: "icons/Home",
+            title: "Home",
+            href: "",
+        },
+        {
             icon: "icons/Aether",
             title: "Characters",
             href: "characters",

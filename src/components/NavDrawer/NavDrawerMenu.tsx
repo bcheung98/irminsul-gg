@@ -29,12 +29,19 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
     const game = useGameTag();
 
     const textStyles = (href: string) => {
-        return pathname.includes(`/${game}/${href}`)
-            ? {
-                  color: theme.text.selected,
-                  textShadow: `${theme.text.selected} 1px 1px 16px`,
-              }
-            : { color: theme.drawer.color.primary, textShadow: "none" };
+        const selected = {
+            color: theme.text.selected,
+            textShadow: `${theme.text.selected} 1px 1px 16px`,
+        };
+        const unselected = {
+            color: theme.drawer.color.primary,
+            textShadow: "none",
+        };
+        if (!href) return pathname === `/${game}` ? selected : unselected;
+        else
+            return pathname.includes(`/${game}/${href}`)
+                ? selected
+                : unselected;
     };
 
     return (
