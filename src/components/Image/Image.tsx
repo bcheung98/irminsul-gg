@@ -48,7 +48,7 @@ export default function Image({
 
     const defaultImageStyle: CSSProperties = {
         width: width || "auto",
-        height: width || "auto",
+        height: height || "auto",
     };
 
     if (!src.startsWith("https")) {
