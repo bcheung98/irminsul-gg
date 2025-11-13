@@ -27,7 +27,9 @@ export default function DiscordButton() {
             <NavButton
                 onClick={handleDialogOpen}
                 sx={{
+                    height: "28px",
                     px: 2,
+                    borderRadius: "4px",
                     backgroundColor: "#5662f6",
                     "&:hover": {
                         backgroundColor: "#5661f6e0",
@@ -37,7 +39,7 @@ export default function DiscordButton() {
                 <TextLabel
                     icon={<DiscordIcon fontSize="small" />}
                     title="Discord"
-                    titleProps={{ variant: "subtitle1" }}
+                    titleProps={{ variant: "subtitle2" }}
                 />
             </NavButton>
             <ContentDialog

@@ -90,7 +90,10 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                     <SelectWithArrows {...selectProps}>
                         {updates.map((version, index) => (
                             <MenuItem key={version.version} value={index}>
-                                <Text sx={{ textAlign: "center" }}>
+                                <Text
+                                    variant="subtitle1"
+                                    sx={{ textAlign: "center" }}
+                                >
                                     {version.version}
                                 </Text>
                             </MenuItem>

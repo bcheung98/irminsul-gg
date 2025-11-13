@@ -33,7 +33,7 @@ export default function SiteSearchRoot({
                                     height: "18px",
                                 }}
                             />
-                            <Text variant="subtitle1">Search...</Text>
+                            <Text variant="body2">Search...</Text>
                         </Stack>
                     }
                     endIcon={

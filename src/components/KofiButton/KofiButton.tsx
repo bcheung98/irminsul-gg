@@ -12,9 +12,10 @@ export default function KofiButton() {
             target="_blank"
             rel="noopener"
             sx={{
+                height: "28px",
                 px: { xs: 1, md: 2 },
                 py: 0.5,
-                borderRadius: "8px",
+                borderRadius: "4px",
                 backgroundColor: "#ce3833",
                 "&:hover": {
                     backgroundColor: "#ce3833da",
@@ -26,11 +27,11 @@ export default function KofiButton() {
                     <Image
                         src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
                         alt="Ko-Fi"
-                        size={[24, 0]}
+                        size={[0, 20]}
                     />
                 }
                 title="Ko-Fi"
-                titleProps={{ variant: "subtitle1" }}
+                titleProps={{ variant: "subtitle2" }}
             />
         </ButtonBase>
     );
