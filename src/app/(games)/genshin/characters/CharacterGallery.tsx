@@ -1,6 +1,12 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useMemo } from "react";
+import {
+    BaseSyntheticEvent,
+    useState,
+    useMemo,
+    useEffect,
+    useTransition,
+} from "react";
 import { useShallow } from "zustand/react/shallow";
 
 // Component imports
@@ -10,6 +16,7 @@ import InfoAvatar from "@/components/InfoAvatar";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -17,14 +24,12 @@ import { useStore, useView } from "@/hooks";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { filterItems } from "@/helpers/filters";
+import { filterItems } from "@/lib/filterItems";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 
-export default function CharacterGallery({
-    characters,
-}: {
+export default function CharacterGallery(props: {
     characters: GenshinCharacter[];
 }) {
     const game = useGameTag();
@@ -38,9 +43,9 @@ export default function CharacterGallery({
         (state) => state.hideUnreleasedContent
     );
 
-    characters = filterUnreleasedContent(
+    const characters = filterUnreleasedContent(
         hideUnreleasedContent,
-        characters,
+        props.characters,
         game
     );
 
@@ -58,10 +63,17 @@ export default function CharacterGallery({
         handleInputChange,
     };
 
-    const currentCharacters = useMemo(
-        () => filterItems(characters, filters, searchValue),
-        [characters, filters, searchValue]
-    );
+    const [currentCharacters, setCurrentCharacters] = useState<
+        GenshinCharacter[]
+    >([]);
+    const [isPending, startTransition] = useTransition();
+
+    useEffect(() => {
+        startTransition(async () => {
+            const chars = await filterItems(characters, filters, searchValue);
+            setCurrentCharacters(chars);
+        });
+    }, [filters, searchValue, hideUnreleasedContent]);
 
     const renderGallery = () => {
         switch (view) {
@@ -103,7 +115,7 @@ export default function CharacterGallery({
 
     return (
         <InfoGallery title="Characters" {...params}>
-            {renderGallery()}
+            {isPending ? <LinearProgress /> : renderGallery()}
         </InfoGallery>
     );
 }
