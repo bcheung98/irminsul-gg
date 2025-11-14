@@ -34,11 +34,11 @@ export interface GenshinCharacterFilterState extends Filters {
 
 export default function CharacterFilters() {
     const game = useGameTag();
-    const key = "genshin/character";
+    const key = "genshin/characters";
 
     const { setFilterState, clearFilterState } = useFilterStore();
     const filters = useFilterStore(
-        useShallow((state) => state["genshin/character"])
+        useShallow((state) => state["genshin/characters"])
     );
     const actions = filterActions(
         key,

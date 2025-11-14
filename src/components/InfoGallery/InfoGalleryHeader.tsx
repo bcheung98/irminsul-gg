@@ -29,6 +29,8 @@ export default function InfoGalleryHeader({
     handleView,
     searchValue,
     handleInputChange,
+    hideSearchBar = false,
+    hideFilters = false,
 }: InfoGalleryProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("lg"));
@@ -50,43 +52,49 @@ export default function InfoGalleryHeader({
             <Grid size="auto">
                 <Text variant="h5">{title}</Text>
             </Grid>
-            <Grid size={{ xs: 6, sm: "auto" }}>
-                <ToggleButtons
-                    color="primary"
-                    buttons={buttons}
-                    value={view}
-                    exclusive
-                    onChange={handleView}
-                    highlightOnHover={false}
-                />
-            </Grid>
-            <Grid size={{ xs: 12, sm: "auto" }}>
-                <SearchBar
-                    placeholder="Search"
-                    value={searchValue}
-                    onChange={handleInputChange}
-                    sx={{ height: "32px" }}
-                />
-            </Grid>
-            <Grid size={{ xs: 12, sm: "auto" }}>
-                <Button
-                    onClick={toggleDrawerState}
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                    disableRipple
-                    startIcon={
-                        matches && rightDrawerOpen ? (
-                            <KeyboardArrowRightIcon />
-                        ) : (
-                            <TuneIcon />
-                        )
-                    }
-                    sx={{ height: "32px" }}
-                >
-                    Filters
-                </Button>
-            </Grid>
+            {buttons.length > 1 && (
+                <Grid size={{ xs: 6, sm: "auto" }}>
+                    <ToggleButtons
+                        color="primary"
+                        buttons={buttons}
+                        value={view}
+                        exclusive
+                        onChange={handleView}
+                        highlightOnHover={false}
+                    />
+                </Grid>
+            )}
+            {!hideSearchBar && (
+                <Grid size={{ xs: 12, sm: "auto" }}>
+                    <SearchBar
+                        placeholder="Search"
+                        value={searchValue}
+                        onChange={handleInputChange}
+                        sx={{ height: "32px" }}
+                    />
+                </Grid>
+            )}
+            {!hideFilters && (
+                <Grid size={{ xs: 12, sm: "auto" }}>
+                    <Button
+                        onClick={toggleDrawerState}
+                        variant="contained"
+                        color="primary"
+                        disableElevation
+                        disableRipple
+                        startIcon={
+                            matches && rightDrawerOpen ? (
+                                <KeyboardArrowRightIcon />
+                            ) : (
+                                <TuneIcon />
+                            )
+                        }
+                        sx={{ height: "32px" }}
+                    >
+                        Filters
+                    </Button>
+                </Grid>
+            )}
         </Grid>
     );
 }
@@ -103,7 +111,7 @@ export const defaultButtons: InfoGalleryButtonProps[] = [
         tooltip: "Expanded card view",
     },
     {
-        value: "table",
+        value: "list",
         icon: <TableRowsIcon />,
         tooltip: "List view",
     },

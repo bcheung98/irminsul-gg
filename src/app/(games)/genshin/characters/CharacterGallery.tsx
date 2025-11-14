@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    BaseSyntheticEvent,
-    useState,
-    useMemo,
-    useEffect,
-    useTransition,
-} from "react";
+import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 // Component imports
@@ -21,10 +15,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 // Helper imports
 import { useGameTag } from "@/context";
 import { useStore, useView } from "@/hooks";
+import { useGalleryStore } from "@/stores/useGalleryStore";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 import { useFilterStore } from "@/stores/useFilterStore";
-import { filterItems } from "@/lib/filterItems";
+import { filterItems } from "@/helpers/filterItems";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
@@ -35,7 +30,10 @@ export default function CharacterGallery(props: {
     const game = useGameTag();
 
     const filters = useFilterStore(
-        useShallow((state) => state["genshin/character"])
+        useShallow((state) => state["genshin/characters"])
+    );
+    const sortParams = useGalleryStore(
+        useShallow((state) => state["genshin/characters"])
     );
 
     const hideUnreleasedContent = useStore(
@@ -54,7 +52,10 @@ export default function CharacterGallery(props: {
         setSearchValue(event.target.value);
     };
 
-    const { view, handleView } = useView("icon");
+    const { view } = useGalleryStore(
+        useShallow((state) => state["genshin/characters"])
+    );
+    const handleView = useView("genshin/characters");
 
     const params = {
         view,
@@ -69,11 +70,17 @@ export default function CharacterGallery(props: {
     const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
-        startTransition(async () => {
-            const chars = await filterItems(characters, filters, searchValue);
+        startTransition(() => {
+            const chars = filterItems(
+                game,
+                characters,
+                filters,
+                searchValue,
+                sortParams
+            );
             setCurrentCharacters(chars);
         });
-    }, [filters, searchValue, hideUnreleasedContent]);
+    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
 
     const renderGallery = () => {
         switch (view) {

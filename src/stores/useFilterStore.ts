@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { GenshinCharacterFilterState } from "@/components/_genshin/CharacterFilters";
 
 export interface FilterState {
-    "genshin/character": GenshinCharacterFilterState;
+    "genshin/characters": GenshinCharacterFilterState;
 }
 
 export type SetFilterState = (
@@ -37,7 +37,7 @@ export const genshinFilters: GenshinCharacterFilterState = {
 };
 
 export const initialState: FilterState = {
-    "genshin/character": genshinFilters,
+    "genshin/characters": genshinFilters,
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

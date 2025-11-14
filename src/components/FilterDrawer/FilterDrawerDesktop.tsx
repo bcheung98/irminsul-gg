@@ -34,6 +34,7 @@ export default function FilterDrawerDesktop({
                     width: open ? width : 0,
                     borderLeft: `1px solid ${theme.border.color.primary}`,
                     backgroundColor: theme.drawer.backgroundColor.main,
+                    scrollbarWidth: "none",
                 },
             }}
         >

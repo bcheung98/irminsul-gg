@@ -1,11 +1,13 @@
 import { useState, BaseSyntheticEvent } from "react";
+import { GalleryState, useGalleryStore } from "@/stores/useGalleryStore";
+import { GalleryView } from "@/types";
 
-export function useView<T>(initialValue: T) {
-    const [view, setView] = useState<T>(initialValue);
-    const handleView = (_: BaseSyntheticEvent, view: T) => {
+export function useView(key: keyof GalleryState) {
+    const { setGalleryState } = useGalleryStore();
+    const handleView = (_: BaseSyntheticEvent, view: GalleryView) => {
         if (view !== null) {
-            setView(view);
+            setGalleryState(key, "view", view);
         }
     };
-    return { view, handleView };
+    return handleView;
 }
