@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import TextLabel from "@/components/TextLabel";
 import { FilterButtons, Filters, GroupFilterButtons } from "@/types";
+import { ClearFilterState, FilterState } from "@/stores/useFilterStore";
 
 interface CreateButtonProps {
     url?: string;
@@ -61,13 +61,14 @@ export function createGroupedFilterButtons<T extends string | number>({
     }));
 }
 
-export function filterActions<T>(
-    initialState: T,
+export function filterActions(
+    key: keyof FilterState,
+    initialState: Record<string, (string | number)[]>,
     filters: Filters,
-    setFilters: Dispatch<SetStateAction<T>>
+    clearFilters: ClearFilterState
 ) {
     return {
-        clearFilters: () => setFilters(initialState),
+        clearFilters: () => clearFilters(key, initialState),
         activeFilters: Object.values(filters).flat().length > 0,
     };
 }

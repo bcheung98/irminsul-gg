@@ -25,6 +25,7 @@ import { CharacterAscensionStat } from "@/types/genshin/character";
 import { GenshinMaterialCategory } from "@/types/genshin/materials";
 
 export function genshinFilters<T extends Filters>({
+    key,
     filters,
     setFilters,
 }: FilterGroupsProps<T>): FilterGroups {
@@ -55,7 +56,7 @@ export function genshinFilters<T extends Filters>({
                 url: "genshin/elements",
             }),
             onChange: (_: BaseSyntheticEvent, newValues: GenshinElement[]) =>
-                setFilters({ ...filters, element: newValues }),
+                setFilters(key, "element", newValues),
         },
         weaponType: {
             name: "Weapon",
@@ -65,7 +66,7 @@ export function genshinFilters<T extends Filters>({
                 url: "genshin/weapons/icons",
             }),
             onChange: (_: BaseSyntheticEvent, newValues: GenshinWeaponType[]) =>
-                setFilters({ ...filters, weaponType: newValues }),
+                setFilters(key, "weaponType", newValues),
         },
         rarity: {
             name: "Rarity",
@@ -75,7 +76,7 @@ export function genshinFilters<T extends Filters>({
                 label: <RarityStars rarity={rarity} variant="h6" />,
             })),
             onChange: (_: BaseSyntheticEvent, newValues: GenshinRarity[]) =>
-                setFilters({ ...filters, rarity: newValues }),
+                setFilters(key, "rarity", newValues),
             padding: "4px 8px",
         },
         ascStat: {
@@ -90,7 +91,7 @@ export function genshinFilters<T extends Filters>({
             onChange: (
                 _: BaseSyntheticEvent,
                 newValues: CharacterAscensionStat[]
-            ) => setFilters({ ...filters, ascStat: newValues }),
+            ) => setFilters(key, "ascStat", newValues),
         },
         talentBook: {
             name: "Talent Book",
@@ -110,7 +111,7 @@ export function genshinFilters<T extends Filters>({
                 },
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
-                setFilters({ ...filters, talentBook: newValues }),
+                setFilters(key, "talentBook", newValues),
             width: "128px",
         },
         commonMat: {
@@ -130,7 +131,7 @@ export function genshinFilters<T extends Filters>({
                 },
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
-                setFilters({ ...filters, commonMat: newValues }),
+                setFilters(key, "commonMat", newValues),
         },
         bossMat: {
             name: "Boss Material",
@@ -148,7 +149,7 @@ export function genshinFilters<T extends Filters>({
                 },
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
-                setFilters({ ...filters, bossMat: newValues }),
+                setFilters(key, "bossMat", newValues),
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
@@ -160,7 +161,7 @@ export function genshinFilters<T extends Filters>({
                 url: "genshin/materials/weekly",
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
-                setFilters({ ...filters, weeklyBossMat: newValues }),
+                setFilters(key, "weeklyBossMat", newValues),
         },
         localMat: {
             name: "Local Specialty",
@@ -172,7 +173,7 @@ export function genshinFilters<T extends Filters>({
                 url: "genshin/materials/local",
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
-                setFilters({ ...filters, localMat: newValues }),
+                setFilters(key, "localMat", newValues),
         },
         nation: {
             name: "Nation",
@@ -182,7 +183,7 @@ export function genshinFilters<T extends Filters>({
                 url: "genshin/nations",
             }),
             onChange: (_: BaseSyntheticEvent, newValues: GenshinNation[]) =>
-                setFilters({ ...filters, nation: newValues }),
+                setFilters(key, "nation", newValues),
         },
     };
 }

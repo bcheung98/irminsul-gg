@@ -1,13 +1,24 @@
 import { create } from "zustand";
 import { GenshinCharacterFilterState } from "@/components/_genshin/CharacterFilters";
-import { Filters } from "@/types";
 
 export interface FilterState {
     "genshin/character": GenshinCharacterFilterState;
 }
 
+export type SetFilterState = (
+    key: keyof FilterState,
+    tag: string,
+    filters: (string | number)[]
+) => void;
+
+export type ClearFilterState = (
+    key: keyof FilterState,
+    initialState: Record<string, (string | number)[]>
+) => void;
+
 export interface FilterActions {
-    setFilterState: (key: keyof FilterState, filters: Filters) => void;
+    setFilterState: SetFilterState;
+    clearFilterState: ClearFilterState;
 }
 
 export type FilterStore = FilterState & FilterActions;
@@ -31,7 +42,12 @@ export const initialState: FilterState = {
 
 export const useFilterStore = create<FilterStore>((set) => ({
     ...initialState,
-    setFilterState: function (key, filters) {
-        return set(() => ({ [`${key}`]: filters }));
+    setFilterState: function (key, tag, filters) {
+        return set((state) => ({
+            [`${key}`]: { ...state[key], [`${tag}`]: filters },
+        }));
+    },
+    clearFilterState: function (key, initialState) {
+        return set(() => ({ [`${key}`]: initialState }));
     },
 }));

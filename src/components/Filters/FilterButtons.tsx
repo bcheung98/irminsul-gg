@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 // Component imports
 import Dropdown from "@/components/Dropdown";
 import ToggleButtons from "@/components/ToggleButtons";
@@ -14,7 +16,7 @@ interface FilterButtonsProps {
     filter: FilterGroup;
 }
 
-export default function FilterButtons({ filter }: FilterButtonsProps) {
+const FilterButtons = memo(function ({ filter }: FilterButtonsProps) {
     const theme = useTheme();
 
     function renderButton(buttons: ToggleButtonProps[]) {
@@ -59,4 +61,6 @@ export default function FilterButtons({ filter }: FilterButtonsProps) {
             )}
         </Dropdown>
     );
-}
+});
+
+export default FilterButtons;

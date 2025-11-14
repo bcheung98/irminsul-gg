@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useShallow } from "zustand/react/shallow";
 
 // Component imports
 import FilterRoot from "@/components/Filters";
@@ -34,19 +34,24 @@ export interface GenshinCharacterFilterState extends Filters {
 
 export default function CharacterFilters() {
     const game = useGameTag();
+    const key = "genshin/character";
 
-    const { setFilterState } = useFilterStore();
-    const [filters, setFilters] = useState(genshinFilters);
-    const actions = filterActions(genshinFilters, filters, setFilters);
+    const { setFilterState, clearFilterState } = useFilterStore();
+    const filters = useFilterStore(
+        useShallow((state) => state["genshin/character"])
+    );
+    const actions = filterActions(
+        key,
+        genshinFilters,
+        filters,
+        clearFilterState
+    );
 
     const groups = filterGroups({
+        key,
         filters,
-        setFilters,
+        setFilters: setFilterState,
     })[game];
-
-    useEffect(() => {
-        setFilterState("genshin/character", filters);
-    }, [filters]);
 
     return <FilterRoot actions={actions} filters={Object.values(groups)} />;
 }

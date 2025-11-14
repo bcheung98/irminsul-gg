@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
 import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
 import { UmaVersion, Version, VersionWithDate } from "./version";
-import { createFilterButtons } from "@/helpers/filters";
+import { FilterState, SetFilterState } from "@/stores/useFilterStore";
 
 // General
 export type Orientation = "row" | "column";
 export type SortOrder = "asc" | "desc";
-export type GalleryView = "icon" | "card" | "table";
+export type GalleryView = "icon" | "card" | "list";
 export interface VoiceActorData {
     en: string;
     jp: string;
@@ -73,8 +72,9 @@ export type Server = keyof typeof servers;
 // Filters
 export type Filters = Record<string, (string | number)[]>;
 export interface FilterGroupsProps<T> {
+    key: keyof FilterState;
     filters: T;
-    setFilters: Dispatch<SetStateAction<T>>;
+    setFilters: SetFilterState;
 }
 export type FilterGroups = Record<string, FilterGroup>;
 export interface FilterGroup {
