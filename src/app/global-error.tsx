@@ -30,14 +30,20 @@ export default function GlobalError({
                             margin: "auto",
                         }}
                     >
-                        <p style={{ fontSize: "1.75rem", margin: 0 }}>
+                        <p
+                            className="global-error-text"
+                            style={{ fontSize: "1.75rem", margin: 0 }}
+                        >
                             Something went wrong!
                         </p>
-                        <p style={{ fontSize: "1rem" }}>
+                        <p
+                            className="global-error-text"
+                            style={{ fontSize: "1rem" }}
+                        >
                             Here are some things you can try:
                         </p>
                         <ul>
-                            <li>
+                            <li className="global-error-text">
                                 Click{" "}
                                 <span
                                     onClick={() => {
@@ -54,25 +60,28 @@ export default function GlobalError({
                                 </span>{" "}
                                 to try and reload the segment.
                             </li>{" "}
-                            <li>
+                            <li className="global-error-text">
                                 Refresh the browser's cache by pressing{" "}
                                 <u>Ctrl + F5</u> (Windows) or{" "}
                                 <u>Cmd + Shift + R</u> (Mac).
                             </li>
-                            <li>
+                            <li className="global-error-text">
                                 Clear your local storage (this will reset your
                                 settings and any data in planners).
                             </li>
                         </ul>
-                        <p style={{ fontSize: "1rem" }}>
+                        <p
+                            className="global-error-text"
+                            style={{ fontSize: "1rem" }}
+                        >
                             If all else fails, please let me know on Discord!
                         </p>
-                        <span>
+                        <span className="global-error-text">
                             <a href="https://discord.gg/QGehvhYdAz">
                                 <u>Click here to join the Discord</u>
                             </a>
                         </span>
-                        <p>Error details:</p>
+                        <p className="global-error-text">Error details:</p>
                         <div
                             style={{
                                 backgroundColor: "rgb(8, 32, 72)",
@@ -82,7 +91,10 @@ export default function GlobalError({
                             }}
                         >
                             <pre>
-                                <code style={{ color: "white" }}>
+                                <code
+                                    className="global-error-text"
+                                    style={{ color: "white" }}
+                                >
                                     {error.stack || error.message}
                                 </code>
                             </pre>

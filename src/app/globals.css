@@ -51,9 +51,7 @@ ul {
     border-radius: 4px;
 }
 
-#global-error > p,
-span,
-li {
+.global-error-text {
     color: white;
     font-family: Rowdies;
     font-weight: 300;
