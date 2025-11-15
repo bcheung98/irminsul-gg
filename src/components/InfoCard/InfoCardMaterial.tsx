@@ -9,40 +9,43 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { convertNametoURL, zoomImageOnHover } from "@/utils";
+import { convertNametoURL, splitJoin, zoomImageOnHover } from "@/utils";
+import { useMaterials } from "@/helpers/materials";
 
 // Type imports
-import { InfoCardProps } from "./InfoCard.types";
+import { InfoCardMaterialProps } from "./InfoCard.types";
+import { Game, GameData } from "@/types";
 
-export default function InfoCard({
+export default function InfoCardMaterial({
     tag,
     name,
     displayName = name,
     rarity = 3,
-    size = 128,
+    size = 96,
     background,
-    disableZoomOnHover,
     url = "avatars",
     componentID,
     badgeLeft,
     badgeRight,
-}: InfoCardProps) {
+    materials,
+}: InfoCardMaterialProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
     const id = `${componentID || convertNametoURL(name)}-infoCard`;
 
-    const [game, type] = tag.split("/");
+    const [game, type] = tag.split("/") as [Game, string];
 
     const href = `/${tag}/${convertNametoURL(name)}`;
 
     let imgSize = size;
     if (matches) {
-        imgSize = imgSize - imgSize * 0.25;
+        imgSize = imgSize - imgSize * 0.3;
     }
 
     const styles = infoCardStyles({
@@ -52,26 +55,50 @@ export default function InfoCard({
         backgroundColor: background || theme.background(1),
         rarity,
         imgSize: `${imgSize}px`,
+        variant: "material-card",
     });
 
-    const handleHover = (direction: "enter" | "leave") => {
-        !disableZoomOnHover &&
-            zoomImageOnHover({
-                direction,
-                id: id,
-                baseScale: 1,
-                zoom: 1.05,
-            });
-    };
+    function MaterialIcon(props: { material: string | number }) {
+        const material = useMaterials()[game](props.material);
+
+        const nums: GameData<string> = {
+            genshin: "3",
+            hsr: "3",
+            wuwa: "4",
+            zzz: "3",
+            uma: "",
+        };
+
+        let imgURL = `${game}/materials/${material.category}/${splitJoin(
+            material.tag
+        )}`;
+
+        if (["talent", "common"].includes(material.category)) {
+            imgURL += nums[game];
+        }
+
+        let tooltip = material.name;
+        if (material.source) {
+            tooltip += ` (${material.source})`;
+        }
+
+        return (
+            <Image
+                src={imgURL}
+                tooltip={tooltip}
+                size={imgSize / (8 / 3.5)}
+                style={{
+                    border: `1px solid ${theme.border.color.primary}`,
+                    borderRadius: "4px",
+                    backgroundColor: theme.background(1),
+                }}
+            />
+        );
+    }
 
     return (
         <Card sx={styles.root()} elevation={2}>
-            <Card
-                elevation={0}
-                sx={styles.card()}
-                onMouseEnter={() => handleHover("enter")}
-                onMouseLeave={() => handleHover("leave")}
-            >
+            <Card elevation={0} sx={styles.card()}>
                 <ButtonBase href={href} LinkComponent={NavLink}>
                     <Box sx={styles.imageContainer()}>
                         <Image
@@ -81,11 +108,29 @@ export default function InfoCard({
                             responsive
                             responsiveSize={0.25}
                         />
+                        <Grid
+                            container
+                            spacing={0.5}
+                            sx={{
+                                alignContent: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            {Object.values(materials).map((material, index) => (
+                                <MaterialIcon key={index} material={material} />
+                            ))}
+                        </Grid>
                     </Box>
                     <Box sx={styles.textContainer()}>
                         <Text
                             variant={
-                                displayName.length > 13 ? "body3" : "body2"
+                                displayName.length > 20
+                                    ? matches
+                                        ? "body3"
+                                        : "body2"
+                                    : matches
+                                    ? "body2"
+                                    : "body1"
                             }
                             sx={styles.text()}
                         >

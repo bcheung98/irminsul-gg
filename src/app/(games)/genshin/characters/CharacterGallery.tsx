@@ -5,8 +5,7 @@ import { useShallow } from "zustand/react/shallow";
 
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
-import InfoCard from "@/components/InfoCard";
-import InfoAvatar from "@/components/InfoAvatar";
+import InfoCard, { InfoCardMaterial } from "@/components/InfoCard";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
@@ -80,7 +79,13 @@ export default function CharacterGallery(props: {
             );
             setCurrentCharacters(chars);
         });
-    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
+    }, [
+        filters,
+        searchValue,
+        hideUnreleasedContent,
+        sortParams.sortBy,
+        sortParams.sortDirection,
+    ]);
 
     const renderGallery = () => {
         switch (view) {
@@ -107,12 +112,17 @@ export default function CharacterGallery(props: {
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
-                            <InfoAvatar
+                            <InfoCardMaterial
                                 tag="genshin/characters"
                                 key={character.id}
                                 name={character.name}
                                 displayName={character.fullName}
                                 rarity={character.rarity}
+                                badgeLeft={{
+                                    element: character.element,
+                                    weaponType: character.weaponType,
+                                }}
+                                materials={character.materials}
                             />
                         ))}
                     </Grid>

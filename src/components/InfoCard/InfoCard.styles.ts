@@ -12,20 +12,21 @@ interface InfoCardStylesProps {
     backgroundColor: string;
     rarity: number;
     imgSize: string;
+    variant?: string;
 }
 
 export const infoCardStyles = ({
-    game,
     type,
     border,
     backgroundColor,
     rarity,
     imgSize,
+    variant,
 }: InfoCardStylesProps) => ({
     root: (): SxProps<Theme> => (theme) => ({
         position: "relative",
         overflow: "visible",
-        width: imgSize,
+        width: variant !== "material-card" ? imgSize : "auto",
         borderRadius: border.radius,
         background: `linear-gradient(to bottom, transparent, ${theme.infoCard.backgroundColor.main})`,
     }),
@@ -39,15 +40,16 @@ export const infoCardStyles = ({
     imageContainer: (): SxProps => () => ({
         display: "flex",
         overflow: "clip",
-        width: imgSize,
+        width:
+            variant !== "material-card" ? imgSize : `calc(${imgSize} * 8 /3)`,
         backgroundColor:
             type === "characters" ? backgroundColor : "transparent",
         backgroundImage:
-            type === "characters"
+            variant !== "material-card" && type === "characters"
                 ? null
-                : `url(https://assets.irminsul.gg/${game}/backgrounds/Background_${rarity}_Star.png)`,
+                : `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
         backgroundSize: "contain",
-        backgroundRepeat: "no-repeat",
+        backgroundRepeat: variant !== "material-card" ? "no-repeat" : "repeat",
     }),
     textContainer: (): SxProps => () => ({
         p: "8px",
@@ -68,11 +70,11 @@ export const infoCardStyles = ({
             backgroundColor: theme.infoCard.backgroundColor.main,
             borderRadius: "16px",
         }),
-    badgeIcon: (): CSSProperties => ({
+    badgeIcon: (matches = true): CSSProperties => ({
         width: `calc(${imgSize} / 8 + 12px)`,
         height: `calc(${imgSize} / 8 + 12px)`,
-        minWidth: "24px",
-        minHeight: "24px",
+        minWidth: matches ? "28px" : "24px",
+        minHeight: matches ? "28px" : "24px",
         padding: "4px",
     }),
 });
