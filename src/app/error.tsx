@@ -3,12 +3,13 @@
 import { useEffect } from "react";
 
 // Component imports
-import Image from "@/components/Image";
 import Text from "@/components/Text";
+import DiscordButton from "@/components/DiscordButton";
 
 // MUI imports
 import { alpha, useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Dropdown from "@/components/Dropdown";
 
@@ -26,11 +27,12 @@ export default function Error({
     }, [error]);
 
     return (
-        <Stack alignItems="center" spacing={6} sx={{ mt: "96px" }}>
+        <Stack alignItems="center" spacing={6} sx={{ mt: { xs: 2, md: 12 } }}>
             <Card
                 sx={{
-                    p: 3,
+                    p: 2,
                     backgroundColor: alpha(theme.background(1), 0.75),
+                    width: { xs: "90%", md: "50%" },
                 }}
             >
                 <Stack spacing={2}>
@@ -40,10 +42,6 @@ export default function Error({
                     <Text variant="h6">Here are some things you can try:</Text>
                     <Text component="span">
                         <ul>
-                            <li>
-                                Hard reload the page to refresh the browser's
-                                cache.
-                            </li>
                             <li>
                                 Click{" "}
                                 <span
@@ -60,19 +58,27 @@ export default function Error({
                                     here
                                 </span>{" "}
                                 to try and reload the segment.
+                            </li>{" "}
+                            <li>
+                                Refresh the browser's cache by pressing{" "}
+                                <u>Ctrl + F5</u> (Windows) or{" "}
+                                <u>Cmd + Shift + R</u> (Mac).
                             </li>
                             <li>
                                 Clear your local storage (this will reset your
-                                settings).
+                                settings and any data in planners).
                             </li>
                         </ul>
                     </Text>
                     <Text>
                         If all else fails, please let me know on Discord!
                     </Text>
-                    <Dropdown title="View error" contentPadding="16px">
-                        <Card sx={{ px: 2 }}>
-                            <Text variant="subtitle1" component="span">
+                    <Box sx={{ width: "192px" }}>
+                        <DiscordButton />
+                    </Box>
+                    <Dropdown title="View error details" contentPadding="16px">
+                        <Card sx={{ px: 2, overflow: "auto" }}>
+                            <Text variant="body2" component="span">
                                 <pre>
                                     <code style={{ color: theme.text.primary }}>
                                         {error.stack || error.message}
@@ -83,7 +89,6 @@ export default function Error({
                     </Dropdown>
                 </Stack>
             </Card>
-            <Image src={`genshin/emotes/error1`} size={256} />
         </Stack>
     );
 }
