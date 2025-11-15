@@ -45,3 +45,16 @@ ul {
 .background-video.fading {
     opacity: 0;
 }
+
+#global-error {
+    background-color: rgba(8, 32, 72, 0.75);
+    border-radius: 4px;
+}
+
+#global-error > p,
+span,
+li {
+    color: white;
+    font-family: Rowdies;
+    font-weight: 300;
+}

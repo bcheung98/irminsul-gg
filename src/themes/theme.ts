@@ -9,7 +9,8 @@ export const themeList = [darkTheme, nextTheme] as const;
 export const themeNames = themeList.map((t) => t.name);
 
 export default function getTheme(id: number) {
-    let theme = themeList[themeList.findIndex((theme) => theme.id === id)];
+    let theme =
+        themeList[themeList.findIndex((theme) => theme.id === id)] || darkTheme;
 
     const baseThemeData = {
         breakpoints: {
