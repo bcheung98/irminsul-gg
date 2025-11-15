@@ -33,3 +33,11 @@ ul {
     left: 0;
     scale: 1.05;
 }
+
+.background-video {
+    transition: opacity 1s;
+}
+
+.background-video.fading {
+    opacity: 0;
+}

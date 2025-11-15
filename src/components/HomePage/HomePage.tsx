@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 // Component imports
 import LandingText from "@/components/LandingText";
 import Websites from "@/components/Websites";
@@ -8,15 +10,32 @@ import Websites from "@/components/Websites";
 import Stack from "@mui/material/Stack";
 
 export default function HomePage() {
+    function playVideo(e: HTMLVideoElement) {
+        e.play();
+        e.classList.remove("fading");
+        setTimeout(() => {
+            e.classList.add("fading");
+        }, (e.duration / e.playbackRate - 1) * 1000);
+    }
+
+    useEffect(() => {
+        const video = document.getElementsByClassName(
+            "background-video"
+        )[0] as HTMLVideoElement;
+        playVideo(video);
+    }, []);
+
     return (
         <>
             <video
                 playsInline
                 autoPlay
                 muted
-                loop
                 poster="https://assets.irminsul.gg/main/images/Irminsul.png"
                 id="background-image"
+                className="background-video fading"
+                onCanPlay={(e) => playVideo(e.currentTarget)}
+                onEnded={(e) => playVideo(e.currentTarget)}
             >
                 {/* 
                     Background video courtesy of /u/lunimater on Reddit
