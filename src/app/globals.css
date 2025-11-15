@@ -10,6 +10,10 @@ body:has(.lock-scroll):not(.nav-mobile) {
     overflow: hidden;
 }
 
+code {
+    font-family: Consolas, "Courier New", Menlo, Monaco, monospace;
+}
+
 a {
     color: inherit;
     text-decoration: none;
