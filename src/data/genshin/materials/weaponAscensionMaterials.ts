@@ -1,7 +1,7 @@
 export const weaponAscensionMaterials = [
     {
         id: 0,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Decarabian",
         tag: "Decarabian",
         source: "Mon/Thu",
@@ -11,7 +11,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114001,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Tile of Decarabian's Tower",
         tag: "Decarabian1",
         rarity: 2,
@@ -22,7 +22,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114002,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Debris of Decarabian's City",
         tag: "Decarabian2",
         rarity: 3,
@@ -33,7 +33,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114003,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Fragment of Decarabian's Epic",
         tag: "Decarabian3",
         rarity: 4,
@@ -44,7 +44,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114004,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Scattered Piece of Decarabian's Dream",
         tag: "Decarabian4",
         rarity: 5,
@@ -55,7 +55,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 1,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Boreal Wolf",
         tag: "Boreal Wolf",
         source: "Tue/Fri",
@@ -65,7 +65,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114005,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Boreal Wolf's Milk Tooth",
         tag: "Boreal Wolf1",
         rarity: 2,
@@ -76,7 +76,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114006,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Boreal Wolf's Cracked Tooth",
         tag: "Boreal Wolf2",
         rarity: 3,
@@ -87,7 +87,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114007,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Boreal Wolf's Broken Fang",
         tag: "Boreal Wolf3",
         rarity: 4,
@@ -98,7 +98,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114008,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Boreal Wolf's Nostalgia",
         tag: "Boreal Wolf4",
         rarity: 5,
@@ -109,7 +109,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 2,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Dandelion Gladiator",
         tag: "Dandelion Gladiator",
         source: "Wed/Sat",
@@ -119,7 +119,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114009,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Fetters of the Dandelion Gladiator",
         tag: "Dandelion Gladiator1",
         rarity: 2,
@@ -130,7 +130,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114010,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Chains of the Dandelion Gladiator",
         tag: "Dandelion Gladiator2",
         rarity: 3,
@@ -141,7 +141,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114011,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Shackles of the Dandelion Gladiator",
         tag: "Dandelion Gladiator3",
         rarity: 4,
@@ -152,7 +152,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114012,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Dream of the Dandelion Gladiator",
         tag: "Dandelion Gladiator4",
         rarity: 5,
@@ -163,7 +163,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 3,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Guyun",
         tag: "Guyun",
         source: "Mon/Thu",
@@ -173,7 +173,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114013,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Luminous Sands from Guyun",
         tag: "Guyun1",
         rarity: 2,
@@ -184,7 +184,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114014,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Lustrous Stone from Guyun",
         tag: "Guyun2",
         rarity: 3,
@@ -195,7 +195,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114015,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Relic from Guyun",
         tag: "Guyun3",
         rarity: 4,
@@ -206,7 +206,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114016,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Divine Body from Guyun",
         tag: "Guyun4",
         rarity: 5,
@@ -217,7 +217,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 4,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mist Veiled Elixir",
         tag: "Mist Veiled Elixir",
         source: "Tue/Fri",
@@ -227,7 +227,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114017,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mist Veiled Lead Elixir",
         tag: "Mist Veiled Elixir1",
         rarity: 2,
@@ -238,7 +238,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114018,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mist Veiled Mercury Elixir",
         tag: "Mist Veiled Elixir2",
         rarity: 3,
@@ -249,7 +249,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114019,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mist Veiled Gold Elixir",
         tag: "Mist Veiled Elixir3",
         rarity: 4,
@@ -260,7 +260,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114020,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mist Veiled Primo Elixir",
         tag: "Mist Veiled Elixir4",
         rarity: 5,
@@ -271,7 +271,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 5,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Aerosiderite",
         tag: "Aerosiderite",
         source: "Wed/Sat",
@@ -281,7 +281,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114021,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Grain of Aerosiderite",
         tag: "Aerosiderite1",
         rarity: 2,
@@ -292,7 +292,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114022,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Piece of Aerosiderite",
         tag: "Aerosiderite2",
         rarity: 3,
@@ -303,7 +303,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114023,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Bit of Aerosiderite",
         tag: "Aerosiderite3",
         rarity: 4,
@@ -314,7 +314,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114024,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Chunk of Aerosiderite",
         tag: "Aerosiderite4",
         rarity: 5,
@@ -325,7 +325,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 6,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Sea Branch",
         tag: "Sea Branch",
         source: "Mon/Thu",
@@ -335,7 +335,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114025,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Coral Branch of a Distant Sea",
         tag: "Sea Branch1",
         rarity: 2,
@@ -346,7 +346,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114026,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Jeweled Branch of a Distant Sea",
         tag: "Sea Branch2",
         rarity: 3,
@@ -357,7 +357,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114027,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Jade Branch of a Distant Sea",
         tag: "Sea Branch3",
         rarity: 4,
@@ -368,7 +368,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114028,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Golden Branch of a Distant Sea",
         tag: "Sea Branch4",
         rarity: 5,
@@ -379,7 +379,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 7,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Narukami",
         tag: "Narukami",
         source: "Tue/Fri",
@@ -389,7 +389,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114029,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Narukami's Wisdom",
         tag: "Narukami1",
         rarity: 2,
@@ -400,7 +400,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114030,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Narukami's Joy",
         tag: "Narukami2",
         rarity: 3,
@@ -411,7 +411,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114031,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Narukami's Affection",
         tag: "Narukami3",
         rarity: 4,
@@ -422,7 +422,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114032,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Narukami's Valor",
         tag: "Narukami4",
         rarity: 5,
@@ -433,7 +433,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 8,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oni Mask",
         tag: "Oni Mask",
         source: "Wed/Sat",
@@ -443,7 +443,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114033,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mask of the Wicked Lieutenant",
         tag: "Oni Mask1",
         rarity: 2,
@@ -454,7 +454,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114034,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mask of the Tiger's Bite",
         tag: "Oni Mask2",
         rarity: 3,
@@ -465,7 +465,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114035,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mask of the One-Horned",
         tag: "Oni Mask3",
         rarity: 4,
@@ -476,7 +476,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114036,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Mask of the Kijin",
         tag: "Oni Mask4",
         rarity: 5,
@@ -487,7 +487,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 9,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Forest Dew",
         tag: "Forest Dew",
         source: "Mon/Thu",
@@ -497,7 +497,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114037,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Copper Talisman of the Forest Dew",
         tag: "Forest Dew1",
         rarity: 2,
@@ -508,7 +508,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114038,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Iron Talisman of the Forest Dew",
         tag: "Forest Dew2",
         rarity: 3,
@@ -519,7 +519,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114039,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Silver Talisman of the Forest Dew",
         tag: "Forest Dew3",
         rarity: 4,
@@ -530,7 +530,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114040,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Golden Talisman of the Forest Dew",
         tag: "Forest Dew4",
         rarity: 5,
@@ -541,7 +541,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 10,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oasis Garden",
         tag: "Oasis Garden",
         source: "Tue/Fri",
@@ -551,7 +551,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114041,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oasis Garden's Reminiscence",
         tag: "Oasis Garden1",
         rarity: 2,
@@ -562,7 +562,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114042,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oasis Garden's Kindness",
         tag: "Oasis Garden2",
         rarity: 3,
@@ -573,7 +573,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114043,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oasis Garden's Mourning",
         tag: "Oasis Garden3",
         rarity: 4,
@@ -584,7 +584,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114044,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oasis Garden's Truth",
         tag: "Oasis Garden4",
         rarity: 5,
@@ -595,7 +595,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 11,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Scorching Might",
         tag: "Scorching Might",
         source: "Wed/Sat",
@@ -605,7 +605,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114045,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Echo of Scorching Might",
         tag: "Scorching Might1",
         rarity: 2,
@@ -616,7 +616,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114046,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Remnant Glow of Scorching Might",
         tag: "Scorching Might2",
         rarity: 3,
@@ -627,7 +627,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114047,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Dream of Scorching Might",
         tag: "Scorching Might3",
         rarity: 4,
@@ -638,7 +638,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114048,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Olden Days of Scorching Might",
         tag: "Scorching Might4",
         rarity: 5,
@@ -649,7 +649,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 12,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Chord",
         tag: "Chord",
         source: "Mon/Thu",
@@ -659,7 +659,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114049,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Fragment of an Ancient Chord",
         tag: "Chord1",
         rarity: 2,
@@ -670,7 +670,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114050,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Chapter of an Ancient Chord",
         tag: "Chord2",
         rarity: 3,
@@ -681,7 +681,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114051,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Movement of an Ancient Chord",
         tag: "Chord3",
         rarity: 4,
@@ -692,7 +692,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114052,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Echo of an Ancient Chord",
         tag: "Chord4",
         rarity: 5,
@@ -703,7 +703,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 13,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Dewdrop",
         tag: "Dewdrop",
         source: "Tue/Fri",
@@ -713,7 +713,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114053,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Dross of Pure Sacred Dewdrop",
         tag: "Dewdrop1",
         rarity: 2,
@@ -724,7 +724,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114054,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Sublimation of Pure Sacred Dewdrop",
         tag: "Dewdrop2",
         rarity: 3,
@@ -735,7 +735,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114055,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Spring of Pure Sacred Dewdrop",
         tag: "Dewdrop3",
         rarity: 4,
@@ -746,7 +746,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 14,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Pristine Sea",
         tag: "Pristine Sea",
         source: "Wed/Sat",
@@ -756,7 +756,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114057,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Broken Goblet of the Pristine Sea",
         tag: "Pristine Sea1",
         rarity: 2,
@@ -767,7 +767,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114058,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Wine Goblet of the Pristine Sea",
         tag: "Pristine Sea2",
         rarity: 3,
@@ -778,7 +778,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114059,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Silver Goblet of the Pristine Sea",
         tag: "Pristine Sea3",
         rarity: 4,
@@ -789,7 +789,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114060,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Golden Goblet of the Pristine Sea",
         tag: "Pristine Sea4",
         rarity: 5,
@@ -800,7 +800,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 15,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blazing Sacrificial Heart",
         tag: "Blazing Sacrificial Heart",
         source: "Mon/Thu",
@@ -810,7 +810,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114061,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blazing Sacrificial Heart's Terror",
         tag: "Blazing Sacrificial Heart1",
         rarity: 2,
@@ -821,7 +821,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114062,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blazing Sacrificial Heart's Hesitance",
         tag: "Blazing Sacrificial Heart2",
         rarity: 3,
@@ -832,7 +832,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114063,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blazing Sacrificial Heart's Resolve",
         tag: "Blazing Sacrificial Heart3",
         rarity: 4,
@@ -843,7 +843,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114064,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blazing Sacrificial Heart's Splendor",
         tag: "Blazing Sacrificial Heart4",
         rarity: 5,
@@ -854,7 +854,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 16,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Sacred Lord",
         tag: "Sacred Lord",
         source: "Tue/Fri",
@@ -864,7 +864,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114065,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Delirious Decadence of the Sacred Lord",
         tag: "Sacred Lord1",
         rarity: 2,
@@ -875,7 +875,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114066,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Delirious Desolation of the Sacred Lord",
         tag: "Sacred Lord2",
         rarity: 3,
@@ -886,7 +886,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114067,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Delirious Demeanor of the Sacred Lord",
         tag: "Sacred Lord3",
         rarity: 4,
@@ -897,7 +897,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114068,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Delirious Divinity of the Sacred Lord",
         tag: "Sacred Lord4",
         rarity: 5,
@@ -908,7 +908,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 17,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Night-Wind",
         tag: "Night-Wind",
         source: "Wed/Sat",
@@ -918,7 +918,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114069,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Night-Wind's Mystic Consideration",
         tag: "Night-Wind1",
         rarity: 2,
@@ -929,7 +929,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114070,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Night-Wind's Mystic Premonition",
         tag: "Night-Wind2",
         rarity: 3,
@@ -940,7 +940,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114071,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Night-Wind's Mystic Augury",
         tag: "Night-Wind3",
         rarity: 4,
@@ -951,7 +951,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114072,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Night-Wind's Mystic Revelation",
         tag: "Night-Wind4",
         rarity: 5,
@@ -962,7 +962,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 18,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Artful",
         tag: "Artful",
         source: "Mon/Thu",
@@ -972,7 +972,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114073,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Artful Device Fragment",
         tag: "Artful1",
         rarity: 2,
@@ -983,7 +983,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114074,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Artful Device Replica",
         tag: "Artful2",
         rarity: 3,
@@ -994,7 +994,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114075,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Artful Device Inheritance",
         tag: "Artful3",
         rarity: 4,
@@ -1005,7 +1005,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114076,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Artful Device Wish",
         tag: "Artful4",
         rarity: 5,
@@ -1016,7 +1016,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 19,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Flint",
         tag: "Flint",
         source: "Tue/Fri",
@@ -1026,7 +1026,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114077,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Ember of Long Night Flint",
         tag: "Flint1",
         rarity: 2,
@@ -1037,7 +1037,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114078,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Afterglow of Long Night Flint",
         tag: "Flint2",
         rarity: 3,
@@ -1048,7 +1048,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114079,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Flare of Long Night Flint",
         tag: "Flint3",
         rarity: 4,
@@ -1059,7 +1059,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114080,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Blaze of Long Night Flint",
         tag: "Flint4",
         rarity: 5,
@@ -1070,7 +1070,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 20,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Scion",
         tag: "Scion",
         source: "Wed/Sat",
@@ -1080,7 +1080,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114081,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Sundered Glory of the Far-North Scions",
         tag: "Scion1",
         rarity: 2,
@@ -1091,7 +1091,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114082,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Unyielding Delusion of the Far-North Scions",
         tag: "Scion2",
         rarity: 3,
@@ -1102,7 +1102,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114083,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Oblation of the Far-North Scions",
         tag: "Scion3",
         rarity: 4,
@@ -1113,7 +1113,7 @@ export const weaponAscensionMaterials = [
     },
     {
         id: 114084,
-        category: "weaponAscension",
+        category: "weapon",
         name: "Aureate Radiance of the Far-North Scions",
         tag: "Scion4",
         rarity: 5,
