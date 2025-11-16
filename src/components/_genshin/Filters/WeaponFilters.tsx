@@ -5,60 +5,44 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import {
-    genshinCharacterFilters,
-    useFilterStore,
-} from "@/stores/useFilterStore";
+import { genshinWeaponFilters, useFilterStore } from "@/stores/useFilterStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
+import { GenshinWeaponSubStat } from "@/data/genshin/weaponStats";
 
 // Type imports
 import { Filters } from "@/types";
-import {
-    GenshinElement,
-    GenshinNation,
-    GenshinRarity,
-    GenshinWeaponType,
-} from "@/types/genshin";
-import { CharacterAscensionStat } from "@/types/genshin/character";
+import { GenshinRarity, GenshinWeaponType } from "@/types/genshin";
 
-export interface GenshinCharacterFilterState extends Filters {
-    element: GenshinElement[];
+export interface GenshinWeaponFilterState extends Filters {
     weaponType: GenshinWeaponType[];
     rarity: GenshinRarity[];
-    ascStat: CharacterAscensionStat[];
-    talentBook: string[];
+    subStat: GenshinWeaponSubStat[];
+    weaponAscensionMat: string[];
+    eliteMat: string[];
     commonMat: string[];
-    bossMat: string[];
-    weeklyBossMat: string[];
-    localMat: string[];
-    nation: GenshinNation[];
 }
 
-export default function CharacterFilters() {
+export default function WeaponFilters() {
     const game = useGameTag();
-    const key = "genshin/characters";
+    const key = "genshin/weapons";
 
     const { setFilterState, clearFilterState } = useFilterStore();
     const filters = useFilterStore(useShallow((state) => state[key]));
     const actions = filterActions(
         key,
-        genshinCharacterFilters,
+        genshinWeaponFilters,
         filters,
         clearFilterState
     );
 
     const {
-        element,
         weaponType,
         rarity,
-        ascStat,
-        talentBook,
+        subStat,
+        weaponAscensionMat,
+        eliteMat,
         commonMat,
-        bossMat,
-        weeklyBossMat,
-        localMat,
-        nation,
     } = filterGroups({
         key,
         filters,
@@ -69,16 +53,12 @@ export default function CharacterFilters() {
         <FilterRoot
             actions={actions}
             filters={[
-                element,
                 weaponType,
                 rarity,
-                ascStat,
-                talentBook,
+                subStat,
+                weaponAscensionMat,
+                eliteMat,
                 commonMat,
-                bossMat,
-                weeklyBossMat,
-                localMat,
-                nation,
             ]}
         />
     );

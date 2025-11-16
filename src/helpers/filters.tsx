@@ -8,6 +8,7 @@ interface CreateButtonProps {
     getURL?: (args?: any) => string;
     getTooltip?: (args?: any) => string;
     getLabel?: (args?: any) => string;
+    endTag?: string;
 }
 
 interface CreateFilterButtonsProps<T extends string | number>
@@ -21,6 +22,7 @@ export function createFilterButtons<T extends string | number>({
     getURL,
     getTooltip,
     getLabel,
+    endTag = "",
 }: CreateFilterButtonsProps<T>): FilterButtons[] {
     return items.map((item) => {
         const src = getURL !== undefined ? getURL(item) : item;
@@ -28,7 +30,7 @@ export function createFilterButtons<T extends string | number>({
             value: item,
             icon: url && (
                 <TextLabel
-                    icon={`${url}/${src}`}
+                    icon={`${url}/${src}${endTag}`}
                     iconProps={{
                         size: 32,
                         padding: "4px",

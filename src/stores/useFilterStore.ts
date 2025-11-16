@@ -1,8 +1,10 @@
 import { create } from "zustand";
-import { GenshinCharacterFilterState } from "@/components/_genshin/CharacterFilters";
+import { GenshinCharacterFilterState } from "@/components/_genshin/Filters/CharacterFilters";
+import { GenshinWeaponFilterState } from "@/components/_genshin/Filters/WeaponFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
+    "genshin/weapons": GenshinWeaponFilterState;
 }
 
 export type SetFilterState = (
@@ -23,7 +25,7 @@ export interface FilterActions {
 
 export type FilterStore = FilterState & FilterActions;
 
-export const genshinFilters: GenshinCharacterFilterState = {
+export const genshinCharacterFilters: GenshinCharacterFilterState = {
     element: [],
     weaponType: [],
     rarity: [],
@@ -36,8 +38,18 @@ export const genshinFilters: GenshinCharacterFilterState = {
     nation: [],
 };
 
+export const genshinWeaponFilters: GenshinWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+    subStat: [],
+    weaponAscensionMat: [],
+    eliteMat: [],
+    commonMat: [],
+};
+
 export const initialState: FilterState = {
-    "genshin/characters": genshinFilters,
+    "genshin/characters": genshinCharacterFilters,
+    "genshin/weapons": genshinWeaponFilters,
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

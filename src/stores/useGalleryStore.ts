@@ -16,6 +16,7 @@ export interface GallerySettings {
 
 export interface GalleryState {
     "genshin/characters": GallerySettings;
+    "genshin/weapons": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -30,6 +31,11 @@ export type GalleryStore = GalleryState & GalleryActions;
 
 export const initialState: GalleryState = {
     "genshin/characters": defaultSettings,
+    "genshin/weapons": {
+        sortBy: "version",
+        sortDirection: "asc",
+        view: "icon",
+    },
 };
 
 export const useGalleryStore = create(

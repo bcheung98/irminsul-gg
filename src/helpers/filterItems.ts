@@ -10,48 +10,66 @@ export function filterItems<T extends Record<string, any>>(
     sort: Omit<GallerySettings, "view">
 ) {
     let res = [...items];
-    if (filters.element.length > 0) {
+    if ("element" in filters && filters.element.length > 0) {
         res = res.filter((item) => filters.element.includes(item.element));
     }
-    if (filters.weaponType.length > 0) {
+    if ("weaponType" in filters && filters.weaponType.length > 0) {
         res = res.filter((item) =>
             filters.weaponType.includes(item.weaponType)
         );
     }
-    if (filters.rarity.length > 0) {
+    if ("rarity" in filters && filters.rarity.length > 0) {
         res = res.filter((item) => filters.rarity.includes(item.rarity));
     }
-    if (filters.ascStat.length > 0) {
+    if ("ascStat" in filters && filters.ascStat.length > 0) {
         res = res.filter((item) =>
             filters.ascStat.includes(item.stats.ascensionStat)
         );
     }
-    if (filters.talentBook.length > 0) {
+    if ("subStat" in filters && filters.subStat.length > 0) {
+        res = res.filter((item) =>
+            filters.subStat.includes(item.stats.subStat)
+        );
+    }
+    if ("talentBook" in filters && filters.talentBook.length > 0) {
         res = res.filter((item) =>
             filters.talentBook.includes(`${item.materials.talent}3`)
         );
     }
-    if (filters.commonMat.length > 0) {
+    if ("commonMat" in filters && filters.commonMat.length > 0) {
         res = res.filter((item) =>
             filters.commonMat.includes(item.materials.common)
         );
     }
-    if (filters.bossMat.length > 0) {
+    if ("bossMat" in filters && filters.bossMat.length > 0) {
         res = res.filter((item) =>
             filters.bossMat.includes(item.materials.boss)
         );
     }
-    if (filters.weeklyBossMat.length > 0) {
+    if ("weeklyBossMat" in filters && filters.weeklyBossMat.length > 0) {
         res = res.filter((item) =>
             filters.weeklyBossMat.includes(item.materials.weekly)
         );
     }
-    if (filters.localMat.length > 0) {
+    if ("localMat" in filters && filters.localMat.length > 0) {
         res = res.filter((item) =>
             filters.localMat.includes(item.materials.local)
         );
     }
-    if (filters.nation.length > 0) {
+    if (
+        "weaponAscensionMat" in filters &&
+        filters.weaponAscensionMat.length > 0
+    ) {
+        res = res.filter((item) =>
+            filters.weaponAscensionMat.includes(item.materials.weapon)
+        );
+    }
+    if ("eliteMat" in filters && filters.eliteMat.length > 0) {
+        res = res.filter((item) =>
+            filters.eliteMat.includes(item.materials.elite)
+        );
+    }
+    if ("nation" in filters && filters.nation.length > 0) {
         res = res.filter((item) => filters.nation.includes(item.nation));
     }
     if (searchValue) {
@@ -61,7 +79,7 @@ export function filterItems<T extends Record<string, any>>(
                 item.displayName
                     .toLowerCase()
                     .includes(searchValue.toLowerCase()) ||
-                item.fullName.toLowerCase().includes(searchValue.toLowerCase())
+                item.fullName?.toLowerCase().includes(searchValue.toLowerCase())
         );
     }
 

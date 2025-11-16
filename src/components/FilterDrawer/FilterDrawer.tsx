@@ -3,7 +3,10 @@ import { usePathname } from "next/navigation";
 // Component imports
 import DrawerDesktop from "./FilterDrawerDesktop";
 import DrawerMobile from "./FilterDrawerMobile";
-import GenshinCharacterFilters from "../_genshin/CharacterFilters";
+import {
+    GenshinCharacterFilters,
+    GenshinWeaponFilters,
+} from "@/components/_genshin/Filters";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -44,5 +47,5 @@ export default function FilterDrawer() {
 
 const components: Record<string, React.ReactNode> = {
     "/genshin/characters": <GenshinCharacterFilters />,
-    "/genshin/weapons": <></>,
+    "/genshin/weapons": <GenshinWeaponFilters />,
 };

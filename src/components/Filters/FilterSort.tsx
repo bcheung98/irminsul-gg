@@ -104,7 +104,7 @@ const options = {
         { value: "weaponType", label: "Weapon" },
     ],
     "genshin/weapons": [
-        { value: "release", label: "Release Date" },
+        { value: "version", label: "Release Date" },
         { value: "name", label: "Name" },
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Weapon" },

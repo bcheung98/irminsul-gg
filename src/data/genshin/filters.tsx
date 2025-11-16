@@ -12,6 +12,8 @@ import {
 import { useMaterialsCategory } from "@/helpers/materials";
 import { elements, nations, rarities, weapons } from "@/data/genshin/common";
 import { characterAscensionStats } from "./characterAscensionStats";
+import { GenshinWeaponSubStat, weaponSubStats } from "./weaponStats";
+import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 // Type imports
 import { Filters, FilterGroupsProps, FilterGroups } from "@/types";
@@ -71,13 +73,22 @@ export function genshinFilters<T extends Filters>({
         rarity: {
             name: "Rarity",
             value: filters.rarity,
-            buttons: rarities.slice(0, -3).map((rarity) => ({
-                value: rarity,
-                label: <RarityStars rarity={rarity} variant="h6" />,
-            })),
+            buttons: rarities
+                .slice(0, key === "genshin/characters" ? -3 : undefined)
+                .map((rarity) => ({
+                    value: rarity,
+                    label: (
+                        <RarityStars
+                            rarity={rarity}
+                            variant="h6"
+                            color={getRarityColor(rarity)}
+                        />
+                    ),
+                })),
             onChange: (_: BaseSyntheticEvent, newValues: GenshinRarity[]) =>
                 setFilters(key, "rarity", newValues),
             padding: "4px 8px",
+            width: "64px",
         },
         ascStat: {
             name: "Ascension Stat",
@@ -92,6 +103,20 @@ export function genshinFilters<T extends Filters>({
                 _: BaseSyntheticEvent,
                 newValues: CharacterAscensionStat[]
             ) => setFilters(key, "ascStat", newValues),
+        },
+        subStat: {
+            name: "Substat",
+            value: filters.subStat,
+            buttons: createFilterButtons({
+                items: objectKeys(weaponSubStats).slice(1),
+                url: "genshin/icons/ascension_stats",
+                getTooltip: (item: GenshinWeaponSubStat) =>
+                    weaponSubStats[item].title,
+            }),
+            onChange: (
+                _: BaseSyntheticEvent,
+                newValues: GenshinWeaponSubStat[]
+            ) => setFilters(key, "subStat", newValues),
         },
         talentBook: {
             name: "Talent Book",
@@ -174,6 +199,45 @@ export function genshinFilters<T extends Filters>({
             }),
             onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "localMat", newValues),
+        },
+        weaponAscensionMat: {
+            name: "Ascension Material",
+            value: filters.weaponAscensionMat,
+            buttons: createFilterButtons({
+                items: getMaterialCategory("weapon")
+                    .filter((material) => material.rarity === undefined)
+                    .map((material) => material.tag || ""),
+                url: "genshin/materials/weapon",
+                getTooltip: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.name} (${mat.source})` : "";
+                },
+                endTag: "4",
+            }),
+            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+                setFilters(key, "weaponAscensionMat", newValues),
+            width: "128px",
+        },
+        eliteMat: {
+            name: "Elite Material",
+            value: filters.eliteMat,
+            buttons: createFilterButtons({
+                items: getMaterialCategory("elite")
+                    .filter((material) => !material.rarity)
+                    .map((material) => material.tag || ""),
+                url: "genshin/materials/elite",
+                getURL: (item: string) => `${item}3`,
+                getTooltip: (item: string) => {
+                    const mat = getMaterialCategory("elite").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.name}` : "";
+                },
+            }),
+            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+                setFilters(key, "eliteMat", newValues),
         },
         nation: {
             name: "Nation",
