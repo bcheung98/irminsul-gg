@@ -6,6 +6,7 @@ import { useShallow } from "zustand/react/shallow";
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
 import InfoCard, { InfoCardMaterial } from "@/components/InfoCard";
+import CharacterList from "./CharacterList";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
@@ -91,6 +92,7 @@ export default function CharacterGallery(props: {
         switch (view) {
             case "icon":
             default:
+                if (isPending) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
@@ -109,6 +111,7 @@ export default function CharacterGallery(props: {
                     </Grid>
                 );
             case "card":
+                if (isPending) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
@@ -127,12 +130,19 @@ export default function CharacterGallery(props: {
                         ))}
                     </Grid>
                 );
+            case "list":
+                return (
+                    <CharacterList
+                        characters={currentCharacters}
+                        isPending={isPending}
+                    />
+                );
         }
     };
 
     return (
         <InfoGallery title="Characters" {...params}>
-            {isPending ? <LinearProgress /> : renderGallery()}
+            {renderGallery()}
         </InfoGallery>
     );
 }

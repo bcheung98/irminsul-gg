@@ -1,6 +1,7 @@
 import { SortProps } from "@/helpers/sort";
 import DateObject from "@/helpers/dates";
-import { sortBy } from "@/utils";
+import { objectKeys, sortBy } from "@/utils";
+import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 
 export default function sortItems<T extends Record<string, any>>({
     items,
@@ -42,11 +43,29 @@ export default function sortItems<T extends Record<string, any>>({
             res = res.sort(
                 (a, b) =>
                     sortBy(
-                        GenshinWeaponMap[b.weapon],
-                        GenshinWeaponMap[a.weapon],
+                        GenshinWeaponMap[b.weaponType],
+                        GenshinWeaponMap[a.weaponType],
                         reverse
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
+                    sortBy(b.fullName, a.fullName)
+            );
+            break;
+        case "ascensionStat":
+            const keys = objectKeys(characterAscensionStats);
+            res = res.sort(
+                (a, b) =>
+                    sortBy(
+                        keys.indexOf(b.stats.ascensionStat),
+                        keys.indexOf(a.stats.ascensionStat),
+                        reverse
+                    ) || sortBy(b.fullName, a.fullName)
+            );
+            break;
+        case "nation":
+            res = res.sort(
+                (a, b) =>
+                    sortBy(b.nation, a.nation, reverse) ||
                     sortBy(b.fullName, a.fullName)
             );
             break;
