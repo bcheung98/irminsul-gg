@@ -8,4 +8,5 @@ export interface InfoAvatarProps {
     componentID?: string;
     disableZoomOnHover?: boolean;
     url?: string;
+    loading?: boolean;
 }

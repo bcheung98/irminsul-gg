@@ -13,10 +13,10 @@ import { SortTableRow } from "@/components/SortTable/SortTable.types";
 
 export default function CharacterList({
     characters,
-    isPending,
+    loading,
 }: {
     characters: GenshinCharacter[];
-    isPending?: boolean;
+    loading?: boolean;
 }) {
     const columns = {
         name: "Name",
@@ -100,7 +100,7 @@ export default function CharacterList({
             createRow={createRow}
             title="Character"
             defaultSortBy="release"
-            isPending={isPending}
+            loading={loading}
         />
     );
 }

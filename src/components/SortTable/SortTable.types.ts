@@ -16,7 +16,7 @@ export interface SortTableProps<T extends ColumnHeaders, U extends BaseData> {
     title?: string;
     defaultSortBy?: keyof T;
     defaultSortOrder?: SortOrder;
-    isPending?: boolean;
+    loading?: boolean;
 }
 
 export interface SortTableHeadProps<T extends ColumnHeaders> {

@@ -13,7 +13,6 @@ import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
-import { useGameTag } from "@/context";
 import { useStore, useView } from "@/hooks";
 import { useGalleryStore } from "@/stores/useGalleryStore";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
@@ -27,14 +26,11 @@ import { GenshinCharacter } from "@/types/genshin/character";
 export default function CharacterGallery(props: {
     characters: GenshinCharacter[];
 }) {
-    const game = useGameTag();
+    const game = "genshin";
+    const tag = "genshin/characters";
 
-    const filters = useFilterStore(
-        useShallow((state) => state["genshin/characters"])
-    );
-    const sortParams = useGalleryStore(
-        useShallow((state) => state["genshin/characters"])
-    );
+    const filters = useFilterStore(useShallow((state) => state[tag]));
+    const sortParams = useGalleryStore(useShallow((state) => state[tag]));
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
@@ -47,57 +43,30 @@ export default function CharacterGallery(props: {
         game
     );
 
+    const [loading, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState("");
-    const handleInputChange = (event: BaseSyntheticEvent) => {
-        setSearchValue(event.target.value);
-    };
-
-    const { view } = useGalleryStore(
-        useShallow((state) => state["genshin/characters"])
-    );
-    const handleView = useView("genshin/characters");
-
-    const params = {
-        view,
-        handleView,
-        searchValue,
-        handleInputChange,
-    };
-
     const [currentCharacters, setCurrentCharacters] = useState<
         GenshinCharacter[]
     >([]);
-    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         startTransition(() => {
-            const chars = filterItems(
-                game,
-                characters,
-                filters,
-                searchValue,
-                sortParams
+            setCurrentCharacters(
+                filterItems(game, characters, filters, searchValue, sortParams)
             );
-            setCurrentCharacters(chars);
         });
-    }, [
-        filters,
-        searchValue,
-        hideUnreleasedContent,
-        sortParams.sortBy,
-        sortParams.sortDirection,
-    ]);
+    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
 
     const renderGallery = () => {
-        switch (view) {
+        switch (sortParams.view) {
             case "icon":
             default:
-                if (isPending) return <LinearProgress />;
+                if (loading) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
                             <InfoCard
-                                tag="genshin/characters"
+                                tag={tag}
                                 key={character.id}
                                 name={character.name}
                                 displayName={character.fullName}
@@ -111,12 +80,12 @@ export default function CharacterGallery(props: {
                     </Grid>
                 );
             case "card":
-                if (isPending) return <LinearProgress />;
+                if (loading) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
                             <InfoCardMaterial
-                                tag="genshin/characters"
+                                tag={tag}
                                 key={character.id}
                                 name={character.name}
                                 displayName={character.fullName}
@@ -134,10 +103,19 @@ export default function CharacterGallery(props: {
                 return (
                     <CharacterList
                         characters={currentCharacters}
-                        isPending={isPending}
+                        loading={loading}
                     />
                 );
         }
+    };
+
+    const params = {
+        view: sortParams.view,
+        handleView: useView(tag),
+        searchValue,
+        handleInputChange: (event: BaseSyntheticEvent) => {
+            setSearchValue(event.target.value);
+        },
     };
 
     return (

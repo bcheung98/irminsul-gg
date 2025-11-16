@@ -26,7 +26,7 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
     title = "",
     defaultSortBy,
     defaultSortOrder = "asc",
-    isPending,
+    loading,
 }: SortTableProps<T, U>) {
     const theme = useTheme();
 
@@ -70,7 +70,7 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
                     />
                     <Table.Body>
                         {rows.map((row, index) =>
-                            isPending ? (
+                            loading ? (
                                 <Table.Row key={index}>
                                     {range(objectKeys(columns).length).map(
                                         (i) => (

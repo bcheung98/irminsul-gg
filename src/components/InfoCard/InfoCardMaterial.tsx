@@ -14,7 +14,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { convertNametoURL, splitJoin, zoomImageOnHover } from "@/utils";
+import { convertNametoURL, splitJoin } from "@/utils";
 import { useMaterials } from "@/helpers/materials";
 
 // Type imports
