@@ -8,10 +8,10 @@ import { CSSProperties } from "@mui/material/styles";
 import { getDataIconURL } from "@/helpers/dataIcon";
 
 // Type imports
-import { AttributeDataKey } from "@/types";
+import { AttributeDataKey, Game } from "@/types";
 
 export interface DataIconProps {
-    game: string;
+    game: Game;
     property: AttributeDataKey;
     value: string;
     styles: CSSProperties;
@@ -24,5 +24,6 @@ export default function DataIcon({
     styles,
 }: DataIconProps) {
     const { src, tooltip } = getDataIconURL({ game, key: property, value });
+    if (!src && !tooltip) return <></>;
     return <Image src={src} tooltip={tooltip} style={styles} />;
 }
