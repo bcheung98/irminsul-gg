@@ -5,7 +5,10 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { genshinFilters, useFilterStore } from "@/stores/useFilterStore";
+import {
+    genshinCharacterFilters,
+    useFilterStore,
+} from "@/stores/useFilterStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
 
@@ -37,12 +40,10 @@ export default function CharacterFilters() {
     const key = "genshin/characters";
 
     const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(
-        useShallow((state) => state["genshin/characters"])
-    );
+    const filters = useFilterStore(useShallow((state) => state[key]));
     const actions = filterActions(
         key,
-        genshinFilters,
+        genshinCharacterFilters,
         filters,
         clearFilterState
     );
