@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
-import { convertNametoURL } from "@/utils";
+import { formatHref } from "@/utils";
 
 // Type imports
 import type { Metadata } from "next";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { weapon } = await params;
     const weaponData = await getData<GenshinWeapon>(
         "genshin/weapons",
-        (wep) => convertNametoURL(wep.name) === convertNametoURL(weapon)
+        (wep) => formatHref(wep.url) === formatHref(weapon)
     );
 
     return {
@@ -34,7 +34,7 @@ export default async function GenshinWeaponPage({ params }: Props) {
     const { weapon } = await params;
     const weaponData = await getData<GenshinWeapon>(
         "genshin/weapons",
-        (wep) => convertNametoURL(wep.name) === convertNametoURL(weapon)
+        (wep) => formatHref(wep.url) === formatHref(weapon)
     );
 
     return (

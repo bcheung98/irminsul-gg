@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { convertNametoURL } from "@/utils";
+import { formatHref } from "@/utils";
 import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 // Type imports
@@ -25,10 +25,9 @@ export default function InfoAvatar({
     disableZoomOnHover,
     url = "icons",
     componentID,
+    href,
 }: InfoAvatarProps) {
     const theme = useTheme();
-
-    const href = `/${tag}/${convertNametoURL(name)}`;
 
     return (
         <Tooltip title={displayName} arrow placement="top">
@@ -49,13 +48,14 @@ export default function InfoAvatar({
                     backgroundRepeat: "no-repeat",
                 }}
             >
-                <ButtonBase href={href} LinkComponent={NavLink}>
+                <ButtonBase
+                    href={`/${tag}/${formatHref(href)}`}
+                    LinkComponent={NavLink}
+                >
                     <Image
                         src={`${tag}/${url}/${name}`}
                         size={size - theme.infoAvatar.border.width * 2}
-                        id={`${
-                            componentID || convertNametoURL(name)
-                        }-infoAvatar`}
+                        id={`${componentID || href}-infoAvatar`}
                         zoomOnHover={!disableZoomOnHover}
                     />
                 </ButtonBase>

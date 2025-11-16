@@ -126,8 +126,8 @@ export function combineStyles(
     return style2 ? { ...style1, ...style2 } : style1;
 }
 
-export function convertNametoURL(name: string) {
-    return name.toLocaleLowerCase().replace("'", "").split(" ").join("-");
+export function formatHref(href = "") {
+    return href.split("-").slice(-1)[0];
 }
 
 export function splitJoin(string = "", split = " ", join = "_") {

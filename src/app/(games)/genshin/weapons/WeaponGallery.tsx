@@ -72,6 +72,7 @@ export default function WeaponGallery(props: { weapons: GenshinWeapon[] }) {
                                     subStat: weapon.stats.subStat,
                                 }}
                                 url=""
+                                href={weapon.url}
                             />
                         ))}
                     </Grid>

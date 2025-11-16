@@ -23,6 +23,7 @@ export type NestedKeyOf<T extends object> = {
 export interface BaseData {
     id: number | string;
     name: string;
+    url?: string;
 }
 export interface BaseDataWithRelease extends BaseData {
     release: Version;

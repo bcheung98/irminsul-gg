@@ -14,7 +14,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { convertNametoURL, splitJoin } from "@/utils";
+import { formatHref, splitJoin } from "@/utils";
 import { useMaterials } from "@/helpers/materials";
 
 // Type imports
@@ -33,15 +33,14 @@ export default function InfoCardMaterial({
     badgeLeft,
     badgeRight,
     materials,
+    href,
 }: InfoCardMaterialProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const id = `${componentID || convertNametoURL(name)}-infoCard`;
+    const id = `${componentID || formatHref(href)}-infoCard`;
 
     const [game, type] = tag.split("/") as [Game, string];
-
-    const href = `/${tag}/${convertNametoURL(name)}`;
 
     let imgSize = size;
     if (matches) {
@@ -99,7 +98,10 @@ export default function InfoCardMaterial({
     return (
         <Card sx={styles.root()} elevation={2}>
             <Card elevation={0} sx={styles.card()}>
-                <ButtonBase href={href} LinkComponent={NavLink}>
+                <ButtonBase
+                    href={`/${tag}/${formatHref(href)}`}
+                    LinkComponent={NavLink}
+                >
                     <Box sx={styles.imageContainer()}>
                         <Image
                             src={`${tag}/${url}/${name}`}

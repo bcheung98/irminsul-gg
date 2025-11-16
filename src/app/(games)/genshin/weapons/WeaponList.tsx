@@ -4,7 +4,7 @@ import RarityStars from "@/components/RarityStars";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
-import { convertNametoURL, splitJoin } from "@/utils";
+import { formatHref, splitJoin } from "@/utils";
 import { baseATKScaling, subStats } from "@/data/genshin/weaponStats";
 
 // Type imports
@@ -47,7 +47,7 @@ export default function WeaponList({
                     },
                     isLink: true,
                 },
-                href: `weapons/${convertNametoURL(weapon.name)}`,
+                href: `weapons/${formatHref(weapon.url)}`,
             },
             rarity: {
                 label: {

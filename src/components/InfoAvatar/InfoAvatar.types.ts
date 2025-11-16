@@ -9,4 +9,5 @@ export interface InfoAvatarProps {
     disableZoomOnHover?: boolean;
     url?: string;
     loading?: boolean;
+    href?: string;
 }

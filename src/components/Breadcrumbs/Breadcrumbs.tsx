@@ -12,7 +12,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
 import { useDataContext } from "@/context";
-import { convertNametoURL } from "@/utils";
+import { formatHref } from "@/utils";
 import { navItems } from "@/data/navItems";
 
 // Type imports
@@ -30,7 +30,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const dataContext = useDataContext();
 
     function getCurrentData(item: string) {
-        const data = dataContext.find((d) => convertNametoURL(d.name) === item);
+        const data = dataContext.find((d) => formatHref(d.url) === item);
         if (data) return data.fullName || data.displayName || data.name;
         else return "";
     }

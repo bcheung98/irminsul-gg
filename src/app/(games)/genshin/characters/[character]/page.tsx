@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
-import { convertNametoURL } from "@/utils";
+import { formatHref } from "@/utils";
 
 // Type imports
 import type { Metadata } from "next";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { character } = await params;
     const charData = await getData<GenshinCharacter>(
         "genshin/characters",
-        (char) => convertNametoURL(char.name) === convertNametoURL(character)
+        (char) => formatHref(char.url) === formatHref(character)
     );
 
     return {
@@ -34,7 +34,7 @@ export default async function GenshinCharacterPage({ params }: Props) {
     const { character } = await params;
     const charData = await getData<GenshinCharacter>(
         "genshin/characters",
-        (char) => convertNametoURL(char.name) === convertNametoURL(character)
+        (char) => formatHref(char.url) === formatHref(character)
     );
 
     return (

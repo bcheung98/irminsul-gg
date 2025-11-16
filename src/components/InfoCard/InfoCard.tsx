@@ -13,7 +13,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { convertNametoURL, zoomImageOnHover } from "@/utils";
+import { formatHref, zoomImageOnHover } from "@/utils";
 
 // Type imports
 import { InfoCardProps } from "./InfoCard.types";
@@ -30,15 +30,14 @@ export default function InfoCard({
     componentID,
     badgeLeft,
     badgeRight,
+    href,
 }: InfoCardProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const id = `${componentID || convertNametoURL(name)}-infoCard`;
+    const id = `${componentID || formatHref(href)}-infoCard`;
 
     const [game, type] = tag.split("/");
-
-    const href = `/${tag}/${convertNametoURL(name)}`;
 
     let imgSize = size;
     if (matches) {
@@ -77,7 +76,10 @@ export default function InfoCard({
                 onMouseEnter={() => handleHover("enter")}
                 onMouseLeave={() => handleHover("leave")}
             >
-                <ButtonBase href={href} LinkComponent={NavLink}>
+                <ButtonBase
+                    href={`/${tag}/${formatHref(href)}`}
+                    LinkComponent={NavLink}
+                >
                     <Box sx={styles.imageContainer()}>
                         <Image
                             src={imgURL}

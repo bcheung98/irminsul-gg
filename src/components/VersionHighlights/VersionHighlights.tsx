@@ -7,6 +7,8 @@ import ContentBox from "@/components/ContentBox";
 import SelectWithArrows from "@/components/SelectWithArrows";
 import MenuItem from "@/components/MenuItem";
 import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
+import InfoCard from "@/components/InfoCard";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -21,8 +23,6 @@ import versions from "@/data/versions";
 
 // Type imports
 import { BaseDataWithRelease } from "@/types";
-import TextLabel from "../TextLabel";
-import InfoCard from "../InfoCard";
 
 interface Data extends BaseDataWithRelease {
     [key: string]: any;
@@ -30,6 +30,7 @@ interface Data extends BaseDataWithRelease {
 
 interface VersionHighlightsProps {
     characters: Data[];
+    weapons: Data[];
 }
 
 export default function VersionHighlights(props: VersionHighlightsProps) {
@@ -60,7 +61,20 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         .filter((char) => char.release.version === version)
         .sort(
             (a, b) =>
-                b.rarity - a.rarity || a.fullName.localeCompare(b.fullName)
+                b.rarity - a.rarity ||
+                (a.fullName || a.displayName).localeCompare(
+                    b.fullName || b.displayName
+                )
+        );
+
+    const weapons = props.weapons
+        .filter((char) => char.release.version === version)
+        .sort(
+            (a, b) =>
+                b.rarity - a.rarity ||
+                (a.fullName || a.displayName).localeCompare(
+                    b.fullName || b.displayName
+                )
         );
 
     const selectProps = {
@@ -133,6 +147,35 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                                     character.weaponType,
                                             }}
                                             background={theme.background(0)}
+                                            href={character.url}
+                                        />
+                                    ))}
+                                </Grid>
+                            </Grid>
+                        )}
+                        {weapons.length > 0 && (
+                            <Grid sx={gridContainerStyle} size="auto">
+                                <TextLabel
+                                    icon={`genshin/icons/Weapons`}
+                                    iconProps={{ size: 32 }}
+                                    title={`New Weapons`}
+                                    titleProps={{ variant: "h6" }}
+                                />
+                                <Grid container spacing={3} sx={gridStyle}>
+                                    {weapons.map((weapon) => (
+                                        <InfoCard
+                                            tag="genshin/weapons"
+                                            key={weapon.id}
+                                            name={weapon.name}
+                                            displayName={weapon.displayName}
+                                            rarity={weapon.rarity}
+                                            badgeLeft={{
+                                                weaponType: weapon.weaponType,
+                                                subStat: weapon.subStat,
+                                            }}
+                                            background={theme.background(0)}
+                                            href={weapon.url}
+                                            url=""
                                         />
                                     ))}
                                 </Grid>

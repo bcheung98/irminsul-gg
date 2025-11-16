@@ -4,7 +4,7 @@ import RarityStars from "@/components/RarityStars";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
-import { convertNametoURL, splitJoin } from "@/utils";
+import { formatHref, splitJoin } from "@/utils";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 
 // Type imports
@@ -43,7 +43,7 @@ export default function CharacterList({
                     },
                     isLink: true,
                 },
-                href: `characters/${convertNametoURL(character.name)}`,
+                href: `characters/${formatHref(character.url)}`,
             },
             rarity: {
                 label: {

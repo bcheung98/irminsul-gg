@@ -75,6 +75,7 @@ export default function CharacterGallery(props: {
                                     element: character.element,
                                     weaponType: character.weaponType,
                                 }}
+                                href={character.url}
                             />
                         ))}
                     </Grid>
@@ -95,6 +96,7 @@ export default function CharacterGallery(props: {
                                     weaponType: character.weaponType,
                                 }}
                                 materials={character.materials}
+                                href={character.url}
                             />
                         ))}
                     </Grid>
