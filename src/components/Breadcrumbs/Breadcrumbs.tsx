@@ -30,12 +30,8 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const dataContext = useDataContext();
 
     function getCurrentData(item: string) {
-        const data = dataContext.find(
-            (d) =>
-                convertNametoURL(d.name) === item ||
-                convertNametoURL(d.fullName) === item
-        );
-        if (data) return data.fullName || data.name;
+        const data = dataContext.find((d) => convertNametoURL(d.name) === item);
+        if (data) return data.fullName || data.displayName || data.name;
         else return "";
     }
 

@@ -49,7 +49,7 @@ export const infoCardStyles = ({
                 ? null
                 : `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
         backgroundSize: "contain",
-        backgroundRepeat: variant !== "material-card" ? "no-repeat" : "repeat",
+        backgroundRepeat: "repeat",
     }),
     textContainer: (): SxProps => () => ({
         p: "8px",

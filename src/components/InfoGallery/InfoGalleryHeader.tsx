@@ -24,7 +24,8 @@ import { InfoGalleryButtonProps, InfoGalleryProps } from "./InfoGallery.types";
 
 export default function InfoGalleryHeader({
     title,
-    buttons = defaultButtons,
+    buttonKeys: buttons = ["icon", "card", "list"],
+    customButtons,
     view,
     handleView,
     searchValue,
@@ -47,6 +48,13 @@ export default function InfoGalleryHeader({
         matches ? toggleRightDrawer() : toggleRightDrawerMobile();
     };
 
+    function getButtons() {
+        if (customButtons) return customButtons;
+        return buttonList
+            .map((button) => buttons.includes(button.value) && button)
+            .filter(Boolean) as InfoGalleryButtonProps[];
+    }
+
     return (
         <Grid container spacing={2}>
             <Grid size="auto">
@@ -56,7 +64,7 @@ export default function InfoGalleryHeader({
                 <Grid size={{ xs: 6, sm: "auto" }}>
                     <ToggleButtons
                         color="primary"
-                        buttons={buttons}
+                        buttons={getButtons()}
                         value={view}
                         exclusive
                         onChange={handleView}
@@ -99,7 +107,7 @@ export default function InfoGalleryHeader({
     );
 }
 
-export const defaultButtons: InfoGalleryButtonProps[] = [
+export const buttonList: InfoGalleryButtonProps[] = [
     {
         value: "icon",
         icon: <ViewCompactIcon />,

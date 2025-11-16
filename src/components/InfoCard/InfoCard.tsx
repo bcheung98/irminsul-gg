@@ -64,6 +64,11 @@ export default function InfoCard({
             });
     };
 
+    let imgURL = `${tag}/${name}`;
+    if (url) {
+        imgURL = `${tag}/${url}/${name}`;
+    }
+
     return (
         <Card sx={styles.root()} elevation={2}>
             <Card
@@ -75,7 +80,7 @@ export default function InfoCard({
                 <ButtonBase href={href} LinkComponent={NavLink}>
                     <Box sx={styles.imageContainer()}>
                         <Image
-                            src={`${tag}/${url}/${name}`}
+                            src={imgURL}
                             id={id}
                             size={size}
                             responsive

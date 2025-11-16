@@ -3,7 +3,8 @@ import { GalleryView } from "@/types";
 export interface InfoGalleryProps {
     children?: React.ReactNode;
     title?: string;
-    buttons?: InfoGalleryButtonProps[];
+    buttonKeys?: string[];
+    customButtons?: InfoGalleryButtonProps[];
     view: GalleryView;
     searchValue: string;
     handleView: (_: React.BaseSyntheticEvent, view: GalleryView) => void;
