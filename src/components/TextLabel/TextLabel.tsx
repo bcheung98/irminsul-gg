@@ -50,6 +50,9 @@ export default function TextLabel({
                         tooltip={iconProps?.tooltip}
                         responsive
                         responsiveSize={0.2}
+                        supressLoadImageWarning={
+                            iconProps?.supressLoadImageWarning
+                        }
                     />
                 ) : (
                     icon

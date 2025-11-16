@@ -18,4 +18,5 @@ export interface ImageProps {
     responsiveSize?: number;
     onClick?: () => void;
     useNext?: boolean;
+    supressLoadImageWarning?: boolean;
 }

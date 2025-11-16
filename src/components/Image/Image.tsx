@@ -29,6 +29,7 @@ export default function Image({
     responsiveSize = 0.125,
     onClick,
     useNext = false,
+    supressLoadImageWarning = false,
 }: ImageProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -62,7 +63,7 @@ export default function Image({
     };
 
     function onError(event: SyntheticEvent<HTMLImageElement, Event>) {
-        console.warn(`Failed to load image ${src}`);
+        !supressLoadImageWarning && console.warn(`Failed to load image ${src}`);
         event.currentTarget.src = `https://assets.irminsul.gg/${fallbackSrc}.png`;
         onerror = null;
     }

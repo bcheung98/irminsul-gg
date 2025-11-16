@@ -79,6 +79,7 @@ export default function CharacterList({
                     icon: `genshin/nations/${character.nation}`,
                     iconProps: {
                         size: 32,
+                        supressLoadImageWarning: true,
                     },
                 },
             },

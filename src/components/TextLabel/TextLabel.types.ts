@@ -12,6 +12,7 @@ export interface IconProps {
     padding?: string | number;
     tooltip?: string;
     styles?: CSSProperties;
+    supressLoadImageWarning?: boolean;
 }
 
 export interface TitleProps {
