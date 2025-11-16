@@ -21,12 +21,13 @@ export default function TextLabel({
     isLink,
     alignItems = "center",
     justifyContent = "left",
+    reverse = false,
 }: TextLabelProps) {
     const theme = useTheme();
 
     return (
         <Stack
-            direction="row"
+            direction={reverse ? "row-reverse" : "row"}
             spacing={spacing || 1}
             alignItems={alignItems}
             justifyContent={justifyContent}
@@ -40,6 +41,9 @@ export default function TextLabel({
                             ...{
                                 borderRadius: iconProps?.borderRadius || "4px",
                                 padding: iconProps?.padding || 0,
+                                cursor: isLink
+                                    ? "pointer"
+                                    : titleProps?.defaultCursor || "inherit",
                             },
                             ...iconProps?.styles,
                         }}

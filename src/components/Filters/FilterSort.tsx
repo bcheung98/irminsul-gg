@@ -23,7 +23,7 @@ export default function FilterSort() {
     const key = usePathname().slice(1) as keyof GalleryState;
 
     const { setGalleryState } = useGalleryStore();
-    const { sortBy, sortDirection } = useGalleryStore(
+    const { sortBy, sortDirection, view } = useGalleryStore(
         useShallow((state) => state[key])
     );
 
@@ -40,7 +40,14 @@ export default function FilterSort() {
     };
 
     return (
-        <Stack spacing={2}>
+        <Stack
+            spacing={2}
+            sx={{
+                display: view !== "list" ? "block" : "none",
+                borderTop: `1px solid ${theme.border.color.primary}`,
+                pt: 2,
+            }}
+        >
             <Text>Sort By</Text>
             <Stack spacing={1} direction="row" alignItems="center">
                 <Select

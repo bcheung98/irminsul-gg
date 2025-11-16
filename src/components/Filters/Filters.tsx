@@ -5,14 +5,13 @@ import FilterSort from "./FilterSort";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
 
 // Type imports
 import { FiltersProps } from "./Filters.types";
 
 export default function Filters({ actions, filters }: FiltersProps) {
     return (
-        <Stack spacing={2} divider={<Divider />}>
+        <Stack spacing={2}>
             <Stack spacing={2}>
                 <FilterActions {...actions} />
                 <FilterList filters={filters} />

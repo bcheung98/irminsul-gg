@@ -34,4 +34,5 @@ export interface TextLabelProps {
     isLink?: boolean;
     alignItems?: StackProps["alignItems"];
     justifyContent?: "left" | "center" | "right";
+    reverse?: boolean;
 }
