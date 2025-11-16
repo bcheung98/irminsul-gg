@@ -44,7 +44,7 @@ export function sortBy(
         b = args[0];
     }
     if (typeof a === "string" && typeof b === "string") {
-        return a.localeCompare(b);
+        return a.localeCompare(b, undefined, { numeric: true });
     } else if (typeof a === "number" && typeof b === "number") {
         return a - b;
     } else {
@@ -127,7 +127,7 @@ export function combineStyles(
 }
 
 export function convertNametoURL(name: string) {
-    return name.toLocaleLowerCase().split(" ").join("-");
+    return name.toLocaleLowerCase().replace("'", "").split(" ").join("-");
 }
 
 export function splitJoin(string = "", split = " ", join = "_") {
