@@ -42,6 +42,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
                     game={game}
                     stats={props.stats}
                     attributes={props.attributes}
+                    initialValue={game === "genshin" ? 14 : undefined}
                 />
                 <LevelUpCosts
                     title="Ascension"
