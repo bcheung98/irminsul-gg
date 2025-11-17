@@ -31,6 +31,7 @@ interface LevelUpCostsProps {
     iconSize?: number;
     threshold?: string;
     element?: string;
+    rarity?: number;
 }
 
 export default function LevelUpCosts({
@@ -42,6 +43,7 @@ export default function LevelUpCosts({
     iconSize = 60,
     threshold = "@100",
     element,
+    rarity = 3,
 }: LevelUpCostsProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
@@ -52,7 +54,7 @@ export default function LevelUpCosts({
         materials = { ...materials, gemstone: element };
     }
 
-    const levels = levelData[game](levelKey);
+    const levels = levelData[game](levelKey, rarity);
     const minDistance = 1;
     const maxValue = levels.length;
     const [values, setValues] = useState([1, maxValue]);
@@ -114,6 +116,7 @@ export default function LevelUpCosts({
         selected: true,
         withXP: false,
         materials: materials,
+        rarity: rarity,
     });
 
     const materialArray: React.ReactNode[] = [];

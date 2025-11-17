@@ -1,5 +1,10 @@
+import {
+    baseATKScaling as genshinBaseATKScaling,
+    subStats,
+} from "@/data/genshin/weaponStats";
 import { StatsDisplayProps } from "./StatsDisplay.types";
 import { characterAscensionStatScalings } from "@/data/genshin/characterAscensionStats";
+import { splitJoin } from "@/utils";
 
 type Props = Omit<StatsDisplayProps, "game">;
 type StatsData = {
@@ -99,11 +104,54 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
             data.push([
                 `${
                     stats.ascensionStat
-                }|genshin/icons/ascension_stats/${stats.ascensionStat
-                    .split(" ")
-                    .join("_")}`,
+                }|genshin/icons/ascension_stats/${splitJoin(
+                    stats.ascensionStat
+                )}`,
                 ...levels.map((_, index) => ascStatScaling[index]),
             ]);
+    } else if ("subStat" in stats) {
+        const { rarity = 3 } = attributes;
+
+        levels = [
+            "1",
+            "20",
+            "20+",
+            "40",
+            "40+",
+            "50",
+            "50+",
+            "60",
+            "60+",
+            "70",
+            "70+",
+            "80",
+            "80+",
+            "90",
+        ];
+        if (rarity < 3) {
+            levels = levels.slice(0, -4);
+        }
+
+        data = [
+            ["Level", ...levels],
+            [
+                "Base ATK|genshin/icons/ascension_stats/ATK",
+                ...levels.map((_, index) =>
+                    (
+                        genshinBaseATKScaling[stats.atk][index] || 0
+                    ).toLocaleString()
+                ),
+            ],
+        ];
+        if (stats.subStat) {
+            let subStatScaling = subStats[stats.atk][stats.subStat] as string[];
+            data.push([
+                `${stats.subStat}|genshin/icons/ascension_stats/${splitJoin(
+                    stats.subStat
+                )}`,
+                ...levels.map((_, index) => subStatScaling[index] || 0),
+            ]);
+        }
     }
 
     return { levels, data };

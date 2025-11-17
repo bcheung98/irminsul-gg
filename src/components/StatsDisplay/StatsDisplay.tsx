@@ -20,8 +20,10 @@ import { SkillDisplay } from "@/types";
 
 export default function StatsDisplay({
     game,
+    title = "Stats",
     stats,
     attributes,
+    initialValue,
 }: StatsDisplayProps) {
     const theme = useTheme();
 
@@ -39,14 +41,14 @@ export default function StatsDisplay({
 
     return (
         <Stack spacing={mode === "slider" ? 1 : 0}>
-            <Text variant="h6">Stats</Text>
+            <Text variant="h6">{title}</Text>
             <StatsTable
                 mode={mode}
                 levels={levels}
                 data={data}
                 orientation="column"
                 sliderProps={{
-                    initialValue: 14,
+                    initialValue: initialValue || levels.length,
                     sx: {
                         minWidth: "100px",
                         maxWidth: "50%",
