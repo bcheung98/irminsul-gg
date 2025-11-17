@@ -3,6 +3,7 @@ import { CostArray, CostValue } from "@/types/costs";
 import {
     getCharacterLevelCost,
     getCharacterSkillCost,
+    getWeaponLevelCost,
 } from "./genshin/getLevelUpCosts";
 
 interface Costs {
@@ -13,6 +14,7 @@ export const costs: GameData<Costs> = {
     genshin: {
         characterLevel: getCharacterLevelCost,
         characterSkill: getCharacterSkillCost,
+        weaponLevel: getWeaponLevelCost,
     },
     hsr: {},
     wuwa: {},
