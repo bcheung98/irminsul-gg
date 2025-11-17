@@ -5,9 +5,7 @@ export const weaponAscensionMaterials = [
         name: "Decarabian",
         tag: "Decarabian",
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114001,
@@ -16,9 +14,7 @@ export const weaponAscensionMaterials = [
         tag: "Decarabian1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114002,
@@ -27,9 +23,7 @@ export const weaponAscensionMaterials = [
         tag: "Decarabian2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114003,
@@ -38,9 +32,7 @@ export const weaponAscensionMaterials = [
         tag: "Decarabian3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114004,
@@ -49,9 +41,7 @@ export const weaponAscensionMaterials = [
         tag: "Decarabian4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 1,
@@ -59,9 +49,7 @@ export const weaponAscensionMaterials = [
         name: "Boreal Wolf",
         tag: "Boreal Wolf",
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114005,
@@ -70,9 +58,7 @@ export const weaponAscensionMaterials = [
         tag: "Boreal Wolf1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114006,
@@ -81,9 +67,7 @@ export const weaponAscensionMaterials = [
         tag: "Boreal Wolf2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114007,
@@ -92,9 +76,7 @@ export const weaponAscensionMaterials = [
         tag: "Boreal Wolf3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114008,
@@ -103,9 +85,7 @@ export const weaponAscensionMaterials = [
         tag: "Boreal Wolf4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 2,
@@ -113,9 +93,7 @@ export const weaponAscensionMaterials = [
         name: "Dandelion Gladiator",
         tag: "Dandelion Gladiator",
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114009,
@@ -124,9 +102,7 @@ export const weaponAscensionMaterials = [
         tag: "Dandelion Gladiator1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114010,
@@ -135,9 +111,7 @@ export const weaponAscensionMaterials = [
         tag: "Dandelion Gladiator2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114011,
@@ -146,9 +120,7 @@ export const weaponAscensionMaterials = [
         tag: "Dandelion Gladiator3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114012,
@@ -157,9 +129,7 @@ export const weaponAscensionMaterials = [
         tag: "Dandelion Gladiator4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 3,
@@ -167,9 +137,7 @@ export const weaponAscensionMaterials = [
         name: "Guyun",
         tag: "Guyun",
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114013,
@@ -178,9 +146,7 @@ export const weaponAscensionMaterials = [
         tag: "Guyun1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114014,
@@ -189,9 +155,7 @@ export const weaponAscensionMaterials = [
         tag: "Guyun2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114015,
@@ -200,9 +164,7 @@ export const weaponAscensionMaterials = [
         tag: "Guyun3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114016,
@@ -211,9 +173,7 @@ export const weaponAscensionMaterials = [
         tag: "Guyun4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 4,
@@ -221,9 +181,7 @@ export const weaponAscensionMaterials = [
         name: "Mist Veiled Elixir",
         tag: "Mist Veiled Elixir",
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114017,
@@ -232,9 +190,7 @@ export const weaponAscensionMaterials = [
         tag: "Mist Veiled Elixir1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114018,
@@ -243,9 +199,7 @@ export const weaponAscensionMaterials = [
         tag: "Mist Veiled Elixir2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114019,
@@ -254,9 +208,7 @@ export const weaponAscensionMaterials = [
         tag: "Mist Veiled Elixir3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114020,
@@ -265,9 +217,7 @@ export const weaponAscensionMaterials = [
         tag: "Mist Veiled Elixir4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 5,
@@ -275,9 +225,7 @@ export const weaponAscensionMaterials = [
         name: "Aerosiderite",
         tag: "Aerosiderite",
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114021,
@@ -286,9 +234,7 @@ export const weaponAscensionMaterials = [
         tag: "Aerosiderite1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114022,
@@ -297,9 +243,7 @@ export const weaponAscensionMaterials = [
         tag: "Aerosiderite2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114023,
@@ -308,9 +252,7 @@ export const weaponAscensionMaterials = [
         tag: "Aerosiderite3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 114024,
@@ -319,9 +261,7 @@ export const weaponAscensionMaterials = [
         tag: "Aerosiderite4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 6,
@@ -329,9 +269,7 @@ export const weaponAscensionMaterials = [
         name: "Sea Branch",
         tag: "Sea Branch",
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114025,
@@ -340,9 +278,7 @@ export const weaponAscensionMaterials = [
         tag: "Sea Branch1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114026,
@@ -351,9 +287,7 @@ export const weaponAscensionMaterials = [
         tag: "Sea Branch2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114027,
@@ -362,9 +296,7 @@ export const weaponAscensionMaterials = [
         tag: "Sea Branch3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114028,
@@ -373,9 +305,7 @@ export const weaponAscensionMaterials = [
         tag: "Sea Branch4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 7,
@@ -383,9 +313,7 @@ export const weaponAscensionMaterials = [
         name: "Narukami",
         tag: "Narukami",
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114029,
@@ -394,9 +322,7 @@ export const weaponAscensionMaterials = [
         tag: "Narukami1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114030,
@@ -405,9 +331,7 @@ export const weaponAscensionMaterials = [
         tag: "Narukami2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114031,
@@ -416,9 +340,7 @@ export const weaponAscensionMaterials = [
         tag: "Narukami3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114032,
@@ -427,9 +349,7 @@ export const weaponAscensionMaterials = [
         tag: "Narukami4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 8,
@@ -437,9 +357,7 @@ export const weaponAscensionMaterials = [
         name: "Oni Mask",
         tag: "Oni Mask",
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114033,
@@ -448,9 +366,7 @@ export const weaponAscensionMaterials = [
         tag: "Oni Mask1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114034,
@@ -459,9 +375,7 @@ export const weaponAscensionMaterials = [
         tag: "Oni Mask2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114035,
@@ -470,9 +384,7 @@ export const weaponAscensionMaterials = [
         tag: "Oni Mask3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 114036,
@@ -481,9 +393,7 @@ export const weaponAscensionMaterials = [
         tag: "Oni Mask4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 9,
@@ -491,9 +401,7 @@ export const weaponAscensionMaterials = [
         name: "Forest Dew",
         tag: "Forest Dew",
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114037,
@@ -502,9 +410,7 @@ export const weaponAscensionMaterials = [
         tag: "Forest Dew1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114038,
@@ -513,9 +419,7 @@ export const weaponAscensionMaterials = [
         tag: "Forest Dew2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114039,
@@ -524,9 +428,7 @@ export const weaponAscensionMaterials = [
         tag: "Forest Dew3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114040,
@@ -535,9 +437,7 @@ export const weaponAscensionMaterials = [
         tag: "Forest Dew4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 10,
@@ -545,9 +445,7 @@ export const weaponAscensionMaterials = [
         name: "Oasis Garden",
         tag: "Oasis Garden",
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114041,
@@ -556,9 +454,7 @@ export const weaponAscensionMaterials = [
         tag: "Oasis Garden1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114042,
@@ -567,9 +463,7 @@ export const weaponAscensionMaterials = [
         tag: "Oasis Garden2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114043,
@@ -578,9 +472,7 @@ export const weaponAscensionMaterials = [
         tag: "Oasis Garden3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114044,
@@ -589,9 +481,7 @@ export const weaponAscensionMaterials = [
         tag: "Oasis Garden4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 11,
@@ -599,9 +489,7 @@ export const weaponAscensionMaterials = [
         name: "Scorching Might",
         tag: "Scorching Might",
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114045,
@@ -610,9 +498,7 @@ export const weaponAscensionMaterials = [
         tag: "Scorching Might1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114046,
@@ -621,9 +507,7 @@ export const weaponAscensionMaterials = [
         tag: "Scorching Might2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114047,
@@ -632,9 +516,7 @@ export const weaponAscensionMaterials = [
         tag: "Scorching Might3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114048,
@@ -643,9 +525,7 @@ export const weaponAscensionMaterials = [
         tag: "Scorching Might4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 12,
@@ -653,9 +533,7 @@ export const weaponAscensionMaterials = [
         name: "Chord",
         tag: "Chord",
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 114049,
@@ -664,9 +542,7 @@ export const weaponAscensionMaterials = [
         tag: "Chord1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114050,
@@ -675,9 +551,7 @@ export const weaponAscensionMaterials = [
         tag: "Chord2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114051,
@@ -686,9 +560,7 @@ export const weaponAscensionMaterials = [
         tag: "Chord3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114052,
@@ -697,9 +569,7 @@ export const weaponAscensionMaterials = [
         tag: "Chord4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 13,
@@ -707,9 +577,7 @@ export const weaponAscensionMaterials = [
         name: "Dewdrop",
         tag: "Dewdrop",
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114053,
@@ -718,9 +586,7 @@ export const weaponAscensionMaterials = [
         tag: "Dewdrop1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114054,
@@ -729,9 +595,7 @@ export const weaponAscensionMaterials = [
         tag: "Dewdrop2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114055,
@@ -740,9 +604,16 @@ export const weaponAscensionMaterials = [
         tag: "Dewdrop3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
+    },
+    {
+        id: 114056,
+        category: "weapon",
+        name: "Essense of Pure Sacred Dewdrop",
+        tag: "Dewdrop4",
+        rarity: 5,
+        source: "Tue/Fri",
+        release: { version: "4.0" },
     },
     {
         id: 14,
@@ -750,9 +621,7 @@ export const weaponAscensionMaterials = [
         name: "Pristine Sea",
         tag: "Pristine Sea",
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114057,
@@ -761,9 +630,7 @@ export const weaponAscensionMaterials = [
         tag: "Pristine Sea1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114058,
@@ -772,9 +639,7 @@ export const weaponAscensionMaterials = [
         tag: "Pristine Sea2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114059,
@@ -783,9 +648,7 @@ export const weaponAscensionMaterials = [
         tag: "Pristine Sea3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 114060,
@@ -794,9 +657,7 @@ export const weaponAscensionMaterials = [
         tag: "Pristine Sea4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 15,
@@ -804,9 +665,7 @@ export const weaponAscensionMaterials = [
         name: "Blazing Sacrificial Heart",
         tag: "Blazing Sacrificial Heart",
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114061,
@@ -815,9 +674,7 @@ export const weaponAscensionMaterials = [
         tag: "Blazing Sacrificial Heart1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114062,
@@ -826,9 +683,7 @@ export const weaponAscensionMaterials = [
         tag: "Blazing Sacrificial Heart2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114063,
@@ -837,9 +692,7 @@ export const weaponAscensionMaterials = [
         tag: "Blazing Sacrificial Heart3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114064,
@@ -848,9 +701,7 @@ export const weaponAscensionMaterials = [
         tag: "Blazing Sacrificial Heart4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 16,
@@ -858,9 +709,7 @@ export const weaponAscensionMaterials = [
         name: "Sacred Lord",
         tag: "Sacred Lord",
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114065,
@@ -869,9 +718,7 @@ export const weaponAscensionMaterials = [
         tag: "Sacred Lord1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114066,
@@ -880,9 +727,7 @@ export const weaponAscensionMaterials = [
         tag: "Sacred Lord2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114067,
@@ -891,9 +736,7 @@ export const weaponAscensionMaterials = [
         tag: "Sacred Lord3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114068,
@@ -902,9 +745,7 @@ export const weaponAscensionMaterials = [
         tag: "Sacred Lord4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 17,
@@ -912,9 +753,7 @@ export const weaponAscensionMaterials = [
         name: "Night-Wind",
         tag: "Night-Wind",
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114069,
@@ -923,9 +762,7 @@ export const weaponAscensionMaterials = [
         tag: "Night-Wind1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114070,
@@ -934,9 +771,7 @@ export const weaponAscensionMaterials = [
         tag: "Night-Wind2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114071,
@@ -945,9 +780,7 @@ export const weaponAscensionMaterials = [
         tag: "Night-Wind3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 114072,
@@ -956,9 +789,7 @@ export const weaponAscensionMaterials = [
         tag: "Night-Wind4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 18,
@@ -966,9 +797,7 @@ export const weaponAscensionMaterials = [
         name: "Artful",
         tag: "Artful",
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114073,
@@ -977,9 +806,7 @@ export const weaponAscensionMaterials = [
         tag: "Artful1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114074,
@@ -988,9 +815,7 @@ export const weaponAscensionMaterials = [
         tag: "Artful2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114075,
@@ -999,9 +824,7 @@ export const weaponAscensionMaterials = [
         tag: "Artful3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114076,
@@ -1010,9 +833,7 @@ export const weaponAscensionMaterials = [
         tag: "Artful4",
         rarity: 5,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 19,
@@ -1020,9 +841,7 @@ export const weaponAscensionMaterials = [
         name: "Flint",
         tag: "Flint",
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114077,
@@ -1031,9 +850,7 @@ export const weaponAscensionMaterials = [
         tag: "Flint1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114078,
@@ -1042,9 +859,7 @@ export const weaponAscensionMaterials = [
         tag: "Flint2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114079,
@@ -1053,9 +868,7 @@ export const weaponAscensionMaterials = [
         tag: "Flint3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114080,
@@ -1064,9 +877,7 @@ export const weaponAscensionMaterials = [
         tag: "Flint4",
         rarity: 5,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 20,
@@ -1074,9 +885,7 @@ export const weaponAscensionMaterials = [
         name: "Scion",
         tag: "Scion",
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114081,
@@ -1085,9 +894,7 @@ export const weaponAscensionMaterials = [
         tag: "Scion1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114082,
@@ -1096,9 +903,7 @@ export const weaponAscensionMaterials = [
         tag: "Scion2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114083,
@@ -1107,9 +912,7 @@ export const weaponAscensionMaterials = [
         tag: "Scion3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 114084,
@@ -1118,8 +921,6 @@ export const weaponAscensionMaterials = [
         tag: "Scion4",
         rarity: 5,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
 ];

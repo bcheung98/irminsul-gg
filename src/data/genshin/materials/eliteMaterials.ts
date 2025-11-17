@@ -1023,10 +1023,11 @@ export const eliteMaterials = [
         },
     },
     {
-        id: 27,
+        id: 112132,
         category: "elite",
-        name: "Wild Hunt Mist",
-        tag: "Wild Mist",
+        name: "Duskshard Remains",
+        tag: "Mutant2",
+        rarity: 3,
         release: {
             version: "Luna I",
         },
@@ -1036,6 +1037,45 @@ export const eliteMaterials = [
         category: "elite",
         name: "Radiant Exoskeleton",
         tag: "Mutant3",
+        rarity: 4,
+        release: {
+            version: "Luna I",
+        },
+    },
+    {
+        id: 27,
+        category: "elite",
+        name: "Wild Hunt Mist",
+        tag: "Wild Mist",
+        release: {
+            version: "Luna I",
+        },
+    },
+    {
+        id: 112134,
+        category: "elite",
+        name: "Solidified Mist",
+        tag: "Wild Mist1",
+        rarity: 2,
+        release: {
+            version: "Luna I",
+        },
+    },
+    {
+        id: 112135,
+        category: "elite",
+        name: "Mist Plate",
+        tag: "Wild Mist2",
+        rarity: 3,
+        release: {
+            version: "Luna I",
+        },
+    },
+    {
+        id: 112136,
+        category: "elite",
+        name: "Mist Helmet",
+        tag: "Wild Mist3",
         rarity: 4,
         release: {
             version: "Luna I",
