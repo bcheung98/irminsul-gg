@@ -16,7 +16,6 @@ import Divider from "@mui/material/Divider";
 // Helper imports
 import { useGameTag } from "@/context";
 import { getDataIconURL } from "@/helpers/dataIcon";
-import { useRarityColors } from "@/helpers/rarityColors";
 
 // Type imports
 import { AttributeData, AttributeDataKey } from "@/types";
@@ -32,8 +31,6 @@ export default function WeaponAttributes({
 
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
-    const rarityColors = useRarityColors()[game];
-
     function Rarity() {
         if (game === "zzz") {
             return <></>;
@@ -43,7 +40,7 @@ export default function WeaponAttributes({
                     title={
                         <RarityStars
                             rarity={attributes.rarity}
-                            color={rarityColors(attributes.rarity)}
+                            useRarityColor
                             variant="h6"
                         />
                     }

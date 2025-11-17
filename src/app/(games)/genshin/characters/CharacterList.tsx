@@ -48,7 +48,11 @@ export default function CharacterList({
             rarity: {
                 label: {
                     title: (
-                        <RarityStars rarity={character.rarity} variant="h6" />
+                        <RarityStars
+                            rarity={character.rarity}
+                            useRarityColor
+                            variant="h6"
+                        />
                     ),
                     titleProps: { variant: "h6" },
                 },

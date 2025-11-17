@@ -30,7 +30,11 @@ export default function CharacterAttributes(props: AttributeData) {
             return (
                 <InfoChip
                     title={
-                        <RarityStars rarity={attributes.rarity} variant="h6" />
+                        <RarityStars
+                            rarity={attributes.rarity}
+                            variant="h6"
+                            useRarityColor
+                        />
                     }
                     chipProps={{ padding: "0px 8px" }}
                 />

@@ -1,4 +1,4 @@
-export function getRarityColor(rarity?: number) {
+export function getGenshinRarityColor(rarity?: number) {
     switch (rarity) {
         case 5:
             return "rgb(255, 208, 112)";
@@ -14,7 +14,7 @@ export function getRarityColor(rarity?: number) {
     }
 }
 
-export function getBackgroundColor(rarity: number, opacity = 0.45) {
+export function getGenshinBackgroundColor(rarity: number, opacity = 0.45) {
     switch (rarity) {
         case 5:
             return `rgba(255, 199, 129, ${opacity})`;

@@ -1,8 +1,9 @@
 import { CSSProperties, SxProps, Theme } from "@mui/material/styles";
-import { getRarityColor } from "@/helpers/genshin/rarityColors";
+import { useRarityColors } from "@/helpers/rarityColors";
+import { Game } from "@/types";
 
 interface InfoCardStylesProps {
-    game: string;
+    game: Game;
     type: string;
     border: {
         width: string | number;
@@ -16,6 +17,7 @@ interface InfoCardStylesProps {
 }
 
 export const infoCardStyles = ({
+    game,
     type,
     border,
     backgroundColor,
@@ -53,7 +55,9 @@ export const infoCardStyles = ({
     }),
     textContainer: (): SxProps => () => ({
         p: "8px",
-        borderTop: `calc(${imgSize} / 20) solid ${getRarityColor(rarity)}`,
+        borderTop: `calc(${imgSize} / 20) solid ${useRarityColors()[game](
+            rarity
+        )}`,
     }),
     text: (): SxProps<Theme> => (theme) => ({
         color: theme.infoCard.color.primary,

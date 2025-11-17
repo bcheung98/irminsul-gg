@@ -13,8 +13,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 // Helper imports
 import { useGameTag } from "@/context";
 import {
-    getBackgroundColor,
-    getRarityColor,
+    getGenshinBackgroundColor,
+    getGenshinRarityColor,
 } from "@/helpers/genshin/rarityColors";
 
 // Type imports
@@ -47,8 +47,8 @@ export default function WeaponPage({ weapon }: { weapon: GenshinWeapon }) {
                 backgroundSize: "contain",
                 backgroundRepeat: "repeat",
                 borderRadius: "4px",
-                border: `2px solid ${getRarityColor(weapon.rarity)}`,
-                boxShadow: `inset 0 0 24px 16px ${getBackgroundColor(
+                border: `2px solid ${getGenshinRarityColor(weapon.rarity)}`,
+                boxShadow: `inset 0 0 24px 16px ${getGenshinBackgroundColor(
                     weapon.rarity
                 )}`,
             }}

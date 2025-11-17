@@ -17,6 +17,7 @@ import { formatHref, zoomImageOnHover } from "@/utils";
 
 // Type imports
 import { InfoCardProps } from "./InfoCard.types";
+import { Game } from "@/types";
 
 export default function InfoCard({
     tag,
@@ -37,7 +38,7 @@ export default function InfoCard({
 
     const id = `${componentID || formatHref(href)}-infoCard`;
 
-    const [game, type] = tag.split("/");
+    const [game, type] = tag.split("/") as [Game, string];
 
     let imgSize = size;
     if (matches) {

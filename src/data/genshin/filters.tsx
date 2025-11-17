@@ -13,7 +13,6 @@ import { useMaterialsCategory } from "@/helpers/materials";
 import { elements, nations, rarities, weapons } from "@/data/genshin/common";
 import { characterAscensionStats } from "./characterAscensionStats";
 import { GenshinWeaponSubStat, weaponSubStats } from "./weaponStats";
-import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 // Type imports
 import { Filters, FilterGroupsProps, FilterGroups } from "@/types";
@@ -80,8 +79,8 @@ export function genshinFilters<T extends Filters>({
                     label: (
                         <RarityStars
                             rarity={rarity}
+                            useRarityColor
                             variant="h6"
-                            color={getRarityColor(rarity)}
                         />
                     ),
                 })),

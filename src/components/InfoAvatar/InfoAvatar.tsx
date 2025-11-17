@@ -1,7 +1,7 @@
 // Component imports
-import NavLink from "../NavLink";
-import Image from "../Image";
-import Tooltip from "../Tooltip";
+import NavLink from "@/components/NavLink";
+import Image from "@/components/Image";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -10,7 +10,8 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { formatHref } from "@/utils";
-import { getRarityColor } from "@/helpers/genshin/rarityColors";
+import { useGameTag } from "@/context";
+import { useRarityColors } from "@/helpers/rarityColors";
 
 // Type imports
 import { InfoAvatarProps } from "./InfoAvatar.types";
@@ -29,6 +30,10 @@ export default function InfoAvatar({
 }: InfoAvatarProps) {
     const theme = useTheme();
 
+    const game = useGameTag();
+
+    const rarityColors = useRarityColors()[game];
+
     return (
         <Tooltip title={displayName} arrow placement="top">
             <Card
@@ -39,11 +44,11 @@ export default function InfoAvatar({
                     height: size,
                     border: `${
                         theme.infoAvatar.border.width
-                    }px solid ${getRarityColor(rarity)}`,
+                    }px solid ${rarityColors(rarity)}`,
                     borderRadius: theme.infoAvatar.border.radius,
                     backgroundImage:
                         background ||
-                        `url(https://assets.irminsul.gg/genshin/backgrounds/Background_${rarity}_Star.png)`,
+                        `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
                 }}

@@ -3,14 +3,12 @@ import SortTable from "@/components/SortTable";
 import RarityStars from "@/components/RarityStars";
 
 // Helper imports
-import DateObject from "@/helpers/dates";
 import { formatHref, splitJoin } from "@/utils";
 import { baseATKScaling, subStats } from "@/data/genshin/weaponStats";
 
 // Type imports
 import { GenshinWeapon } from "@/types/genshin/weapon";
 import { SortTableRow } from "@/components/SortTable/SortTable.types";
-import { getRarityColor } from "@/helpers/genshin/rarityColors";
 
 export default function WeaponList({
     weapons,
@@ -54,8 +52,8 @@ export default function WeaponList({
                     title: (
                         <RarityStars
                             rarity={weapon.rarity}
+                            useRarityColor
                             variant="h6"
-                            color={getRarityColor(weapon.rarity)}
                         />
                     ),
                     titleProps: { variant: "h6" },
