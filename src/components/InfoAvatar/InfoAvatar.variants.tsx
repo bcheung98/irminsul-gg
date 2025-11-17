@@ -18,6 +18,7 @@ export function GenshinCharacterInfoAvatar({
             rarity={character.rarity}
             href={character.url}
             background="transparent"
+            url="avatars"
             {...props}
         />
     );

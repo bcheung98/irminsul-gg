@@ -8,10 +8,8 @@ import SelectWithArrows from "@/components/SelectWithArrows";
 import MenuItem from "@/components/MenuItem";
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
-import InfoCard from "@/components/InfoCard";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import { SelectChangeEvent } from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -20,22 +18,16 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { useGameTag } from "@/context";
 import versions from "@/data/versions";
+import {
+    renderInfoCard,
+    textLabelIcon,
+    textLabelTitle,
+} from "./VersionHighlights.utils";
 
 // Type imports
-import { BaseDataWithRelease } from "@/types";
-
-interface Data extends BaseDataWithRelease {
-    [key: string]: any;
-}
-
-interface VersionHighlightsProps {
-    characters: Data[];
-    weapons: Data[];
-}
+import { VersionHighlightsProps } from "./VersionHighlights.types";
 
 export default function VersionHighlights(props: VersionHighlightsProps) {
-    const theme = useTheme();
-
     const game = useGameTag();
 
     const updates = versions[game];
@@ -72,9 +64,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                (a.fullName || a.displayName).localeCompare(
-                    b.fullName || b.displayName
-                )
+                a.displayName.localeCompare(b.displayName)
         );
 
     const selectProps = {
@@ -128,56 +118,34 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                         {characters.length > 0 && (
                             <Grid sx={gridContainerStyle} size="auto">
                                 <TextLabel
-                                    icon={`genshin/icons/Aether`}
+                                    icon={textLabelIcon(game, "characters")}
                                     iconProps={{ size: 32 }}
-                                    title={`New Characters`}
+                                    title={textLabelTitle(game, "characters")}
                                     titleProps={{ variant: "h6" }}
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
-                                    {characters.map((character) => (
-                                        <InfoCard
-                                            tag="genshin/characters"
-                                            key={character.id}
-                                            name={character.name}
-                                            displayName={character.fullName}
-                                            rarity={character.rarity}
-                                            badgeLeft={{
-                                                element: character.element,
-                                                weaponType:
-                                                    character.weaponType,
-                                            }}
-                                            background={theme.background(0)}
-                                            href={character.url}
-                                        />
-                                    ))}
+                                    {characters.map((character) =>
+                                        renderInfoCard(
+                                            game,
+                                            "characters",
+                                            character
+                                        )
+                                    )}
                                 </Grid>
                             </Grid>
                         )}
                         {weapons.length > 0 && (
                             <Grid sx={gridContainerStyle} size="auto">
                                 <TextLabel
-                                    icon={`genshin/icons/Weapons`}
+                                    icon={textLabelIcon(game, "weapons")}
                                     iconProps={{ size: 32 }}
-                                    title={`New Weapons`}
+                                    title={textLabelTitle(game, "weapons")}
                                     titleProps={{ variant: "h6" }}
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
-                                    {weapons.map((weapon) => (
-                                        <InfoCard
-                                            tag="genshin/weapons"
-                                            key={weapon.id}
-                                            name={weapon.name}
-                                            displayName={weapon.displayName}
-                                            rarity={weapon.rarity}
-                                            badgeLeft={{
-                                                weaponType: weapon.weaponType,
-                                                subStat: weapon.subStat,
-                                            }}
-                                            background={theme.background(0)}
-                                            href={weapon.url}
-                                            url=""
-                                        />
-                                    ))}
+                                    {weapons.map((weapon) =>
+                                        renderInfoCard(game, "weapons", weapon)
+                                    )}
                                 </Grid>
                             </Grid>
                         )}

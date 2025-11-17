@@ -5,7 +5,10 @@ import { useShallow } from "zustand/react/shallow";
 
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
-import InfoCard, { InfoCardMaterial } from "@/components/InfoCard";
+import {
+    GenshinCharacterInfoCard,
+    GenshinCharacterInfoCardMaterial,
+} from "@/components/InfoCard";
 import CharacterList from "./CharacterList";
 
 // MUI imports
@@ -65,17 +68,9 @@ export default function CharacterGallery(props: {
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
-                            <InfoCard
-                                tag={tag}
+                            <GenshinCharacterInfoCard
                                 key={character.id}
-                                name={character.name}
-                                displayName={character.fullName}
-                                rarity={character.rarity}
-                                badgeLeft={{
-                                    element: character.element,
-                                    weaponType: character.weaponType,
-                                }}
-                                href={character.url}
+                                character={character}
                             />
                         ))}
                     </Grid>
@@ -85,18 +80,9 @@ export default function CharacterGallery(props: {
                 return (
                     <Grid container spacing={3}>
                         {currentCharacters.map((character) => (
-                            <InfoCardMaterial
-                                tag={tag}
+                            <GenshinCharacterInfoCardMaterial
                                 key={character.id}
-                                name={character.name}
-                                displayName={character.fullName}
-                                rarity={character.rarity}
-                                badgeLeft={{
-                                    element: character.element,
-                                    weaponType: character.weaponType,
-                                }}
-                                materials={character.materials}
-                                href={character.url}
+                                character={character}
                             />
                         ))}
                     </Grid>

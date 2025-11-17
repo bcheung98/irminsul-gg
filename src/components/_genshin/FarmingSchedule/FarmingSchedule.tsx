@@ -78,12 +78,20 @@ export default function FarmingSchedule(props: {
         days[index],
         hideUnreleasedContent
     );
-    const characters = props.characters.filter((character) =>
-        characterMats.includes(character.materials.talent.toString())
-    );
-    const weapons = props.weapons.filter((weapon) =>
-        weaponMats.includes(weapon.materials.weapon.toString())
-    );
+    const characters = props.characters
+        .filter((character) =>
+            characterMats.includes(character.materials.talent.toString())
+        )
+        .sort((a, b) => a.fullName.localeCompare(b.fullName));
+    const weapons = props.weapons
+        .filter((weapon) =>
+            weaponMats.includes(weapon.materials.weapon.toString())
+        )
+        .sort(
+            (a, b) =>
+                b.rarity - a.rarity ||
+                a.displayName.localeCompare(b.displayName)
+        );
 
     const selectProps = {
         index,

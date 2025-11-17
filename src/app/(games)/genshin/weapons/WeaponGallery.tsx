@@ -5,7 +5,7 @@ import { useShallow } from "zustand/react/shallow";
 
 // Component imports
 import InfoGallery from "@/components/InfoGallery";
-import InfoCard from "@/components/InfoCard";
+import { GenshinWeaponInfoCard } from "@/components/InfoCard";
 import WeaponList from "./WeaponList";
 
 // MUI imports
@@ -61,18 +61,9 @@ export default function WeaponGallery(props: { weapons: GenshinWeapon[] }) {
                 return (
                     <Grid container spacing={3}>
                         {currentWeapons.map((weapon) => (
-                            <InfoCard
-                                tag={tag}
+                            <GenshinWeaponInfoCard
                                 key={weapon.id}
-                                name={weapon.name}
-                                displayName={weapon.displayName}
-                                rarity={weapon.rarity}
-                                badgeLeft={{
-                                    weaponType: weapon.weaponType,
-                                    subStat: weapon.stats.subStat,
-                                }}
-                                url=""
-                                href={weapon.url}
+                                weapon={weapon}
                             />
                         ))}
                     </Grid>

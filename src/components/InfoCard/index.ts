@@ -1,5 +1,4 @@
-import InfoCardMaterial from "./InfoCardMaterial";
-
 export * from "./InfoCard";
+export * from "./InfoCardMaterial";
+export * from "./InfoCard.variants";
 export { default } from "./InfoCard";
-export { InfoCardMaterial };

@@ -1,8 +1,3 @@
-import {
-    GenshinCharacterInfoAvatar,
-    GenshinWeaponInfoAvatar,
-} from "./InfoAvatar.variants";
-
 export * from "./InfoAvatar";
+export * from "./InfoAvatar.variants";
 export { default } from "./InfoAvatar";
-export { GenshinCharacterInfoAvatar, GenshinWeaponInfoAvatar };
