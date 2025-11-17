@@ -12,11 +12,13 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 interface SelectWithArrowsProps<T> {
     children: React.ReactNode;
     index: number;
-    data: T[];
+    data: T[] | readonly T[];
     handleIndexChange: (event: SelectChangeEvent) => void;
     handleIndexChangeLeft: () => void;
     handleIndexChangeRight: () => void;
     width?: string | number;
+    disabledLeft?: boolean;
+    disabledRight?: boolean;
 }
 
 export default function SelectWithArrows<T>({
@@ -27,6 +29,8 @@ export default function SelectWithArrows<T>({
     handleIndexChangeLeft,
     handleIndexChangeRight,
     width = "100px",
+    disabledLeft,
+    disabledRight,
 }: SelectWithArrowsProps<T>) {
     const theme = useTheme();
 
@@ -42,7 +46,7 @@ export default function SelectWithArrows<T>({
             <Grid>
                 <IconButton
                     onClick={handleIndexChangeLeft}
-                    disabled={index >= data.length - 1}
+                    disabled={disabledLeft ?? index >= data.length - 1}
                     sx={buttonStyle}
                 >
                     <KeyboardArrowLeftIcon />
@@ -62,7 +66,7 @@ export default function SelectWithArrows<T>({
             <Grid>
                 <IconButton
                     onClick={handleIndexChangeRight}
-                    disabled={index === 0}
+                    disabled={disabledRight ?? index === 0}
                     sx={buttonStyle}
                 >
                     <KeyboardArrowRightIcon />
