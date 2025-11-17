@@ -97,7 +97,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
     };
 
     return (
-        <Box sx={{ pt: 2 }}>
+        <Box>
             <ContentBox
                 header="Version Highlights"
                 actions={
