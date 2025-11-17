@@ -201,7 +201,7 @@ export const darkThemeData = {
             main: appbarColors[0],
         },
         border: {
-            radius: 2,
+            radius: 1,
             width: 2,
             color: borderColors.primary,
         },
