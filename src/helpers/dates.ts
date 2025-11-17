@@ -1,6 +1,6 @@
 import type { Server } from "@/types";
 
-const months = [
+export const months = [
     "January",
     "February",
     "March",
@@ -13,7 +13,21 @@ const months = [
     "October",
     "November",
     "December",
-];
+] as const;
+
+export type Month = (typeof months)[number];
+
+export const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+] as const;
+
+export type Day = (typeof days)[number];
 
 export const servers = {
     NA: "-5",
