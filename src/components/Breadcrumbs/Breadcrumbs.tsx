@@ -1,7 +1,6 @@
 import { usePathname } from "next/navigation";
 
 // Component imports
-import NavLink from "@/components/NavLink";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
@@ -37,55 +36,53 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
 
     return (
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-            <NavLink href={`/${game}`}>
+            <TextLabel
+                icon={matches && `main/game-icons/${website.shortName}`}
+                title={matches ? website.name : website.shortName}
+                titleProps={{
+                    variant: matches ? "body2" : "subtitle2",
+                    color:
+                        pathname.length > 2
+                            ? theme.appbar.color.primary
+                            : theme.text.selected,
+                    sx: {
+                        userSelect: "none",
+                        textShadow:
+                            pathname.length > 2
+                                ? "none"
+                                : `${theme.text.selected} 1px 1px 16px`,
+                    },
+                }}
+                href={pathname.length > 2 ? `/${game}` : ""}
+            />
+            {pathname.slice(2).map((item, index) => (
                 <TextLabel
-                    icon={matches && `main/game-icons/${website.shortName}`}
-                    title={matches ? website.name : website.shortName}
+                    title={
+                        items.find((i) => item === i.href)?.title ||
+                        getCurrentData(item)
+                    }
                     titleProps={{
                         variant: matches ? "body2" : "subtitle2",
                         color:
-                            pathname.length > 2
+                            index + 2 !== pathname.length - 1
                                 ? theme.appbar.color.primary
                                 : theme.text.selected,
                         sx: {
                             userSelect: "none",
                             textShadow:
-                                pathname.length > 2
+                                index + 2 !== pathname.length - 1
                                     ? "none"
                                     : `${theme.text.selected} 1px 1px 16px`,
                         },
                     }}
-                    isLink={pathname.length > 2}
+                    href={
+                        index + 2 !== pathname.length - 1
+                            ? `/${game}/${pathname
+                                  .slice(2, index + 3)
+                                  .join("/")}`
+                            : ""
+                    }
                 />
-            </NavLink>
-            {pathname.slice(2).map((item, index) => (
-                <NavLink
-                    key={index}
-                    href={`/${game}/${pathname.slice(2, index + 3).join("/")}`}
-                    disabled={index + 2 === pathname.length - 1}
-                >
-                    <TextLabel
-                        title={
-                            items.find((i) => item === i.href)?.title ||
-                            getCurrentData(item)
-                        }
-                        titleProps={{
-                            variant: matches ? "body2" : "subtitle2",
-                            color:
-                                index + 2 !== pathname.length - 1
-                                    ? theme.appbar.color.primary
-                                    : theme.text.selected,
-                            sx: {
-                                userSelect: "none",
-                                textShadow:
-                                    index + 2 !== pathname.length - 1
-                                        ? "none"
-                                        : `${theme.text.selected} 1px 1px 16px`,
-                            },
-                        }}
-                        isLink={index + 2 !== pathname.length - 1}
-                    />
-                </NavLink>
             ))}
         </MuiBreadcrumbs>
     );

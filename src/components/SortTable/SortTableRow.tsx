@@ -1,6 +1,5 @@
 // Component imports
 import TextLabel from "@/components/TextLabel";
-import NavLink from "@/components/NavLink";
 import * as Table from "@/components/Table";
 
 // MUI imports
@@ -44,23 +43,12 @@ export default function SortTableRow<T extends ColumnHeaders>({
                         borderColor: theme.border.color.primary,
                     }}
                 >
-                    {value.href ? (
-                        <NavLink href={value.href}>
-                            <TextLabel
-                                {...{
-                                    ...labelProps,
-                                    ...value.label,
-                                }}
-                            />
-                        </NavLink>
-                    ) : (
-                        <TextLabel
-                            {...{
-                                ...labelProps,
-                                ...value.label,
-                            }}
-                        />
-                    )}
+                    <TextLabel
+                        {...{
+                            ...labelProps,
+                            ...value.label,
+                        }}
+                    />
                 </TableCell>
             ))}
         </Table.Row>

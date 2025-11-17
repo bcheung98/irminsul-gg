@@ -1,6 +1,7 @@
 // Component imports
 import Image from "@/components/Image";
 import Text from "@/components/Text";
+import NavLink from "@/components/NavLink";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -18,12 +19,89 @@ export default function TextLabel({
     subtitleProps,
     spacing,
     textSpacing,
-    isLink,
+    href,
     alignItems = "center",
     justifyContent = "left",
     reverse = false,
 }: TextLabelProps) {
     const theme = useTheme();
+
+    const IconRoot =
+        typeof icon === "string" ? (
+            <Image
+                src={icon}
+                size={iconProps?.size || 24}
+                style={{
+                    ...{
+                        borderRadius: iconProps?.borderRadius || "4px",
+                        padding: iconProps?.padding || 0,
+                        cursor: href
+                            ? "pointer"
+                            : titleProps?.defaultCursor || "inherit",
+                    },
+                    ...iconProps?.styles,
+                }}
+                tooltip={iconProps?.tooltip}
+                responsive
+                responsiveSize={0.2}
+                supressLoadImageWarning={iconProps?.supressLoadImageWarning}
+                fallbackSrc={iconProps?.fallbackSrc}
+            />
+        ) : (
+            icon
+        );
+
+    function Icon() {
+        return href ? (
+            <NavLink href={href} style={{ display: "inline-flex" }}>
+                {IconRoot}
+            </NavLink>
+        ) : (
+            IconRoot
+        );
+    }
+
+    const TitleRoot = (
+        <Text
+            component={titleProps?.component || "span"}
+            variant={titleProps?.variant || "body1"}
+            sx={{
+                ...{
+                    color: titleProps?.color || theme.text.primary,
+                    textAlign: justifyContent,
+                    "&:hover": {
+                        color: href ? theme.text.selected : "global",
+                        textDecoration: href ? "underline" : "none",
+                        cursor: href
+                            ? "pointer"
+                            : titleProps?.defaultCursor || "inherit",
+                    },
+                },
+                ...titleProps?.sx,
+            }}
+        >
+            {title}
+        </Text>
+    );
+
+    function Title() {
+        return href ? (
+            <NavLink href={href} style={{ display: "inline-flex" }}>
+                {TitleRoot}
+            </NavLink>
+        ) : (
+            TitleRoot
+        );
+    }
+
+    const Subtitle = (
+        <Text
+            variant={subtitleProps?.variant || "body2"}
+            sx={{ color: subtitleProps?.color || "inherit" }}
+        >
+            {subtitle}
+        </Text>
+    );
 
     return (
         <Stack
@@ -32,66 +110,11 @@ export default function TextLabel({
             alignItems={alignItems}
             justifyContent={justifyContent}
         >
-            {icon &&
-                (typeof icon === "string" ? (
-                    <Image
-                        src={icon}
-                        size={iconProps?.size || 24}
-                        style={{
-                            ...{
-                                borderRadius: iconProps?.borderRadius || "4px",
-                                padding: iconProps?.padding || 0,
-                                cursor: isLink
-                                    ? "pointer"
-                                    : titleProps?.defaultCursor || "inherit",
-                            },
-                            ...iconProps?.styles,
-                        }}
-                        tooltip={iconProps?.tooltip}
-                        responsive
-                        responsiveSize={0.2}
-                        supressLoadImageWarning={
-                            iconProps?.supressLoadImageWarning
-                        }
-                    />
-                ) : (
-                    icon
-                ))}
+            {icon && Icon()}
             {(title || subtitle) && (
                 <Stack spacing={textSpacing || 0}>
-                    <Text
-                        component={titleProps?.component || "span"}
-                        variant={titleProps?.variant || "body1"}
-                        sx={{
-                            ...{
-                                color: titleProps?.color || theme.text.primary,
-                                textAlign: justifyContent,
-                                "&:hover": {
-                                    color: isLink
-                                        ? theme.text.selected
-                                        : "global",
-                                    textDecoration: isLink
-                                        ? "underline"
-                                        : "none",
-                                    cursor: isLink
-                                        ? "pointer"
-                                        : titleProps?.defaultCursor ||
-                                          "inherit",
-                                },
-                            },
-                            ...titleProps?.sx,
-                        }}
-                    >
-                        {title}
-                    </Text>
-                    {subtitle && (
-                        <Text
-                            variant={subtitleProps?.variant || "body2"}
-                            sx={{ color: subtitleProps?.color || "inherit" }}
-                        >
-                            {subtitle}
-                        </Text>
-                    )}
+                    {Title()}
+                    {subtitle && Subtitle}
                 </Stack>
             )}
         </Stack>

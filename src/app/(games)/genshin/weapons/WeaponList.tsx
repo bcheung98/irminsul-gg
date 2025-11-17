@@ -43,9 +43,8 @@ export default function WeaponList({
                         size: 48,
                         borderRadius: "4px",
                     },
-                    isLink: true,
+                    href: `weapons/${formatHref(weapon.url)}`,
                 },
-                href: `weapons/${formatHref(weapon.url)}`,
             },
             rarity: {
                 label: {

@@ -13,6 +13,7 @@ export interface IconProps {
     tooltip?: string;
     styles?: CSSProperties;
     supressLoadImageWarning?: boolean;
+    fallbackSrc?: string;
 }
 
 export interface TitleProps {
@@ -32,7 +33,7 @@ export interface TextLabelProps {
     subtitleProps?: TitleProps;
     spacing?: number;
     textSpacing?: number;
-    isLink?: boolean;
+    href?: string;
     alignItems?: StackProps["alignItems"];
     justifyContent?: "left" | "center" | "right";
     reverse?: boolean;

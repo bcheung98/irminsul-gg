@@ -41,9 +41,8 @@ export default function CharacterList({
                         size: 48,
                         borderRadius: "4px",
                     },
-                    isLink: true,
+                    href: `characters/${formatHref(character.url)}`,
                 },
-                href: `characters/${formatHref(character.url)}`,
             },
             rarity: {
                 label: {
@@ -84,6 +83,7 @@ export default function CharacterList({
                     iconProps: {
                         size: 32,
                         supressLoadImageWarning: true,
+                        fallbackSrc: "genshin/nations/Outlander",
                     },
                 },
             },

@@ -1,9 +1,7 @@
 import { BaseData, SortOrder } from "@/types";
 import { CellProps } from "@/components/Table";
 
-export interface SortTableCellProps extends CellProps {
-    href?: string;
-}
+export interface SortTableCellProps extends CellProps {}
 
 export interface ColumnHeaders {
     [key: string]: string;
