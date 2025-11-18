@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
 // Component imports
 import Text from "@/components/Text";
 
@@ -12,6 +14,7 @@ import { useGame } from "@/context";
 
 export default function NavBarBottom() {
     const game = useGame();
+    const pathname = usePathname();
 
     let text1 = "";
     let text2 = "";
@@ -45,7 +48,7 @@ export default function NavBarBottom() {
                     flexWrap: "wrap",
                     gap: "8px",
                     py: "8px",
-                    width: game !== undefined ? "100%" : "75%",
+                    width: pathname !== "/" ? "100%" : "75%",
                     mx: "auto",
                 }}
             >
