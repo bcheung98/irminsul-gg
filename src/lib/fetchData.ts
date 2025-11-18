@@ -4,6 +4,10 @@ export const urls: { [key: string]: string } = {
     "genshin/characters": "https://api.irminsul.gg/v2/genshin/characters.json",
     "genshin/weapons": "https://api.irminsul.gg/v2/genshin/weapons.json",
     "genshin/artifacts": "https://api.irminsul.gg/v2/genshin/artifacts.json",
+    "genshin/banner-characters":
+        "https://api.irminsul.gg/v2/genshin/banner-characters.json",
+    "genshin/banner-weapons":
+        "https://api.irminsul.gg/v2/genshin/banner-weapons.json",
 };
 
 export async function getDataSet<T>(url: string): Promise<T[]> {
