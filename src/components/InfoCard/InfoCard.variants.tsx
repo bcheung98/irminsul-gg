@@ -1,7 +1,12 @@
 import InfoCard from "./InfoCard";
 import InfoCardMaterial from "./InfoCardMaterial";
-import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
+import {
+    GenshinArtifact,
+    GenshinCharacter,
+    GenshinWeapon,
+} from "@/types/genshin";
 import { InfoCardProps } from "./InfoCard.types";
+import { splitJoin } from "@/utils";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -72,6 +77,29 @@ export function GenshinWeaponInfoCard({
             }}
             url=""
             href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function GenshinArtifactInfoCard({
+    artifact,
+    props,
+}: {
+    artifact: GenshinArtifact;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="genshin/artifacts"
+            key={artifact.id}
+            name={`${splitJoin(artifact.name)}/${
+                artifact.pieces.length > 1 ? "flower" : "circlet"
+            }`}
+            displayName={artifact.displayName}
+            rarity={artifact.rarity}
+            url="sets"
+            href={artifact.url}
             {...props}
         />
     );

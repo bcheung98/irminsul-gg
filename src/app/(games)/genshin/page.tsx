@@ -8,16 +8,24 @@ import Loader from "@/components/Loader";
 import { getDataSet } from "@/lib/fetchData";
 
 // Type imports
-import { GenshinCharacter } from "@/types/genshin/character";
-import { GenshinWeapon } from "@/types/genshin/weapon";
+import {
+    GenshinCharacter,
+    GenshinWeapon,
+    GenshinArtifact,
+} from "@/types/genshin";
 
 export default async function Page() {
     const characters = await getDataSet<GenshinCharacter>("genshin/characters");
     const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");
+    const equipment = await getDataSet<GenshinArtifact>("genshin/artifacts");
 
     return (
         <Suspense fallback={<Loader />}>
-            <GenshinHome characters={characters} weapons={weapons} />
+            <GenshinHome
+                characters={characters}
+                weapons={weapons}
+                equipment={equipment}
+            />
         </Suspense>
     );
 }

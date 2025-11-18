@@ -1,0 +1,23 @@
+import { GameData } from "@/types";
+
+export const equipmentTags: GameData<string> = {
+    genshin: "artifacts",
+    hsr: "relics",
+    wuwa: "echoes",
+    zzz: "drive-discs",
+    uma: "",
+};
+
+export const equipmentPieceType: GameData<Record<string, string>> = {
+    genshin: {
+        flower: "Flower of Life",
+        feather: "Plume of Death",
+        sands: "Sands of Eon",
+        goblet: "Goblet of Eonothem",
+        circlet: "Circlet of Logos",
+    },
+    hsr: {},
+    wuwa: {},
+    zzz: {},
+    uma: {},
+};

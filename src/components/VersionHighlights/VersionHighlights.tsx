@@ -10,6 +10,7 @@ import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import { SelectChangeEvent } from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -28,6 +29,8 @@ import {
 import { VersionHighlightsProps } from "./VersionHighlights.types";
 
 export default function VersionHighlights(props: VersionHighlightsProps) {
+    const theme = useTheme();
+
     const game = useGameTag();
 
     const updates = versions[game];
@@ -50,7 +53,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
     const { version, name } = updates[index];
 
     const characters = props.characters
-        .filter((char) => char.release.version === version)
+        .filter((character) => character.release.version === version)
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
@@ -58,9 +61,15 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                     b.fullName || b.displayName
                 )
         );
-
     const weapons = props.weapons
-        .filter((char) => char.release.version === version)
+        .filter((weapon) => weapon.release.version === version)
+        .sort(
+            (a, b) =>
+                b.rarity - a.rarity ||
+                a.displayName.localeCompare(b.displayName)
+        );
+    const equipment = props.equipment
+        .filter((equipment) => equipment.release.version === version)
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
@@ -104,7 +113,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                         ))}
                     </SelectWithArrows>
                 }
-                contentProps={{ padding: 2, overflowX: "clip" }}
+                contentProps={{ padding: "16px 24px", overflowX: "clip" }}
             >
                 <Stack spacing={3}>
                     <Text variant="h6">
@@ -128,7 +137,8 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                         renderInfoCard(
                                             game,
                                             "characters",
-                                            character
+                                            character,
+                                            theme.background(0)
                                         )
                                     )}
                                 </Grid>
@@ -145,6 +155,21 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {weapons.map((weapon) =>
                                         renderInfoCard(game, "weapons", weapon)
+                                    )}
+                                </Grid>
+                            </Grid>
+                        )}
+                        {equipment.length > 0 && (
+                            <Grid sx={gridContainerStyle} size="auto">
+                                <TextLabel
+                                    icon={textLabelIcon(game, "equipment")}
+                                    iconProps={{ size: 32 }}
+                                    title={textLabelTitle(game, "equipment")}
+                                    titleProps={{ variant: "h6" }}
+                                />
+                                <Grid container spacing={3} sx={gridStyle}>
+                                    {equipment.map((item) =>
+                                        renderInfoCard(game, "equipment", item)
                                     )}
                                 </Grid>
                             </Grid>

@@ -8,18 +8,25 @@ import Grid from "@mui/material/Grid";
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
 import { GenshinWeapon } from "@/types/genshin/weapon";
+import { GenshinArtifact } from "@/types/genshin";
 
 export default function GenshinHome({
     characters,
     weapons,
+    equipment,
 }: {
     characters: GenshinCharacter[];
     weapons: GenshinWeapon[];
+    equipment: GenshinArtifact[];
 }) {
     return (
         <Grid container spacing={3} sx={{ pt: 2 }}>
             <Grid size={{ xs: 12, md: 6 }}>
-                <VersionHighlights characters={characters} weapons={weapons} />
+                <VersionHighlights
+                    characters={characters}
+                    weapons={weapons}
+                    equipment={equipment}
+                />
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
                 <FarmingSchedule characters={characters} weapons={weapons} />

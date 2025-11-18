@@ -7,4 +7,5 @@ export interface VersionItemData extends BaseDataWithRelease {
 export interface VersionHighlightsProps {
     characters: VersionItemData[];
     weapons: VersionItemData[];
+    equipment: VersionItemData[];
 }

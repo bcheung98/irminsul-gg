@@ -35,12 +35,14 @@ export default function InfoGallery(props: InfoGalleryProps) {
                 <InfoGalleryHeader {...props} />
                 {props.children}
             </Stack>
-            <ActionFab
-                action={toggleDrawerState}
-                icon={<TuneIcon fontSize="small" />}
-                tooltip="Open filters"
-                tooltipArrow="left"
-            />
+            {!props.hideFilters && (
+                <ActionFab
+                    action={toggleDrawerState}
+                    icon={<TuneIcon fontSize="small" />}
+                    tooltip="Open filters"
+                    tooltipArrow="left"
+                />
+            )}
         </>
     );
 }
