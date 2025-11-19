@@ -1,11 +1,11 @@
 import { alpha, SxProps, Theme } from "@mui/material/styles";
 
 export const calendarStyles: SxProps<Theme> = (theme) => ({
-    pt: 2,
+    pt: { xs: 0, sm: 2, md: 3 },
     color: theme.text.primary,
     fontFamily: theme.typography.fontFamily,
     fontWeight: theme.font.weight.primary,
-    "--fc-page-bg-color": theme.contentBox.backgroundColor.header,
+    "--fc-page-bg-color": alpha(theme.contentBox.backgroundColor.header, 0.95),
     "--fc-border-color": theme.border.color.primary,
     "--fc-event-bg-color": "transparent",
     "--fc-event-border-color": "transparent",
@@ -24,7 +24,7 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
         fontWeight: theme.font.weight.primary,
     },
     ".fc-daygrid": {
-        backgroundColor: alpha(theme.background(1), 0.75),
+        backgroundColor: alpha(theme.background(1, "dark"), 0.75),
         backdropFilter: "blur(4px)",
     },
     ".fc-col-header-cell": {
@@ -80,15 +80,14 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
             fontSize: theme.font.sizes.h6.sm,
         },
         ".fc-daygrid": {
-            borderRadius: "8px",
+            borderRadius: "8px 8px 0px 0px",
         },
         ".fc-scrollgrid": {
             borderLeftWidth: "1px",
-            borderRadius: "8px",
+            borderRadius: "8px 8px 0px 0px",
         },
         ".fc-scrollgrid-section > td": {
             borderRightWidth: "1px",
-            borderRadius: "0px 0px 8px 8px",
         },
         ".fc-scrollgrid-section > th": {
             borderRightWidth: "1px",
@@ -107,20 +106,40 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
     },
 });
 
+export const calendarHeaderStyles: SxProps<Theme> = () => ({
+    columnGap: 2,
+    rowGap: 1,
+    alignItems: "center",
+    justifyContent: { xs: "space-between", sm: "left" },
+    p: { xs: "8px 16px", sm: "0px 24px" },
+    flexWrap: "wrap",
+});
+
 export const calendarButtonStyles: SxProps<Theme> = (theme) => ({
     p: "0px 8px",
     borderRadius: "4px",
-    height: "28px",
+    minWidth: { xs: "28px", sm: "64px" },
+    height: { xs: "20px", sm: "28px" },
     "&.Mui-disabled": {
         opacity: 0.5,
+        outline: `1px solid ${theme.border.color.secondary}`,
     },
 });
 
 export const calendarIconButtonStyles: SxProps<Theme> = (theme) => ({
     p: "4px",
     borderRadius: "4px",
-    height: "28px",
+    height: { xs: "20px", sm: "28px" },
     "&:hover": {
-        backgroundColor: theme.drawer.backgroundColor.hover,
+        backgroundColor: theme.appbar.backgroundColor.selectedHover,
+    },
+});
+
+export const calendarMenuButtonStyles: SxProps<Theme> = (theme) => ({
+    p: 0.5,
+    borderRadius: "4px",
+    height: { xs: "20px", sm: "28px" },
+    "&:hover": {
+        backgroundColor: theme.appbar.backgroundColor.selectedHover,
     },
 });
