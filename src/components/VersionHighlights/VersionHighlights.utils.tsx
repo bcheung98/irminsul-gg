@@ -1,3 +1,4 @@
+import { categories } from "@/data/categories";
 import {
     GenshinArtifactInfoCard,
     GenshinCharacterInfoCard,
@@ -48,34 +49,7 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
 }
 
 export function textLabelTitle(game: Game, tag: keyof VersionHighlightsProps) {
-    const items: GameData<Data<string>> = {
-        genshin: {
-            characters: "Characters",
-            weapons: "Weapons",
-            equipment: "Artifacts",
-        },
-        hsr: {
-            characters: "Characters",
-            weapons: "Light Cones",
-            equipment: "Relics",
-        },
-        wuwa: {
-            characters: "Resonators",
-            weapons: "Weapons",
-            equipment: "Echoes",
-        },
-        zzz: {
-            characters: "Agents",
-            weapons: "W-Engines",
-            equipment: "Drive Discs",
-        },
-        uma: {
-            characters: "",
-            weapons: "",
-            equipment: "",
-        },
-    };
-    return `New ${items[game][tag]}`;
+    return `New ${categories[game][tag]}`;
 }
 
 export function renderInfoCard(
