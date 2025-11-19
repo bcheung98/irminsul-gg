@@ -1,7 +1,13 @@
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 
-export default function MenuCloseIcon({ open }: { open?: boolean }) {
+export default function MenuCloseIcon({
+    open,
+    targetClass,
+}: {
+    open?: boolean;
+    targetClass?: string;
+}) {
     const theme = useTheme();
 
     const baseIconStyle = {
@@ -29,7 +35,7 @@ export default function MenuCloseIcon({ open }: { open?: boolean }) {
                         ? "translate(1.5px, 1.6px) rotateZ(-45deg)"
                         : "none",
                 }}
-                className={open ? "lock-scroll" : ""}
+                className={open ? targetClass : ""}
             ></rect>
             <rect
                 x="1"
@@ -43,7 +49,7 @@ export default function MenuCloseIcon({ open }: { open?: boolean }) {
                         ? "translate(1.5px, -1.2px) rotateZ(45deg)"
                         : "none",
                 }}
-                className={open ? "lock-scroll" : ""}
+                className={open ? targetClass : ""}
             ></rect>
         </svg>
     );

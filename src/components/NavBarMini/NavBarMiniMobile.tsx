@@ -62,7 +62,10 @@ export default function NavBarMiniMobile() {
                                 },
                             }}
                         >
-                            <MenuCloseIcon open={menuOpen} />
+                            <MenuCloseIcon
+                                open={menuOpen}
+                                targetClass="lock-scroll"
+                            />
                         </IconButton>
                     </Tooltip>
                     {game && <Breadcrumbs website={game} />}

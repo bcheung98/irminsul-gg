@@ -35,7 +35,6 @@ export default function GamesMenu() {
                 <AppsIcon />
             </NavButton>
             <Menu
-                disableScrollLock
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleMenuClose}
