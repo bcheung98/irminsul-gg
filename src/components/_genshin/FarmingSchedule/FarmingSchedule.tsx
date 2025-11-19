@@ -24,6 +24,7 @@ import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useSettingsStore } from "@/stores/useSettingsStore";
+import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { getFarmableMaterials } from "@/helpers/genshin/getFarmableMaterials";
 import { Day, days } from "@/helpers/dates";
 
@@ -78,12 +79,20 @@ export default function FarmingSchedule(props: {
         days[index],
         hideUnreleasedContent
     );
-    const characters = props.characters
+    const characters = filterUnreleasedContent(
+        hideUnreleasedContent,
+        props.characters,
+        "genshin"
+    )
         .filter((character) =>
             characterMats.includes(character.materials.talent.toString())
         )
         .sort((a, b) => a.fullName.localeCompare(b.fullName));
-    const weapons = props.weapons
+    const weapons = filterUnreleasedContent(
+        hideUnreleasedContent,
+        props.weapons,
+        "genshin"
+    )
         .filter((weapon) =>
             weaponMats.includes(weapon.materials.weapon.toString())
         )
@@ -135,13 +144,13 @@ export default function FarmingSchedule(props: {
         const items = index ? weapons : characters;
 
         return (
-            <Tabs.Panel value={value} index={index}>
+            <Tabs.Panel value={value} index={index} padding="16px 24px 24px">
                 <Stack spacing={2} divider={<Divider />}>
                     {materials.map((material, matIndex) => (
                         <Stack key={material} spacing={1}>
                             <TextLabel
                                 icon={getImgSrc(material)}
-                                iconProps={{ size: 48 }}
+                                iconProps={{ size: 40 }}
                                 title={material}
                                 titleProps={{ variant: "h6" }}
                             />
