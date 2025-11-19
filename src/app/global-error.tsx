@@ -91,10 +91,7 @@ export default function GlobalError({
                             }}
                         >
                             <pre>
-                                <code
-                                    className="global-error-text"
-                                    style={{ color: "white" }}
-                                >
+                                <code className="global-error-code-text">
                                     {error.stack || error.message}
                                 </code>
                             </pre>

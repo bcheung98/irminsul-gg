@@ -51,8 +51,16 @@ ul {
     border-radius: 4px;
 }
 
-.global-error-text {
+.global-error-text,
+.global-error-code-text {
     color: white;
+}
+
+.global-error-text {
     font-family: Rowdies;
     font-weight: 300;
+}
+
+.global-error-code-text {
+    font-size: 11pt;
 }
