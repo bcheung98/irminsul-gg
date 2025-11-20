@@ -2,10 +2,22 @@ import { useEffect, useState } from "react";
 
 // Component imports
 import SiteSearchRoot from "./SiteSearchRoot";
+import SiteSearchPopup from "./SiteSearchPopup";
 
-// MUI imports
+// Type imports
+import { BaseDataWithRelease } from "@/types";
+
+export interface SearchResult extends BaseDataWithRelease {
+    displayName: string;
+    category: string;
+}
 
 export default function SiteSearch() {
+    const [focus, setFocus] = useState(-1);
+    const handleFocusChange = (index: number) => {
+        setFocus(index);
+    };
+
     const [searchOpen, setSearchOpen] = useState(false);
     const handleSearchOpen = () => {
         setFocus(-1);
@@ -20,30 +32,8 @@ export default function SiteSearch() {
         setSearchValue(event.target.value);
     };
 
-    const [focus, setFocus] = useState(-1);
-    const handleFocusChange = (index: number) => {
-        setFocus(index);
-    };
-    const handleFocusChangeKey = (
-        values: any[],
-        direction: "ArrowUp" | "ArrowDown"
-    ) => {
-        let index;
-        if (direction === "ArrowUp") {
-            index = focus - 1;
-            if (index < 0) {
-                index = values.length - 1;
-            }
-        } else {
-            index = focus + 1;
-            if (index > values.length - 1) {
-                index = 0;
-            }
-        }
-        setFocus(index);
-        // document
-        //     .getElementById(getURL(values[index]))
-        //     ?.scrollIntoView({ behavior: "instant", block: "center" });
+    const handleSelect = (option: SearchResult, keyPress = false) => {
+        setSearchOpen(false);
     };
 
     const keyDownHandler = (event: KeyboardEvent) => {
@@ -59,5 +49,19 @@ export default function SiteSearch() {
         window.addEventListener("keydown", keyDownHandler);
     }, []);
 
-    return <SiteSearchRoot handleSearchOpen={handleSearchOpen} />;
+    return (
+        <>
+            <SiteSearchRoot handleSearchOpen={handleSearchOpen} />
+            <SiteSearchPopup
+                open={searchOpen}
+                setOpen={setSearchOpen}
+                onClose={handleSearchClose}
+                value={searchValue}
+                focus={focus}
+                handleFocusChange={handleFocusChange}
+                handleInputChange={handleInputChange}
+                handleSelect={handleSelect}
+            />
+        </>
+    );
 }
