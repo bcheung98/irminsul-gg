@@ -12,29 +12,29 @@ const font = Inter({
     variable: "--font-inter",
 });
 
-const appbarColors = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
+const appbarColors = ["rgb(8, 8, 8)", "rgb(16, 16, 16)", "rgb(40, 40, 40)"];
 
 const borderColors = {
-    primary: "rgb(168, 147, 105)",
-    secondary: "rgb(30, 73, 118)",
-    highlight: "rgb(233, 194, 39)",
+    primary: "rgb(80, 80, 80)",
+    secondary: "rgb(75, 83, 102)",
+    highlight: "rgb(30, 73, 118)",
 };
 
 const backgroundColors = [
     {
-        light: "rgb(42, 66, 106)",
-        main: "rgb(32, 56, 96)",
-        dark: "rgb(22, 46, 86)",
+        light: "rgb(50, 50, 50)",
+        main: "rgb(40, 40, 40)",
+        dark: "rgb(30, 30, 30)",
     },
     {
-        light: "rgb(10, 42, 82)",
-        main: "rgb(8, 32, 72)",
-        dark: "rgb(6, 22, 62)",
+        light: "rgb(26, 26, 26)",
+        main: "rgb(16, 16, 16)",
+        dark: "rgb(6, 6, 6)",
     },
     {
-        light: "rgb(0, 21, 42)",
-        main: "rgb(0, 16, 32)",
-        dark: "rgb(0, 11, 22)",
+        light: "rgb(18, 18, 18)",
+        main: "rgb(8, 8, 8)",
+        dark: "rgb(0, 0, 0)",
     },
 ];
 
@@ -47,16 +47,17 @@ const textColors = {
     star: "rgb(255, 204, 51)",
 };
 
-const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
+const iconBackgrounds = ["rgb(8, 8, 8)", "rgb(16, 16, 16)", "rgb(40, 40, 40)"];
 
 export const nextThemeData = {
     id: 1,
     name: "Modern",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
-    backgroundImageColors: ["rgba(23, 46, 98, 0)", "rgba(73, 218, 243, 0)"],
-    backgroundImageURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
-    backgroundImageAlpha: 0.75,
+    backgroundImage: {
+        imgURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
+        filter: "brightness(0.25) grayscale(100%)",
+    },
     irminsulLogo: {
         imgURL: "logo_red",
         filter: "brightness(1) invert(0)",
@@ -69,15 +70,15 @@ export const nextThemeData = {
             paper: backgroundColors[1].main,
         },
         primary: {
-            main: "rgb(0, 16, 32)",
+            main: "rgb(8, 8, 8)",
         },
         secondary: {
-            main: "rgb(8, 32, 72)",
+            main: "rgb(16, 16, 16)",
         },
         tertiary: {
-            light: "rgb(52, 76, 116)",
-            main: "rgb(32, 56, 96)",
-            dark: "rgb(22, 46, 86)",
+            light: "rgb(60, 60, 60)",
+            main: "rgb(40, 40, 40)",
+            dark: "rgb(20, 20, 20)",
         },
         info: {
             main: "rgb(25, 118, 210)",
@@ -89,48 +90,48 @@ export const nextThemeData = {
             primary: 600,
             element: 600,
             highlight: 600,
-            home: 400,
+            home: 700,
         },
         sizes: {
             h3: {
-                xs: 28,
-                sm: 30,
-            },
-            h4: {
                 xs: 26,
                 sm: 28,
             },
+            h4: {
+                xs: 24,
+                sm: 26,
+            },
             h5: {
-                xs: 22,
-                sm: 24,
+                xs: 20,
+                sm: 22,
             },
             h6: {
-                xs: 18,
-                sm: 20,
+                xs: 16,
+                sm: 18,
             },
             body1: {
-                xs: 14,
-                sm: 16,
-            },
-            subtitle1: {
                 xs: 13,
                 sm: 15,
             },
-            body2: {
+            subtitle1: {
                 xs: 12,
                 sm: 14,
             },
-            subtitle2: {
+            body2: {
                 xs: 11,
                 sm: 13,
             },
-            body3: {
+            subtitle2: {
                 xs: 10,
                 sm: 12,
             },
-            subtitle3: {
+            body3: {
                 xs: 9,
                 sm: 11,
+            },
+            subtitle3: {
+                xs: 8,
+                sm: 10,
             },
         },
     },
@@ -177,7 +178,7 @@ export const nextThemeData = {
             header: appbarColors[0],
         },
         border: {
-            radius: 1,
+            radius: 2,
             width: 0,
             color: borderColors.primary,
         },

@@ -7,9 +7,12 @@ import LandingText from "@/components/LandingText";
 import Websites from "@/components/Websites";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 export default function HomePage() {
+    const theme = useTheme();
+
     function playVideo(e: HTMLVideoElement) {
         e.play();
         e.classList.remove("fading");
@@ -28,14 +31,15 @@ export default function HomePage() {
     return (
         <>
             <video
+                id="background-image"
+                className="background-video fading"
                 playsInline
                 autoPlay
                 muted
-                poster="https://assets.irminsul.gg/main/images/Irminsul.png"
-                id="background-image"
-                className="background-video fading"
+                poster={theme.backgroundImage.imgURL}
                 onCanPlay={(e) => playVideo(e.currentTarget)}
                 onEnded={(e) => playVideo(e.currentTarget)}
+                style={{ filter: theme.backgroundImage.filter }}
             >
                 {/* 
                     Background video courtesy of /u/lunimater on Reddit

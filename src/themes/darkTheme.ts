@@ -51,12 +51,13 @@ const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
 
 export const darkThemeData = {
     id: 0,
-    name: "Dark",
+    name: "Classic",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
-    backgroundImageColors: ["rgba(23, 46, 98, 0)", "rgba(73, 218, 243, 0)"],
-    backgroundImageURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
-    backgroundImageAlpha: 0.75,
+    backgroundImage: {
+        imgURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
+        filter: "none",
+    },
     irminsulLogo: {
         imgURL: "logo_red",
         filter: "brightness(1) invert(0)",

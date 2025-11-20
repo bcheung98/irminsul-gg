@@ -15,13 +15,15 @@ const Tooltip = styled(({ className, ...props }: TooltipProps) => (
         disableInteractive
         classes={{ popper: className }}
     />
-))(({ theme, fontSize = 12 }) => ({
+))(({ theme, fontSize }) => ({
     [`& .${tooltipClasses.arrow}`]: {
         color: `black`,
     },
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: `black`,
-        fontSize: theme.typography.pxToRem(fontSize),
+        fontSize: theme.typography.pxToRem(
+            fontSize || theme.font.sizes.body3.sm
+        ),
         fontFamily: theme.typography.fontFamily,
         fontWeight: theme.font.weight.primary,
         maxWidth: "none",

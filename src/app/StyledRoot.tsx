@@ -71,7 +71,11 @@ export default function StyledRoot({
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Toolbar variant="dense" id="back-to-top-anchor" />
-            <img src={theme.backgroundImageURL} id="background-image" />
+            <img
+                id="background-image"
+                src={theme.backgroundImage.imgURL}
+                style={{ filter: theme.backgroundImage.filter }}
+            />
             <GameListContext value={websites}>
                 <GameContext value={games[gameTag as Game]}>
                     <DataContext value={data}>
