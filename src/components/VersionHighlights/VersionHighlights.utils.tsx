@@ -49,7 +49,7 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
 }
 
 export function textLabelTitle(game: Game, tag: keyof VersionHighlightsProps) {
-    return `New ${categories[game][tag]}`;
+    return `New ${categories[`${game}/${tag}`]}`;
 }
 
 export function renderInfoCard(
