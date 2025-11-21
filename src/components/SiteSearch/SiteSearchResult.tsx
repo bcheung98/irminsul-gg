@@ -129,10 +129,7 @@ export default function SiteSearchResult({
                         </Tooltip>
                     )}
                     {buttons?.removePin && (
-                        <Tooltip
-                            title="Remove this search from favorites"
-                            placement="top"
-                        >
+                        <Tooltip title="Unpin this search" placement="top">
                             <IconButton
                                 onClick={() => removePinnedSearch(item)}
                                 sx={{
