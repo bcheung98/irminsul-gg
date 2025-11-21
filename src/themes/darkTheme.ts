@@ -134,6 +134,10 @@ export const darkThemeData = {
                 sm: 11,
             },
         },
+        lineHeight: {
+            subtitle1: 1.5,
+            subtitle2: 1.43,
+        },
     },
     typography: {
         fontFamily: font.style.fontFamily,
@@ -176,6 +180,7 @@ export const darkThemeData = {
         backgroundColor: {
             main: backgroundColors[1].main,
             header: appbarColors[0],
+            headerHover: appbarColors[1],
         },
         border: {
             radius: 1,

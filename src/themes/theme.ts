@@ -4,13 +4,13 @@ import { createTheme } from "@mui/material/styles";
 import { darkTheme } from "./darkTheme";
 import { nextTheme } from "./nextTheme";
 
-export const themeList = [darkTheme, nextTheme] as const;
+export const themeList = [nextTheme, darkTheme] as const;
 
 export const themeNames = themeList.map((t) => t.name);
 
 export default function getTheme(id: number) {
     let theme =
-        themeList[themeList.findIndex((theme) => theme.id === id)] || darkTheme;
+        themeList[themeList.findIndex((theme) => theme.id === id)] || nextTheme;
 
     const baseThemeData = {
         breakpoints: {
@@ -50,14 +50,24 @@ export default function getTheme(id: number) {
             },
             MuiButtonBase: {
                 defaultProps: {
-                    disableRipple: true,
-                    disableTouchRipple: true,
+                    // disableRipple: true,
+                    // disableTouchRipple: true,
+                },
+            },
+            MuiDialog: {
+                styleOverrides: {
+                    container: {
+                        backgroundColor: "rgba(26, 30, 35, 0.6)",
+                    },
+                    paper: {
+                        outline: `1px solid ${theme.border.color.secondary}`,
+                    },
                 },
             },
             MuiIconButton: {
                 defaultProps: {
-                    disableRipple: true,
-                    disableTouchRipple: true,
+                    // disableRipple: true,
+                    // disableTouchRipple: true,
                 },
                 styleOverrides: {
                     root: {
@@ -148,7 +158,7 @@ export default function getTheme(id: number) {
                 },
             },
             subtitle1: {
-                lineHeight: theme.typography.body1.lineHeight,
+                lineHeight: theme.font.lineHeight.subtitle1,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle1.xs
@@ -173,7 +183,7 @@ export default function getTheme(id: number) {
                 },
             },
             subtitle2: {
-                lineHeight: theme.typography.body2.lineHeight,
+                lineHeight: theme.font.lineHeight.subtitle2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle2.xs

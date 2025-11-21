@@ -71,6 +71,7 @@ export const nextThemeData = {
         },
         primary: {
             main: "rgb(8, 8, 8)",
+            dark: "rgb(18, 18, 18)",
         },
         secondary: {
             main: "rgb(16, 16, 16)",
@@ -134,6 +135,10 @@ export const nextThemeData = {
                 sm: 10,
             },
         },
+        lineHeight: {
+            subtitle1: 1.75,
+            subtitle2: 1.57,
+        },
     },
     typography: {
         fontFamily: font.style.fontFamily,
@@ -176,6 +181,7 @@ export const nextThemeData = {
         backgroundColor: {
             main: backgroundColors[1].main,
             header: appbarColors[0],
+            headerHover: appbarColors[1],
         },
         border: {
             radius: 2,
