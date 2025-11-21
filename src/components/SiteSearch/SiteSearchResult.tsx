@@ -6,15 +6,13 @@ import FlexBox from "@/components/FlexBox";
 import Tooltip from "@/components/Tooltip";
 import NavLink from "@/components/NavLink";
 import Image from "@/components/Image";
+import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import StarIcon from "@mui/icons-material/Star";
 import CloseIcon from "@mui/icons-material/Close";
 import PushPinIcon from "@mui/icons-material/PushPin";
 
@@ -63,6 +61,8 @@ export default function SiteSearchResult({
                     },
                 },
             }}
+            disableRipple
+            disableTouchRipple
         >
             <FlexBox
                 wrap
@@ -73,7 +73,12 @@ export default function SiteSearchResult({
                 }}
             >
                 <Box
-                    sx={{ flex: "1 0 auto" }}
+                    sx={{
+                        flex: "1 0 auto",
+                        "&.Mui-focusVisible, &.Mui-selected": {
+                            outline: 0,
+                        },
+                    }}
                     onClick={() => handleSelect(item)}
                 >
                     <NavLink href={item.url}>
@@ -129,41 +134,22 @@ export default function SiteSearchResult({
                         </Tooltip>
                     )}
                     {buttons?.removePin && (
-                        <Tooltip title="Unpin this search" placement="top">
-                            <IconButton
-                                onClick={() => removePinnedSearch(item)}
-                                sx={{
-                                    p: 0.25,
-                                    borderRadius: "4px",
-                                    "&:hover": {
-                                        backgroundColor:
-                                            theme.palette.error.main,
-                                    },
-                                }}
-                            >
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </Tooltip>
+                        <CloseButton
+                            onClick={() => removePinnedSearch(item)}
+                            padding={0.25}
+                            borderRadius="4px"
+                            hoverColor={theme.palette.error.main}
+                            tooltip="Unpin this search"
+                        />
                     )}
                     {buttons?.removeRecent && (
-                        <Tooltip
-                            title="Remove this search from history"
-                            placement="top"
-                        >
-                            <IconButton
-                                onClick={() => removeRecentSearch(item)}
-                                sx={{
-                                    p: 0.25,
-                                    borderRadius: "4px",
-                                    "&:hover": {
-                                        backgroundColor:
-                                            theme.palette.error.main,
-                                    },
-                                }}
-                            >
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </Tooltip>
+                        <CloseButton
+                            onClick={() => removeRecentSearch(item)}
+                            padding={0.25}
+                            borderRadius="4px"
+                            hoverColor={theme.palette.error.main}
+                            tooltip="Remove this search from history"
+                        />
                     )}
                     <Image
                         src={`main/game-icons/${game.shortName}`}

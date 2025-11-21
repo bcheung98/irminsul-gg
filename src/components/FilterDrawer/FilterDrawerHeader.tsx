@@ -1,12 +1,11 @@
 // Component imports
 import Text from "@/components/Text";
+import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 // Type imports
 import { FilterDrawerProps } from "./FilterDrawer.types";
@@ -25,18 +24,11 @@ export default function FilterDrawerHeader({
                 sx={{ justifyContent: "space-between", gap: 2 }}
             >
                 <Text>Filters</Text>
-                <IconButton
+                <CloseButton
                     onClick={toggleDrawer}
-                    sx={{
-                        color: theme.drawer.color.primary,
-                        p: 0.5,
-                        "&:hover": {
-                            backgroundColor: theme.drawer.backgroundColor.hover,
-                        },
-                    }}
-                >
-                    <CloseIcon />
-                </IconButton>
+                    textColor={theme.drawer.color.primary}
+                    hoverColor={theme.drawer.backgroundColor.hover}
+                />
             </Toolbar>
             {component || null}
         </Stack>

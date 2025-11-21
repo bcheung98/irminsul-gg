@@ -4,13 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import NavButton from "@/components/NavButton";
 import ContentBox from "@/components/ContentBox";
 import SettingsList from "./SettingsList";
+import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
@@ -73,20 +72,10 @@ export default function Settings() {
                     <ContentBox
                         header="Settings"
                         actions={
-                            <IconButton
+                            <CloseButton
                                 onClick={() => setOpen(false)}
-                                sx={{
-                                    p: 0.5,
-                                    color: theme.contentBox.color.header,
-                                    "&:hover": {
-                                        backgroundColor:
-                                            theme.drawer.backgroundColor.hover,
-                                    },
-                                }}
-                                edge="end"
-                            >
-                                <CloseIcon />
-                            </IconButton>
+                                hoverColor={theme.drawer.backgroundColor.hover}
+                            />
                         }
                         elevation={0}
                         headerProps={{

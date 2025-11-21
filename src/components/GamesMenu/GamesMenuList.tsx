@@ -4,6 +4,7 @@ import TextLabel from "@/components/TextLabel";
 import NavLink from "@/components/NavLink";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
+import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -12,8 +13,6 @@ import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 // Helper imports
 import { useGameList, useGameTag } from "@/context";
@@ -44,31 +43,16 @@ export default function GamesMenuList({
             <Stack
                 direction="row"
                 sx={{
-                    p: "0px 16px",
+                    p: "0px 8px 0px 16px",
                     alignItems: "center",
                     justifyContent: "space-between",
                 }}
             >
                 <Text>Games</Text>
-                <IconButton
+                <CloseButton
                     onClick={handleClose}
-                    sx={{
-                        p: 0.5,
-                        color: theme.text.primary,
-                        "&:hover": {
-                            backgroundColor: theme.drawer.backgroundColor.hover,
-                        },
-                    }}
-                    size="small"
-                    edge="end"
-                >
-                    <CloseIcon
-                        sx={{
-                            width: theme.typography.h6.fontSize,
-                            height: theme.typography.h6.fontSize,
-                        }}
-                    />
-                </IconButton>
+                    hoverColor={theme.drawer.backgroundColor.hover}
+                />
             </Stack>
             <Stack spacing={0.5}>
                 {games.map((game, index) => (

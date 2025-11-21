@@ -1,15 +1,14 @@
 // Component imports
 import ContentDialog, { ContentDialogProps } from "@/components/ContentDialog";
 import SearchBar from "@/components/SearchBar";
-import Tooltip from "@/components/Tooltip";
+import CloseButton from "@/components/CloseButton";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
+import Text from "../Text";
 
 export interface SearchDialogProps extends ContentDialogProps {
     children?: React.ReactNode;
@@ -52,21 +51,36 @@ export default function SearchDialog({
                         />
                     </Grid>
                     <Grid size="auto">
-                        <Tooltip title="Close" arrow placement="top">
-                            <IconButton
-                                onClick={() => setOpen(false)}
+                        {matches ? (
+                            <Text
+                                variant="subtitle2"
                                 sx={{
-                                    color: theme.contentBox.color.header,
-                                    p: 0.5,
+                                    backgroundColor:
+                                        theme.contentBox.backgroundColor.header,
+                                    outline: `1px solid ${theme.border.color.primary}`,
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                    px: 0.75,
+                                    py: 0.25,
                                     "&:hover": {
                                         backgroundColor:
-                                            theme.drawer.backgroundColor.hover,
+                                            theme.contentBox.backgroundColor
+                                                .headerHover,
                                     },
                                 }}
+                                onClick={() => setOpen(false)}
                             >
-                                <CloseIcon />
-                            </IconButton>
-                        </Tooltip>
+                                <code>esc</code>
+                            </Text>
+                        ) : (
+                            <CloseButton
+                                onClick={() => setOpen(false)}
+                                textColor={theme.contentBox.color.header}
+                                hoverColor={
+                                    theme.contentBox.backgroundColor.headerHover
+                                }
+                            />
+                        )}
                     </Grid>
                 </Grid>
             }
@@ -76,7 +90,6 @@ export default function SearchDialog({
                 ".MuiDialog-paper": {
                     maxWidth: "600px",
                     minHeight: { xs: "90vh", sm: "640px" },
-                    outline: `1px solid ${theme.border.color.secondary}`,
                 },
             }}
             headerProps={{ padding: "0 16px 0 0" }}
