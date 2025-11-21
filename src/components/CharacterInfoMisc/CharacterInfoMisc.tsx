@@ -22,7 +22,13 @@ export default function CharacterInfoMisc(props: AttributeDataMisc) {
     };
 
     return (
-        <Table.Container component={Card} sx={{ py: "8px" }}>
+        <Table.Container
+            component={Card}
+            sx={(theme) => ({
+                py: "8px",
+                borderRadius: theme.contentBox.border.radius,
+            })}
+        >
             <Table.Root size="small">
                 <Table.Body>
                     {rows.map((row) => (

@@ -46,7 +46,7 @@ export default function WeaponPage({ weapon }: { weapon: GenshinWeapon }) {
                 backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${weapon.rarity}_Star.png)`,
                 backgroundSize: "contain",
                 backgroundRepeat: "repeat",
-                borderRadius: "4px",
+                borderRadius: theme.contentBox.border.radius * 4,
                 border: `2px solid ${getGenshinRarityColor(weapon.rarity)}`,
                 boxShadow: `inset 0 0 24px 16px ${getGenshinBackgroundColor(
                     weapon.rarity

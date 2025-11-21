@@ -61,7 +61,7 @@ export default function CharacterSplash({
     const buttonStyle = {
         display: outfits.length > 1 ? "flex" : "none",
         color: theme.text.primary,
-        px: 0,
+        p: 0,
         "&.Mui-disabled": {
             opacity: 0.35,
             color: theme.text.primary,
@@ -78,6 +78,7 @@ export default function CharacterSplash({
             <Card
                 sx={{
                     backgroundColor: theme.background(1),
+                    borderRadius: theme.contentBox.border.radius,
                     width: "100%",
                     height: "auto",
                 }}
@@ -109,11 +110,12 @@ export default function CharacterSplash({
                         p: "4px 8px 8px",
                         height: "48px",
                     }}
+                    spacing={1}
                 >
                     <IconButton
                         onClick={handleTabChangeLeft}
-                        sx={buttonStyle}
                         disableRipple
+                        sx={buttonStyle}
                     >
                         <KeyboardArrowLeftIcon />
                     </IconButton>
@@ -127,8 +129,8 @@ export default function CharacterSplash({
                     </Button>
                     <IconButton
                         onClick={handleTabChangeRight}
-                        sx={buttonStyle}
                         disableRipple
+                        sx={buttonStyle}
                     >
                         <KeyboardArrowRightIcon />
                     </IconButton>
