@@ -13,7 +13,6 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import PushPinIcon from "@mui/icons-material/PushPin";
 
 // Helper imports
@@ -25,13 +24,19 @@ import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
 
+interface SearchResultButtons {
+    addPin?: boolean;
+    removePin?: boolean;
+    removeRecent?: boolean;
+}
+
 export default function SiteSearchResult({
     item,
     buttons,
     handleSelect,
 }: {
     item: SearchResult;
-    buttons?: { addPin?: boolean; removePin?: boolean; removeRecent?: boolean };
+    buttons?: SearchResultButtons;
     handleSelect: (option: SearchResult, keyPress?: boolean) => void;
 }) {
     const theme = useTheme();

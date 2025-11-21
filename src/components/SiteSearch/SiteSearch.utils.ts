@@ -1,8 +1,9 @@
 "server only";
 
 import { getDataSet } from "@/lib/fetchData";
-import { formatHref } from "@/utils";
+import { formatHref, splitJoin } from "@/utils";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
+import { categories } from "@/data/categories";
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
 import {
@@ -26,7 +27,7 @@ export async function getItems(
             await getDataSet<GenshinWeapon>("genshin/weapons"),
             "genshin"
         ),
-        "genshin/artifacts": filterUnreleasedContent(
+        "genshin/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinArtifact>("genshin/artifacts"),
             "genshin"
@@ -40,7 +41,11 @@ export async function getItems(
                     "fullName" in item ? item.fullName : item.displayName,
                 category: category,
                 release: item.release,
-                url: `/${category}/${formatHref(item.url)}`,
+                url: `/${category.split("/")[0]}/${splitJoin(
+                    categories[category],
+                    " ",
+                    "-"
+                ).toLowerCase()}/${formatHref(item.url)}`,
             }))
         )
         .flat();
