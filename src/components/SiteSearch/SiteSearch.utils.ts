@@ -2,6 +2,7 @@
 
 import { getDataSet } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
 import {
@@ -10,17 +11,27 @@ import {
     GenshinWeapon,
 } from "@/types/genshin";
 
-export async function getItems(game: Game): Promise<SearchResult[]> {
-    const items = {
-        "genshin/characters": await getDataSet<GenshinCharacter>(
-            "genshin/characters"
+export async function getItems(
+    hideUnreleasedContent = true,
+    game?: Game
+): Promise<SearchResult[]> {
+    let data = Object.entries({
+        "genshin/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<GenshinCharacter>("genshin/characters"),
+            "genshin"
         ),
-        "genshin/weapons": await getDataSet<GenshinWeapon>("genshin/weapons"),
-        "genshin/artifacts": await getDataSet<GenshinArtifact>(
-            "genshin/artifacts"
+        "genshin/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<GenshinWeapon>("genshin/weapons"),
+            "genshin"
         ),
-    };
-    return Object.entries(items)
+        "genshin/artifacts": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<GenshinArtifact>("genshin/artifacts"),
+            "genshin"
+        ),
+    })
         .map(([category, data]) =>
             data.map((item) => ({
                 id: item.id,
@@ -32,6 +43,9 @@ export async function getItems(game: Game): Promise<SearchResult[]> {
                 url: `/${category}/${formatHref(item.url)}`,
             }))
         )
-        .flat()
-        .filter((item) => item.category.startsWith(game));
+        .flat();
+    if (game) {
+        data = data.filter((item) => item.category.startsWith(game));
+    }
+    return data;
 }

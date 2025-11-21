@@ -1,45 +1,50 @@
-import { useEffect, useMemo, useState, useTransition } from "react";
+import {
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+    useTransition,
+} from "react";
 import { matchSorter } from "match-sorter";
 
 // Component imports
 import SiteSearchResult from "./SiteSearchResult";
-import ContentDialog, { ContentDialogProps } from "@/components/ContentDialog";
-import SearchBar from "@/components/SearchBar";
+import SearchDialog from "@/components/SearchDialog";
+import FlexBox from "@/components/FlexBox";
+import Text from "@/components/Text";
+import Image from "@/components/Image";
 
 // MUI imports
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import HistoryIcon from "@mui/icons-material/History";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
+import { useTheme } from "@mui/material/styles";
 import { useGameTag } from "@/context";
 import { getItems } from "./SiteSearch.utils";
-import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { useStore } from "@/hooks";
 import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";
+import { ContentDialogProps } from "@/components/ContentDialog";
 
 interface SiteSearchPopupProps extends ContentDialogProps {
-    value: string;
-    focus: number;
-    handleFocusChange: (index: number) => void;
-    handleInputChange: (event: React.BaseSyntheticEvent) => void;
+    open: boolean;
     handleSelect: (option: SearchResult, keyPress?: boolean) => void;
 }
 
 export default function SiteSearchPopup({
     open,
-    value,
-    focus,
-    handleFocusChange,
-    handleInputChange,
+    setOpen,
     handleSelect,
-    ...other
 }: SiteSearchPopupProps) {
-    const matches = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+    const theme = useTheme();
 
     const game = useGameTag();
 
@@ -48,69 +53,167 @@ export default function SiteSearchPopup({
         (state) => state.hideUnreleasedContent
     );
 
-    const [loading, startTransition] = useTransition();
-    const [data, setData] = useState<SearchResult[]>([]);
+    const pinnedSearches =
+        useStore(useSiteSearchStore, (state) => state.pinned) || [];
+    const recentSearches =
+        useStore(useSiteSearchStore, (state) => state.recent) || [];
 
-    const searchResults = useMemo(
-        () => filterSearchResults(data, value),
-        [data, value]
-    );
+    const { removeRecentSearch } = useSiteSearchStore();
+
+    const [dataLoading, startDataTransition] = useTransition();
+    const [hitsLoading, startHitsTransition] = useTransition();
+
+    const [data, setData] = useState<SearchResult[]>([]);
+    useEffect(() => {
+        startDataTransition(async () => {
+            const items = await getItems(hideUnreleasedContent, game);
+            startDataTransition(() => {
+                setData(items);
+            });
+        });
+    }, [hideUnreleasedContent]);
+
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
+        setSearchValue(() => event.target.value);
+    }, []);
+
+    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+    useEffect(() => {
+        startHitsTransition(() => {
+            setSearchResults(() => filterSearchResults(data, searchValue));
+        });
+    }, [searchValue]);
+    const hits = useMemo(() => [...searchResults], [data, searchResults]);
 
     useEffect(() => {
-        startTransition(async () => {
-            const items = await getItems(game);
-            setData(
-                filterUnreleasedContent(hideUnreleasedContent, items, game)
-            );
-        });
-    }, [open, value]);
+        setSearchValue("");
+    }, [open]);
 
-    return (
-        <ContentDialog
-            {...other}
-            open={open}
-            fullWidth
-            fullScreen={!matches}
-            header={
-                <Box sx={{ width: "75%" }}>
-                    <SearchBar
-                        autoFocus
-                        placeholder="Search Irminsul..."
-                        value={value}
-                        onChange={handleInputChange}
+    const Loader = (
+        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
+            <CircularProgress color="info" />
+        </FlexBox>
+    );
+
+    const PinnedSearches =
+        pinnedSearches.length > 0 ? (
+            <Stack spacing={2}>
+                <FlexBox spacing={1}>
+                    <PushPinIcon
+                        fontSize="small"
+                        sx={{
+                            color: theme.text.primary,
+                            transform: "rotate(45deg)",
+                        }}
                     />
-                </Box>
-            }
-            sx={{
-                backdropFilter: "blur(4px)",
-                ".MuiDialog-paper": {
-                    maxWidth: "600px",
-                    minHeight: { sm: "96px" },
-                    maxHeight: { sm: "640px" },
-                },
-            }}
-            headerProps={{ padding: "0 16px 0 0" }}
-            contentProps={{ padding: 0 }}
-        >
-            <Stack spacing={1} sx={{ p: 3 }}>
-                {!loading ? (
-                    searchResults.map((item, index) => (
+                    <Text>Pinned</Text>
+                </FlexBox>
+                <Stack spacing={1}>
+                    {pinnedSearches.map((item) => (
                         <SiteSearchResult
                             key={item.url}
                             item={item}
-                            selected={index === focus}
                             handleSelect={handleSelect}
+                            buttons={{ removePin: true }}
                         />
-                    ))
-                ) : (
-                    <Box
-                        sx={{ display: "flex", justifyContent: "center", p: 3 }}
-                    >
-                        <CircularProgress color="info" />
-                    </Box>
-                )}
+                    ))}
+                </Stack>
             </Stack>
-        </ContentDialog>
+        ) : null;
+
+    const RecentSearches =
+        recentSearches.length > 0 ? (
+            <Stack spacing={2}>
+                <FlexBox sx={{ justifyContent: "space-between" }}>
+                    <FlexBox spacing={1}>
+                        <HistoryIcon
+                            fontSize="small"
+                            sx={{ color: theme.text.primary }}
+                        />
+                        <Text>Recent</Text>
+                    </FlexBox>
+                    <Button
+                        variant="contained"
+                        onClick={() => removeRecentSearch()}
+                        endIcon={<DeleteIcon fontSize="small" />}
+                    >
+                        <Text variant="subtitle2">Clear All</Text>
+                    </Button>
+                </FlexBox>
+                <Stack spacing={1}>
+                    {recentSearches.map((item) => (
+                        <SiteSearchResult
+                            key={item.url}
+                            item={item}
+                            handleSelect={handleSelect}
+                            buttons={{ addPin: true, removeRecent: true }}
+                        />
+                    ))}
+                </Stack>
+            </Stack>
+        ) : null;
+
+    const SearchHistory = !hitsLoading ? (
+        [...pinnedSearches, ...recentSearches].length > 0 ? (
+            <Stack spacing={2}>
+                {PinnedSearches}
+                {RecentSearches}
+            </Stack>
+        ) : (
+            <FlexBox sx={{ justifyContent: "center" }}>
+                <Stack spacing={2}>
+                    <Text variant="h6" sx={{ textAlign: "center" }}>
+                        Looking for something?
+                    </Text>
+                    <Image
+                        src="genshin/emotes/error10"
+                        style={{
+                            width: "100%",
+                            maxWidth: "192px",
+                            height: "auto",
+                            margin: "16px auto",
+                        }}
+                    />
+                </Stack>
+            </FlexBox>
+        )
+    ) : (
+        Loader
+    );
+
+    const NoHits =
+        searchValue !== "" && !hitsLoading ? (
+            <Text>{`No results for "${searchValue}"`}</Text>
+        ) : null;
+
+    const SearchResults =
+        hits.length > 0 ? (
+            <Stack spacing={1}>
+                {hits.map((item) => (
+                    <SiteSearchResult
+                        key={item.url}
+                        item={item}
+                        handleSelect={handleSelect}
+                    />
+                ))}
+            </Stack>
+        ) : (
+            NoHits
+        );
+
+    const SearchContent = searchValue !== "" ? SearchResults : SearchHistory;
+
+    return (
+        <SearchDialog
+            open={open}
+            setOpen={setOpen}
+            value={searchValue}
+            handleInputChange={handleInputChange}
+            placeholder="Search Irminsul..."
+        >
+            {!dataLoading ? SearchContent : Loader}
+        </SearchDialog>
     );
 }
 

@@ -4,36 +4,30 @@ import { useEffect, useState } from "react";
 import SiteSearchRoot from "./SiteSearchRoot";
 import SiteSearchPopup from "./SiteSearchPopup";
 
+// Helper imports
+import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
+
 // Type imports
 import { BaseDataWithRelease } from "@/types";
 
 export interface SearchResult extends BaseDataWithRelease {
     displayName: string;
     category: string;
+    url: string;
 }
 
 export default function SiteSearch() {
-    const [focus, setFocus] = useState(-1);
-    const handleFocusChange = (index: number) => {
-        setFocus(index);
-    };
+    const { addRecentSearch } = useSiteSearchStore();
 
     const [searchOpen, setSearchOpen] = useState(false);
     const handleSearchOpen = () => {
-        setFocus(-1);
-        setSearchValue("");
         setSearchOpen(true);
     };
     const handleSearchClose = () => setSearchOpen(false);
 
-    const [searchValue, setSearchValue] = useState("");
-    const handleInputChange = (event: React.BaseSyntheticEvent) => {
-        setFocus(-1);
-        setSearchValue(event.target.value);
-    };
-
-    const handleSelect = (option: SearchResult, keyPress = false) => {
+    const handleSelect = (item: SearchResult) => {
         setSearchOpen(false);
+        addRecentSearch(item);
     };
 
     const keyDownHandler = (event: KeyboardEvent) => {
@@ -56,10 +50,6 @@ export default function SiteSearch() {
                 open={searchOpen}
                 setOpen={setSearchOpen}
                 onClose={handleSearchClose}
-                value={searchValue}
-                focus={focus}
-                handleFocusChange={handleFocusChange}
-                handleInputChange={handleInputChange}
                 handleSelect={handleSelect}
             />
         </>
