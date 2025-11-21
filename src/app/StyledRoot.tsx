@@ -1,7 +1,8 @@
 "use client";
 
-import useSWR from "swr";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import useSWR from "swr";
 
 // Component imports
 import NavBar from "@/components/NavBar";
@@ -66,6 +67,17 @@ export default function StyledRoot({
             });
         }
     };
+
+    useEffect(() => {
+        const anchor = document.querySelector("#back-to-top-anchor");
+        if (anchor) {
+            anchor.scrollIntoView({
+                block: "center",
+            });
+        } else {
+            window.scroll(0, 0);
+        }
+    }, [pathname]);
 
     return (
         <ThemeProvider theme={theme}>
