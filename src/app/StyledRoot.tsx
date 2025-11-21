@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import useSWR from "swr";
 
@@ -8,10 +8,11 @@ import useSWR from "swr";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 import ActionFab from "@/components/ActionFab";
+import Loader from "@/components/Loader";
 
 // MUI imports
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
+import { Theme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -33,11 +34,15 @@ export default function StyledRoot({
 }>) {
     const { theme: themeIndex } = useSettingsStore((state) => state);
 
-    const theme = getTheme(themeIndex);
+    const [theme, setTheme] = useState<Theme | undefined>();
+
+    useEffect(() => {
+        setTheme(getTheme(themeIndex));
+    }, [themeIndex]);
 
     const pathname = usePathname();
     const pathSplit = pathname.split("/");
-    const gameTag = pathSplit[1];
+    const gameTag = pathSplit[1] as Game;
     const url = pathSplit.slice(1, 3).join("/");
 
     function getCurrentData() {
@@ -79,49 +84,53 @@ export default function StyledRoot({
         }
     }, [pathname]);
 
-    return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Toolbar variant="dense" id="back-to-top-anchor" />
-            <img
-                id="background-image"
-                src={theme.backgroundImage.imgURL}
-                style={{ filter: theme.backgroundImage.filter }}
-            />
-            <GameListContext value={websites}>
-                <GameContext value={games[gameTag as Game]}>
-                    <DataContext value={data}>
-                        <NavBar />
-                        <Box sx={{ display: "flex" }}>
-                            <Box
-                                sx={{
-                                    position: "relative",
-                                    minWidth: "0vw",
-                                    width: "100vw",
-                                }}
-                            >
+    if (theme) {
+        return (
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Toolbar variant="dense" id="back-to-top-anchor" />
+                <img
+                    id="background-image"
+                    src={theme.backgroundImage.imgURL}
+                    style={{ filter: theme.backgroundImage.filter }}
+                />
+                <GameListContext value={websites}>
+                    <GameContext value={games[gameTag]}>
+                        <DataContext value={data}>
+                            <NavBar />
+                            <Box sx={{ display: "flex" }}>
                                 <Box
                                     sx={{
-                                        width: "100%",
-                                        minHeight: "100vh",
+                                        position: "relative",
+                                        minWidth: "0vw",
+                                        width: "100vw",
                                     }}
                                 >
-                                    {children}
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            minHeight: "100vh",
+                                        }}
+                                    >
+                                        {children}
+                                    </Box>
+                                    {pathname === "/" && <NavBarBottom />}
                                 </Box>
-                                {pathname === "/" && <NavBarBottom />}
                             </Box>
-                        </Box>
-                    </DataContext>
-                </GameContext>
-            </GameListContext>
-            <ActionFab
-                position={{ bottom: 50, left: 18 }}
-                action={scrollToTop}
-                icon={<KeyboardArrowUpIcon />}
-                tooltip="Scroll to top"
-                tooltipArrow="right"
-                zIndex={theme.zIndex.drawer + 1}
-            />
-        </ThemeProvider>
-    );
+                        </DataContext>
+                    </GameContext>
+                </GameListContext>
+                <ActionFab
+                    position={{ bottom: 50, left: 18 }}
+                    action={scrollToTop}
+                    icon={<KeyboardArrowUpIcon />}
+                    tooltip="Scroll to top"
+                    tooltipArrow="right"
+                    zIndex={theme.zIndex.drawer + 1}
+                />
+            </ThemeProvider>
+        );
+    } else {
+        return <Loader />;
+    }
 }
