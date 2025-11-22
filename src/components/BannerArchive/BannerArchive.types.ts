@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent } from "react";
+import { BaseSyntheticEvent, Dispatch, SetStateAction } from "react";
 import { SortOrder } from "@/types";
 import { Banner, BannerOption, BannerProps, BannerType } from "@/types/banner";
 
@@ -25,4 +25,10 @@ export interface BannerArchiveRowProps {
 export interface BannerItemsProps extends BannerArchiveRowProps {
     showCountdown?: boolean;
     backgroundColor?: string;
+}
+
+export interface BannerArchiveSelectorProps {
+    options: BannerOption[];
+    values: BannerOption[];
+    setValues: Dispatch<SetStateAction<BannerOption[]>>;
 }

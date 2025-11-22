@@ -1,5 +1,7 @@
 import { createContext, useContext } from "react";
+import { matchSorter } from "match-sorter";
 import DateObject from "@/helpers/dates";
+import { sortBy } from "@/utils";
 import { Banner, BannerOption } from "@/types/banner";
 
 export function isCurrentBanner(banner: Banner) {
@@ -30,6 +32,20 @@ export function getBannerLabel(banner: Banner, hideVersionLabel = false) {
     const dateRange = `${start} — ${end}`;
 
     return hideVersionLabel ? dateRange : `${versionLabel}: ${dateRange}`;
+}
+
+export function filterOptions(options: BannerOption[], searchValue: string) {
+    options = options.sort(
+        (a, b) =>
+            (a.category || "").localeCompare(b.category || "") ||
+            sortBy(a.rarity, b.rarity) ||
+            a.displayName.localeCompare(b.displayName)
+    );
+    if (searchValue === "") return options;
+    return matchSorter(options, searchValue, {
+        keys: ["displayName", "name"],
+        threshold: matchSorter.rankings.WORD_STARTS_WITH,
+    });
 }
 
 export const BannerCharactersContext = createContext<BannerOption[]>([]);

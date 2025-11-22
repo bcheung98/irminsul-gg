@@ -1,4 +1,4 @@
-import { BannerOption } from "@/types/banner";
+import { Banner, BannerOption, BannerProps } from "@/types/banner";
 
 export function createBannerData<
     T extends BannerOption,
@@ -52,4 +52,29 @@ export function createBannerData<
         name !== "TBA" && console.warn(`Could not find an entry with ID ${id}`);
     }
     return data;
+}
+
+export function createBannerOptions<
+    T extends BannerOption,
+    U extends BannerOption
+>(banners: BannerProps, characters: T[], weapons: U[]) {
+    const options: BannerOption[] = [];
+    Object.values(banners).forEach((value) => {
+        value.forEach((banner: Banner) => {
+            banner.rateUps.forEach((item) => {
+                if (item !== "TBA") {
+                    options.push(
+                        createBannerData({
+                            name: `${item}`,
+                            characters,
+                            weapons,
+                        })
+                    );
+                }
+            });
+        });
+    });
+    return options.filter(
+        (o1, index, arr) => arr.findIndex((o2) => o1.id === o2.id) === index
+    );
 }
