@@ -3,9 +3,16 @@ import Image from "@/components/Image";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
+import useMediaQuery from "@mui/material/useMediaQuery";
 import ButtonBase from "@mui/material/ButtonBase";
 
 export default function KofiButton() {
+    const matches_up_lg = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+    const matches_dn_md = useMediaQuery((theme) =>
+        theme.breakpoints.down("md")
+    );
+    const matches = matches_up_lg || matches_dn_md;
+
     return (
         <ButtonBase
             href="https://ko-fi.com/bcheung"
@@ -30,7 +37,7 @@ export default function KofiButton() {
                         size={[0, 20]}
                     />
                 }
-                title="Ko-Fi"
+                title={matches && "Ko-Fi"}
                 titleProps={{ variant: "subtitle2" }}
             />
         </ButtonBase>

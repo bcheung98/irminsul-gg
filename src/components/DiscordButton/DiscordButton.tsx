@@ -7,12 +7,17 @@ import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import { createSvgIcon } from "@mui/material/utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 export default function DiscordButton() {
-    const theme = useTheme();
+    const matches_up_lg = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+    const matches_dn_md = useMediaQuery((theme) =>
+        theme.breakpoints.down("md")
+    );
+    const matches = matches_up_lg || matches_dn_md;
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = () => {
@@ -38,7 +43,7 @@ export default function DiscordButton() {
             >
                 <TextLabel
                     icon={<DiscordIcon fontSize="small" />}
-                    title="Discord"
+                    title={matches && "Discord"}
                     titleProps={{ variant: "subtitle2" }}
                 />
             </NavButton>
@@ -68,11 +73,12 @@ export default function DiscordButton() {
                     variant="contained"
                     disableElevation
                     startIcon={<DiscordIcon />}
-                    sx={{
+                    endIcon={<OpenInNewIcon />}
+                    sx={(theme) => ({
                         backgroundColor: "#00863A",
                         color: theme.text.primary,
                         height: "32px",
-                    }}
+                    })}
                 >
                     Join
                 </Button>

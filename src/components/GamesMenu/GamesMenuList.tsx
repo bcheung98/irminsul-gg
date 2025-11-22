@@ -40,20 +40,23 @@ export default function GamesMenuList({
                 <Divider sx={{ borderColor: theme.border.color.secondary }} />
             }
         >
-            <Stack
-                direction="row"
-                sx={{
-                    p: "0px 8px 0px 16px",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                }}
-            >
-                <Text>Games</Text>
-                <CloseButton
-                    onClick={handleClose}
-                    hoverColor={theme.drawer.backgroundColor.hover}
-                />
-            </Stack>
+            {!matches && (
+                <Stack
+                    direction="row"
+                    sx={{
+                        display: { md: "none" },
+                        p: "0px 8px 0px 16px",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Text>Games</Text>
+                    <CloseButton
+                        onClick={handleClose}
+                        hoverColor={theme.drawer.backgroundColor.hover}
+                    />
+                </Stack>
+            )}
             <Stack spacing={0.5}>
                 {games.map((game, index) => (
                     <ButtonBase
