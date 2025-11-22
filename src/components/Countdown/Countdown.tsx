@@ -7,7 +7,12 @@ import Tooltip from "@/components/Tooltip";
 // Helper imports
 import DateObject from "@/helpers/dates";
 
-export default function Countdown(props: { date: string; endText?: string }) {
+export default function Countdown(props: {
+    date: string;
+    startText?: string;
+    endText?: string;
+    textColor?: string;
+}) {
     const date = new DateObject(props.date).date.getTime();
     const initialTime = date - new Date().getTime();
     const [timeRemaining, setTimeRemaining] = useState(initialTime);
@@ -44,30 +49,28 @@ export default function Countdown(props: { date: string; endText?: string }) {
     countdownArr.push(`${seconds}s`);
 
     return (
-        <>
-            <Text variant="body2">
-                {timeRemaining > 0 ? (
-                    <>
-                        {`Ends in `}
-                        <Tooltip
-                            title={new DateObject(props.date).timeString}
-                            arrow
-                            placement="bottom"
+        <Text variant="body2" sx={{ color: props.textColor }}>
+            {timeRemaining > 0 ? (
+                <>
+                    {`${props.startText || "Ends in"} `}
+                    <Tooltip
+                        title={new DateObject(props.date).timeString}
+                        arrow
+                        placement="bottom"
+                    >
+                        <span
+                            style={{
+                                textDecoration: "underline dotted",
+                                cursor: "help",
+                            }}
                         >
-                            <span
-                                style={{
-                                    textDecoration: "underline dotted",
-                                    cursor: "help",
-                                }}
-                            >
-                                {countdownArr.join(" ")}
-                            </span>
-                        </Tooltip>
-                    </>
-                ) : (
-                    <>{props.endText}</>
-                )}
-            </Text>
-        </>
+                            {countdownArr.join(" ")}
+                        </span>
+                    </Tooltip>
+                </>
+            ) : (
+                <>{props.endText}</>
+            )}
+        </Text>
     );
 }
