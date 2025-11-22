@@ -11,6 +11,7 @@ export interface Banner {
 }
 
 export interface BannerOption extends BaseData {
+    category?: "characters" | "weapons";
     displayName: string;
     fullName?: string;
     rarity: number;
@@ -24,4 +25,4 @@ export interface BannerProps {
     chronicled?: Banner[];
 }
 
-export type BannerType = keyof BannerProps;
+export type BannerType = keyof BannerProps | "all";
