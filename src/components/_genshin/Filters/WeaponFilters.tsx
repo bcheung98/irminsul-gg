@@ -5,7 +5,9 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
 import { genshinWeaponFilters, useFilterStore } from "@/stores/useFilterStore";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
 import { GenshinWeaponSubStat } from "@/data/genshin/weaponStats";
@@ -27,6 +29,11 @@ export default function WeaponFilters() {
     const game = useGameTag();
     const key = "genshin/weapons";
 
+    const hideUnreleasedContent = useStore(
+        useSettingsStore,
+        (state) => state.hideUnreleasedContent
+    );
+
     const { setFilterState, clearFilterState } = useFilterStore();
     const filters = useFilterStore(useShallow((state) => state[key]));
     const actions = filterActions(
@@ -47,6 +54,7 @@ export default function WeaponFilters() {
         key,
         filters,
         setFilters: setFilterState,
+        hideUnreleasedContent,
     })[game];
 
     return (

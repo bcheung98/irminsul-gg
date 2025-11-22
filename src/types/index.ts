@@ -76,6 +76,7 @@ export interface FilterGroupsProps<T> {
     key: keyof FilterState;
     filters: T;
     setFilters: SetFilterState;
+    hideUnreleasedContent?: boolean;
 }
 export type FilterGroups = Record<string, FilterGroup>;
 export interface FilterGroup {

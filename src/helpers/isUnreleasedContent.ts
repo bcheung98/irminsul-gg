@@ -11,7 +11,7 @@ export function filterUnreleasedContent<T extends BaseDataWithRelease>(
     items: T[],
     game: Game
 ) {
-    if (!hideUnreleasedContent) {
+    if (hideUnreleasedContent) {
         items = items.filter((item) =>
             isUnreleasedContent(item.release.version, game)
         );

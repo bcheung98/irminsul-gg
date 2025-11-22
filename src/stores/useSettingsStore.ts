@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Server, SkillDisplay } from "@/types";
+import { SkillDisplay } from "@/types";
 
 export interface SettingsState {
     theme: number;
     statDisplay: SkillDisplay;
-    server: Server;
     hideUnreleasedContent: boolean;
 }
 
@@ -22,8 +21,7 @@ export type SettingsStore = SettingsState & SettingsActions;
 export const initialState: SettingsState = {
     theme: 0,
     statDisplay: "slider",
-    server: "NA",
-    hideUnreleasedContent: true,
+    hideUnreleasedContent: false,
 };
 
 export const useSettingsStore = create(

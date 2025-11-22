@@ -5,10 +5,12 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
 import {
     genshinCharacterFilters,
     useFilterStore,
 } from "@/stores/useFilterStore";
+import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
 
@@ -39,6 +41,11 @@ export default function CharacterFilters() {
     const game = useGameTag();
     const key = "genshin/characters";
 
+    const hideUnreleasedContent = useStore(
+        useSettingsStore,
+        (state) => state.hideUnreleasedContent
+    );
+
     const { setFilterState, clearFilterState } = useFilterStore();
     const filters = useFilterStore(useShallow((state) => state[key]));
     const actions = filterActions(
@@ -63,6 +70,7 @@ export default function CharacterFilters() {
         key,
         filters,
         setFilters: setFilterState,
+        hideUnreleasedContent,
     })[game];
 
     return (

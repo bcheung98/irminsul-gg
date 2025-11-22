@@ -1,5 +1,3 @@
-import { BaseSyntheticEvent } from "react";
-
 // Component imports
 import RarityStars from "@/components/RarityStars";
 
@@ -29,8 +27,11 @@ export function genshinFilters<T extends Filters>({
     key,
     filters,
     setFilters,
+    hideUnreleasedContent = false,
 }: FilterGroupsProps<T>): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory().genshin;
+    const getMaterialCategory = useMaterialsCategory(
+        hideUnreleasedContent
+    ).genshin;
 
     function getGroupedMatNames(category: GenshinMaterialCategory) {
         const res: Record<string, string[]> = {};
@@ -56,8 +57,10 @@ export function genshinFilters<T extends Filters>({
                 items: elements,
                 url: "genshin/elements",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: GenshinElement[]) =>
-                setFilters(key, "element", newValues),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: GenshinElement[]
+            ) => setFilters(key, "element", newValues),
         },
         weaponType: {
             name: "Weapon",
@@ -66,8 +69,10 @@ export function genshinFilters<T extends Filters>({
                 items: weapons,
                 url: "genshin/weapons/icons",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: GenshinWeaponType[]) =>
-                setFilters(key, "weaponType", newValues),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: GenshinWeaponType[]
+            ) => setFilters(key, "weaponType", newValues),
         },
         rarity: {
             name: "Rarity",
@@ -84,8 +89,10 @@ export function genshinFilters<T extends Filters>({
                         />
                     ),
                 })),
-            onChange: (_: BaseSyntheticEvent, newValues: GenshinRarity[]) =>
-                setFilters(key, "rarity", newValues),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: GenshinRarity[]
+            ) => setFilters(key, "rarity", newValues),
             padding: "4px 8px",
             width: "64px",
         },
@@ -99,7 +106,7 @@ export function genshinFilters<T extends Filters>({
                     characterAscensionStats[item].title,
             }),
             onChange: (
-                _: BaseSyntheticEvent,
+                _: React.BaseSyntheticEvent,
                 newValues: CharacterAscensionStat[]
             ) => setFilters(key, "ascStat", newValues),
         },
@@ -113,7 +120,7 @@ export function genshinFilters<T extends Filters>({
                     weaponSubStats[item].title,
             }),
             onChange: (
-                _: BaseSyntheticEvent,
+                _: React.BaseSyntheticEvent,
                 newValues: GenshinWeaponSubStat[]
             ) => setFilters(key, "subStat", newValues),
         },
@@ -134,7 +141,7 @@ export function genshinFilters<T extends Filters>({
                         : "";
                 },
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "talentBook", newValues),
             width: "128px",
         },
@@ -154,7 +161,7 @@ export function genshinFilters<T extends Filters>({
                     return mat ? `${mat.name}` : "";
                 },
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "commonMat", newValues),
         },
         bossMat: {
@@ -172,7 +179,7 @@ export function genshinFilters<T extends Filters>({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "bossMat", newValues),
         },
         weeklyBossMat: {
@@ -184,7 +191,7 @@ export function genshinFilters<T extends Filters>({
                 groupUrl: "genshin/bosses",
                 url: "genshin/materials/weekly",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "weeklyBossMat", newValues),
         },
         localMat: {
@@ -196,7 +203,7 @@ export function genshinFilters<T extends Filters>({
                 groupUrl: "genshin/nations",
                 url: "genshin/materials/local",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "localMat", newValues),
         },
         weaponAscensionMat: {
@@ -215,7 +222,7 @@ export function genshinFilters<T extends Filters>({
                 },
                 endTag: "4",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "weaponAscensionMat", newValues),
             width: "128px",
         },
@@ -235,7 +242,7 @@ export function genshinFilters<T extends Filters>({
                     return mat ? `${mat.name}` : "";
                 },
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: string[]) =>
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "eliteMat", newValues),
         },
         nation: {
@@ -245,8 +252,10 @@ export function genshinFilters<T extends Filters>({
                 items: nations,
                 url: "genshin/nations",
             }),
-            onChange: (_: BaseSyntheticEvent, newValues: GenshinNation[]) =>
-                setFilters(key, "nation", newValues),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: GenshinNation[]
+            ) => setFilters(key, "nation", newValues),
         },
     };
 }

@@ -107,7 +107,7 @@ export default function SettingsList() {
                         </IconButton>
                     </Stack>
                     <Switch
-                        checked={hideUnreleasedContent}
+                        checked={!hideUnreleasedContent}
                         onChange={() => toggleUnreleasedContent()}
                     />
                 </Box>
