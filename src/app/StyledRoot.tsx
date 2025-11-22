@@ -43,7 +43,7 @@ export default function StyledRoot({
     const pathname = usePathname();
     const pathSplit = pathname.split("/");
     const gameTag = pathSplit[1] as Game;
-    const url = pathSplit.slice(1, 3).join("/");
+    const url = pathSplit.slice(1, 3).join("/") as keyof typeof urls;
 
     function getCurrentData() {
         const { data, error, isLoading } = useSWR(urls[url], (url: string) =>
