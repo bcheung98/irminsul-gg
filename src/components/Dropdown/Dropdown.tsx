@@ -69,7 +69,7 @@ export default function Dropdown({
     }
 
     return (
-        <Box sx={{ mb: "8px" }}>
+        <Box>
             <FlexBox
                 sx={{
                     maxWidth: "100%",
