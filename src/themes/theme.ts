@@ -3,6 +3,7 @@
 import { createTheme } from "@mui/material/styles";
 import { darkTheme } from "./darkTheme";
 import { nextTheme } from "./nextTheme";
+import { getContrastText } from "@/utils/getContrastText";
 
 export const themeList = [nextTheme, darkTheme] as const;
 
@@ -35,6 +36,65 @@ export default function getTheme(id: number) {
                         borderWidth: "0 0 1px 0",
                         borderStyle: "solid",
                         borderColor: theme.border.color.primary,
+                    },
+                },
+            },
+            MuiAutocomplete: {
+                styleOverrides: {
+                    noOptions: {
+                        color: theme.appbar.color.primary,
+                        backgroundColor: theme.menu.backgroundColor.primary,
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: theme.font.weight.primary,
+                        fontSize: {
+                            xs: theme.font.sizes.subtitle1.xs,
+                            sm: theme.font.sizes.subtitle1.sm,
+                        },
+                    },
+                },
+                defaultProps: {
+                    slotProps: {
+                        chip: {
+                            sx: {
+                                height: "24px",
+                                backgroundColor: theme.palette.info.main,
+                                fontFamily: theme.typography.fontFamily,
+                                fontSize: {
+                                    xs: theme.font.sizes.subtitle2.xs,
+                                    sm: theme.font.sizes.subtitle2.sm,
+                                },
+                                color: getContrastText(
+                                    theme.text.primary,
+                                    theme.palette.info.main
+                                ),
+                                "& .MuiChip-deleteIcon": {
+                                    fontSize: {
+                                        xs: theme.font.sizes.h6.xs,
+                                        sm: theme.font.sizes.h6.sm,
+                                    },
+                                    color: getContrastText(
+                                        theme.text.primary,
+                                        theme.palette.info.main
+                                    ),
+                                    "&:hover": {
+                                        color: getContrastText(
+                                            theme.text.description,
+                                            theme.palette.info.main
+                                        ),
+                                    },
+                                },
+                            },
+                        },
+                        listbox: {
+                            sx: { p: 0 },
+                        },
+                        paper: {
+                            sx: {
+                                backgroundColor:
+                                    theme.menu.backgroundColor.primary,
+                                borderRadius: theme.contentBox.border.radius,
+                            },
+                        },
                     },
                 },
             },

@@ -10,6 +10,8 @@ interface SearchBarProps {
     placeholder?: string;
     inputIcon?: React.ReactNode;
     sx?: SxProps;
+    backgroundColor?: string;
+    height?: string;
     params?: any;
 }
 
@@ -20,6 +22,8 @@ export default function SearchBar({
     placeholder = "Search",
     inputIcon,
     sx,
+    backgroundColor,
+    height,
     params,
 }: SearchBarProps) {
     const theme = useTheme();
@@ -34,12 +38,13 @@ export default function SearchBar({
             fullWidth
             autoComplete="off"
             spellCheck={false}
+            {...params}
             sx={{
                 ...{
                     "& .MuiOutlinedInput-root": {
                         width: "100%",
-                        height: "100%",
-                        backgroundColor: theme.background(2),
+                        height: height || "100%",
+                        backgroundColor: backgroundColor || theme.background(2),
                         color: theme.text.primary,
                         fontFamily: theme.typography.fontFamily,
                         fontWeight: theme.font.weight.primary,
