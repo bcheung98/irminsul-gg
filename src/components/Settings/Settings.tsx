@@ -8,6 +8,7 @@ import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -18,6 +19,7 @@ import { useSettingsStore } from "@/stores/useSettingsStore";
 
 export default function Settings() {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const [open, setOpen] = useState(false);
 
@@ -59,7 +61,7 @@ export default function Settings() {
             <Drawer
                 open={open}
                 onClose={toggleDrawer(false)}
-                anchor="right"
+                anchor={matches ? "right" : "top"}
                 sx={{
                     zIndex: theme.zIndex.drawer + 1,
                     boxSizing: "content-box",
@@ -68,7 +70,12 @@ export default function Settings() {
                     },
                 }}
             >
-                <Box sx={{ width: { xs: "100vw", sm: "500px" } }}>
+                <Box
+                    sx={{
+                        width: { xs: "100vw", sm: "500px" },
+                        height: "100vh",
+                    }}
+                >
                     <ContentBox
                         header="Settings"
                         actions={
@@ -80,7 +87,7 @@ export default function Settings() {
                         elevation={0}
                         headerProps={{
                             textVariant: "body1",
-                            padding: "4px 24px",
+                            padding: matches ? "4px 24px" : "4px 16px",
                             dense: true,
                         }}
                     >
