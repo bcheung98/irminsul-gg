@@ -16,12 +16,14 @@ export interface SettingsItemProps {
     label: string;
     input: React.ReactNode;
     description?: string | React.ReactNode;
+    divider?: boolean;
 }
 
 export default function SettingsItem({
     label,
     input,
     description,
+    divider = false,
 }: SettingsItemProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -74,7 +76,9 @@ export default function SettingsItem({
                             px: { xs: 1, sm: 4 },
                             pt: 1,
                             pb: 2,
-                            borderBottom: `1px solid ${theme.border.color.primary}`,
+                            borderBottom: divider
+                                ? `1px solid ${theme.border.color.primary}`
+                                : 0,
                         }}
                     >
                         {typeof description === "string" ? (
