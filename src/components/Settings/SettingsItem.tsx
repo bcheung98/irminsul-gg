@@ -11,12 +11,14 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { StackProps } from "@mui/material/Stack";
 
 export interface SettingsItemProps {
     label: string;
     input: React.ReactNode;
     description?: string | React.ReactNode;
     divider?: boolean;
+    alignItems?: StackProps["alignItems"];
 }
 
 export default function SettingsItem({
@@ -24,6 +26,7 @@ export default function SettingsItem({
     input,
     description,
     divider = false,
+    alignItems = "normal",
 }: SettingsItemProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -37,7 +40,7 @@ export default function SettingsItem({
         <Box>
             <FlexBox
                 sx={{
-                    alignItems: "normal",
+                    alignItems: alignItems,
                     justifyContent: "space-between",
                     pl: { xs: 0, sm: description ? 0 : 1 },
                     pr: { xs: 0, sm: 1 },
