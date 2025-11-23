@@ -1,3 +1,5 @@
+import { usePathname } from "next/navigation";
+
 // Component imports
 import NavButton from "@/components/NavButton";
 import NavLink from "@/components/NavLink";
@@ -13,16 +15,26 @@ export default function CalendarButton() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("md"));
 
+    const href = "/calendar";
+    const pathname = usePathname();
+    const linkActive = pathname === href;
+
     return matches ? (
-        <NavLink href="/calendar">
+        <NavLink href={href}>
             <Button
                 variant="text"
                 sx={{
                     display: { xs: "none", md: "flex" },
                     transition: "color 0.25s",
+                    color: linkActive
+                        ? theme.text.selected
+                        : theme.text.primary,
+                    textShadow: linkActive
+                        ? `${theme.text.selected} 1px 1px 8px`
+                        : "none",
                     "&:hover": {
                         color: theme.text.selected,
-                        textShadow: ` ${theme.text.selected} 1px 1px 8px`,
+                        textShadow: `${theme.text.selected} 1px 1px 8px`,
                     },
                 }}
             >
@@ -34,7 +46,7 @@ export default function CalendarButton() {
     ) : (
         <NavButton
             title="Calendar"
-            href="/calendar"
+            href={href}
             sx={{ display: { xs: "flex", md: "none" } }}
         >
             <CalendarMonthIcon />
