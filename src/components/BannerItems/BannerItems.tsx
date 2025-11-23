@@ -15,8 +15,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { useGameTag } from "@/context";
 import {
     isFutureBanner,
-    useBannerCharacters,
-    useBannerWeapons,
+    useBannerData,
 } from "@/components/BannerArchive/BannerArchive.utils";
 import { range } from "@/utils";
 import { getContrastText } from "@/utils/getContrastText";
@@ -35,8 +34,7 @@ const BannerItems = memo(function BannerItems({
 
     const game = useGameTag();
 
-    const characters = useBannerCharacters();
-    const weapons = useBannerWeapons();
+    const { characters, weapons, server } = useBannerData();
 
     const [loading, startTransition] = useTransition();
     const [bannerData, setBannerData] = useState<BannerOption[]>([]);
@@ -59,7 +57,7 @@ const BannerItems = memo(function BannerItems({
         />
     ));
 
-    const upcoming = isFutureBanner(banner);
+    const upcoming = isFutureBanner(banner, server);
 
     const textColor = getContrastText(
         theme.text.primary,
@@ -97,6 +95,7 @@ const BannerItems = memo(function BannerItems({
             {showCountdown && (
                 <Countdown
                     date={upcoming ? banner.start : banner.end}
+                    server={server}
                     startText={upcoming ? "Starts in" : ""}
                     endText="Banner has ended"
                     textColor={textColor}

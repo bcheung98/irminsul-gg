@@ -31,11 +31,10 @@ import SearchIcon from "@mui/icons-material/Search";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
+import { useServerStore } from "@/stores/useServerStore";
 import { banners as bannerLabels } from "@/data/banners";
-import {
-    BannerCharactersContext,
-    BannerWeaponsContext,
-} from "./BannerArchive.utils";
+import { BannerDataContext } from "./BannerArchive.utils";
 import { getBannerList } from "@/helpers/createBannerList";
 import { createBannerOptions } from "@/helpers/createBannerData";
 
@@ -49,6 +48,7 @@ export default function BannerArchive<
     U extends BannerOption
 >({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
     const game = useGameTag();
+    const server = useStore(useServerStore, (state) => state[game]) || "NA";
 
     const [loading, startTransition] = useTransition();
 
@@ -241,37 +241,32 @@ export default function BannerArchive<
     );
 
     return (
-        <BannerCharactersContext value={characters}>
-            <BannerWeaponsContext value={weapons}>
-                <Stack spacing={2} sx={{ p: 1 }}>
-                    <Text variant="h5">Banner Archive</Text>
-                    <ContentBox
-                        header={HeaderRoot}
-                        contentProps={{ padding: 0 }}
+        <BannerDataContext value={{ characters, weapons, server }}>
+            <Stack spacing={2} sx={{ p: 1 }}>
+                <Text variant="h5">Banner Archive</Text>
+                <ContentBox header={HeaderRoot} contentProps={{ padding: 0 }}>
+                    <Box
+                        sx={{
+                            minHeight: "75vh",
+                            maxHeight: "75vh",
+                            overflowY: "auto",
+                        }}
                     >
-                        <Box
-                            sx={{
-                                minHeight: "75vh",
-                                maxHeight: "75vh",
-                                overflowY: "auto",
-                            }}
-                        >
-                            {!loading ? (
-                                <Stack divider={<Divider />}>
-                                    {bannerList.map((banner) => (
-                                        <BannerArchiveRow
-                                            key={banner.id}
-                                            banner={banner}
-                                        />
-                                    ))}
-                                </Stack>
-                            ) : (
-                                <LinearProgress />
-                            )}
-                        </Box>
-                    </ContentBox>
-                </Stack>
-            </BannerWeaponsContext>
-        </BannerCharactersContext>
+                        {!loading ? (
+                            <Stack divider={<Divider />}>
+                                {bannerList.map((banner) => (
+                                    <BannerArchiveRow
+                                        key={banner.id}
+                                        banner={banner}
+                                    />
+                                ))}
+                            </Stack>
+                        ) : (
+                            <LinearProgress />
+                        )}
+                    </Box>
+                </ContentBox>
+            </Stack>
+        </BannerDataContext>
     );
 }

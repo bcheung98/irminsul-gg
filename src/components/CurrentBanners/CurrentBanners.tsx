@@ -4,21 +4,27 @@
 import BannerItems from "@/components/BannerItems";
 import ContentBox from "@/components/ContentBox";
 import FlexBox from "@/components/FlexBox";
+import Dropdown from "@/components/Dropdown";
 import Text from "@/components/Text";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 // Helper imports
+import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
+import { useServerStore } from "@/stores/useServerStore";
 import {
+    BannerDataContext,
     isCurrentBanner,
-    BannerCharactersContext,
-    BannerWeaponsContext,
+    isFutureBanner,
 } from "@/components/BannerArchive/BannerArchive.utils";
 
 // Type imports
-import { BannerOption } from "@/types/banner";
+import { BannerOption, BannerProps } from "@/types/banner";
 import { BannerArchiveProps } from "@/components/BannerArchive";
+import Box from "@mui/material/Box";
 
 export default function CurrentBanners<
     T extends BannerOption,
@@ -30,16 +36,40 @@ export default function CurrentBanners<
         chronicled: chronicledBanners,
     } = banners;
 
-    const currentCharacterBanners = characterBanners.filter(isCurrentBanner);
-    const currentWeaponBanners = weaponBanners.filter(isCurrentBanner);
+    const game = useGameTag();
+    const server = useStore(useServerStore, (state) => state[game]) || "NA";
+
+    const currentCharacterBanners = characterBanners.filter((banner) =>
+        isCurrentBanner(banner, server)
+    );
+    const currentWeaponBanners = weaponBanners.filter((banner) =>
+        isCurrentBanner(banner, server)
+    );
     const currentChronicledBanners =
-        chronicledBanners && chronicledBanners.filter(isCurrentBanner);
+        chronicledBanners &&
+        chronicledBanners.filter((banner) => isCurrentBanner(banner, server));
+
+    const futureCharacterBanners = characterBanners.filter((banner) =>
+        isFutureBanner(banner, server)
+    );
+    const futureWeaponBanners = weaponBanners.filter((banner) =>
+        isFutureBanner(banner, server)
+    );
+    const futureChronicledBanners =
+        chronicledBanners &&
+        chronicledBanners.filter((banner) => isFutureBanner(banner, server));
 
     const activeBanners =
         [
             ...currentCharacterBanners,
             ...currentWeaponBanners,
             ...(currentChronicledBanners || []),
+        ].length > 0;
+    const futureBanners =
+        [
+            ...futureCharacterBanners,
+            ...futureWeaponBanners,
+            ...(futureChronicledBanners || []),
         ].length > 0;
 
     const bannerItemsParams = {
@@ -48,48 +78,84 @@ export default function CurrentBanners<
         showCountdown: true,
     };
 
+    function Banners({ character, weapon, chronicled }: BannerProps) {
+        return (
+            <FlexBox wrap spacing={[2, 8]}>
+                {character.length > 0 && (
+                    <Stack spacing={1}>
+                        <Text>{`Character Banner`}</Text>
+                        <Stack spacing={2}>
+                            {character.map((banner) => (
+                                <BannerItems
+                                    key={banner.id}
+                                    banner={banner}
+                                    {...bannerItemsParams}
+                                />
+                            ))}
+                        </Stack>
+                    </Stack>
+                )}
+                {weapon.length > 0 && (
+                    <Stack spacing={1}>
+                        <Text>{`Weapon Banner`}</Text>
+                        <Stack spacing={2}>
+                            {weapon.map((banner) => (
+                                <BannerItems
+                                    key={banner.id}
+                                    banner={banner}
+                                    {...bannerItemsParams}
+                                />
+                            ))}
+                        </Stack>
+                    </Stack>
+                )}
+                {chronicled && chronicled.length > 0 && (
+                    <Stack spacing={1}>
+                        <Text>{`Chronicled Wish Banner`}</Text>
+                        <Stack spacing={2}>
+                            {chronicled.map((banner) => (
+                                <BannerItems
+                                    key={banner.id}
+                                    banner={banner}
+                                    {...bannerItemsParams}
+                                />
+                            ))}
+                        </Stack>
+                    </Stack>
+                )}
+            </FlexBox>
+        );
+    }
+
     return (
-        <BannerCharactersContext value={characters}>
-            <BannerWeaponsContext value={weapons}>
-                <ContentBox header="Current Banners">
-                    {activeBanners ? (
-                        <FlexBox wrap spacing={[2, 8]}>
-                            {currentCharacterBanners.length > 0 && (
-                                <Stack spacing={1}>
-                                    <Text>{`Character Banner`}</Text>
-                                    <Stack spacing={1}>
-                                        {currentCharacterBanners.map(
-                                            (banner) => (
-                                                <BannerItems
-                                                    key={banner.id}
-                                                    banner={banner}
-                                                    {...bannerItemsParams}
-                                                />
-                                            )
-                                        )}
-                                    </Stack>
-                                </Stack>
-                            )}
-                            {currentWeaponBanners.length > 0 && (
-                                <Stack spacing={1}>
-                                    <Text>{`Weapon Banner`}</Text>
-                                    <Stack spacing={1}>
-                                        {currentWeaponBanners.map((banner) => (
-                                            <BannerItems
-                                                key={banner.id}
-                                                banner={banner}
-                                                {...bannerItemsParams}
-                                            />
-                                        ))}
-                                    </Stack>
-                                </Stack>
-                            )}
-                        </FlexBox>
-                    ) : (
-                        <Text>There are no active banners.</Text>
+        <BannerDataContext value={{ characters, weapons, server }}>
+            <ContentBox header={`Current Banners`}>
+                <Stack spacing={2} divider={<Divider />}>
+                    {activeBanners && (
+                        <Banners
+                            character={currentCharacterBanners}
+                            weapon={currentWeaponBanners}
+                            chronicled={currentChronicledBanners}
+                        />
                     )}
-                </ContentBox>
-            </BannerWeaponsContext>
-        </BannerCharactersContext>
+                    {futureBanners && (
+                        <Dropdown
+                            title={`Upcoming Banners`}
+                            textVariant="h6"
+                            contentPadding={"8px 0"}
+                            reverse
+                        >
+                            <Box sx={{ maxHeight: "320px", overflowY: "auto" }}>
+                                <Banners
+                                    character={futureCharacterBanners}
+                                    weapon={futureWeaponBanners}
+                                    chronicled={futureChronicledBanners}
+                                />
+                            </Box>
+                        </Dropdown>
+                    )}
+                </Stack>
+            </ContentBox>
+        </BannerDataContext>
     );
 }

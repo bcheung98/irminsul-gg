@@ -13,6 +13,7 @@ import {
     getBannerLabel,
     isCurrentBanner,
     isFutureBanner,
+    useBannerData,
 } from "./BannerArchive.utils";
 import { getContrastText } from "@/utils/getContrastText";
 
@@ -24,8 +25,10 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
 }: BannerArchiveRowProps) {
     const theme = useTheme();
 
-    const current = isCurrentBanner(banner);
-    const upcoming = isFutureBanner(banner);
+    const { server } = useBannerData();
+
+    const current = isCurrentBanner(banner, server);
+    const upcoming = isFutureBanner(banner, server);
 
     const backgroundColor = current
         ? theme.palette.info.dark
@@ -46,7 +49,7 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
                     color: getContrastText(theme.text.primary, backgroundColor),
                 }}
             >
-                {getBannerLabel(banner)}
+                {getBannerLabel(banner, server)}
             </Text>
             <BannerItems
                 banner={banner}

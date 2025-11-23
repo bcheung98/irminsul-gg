@@ -7,13 +7,20 @@ import Tooltip from "@/components/Tooltip";
 // Helper imports
 import DateObject from "@/helpers/dates";
 
+// Type imports
+import { Server } from "@/types";
+
 export default function Countdown(props: {
     date: string;
+    server: Server;
     startText?: string;
     endText?: string;
     textColor?: string;
 }) {
-    const date = new DateObject(props.date).date.getTime();
+    const { server, startText, endText, textColor } = props;
+
+    const dateObj = new DateObject(props.date, server);
+    const date = dateObj.date.getTime();
     const initialTime = date - new Date().getTime();
     const [timeRemaining, setTimeRemaining] = useState(initialTime);
 
@@ -49,12 +56,12 @@ export default function Countdown(props: {
     countdownArr.push(`${seconds}s`);
 
     return (
-        <Text variant="body2" sx={{ color: props.textColor }}>
+        <Text variant="body2" sx={{ color: textColor }}>
             {timeRemaining > 0 ? (
                 <>
-                    {`${props.startText || "Ends in"} `}
+                    {`${startText || "Ends in"} `}
                     <Tooltip
-                        title={new DateObject(props.date).timeString}
+                        title={dateObj.timeString}
                         arrow
                         placement="bottom"
                     >
@@ -69,7 +76,7 @@ export default function Countdown(props: {
                     </Tooltip>
                 </>
             ) : (
-                <>{props.endText}</>
+                <>{endText}</>
             )}
         </Text>
     );

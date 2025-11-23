@@ -8,19 +8,22 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 // Helper imports
-import { useGameTag } from "@/context";
+import { useGame } from "@/context";
 import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useServerStore } from "@/stores/useServerStore";
 import {
     forbiddenKnowledge,
+    serverButtons,
     statDisplayButtons,
     themeButtons,
 } from "@/data/settings";
 
 // Type imports
-import { SkillDisplay } from "@/types";
+import { Game, Server, SkillDisplay } from "@/types";
 
 export default function SettingsList() {
-    const game = useGameTag();
+    const game = useGame();
+    const gameTag = game.tag as Game;
 
     const {
         theme: themeIndex,
@@ -31,13 +34,15 @@ export default function SettingsList() {
         setUnreleasedContent,
     } = useSettingsStore();
 
+    const server = useServerStore();
+
     const toggleButtonsParams = {
         spacing: 0,
-        padding: "0px 8px",
+        padding: "0 8px",
         highlightOnHover: false,
     };
 
-    const settingsList: SettingsItemProps[] = [
+    const group1: SettingsItemProps[] = [
         {
             label: "Theme",
             input: (
@@ -76,6 +81,32 @@ export default function SettingsList() {
                 />
             ),
         },
+    ];
+
+    if (game) {
+        const serverSettings: SettingsItemProps = {
+            label: `Server (${game.name})`,
+            input: (
+                <ToggleButtons
+                    buttons={serverButtons}
+                    value={server[gameTag]}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newValue: Server
+                    ) => {
+                        if (newValue !== null) {
+                            server.setServer(gameTag, newValue);
+                        }
+                    }}
+                    {...toggleButtonsParams}
+                />
+            ),
+        };
+        group1.push(serverSettings);
+    }
+
+    const group2: SettingsItemProps[] = [
         {
             label: "Forbidden Knowledge",
             input: (
@@ -110,13 +141,20 @@ export default function SettingsList() {
         },
     ];
 
+    const settings = [group1];
+    if (gameTag !== "uma") {
+        settings.push(group2);
+    }
+
     return (
         <Stack spacing={2} divider={<Divider />}>
-            <Stack spacing={2}>
-                {settingsList.map((setting, index) => (
-                    <SettingsItem key={index} {...setting} />
-                ))}
-            </Stack>
+            {settings.map((group, index) => (
+                <Stack key={index} spacing={2}>
+                    {group.map((setting) => (
+                        <SettingsItem key={setting.label} {...setting} />
+                    ))}
+                </Stack>
+            ))}
         </Stack>
     );
 }

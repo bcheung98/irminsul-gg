@@ -13,15 +13,15 @@ export interface SettingsActions {
     setSettings: (payload: SettingsState) => void;
     setTheme: (payload: number) => void;
     setStatDisplay: (payload: SkillDisplay) => void;
-    toggleUnreleasedContent: () => void;
+    setUnreleasedContent: (payload: boolean) => void;
 }
 
 export type SettingsStore = SettingsState & SettingsActions;
 
 export const initialState: SettingsState = {
-    theme: 0,
+    theme: 1,
     statDisplay: "slider",
-    hideUnreleasedContent: false,
+    hideUnreleasedContent: true,
 };
 
 export const useSettingsStore = create(
@@ -37,10 +37,8 @@ export const useSettingsStore = create(
             setStatDisplay: function (payload) {
                 return set(() => ({ statDisplay: payload }));
             },
-            toggleUnreleasedContent: function () {
-                return set((state) => ({
-                    hideUnreleasedContent: !state.hideUnreleasedContent,
-                }));
+            setUnreleasedContent: function (payload) {
+                return set(() => ({ hideUnreleasedContent: payload }));
             },
         }),
         { name: "v2/settings" }

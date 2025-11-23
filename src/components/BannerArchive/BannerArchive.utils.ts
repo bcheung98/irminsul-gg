@@ -3,20 +3,23 @@ import { matchSorter } from "match-sorter";
 import DateObject from "@/helpers/dates";
 import { sortBy } from "@/utils";
 import { Banner, BannerOption } from "@/types/banner";
+import { Game, Server } from "@/types";
 
-export function isCurrentBanner(banner: Banner) {
-    const start = new DateObject(banner.start).createDateObject();
-    const end = new DateObject(banner.end).createDateObject();
+export function isCurrentBanner(banner: Banner, server: Server, game?: Game) {
+    const start = new DateObject(banner.start, server, game).date;
+    const end = new DateObject(banner.end, server).date;
     return DateObject.inRange(start, end);
 }
 
-export function isFutureBanner(banner: Banner) {
-    return (
-        new DateObject(banner.start).date.getTime() - new Date().getTime() > 0
-    );
+export function isFutureBanner(banner: Banner, server: Server, game?: Game) {
+    return new DateObject(banner.start, server, game).checkDate === 1;
 }
 
-export function getBannerLabel(banner: Banner, hideVersionLabel = false) {
+export function getBannerLabel(
+    banner: Banner,
+    server: Server,
+    hideVersionLabel = false
+) {
     let version, phase;
     let b = banner.version.split(".");
     if (banner.version.startsWith("Luna")) {
@@ -27,8 +30,8 @@ export function getBannerLabel(banner: Banner, hideVersionLabel = false) {
     }
     const versionLabel = `${version} Phase ${phase}`;
 
-    const start = new DateObject(banner.start).string;
-    const end = new DateObject(banner.end).string;
+    const start = new DateObject(banner.start, server).string;
+    const end = new DateObject(banner.end, server).string;
     const dateRange = `${start} — ${end}`;
 
     return hideVersionLabel ? dateRange : `${versionLabel}: ${dateRange}`;
@@ -48,12 +51,12 @@ export function filterOptions(options: BannerOption[], searchValue: string) {
     });
 }
 
-export const BannerCharactersContext = createContext<BannerOption[]>([]);
-export const BannerWeaponsContext = createContext<BannerOption[]>([]);
+export const BannerDataContext = createContext<{
+    characters: BannerOption[];
+    weapons: BannerOption[];
+    server: Server;
+}>({ characters: [], weapons: [], server: "NA" });
 
-export function useBannerCharacters() {
-    return useContext(BannerCharactersContext);
-}
-export function useBannerWeapons() {
-    return useContext(BannerWeaponsContext);
+export function useBannerData() {
+    return useContext(BannerDataContext);
 }
