@@ -74,6 +74,9 @@ export default function StyledRoot({
     };
 
     useEffect(() => {
+        const image = document.getElementById("background-image--1");
+        image?.classList.remove("inactive");
+        image?.classList.add("active");
         const anchor = document.querySelector("#back-to-top-anchor");
         if (anchor) {
             anchor.scrollIntoView({
@@ -90,9 +93,12 @@ export default function StyledRoot({
                 <CssBaseline />
                 <Toolbar variant="dense" id="back-to-top-anchor" />
                 <img
-                    id="background-image"
+                    id="background-image--1"
+                    className="background-image active"
                     src={theme.backgroundImage.imgURL}
-                    style={{ filter: theme.backgroundImage.filter }}
+                    style={{
+                        filter: theme.backgroundImage.filter,
+                    }}
                 />
                 <GameListContext value={websites}>
                     <GameContext value={games[gameTag]}>

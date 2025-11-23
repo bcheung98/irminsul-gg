@@ -10,19 +10,25 @@ import Grid from "@mui/material/Grid";
 // Helper imports
 import { useGameList } from "@/context";
 
-export default function Websites() {
-    const games = useGameList();
+export default function Websites({
+    action,
+}: {
+    action: (newIndex: number) => void;
+}) {
+    const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
             <Grid container spacing={4}>
-                {games
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .map((website) => (
-                        <Grid key={website.tag} size={{ xs: 12, sm: 6, md: 3 }}>
-                            <WebsiteCard game={website} />
-                        </Grid>
-                    ))}
+                {games.map((game, index) => (
+                    <Grid key={game.tag} size={{ xs: 12, sm: 6, md: 3 }}>
+                        <WebsiteCard
+                            game={game}
+                            index={index}
+                            handleIndexChange={action}
+                        />
+                    </Grid>
+                ))}
             </Grid>
         </Container>
     );

@@ -57,6 +57,7 @@ export const darkThemeData = {
     backgroundImage: {
         imgURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
         filter: "none",
+        filterGame: "brightness(0.75) opacity(0.5)",
     },
     irminsulLogo: {
         imgURL: "logo_red",

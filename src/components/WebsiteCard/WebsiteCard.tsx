@@ -5,6 +5,7 @@ import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme, SxProps } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -16,8 +17,17 @@ import versions from "@/data/versions";
 // Type imports
 import { Game, GameInfo } from "@/types";
 
-export default function WebsiteCard({ game }: { game: GameInfo }) {
+export default function WebsiteCard({
+    game,
+    index,
+    handleIndexChange,
+}: {
+    game: GameInfo;
+    index: number;
+    handleIndexChange: (newIndex: number) => void;
+}) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
     const { tag, name, shortName, enabled } = game;
 
@@ -34,6 +44,9 @@ export default function WebsiteCard({ game }: { game: GameInfo }) {
     const imgSrc = `main/wallpapers/${tag}/${shortName}_${version}`;
 
     const handleHover = (direction: "enter" | "leave") => {
+        if (direction === "enter") {
+            handleIndexChange(index);
+        }
         if (enabled) {
             zoomImageOnHover({
                 direction,
@@ -48,10 +61,10 @@ export default function WebsiteCard({ game }: { game: GameInfo }) {
     const rootStyle: SxProps = {
         position: "relative",
         overflow: "visible",
-        width: "100%",
         height: "auto",
         borderRadius: borderRadius,
         background: `linear-gradient(to bottom, transparent, ${theme.infoCard.backgroundColor.main} 50%)`,
+        zIndex: 1,
     };
 
     const cardStyle: SxProps = {
@@ -88,7 +101,6 @@ export default function WebsiteCard({ game }: { game: GameInfo }) {
                         <Image
                             src={imgSrc}
                             fallbackSrc={`main/wallpapers/${tag}/${shortName}`}
-                            alt={tag}
                             id={`${id}-img`}
                             style={imageStyle}
                         />
@@ -102,6 +114,7 @@ export default function WebsiteCard({ game }: { game: GameInfo }) {
                     >
                         <Box sx={{ mx: "auto" }}>
                             <Text
+                                variant={matches ? "subtitle1" : "subtitle2"}
                                 sx={{
                                     color: theme.infoCard.color.primary,
                                     textAlign: "center",

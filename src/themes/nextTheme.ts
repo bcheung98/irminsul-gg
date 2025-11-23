@@ -57,6 +57,7 @@ export const nextThemeData = {
     backgroundImage: {
         imgURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
         filter: "brightness(0.25) grayscale(100%)",
+        filterGame: "brightness(0.375) grayscale(100%)",
     },
     irminsulLogo: {
         imgURL: "logo_red",

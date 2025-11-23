@@ -1,7 +1,7 @@
 :root {
     color-scheme: dark;
     scrollbar-gutter: stable;
-    background-color: rgb(44, 44, 44);
+    background-color: inherit;
 }
 
 body {
@@ -35,7 +35,7 @@ ul {
     padding-left: 18px;
 }
 
-#background-image {
+.background-image {
     object-fit: cover;
     width: 100vw;
     height: 100vh;
@@ -43,13 +43,27 @@ ul {
     top: 0;
     left: 0;
     scale: 1.05;
+    z-index: -1;
+    transition: opacity 0.5s;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+.background-image.inactive {
+    opacity: 0;
+}
+
+.background-image.active {
+    opacity: 1;
 }
 
 .background-video {
     transition: opacity 1s;
 }
 
-.background-video.fading {
+.background-video.inactive {
     opacity: 0;
 }
 
