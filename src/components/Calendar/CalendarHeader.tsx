@@ -83,40 +83,45 @@ export default function CalendarHeader({
 
     const isDisabled = getDateText(calendarApi()?.getDate()) === getDateText();
 
-    const keyDownHandler = (event: KeyboardEvent) => {
-        if (event.ctrlKey && event.key === "ArrowLeft") {
-            event.preventDefault();
-            prevYear();
-            return;
-        }
-        if (event.ctrlKey && event.key === "ArrowRight") {
-            event.preventDefault();
-            nextYear();
-            return;
-        }
-        if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            prevMonth();
-            return;
-        }
-        // TODO: Fix site search input being blocked by this
-        // if (event.key === "t") {
-        //     event.preventDefault();
-        //     jumpToday();
-        //     return;
-        // }
-        if (event.key === "ArrowRight") {
-            event.preventDefault();
-            nextMonth();
-            return;
-        }
-    };
-
     useEffect(() => {
         handleTitleChange();
-        window.addEventListener("keydown", keyDownHandler);
+        window.addEventListener("keydown", (event: KeyboardEvent) => {
+            // Disable keyboard controls if a dialog is open
+            const dialogOpen = Object.values(document.body.style).includes(
+                "padding-right"
+            );
+            if (dialogOpen) return;
+            else {
+                if (event.ctrlKey && event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    prevYear();
+                    return;
+                }
+                if (event.ctrlKey && event.key === "ArrowRight") {
+                    event.preventDefault();
+                    nextYear();
+                    return;
+                }
+                if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    prevMonth();
+                    return;
+                }
+                if (event.key === "t") {
+                    event.preventDefault();
+                    jumpToday();
+                    return;
+                }
+                if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    nextMonth();
+                    return;
+                }
+            }
+        });
     }, []);
 
+    // Update title when window is resized
     useEffect(() => {
         handleTitleChange();
     }, [matches]);
@@ -127,6 +132,7 @@ export default function CalendarHeader({
             placement="top"
         >
             <IconButton
+                disableRipple
                 onClick={() => toggleDrawerState()}
                 sx={calendarMenuButtonStyles}
             >
@@ -143,10 +149,7 @@ export default function CalendarHeader({
             sx={calendarButtonStyles}
             disabled={isDisabled}
         >
-            <Text
-                variant="subtitle2"
-                sx={{ fontWeight: theme.font.weight.highlight }}
-            >
+            <Text variant="subtitle2" weight="highlight">
                 Today
             </Text>
         </Button>
