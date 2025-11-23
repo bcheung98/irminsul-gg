@@ -1,5 +1,5 @@
 // Component imports
-import * as Table from "../Table";
+import * as Table from "@/components/Table";
 
 // MUI imports
 import Card from "@mui/material/Card";
@@ -7,14 +7,17 @@ import Card from "@mui/material/Card";
 // Helper imports
 import DateObject from "@/helpers/dates";
 import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
+import { useServerStore } from "@/stores/useServerStore";
 
 // Type imports
-import { AttributeDataMisc, GameData } from "@/types";
+import { AttributeDataMisc, GameData, Server } from "@/types";
 
 export default function CharacterInfoMisc(props: AttributeDataMisc) {
     const game = useGameTag();
+    const server = useStore(useServerStore, (state) => state[game]);
 
-    const rows = getRows(props)[game];
+    const rows = getRows(props, server)[game];
 
     const cellProps = {
         borderColor: "transparent",
@@ -52,10 +55,11 @@ export default function CharacterInfoMisc(props: AttributeDataMisc) {
 }
 
 function getRows(
-    attributes: AttributeDataMisc
+    attributes: AttributeDataMisc,
+    server: Server | undefined
 ): GameData<{ key: string; value: string | undefined }[]> {
     const releaseDate = attributes.release?.date
-        ? new DateObject(attributes.release.date).string
+        ? new DateObject(attributes.release.date, server).string
         : "";
     const releaseVersion = attributes.release?.version;
 

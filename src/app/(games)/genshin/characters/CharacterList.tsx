@@ -6,6 +6,9 @@ import RarityStars from "@/components/RarityStars";
 import DateObject from "@/helpers/dates";
 import { formatHref, splitJoin } from "@/utils";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
+import { useGameTag } from "@/context";
+import { useStore } from "@/hooks";
+import { useServerStore } from "@/stores/useServerStore";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";
@@ -18,6 +21,9 @@ export default function CharacterList({
     characters: GenshinCharacter[];
     loading?: boolean;
 }) {
+    const game = useGameTag();
+    const server = useStore(useServerStore, (state) => state[game]);
+
     const columns = {
         name: "Name",
         rarity: "Rarity",
@@ -89,9 +95,9 @@ export default function CharacterList({
             },
             release: {
                 label: {
-                    title: `${new DateObject(character.release.date).string} (${
-                        character.release.version
-                    })`,
+                    title: `${
+                        new DateObject(character.release.date, server).string
+                    } (${character.release.version})`,
                 },
             },
         };
