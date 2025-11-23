@@ -20,8 +20,9 @@ export default function GlobalError({
                 <img
                     src="https://assets.irminsul.gg/main/images/Irminsul.png"
                     id="background-image"
+                    style={{ filter: "brightness(0.25) grayscale(100%)" }}
                 />
-                <main style={{ position: "relative", marginTop: "16px" }}>
+                <main style={{ position: "relative", marginTop: "32px" }}>
                     <div
                         id="global-error"
                         style={{
@@ -84,7 +85,7 @@ export default function GlobalError({
                         <p className="global-error-text">Error details:</p>
                         <div
                             style={{
-                                backgroundColor: "rgb(8, 32, 72)",
+                                backgroundColor: "rgb(16, 16, 16)",
                                 borderRadius: "4px",
                                 padding: "0px 16px",
                                 overflow: "auto",
