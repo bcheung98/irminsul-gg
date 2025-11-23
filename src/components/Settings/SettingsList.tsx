@@ -9,8 +9,7 @@ import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useGame } from "@/context";
-import { useSettingsStore } from "@/stores/useSettingsStore";
-import { useServerStore } from "@/stores/useServerStore";
+import { useSettingsStore, useServerStore } from "@/stores";
 import {
     forbiddenKnowledge,
     serverButtons,

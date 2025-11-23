@@ -17,7 +17,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
-import { useDrawerStore } from "@/stores/useDrawerStore";
+import { useDrawerStore } from "@/stores";
 
 // Type imports
 import { InfoGalleryButtonProps, InfoGalleryProps } from "./InfoGallery.types";

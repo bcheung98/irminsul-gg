@@ -18,7 +18,7 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 // Helper imports
 import { categories, categoryImgURLs } from "@/data/categories";
 import { games } from "@/data/games";
-import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
+import { useSiteSearchStore } from "@/stores";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";

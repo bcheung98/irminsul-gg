@@ -5,12 +5,11 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { useStore } from "@/hooks";
+import { useStore, useSettingsStore } from "@/stores";
 import {
     genshinCharacterFilters,
     useFilterStore,
 } from "@/stores/useFilterStore";
-import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
 

@@ -5,7 +5,7 @@ import SiteSearchRoot from "./SiteSearchRoot";
 import SiteSearchPopup from "./SiteSearchPopup";
 
 // Helper imports
-import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
+import { useSiteSearchStore } from "@/stores";
 
 // Type imports
 import { BaseDataWithRelease } from "@/types";

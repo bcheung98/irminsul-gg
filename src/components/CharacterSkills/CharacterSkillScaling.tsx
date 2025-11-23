@@ -10,8 +10,7 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { range } from "@/utils";
-import { useStore } from "@/hooks/useStore";
-import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useStore, useSettingsStore } from "@/stores";
 
 // Type imports
 import { CharacterSkillScalingProps } from "./CharacterSkills.types";

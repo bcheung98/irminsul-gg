@@ -7,8 +7,7 @@ import DateObject from "@/helpers/dates";
 import { formatHref, splitJoin } from "@/utils";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 import { useGameTag } from "@/context";
-import { useStore } from "@/hooks";
-import { useServerStore } from "@/stores/useServerStore";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { GenshinCharacter } from "@/types/genshin/character";

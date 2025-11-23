@@ -5,9 +5,8 @@ import FilterRoot from "@/components/Filters";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { useStore } from "@/hooks";
-import { genshinWeaponFilters, useFilterStore } from "@/stores/useFilterStore";
-import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useStore, useSettingsStore, useFilterStore } from "@/stores";
+import { genshinWeaponFilters } from "@/stores/useFilterStore";
 import { filterActions } from "@/helpers/filters";
 import { filterGroups } from "@/data/filters";
 import { GenshinWeaponSubStat } from "@/data/genshin/weaponStats";

@@ -1,4 +1,3 @@
-import { BaseSyntheticEvent } from "react";
 import { usePathname } from "next/navigation";
 import { useShallow } from "zustand/react/shallow";
 
@@ -15,12 +14,12 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
 // Helper imports
-import { GalleryState, useGalleryStore } from "@/stores/useGalleryStore";
+import { useGalleryStore } from "@/stores";
 
 export default function FilterSort() {
     const theme = useTheme();
 
-    const key = usePathname().slice(1) as keyof GalleryState;
+    const key = usePathname().slice(1) as keyof typeof options;
 
     const { setGalleryState } = useGalleryStore();
     const { sortBy, sortDirection, view } = useGalleryStore(
@@ -31,7 +30,7 @@ export default function FilterSort() {
         setGalleryState(key, "sortBy", event.target.value);
     };
 
-    const handleDirectionChange = (_: BaseSyntheticEvent) => {
+    const handleDirectionChange = (_: React.BaseSyntheticEvent) => {
         if (sortDirection === "asc") {
             setGalleryState(key, "sortDirection", "desc");
         } else {

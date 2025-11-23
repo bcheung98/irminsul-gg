@@ -25,10 +25,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 // Helper imports
 import { useTheme } from "@mui/material/styles";
 import { useGameTag } from "@/context";
+import { useStore, useSettingsStore, useSiteSearchStore } from "@/stores";
 import { getItems } from "./SiteSearch.utils";
-import { useStore } from "@/hooks";
-import { useSettingsStore } from "@/stores/useSettingsStore";
-import { useSiteSearchStore } from "@/stores/useSiteSearchStore";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";

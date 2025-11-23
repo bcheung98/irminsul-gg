@@ -13,7 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Helper imports
-import { useDrawerStore } from "@/stores/useDrawerStore";
+import { useDrawerStore } from "@/stores";
 
 export default function FilterDrawer() {
     const theme = useTheme();

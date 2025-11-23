@@ -14,8 +14,7 @@ import Box from "@mui/material/Box";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
-import { useStore } from "@/hooks";
-import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useStore, useSettingsStore } from "@/stores";
 
 export default function Settings() {
     const theme = useTheme();

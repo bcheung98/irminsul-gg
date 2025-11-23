@@ -13,8 +13,7 @@ import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { useStore } from "@/hooks";
-import { useServerStore } from "@/stores/useServerStore";
+import { useStore, useServerStore } from "@/stores";
 import {
     BannerDataContext,
     isCurrentBanner,

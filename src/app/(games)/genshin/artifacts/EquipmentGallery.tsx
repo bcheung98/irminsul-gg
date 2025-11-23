@@ -13,10 +13,9 @@ import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
-import { useStore, useView } from "@/hooks";
-import { useGalleryStore } from "@/stores/useGalleryStore";
+import { useView } from "@/hooks";
+import { useStore, useGalleryStore, useSettingsStore } from "@/stores";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterEquipment } from "@/helpers/equipment";
 import sortItems from "@/helpers/genshin/sortItems";
 

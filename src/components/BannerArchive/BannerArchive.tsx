@@ -31,8 +31,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { useStore } from "@/hooks";
-import { useServerStore } from "@/stores/useServerStore";
+import { useStore, useServerStore } from "@/stores";
 import { banners as bannerLabels } from "@/data/banners";
 import { BannerDataContext } from "./BannerArchive.utils";
 import { getBannerList } from "@/helpers/createBannerList";

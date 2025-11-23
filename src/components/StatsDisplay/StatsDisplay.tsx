@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // Component imports
-import Text from "../Text";
-import StatsTable from "../StatsTable";
+import Text from "@/components/Text";
+import StatsTable from "@/components/StatsTable";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -11,8 +11,7 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { getStats } from "./StatsDisplay.utils";
 import { useTextColor } from "@/helpers/styles";
-import { useStore } from "@/hooks/useStore";
-import { useSettingsStore } from "@/stores/useSettingsStore";
+import { useStore, useSettingsStore } from "@/stores";
 
 // Type imports
 import { StatsDisplayProps } from "./StatsDisplay.types";
