@@ -1,6 +1,6 @@
 // Component imports
-import Dropdown from "../Dropdown";
-import LevelUpCosts from "../LevelUpCosts";
+import Dropdown from "@/components/Dropdown";
+import LevelUpCosts from "@/components/LevelUpCosts";
 
 // Type imports
 import { Materials } from "@/types/materials";

@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 // Component imports
-import MaterialCard from "../MaterialCard";
-import Text from "../Text";
-import Slider from "../Slider";
-import LevelUpSlider from "../LevelUpSlider";
+import MaterialCard from "@/components/MaterialCard";
+import Text from "@/components/Text";
+import Slider from "@/components/Slider";
+import LevelUpSlider from "@/components/LevelUpSlider";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

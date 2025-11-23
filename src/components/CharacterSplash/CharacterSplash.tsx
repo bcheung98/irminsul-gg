@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 import parse from "html-react-parser";
 
 // Component imports
@@ -40,7 +40,7 @@ export default function CharacterSplash({
     };
 
     const [tabValue, setTabValue] = useState(0);
-    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
+    const handleTabChange = (_: React.BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
     const handleTabChangeLeft = () => {

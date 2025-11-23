@@ -1,5 +1,5 @@
 import { AttributeData } from "@/types";
-import { InfoAvatarProps } from "../InfoAvatar/InfoAvatar.types";
+import { InfoAvatarProps } from "@/components/InfoAvatar/InfoAvatar.types";
 import { Materials } from "@/types/materials";
 
 export interface InfoCardProps extends InfoAvatarProps {

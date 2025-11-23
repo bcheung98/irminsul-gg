@@ -1,7 +1,7 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 // Component imports
-import ContentBox from "../ContentBox";
+import ContentBox from "@/components/ContentBox";
 import ContentDialog from "@/components/ContentDialog";
 import KeywordPopup from "@/components/KeywordPopup";
 import Text from "@/components/Text";
@@ -75,7 +75,7 @@ export default function CharacterUpgrades({
         null
     );
     const [dialogOpen, setDialogOpen] = useState(false);
-    const handleDialogOpen = (event: BaseSyntheticEvent) => {
+    const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,

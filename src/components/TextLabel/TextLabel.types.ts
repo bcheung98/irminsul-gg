@@ -3,7 +3,7 @@ import {
     SxProps,
     TypographyVariant,
 } from "@mui/material/styles";
-import { ImageSize } from "../Image/Image.types";
+import { ImageSize } from "@/components/Image/Image.types";
 import { StackProps } from "@mui/material/Stack";
 
 export interface IconProps {

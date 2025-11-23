@@ -1,5 +1,3 @@
-import { CSSProperties } from "react";
-
 // Component imports
 import Image from "@/components/Image";
 import NavLink from "@/components/NavLink";
@@ -68,7 +66,7 @@ export default function WebsiteCard({ game }: { game: GameInfo }) {
         width: "auto",
     };
 
-    const imageStyle: CSSProperties = {
+    const imageStyle: React.CSSProperties = {
         width: "100%",
         height: "100%",
         transform: `scale(${scale}) translate(${translate[0]}px, ${translate[1]}px)`,

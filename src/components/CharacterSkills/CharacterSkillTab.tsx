@@ -1,12 +1,12 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 // Component imports
-import ContentDialog from "../ContentDialog";
-import KeywordPopup from "../KeywordPopup";
-import Text from "../Text";
-import TextLabel from "../TextLabel";
-import SkillIcon from "../SkillIcon";
-import SkillDescription from "../SkillDescription";
+import ContentDialog from "@/components/ContentDialog";
+import KeywordPopup from "@/components/KeywordPopup";
+import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
+import SkillIcon from "@/components/SkillIcon";
+import SkillDescription from "@/components/SkillDescription";
 import CharacterSkillScaling from "./CharacterSkillScaling";
 import CharacterSkillLevelUp from "./CharacterSkillLevelUp";
 
@@ -54,7 +54,7 @@ export default function CharacterSkillTab({
         null
     );
     const [dialogOpen, setDialogOpen] = useState(false);
-    const handleDialogOpen = (event: BaseSyntheticEvent) => {
+    const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,

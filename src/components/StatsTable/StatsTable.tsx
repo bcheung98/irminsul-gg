@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 // Component imports
-import FlexBox from "../FlexBox";
-import * as Table from "../Table";
-import Slider from "../Slider";
-import Text from "../Text";
+import FlexBox from "@/components/FlexBox";
+import * as Table from "@/components/Table";
+import Slider from "@/components/Slider";
+import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme, SxProps } from "@mui/material/styles";

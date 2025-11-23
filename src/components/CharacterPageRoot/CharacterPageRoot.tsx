@@ -3,7 +3,7 @@ import { SkillContext } from "@/context";
 
 // Type imports
 import { CharacterSkillsList } from "@/types/skill";
-import InfoPageRoot, { InfoPageRootProps } from "../InfoPageRoot/InfoPageRoot";
+import InfoPageRoot, { InfoPageRootProps } from "@/components/InfoPageRoot/InfoPageRoot";
 
 interface CharacterPageRootProps extends InfoPageRootProps {
     skills: CharacterSkillsList;

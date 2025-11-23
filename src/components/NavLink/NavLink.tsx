@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import Link from "next/link";
 import { ButtonBaseProps } from "@mui/material/ButtonBase";
 
@@ -7,7 +6,7 @@ interface NavLinkProps extends ButtonBaseProps {
     openInNewTab?: boolean;
     children: React.ReactNode;
     disabled?: boolean;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
 }
 
 export default function NavLink({

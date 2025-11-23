@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { TooltipProps } from "@mui/material";
 
 export type ImageSize = number | [number, number];
@@ -10,7 +9,7 @@ export interface ImageProps {
     alt?: string;
     id?: string;
     loading?: "lazy" | "eager";
-    style?: CSSProperties;
+    style?: React.CSSProperties;
     tooltip?: React.ReactNode;
     tooltipArrow?: TooltipProps["placement"];
     zoomOnHover?: boolean;

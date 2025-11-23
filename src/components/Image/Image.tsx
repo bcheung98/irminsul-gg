@@ -1,4 +1,3 @@
-import { CSSProperties, SyntheticEvent } from "react";
 import { default as NextImage } from "next/image";
 
 // Component imports
@@ -47,7 +46,7 @@ export default function Image({
         fill = true;
     }
 
-    const defaultImageStyle: CSSProperties = {
+    const defaultImageStyle: React.CSSProperties = {
         width: width || "auto",
         height: height || "auto",
     };
@@ -62,7 +61,7 @@ export default function Image({
         zoomOnHover && zoomImageOnHover({ direction, id, zoom: 1.05 });
     };
 
-    function onError(event: SyntheticEvent<HTMLImageElement, Event>) {
+    function onError(event: React.SyntheticEvent<HTMLImageElement, Event>) {
         !supressLoadImageWarning && console.warn(`Failed to load image ${src}`);
         event.currentTarget.src = `https://assets.irminsul.gg/${fallbackSrc}.png`;
         onerror = null;

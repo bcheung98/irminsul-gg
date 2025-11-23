@@ -1,5 +1,5 @@
 // Component imports
-import Text from "../Text";
+import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme, alpha } from "@mui/material/styles";

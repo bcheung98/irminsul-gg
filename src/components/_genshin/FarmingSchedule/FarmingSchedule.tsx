@@ -1,6 +1,6 @@
 "use client";
 
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 // Component imports
@@ -42,7 +42,7 @@ export default function FarmingSchedule(props: {
     );
 
     const [tabValue, setTabValue] = useState(0);
-    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
+    const handleTabChange = (_: React.BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 

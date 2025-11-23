@@ -1,4 +1,4 @@
-import { TextLabelProps } from "../TextLabel/TextLabel.types";
+import { TextLabelProps } from "@/components/TextLabel/TextLabel.types";
 
 export interface InfoChipProps extends TextLabelProps {
     chipProps?: {

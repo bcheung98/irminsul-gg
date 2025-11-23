@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { SortOrder } from "@/types";
 import { Banner, BannerOption, BannerProps, BannerType } from "@/types/banner";
 
@@ -14,8 +14,8 @@ export interface BannerArchiveProps<
 export interface BannerArchiveHeaderProps {
     bannerType: BannerType;
     sortDirection: SortOrder;
-    handleViewChange: (_: BaseSyntheticEvent, newValue: BannerType) => void;
-    handleDirectionChange: (_: BaseSyntheticEvent) => void;
+    handleViewChange: (_: React.BaseSyntheticEvent, newValue: BannerType) => void;
+    handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
 }
 
 export interface BannerArchiveRowProps {

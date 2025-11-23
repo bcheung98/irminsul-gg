@@ -1,7 +1,7 @@
 "use client";
 
 // Component imports
-import WebsiteCard from "../WebsiteCard";
+import WebsiteCard from "@/components/WebsiteCard";
 
 // MUI imports
 import Container from "@mui/material/Container";

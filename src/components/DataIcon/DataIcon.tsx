@@ -1,5 +1,5 @@
 // Component imports
-import Image from "../Image";
+import Image from "@/components/Image";
 
 // MUI imports
 import { CSSProperties } from "@mui/material/styles";

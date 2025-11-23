@@ -1,5 +1,5 @@
 // Component imports
-import DataIcon from "../DataIcon/DataIcon";
+import DataIcon from "@/components/DataIcon/DataIcon";
 
 // MUI imports
 import Stack from "@mui/material/Stack";

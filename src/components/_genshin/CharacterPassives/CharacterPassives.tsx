@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 // Component imports
 import ContentBox from "@/components/ContentBox";
@@ -55,7 +55,7 @@ export default function CharacterPassives({
         null
     );
     const [dialogOpen, setDialogOpen] = useState(false);
-    const handleDialogOpen = (event: BaseSyntheticEvent) => {
+    const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,

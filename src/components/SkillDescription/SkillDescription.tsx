@@ -1,4 +1,3 @@
-import { BaseSyntheticEvent } from "react";
 import parse, {
     HTMLReactParserOptions,
     Element as DOMElement,
@@ -24,7 +23,7 @@ export default function SkillDescription({
     description: string;
     targetClassName?: string;
     newClassName?: string;
-    onClick?: (event: BaseSyntheticEvent) => void;
+    onClick?: (event: React.BaseSyntheticEvent) => void;
     disableLink?: boolean;
 }) {
     const theme = useTheme();

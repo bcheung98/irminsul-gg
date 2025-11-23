@@ -1,6 +1,7 @@
-import { useState, BaseSyntheticEvent } from "react";
+import { useState } from "react";
 
 // Component imports
+import EquipmentSetEffect from "@/components/EquipmentSetEffect";
 import ContentBox from "@/components/ContentBox";
 import { default as Tabs } from "@/components/Tabs";
 import SkillIcon from "@/components/SkillIcon";
@@ -20,7 +21,6 @@ import { equipmentPieceType, equipmentTags } from "@/data/equipment";
 
 // Type imports
 import { Equipment } from "@/types/equipment";
-import EquipmentSetEffect from "../EquipmentSetEffect";
 
 export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     const theme = useTheme();
@@ -30,7 +30,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     const game = useGameTag();
 
     const [tabValue, setTabValue] = useState(0);
-    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
+    const handleTabChange = (_: React.BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 

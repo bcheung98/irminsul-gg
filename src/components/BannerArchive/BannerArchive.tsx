@@ -1,7 +1,6 @@
 "use client";
 
 import {
-    BaseSyntheticEvent,
     useCallback,
     useEffect,
     useMemo,
@@ -64,7 +63,7 @@ export default function BannerArchive<
 
     const [bannerType, setBannerType] = useState<BannerType>("character");
     const handleViewChange = useCallback(
-        (_: BaseSyntheticEvent, newValue: BannerType | null) => {
+        (_: React.BaseSyntheticEvent, newValue: BannerType | null) => {
             if (newValue) {
                 setBannerType(() => newValue);
                 if (newValue == "all" || newValue === "chronicled") {
@@ -85,7 +84,7 @@ export default function BannerArchive<
     );
 
     const [sortDirection, setSortDirection] = useState<SortOrder>("asc");
-    const handleDirectionChange = (_: BaseSyntheticEvent) => {
+    const handleDirectionChange = (_: React.BaseSyntheticEvent) => {
         startTransition(() => {
             if (sortDirection === "asc") {
                 setSortDirection("desc");

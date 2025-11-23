@@ -8,7 +8,7 @@ import { alpha, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Text from "../Text";
+import Text from "@/components/Text";
 
 export interface SearchDialogProps extends ContentDialogProps {
     children?: React.ReactNode;

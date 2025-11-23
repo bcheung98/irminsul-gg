@@ -1,8 +1,8 @@
 // Component imports
-import Text from "../Text";
-import TextLabel from "../TextLabel";
-import SkillIcon from "../SkillIcon";
-import SkillDescription from "../SkillDescription";
+import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
+import SkillIcon from "@/components/SkillIcon";
+import SkillDescription from "@/components/SkillDescription";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

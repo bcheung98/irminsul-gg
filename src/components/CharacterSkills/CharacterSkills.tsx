@@ -1,10 +1,10 @@
-import { BaseSyntheticEvent, useState } from "react";
+import { useState } from "react";
 
 // Component imports
-import ContentBox from "../ContentBox";
-import SkillIcon from "../SkillIcon";
 import CharacterSkillTab from "./CharacterSkillTab";
-import { default as Tabs } from "../Tabs";
+import ContentBox from "@/components/ContentBox";
+import SkillIcon from "@/components/SkillIcon";
+import { default as Tabs } from "@/components/Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -32,7 +32,7 @@ export default function CharacterSkills({
     const textColor = useTextColor(theme.text);
 
     const [tabValue, setTabValue] = useState(0);
-    const handleTabChange = (_: BaseSyntheticEvent, newValue: number) => {
+    const handleTabChange = (_: React.BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 

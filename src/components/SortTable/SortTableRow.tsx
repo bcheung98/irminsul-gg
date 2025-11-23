@@ -7,7 +7,7 @@ import { alpha, useTheme } from "@mui/material/styles";
 import TableCell from "@mui/material/TableCell";
 
 // Type imports
-import { TextLabelProps } from "../TextLabel/TextLabel.types";
+import { TextLabelProps } from "@/components/TextLabel/TextLabel.types";
 import { ColumnHeaders, SortTableRowProps } from "./SortTable.types";
 
 export default function SortTableRow<T extends ColumnHeaders>({
