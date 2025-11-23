@@ -13,6 +13,7 @@ import { useSettingsStore, useServerStore } from "@/stores";
 import {
     forbiddenKnowledge,
     serverButtons,
+    serverButtonsUma,
     statDisplayButtons,
     themeButtons,
 } from "@/data/settings";
@@ -22,7 +23,6 @@ import { Game, Server, SkillDisplay } from "@/types";
 
 export default function SettingsList() {
     const game = useGame();
-    const gameTag = game.tag as Game;
 
     const {
         theme: themeIndex,
@@ -61,49 +61,7 @@ export default function SettingsList() {
                 />
             ),
         },
-        {
-            label: "Stat Display",
-            input: (
-                <ToggleButtons
-                    buttons={statDisplayButtons}
-                    value={statDisplay}
-                    exclusive
-                    onChange={(
-                        _: React.BaseSyntheticEvent,
-                        newValue: SkillDisplay
-                    ) => {
-                        if (newValue !== null) {
-                            setStatDisplay(newValue);
-                        }
-                    }}
-                    {...toggleButtonsParams}
-                />
-            ),
-        },
     ];
-
-    if (game) {
-        const serverSettings: SettingsItemProps = {
-            label: `Server (${game.name})`,
-            input: (
-                <ToggleButtons
-                    buttons={serverButtons}
-                    value={server[gameTag]}
-                    exclusive
-                    onChange={(
-                        _: React.BaseSyntheticEvent,
-                        newValue: Server
-                    ) => {
-                        if (newValue !== null) {
-                            server.setServer(gameTag, newValue);
-                        }
-                    }}
-                    {...toggleButtonsParams}
-                />
-            ),
-        };
-        group1.push(serverSettings);
-    }
 
     const group2: SettingsItemProps[] = [
         {
@@ -141,8 +99,59 @@ export default function SettingsList() {
     ];
 
     const settings = [group1];
-    if (gameTag !== "uma") {
-        settings.push(group2);
+
+    if (game) {
+        const gameTag = game.tag as Game;
+
+        const statDisplaySettings: SettingsItemProps = {
+            label: "Stat Display",
+            input: (
+                <ToggleButtons
+                    buttons={statDisplayButtons}
+                    value={statDisplay}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newValue: SkillDisplay
+                    ) => {
+                        if (newValue !== null) {
+                            setStatDisplay(newValue);
+                        }
+                    }}
+                    {...toggleButtonsParams}
+                />
+            ),
+        };
+
+        const serverSettings: SettingsItemProps = {
+            label: `Server (${game.name})`,
+            input: (
+                <ToggleButtons
+                    buttons={
+                        gameTag === "uma" ? serverButtonsUma : serverButtons
+                    }
+                    value={server[gameTag]}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newValue: Server
+                    ) => {
+                        if (newValue !== null) {
+                            server.setServer(gameTag, newValue);
+                        }
+                    }}
+                    {...toggleButtonsParams}
+                />
+            ),
+        };
+        if (["genshin", "wuwa", "zzz"].includes(gameTag)) {
+            group1.push(statDisplaySettings);
+        }
+        group1.push(serverSettings);
+
+        if (gameTag !== "uma") {
+            settings.push(group2);
+        }
     }
 
     return (
