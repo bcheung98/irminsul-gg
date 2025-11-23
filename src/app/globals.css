@@ -1,9 +1,12 @@
 :root {
     color-scheme: dark;
+    scrollbar-gutter: stable;
+    background-color: rgb(44, 44, 44);
 }
 
 body {
     margin: 0;
+    padding-right: 0 !important;
     background-color: transparent;
     font-family: Inter, "Segoe UI", Roboto, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -51,8 +54,8 @@ ul {
 }
 
 #global-error {
-    background-color: rgba(8, 32, 72, 0.75);
-    border-radius: 4px;
+    background-color: rgba(16, 16, 16, 0.75);
+    border-radius: 8px;
 }
 
 .global-error-text,
@@ -61,8 +64,8 @@ ul {
 }
 
 .global-error-text {
-    font-family: Rowdies;
-    font-weight: 300;
+    font-family: Inter;
+    font-weight: 600;
 }
 
 .global-error-code-text {

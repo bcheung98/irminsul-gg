@@ -28,6 +28,7 @@ export default function NavBar() {
                     xs: theme.appbar.backgroundColor.main,
                     lg: alpha(theme.appbar.backgroundColor.main, 0.95),
                 },
+                pr: "0 !important",
             }}
         >
             <Toolbar
