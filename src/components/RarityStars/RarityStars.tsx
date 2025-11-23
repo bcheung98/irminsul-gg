@@ -24,7 +24,7 @@ export default function RarityStars({
 }) {
     const game = useGameTag();
 
-    const rarityColors = useRarityColors()[game];
+    const rarityColors = useRarityColors()[game || "genshin"];
 
     return (
         <Text
@@ -36,6 +36,7 @@ export default function RarityStars({
                     : color || theme.text.star,
                 userSelect: "none",
                 lineHeight: theme.typography[variant].fontSize,
+                fontWeight: theme.font.weight.highlight,
             })}
         >
             {range(rarity).map((_) => star)}

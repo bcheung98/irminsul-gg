@@ -138,7 +138,9 @@ export default function LevelUpCosts({
 
     return (
         <Stack spacing={1}>
-            <Text variant="h6">{title}</Text>
+            <Text variant="h6" weight="highlight">
+                {title}
+            </Text>
             <Box sx={{ containerType: "inline-size" }}>
                 <Grid
                     container

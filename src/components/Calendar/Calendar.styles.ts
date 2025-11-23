@@ -4,7 +4,7 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
     pt: { xs: 0, sm: 2, md: 3 },
     color: theme.text.primary,
     fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.font.weight.primary,
+    fontWeight: theme.font.weight.highlight,
     "--fc-page-bg-color": alpha(theme.contentBox.backgroundColor.header, 0.95),
     "--fc-border-color": theme.border.color.primary,
     "--fc-event-bg-color": "transparent",
@@ -19,9 +19,6 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
     },
     ".fc-header-toolbar.fc-toolbar": {
         mb: "16px",
-    },
-    ".fc-toolbar-title, .fc-button": {
-        fontWeight: theme.font.weight.primary,
     },
     ".fc-daygrid": {
         backgroundColor: alpha(theme.background(1, "dark"), 0.75),
@@ -66,7 +63,7 @@ export const calendarStyles: SxProps<Theme> = (theme) => ({
         },
         ".fc-col-header-cell-cushion": {
             fontSize: theme.font.sizes.body2.xs,
-            fontWeight: theme.font.weight.primary,
+            fontWeight: theme.font.weight.highlight,
         },
         ".fc .fc-daygrid-day-frame": {
             minHeight: "96px",

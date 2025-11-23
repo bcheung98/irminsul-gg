@@ -45,6 +45,7 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
             }}
         >
             <Text
+                weight="highlight"
                 sx={{
                     color: getContrastText(theme.text.primary, backgroundColor),
                 }}

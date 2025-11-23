@@ -47,7 +47,9 @@ export default function FilterSort() {
                 pt: 2,
             }}
         >
-            <Text>Sort By</Text>
+            <Text sx={{ fontWeight: theme.font.weight.highlight }}>
+                Sort By
+            </Text>
             <Stack spacing={1} direction="row" alignItems="center">
                 <Select
                     value={sortBy}

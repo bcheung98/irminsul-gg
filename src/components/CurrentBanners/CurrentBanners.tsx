@@ -8,6 +8,8 @@ import Dropdown from "@/components/Dropdown";
 import Text from "@/components/Text";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
@@ -23,12 +25,13 @@ import {
 // Type imports
 import { BannerOption, BannerProps } from "@/types/banner";
 import { BannerArchiveProps } from "@/components/BannerArchive";
-import Box from "@mui/material/Box";
 
 export default function CurrentBanners<
     T extends BannerOption,
     U extends BannerOption
 >({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
+    const theme = useTheme();
+
     const {
         character: characterBanners,
         weapon: weaponBanners,
@@ -82,7 +85,7 @@ export default function CurrentBanners<
             <FlexBox wrap spacing={[2, 8]}>
                 {character.length > 0 && (
                     <Stack spacing={1}>
-                        <Text>{`Character Banner`}</Text>
+                        <Text weight="highlight">{`Character Banner`}</Text>
                         <Stack spacing={2}>
                             {character.map((banner) => (
                                 <BannerItems
@@ -96,7 +99,7 @@ export default function CurrentBanners<
                 )}
                 {weapon.length > 0 && (
                     <Stack spacing={1}>
-                        <Text>{`Weapon Banner`}</Text>
+                        <Text weight="highlight">{`Weapon Banner`}</Text>
                         <Stack spacing={2}>
                             {weapon.map((banner) => (
                                 <BannerItems

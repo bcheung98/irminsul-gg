@@ -38,6 +38,7 @@ export default function EquipmentSetEffect({
                     <span
                         style={{
                             color: theme.text.primary,
+                            fontWeight: theme.font.weight.highlight,
                         }}
                     >
                         {`${key}-${countText({

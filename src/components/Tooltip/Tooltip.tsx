@@ -21,11 +21,12 @@ const Tooltip = styled(({ className, ...props }: TooltipProps) => (
     },
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: `black`,
+        outline: `1px solid rgb(44, 44, 44)`,
         fontSize: theme.typography.pxToRem(
             fontSize || theme.font.sizes.body3.sm
         ),
         fontFamily: theme.typography.fontFamily,
-        fontWeight: theme.font.weight.primary,
+        fontWeight: theme.font.weight.highlight,
         maxWidth: "none",
     },
 }));

@@ -51,6 +51,10 @@ export default function SearchBar({
                         borderRadius: "4px",
                         "& fieldset, &:hover fieldset, &:focus, &.Mui-focused fieldset":
                             { border: 0 },
+                        "input::placeholder": {
+                            ...theme.typography.subtitle1,
+                            fontWeight: theme.font.weight.primary,
+                        },
                     },
                 },
                 ...sx,

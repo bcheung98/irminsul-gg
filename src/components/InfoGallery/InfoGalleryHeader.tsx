@@ -58,7 +58,12 @@ export default function InfoGalleryHeader({
     return (
         <Grid container spacing={2}>
             <Grid size="auto">
-                <Text variant="h5">{title}</Text>
+                <Text
+                    variant="h5"
+                    sx={{ fontWeight: theme.font.weight.highlight }}
+                >
+                    {title}
+                </Text>
             </Grid>
             {buttons.length > 1 && (
                 <Grid size={{ xs: 6, sm: "auto" }}>
@@ -99,7 +104,9 @@ export default function InfoGalleryHeader({
                         }
                         sx={{ height: "32px" }}
                     >
-                        Filters
+                        <Text variant="body2" weight="highlight">
+                            Filters
+                        </Text>
                     </Button>
                 </Grid>
             )}

@@ -116,7 +116,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                 contentProps={{ padding: "16px 24px", overflowX: "clip" }}
             >
                 <Stack spacing={3}>
-                    <Text variant="h6">
+                    <Text variant="h6" weight="highlight">
                         {version} - <i>{name}</i>
                     </Text>
                     <Grid

@@ -55,7 +55,13 @@ export default function GamesMenu() {
                     },
                 ]}
             >
-                <Text variant="body2" sx={{ color: "inherit" }}>
+                <Text
+                    variant="body2"
+                    sx={{
+                        fontWeight: theme.font.weight.highlight,
+                        color: "inherit",
+                    }}
+                >
                     Games
                 </Text>
             </Button>

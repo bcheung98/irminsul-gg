@@ -12,7 +12,7 @@ export default function LandingText() {
 
     return (
         <Stack spacing={1}>
-            <Text variant="h4" sx={{ fontWeight: theme.font.weight.home }}>
+            <Text variant="h4" weight="home">
                 Welcome to IRMINSUL.GG!
             </Text>
             <Text variant="h6">

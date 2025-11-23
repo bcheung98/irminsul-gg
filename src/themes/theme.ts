@@ -103,7 +103,7 @@ export default function getTheme(id: number) {
                     root: {
                         color: theme.appbar.color.primary,
                         fontFamily: theme.typography.fontFamily,
-                        fontWeight: theme.font.weight.primary,
+                        fontWeight: theme.font.weight.highlight,
                         textTransform: "none",
                     },
                 },

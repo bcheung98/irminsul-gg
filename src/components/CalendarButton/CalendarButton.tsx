@@ -38,7 +38,13 @@ export default function CalendarButton() {
                     },
                 }}
             >
-                <Text variant="body2" sx={{ color: "inherit" }}>
+                <Text
+                    variant="body2"
+                    weight="highlight"
+                    sx={{
+                        color: "inherit",
+                    }}
+                >
                     Calendar
                 </Text>
             </Button>

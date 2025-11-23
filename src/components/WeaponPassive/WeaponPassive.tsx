@@ -65,7 +65,7 @@ export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
             <Stack spacing={2}>
                 <Card sx={{ p: 2, backgroundColor: theme.background(0) }}>
                     <Stack spacing={1}>
-                        <Text>{passive.name}</Text>
+                        <Text weight="highlight">{passive.name}</Text>
                         <Text
                             component="span"
                             variant="subtitle1"

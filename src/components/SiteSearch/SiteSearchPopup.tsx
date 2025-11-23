@@ -161,7 +161,11 @@ export default function SiteSearchPopup({
         ) : (
             <FlexBox sx={{ justifyContent: "center" }}>
                 <Stack spacing={2}>
-                    <Text variant="h6" sx={{ textAlign: "center" }}>
+                    <Text
+                        variant="h6"
+                        weight="highlight"
+                        sx={{ textAlign: "center" }}
+                    >
                         Looking for something?
                     </Text>
                     <Image
@@ -182,7 +186,13 @@ export default function SiteSearchPopup({
 
     const NoHits =
         searchValue !== "" && !hitsLoading ? (
-            <Text>{`No results for "${searchValue}"`}</Text>
+            <Text sx={{ textAlign: "center", pt: 2 }}>
+                {`No results for "`}
+                <span style={{ fontWeight: theme.font.weight.highlight }}>
+                    {searchValue}
+                </span>
+                {`"`}
+            </Text>
         ) : null;
 
     const SearchResults =

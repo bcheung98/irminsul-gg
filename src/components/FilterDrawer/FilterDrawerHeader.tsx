@@ -23,7 +23,9 @@ export default function FilterDrawerHeader({
                 disableGutters
                 sx={{ justifyContent: "space-between", gap: 2 }}
             >
-                <Text>Filters</Text>
+                <Text sx={{ fontWeight: theme.font.weight.highlight }}>
+                    Filters
+                </Text>
                 <CloseButton
                     onClick={toggleDrawer}
                     textColor={theme.drawer.color.primary}

@@ -65,6 +65,7 @@ export default function TextLabel({
         <Text
             component={titleProps?.component || "span"}
             variant={titleProps?.variant || "body1"}
+            weight={titleProps?.weight || "highlight"}
             sx={{
                 ...{
                     color: titleProps?.color || theme.text.primary,
@@ -96,7 +97,9 @@ export default function TextLabel({
 
     const Subtitle = (
         <Text
+            component={subtitleProps?.component || "span"}
             variant={subtitleProps?.variant || "body2"}
+            weight={subtitleProps?.weight || "highlight"}
             sx={{ color: subtitleProps?.color || "inherit" }}
         >
             {subtitle}

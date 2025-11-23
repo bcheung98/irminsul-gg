@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding-right: 0 !important;
     background-color: transparent;
-    font-family: Inter, "Segoe UI", Roboto, Helvetica, sans-serif;
+    font-family: Geist, "Segoe UI", Roboto, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -35,6 +35,14 @@ ul {
     padding-left: 18px;
 }
 
+img,
+video {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
 .background-image {
     object-fit: cover;
     width: 100vw;
@@ -45,10 +53,6 @@ ul {
     scale: 1.05;
     z-index: -1;
     transition: opacity 0.5s;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
 }
 
 .background-image.inactive {
@@ -78,7 +82,7 @@ ul {
 }
 
 .global-error-text {
-    font-family: Inter;
+    font-family: Geist;
     font-weight: 600;
 }
 

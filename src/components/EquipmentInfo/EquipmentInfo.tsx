@@ -56,7 +56,11 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
 
     return (
         <ContentBox
-            header={<Text variant="h5">{displayName}</Text>}
+            header={
+                <Text variant="h5" weight="highlight">
+                    {displayName}
+                </Text>
+            }
             headerProps={{ dense: false, padding: "12px 16px" }}
             contentProps={{ padding: 0 }}
         >
@@ -72,10 +76,15 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                     <Stack spacing={2} divider={<Divider />}>
                         <Stack spacing={2}>
                             <Stack spacing={1}>
-                                <Text sx={{ color: theme.text.header }}>
+                                <Text
+                                    weight="highlight"
+                                    sx={{ color: theme.text.header }}
+                                >
                                     {equipmentPieceType[game][piece.type]}
                                 </Text>
-                                <Text variant="h6">{piece.name}</Text>
+                                <Text variant="h6" weight="highlight">
+                                    {piece.name}
+                                </Text>
                             </Stack>
                             <Grid container spacing={3}>
                                 <Grid size="auto">
@@ -101,7 +110,9 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                                 </Grid>
                             </Grid>
                         </Stack>
-                        <Text variant="body2">{piece.description}</Text>
+                        <Text variant="body2" weight="highlight">
+                            {piece.description}
+                        </Text>
                     </Stack>
                 </Tabs.Panel>
             ))}

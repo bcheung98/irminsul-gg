@@ -69,6 +69,7 @@ export default function ContentBox({
                     {typeof header === "string" ? (
                         <Text
                             variant={headerProps.textVariant}
+                            weight="highlight"
                             sx={{ color: theme.contentBox.color.header }}
                         >
                             {header}

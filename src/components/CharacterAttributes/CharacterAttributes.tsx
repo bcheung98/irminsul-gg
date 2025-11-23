@@ -78,7 +78,9 @@ export default function CharacterAttributes(props: AttributeData) {
                 </FlexBox>
             </Stack>
             {attributes.description && (
-                <Text variant="body2">{parse(attributes.description)}</Text>
+                <Text variant="body2" weight="highlight">
+                    {parse(attributes.description)}
+                </Text>
             )}
         </Stack>
     );

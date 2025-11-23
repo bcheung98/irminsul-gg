@@ -63,12 +63,18 @@ export default function SettingsItem({
                                 transition: "transform 0.25s",
                             }}
                         />
-                        <Text variant="subtitle1" sx={{ textAlign: "left" }}>
+                        <Text
+                            variant="subtitle1"
+                            weight="highlight"
+                            sx={{ textAlign: "left" }}
+                        >
                             {label}
                         </Text>
                     </ButtonBase>
                 ) : (
-                    <Text variant="subtitle1">{label}</Text>
+                    <Text variant="subtitle1" weight="highlight">
+                        {label}
+                    </Text>
                 )}
                 {input}
             </FlexBox>

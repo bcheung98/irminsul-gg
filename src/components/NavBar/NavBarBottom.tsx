@@ -52,7 +52,9 @@ export default function NavBarBottom() {
                     mx: "auto",
                 }}
             >
-                <Text variant="body2">{navText}</Text>
+                <Text variant="body2" weight="highlight">
+                    {navText}
+                </Text>
             </Toolbar>
         </AppBar>
     );

@@ -103,6 +103,7 @@ export default function SiteSearchResult({
                             subtitle={
                                 <Text
                                     variant={matches ? "subtitle2" : "body3"}
+                                    weight="highlight"
                                     component="span"
                                 >
                                     {`${categories[item.category]}`}

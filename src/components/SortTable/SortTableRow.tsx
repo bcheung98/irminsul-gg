@@ -18,6 +18,9 @@ export default function SortTableRow<T extends ColumnHeaders>({
     const labelProps: TextLabelProps = {
         titleProps: {
             variant: "body2",
+            sx: {
+                fontWeight: theme.font.weight.primary,
+            },
         },
         spacing: 2,
         iconProps: {

@@ -1,15 +1,15 @@
 "use client";
 
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 import { createTheme } from "@mui/material";
 import { getThemeBackgroundColors } from "@/helpers/styles";
 import { Shade } from "@/types/theme";
 
-const font = Inter({
-    weight: ["300", "400", "700"],
+const font = Geist({
+    weight: ["300", "400", "500", "700", "800"],
     subsets: ["latin"],
     display: "swap",
-    variable: "--font-inter",
+    variable: "--font-geist",
 });
 
 const appbarColors = ["rgb(8, 8, 8)", "rgb(16, 16, 16)", "rgb(40, 40, 40)"];
@@ -89,10 +89,10 @@ export const nextThemeData = {
     },
     font: {
         weight: {
-            primary: 600,
-            element: 600,
-            highlight: 600,
-            home: 700,
+            primary: 500,
+            element: 700,
+            highlight: 700,
+            home: 800,
         },
         sizes: {
             h3: {

@@ -44,7 +44,9 @@ export default function CalendarEventPopup(props: {
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
             <Stack spacing={1}>
-                <Text>{getBannerLabel(props.eventProps, server, "date")}</Text>
+                <Text weight="highlight">
+                    {getBannerLabel(props.eventProps, server, "date")}
+                </Text>
                 <BannerItems
                     banner={props.eventProps}
                     showCountdown={isCurrent || isFuture}

@@ -29,7 +29,11 @@ export default function CalendarFooter() {
             justifyContent="center"
         >
             <InfoIcon fontSize="small" sx={{ color: theme.text.primary }} />
-            <Text variant="body2" sx={{ userSelect: "none" }}>
+            <Text
+                variant="body2"
+                weight="highlight"
+                sx={{ userSelect: "none" }}
+            >
                 The schedule and contents of future updates are subject to
                 change without notice
             </Text>

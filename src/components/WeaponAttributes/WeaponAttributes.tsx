@@ -87,7 +87,9 @@ export default function WeaponAttributes({
                 </Stack>
             </FlexBox>
             {attributes.description && (
-                <Text variant="body2">{parse(attributes.description)}</Text>
+                <Text variant="body2" weight="highlight">
+                    {parse(attributes.description)}
+                </Text>
             )}
         </Stack>
     );

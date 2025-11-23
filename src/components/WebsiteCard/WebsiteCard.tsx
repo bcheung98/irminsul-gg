@@ -117,6 +117,7 @@ export default function WebsiteCard({
                                 variant={matches ? "subtitle1" : "subtitle2"}
                                 sx={{
                                     color: theme.infoCard.color.primary,
+                                    fontWeight: theme.font.weight.highlight,
                                     textAlign: "center",
                                     cursor: enabled ? "pointer" : "auto",
                                 }}

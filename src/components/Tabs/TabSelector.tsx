@@ -13,6 +13,7 @@ export default function TabSelector(props: TabProps) {
             sx={{
                 ...{
                     textTransform: "none",
+                    fontWeight: theme.font.weight.highlight,
                     "&.Mui-selected": {
                         color: theme.text.selected,
                     },

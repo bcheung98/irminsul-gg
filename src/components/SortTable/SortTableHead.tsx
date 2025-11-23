@@ -45,7 +45,12 @@ export default function SortTableHead<T extends ColumnHeaders>({
                                 },
                             }}
                         >
-                            <Text variant="body2">{value}</Text>
+                            <Text
+                                variant="body2"
+                                sx={{ fontWeight: theme.font.weight.highlight }}
+                            >
+                                {value}
+                            </Text>
                         </TableSortLabel>
                     </TableCell>
                 ))}

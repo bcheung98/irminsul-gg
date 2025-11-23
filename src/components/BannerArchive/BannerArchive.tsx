@@ -192,6 +192,7 @@ export default function BannerArchive<
                         >
                             <Text
                                 variant="body2"
+                                weight="highlight"
                                 sx={{
                                     mt: 0.5,
                                     cursor: "help",
@@ -203,7 +204,9 @@ export default function BannerArchive<
                         </Tooltip>
                     </FlexBox>
                     <FlexBox sx={{ mt: 0.5 }} spacing={1}>
-                        <Text variant="body2">Limit Search:</Text>
+                        <Text variant="body2" weight="highlight">
+                            Limit Search:
+                        </Text>
                         <FlexBox spacing={2}>
                             <FlexBox spacing={1}>
                                 <Text variant="body2">
@@ -241,7 +244,9 @@ export default function BannerArchive<
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
             <Stack spacing={2} sx={{ p: 1 }}>
-                <Text variant="h5">Banner Archive</Text>
+                <Text variant="h5" weight="highlight">
+                    Banner Archive
+                </Text>
                 <ContentBox header={HeaderRoot} contentProps={{ padding: 0 }}>
                     <Box
                         sx={{

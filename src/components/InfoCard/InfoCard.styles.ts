@@ -61,6 +61,7 @@ export const infoCardStyles = ({
     }),
     text: (): SxProps<Theme> => (theme) => ({
         color: theme.infoCard.color.primary,
+        fontWeight: theme.font.weight.highlight,
         textAlign: "center",
     }),
     badgeContainer:

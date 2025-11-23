@@ -60,6 +60,7 @@ export default function SkillDescription({
                             className={className}
                             style={{
                                 color: textColor(game, getTextColor(className)),
+                                fontWeight: theme.font.weight.highlight,
                                 textDecoration: !disableLink
                                     ? "underline"
                                     : "none",

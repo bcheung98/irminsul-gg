@@ -65,14 +65,17 @@ export default function Countdown(props: {
                         arrow
                         placement="bottom"
                     >
-                        <span
-                            style={{
+                        <Text
+                            component="span"
+                            variant="body2"
+                            weight="highlight"
+                            sx={{
                                 textDecoration: "underline dotted",
                                 cursor: "help",
                             }}
                         >
                             {countdownArr.join(" ")}
-                        </span>
+                        </Text>
                     </Tooltip>
                 </>
             ) : (

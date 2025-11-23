@@ -99,11 +99,12 @@ export default function CalendarHeader({
             prevMonth();
             return;
         }
-        if (event.key === "t") {
-            event.preventDefault();
-            jumpToday();
-            return;
-        }
+        // TODO: Fix site search input being blocked by this
+        // if (event.key === "t") {
+        //     event.preventDefault();
+        //     jumpToday();
+        //     return;
+        // }
         if (event.key === "ArrowRight") {
             event.preventDefault();
             nextMonth();
@@ -142,7 +143,12 @@ export default function CalendarHeader({
             sx={calendarButtonStyles}
             disabled={isDisabled}
         >
-            <Text variant="subtitle2">Today</Text>
+            <Text
+                variant="subtitle2"
+                sx={{ fontWeight: theme.font.weight.highlight }}
+            >
+                Today
+            </Text>
         </Button>
     );
 
@@ -166,6 +172,7 @@ export default function CalendarHeader({
         <Text
             variant={matches ? "h6" : "body1"}
             sx={{
+                fontWeight: theme.font.weight.highlight,
                 userSelect: "none",
                 lineHeight: { xs: "20px", sm: "28px" },
             }}
@@ -178,6 +185,7 @@ export default function CalendarHeader({
         <Text
             variant={matches ? "body1" : "body2"}
             sx={{
+                fontWeight: theme.font.weight.highlight,
                 userSelect: "none",
                 lineHeight: { xs: "20px", sm: "28px" },
             }}

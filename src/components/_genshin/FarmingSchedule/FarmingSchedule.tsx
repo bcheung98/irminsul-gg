@@ -114,6 +114,7 @@ export default function FarmingSchedule(props: {
         return (
             <Text
                 variant="subtitle1"
+                weight="highlight"
                 sx={{
                     color:
                         props.index === tabValue

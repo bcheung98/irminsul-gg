@@ -40,7 +40,9 @@ export default function StatsDisplay({
 
     return (
         <Stack spacing={mode === "slider" ? 1 : 0}>
-            <Text variant="h6">{title}</Text>
+            <Text variant="h6" weight="highlight">
+                {title}
+            </Text>
             <StatsTable
                 mode={mode}
                 levels={levels}

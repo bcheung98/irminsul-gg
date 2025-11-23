@@ -78,7 +78,7 @@ export default function StatsTable({
                         flexWrap: { xs: "wrap", md: "nowrap" },
                     }}
                 >
-                    <Text sx={{ minWidth: "60px" }}>
+                    <Text weight="highlight" sx={{ minWidth: "60px" }}>
                         Lv. {levels[sliderValue - 1]}
                     </Text>
                     <Slider
