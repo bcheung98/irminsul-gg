@@ -1,4 +1,5 @@
 import { useStore } from "./useStore";
+import { useCalendarStore } from "./useCalendarStore";
 import { useDrawerStore } from "./useDrawerStore";
 import { useFilterStore } from "./useFilterStore";
 import { useGalleryStore } from "./useGalleryStore";
@@ -9,6 +10,7 @@ import { useSiteSearchStore } from "./useSiteSearchStore";
 
 export {
     useStore,
+    useCalendarStore,
     useDrawerStore,
     useFilterStore,
     useGalleryStore,

@@ -39,6 +39,7 @@ export async function getItems(
                 name: item.name,
                 displayName:
                     "fullName" in item ? item.fullName : item.displayName,
+                rarity: item.rarity,
                 category: category,
                 release: item.release,
                 url: `/${category.split("/")[0]}/${splitJoin(

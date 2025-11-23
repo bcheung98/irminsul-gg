@@ -30,7 +30,7 @@ export default function InfoAvatar({
 }: InfoAvatarProps) {
     const theme = useTheme();
 
-    const game = useGameTag();
+    const game = useGameTag() || "genshin";
 
     const rarityColors = useRarityColors()[game];
 

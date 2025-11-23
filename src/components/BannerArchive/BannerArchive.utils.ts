@@ -17,8 +17,8 @@ export function isFutureBanner(banner: Banner, server: Server, game?: Game) {
 
 export function getBannerLabel(
     banner: Banner,
-    server: Server,
-    hideVersionLabel = false
+    server?: Server,
+    info?: "version" | "date" | undefined
 ) {
     let version, phase;
     let b = banner.version.split(".");
@@ -34,7 +34,9 @@ export function getBannerLabel(
     const end = new DateObject(banner.end, server).string;
     const dateRange = `${start} — ${end}`;
 
-    return hideVersionLabel ? dateRange : `${versionLabel}: ${dateRange}`;
+    if (info === "date") return dateRange;
+    else if (info === "version") return versionLabel;
+    else return `${versionLabel}: ${dateRange}`;
 }
 
 export function filterOptions(options: BannerOption[], searchValue: string) {

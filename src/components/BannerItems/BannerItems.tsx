@@ -29,10 +29,13 @@ const BannerItems = memo(function BannerItems({
     banner,
     backgroundColor,
     showCountdown = false,
+    game,
 }: BannerItemsProps) {
     const theme = useTheme();
 
-    const game = useGameTag();
+    if (!game) {
+        game = useGameTag();
+    }
 
     const { characters, weapons, server } = useBannerData();
 

@@ -13,6 +13,7 @@ import { BaseDataWithRelease } from "@/types";
 export interface SearchResult extends BaseDataWithRelease {
     displayName: string;
     category: string;
+    rarity: number;
     url: string;
 }
 
