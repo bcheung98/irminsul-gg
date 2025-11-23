@@ -57,7 +57,7 @@ export type AttributeDataMiscKey = keyof AttributeDataMisc;
 // Game data
 export type Game = (typeof gameNames)[number];
 export interface GameInfo {
-    tag: string;
+    tag: Game;
     name: string;
     shortName: string;
     enabled: boolean;
