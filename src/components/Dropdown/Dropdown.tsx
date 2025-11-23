@@ -122,9 +122,7 @@ export default function Dropdown({
                 </ButtonBase>
             </FlexBox>
             <Collapse in={open} timeout="auto" unmountOnExit={unmountOnExit}>
-                <Box sx={{ p: { xs: "8px 0", md: contentPadding } }}>
-                    {children}
-                </Box>
+                <Box sx={{ p: contentPadding }}>{children}</Box>
             </Collapse>
         </Box>
     );
