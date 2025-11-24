@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Component imports
 import FlexBox from "@/components/FlexBox";
-import Text from "@/components/Text";
+import Text, { TextWeight } from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -12,6 +12,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { StackProps } from "@mui/material/Stack";
+import { TypographyProps } from "@mui/material/Typography";
 
 export interface SettingsItemProps {
     label: string;
@@ -19,6 +20,8 @@ export interface SettingsItemProps {
     description?: string | React.ReactNode;
     divider?: boolean;
     alignItems?: StackProps["alignItems"];
+    textVariant?: TypographyProps["variant"];
+    textWeight?: TextWeight;
 }
 
 export default function SettingsItem({
@@ -27,6 +30,8 @@ export default function SettingsItem({
     description,
     divider = false,
     alignItems = "normal",
+    textVariant = "subtitle1",
+    textWeight = "highlight",
 }: SettingsItemProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -64,15 +69,15 @@ export default function SettingsItem({
                             }}
                         />
                         <Text
-                            variant="subtitle1"
-                            weight="highlight"
+                            variant={textVariant}
+                            weight={textWeight}
                             sx={{ textAlign: "left" }}
                         >
                             {label}
                         </Text>
                     </ButtonBase>
                 ) : (
-                    <Text variant="subtitle1" weight="highlight">
+                    <Text variant={textVariant} weight={textWeight}>
                         {label}
                     </Text>
                 )}
