@@ -8,7 +8,6 @@ import Dropdown from "@/components/Dropdown";
 import Text from "@/components/Text";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
@@ -25,13 +24,12 @@ import {
 // Type imports
 import { BannerOption, BannerProps } from "@/types/banner";
 import { BannerArchiveProps } from "@/components/BannerArchive";
+import { GameData } from "@/types";
 
 export default function CurrentBanners<
     T extends BannerOption,
     U extends BannerOption
 >({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
-    const theme = useTheme();
-
     const {
         character: characterBanners,
         weapon: weaponBanners,
@@ -131,14 +129,22 @@ export default function CurrentBanners<
 
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
-            <ContentBox header={`Current Banners`}>
+            <ContentBox header={title[game]}>
                 <Stack spacing={2} divider={<Divider />}>
                     {activeBanners && (
-                        <Banners
-                            character={currentCharacterBanners}
-                            weapon={currentWeaponBanners}
-                            chronicled={currentChronicledBanners}
-                        />
+                        <Dropdown
+                            title={`Current Banners`}
+                            textVariant="h6"
+                            contentPadding={"8px 0"}
+                            reverse
+                            defaultOpen
+                        >
+                            <Banners
+                                character={currentCharacterBanners}
+                                weapon={currentWeaponBanners}
+                                chronicled={currentChronicledBanners}
+                            />
+                        </Dropdown>
                     )}
                     {futureBanners && (
                         <Dropdown
@@ -146,6 +152,7 @@ export default function CurrentBanners<
                             textVariant="h6"
                             contentPadding={"8px 0"}
                             reverse
+                            defaultOpen={!activeBanners}
                         >
                             <Box sx={{ maxHeight: "320px", overflowY: "auto" }}>
                                 <Banners
@@ -161,3 +168,11 @@ export default function CurrentBanners<
         </BannerDataContext>
     );
 }
+
+const title: GameData<string> = {
+    genshin: "Event Wishes",
+    hsr: "Event Warps",
+    wuwa: "Convenes",
+    zzz: "Signal Searches",
+    uma: "Spotlight Scouts",
+};
