@@ -4,10 +4,6 @@ import { GameData } from "@/types";
 export const banners: GameData<ToggleButtonProps[]> = {
     genshin: [
         {
-            value: "all",
-            label: "All",
-        },
-        {
             value: "character",
             label: "Character",
         },

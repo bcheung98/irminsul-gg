@@ -12,11 +12,11 @@ export interface BannerArchiveProps<
 }
 
 export interface BannerArchiveHeaderProps {
-    bannerType: BannerType;
+    bannerType: BannerType[];
     sortDirection: SortOrder;
     handleViewChange: (
         _: React.BaseSyntheticEvent,
-        newValue: BannerType
+        newValue: BannerType[]
     ) => void;
     handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
 }

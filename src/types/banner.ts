@@ -25,4 +25,4 @@ export interface BannerProps {
     chronicled?: Banner[];
 }
 
-export type BannerType = keyof BannerProps | "all";
+export type BannerType = keyof BannerProps;

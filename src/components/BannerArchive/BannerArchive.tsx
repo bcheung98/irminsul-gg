@@ -67,24 +67,31 @@ export default function BannerArchive<
         setFilterWeapon(event.target.checked);
     };
 
-    const [bannerType, setBannerType] = useState<BannerType>("character");
+    const [bannerType, setBannerType] = useState<BannerType[]>([
+        "character",
+        "weapon",
+    ]);
     const handleViewChange = useCallback(
-        (_: React.BaseSyntheticEvent, newValue: BannerType | null) => {
-            if (newValue) {
-                setBannerType(() => newValue);
-                if (newValue == "all" || newValue === "chronicled") {
-                    setFilterCharacter(true);
-                    setFilterWeapon(true);
-                }
-                if (newValue === "character") {
-                    setFilterCharacter(true);
-                    setFilterWeapon(false);
-                }
-                if (newValue === "weapon") {
-                    setFilterCharacter(false);
-                    setFilterWeapon(true);
-                }
+        (_: React.BaseSyntheticEvent, newValue: BannerType[]) => {
+            let draft: BannerType[] = [];
+            if (newValue.includes("character")) {
+                draft.push("character");
+                setFilterCharacter(true);
+            } else {
+                setFilterCharacter(false);
             }
+            if (newValue.includes("weapon")) {
+                draft.push("weapon");
+                setFilterWeapon(true);
+            } else {
+                setFilterWeapon(false);
+            }
+            if (banners.chronicled && newValue.includes("chronicled")) {
+                draft.push("chronicled");
+                setFilterCharacter(true);
+                setFilterWeapon(true);
+            }
+            setBannerType(() => draft);
         },
         []
     );
@@ -143,26 +150,6 @@ export default function BannerArchive<
         startDropdownTransition(() => setOpen(!open));
     };
 
-    const width = { xs: "100%", md: "75%", xl: "50%" };
-
-    const gridStyle = (banner: Banner): SxProps<Theme> => {
-        const current = isCurrentBanner(banner, server);
-        const upcoming = isFutureBanner(banner, server);
-        return (theme) => ({
-            borderRadius: theme.contentBox.border.radius,
-            backgroundColor: current
-                ? theme.palette.info.dark
-                : theme.contentBox.backgroundColor.main,
-            borderLeft: `8px solid ${
-                current
-                    ? theme.text.header
-                    : upcoming
-                    ? theme.palette.success.main
-                    : theme.palette.error.main
-            }`,
-        });
-    };
-
     const HeaderAction = (
         <Tooltip
             title={`${open ? "Hide" : "Expand"} search options`}
@@ -193,7 +180,6 @@ export default function BannerArchive<
         <Card
             sx={{
                 p: 2,
-                width: width,
                 borderRadius: theme.contentBox.border.radius,
             }}
         >
@@ -209,7 +195,14 @@ export default function BannerArchive<
                 </FlexBox>
                 {!dropdownLoading ? (
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Stack spacing={1}>
+                        <Stack
+                            spacing={1}
+                            sx={{
+                                contentVisibility: !dropdownLoading
+                                    ? "visible"
+                                    : "hidden",
+                            }}
+                        >
                             <FlexBox spacing={1}>
                                 <Switch
                                     checked={unique}
@@ -287,6 +280,36 @@ export default function BannerArchive<
         </Card>
     );
 
+    const gridStyle = (banner: Banner): SxProps<Theme> => {
+        const current = isCurrentBanner(banner, server);
+        const upcoming = isFutureBanner(banner, server);
+        return (theme) => ({
+            borderRadius: theme.contentBox.border.radius,
+            backgroundColor: current
+                ? theme.palette.info.dark
+                : theme.contentBox.backgroundColor.main,
+            borderLeft: `8px solid ${
+                current
+                    ? theme.text.header
+                    : upcoming
+                    ? theme.palette.success.main
+                    : theme.palette.error.main
+            }`,
+        });
+    };
+
+    const showDoubleGrid =
+        bannerType.length === 2 && !bannerType.includes("chronicled");
+    const gridSize = { xs: 12, md: showDoubleGrid ? 6 : 12 };
+    const gridParams = {
+        spacing: 1,
+        sx: {
+            maxWidth: showDoubleGrid
+                ? theme.breakpoints.values.xl
+                : theme.breakpoints.values.md,
+        },
+    };
+
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
             <Stack spacing={2} sx={{ p: 1 }}>
@@ -294,13 +317,15 @@ export default function BannerArchive<
                     <Text variant="h5" weight="highlight">
                         Banner Archive
                     </Text>
-                    {HeaderRoot}
+                    <Grid container {...gridParams}>
+                        <Grid size={gridSize}>{HeaderRoot}</Grid>
+                    </Grid>
                 </Stack>
                 {!loading ? (
-                    <Grid container spacing={1} sx={{ width: width }}>
+                    <Grid container {...gridParams}>
                         {bannerList.map((banner) => (
                             <Grid
-                                size={12}
+                                size={gridSize}
                                 key={banner.id}
                                 sx={gridStyle(banner)}
                             >

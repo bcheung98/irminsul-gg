@@ -48,7 +48,6 @@ export default function BannerArchiveHeader({
                 />
             </IconButton>
             <ToggleButtons
-                exclusive
                 buttons={banners[game]}
                 value={bannerType}
                 padding="6px 16px"
