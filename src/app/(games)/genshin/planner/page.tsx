@@ -17,8 +17,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const characters = await getDataSet<GenshinCharacter>("genshin/characters");
-    const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");
+    const characterData = await getDataSet<GenshinCharacter>(
+        "genshin/characters"
+    );
+    const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
+
+    const [characters, weapons] = await Promise.all([
+        characterData,
+        weaponData,
+    ]);
 
     return (
         <Suspense fallback={<Loader />}>

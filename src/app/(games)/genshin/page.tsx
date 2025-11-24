@@ -16,13 +16,26 @@ import {
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
-    const characters = await getDataSet<GenshinCharacter>("genshin/characters");
-    const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");
-    const equipment = await getDataSet<GenshinArtifact>("genshin/artifacts");
-    const characterBanners = await getDataSet<Banner>(
+    const characterData = await getDataSet<GenshinCharacter>(
+        "genshin/characters"
+    );
+    const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
+    const equipmentData = await getDataSet<GenshinArtifact>(
+        "genshin/artifacts"
+    );
+    const characterBannerData = await getDataSet<Banner>(
         "genshin/banner-characters"
     );
-    const weaponBanners = await getDataSet<Banner>("genshin/banner-weapons");
+    const weaponBannerData = await getDataSet<Banner>("genshin/banner-weapons");
+
+    const [characters, weapons, equipment, characterBanners, weaponBanners] =
+        await Promise.all([
+            characterData,
+            weaponData,
+            equipmentData,
+            characterBannerData,
+            weaponBannerData,
+        ]);
 
     return (
         <Suspense fallback={<Loader />}>
