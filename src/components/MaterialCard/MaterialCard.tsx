@@ -78,6 +78,7 @@ export default function MaterialCard({
             <Box sx={styles.label()}>
                 <Text
                     variant="body2"
+                    weight="highlight"
                     sx={{
                         fontSize: `${fontSize}px !important`,
                         color: theme.materialCard.color.primary,

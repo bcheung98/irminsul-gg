@@ -78,7 +78,10 @@ export default function CharacterSkillTab({
             <>
                 <Stack spacing={3}>
                     <Box>
-                        <Text sx={{ mb: "16px", color: theme.text.header }}>
+                        <Text
+                            weight="highlight"
+                            sx={{ mb: "16px", color: theme.text.header }}
+                        >
                             {skillKeys[game][skillKey]}
                         </Text>
                         <Stack spacing={2}>
