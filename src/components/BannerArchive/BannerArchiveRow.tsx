@@ -41,7 +41,6 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
                 px: 2,
                 pt: 1,
                 pb: current || upcoming ? 1 : 2,
-                backgroundColor: backgroundColor,
             }}
         >
             <Text

@@ -30,10 +30,9 @@ export default function BannerArchiveSelector({
     ) => setValues(() => newValue as BannerOption[]);
 
     const styles: SxProps<Theme> = (theme) => ({
-        mt: 1,
-        width: { xs: "100%", md: "50%", lg: "35%" },
+        width: { xs: "100%", md: "75%", lg: "50%" },
         "& .MuiAutocomplete-inputRoot": {
-            backgroundColor: `${theme.background(0)} !important`,
+            backgroundColor: theme.background(2),
             borderRadius: theme.contentBox.border.radius,
             p: 0,
         },

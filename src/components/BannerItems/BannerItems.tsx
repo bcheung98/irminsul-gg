@@ -17,7 +17,7 @@ import {
     isFutureBanner,
     useBannerData,
 } from "@/components/BannerArchive/BannerArchive.utils";
-import { range } from "@/utils";
+import { range, sortBy } from "@/utils";
 import { getContrastText } from "@/utils/getContrastText";
 import { createBannerData } from "@/helpers/createBannerData";
 
@@ -43,9 +43,11 @@ const BannerItems = memo(function BannerItems({
     const [bannerData, setBannerData] = useState<BannerOption[]>([]);
     useEffect(() => {
         startTransition(() => {
-            const data = banner.rateUps.map((item) =>
-                createBannerData({ name: `${item}`, characters, weapons })
-            );
+            const data = banner.rateUps
+                .map((item) =>
+                    createBannerData({ name: `${item}`, characters, weapons })
+                )
+                .sort((a, b) => sortBy(a.rarity, b.rarity));
             setBannerData(data);
         });
     }, []);

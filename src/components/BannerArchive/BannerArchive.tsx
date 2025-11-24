@@ -12,7 +12,6 @@ import {
 import BannerArchiveHeader from "./BannerArchiveHeader";
 import BannerArchiveSelector from "./BannerArchiveSelector";
 import BannerArchiveRow from "./BannerArchiveRow";
-import ContentBox from "@/components/ContentBox";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Tooltip from "@/components/Tooltip";
@@ -20,19 +19,24 @@ import Switch from "@/components/Switch";
 import Checkbox from "@/components/Checkbox";
 
 // MUI imports
-import Box from "@mui/material/Box";
+import { SxProps, Theme, useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
 import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";
 import { banners as bannerLabels } from "@/data/banners";
-import { BannerDataContext } from "./BannerArchive.utils";
+import {
+    BannerDataContext,
+    isCurrentBanner,
+    isFutureBanner,
+} from "./BannerArchive.utils";
 import { getBannerList } from "@/helpers/createBannerList";
 import { createBannerOptions } from "@/helpers/createBannerData";
 
@@ -45,6 +49,8 @@ export default function BannerArchive<
     T extends BannerOption,
     U extends BannerOption
 >({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
+    const theme = useTheme();
+
     const game = useGameTag();
     const server = useStore(useServerStore, (state) => state[game]) || "NA";
 
@@ -96,7 +102,7 @@ export default function BannerArchive<
 
     const [unique, setUnique] = useState(true);
     const handleSelect = () => {
-        setUnique(!unique);
+        startTransition(() => setUnique(!unique));
     };
 
     const [values, setValues] = useState<BannerOption[]>([]);
@@ -131,9 +137,30 @@ export default function BannerArchive<
         return items;
     }, [banners, filterCharacter, filterWeapon]);
 
+    const [dropdownLoading, startDropdownTransition] = useTransition();
     const [open, setOpen] = useState(false);
     const toggleDropdownState = () => {
-        setOpen(!open);
+        startDropdownTransition(() => setOpen(!open));
+    };
+
+    const width = { xs: "100%", md: "75%", xl: "50%" };
+
+    const gridStyle = (banner: Banner): SxProps<Theme> => {
+        const current = isCurrentBanner(banner, server);
+        const upcoming = isFutureBanner(banner, server);
+        return (theme) => ({
+            borderRadius: theme.contentBox.border.radius,
+            backgroundColor: current
+                ? theme.palette.info.dark
+                : theme.contentBox.backgroundColor.main,
+            borderLeft: `8px solid ${
+                current
+                    ? theme.text.header
+                    : upcoming
+                    ? theme.palette.success.main
+                    : theme.palette.error.main
+            }`,
+        });
     };
 
     const HeaderAction = (
@@ -144,131 +171,146 @@ export default function BannerArchive<
             <IconButton
                 onClick={toggleDropdownState}
                 disableRipple
-                sx={(theme) => ({
+                sx={{
                     p: 0.5,
-                    borderRadius: "8px",
+                    borderRadius: "4px",
                     backgroundColor: open
                         ? theme.palette.info.main
                         : "transparent",
                     "&:hover": {
                         backgroundColor: open
                             ? theme.palette.info.light
-                            : theme.drawer.backgroundColor.hover,
+                            : theme.background(0),
                     },
-                })}
+                }}
             >
-                <SearchIcon />
+                <SettingsIcon />
             </IconButton>
         </Tooltip>
     );
 
     const HeaderRoot = (
-        <Box sx={{ width: "100%" }}>
-            <FlexBox spacing={2}>
-                {HeaderAction}
-                <BannerArchiveHeader
-                    bannerType={bannerType}
-                    sortDirection={sortDirection}
-                    handleViewChange={handleViewChange}
-                    handleDirectionChange={handleDirectionChange}
-                />
-            </FlexBox>
-            <Collapse in={open} timeout="auto">
-                <FlexBox spacing={[0, 2]} wrap>
-                    <BannerArchiveSelector
-                        options={bannerOptions}
-                        values={values}
-                        setValues={setValues}
+        <Card
+            sx={{
+                p: 2,
+                width: width,
+                borderRadius: theme.contentBox.border.radius,
+            }}
+        >
+            <Stack spacing={1}>
+                <FlexBox spacing={2} sx={{ justifyContent: "space-between" }}>
+                    <BannerArchiveHeader
+                        bannerType={bannerType}
+                        sortDirection={sortDirection}
+                        handleViewChange={handleViewChange}
+                        handleDirectionChange={handleDirectionChange}
                     />
-                    <FlexBox spacing={0.5}>
-                        <Switch
-                            checked={unique}
-                            onChange={handleSelect}
-                            sx={{ mt: 1 }}
-                        />
-                        <Tooltip
-                            title="If toggled, will filter banners that only contain all selected items."
-                            placement="top"
-                        >
-                            <Text
-                                variant="body2"
-                                weight="highlight"
-                                sx={{
-                                    mt: 0.5,
-                                    cursor: "help",
-                                    textDecoration: "dotted underline",
-                                }}
-                            >
-                                Toggle "AND" Filter
-                            </Text>
-                        </Tooltip>
-                    </FlexBox>
-                    <FlexBox sx={{ mt: 0.5 }} spacing={1}>
-                        <Text variant="body2" weight="highlight">
-                            Limit Search:
-                        </Text>
-                        <FlexBox spacing={2}>
-                            <FlexBox spacing={1}>
-                                <Text variant="body2">
-                                    {`${
-                                        bannerLabels[game].find(
-                                            (item) => item.value === "character"
-                                        )?.label
-                                    }s`}
-                                </Text>
-                                <Checkbox
-                                    checked={filterCharacter}
-                                    onChange={handleCharacterChange}
-                                />
-                            </FlexBox>
-                            <FlexBox spacing={1}>
-                                <Text variant="body2">
-                                    {`${
-                                        bannerLabels[game].find(
-                                            (item) => item.value === "weapon"
-                                        )?.label
-                                    }s`}
-                                </Text>
-                                <Checkbox
-                                    checked={filterWeapon}
-                                    onChange={handleWeaponChange}
-                                />
-                            </FlexBox>
-                        </FlexBox>
-                    </FlexBox>
+                    {HeaderAction}
                 </FlexBox>
-            </Collapse>
-        </Box>
+                {!dropdownLoading ? (
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Stack spacing={1}>
+                            <FlexBox spacing={1}>
+                                <Switch
+                                    checked={unique}
+                                    onChange={handleSelect}
+                                    size="small"
+                                    sx={{ mt: 1 }}
+                                />
+                                <Tooltip
+                                    title="If toggled, will filter banners that only contain all selected items."
+                                    placement="top"
+                                >
+                                    <Text
+                                        variant="body2"
+                                        weight="highlight"
+                                        sx={{
+                                            mt: 0.5,
+                                            cursor: "help",
+                                            textDecoration: "dotted underline",
+                                        }}
+                                    >
+                                        Toggle "AND" Filter
+                                    </Text>
+                                </Tooltip>
+                            </FlexBox>
+                            <Stack spacing={2}>
+                                <FlexBox spacing={1}>
+                                    <Text variant="body2" weight="highlight">
+                                        Limit Search:
+                                    </Text>
+                                    <FlexBox spacing={2}>
+                                        <FlexBox spacing={1}>
+                                            <Text variant="body2">
+                                                {`${
+                                                    bannerLabels[game].find(
+                                                        (item) =>
+                                                            item.value ===
+                                                            "character"
+                                                    )?.label
+                                                }s`}
+                                            </Text>
+                                            <Checkbox
+                                                checked={filterCharacter}
+                                                onChange={handleCharacterChange}
+                                            />
+                                        </FlexBox>
+                                        <FlexBox spacing={1}>
+                                            <Text variant="body2">
+                                                {`${
+                                                    bannerLabels[game].find(
+                                                        (item) =>
+                                                            item.value ===
+                                                            "weapon"
+                                                    )?.label
+                                                }s`}
+                                            </Text>
+                                            <Checkbox
+                                                checked={filterWeapon}
+                                                onChange={handleWeaponChange}
+                                            />
+                                        </FlexBox>
+                                    </FlexBox>
+                                </FlexBox>
+                                <BannerArchiveSelector
+                                    options={bannerOptions}
+                                    values={values}
+                                    setValues={setValues}
+                                />
+                            </Stack>
+                        </Stack>
+                    </Collapse>
+                ) : !open ? (
+                    <LinearProgress color="info" />
+                ) : null}
+            </Stack>
+        </Card>
     );
 
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
             <Stack spacing={2} sx={{ p: 1 }}>
-                <Text variant="h5" weight="highlight">
-                    Banner Archive
-                </Text>
-                <ContentBox header={HeaderRoot} contentProps={{ padding: 0 }}>
-                    <Box
-                        sx={{
-                            minHeight: "75vh",
-                            maxHeight: "75vh",
-                            overflowY: "auto",
-                        }}
-                    >
-                        {!loading ? (
-                            <Stack divider={<Divider />}>
-                                {bannerList.map((banner) => (
-                                    <BannerArchiveRow
-                                        key={banner.id}
-                                        banner={banner}
-                                    />
-                                ))}
-                            </Stack>
-                        ) : (
-                            <LinearProgress />
-                        )}
-                    </Box>
-                </ContentBox>
+                <Stack spacing={2}>
+                    <Text variant="h5" weight="highlight">
+                        Banner Archive
+                    </Text>
+                    {HeaderRoot}
+                </Stack>
+                {!loading ? (
+                    <Grid container spacing={1} sx={{ width: width }}>
+                        {bannerList.map((banner) => (
+                            <Grid
+                                size={12}
+                                key={banner.id}
+                                sx={gridStyle(banner)}
+                            >
+                                <BannerArchiveRow banner={banner} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                ) : (
+                    <LinearProgress />
+                )}
             </Stack>
         </BannerDataContext>
     );

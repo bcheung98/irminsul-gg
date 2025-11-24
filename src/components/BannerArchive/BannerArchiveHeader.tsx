@@ -23,24 +23,16 @@ export default function BannerArchiveHeader({
 
     return (
         <FlexBox spacing={[1, 2]} wrap>
-            <ToggleButtons
-                color="secondary"
-                exclusive
-                buttons={banners[game]}
-                value={bannerType}
-                padding={8}
-                onChange={handleViewChange}
-            />
             <IconButton
                 onClick={handleDirectionChange}
                 sx={(theme) => ({
-                    backgroundColor: theme.background(0, "dark"),
+                    backgroundColor: theme.background(2, "dark"),
                     border: `1px solid ${theme.border.color.primary}`,
                     borderRadius: "4px",
                     width: "32px",
                     height: "32px",
                     "&:hover": {
-                        backgroundColor: theme.background(0, "light"),
+                        backgroundColor: theme.background(0),
                     },
                 })}
             >
@@ -55,6 +47,14 @@ export default function BannerArchiveHeader({
                     }}
                 />
             </IconButton>
+            <ToggleButtons
+                exclusive
+                buttons={banners[game]}
+                value={bannerType}
+                padding="6px 16px"
+                onChange={handleViewChange}
+                highlightOnHover={false}
+            />
         </FlexBox>
     );
 }
