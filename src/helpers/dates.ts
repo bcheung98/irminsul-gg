@@ -43,19 +43,16 @@ function formatDate(date: string, offset: string) {
         .replace(/-/g, "/")}${offset}`;
 }
 
-/**
- * @param value - A string representing a date.
- * The string must be formatted in the following way: `YYYY-MM-DD HH:MM:SS UTC+Z`.
- * @param server - The current server (NA / EU / Asia).
- * @param game - The current game.
- */
 export default class DateObject {
     value: string;
     server: Server;
     game: Game | undefined;
 
     /**
-     * @constructor
+     * @param value - A string representing a date.
+     * The string must be formatted in the following way: `YYYY-MM-DD HH:MM:SS UTC+Z`.
+     * @param server - The current server (NA / EU / Asia).
+     * @param game - The current game.
      */
     constructor(value: string, server?: Server, game?: Game) {
         this.value = value;
