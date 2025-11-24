@@ -1,0 +1,28 @@
+import { Suspense } from "react";
+
+// Component imports
+import Planner from "@/components/Planner";
+import Loader from "@/components/Loader";
+
+// Helper imports
+import { getDataSet } from "@/lib/fetchData";
+
+// Type imports
+import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Ascension Planner",
+    description: "Tool for calculating level-up costs",
+};
+
+export default async function Page() {
+    const characters = await getDataSet<GenshinCharacter>("genshin/characters");
+    const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");
+
+    return (
+        <Suspense fallback={<Loader />}>
+            <Planner characters={characters} weapons={weapons} />
+        </Suspense>
+    );
+}

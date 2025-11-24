@@ -28,6 +28,9 @@ export interface BaseData {
 export interface BaseDataWithRelease extends BaseData {
     release: Version;
 }
+export type DataType = BaseDataWithRelease & {
+    [key: string]: any;
+};
 
 // Attribute data
 export interface AttributeData {
