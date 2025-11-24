@@ -12,7 +12,7 @@ import { default as Tabs } from "@/components/Tabs";
 import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -178,8 +178,8 @@ export default function CharacterSplash({
                         value={tabValue}
                         timeout={500}
                     >
-                        <Box sx={{ minHeight: "96px" }}>
-                            <Text variant="h6" gutterBottom>
+                        <Stack spacing={1} sx={{ minHeight: "96px" }}>
+                            <Text variant="h6" weight="highlight">
                                 {outfit.displayName || outfit.name}
                             </Text>
                             <Text
@@ -188,7 +188,7 @@ export default function CharacterSplash({
                             >
                                 {parse(outfit.description)}
                             </Text>
-                        </Box>
+                        </Stack>
                         <Image
                             src={imgSrcSplash}
                             alt={outfit.name}
