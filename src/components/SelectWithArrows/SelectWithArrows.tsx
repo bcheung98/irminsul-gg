@@ -35,6 +35,7 @@ export default function SelectWithArrows<T>({
     const theme = useTheme();
 
     const buttonStyle = {
+        p: 0,
         color: theme.contentBox.color.header,
         "&.Mui-disabled": {
             opacity: 0.35,
@@ -42,7 +43,7 @@ export default function SelectWithArrows<T>({
         },
     };
     return (
-        <Grid container sx={{ alignItems: "center" }}>
+        <Grid container spacing={0.5} sx={{ alignItems: "center" }}>
             <Grid>
                 <IconButton
                     onClick={handleIndexChangeLeft}
