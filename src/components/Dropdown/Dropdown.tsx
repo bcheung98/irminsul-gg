@@ -5,20 +5,21 @@ import FlexBox from "@/components/FlexBox";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
-import { useTheme, TypographyVariant } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ButtonBase from "@mui/material/ButtonBase";
 import { StackProps } from "@mui/material/Stack";
+import { TypographyProps } from "@mui/material/Typography";
 
 interface DropdownProps {
     children?: React.ReactNode;
     icon?: React.ReactNode;
     title?: string;
     titleColor?: string;
-    textVariant?: TypographyVariant;
+    textVariant?: TypographyProps["variant"];
     img?: string;
     imgStyle?: React.CSSProperties;
     iconColor?: string;
@@ -82,6 +83,7 @@ export default function Dropdown({
                     disableRipple
                     onClick={toggleDropdownState}
                     sx={{
+                        ml: reverse && justifyContent === "left" ? spacing : 0,
                         mr: !reverse && justifyContent === "left" ? spacing : 0,
                         color: iconColor || theme.border.color.primary,
                         transform: open

@@ -1,11 +1,8 @@
-import {
-    CSSProperties,
-    SxProps,
-    TypographyVariant,
-} from "@mui/material/styles";
+import { CSSProperties, SxProps } from "@mui/material/styles";
 import { ImageSize } from "@/components/Image/Image.types";
 import { StackProps } from "@mui/material/Stack";
 import { TextWeight } from "../Text/Text";
+import { TypographyProps } from "@mui/material/Typography";
 
 export interface IconProps {
     size?: ImageSize;
@@ -19,7 +16,7 @@ export interface IconProps {
 
 export interface TitleProps {
     component?: React.ElementType;
-    variant?: TypographyVariant;
+    variant?: TypographyProps["variant"];
     weight?: TextWeight;
     color?: string;
     defaultCursor?: string;
