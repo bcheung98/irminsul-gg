@@ -256,7 +256,10 @@ export default function BannerArchive<
 
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
-            <Stack spacing={2} sx={{ p: 1 }}>
+            <Stack
+                spacing={2}
+                sx={{ p: 1, maxWidth: theme.breakpoints.values.xl }}
+            >
                 <Stack spacing={2}>
                     <Text variant="h5" weight="highlight">
                         Banner Archive
