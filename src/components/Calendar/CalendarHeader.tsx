@@ -19,13 +19,13 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
+import { months } from "@/helpers/dates";
 import {
     calendarButtonStyles,
     calendarHeaderStyles,
     calendarIconButtonStyles,
     calendarMenuButtonStyles,
 } from "./Calendar.styles";
-import { months } from "@/helpers/dates";
 
 // Type imports
 import { CalendarApi } from "@fullcalendar/core/index.js";
@@ -249,6 +249,7 @@ export default function CalendarHeader({
                 open={drawerOpen}
                 onClose={() => toggleDrawerState()}
                 sx={{ zIndex: theme.zIndex.appBar - 1 }}
+                keepMounted
             >
                 <CalendarDrawer />
             </Drawer>
