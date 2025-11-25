@@ -21,11 +21,11 @@ export interface BannerArchiveHeaderProps {
     handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
 }
 
-export interface BannerArchiveRowProps {
+export interface BannerListRowProps {
     banner: Banner;
 }
 
-export interface BannerItemsProps extends BannerArchiveRowProps {
+export interface BannerItemsProps extends BannerListRowProps {
     showCountdown?: boolean;
     backgroundColor?: string;
     game?: Game;

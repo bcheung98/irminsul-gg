@@ -26,3 +26,7 @@ export interface BannerProps {
 }
 
 export type BannerType = keyof BannerProps;
+
+export type ActiveBanners = {
+    [Property in keyof BannerProps]: boolean;
+};

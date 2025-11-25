@@ -14,15 +14,15 @@ import {
     isCurrentBanner,
     isFutureBanner,
     useBannerData,
-} from "./BannerArchive.utils";
+} from "../BannerArchive/BannerArchive.utils";
 import { getContrastText } from "@/utils/getContrastText";
 
 // Type imports
-import { BannerArchiveRowProps } from "./BannerArchive.types";
+import { BannerListRowProps } from "../BannerArchive/BannerArchive.types";
 
-const BannerArchiveRow = memo(function BannerArchiveRow({
+const BannerListRow = memo(function BannerListRow({
     banner,
-}: BannerArchiveRowProps) {
+}: BannerListRowProps) {
     const theme = useTheme();
 
     const { server } = useBannerData();
@@ -41,6 +41,15 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
                 px: 2,
                 pt: 1,
                 pb: current || upcoming ? 1 : 2,
+                borderRadius: theme.contentBox.border.radius,
+                backgroundColor,
+                borderLeft: `8px solid ${
+                    current
+                        ? theme.palette.warning.light
+                        : upcoming
+                        ? theme.palette.success.dark
+                        : theme.palette.error.dark
+                }`,
             }}
         >
             <Text
@@ -60,4 +69,4 @@ const BannerArchiveRow = memo(function BannerArchiveRow({
     );
 });
 
-export default BannerArchiveRow;
+export default BannerListRow;

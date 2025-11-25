@@ -11,7 +11,7 @@ import {
 // Component imports
 import BannerArchiveHeader from "./BannerArchiveHeader";
 import BannerArchiveSelector from "./BannerArchiveSelector";
-import BannerArchiveRow from "./BannerArchiveRow";
+import BannerList from "@/components/BannerList";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Tooltip from "@/components/Tooltip";
@@ -19,30 +19,30 @@ import Switch from "@/components/Switch";
 import Checkbox from "@/components/Checkbox";
 
 // MUI imports
-import { SxProps, Theme, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
+import { objectKeys } from "@/utils";
 import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";
 import { banners as bannerLabels } from "@/data/banners";
-import {
-    BannerDataContext,
-    isCurrentBanner,
-    isFutureBanner,
-} from "./BannerArchive.utils";
-import { getBannerList } from "@/helpers/createBannerList";
+import { BannerDataContext } from "./BannerArchive.utils";
+import { getBannerData } from "@/helpers/createBannerList";
 import { createBannerOptions } from "@/helpers/createBannerData";
+import { filterBanners } from "@/helpers/filterBanners";
 
 // Type imports
 import { SortOrder } from "@/types";
-import { Banner, BannerOption, BannerType } from "@/types/banner";
+import {
+    ActiveBanners,
+    BannerOption,
+    BannerProps,
+    BannerType,
+} from "@/types/banner";
 import { BannerArchiveProps } from "./BannerArchive.types";
 
 export default function BannerArchive<
@@ -57,15 +57,19 @@ export default function BannerArchive<
     const [loading, startTransition] = useTransition();
 
     const [filterCharacter, setFilterCharacter] = useState(true);
-    const handleCharacterChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setFilterCharacter(event.target.checked);
-    };
-    const [filterWeapon, setFilterWeapon] = useState(false);
-    const handleWeaponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFilterWeapon(event.target.checked);
-    };
+    const handleCharacterChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setFilterCharacter(() => event.target.checked);
+        },
+        []
+    );
+    const [filterWeapon, setFilterWeapon] = useState(true);
+    const handleWeaponChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setFilterWeapon(() => event.target.checked);
+        },
+        []
+    );
 
     const [bannerType, setBannerType] = useState<BannerType[]>([
         "character",
@@ -73,25 +77,20 @@ export default function BannerArchive<
     ]);
     const handleViewChange = useCallback(
         (_: React.BaseSyntheticEvent, newValue: BannerType[]) => {
-            let draft: BannerType[] = [];
-            if (newValue.includes("character")) {
-                draft.push("character");
-                setFilterCharacter(true);
-            } else {
-                setFilterCharacter(false);
-            }
-            if (newValue.includes("weapon")) {
-                draft.push("weapon");
-                setFilterWeapon(true);
-            } else {
-                setFilterWeapon(false);
-            }
-            if (banners.chronicled && newValue.includes("chronicled")) {
-                draft.push("chronicled");
+            if (banners.chronicled && newValue.length === 3) {
+                newValue = ["chronicled"];
                 setFilterCharacter(true);
                 setFilterWeapon(true);
+            } else if (newValue.length === 0) {
+                newValue = ["character", "weapon"];
+                setFilterCharacter(true);
+                setFilterWeapon(true);
+            } else {
+                newValue = newValue.filter((i) => i !== "chronicled");
+                setFilterCharacter(newValue.includes("character"));
+                setFilterWeapon(newValue.includes("weapon"));
             }
-            setBannerType(() => draft);
+            startTransition(() => setBannerType(() => newValue));
         },
         []
     );
@@ -112,27 +111,50 @@ export default function BannerArchive<
         startTransition(() => setUnique(!unique));
     };
 
-    const [values, setValues] = useState<BannerOption[]>([]);
+    const activeBanners = useMemo(() => {
+        const res: ActiveBanners = {
+            character: false,
+            weapon: false,
+            chronicled: false,
+        };
+        objectKeys(banners).forEach(
+            (banner) => (res[banner] = bannerType.includes(banner))
+        );
+        return res;
+    }, [JSON.stringify(bannerType)]);
 
-    const [bannerList, setBannerList] = useState<Banner[]>([]);
+    const [bannerData, setBannerData] = useState<BannerProps>({
+        character: [],
+        weapon: [],
+    });
     useEffect(() => {
         startTransition(async () => {
-            let items = await getBannerList(banners, bannerType, sortDirection);
-            if (values.length > 0) {
-                items = items.filter((banner) => {
-                    function filterFn(item: BannerOption) {
-                        return banner.rateUps
-                            .map((item) => item)
-                            .includes(item.name);
-                    }
-                    return unique
-                        ? values.every(filterFn)
-                        : values.some(filterFn);
-                });
-            }
-            startTransition(() => setBannerList(items));
+            let items = await getBannerData(banners);
+            startTransition(() => setBannerData(items));
         });
-    }, [bannerType, sortDirection, values, unique]);
+    }, [banners]);
+
+    const [values, setValues] = useState<BannerOption[]>([]);
+
+    const characterBanners = useMemo(
+        () =>
+            filterBanners(bannerData.character, values, unique, sortDirection),
+        [bannerData.character, values, unique, sortDirection]
+    );
+    const weaponBanners = useMemo(
+        () => filterBanners(bannerData.weapon, values, unique, sortDirection),
+        [bannerData.weapon, values, unique, sortDirection]
+    );
+    const chronicledBanners = useMemo(
+        () =>
+            filterBanners(
+                bannerData.chronicled || [],
+                values,
+                unique,
+                sortDirection
+            ),
+        [bannerData.chronicled, values, unique, sortDirection]
+    );
 
     const bannerOptions = useMemo(() => {
         let items = createBannerOptions(banners, characters, weapons);
@@ -143,38 +165,6 @@ export default function BannerArchive<
             return items.filter((item) => item.category === "weapons");
         return items;
     }, [banners, filterCharacter, filterWeapon]);
-
-    const [dropdownLoading, startDropdownTransition] = useTransition();
-    const [open, setOpen] = useState(false);
-    const toggleDropdownState = () => {
-        startDropdownTransition(() => setOpen(!open));
-    };
-
-    const HeaderAction = (
-        <Tooltip
-            title={`${open ? "Hide" : "Expand"} search options`}
-            placement="top"
-        >
-            <IconButton
-                onClick={toggleDropdownState}
-                disableRipple
-                sx={{
-                    p: 0.5,
-                    borderRadius: "4px",
-                    backgroundColor: open
-                        ? theme.palette.info.main
-                        : "transparent",
-                    "&:hover": {
-                        backgroundColor: open
-                            ? theme.palette.info.light
-                            : theme.background(0),
-                    },
-                }}
-            >
-                <SettingsIcon />
-            </IconButton>
-        </Tooltip>
-    );
 
     const HeaderRoot = (
         <Card
@@ -191,124 +181,78 @@ export default function BannerArchive<
                         handleViewChange={handleViewChange}
                         handleDirectionChange={handleDirectionChange}
                     />
-                    {HeaderAction}
                 </FlexBox>
-                {!dropdownLoading ? (
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Stack
-                            spacing={1}
-                            sx={{
-                                contentVisibility: !dropdownLoading
-                                    ? "visible"
-                                    : "hidden",
-                            }}
+                <Stack spacing={1}>
+                    <FlexBox spacing={1}>
+                        <Switch
+                            checked={unique}
+                            onChange={handleSelect}
+                            size="small"
+                            sx={{ mt: 1 }}
+                        />
+                        <Tooltip
+                            title="If toggled, will filter banners that only contain all selected items."
+                            placement="top"
                         >
-                            <FlexBox spacing={1}>
-                                <Switch
-                                    checked={unique}
-                                    onChange={handleSelect}
-                                    size="small"
-                                    sx={{ mt: 1 }}
-                                />
-                                <Tooltip
-                                    title="If toggled, will filter banners that only contain all selected items."
-                                    placement="top"
-                                >
-                                    <Text
-                                        variant="body2"
-                                        weight="highlight"
-                                        sx={{
-                                            mt: 0.5,
-                                            cursor: "help",
-                                            textDecoration: "dotted underline",
-                                        }}
-                                    >
-                                        Toggle "AND" Filter
-                                    </Text>
-                                </Tooltip>
-                            </FlexBox>
-                            <Stack spacing={2}>
+                            <Text
+                                variant="body2"
+                                weight="highlight"
+                                sx={{
+                                    mt: 0.5,
+                                    cursor: "help",
+                                    textDecoration: "dotted underline",
+                                }}
+                            >
+                                Toggle "AND" Filter
+                            </Text>
+                        </Tooltip>
+                    </FlexBox>
+                    <Stack spacing={2}>
+                        <FlexBox spacing={1}>
+                            <Text variant="body2" weight="highlight">
+                                Limit Search:
+                            </Text>
+                            <FlexBox spacing={2}>
                                 <FlexBox spacing={1}>
-                                    <Text variant="body2" weight="highlight">
-                                        Limit Search:
+                                    <Text variant="body2">
+                                        {`${
+                                            bannerLabels[game].find(
+                                                (item) =>
+                                                    item.value === "character"
+                                            )?.label
+                                        }s`}
                                     </Text>
-                                    <FlexBox spacing={2}>
-                                        <FlexBox spacing={1}>
-                                            <Text variant="body2">
-                                                {`${
-                                                    bannerLabels[game].find(
-                                                        (item) =>
-                                                            item.value ===
-                                                            "character"
-                                                    )?.label
-                                                }s`}
-                                            </Text>
-                                            <Checkbox
-                                                checked={filterCharacter}
-                                                onChange={handleCharacterChange}
-                                            />
-                                        </FlexBox>
-                                        <FlexBox spacing={1}>
-                                            <Text variant="body2">
-                                                {`${
-                                                    bannerLabels[game].find(
-                                                        (item) =>
-                                                            item.value ===
-                                                            "weapon"
-                                                    )?.label
-                                                }s`}
-                                            </Text>
-                                            <Checkbox
-                                                checked={filterWeapon}
-                                                onChange={handleWeaponChange}
-                                            />
-                                        </FlexBox>
-                                    </FlexBox>
+                                    <Checkbox
+                                        checked={filterCharacter}
+                                        onChange={handleCharacterChange}
+                                    />
                                 </FlexBox>
-                                <BannerArchiveSelector
-                                    options={bannerOptions}
-                                    values={values}
-                                    setValues={setValues}
-                                />
-                            </Stack>
-                        </Stack>
-                    </Collapse>
-                ) : !open ? (
-                    <LinearProgress color="info" />
-                ) : null}
+                                <FlexBox spacing={1}>
+                                    <Text variant="body2">
+                                        {`${
+                                            bannerLabels[game].find(
+                                                (item) =>
+                                                    item.value === "weapon"
+                                            )?.label
+                                        }s`}
+                                    </Text>
+                                    <Checkbox
+                                        checked={filterWeapon}
+                                        onChange={handleWeaponChange}
+                                    />
+                                </FlexBox>
+                            </FlexBox>
+                        </FlexBox>
+                        <BannerArchiveSelector
+                            options={bannerOptions}
+                            values={values}
+                            setValues={setValues}
+                        />
+                    </Stack>
+                </Stack>
             </Stack>
         </Card>
     );
-
-    const gridStyle = (banner: Banner): SxProps<Theme> => {
-        const current = isCurrentBanner(banner, server);
-        const upcoming = isFutureBanner(banner, server);
-        return (theme) => ({
-            borderRadius: theme.contentBox.border.radius,
-            backgroundColor: current
-                ? theme.palette.info.dark
-                : theme.contentBox.backgroundColor.main,
-            borderLeft: `8px solid ${
-                current
-                    ? theme.text.header
-                    : upcoming
-                    ? theme.palette.success.main
-                    : theme.palette.error.main
-            }`,
-        });
-    };
-
-    const showDoubleGrid =
-        bannerType.length === 2 && !bannerType.includes("chronicled");
-    const gridSize = { xs: 12, md: showDoubleGrid ? 6 : 12 };
-    const gridParams = {
-        spacing: 1,
-        sx: {
-            maxWidth: showDoubleGrid
-                ? theme.breakpoints.values.xl
-                : theme.breakpoints.values.md,
-        },
-    };
 
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
@@ -317,22 +261,20 @@ export default function BannerArchive<
                     <Text variant="h5" weight="highlight">
                         Banner Archive
                     </Text>
-                    <Grid container {...gridParams}>
-                        <Grid size={gridSize}>{HeaderRoot}</Grid>
+                    <Grid container spacing={2}>
+                        <Grid size={{ xs: 12, xl: 6 }}>{HeaderRoot}</Grid>
                     </Grid>
                 </Stack>
                 {!loading ? (
-                    <Grid container {...gridParams}>
-                        {bannerList.map((banner) => (
-                            <Grid
-                                size={gridSize}
-                                key={banner.id}
-                                sx={gridStyle(banner)}
-                            >
-                                <BannerArchiveRow banner={banner} />
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <BannerList
+                        activeBanners={activeBanners}
+                        banners={{
+                            character: characterBanners,
+                            weapon: weaponBanners,
+                            chronicled: chronicledBanners,
+                        }}
+                        reverse={sortDirection === "desc"}
+                    />
                 ) : (
                     <LinearProgress />
                 )}
