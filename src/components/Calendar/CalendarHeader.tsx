@@ -83,42 +83,44 @@ export default function CalendarHeader({
 
     const isDisabled = getDateText(calendarApi()?.getDate()) === getDateText();
 
+    // NOTE: cannot be inline
+    const keyboardEventHandler = (event: KeyboardEvent) => {
+        // Disable keyboard controls if a dialog is open
+        const isDialogOpen = Object.values(document.body.style).includes(
+            "padding-right"
+        );
+        if (!isDialogOpen) {
+            if (event.ctrlKey && event.key === "ArrowLeft") {
+                event.preventDefault();
+                prevYear();
+                return;
+            }
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                prevMonth();
+                return;
+            }
+            if (event.key === "t") {
+                event.preventDefault();
+                jumpToday();
+                return;
+            }
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                nextMonth();
+                return;
+            }
+            if (event.ctrlKey && event.key === "ArrowRight") {
+                event.preventDefault();
+                nextYear();
+                return;
+            }
+        }
+    };
+
     useEffect(() => {
         handleTitleChange();
-        window.addEventListener("keydown", (event: KeyboardEvent) => {
-            // Disable keyboard controls if a dialog is open
-            const dialogOpen = Object.values(document.body.style).includes(
-                "padding-right"
-            );
-            if (dialogOpen) return;
-            else {
-                if (event.ctrlKey && event.key === "ArrowLeft") {
-                    event.preventDefault();
-                    prevYear();
-                    return;
-                }
-                if (event.ctrlKey && event.key === "ArrowRight") {
-                    event.preventDefault();
-                    nextYear();
-                    return;
-                }
-                if (event.key === "ArrowLeft") {
-                    event.preventDefault();
-                    prevMonth();
-                    return;
-                }
-                if (event.key === "t") {
-                    event.preventDefault();
-                    jumpToday();
-                    return;
-                }
-                if (event.key === "ArrowRight") {
-                    event.preventDefault();
-                    nextMonth();
-                    return;
-                }
-            }
-        });
+        window.addEventListener("keydown", keyboardEventHandler);
     }, []);
 
     // Update title when window is resized
