@@ -28,6 +28,11 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
     const pathname = usePathname();
     const game = useGameTag();
 
+    function isLinkActive<T>(href: string, active: T, inactive: T) {
+        if (!href) return pathname === `/${game}` ? active : inactive;
+        else return pathname.includes(`/${game}/${href}`) ? active : inactive;
+    }
+
     const textStyles = (href: string) => {
         const selected = {
             color: theme.text.selected,
@@ -37,11 +42,19 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
             color: theme.drawer.color.primary,
             textShadow: "none",
         };
-        if (!href) return pathname === `/${game}` ? selected : unselected;
-        else
-            return pathname.includes(`/${game}/${href}`)
-                ? selected
-                : unselected;
+        return isLinkActive(href, selected, unselected);
+    };
+
+    const borderColor = (href: string) => {
+        const selected = theme.text.selected;
+        const unselected = "transparent";
+        return isLinkActive(href, selected, unselected);
+    };
+
+    const backgroundColor = (href: string) => {
+        const selected = theme.drawer.backgroundColor.hover;
+        const unselected = "transparent";
+        return isLinkActive(href, selected, unselected);
     };
 
     return (
@@ -64,12 +77,27 @@ export default function NavDrawerMenu({ open, items }: NavDrawerMenuProps) {
                         >
                             <Box
                                 sx={{
-                                    p: { xs: "4px 16px", sm: "4px 24px" },
-                                    borderRadius: { xs: "4px", lg: 0 },
+                                    p: {
+                                        xs: "4px 16px",
+                                        lg: "4px 24px 4px 20px",
+                                    },
+                                    borderRadius: {
+                                        xs: "4px",
+                                        lg: "4px 0 0 4px",
+                                    },
+                                    borderLeft: {
+                                        xs: 0,
+                                        lg: `4px solid ${borderColor(
+                                            item.href
+                                        )}`,
+                                    },
+                                    backgroundColor: backgroundColor(item.href),
                                     "&:hover": {
                                         backgroundColor:
                                             theme.drawer.backgroundColor.hover,
                                     },
+                                    transition:
+                                        "border-left 0.25s, background-color 0.25s",
                                 }}
                             >
                                 <TextLabel
