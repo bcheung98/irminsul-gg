@@ -3,6 +3,8 @@ import { StateCreator } from "zustand";
 
 export interface GenshinSlice {
     totalCost: Record<string, any>;
+    characters: GenshinCharacter[];
+    weapons: GenshinWeapon[];
     genshinSetCharacters: (characters: GenshinCharacter[]) => void;
     genshinSetWeapons: (weapons: GenshinWeapon[]) => void;
     genshinUpdateCharacterCosts: () => void;
@@ -16,6 +18,8 @@ export const createGenshinSlice: StateCreator<
     GenshinSlice
 > = (set) => ({
     totalCost: {},
+    characters: [],
+    weapons: [],
     genshinSetCharacters: function (characters) {
         return set(() => ({}));
     },
