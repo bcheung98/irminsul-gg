@@ -9,12 +9,6 @@ import { getDataSet } from "@/lib/fetchData";
 
 // Type imports
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-    title: "Ascension Planner",
-    description: "Tool for calculating level-up costs",
-};
 
 export default async function Page() {
     const characterData = await getDataSet<GenshinCharacter>(
