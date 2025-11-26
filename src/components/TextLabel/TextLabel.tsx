@@ -95,16 +95,19 @@ export default function TextLabel({
         );
     }
 
-    const Subtitle = (
-        <Text
-            component={subtitleProps?.component || "span"}
-            variant={subtitleProps?.variant || "body2"}
-            weight={subtitleProps?.weight || "highlight"}
-            sx={{ color: subtitleProps?.color || "inherit" }}
-        >
-            {subtitle}
-        </Text>
-    );
+    const Subtitle =
+        typeof subtitle === "string" || typeof subtitle === "number" ? (
+            <Text
+                component={subtitleProps?.component || "span"}
+                variant={subtitleProps?.variant || "body2"}
+                weight={subtitleProps?.weight || "highlight"}
+                sx={{ color: subtitleProps?.color || "inherit" }}
+            >
+                {subtitle}
+            </Text>
+        ) : (
+            <>{subtitle}</>
+        );
 
     return (
         <Stack

@@ -1,8 +1,8 @@
 import { memo } from "react";
 
 // Component imports
+import FilterButtonsRoot from "./FilterButtonsRoot";
 import Dropdown from "@/components/Dropdown";
-import ToggleButtons from "@/components/ToggleButtons";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -10,27 +10,13 @@ import Stack from "@mui/material/Stack";
 
 // Type imports
 import { FilterGroup } from "@/types";
-import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
 
-interface FilterButtonsProps {
+export interface FilterButtonsProps {
     filter: FilterGroup;
 }
 
 const FilterButtons = memo(function ({ filter }: FilterButtonsProps) {
     const theme = useTheme();
-
-    function renderButton(buttons: ToggleButtonProps[]) {
-        return (
-            <ToggleButtons
-                buttons={buttons}
-                value={filter.value}
-                onChange={filter.onChange}
-                spacing={4}
-                padding={filter.padding ?? 0}
-                width={filter.width}
-            />
-        );
-    }
 
     return (
         <Dropdown
@@ -52,12 +38,15 @@ const FilterButtons = memo(function ({ filter }: FilterButtonsProps) {
                             title={group.label}
                             titleColor={theme.text.primary}
                         >
-                            {renderButton(group.buttons)}
+                            <FilterButtonsRoot
+                                filter={filter}
+                                buttons={group.buttons}
+                            />
                         </Dropdown>
                     ))}
                 </Stack>
             ) : (
-                renderButton(filter.buttons)
+                <FilterButtonsRoot filter={filter} buttons={filter.buttons} />
             )}
         </Dropdown>
     );
