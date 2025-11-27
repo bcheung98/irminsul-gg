@@ -34,13 +34,10 @@ export default function Planner({
     const game = useGameTag() as Exclude<Game, "uma">;
 
     const store = usePlannerStore();
+    const items = store[`${game}/items`];
 
     const titleCharacters = `${categories[`${game}/characters`].slice(0, -1)}`;
     const titleWeapons = `${categories[`${game}/weapons`].slice(0, -1)}`;
-
-    const selectedCharacters = store[`${game}/characters`];
-    const selectedWeapons = store[`${game}/weapons`];
-    const items = [...selectedCharacters, ...selectedWeapons];
 
     return (
         <PlannerDataContext value={{ characters, weapons }}>

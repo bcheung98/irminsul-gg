@@ -14,19 +14,12 @@ export const createZZZSlice: StateCreator<
     ZZZPlannerSlice
 > = (set) => ({
     "zzz/totalCost": {},
-    "zzz/characters": [],
-    "zzz/weapons": [],
+    "zzz/items": [],
     "zzz/hidden": [],
-    "zzz/setCharacters": function (characters) {
+    "zzz/setItems": function (items) {
         return set(() => ({}));
     },
-    "zzz/setWeapons": function (weapons) {
-        return set(() => ({}));
-    },
-    "zzz/updateCharacterCosts": function () {
-        return set(() => ({}));
-    },
-    "zzz/updateWeaponCosts": function () {
+    "zzz/updateItemCosts": function () {
         return set(() => ({}));
     },
     "zzz/updateTotalCosts": function () {

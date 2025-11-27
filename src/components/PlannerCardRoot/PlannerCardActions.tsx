@@ -24,11 +24,11 @@ export default function PlannerCardActions({ item, type }: PlannerCardProps) {
     const store = usePlannerStore();
 
     const handleDelete = () => {
-        const newValues = store[`${game}/${type}`].filter(
+        const newValues = store[`${game}/items`].filter(
             (i) => i.id !== item.id
         );
         usePlannerStore.setState(() => ({
-            [`${game}/${type}`]: newValues,
+            [`${game}/items`]: newValues,
         }));
     };
 

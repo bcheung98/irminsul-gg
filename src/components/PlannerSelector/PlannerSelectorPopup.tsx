@@ -117,7 +117,7 @@ export default function PlannerSelectorPopup({
     const [searchResults, setSearchResults] = useState<PlannerItemData[]>([]);
     useEffect(() => {
         startHitsTransition(() => {
-            const selectedItems = store[`${game}/${type}`];
+            const selectedItems = store[`${game}/items`];
             const items = data.filter(
                 (item) => !selectedItems.map((i) => i.id).includes(item.id)
             );
@@ -170,7 +170,8 @@ export default function PlannerSelectorPopup({
                     {searchValue}
                 </span>
                 {`"`}
-                <br /><br />
+                <br />
+                <br />
                 {`The item you are looking for may have already been selected.`}
             </Text>
         ) : null;

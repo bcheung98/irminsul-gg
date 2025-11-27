@@ -30,13 +30,13 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
 
     const store = usePlannerStore();
 
-    const items = store[`${game}/${type}`];
+    const items = store[`${game}/items`];
 
     const handleSelect = (item: PlannerItemData) => {
         const newValues = [...items];
         newValues.push(item);
         usePlannerStore.setState(() => ({
-            [`${game}/${type}`]: newValues,
+            [`${game}/items`]: newValues,
         }));
         setSearchOpen(false);
     };

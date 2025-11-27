@@ -14,19 +14,12 @@ export const createWuWaSlice: StateCreator<
     WuWaPlannerSlice
 > = (set) => ({
     "wuwa/totalCost": {},
-    "wuwa/characters": [],
-    "wuwa/weapons": [],
+    "wuwa/items": [],
     "wuwa/hidden": [],
-    "wuwa/setCharacters": function (characters) {
+    "wuwa/setItems": function (items) {
         return set(() => ({}));
     },
-    "wuwa/setWeapons": function (weapons) {
-        return set(() => ({}));
-    },
-    "wuwa/updateCharacterCosts": function () {
-        return set(() => ({}));
-    },
-    "wuwa/updateWeaponCosts": function () {
+    "wuwa/updateItemCosts": function () {
         return set(() => ({}));
     },
     "wuwa/updateTotalCosts": function () {

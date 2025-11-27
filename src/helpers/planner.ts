@@ -13,5 +13,6 @@ export function parseData<T extends DataType, U extends DataType>(
         weaponType: item.weaponType,
         materials: item.materials,
         release: item.release,
+        url: item.url,
     };
 }

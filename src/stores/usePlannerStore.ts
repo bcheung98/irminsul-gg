@@ -13,13 +13,10 @@ import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
 
 export interface PlannerSlice {
     totalCost: Record<string, any>;
-    characters: PlannerItemData[];
-    weapons: PlannerItemData[];
+    items: PlannerItemData[];
     hidden: number[];
-    setCharacters: (characters: PlannerItemData[]) => void;
-    setWeapons: (weapons: PlannerItemData[]) => void;
-    updateCharacterCosts: () => void;
-    updateWeaponCosts: () => void;
+    setItems: (items: PlannerItemData[]) => void;
+    updateItemCosts: () => void;
     updateTotalCosts: () => void;
     toggleHidden: (id: number) => void;
 }

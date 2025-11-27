@@ -14,19 +14,12 @@ export const createHSRSlice: StateCreator<
     HSRPlannerSlice
 > = (set) => ({
     "hsr/totalCost": {},
-    "hsr/characters": [],
-    "hsr/weapons": [],
+    "hsr/items": [],
     "hsr/hidden": [],
-    "hsr/setCharacters": function (characters) {
+    "hsr/setItems": function (items) {
         return set(() => ({}));
     },
-    "hsr/setWeapons": function (weapons) {
-        return set(() => ({}));
-    },
-    "hsr/updateCharacterCosts": function () {
-        return set(() => ({}));
-    },
-    "hsr/updateWeaponCosts": function () {
+    "hsr/updateItemCosts": function () {
         return set(() => ({}));
     },
     "hsr/updateTotalCosts": function () {

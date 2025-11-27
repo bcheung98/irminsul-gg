@@ -14,19 +14,12 @@ export const createGenshinSlice: StateCreator<
     GenshinPlannerSlice
 > = (set) => ({
     "genshin/totalCost": {},
-    "genshin/characters": [],
-    "genshin/weapons": [],
+    "genshin/items": [],
     "genshin/hidden": [],
-    "genshin/setCharacters": function (characters) {
+    "genshin/setItems": function (items) {
         return set(() => ({}));
     },
-    "genshin/setWeapons": function (weapons) {
-        return set(() => ({}));
-    },
-    "genshin/updateCharacterCosts": function () {
-        return set(() => ({}));
-    },
-    "genshin/updateWeaponCosts": function () {
+    "genshin/updateItemCosts": function () {
         return set(() => ({}));
     },
     "genshin/updateTotalCosts": function () {

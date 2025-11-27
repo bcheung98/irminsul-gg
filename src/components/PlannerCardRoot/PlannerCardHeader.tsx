@@ -29,7 +29,6 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     if (!item) {
         throw new Error(`Could not find item with ID ${props.item.id}`);
-        return <></>;
     }
 
     const theme = useTheme();
