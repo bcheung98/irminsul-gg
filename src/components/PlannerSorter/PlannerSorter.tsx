@@ -19,6 +19,7 @@ import {
 } from "@dnd-kit/modifiers";
 
 // Component imports
+import PlannerSorterItem from "./PlannerSorterItem";
 import ContentDialog from "@/components/ContentDialog";
 import TextLabel from "@/components/TextLabel";
 
@@ -26,7 +27,7 @@ import TextLabel from "@/components/TextLabel";
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import LowPriorityIcon from "@mui/icons-material/LowPriority";
+import MoveUpIcon from "@mui/icons-material/MoveUp";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -35,7 +36,6 @@ import { usePlannerStore } from "@/stores";
 // Type imports
 import { Game } from "@/types";
 import { PlannerItemData } from "@/types/planner";
-import PlannerSorterItem from "./PlannerSorterItem";
 
 export default function PlannerSorter() {
     const theme = useTheme();
@@ -98,7 +98,7 @@ export default function PlannerSorter() {
                 >
                     <TextLabel
                         icon={
-                            <LowPriorityIcon
+                            <MoveUpIcon
                                 fontSize="small"
                                 sx={{ color: theme.text.primary }}
                             />
@@ -134,14 +134,7 @@ export default function PlannerSorter() {
                         items={list}
                         strategy={verticalListSortingStrategy}
                     >
-                        <Stack
-                            spacing={1}
-                            sx={{
-                                height: "50vh",
-                                maxHeight: "600px",
-                                overflowY: "auto",
-                            }}
-                        >
+                        <Stack spacing={1}>
                             {list.map((item) => (
                                 <PlannerSorterItem
                                     key={item.id}

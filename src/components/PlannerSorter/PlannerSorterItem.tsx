@@ -7,7 +7,7 @@ import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 
 // Type imports
 import { PlannerCardHeaderProps } from "../PlannerCardRoot/PlannerCardRoot.types";
@@ -26,21 +26,22 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
 
         const styles = {
             cursor: isDragging ? "grabbing" : "grab",
-            backgroundColor: theme.background(0, isDragging ? "light" : "dark"),
+            backgroundColor: theme.background(0, isDragging ? "dark" : "main"),
+            borderRadius: "4px",
             touchAction: "manipulation",
             ...style,
         };
 
         return (
             <div ref={ref} style={styles} {...props}>
-                <Card
+                <Box
                     sx={{
                         p: 1,
-                        backgroundColor: theme.background(0),
+                        borderRadius: "4px",
                         "&:hover": {
                             backgroundColor: theme.background(
                                 0,
-                                isDragging ? "light" : "main"
+                                isDragging ? "dark" : "light"
                             ),
                         },
                     }}
@@ -49,7 +50,7 @@ const Item = forwardRef<HTMLDivElement, ItemProps>(
                         item={item}
                         type={"element" in item ? "characters" : "weapons"}
                     />
-                </Card>
+                </Box>
             </div>
         );
     }
