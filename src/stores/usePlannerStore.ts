@@ -1,13 +1,48 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { Game } from "@/types";
+import { PlannerItemData } from "@/types/planner";
 
-import { createGenshinSlice, GenshinSlice } from "./planner/useGenshinStore";
+import {
+    createGenshinSlice,
+    GenshinPlannerSlice,
+} from "./planner/useGenshinStore";
+import { createHSRSlice, HSRPlannerSlice } from "./planner/useHSRStore";
+import { createWuWaSlice, WuWaPlannerSlice } from "./planner/useWuWaStore";
+import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
 
-export const usePlannerStore = create<GenshinSlice>()(
-    persist(
+export interface PlannerSlice {
+    totalCost: Record<string, any>;
+    characters: PlannerItemData[];
+    weapons: PlannerItemData[];
+    hidden: number[];
+    setCharacters: (characters: PlannerItemData[]) => void;
+    setWeapons: (weapons: PlannerItemData[]) => void;
+    updateCharacterCosts: () => void;
+    updateWeaponCosts: () => void;
+    updateTotalCosts: () => void;
+    toggleHidden: (id: number) => void;
+}
+
+export type GamePlannerSlice<G extends Game, T> = {
+    [K in keyof T as `${G}/${string & K}`]: T[K];
+};
+
+export type CombinedPlannerSlice = GenshinPlannerSlice &
+    HSRPlannerSlice &
+    WuWaPlannerSlice &
+    ZZZPlannerSlice;
+
+export const usePlannerStore = create(
+    persist<CombinedPlannerSlice>(
         (...args) => ({
             ...createGenshinSlice(...args),
+            ...createHSRSlice(...args),
+            ...createWuWaSlice(...args),
+            ...createZZZSlice(...args),
         }),
-        { name: "v2/planner" }
+        {
+            name: "v2/planner",
+        }
     )
 );

@@ -5,6 +5,14 @@ import { GenshinWeaponFilterState } from "@/components/_genshin/Filters/WeaponFi
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
     "genshin/weapons": GenshinWeaponFilterState;
+    "hsr/characters": {};
+    "hsr/weapons": {};
+    "wuwa/characters": {};
+    "wuwa/weapons": {};
+    "zzz/characters": {};
+    "zzz/weapons": {};
+    "uma/characters": {};
+    "uma/weapons": {};
 }
 
 export type SetFilterState = (
@@ -50,6 +58,14 @@ export const genshinWeaponFilters: GenshinWeaponFilterState = {
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
+    "hsr/characters": {},
+    "hsr/weapons": {},
+    "wuwa/characters": {},
+    "wuwa/weapons": {},
+    "zzz/characters": {},
+    "zzz/weapons": {},
+    "uma/characters": {},
+    "uma/weapons": {},
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

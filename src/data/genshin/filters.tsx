@@ -94,7 +94,6 @@ export function genshinFilters<T extends Filters>({
                 newValues: GenshinRarity[]
             ) => setFilters(key, "rarity", newValues),
             padding: "4px 8px",
-            width: "64px",
         },
         ascStat: {
             name: "Ascension Stat",

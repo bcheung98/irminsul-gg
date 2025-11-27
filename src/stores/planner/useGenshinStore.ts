@@ -1,35 +1,38 @@
-import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
+import {
+    CombinedPlannerSlice,
+    GamePlannerSlice,
+    PlannerSlice,
+} from "../usePlannerStore";
 import { StateCreator } from "zustand";
 
-export interface GenshinSlice {
-    totalCost: Record<string, any>;
-    characters: GenshinCharacter[];
-    weapons: GenshinWeapon[];
-    genshinSetCharacters: (characters: GenshinCharacter[]) => void;
-    genshinSetWeapons: (weapons: GenshinWeapon[]) => void;
-    genshinUpdateCharacterCosts: () => void;
-    genshinUpdateWeaponCosts: () => void;
-}
+export type GenshinPlannerSlice = GamePlannerSlice<"genshin", PlannerSlice>;
 
 export const createGenshinSlice: StateCreator<
-    GenshinSlice,
+    CombinedPlannerSlice,
+    [["zustand/persist", unknown]],
     [],
-    [],
-    GenshinSlice
+    GenshinPlannerSlice
 > = (set) => ({
-    totalCost: {},
-    characters: [],
-    weapons: [],
-    genshinSetCharacters: function (characters) {
+    "genshin/totalCost": {},
+    "genshin/characters": [],
+    "genshin/weapons": [],
+    "genshin/hidden": [],
+    "genshin/setCharacters": function (characters) {
         return set(() => ({}));
     },
-    genshinSetWeapons: function (weapons) {
+    "genshin/setWeapons": function (weapons) {
         return set(() => ({}));
     },
-    genshinUpdateCharacterCosts: function () {
+    "genshin/updateCharacterCosts": function () {
         return set(() => ({}));
     },
-    genshinUpdateWeaponCosts: function () {
+    "genshin/updateWeaponCosts": function () {
+        return set(() => ({}));
+    },
+    "genshin/updateTotalCosts": function () {
+        return set(() => ({}));
+    },
+    "genshin/toggleHidden": function (id) {
         return set(() => ({}));
     },
 });

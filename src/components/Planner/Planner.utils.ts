@@ -1,9 +1,9 @@
+import { PlannerItemData } from "@/types/planner";
 import { createContext, useContext } from "react";
-import { DataType } from "@/types";
 
 export const PlannerDataContext = createContext<{
-    characters: DataType[];
-    weapons: DataType[];
+    characters: PlannerItemData[];
+    weapons: PlannerItemData[];
 }>({ characters: [], weapons: [] });
 
 export function usePlannerData() {
