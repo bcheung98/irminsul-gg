@@ -12,7 +12,7 @@ export const createGenshinSlice: StateCreator<
     [["zustand/persist", unknown]],
     [],
     GenshinPlannerSlice
-> = (set) => ({
+> = (set, get) => ({
     "genshin/totalCost": {},
     "genshin/items": [],
     "genshin/hidden": [],
@@ -26,6 +26,10 @@ export const createGenshinSlice: StateCreator<
         return set(() => ({}));
     },
     "genshin/toggleHidden": function (id) {
-        return set(() => ({}));
+        const hidden = [...get()["genshin/hidden"]];
+        !hidden.includes(id)
+            ? hidden.push(id)
+            : hidden.splice(hidden.indexOf(id), 1);
+        return set(() => ({ "genshin/hidden": hidden }));
     },
 });

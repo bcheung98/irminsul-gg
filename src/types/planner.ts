@@ -4,7 +4,7 @@ import { Materials } from "./materials";
 export type PlannerType = "characters" | "weapons";
 
 export interface PlannerItemData extends BaseDataWithRelease {
-    id: number | string;
+    id: number;
     name: string;
     displayName: string;
     rarity: number;
