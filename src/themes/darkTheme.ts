@@ -182,6 +182,7 @@ export const darkThemeData = {
             main: backgroundColors[1].main,
             header: appbarColors[0],
             headerHover: appbarColors[1],
+            headerSelectedHover: appbarColors[2],
         },
         border: {
             radius: 1,
