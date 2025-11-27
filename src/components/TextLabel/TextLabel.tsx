@@ -6,6 +6,7 @@ import NavLink from "@/components/NavLink";
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 // Type imports
 import { TextLabelProps } from "./TextLabel.types";
@@ -117,12 +118,15 @@ export default function TextLabel({
             justifyContent={justifyContent}
         >
             {icon && Icon()}
-            {(title || subtitle) && (
-                <Stack spacing={textSpacing || 0}>
-                    {Title()}
-                    {subtitle && Subtitle}
-                </Stack>
-            )}
+            {(title || subtitle) &&
+                (!subtitle ? (
+                    <Stack spacing={textSpacing ?? 0}>{Title()}</Stack>
+                ) : (
+                    <Box>
+                        <Box sx={{ textAlign: "left" }}>{Title()}</Box>
+                        <Box sx={{ mt: textSpacing ?? 0 }}>{Subtitle}</Box>
+                    </Box>
+                ))}
         </Stack>
     );
 }
