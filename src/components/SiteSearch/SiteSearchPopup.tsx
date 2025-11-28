@@ -42,6 +42,15 @@ export default function SiteSearchPopup({
     setOpen,
     handleSelect,
 }: SiteSearchPopupProps) {
+    /*
+        DO NOT REMOVE!!!
+        This prevents "Internal React error: Expected static flag was missing."
+        when refreshing the Ascension Planner with items in it.
+        I presume it has something to do with calling hooks 
+        and updating state in Zustand.
+    */
+    if (!open) return;
+
     const theme = useTheme();
 
     const game = useGameTag();
