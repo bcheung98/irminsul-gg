@@ -59,6 +59,7 @@ export type AttributeDataMiscKey = keyof AttributeDataMisc;
 
 // Game data
 export type Game = (typeof gameNames)[number];
+export type GameNoUma = Exclude<Game, "uma">;
 export interface GameInfo {
     tag: Game;
     name: string;

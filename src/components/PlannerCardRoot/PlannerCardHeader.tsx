@@ -15,7 +15,7 @@ import { getDataIconURL } from "@/helpers/dataIcon";
 import { usePlannerData } from "../Planner/Planner.utils";
 
 // Type imports
-import { Game } from "@/types";
+import { GameNoUma } from "@/types";
 import { InfoChipProps } from "../InfoChip/InfoChip.types";
 import { PlannerCardHeaderProps } from "./PlannerCardRoot.types";
 
@@ -33,7 +33,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     const theme = useTheme();
 
-    const game = useGameTag() as Exclude<Game, "uma">;
+    const game = useGameTag() as GameNoUma;
 
     const rarityColors = useRarityColors()[game];
 
@@ -54,7 +54,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             height: "24px",
         },
         iconProps: { size: 16 },
-        titleProps: { variant: "body3" },
+        titleProps: { variant: "body3", sx: { userSelect: "none" } },
     };
 
     return (
@@ -72,7 +72,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
                 },
             }}
             title={item.displayName}
-            titleProps={{ variant: textVariant }}
+            titleProps={{ variant: textVariant, sx: { userSelect: "none" } }}
             subtitle={
                 <FlexBox spacing={[1, 0.5]} wrap>
                     {item.element && (

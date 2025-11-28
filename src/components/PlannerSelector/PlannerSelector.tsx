@@ -16,13 +16,13 @@ import { categories } from "@/data/categories";
 import { usePlannerStore } from "@/stores";
 
 // Type imports
-import { Game } from "@/types";
+import { GameNoUma } from "@/types";
 import { PlannerItemData, PlannerType } from "@/types/planner";
 
 export default function PlannerSelector({ type }: { type: PlannerType }) {
     const theme = useTheme();
 
-    const game = useGameTag() as Exclude<Game, "uma">;
+    const game = useGameTag() as GameNoUma;
 
     const [searchOpen, setSearchOpen] = useState(false);
     const handleSearchOpen = () => setSearchOpen(true);

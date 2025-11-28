@@ -18,7 +18,7 @@ import { usePlannerStore } from "@/stores";
 import { categories } from "@/data/categories";
 
 // Type imports
-import { Game } from "@/types";
+import { GameNoUma } from "@/types";
 import { PlannerDataContext } from "./Planner.utils";
 import { PlannerItemData } from "@/types/planner";
 
@@ -31,7 +31,7 @@ export default function Planner({
 }) {
     const theme = useTheme();
 
-    const game = useGameTag() as Exclude<Game, "uma">;
+    const game = useGameTag() as GameNoUma;
 
     const store = usePlannerStore();
     const items = store[`${game}/items`];

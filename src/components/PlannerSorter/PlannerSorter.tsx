@@ -34,13 +34,13 @@ import { useGameTag } from "@/context";
 import { usePlannerStore } from "@/stores";
 
 // Type imports
-import { Game } from "@/types";
+import { GameNoUma } from "@/types";
 import { PlannerItemData } from "@/types/planner";
 
 export default function PlannerSorter() {
     const theme = useTheme();
 
-    const game = useGameTag() as Exclude<Game, "uma">;
+    const game = useGameTag() as GameNoUma;
 
     const store = usePlannerStore();
     const items = store[`${game}/items`];

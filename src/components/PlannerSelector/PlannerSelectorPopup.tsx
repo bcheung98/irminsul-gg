@@ -32,7 +32,7 @@ import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
 import { ContentDialogProps } from "../ContentDialog";
-import { Filters, Game } from "@/types";
+import { Filters, GameNoUma } from "@/types";
 import { FilterState } from "@/stores/useFilterStore";
 import { PlannerItemData, PlannerType } from "@/types/planner";
 
@@ -62,7 +62,7 @@ export default function PlannerSelectorPopup({
 }: PlannerSelectorPopupProps) {
     const theme = useTheme();
 
-    const game = useGameTag() as Exclude<Game, "uma">;
+    const game = useGameTag() as GameNoUma;
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,

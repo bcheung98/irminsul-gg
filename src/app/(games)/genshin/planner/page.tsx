@@ -18,8 +18,8 @@ export default async function Page() {
     const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
 
     const [characters, weapons] = await Promise.all([
-        characterData.map(parseData),
-        weaponData.map(parseData),
+        characterData.map((item) => parseData("genshin", item)),
+        weaponData.map((item) => parseData("genshin", item)),
     ]);
 
     return (
