@@ -69,9 +69,9 @@ export default function GenshinPlannerCard() {
             ).toLowerCase()}_skill`,
         },
         {
-            skillKey: "burst",
+            skillKey: "ultimate",
             levels: skillLevel,
-            values: item.values.burst || defaultSkillValues,
+            values: item.values.ultimate || defaultSkillValues,
             icon: `genshin/characters/talents/${splitJoin(
                 item.name
             ).toLowerCase()}_burst`,

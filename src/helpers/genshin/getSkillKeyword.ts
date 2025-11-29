@@ -14,7 +14,7 @@ export default function getSkillKeyword({
     if (tag.startsWith("_")) {
         const [_, skillKey] = tag.split("_");
         let skill: Skill | undefined;
-        if (["a1", "a4", "util", "nightsoul", "witch"].includes(skillKey)) {
+        if (["a1", "a4", "util", "nightsoul", "special"].includes(skillKey)) {
             skill = passives.find((passive) => passive.type === skillKey);
         } else {
             skill = skills[skillKey]![0];

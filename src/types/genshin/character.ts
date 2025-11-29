@@ -41,7 +41,7 @@ export type CharacterAscensionStat = keyof typeof characterAscensionStats;
 export interface GenshinCharacterSkills extends CharacterSkillsList {
     attack: Skill[];
     skill: Skill[];
-    burst: Skill[];
+    ultimate: Skill[];
     altsprint?: Skill[];
 }
 
@@ -53,7 +53,7 @@ export type GenshinCharacterPassiveType =
     | "util"
     | "nightsoul"
     | "moon"
-    | "witch"
+    | "special"
     | "";
 
 export interface GenshinCharacterPassive extends Skill {

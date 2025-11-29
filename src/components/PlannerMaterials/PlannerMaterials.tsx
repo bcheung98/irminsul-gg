@@ -36,7 +36,7 @@ export default function PlannerMaterials() {
                 break;
             case "attack":
             case "skill":
-            case "burst":
+            case "ultimate":
             default:
                 skillKey = "characterSkill";
         }

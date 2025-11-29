@@ -6,7 +6,10 @@ export interface Skill {
     icon?: string;
     showIcon?: boolean;
     scaling?: string[][];
-    version?: string;
+    version?: {
+        value: string;
+        label: string;
+    };
     index?: number;
 }
 

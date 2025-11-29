@@ -38,7 +38,7 @@ export function genshinLevels(key: string, rarity = 5) {
                   ];
         case "attack":
         case "skill":
-        case "burst":
+        case "ultimate":
             return range(1, 10);
         default:
             return [];
