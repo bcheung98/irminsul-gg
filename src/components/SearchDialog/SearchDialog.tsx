@@ -15,6 +15,7 @@ export interface SearchDialogProps extends ContentDialogProps {
     value: string;
     handleInputChange: (event: React.BaseSyntheticEvent) => void;
     placeholder?: string;
+    backgroundBlur?: string;
 }
 
 export default function SearchDialog({
@@ -24,6 +25,7 @@ export default function SearchDialog({
     children,
     handleInputChange,
     placeholder,
+    backgroundBlur,
     ...other
 }: SearchDialogProps) {
     const theme = useTheme();
@@ -86,7 +88,7 @@ export default function SearchDialog({
             }
             actions={<></>}
             sx={{
-                backdropFilter: "blur(4px)",
+                backdropFilter: `blur(${backgroundBlur || "0px"})`,
                 ".MuiDialog-paper": {
                     maxWidth: "600px",
                     minHeight: { xs: "90vh", sm: "640px" },

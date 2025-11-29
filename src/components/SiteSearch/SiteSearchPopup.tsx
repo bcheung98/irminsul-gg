@@ -219,6 +219,7 @@ export default function SiteSearchPopup({
             value={searchValue}
             handleInputChange={handleInputChange}
             placeholder="Search Irminsul..."
+            backgroundBlur="4px"
         >
             {!dataLoading ? SearchContent : Loader}
         </SearchDialog>
