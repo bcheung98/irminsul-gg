@@ -36,7 +36,6 @@ function ActionFab({
     label,
     tooltip = "",
     tooltipArrow = "top",
-    color = "primary",
     position = {
         top: 100,
         right: 20,
@@ -56,16 +55,19 @@ function ActionFab({
             >
                 <Tooltip title={tooltip} arrow placement={tooltipArrow}>
                     <Fab
-                        color={color}
                         size="small"
                         disableRipple
-                        sx={{
+                        sx={(theme) => ({
                             width: "100%",
                             height: "100%",
                             p: 1,
                             borderRadius: "8px",
-                            color: "white",
-                        }}
+                            color: theme.text.primary,
+                            backgroundColor: theme.background(2, "dark"),
+                            "&:hover": {
+                                backgroundColor: theme.background(2),
+                            },
+                        })}
                     >
                         {icon || <KeyboardArrowLeftIcon />}
                         {label && (

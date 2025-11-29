@@ -83,7 +83,12 @@ export default function PlannerCardActions({
     };
 
     const iconProps: SvgIconProps = {
-        fontSize: "small",
+        sx: {
+            fontSize: {
+                xs: "16px",
+                sm: "18px",
+            },
+        },
     };
 
     const buttonProps: ButtonProps = {

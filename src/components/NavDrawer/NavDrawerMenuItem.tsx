@@ -72,15 +72,19 @@ export default function NavDrawerMenuItem({
         },
         hover &&
             !isLinkActive && {
-                borderColor: theme.text.selected,
+                borderColor: theme.drawer.indicator.main,
                 borderRadius: "0 8px 8px 0",
             },
         isLinkActive && {
             top: 0,
             height: { xs: "30px", md: "36px" },
-            borderColor: theme.text.selected,
+            borderColor: theme.drawer.indicator.main,
             borderRadius: "0 8px 8px 0",
         },
+        hover &&
+            isLinkActive && {
+                borderColor: theme.drawer.indicator.hover,
+            },
     ];
 
     const titleStyle = {

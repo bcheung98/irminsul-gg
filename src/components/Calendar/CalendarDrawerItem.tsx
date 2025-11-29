@@ -50,7 +50,7 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                 <ExpandMoreIcon
                     fontSize={matches ? "medium" : "small"}
                     sx={{
-                        color: theme.border.color.primary,
+                        color: theme.border.color.accent,
                         transform: open ? `rotateZ(0deg)` : `rotateZ(-90deg)`,
                         transition: "transform 0.25s",
                     }}

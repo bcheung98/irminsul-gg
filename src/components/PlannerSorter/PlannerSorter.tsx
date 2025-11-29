@@ -100,7 +100,13 @@ export default function PlannerSorter() {
                         icon={
                             <MoveUpIcon
                                 fontSize="small"
-                                sx={{ color: theme.text.primary }}
+                                sx={{
+                                    color: theme.text.primary,
+                                    fontSize: {
+                                        xs: "16px",
+                                        sm: "18px",
+                                    },
+                                }}
                             />
                         }
                         title="Adjust Order"

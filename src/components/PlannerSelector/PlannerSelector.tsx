@@ -42,8 +42,13 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
     };
 
     const iconProps: SvgIconOwnProps = {
-        fontSize: "small",
-        sx: { color: theme.text.primary },
+        sx: {
+            color: theme.text.primary,
+            fontSize: {
+                xs: "16px",
+                sm: "18px",
+            },
+        },
     };
 
     return (

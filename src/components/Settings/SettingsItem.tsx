@@ -61,7 +61,7 @@ export default function SettingsItem({
                         <ExpandMoreIcon
                             fontSize={matches ? "medium" : "small"}
                             sx={{
-                                color: theme.border.color.primary,
+                                color: theme.border.color.accent,
                                 transform: open
                                     ? `rotateZ(0deg)`
                                     : `rotateZ(-90deg)`,

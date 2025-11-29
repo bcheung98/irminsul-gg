@@ -85,7 +85,7 @@ export default function Dropdown({
                     sx={{
                         ml: reverse && justifyContent === "left" ? spacing : 0,
                         mr: !reverse && justifyContent === "left" ? spacing : 0,
-                        color: iconColor || theme.border.color.primary,
+                        color: iconColor || theme.border.color.accent,
                         transform: open
                             ? `rotate${axis}(${start}deg)`
                             : `rotate${axis}(${end}deg)`,

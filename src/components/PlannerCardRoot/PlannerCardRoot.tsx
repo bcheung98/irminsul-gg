@@ -9,6 +9,7 @@ import ContentBox from "@/components/ContentBox";
 import Dropdown from "@/components/Dropdown";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
@@ -20,6 +21,7 @@ import {
     PlannerCardModeContext,
 } from "./PlannerCard.utils";
 import { usePlannerData } from "@/components/Planner/Planner.utils";
+import { useTextColor } from "@/helpers/styles";
 
 // Type imports
 import { PlannerCardProps } from "./PlannerCardRoot.types";
@@ -27,8 +29,12 @@ import { GameData, GameNoUma } from "@/types";
 import { CardMode, PlannerItemData } from "@/types/planner";
 
 export default function PlannerCardRoot(props: PlannerCardProps) {
+    const theme = useTheme();
+
     const { characters, weapons } = usePlannerData();
     const game = useGameTag() as GameNoUma;
+
+    const textColors = useTextColor(theme.text);
 
     // Updates the item's data in case the names or materials change
     function validateItem(inputItem: PlannerItemData) {
@@ -83,7 +89,8 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
                         {components[game]}
                         <Dropdown
                             title="Materials Required"
-                            contentPadding={"16px 0"}
+                            contentPadding="16px 0"
+                            iconColor={textColors(game, item.element)}
                             defaultOpen
                         >
                             <PlannerMaterials />

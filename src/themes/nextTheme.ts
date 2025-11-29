@@ -18,6 +18,7 @@ const borderColors = {
     primary: "rgb(80, 80, 80)",
     secondary: "rgb(75, 83, 102)",
     highlight: "rgb(30, 73, 118)",
+    accent: "rgb(30, 175, 255)",
 };
 
 const backgroundColors = [
@@ -160,6 +161,45 @@ export const nextThemeData = {
             geo: "#ecd133",
             dendro: "#9cdf3f",
         },
+        hsr: {
+            highlight: "#f29e38",
+            header: "#f29e38",
+            refinement: "#f29e38",
+            value: "#f29e38",
+            star: "#ffd070",
+            physical: "#a8a8a8",
+            fire: "#e62a29",
+            ice: "#07a0ff",
+            lightning: "#b54bd3",
+            wind: "#42c38c",
+            quantum: "#6778fd",
+            imaginary: "#e5b909",
+        },
+        wuwa: {
+            highlight: "#f7ca2f",
+            header: "#eec477",
+            refinement: "#f7ca2f",
+            value: "#f7ca2f",
+            star: "#ffee9d",
+            aero: "#55ffb5",
+            electro: "#ac70f1",
+            fusion: "#f0744e",
+            glacio: "#49abf7",
+            havoc: "#c989b1",
+            spectro: "#fae56c",
+        },
+        zzz: {
+            highlight: "#ffffff",
+            header: "#e0bb00",
+            refinement: "#2bad00",
+            value: "#2bad00",
+            physical: "#f0d12b",
+            ice: "#98eff0",
+            fire: "#ff5521",
+            electric: "#2eb6ff",
+            ether: "#fe437e",
+            wind: "#48eea7",
+        },
     },
     appbar: {
         backgroundColor: {
@@ -172,17 +212,13 @@ export const nextThemeData = {
         },
     },
     border: {
-        color: {
-            primary: borderColors.primary,
-            secondary: borderColors.secondary,
-            highlight: borderColors.highlight,
-        },
+        color: { ...borderColors },
     },
     contentBox: {
         backgroundColor: {
             main: backgroundColors[1].main,
             header: appbarColors[0],
-            headerHover: appbarColors[1],
+            headerHover: "rgb(24, 24, 24)",
             headerSelectedHover: appbarColors[2],
         },
         border: {
@@ -203,6 +239,10 @@ export const nextThemeData = {
         },
         color: {
             primary: textColors.primary,
+        },
+        indicator: {
+            main: "rgb(30, 175, 255)",
+            hover: "rgb(101, 201, 255)",
         },
     },
     infoAvatar: {

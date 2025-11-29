@@ -133,7 +133,7 @@ const PlannerSlider = memo(function PlannerSlider({
                             padding: "4px",
                             borderRadius: "64px",
                             border: `2px solid ${theme.border.color.primary}`,
-                            backgroundColor: theme.background(2),
+                            backgroundColor: theme.iconBackground.primary,
                         }}
                         tooltip={mode === "view" ? title : ""}
                     />
