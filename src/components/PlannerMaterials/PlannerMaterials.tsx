@@ -1,13 +1,12 @@
-// Component imports
-import MaterialCard from "@/components/MaterialCard";
+import { useEffect } from "react";
 
-// MUI imports
-import Grid from "@mui/material/Grid";
+// Component imports
+import MaterialGrid from "@/components/MaterialGrid";
 
 // Helper imports
 import { useGameTag } from "@/context";
 import { costs } from "@/helpers/costs";
-import { objectKeys } from "@/utils";
+import { usePlannerStore } from "@/stores";
 import { usePlannerCardData } from "../PlannerCardRoot/PlannerCard.utils";
 
 // Type imports
@@ -17,6 +16,8 @@ import { CostValue } from "@/types/costs";
 export default function PlannerMaterials() {
     const game = useGameTag() as GameNoUma;
 
+    const updateTotalCosts = usePlannerStore()[`${game}/updateTotalCosts`];
+
     const item = usePlannerCardData();
     if (!item) throw new Error("Item not found");
 
@@ -25,7 +26,8 @@ export default function PlannerMaterials() {
         item.materials = { ...item.materials, gemstone: item.element || "" };
     }
 
-    const data = Object.entries(item.values).map(([key, value]) => {
+    // Get material costs for each source based on current input values
+    const costSourceMap = Object.entries(item.values).map(([key, value]) => {
         let skillKey;
         switch (key) {
             case "level":
@@ -46,8 +48,9 @@ export default function PlannerMaterials() {
         });
     });
 
+    // Calculate costs for all materials
     const materialCosts: Record<string, CostValue> = {};
-    data.forEach((item) => {
+    costSourceMap.forEach((item) => {
         Object.entries(item).forEach(([key, value]) => {
             if (materialCosts[key] === undefined) {
                 materialCosts[key] = Object.fromEntries(
@@ -64,26 +67,9 @@ export default function PlannerMaterials() {
         });
     });
 
-    const materialArray: React.ReactNode[] = [];
-    objectKeys(materialCosts).forEach((key) =>
-        Object.entries(materialCosts[key]).forEach(
-            ([material, cost]) =>
-                cost &&
-                materialArray.push(
-                    <MaterialCard
-                        key={Number(material)}
-                        game={game}
-                        material={Number(material)}
-                        cost={cost}
-                        size={56}
-                    />
-                )
-        )
-    );
+    useEffect(() => {
+        updateTotalCosts(item.id, materialCosts);
+    }, [JSON.stringify(item.values)]);
 
-    return (
-        <Grid container spacing={2}>
-            {materialArray.map((card) => card)}
-        </Grid>
-    );
+    return <MaterialGrid costs={materialCosts} />;
 }

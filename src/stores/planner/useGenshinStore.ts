@@ -37,13 +37,29 @@ export const createGenshinSlice: StateCreator<
         }
     },
     "genshin/setHiddenItems": function (id) {
-        const hidden = [...get()["genshin/hidden"]];
+        const hidden = get()["genshin/hidden"];
         !hidden.includes(id)
             ? hidden.push(id)
             : hidden.splice(hidden.indexOf(id), 1);
         return set(() => ({ "genshin/hidden": hidden }));
     },
-    "genshin/updateTotalCosts": function () {
-        return set(() => ({}));
+    "genshin/updateTotalCosts": function (id, costs) {
+        const totalCosts = get()["genshin/totalCost"];
+        const itemIDs = get()["genshin/items"].map((item) => item.id);
+        Object.keys(totalCosts).forEach((costID) => {
+            if (!itemIDs.includes(Number(costID))) {
+                delete totalCosts[Number(costID)];
+            }
+        });
+        if (id !== undefined && costs !== undefined) {
+            if (totalCosts[id] === undefined) {
+                totalCosts[id] = {};
+            }
+            totalCosts[id] = costs;
+        }
+        return set((state) => ({
+            ...state,
+            ["genshin/totalCost"]: totalCosts,
+        }));
     },
 });

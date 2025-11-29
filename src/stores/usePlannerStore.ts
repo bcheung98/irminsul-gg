@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { GameNoUma } from "@/types";
+import { CostValue } from "@/types/costs";
 import { PlannerItemData, SetItemValuesProps } from "@/types/planner";
 
 import {
@@ -12,13 +13,13 @@ import { createWuWaSlice, WuWaPlannerSlice } from "./planner/useWuWaStore";
 import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
 
 export interface PlannerSlice {
-    totalCost: Record<string, any>;
+    totalCost: Record<number, Record<string, CostValue>>;
     items: PlannerItemData[];
     hidden: number[];
     setItems: (items: PlannerItemData[]) => void;
     setItemValues: (item: SetItemValuesProps) => void;
     setHiddenItems: (id: number) => void;
-    updateTotalCosts: () => void;
+    updateTotalCosts: (id?: number, costs?: Record<string, CostValue>) => void;
 }
 
 export type GamePlannerSlice<G extends GameNoUma, T> = {

@@ -12,20 +12,54 @@ export const createWuWaSlice: StateCreator<
     [["zustand/persist", unknown]],
     [],
     WuWaPlannerSlice
-> = (set) => ({
+> = (set, get) => ({
     "wuwa/totalCost": {},
     "wuwa/items": [],
     "wuwa/hidden": [],
     "wuwa/setItems": function (items) {
-        return set(() => ({}));
+        return set((state) => ({
+            ...state,
+            ["wuwa/items"]: items,
+        }));
     },
-    "wuwa/setItemValues": function () {
-        return set(() => ({}));
+    "wuwa/setItemValues": function ({ id, skillKey, values }) {
+        const items = get()["wuwa/items"];
+        if (items.length > 0) {
+            const index = items.findIndex((item) => item.id === id);
+            if (index === -1) {
+                throw new Error(`Could not find item with ID ${id}`);
+            }
+            items[index].values[skillKey] = values;
+            return set((state) => ({
+                ...state,
+                ["wuwa/items"]: items,
+            }));
+        }
     },
     "wuwa/setHiddenItems": function (id) {
-        return set(() => ({}));
+        const hidden = get()["wuwa/hidden"];
+        !hidden.includes(id)
+            ? hidden.push(id)
+            : hidden.splice(hidden.indexOf(id), 1);
+        return set(() => ({ "wuwa/hidden": hidden }));
     },
-    "wuwa/updateTotalCosts": function () {
-        return set(() => ({}));
+    "wuwa/updateTotalCosts": function (id, costs) {
+        const totalCosts = get()["wuwa/totalCost"];
+        const itemIDs = get()["wuwa/items"].map((item) => item.id);
+        Object.keys(totalCosts).forEach((costID) => {
+            if (!itemIDs.includes(Number(costID))) {
+                delete totalCosts[Number(costID)];
+            }
+        });
+        if (id !== undefined && costs !== undefined) {
+            if (totalCosts[id] === undefined) {
+                totalCosts[id] = {};
+            }
+            totalCosts[id] = costs;
+        }
+        return set((state) => ({
+            ...state,
+            ["wuwa/totalCost"]: totalCosts,
+        }));
     },
 });

@@ -41,6 +41,7 @@ export default function PlannerCardActions({
     const hiddenItems = store[`${game}/hidden`];
 
     const setHiddenItems = store[`${game}/setHiddenItems`];
+    const updateTotalCosts = usePlannerStore()[`${game}/updateTotalCosts`];
 
     const [hidden, setHidden] = useState(hiddenItems.includes(item.id));
     const handleHiddenChange = () => {
@@ -56,6 +57,7 @@ export default function PlannerCardActions({
         usePlannerStore.setState(() => ({
             [`${game}/items`]: newValues,
         }));
+        updateTotalCosts();
     };
 
     const [alertOpen, setAlertOpen] = useState(false);

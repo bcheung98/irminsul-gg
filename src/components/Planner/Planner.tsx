@@ -1,9 +1,12 @@
 "use client";
 
 // Component imports
-import ContentBox from "@/components/ContentBox";
+import PlannerSelector from "@/components/PlannerSelector";
+import PlannerSorter from "@/components/PlannerSorter";
+import PlannerTotalCost from "@/components/PlannerTotalCost";
 import PlannerCardRoot from "@/components/PlannerCardRoot";
-import PlannerActions from "./PlannerActions";
+import FlexBox from "@/components/FlexBox";
+import ContentBox from "@/components/ContentBox";
 import Dropdown from "@/components/Dropdown";
 import Text from "@/components/Text";
 
@@ -49,14 +52,24 @@ export default function Planner({
                     Ascension Planner
                 </Text>
                 <ContentBox
-                    header={<PlannerActions />}
+                    header={
+                        <FlexBox spacing={2} wrap>
+                            <PlannerSelector type="characters" />
+                            <PlannerSelector type="weapons" />
+                            <PlannerSorter />
+                        </FlexBox>
+                    }
                     headerProps={{ padding: "16px" }}
                 >
                     {items.length > 0 ? (
                         <Dropdown
                             title="Total Materials Required"
                             textVariant="body1"
-                        ></Dropdown>
+                            contentPadding="16px 0"
+                            defaultOpen
+                        >
+                            <PlannerTotalCost />
+                        </Dropdown>
                     ) : (
                         <Text weight="highlight">
                             {`Add a ${titleCharacters} or ${titleWeapons} to get started!`}
