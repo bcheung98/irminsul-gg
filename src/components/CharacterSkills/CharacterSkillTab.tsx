@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
 // Helper imports
-import { useGameTag, useSkillContext } from "@/context";
+import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 import { skillKeys, skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL, useSkillKeyword } from "@/helpers/skills";
@@ -34,6 +34,8 @@ export default function CharacterSkillTab({
     const theme = useTheme();
 
     const game = useGameTag();
+
+    const buffs = useSkillVersionContext();
 
     const textColor = useTextColor(theme.text);
 
@@ -58,6 +60,7 @@ export default function CharacterSkillTab({
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,
+            skillVersion: buffs.value,
             keywords: keywords,
             attributes: attributes,
         });
@@ -71,8 +74,15 @@ export default function CharacterSkillTab({
         setCurrentKeyword(null);
     };
 
-    if (skills) {
-        const skill = skills[skillKey];
+    if (skills && skills[skillKey]) {
+        let skill = skills[skillKey];
+        if (buffs && buffs.value !== "v1" && skill.length > 1) {
+            skill = skill.filter(
+                (skill) => skill.version?.value === buffs.value
+            );
+        } else {
+            skill = skill.slice(0, 1);
+        }
 
         return (
             <>

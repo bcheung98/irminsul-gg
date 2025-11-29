@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 // Component imports
+import CharacterBuffs from "@/components/CharacterBuffs";
 import ContentBox from "@/components/ContentBox";
 import ContentDialog from "@/components/ContentDialog";
 import KeywordPopup from "@/components/KeywordPopup";
@@ -16,7 +17,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { useSkillContext } from "@/context";
+import { useSkillContext, useSkillVersionContext } from "@/context";
 import { splitJoin } from "@/utils";
 import { skillKeys } from "@/data/skills";
 import { useSkillKeyword } from "@/helpers/skills";
@@ -36,6 +37,8 @@ export default function CharacterPassives({
     attributes,
 }: CharacterPassivesProps) {
     const theme = useTheme();
+
+    const buffs = useSkillVersionContext();
 
     const getSkillKeyword = useSkillKeyword().genshin;
 
@@ -59,6 +62,7 @@ export default function CharacterPassives({
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,
+            skillVersion: buffs.value,
             keywords: keywords,
             attributes: attributes,
         });
@@ -73,11 +77,26 @@ export default function CharacterPassives({
     };
 
     if (skills?.passives) {
-        const passives = skills.passives as GenshinCharacterPassive[];
+        const types: string[] = [];
+        const passives: GenshinCharacterPassive[] = [];
+        (skills.passives as GenshinCharacterPassive[]).forEach((skill) => {
+            if (!types.includes(skill.type)) {
+                types.push(skill.type);
+                passives.push(skill);
+            } else {
+                if (buffs && buffs.value === skill.version?.value) {
+                    passives.pop();
+                    passives.push(skill);
+                }
+            }
+        });
 
         return (
             <>
-                <ContentBox header="Passive Talents">
+                <ContentBox
+                    header="Passive Talents"
+                    actions={<CharacterBuffs {...buffs} />}
+                >
                     <Grid container spacing={3}>
                         {passives.map((passive, index) => (
                             <SkillCard key={index}>

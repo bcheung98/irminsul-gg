@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // Component imports
 import CharacterSkillTab from "./CharacterSkillTab";
+import CharacterBuffs from "@/components/CharacterBuffs";
 import ContentBox from "@/components/ContentBox";
 import SkillIcon from "@/components/SkillIcon";
 import { default as Tabs } from "@/components/Tabs";
@@ -10,7 +11,7 @@ import { default as Tabs } from "@/components/Tabs";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { useGameTag } from "@/context";
+import { useGameTag, useSkillVersionContext } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 import { skillIconURLs } from "@/data/skills";
 import { formatSkillIconURL } from "@/helpers/skills";
@@ -29,6 +30,8 @@ export default function CharacterSkills({
 
     const game = useGameTag();
 
+    const buffs = useSkillVersionContext();
+
     const textColor = useTextColor(theme.text);
 
     const [tabValue, setTabValue] = useState(0);
@@ -37,7 +40,11 @@ export default function CharacterSkills({
     };
 
     return (
-        <ContentBox header={title} contentProps={{ padding: "8px 0px" }}>
+        <ContentBox
+            header={title}
+            contentProps={{ padding: "8px 0px" }}
+            actions={<CharacterBuffs {...buffs} />}
+        >
             <Tabs.List
                 value={tabValue}
                 onChange={handleTabChange}

@@ -10,3 +10,12 @@ export interface CharacterOutfit {
     rarity: number;
     description: string;
 }
+
+export interface CharacterBuffs {
+    versions?: {
+        value: string;
+        label: string;
+    }[];
+    value?: string;
+    onChange?: (arg0: any, arg1: any) => void;
+}

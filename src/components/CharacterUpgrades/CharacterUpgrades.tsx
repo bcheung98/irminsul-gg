@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 // Component imports
+import CharacterBuffs from "@/components/CharacterBuffs";
 import ContentBox from "@/components/ContentBox";
 import ContentDialog from "@/components/ContentDialog";
 import KeywordPopup from "@/components/KeywordPopup";
@@ -16,30 +17,30 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { useGameTag, useSkillContext } from "@/context";
+import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
 import { splitJoin } from "@/utils";
 import { useSkillKeyword } from "@/helpers/skills";
 
 // Type imports
 import { AttributeData, GameData } from "@/types";
-import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
+import { CharacterSkillsList, Skill, SkillKeyword } from "@/types/skill";
 
 interface CharacterUpgradesProps {
     title?: string;
-    actions?: React.ReactNode;
     keywords?: SkillKeyword[];
     attributes: AttributeData;
 }
 
 export default function CharacterUpgrades({
     title,
-    actions,
     keywords,
     attributes,
 }: CharacterUpgradesProps) {
     const theme = useTheme();
 
     const game = useGameTag();
+
+    const buffs = useSkillVersionContext();
 
     const getSkillKeyword = useSkillKeyword()[game];
 
@@ -79,6 +80,7 @@ export default function CharacterUpgrades({
         const keyword = getSkillKeyword({
             tag: event.target.className.split("-")[1],
             skills: skills,
+            skillVersion: buffs.value,
             keywords: keywords,
             attributes: attributes,
         });
@@ -93,11 +95,26 @@ export default function CharacterUpgrades({
     };
 
     if (skills?.upgrades) {
-        const upgrades = skills.upgrades;
+        const indexes: number[] = [];
+        const upgrades: Skill[] = [];
+        skills.upgrades.forEach((skill) => {
+            if (skill.index && !indexes.includes(skill.index)) {
+                indexes.push(skill.index);
+                upgrades.push(skill);
+            } else {
+                if (buffs && buffs.value === skill.version?.value) {
+                    upgrades.pop();
+                    upgrades.push(skill);
+                }
+            }
+        });
 
         return (
             <>
-                <ContentBox header={title} actions={actions}>
+                <ContentBox
+                    header={title}
+                    actions={<CharacterBuffs {...buffs} />}
+                >
                     <Grid container spacing={3}>
                         {upgrades.map((upgrade, index) => (
                             <SkillCard key={index}>

@@ -24,6 +24,7 @@ export interface GetSkillKeywordProps {
     skills?: CharacterSkillsList;
     keywords?: SkillKeyword[];
     attributes: AttributeData;
+    skillVersion?: string;
 }
 
 type UseSkillKeywordFn = (
