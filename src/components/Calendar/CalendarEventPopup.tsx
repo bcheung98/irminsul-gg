@@ -1,6 +1,6 @@
 // Component imports
-import Text from "@/components/Text";
 import BannerItems from "@/components/BannerItems";
+import Text from "@/components/Text";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -41,12 +41,15 @@ export default function CalendarEventPopup(props: {
     const server = useServerStore()[game];
     const isFuture = isFutureBanner(props.eventProps, server);
 
+    let title = getBannerLabel(props.eventProps, server, "date");
+    if (props.eventProps.isFuture !== undefined && props.eventProps.isFuture) {
+        title += " (Tentative)";
+    }
+
     return (
         <BannerDataContext value={{ characters, weapons, server }}>
             <Stack spacing={1}>
-                <Text weight="highlight">
-                    {getBannerLabel(props.eventProps, server, "date")}
-                </Text>
+                <Text weight="highlight">{title}</Text>
                 <BannerItems
                     banner={props.eventProps}
                     showCountdown={isCurrent || isFuture}

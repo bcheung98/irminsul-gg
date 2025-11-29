@@ -95,14 +95,14 @@ export default function CalendarHeader({
                 prevYear();
                 return;
             }
+            if (event.ctrlKey && event.key === "ArrowRight") {
+                event.preventDefault();
+                nextYear();
+                return;
+            }
             if (event.key === "ArrowLeft") {
                 event.preventDefault();
                 prevMonth();
-                return;
-            }
-            if (event.key === "t") {
-                event.preventDefault();
-                jumpToday();
                 return;
             }
             if (event.key === "ArrowRight") {
@@ -110,9 +110,9 @@ export default function CalendarHeader({
                 nextMonth();
                 return;
             }
-            if (event.ctrlKey && event.key === "ArrowRight") {
+            if (event.key === "t") {
                 event.preventDefault();
-                nextYear();
+                jumpToday();
                 return;
             }
         }
