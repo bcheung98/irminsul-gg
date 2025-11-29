@@ -1,3 +1,5 @@
+import { usePathname } from "next/navigation";
+
 // Component imports
 import MaterialCard from "@/components/MaterialCard";
 
@@ -24,8 +26,10 @@ export default function MaterialGrid({
 }: MaterialGridProps) {
     const game = useGameTag();
 
+    const pathname = usePathname();
+
     const materialArray: React.ReactNode[] = [];
-    objectKeys(costs).forEach((key) =>
+    sortItems(objectKeys(costs), pathname).forEach((key) =>
         Object.entries(costs[key]).forEach(
             ([material, cost]) =>
                 cost &&
@@ -47,4 +51,41 @@ export default function MaterialGrid({
             {materialArray.map((card) => card)}
         </Grid>
     );
+}
+
+function sortItems(items: string[], pathname: string) {
+    const sortIndex: Record<string, number> = {};
+    const sortOrder = pathname.endsWith("planner")
+        ? [
+              "credits",
+              "characterXP",
+              "weaponXP",
+              "boss",
+              "weekly",
+              "crown",
+              "gemstone",
+              "local",
+              "talent",
+              "weapon",
+              "elite",
+              "common",
+          ]
+        : [
+              "credits",
+              "characterXP",
+              "weaponXP",
+              "boss",
+              "local",
+              "gemstone",
+              "talent",
+              "weapon",
+              "elite",
+              "common",
+              "weekly",
+              "crown",
+          ];
+    sortOrder.forEach((item, index) => {
+        sortIndex[item] = index;
+    });
+    return items.sort((a, b) => sortIndex[a] - sortIndex[b]);
 }
