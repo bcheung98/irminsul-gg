@@ -38,7 +38,7 @@ export async function getItems(
                 id: item.id,
                 name: item.name,
                 displayName:
-                    "fullName" in item ? item.fullName : item.displayName,
+                    "fullName" in item ? item.displayName : item.displayName,
                 rarity: item.rarity,
                 category: category,
                 release: item.release,

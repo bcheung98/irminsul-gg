@@ -30,7 +30,7 @@ export default function CharacterPage({
 
     const attributes: AttributeData = {
         name: character.name,
-        displayName: character.fullName,
+        displayName: character.displayName,
         title: character.title,
         description: character.description,
         element: character.element,

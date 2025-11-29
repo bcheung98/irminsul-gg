@@ -87,7 +87,7 @@ export default function FarmingSchedule(props: {
         .filter((character) =>
             characterMats.includes(character.materials.talent.toString())
         )
-        .sort((a, b) => a.fullName.localeCompare(b.fullName));
+        .sort((a, b) => a.displayName.localeCompare(b.displayName));
     const weapons = filterUnreleasedContent(
         hideUnreleasedContent,
         props.weapons,

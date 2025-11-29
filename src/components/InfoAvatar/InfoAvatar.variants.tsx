@@ -14,7 +14,7 @@ export function GenshinCharacterInfoAvatar({
             tag="genshin/characters"
             key={character.id}
             name={character.name}
-            displayName={character.fullName || character.displayName}
+            displayName={character.displayName}
             rarity={character.rarity}
             href={character.url}
             background="transparent"

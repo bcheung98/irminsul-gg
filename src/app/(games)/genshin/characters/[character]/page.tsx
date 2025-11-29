@@ -24,9 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     );
 
     return {
-        title: charData?.fullName,
+        title: charData?.displayName,
         description: charData?.description,
-        keywords: [charData.fullName, charData.name],
+        keywords: [charData.displayName, charData.name],
     };
 }
 

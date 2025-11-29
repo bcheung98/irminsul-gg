@@ -37,7 +37,7 @@ export default function CharacterList({
         return {
             name: {
                 label: {
-                    title: character.fullName,
+                    title: character.displayName,
                     titleProps: { variant: "body1" },
                     icon: `genshin/characters/avatars/${splitJoin(
                         character.name

@@ -20,7 +20,7 @@ export function GenshinCharacterInfoCard({
             tag="genshin/characters"
             key={character.id}
             name={character.name}
-            displayName={character.fullName}
+            displayName={character.displayName}
             rarity={character.rarity}
             badgeLeft={{
                 element: character.element,
@@ -44,7 +44,7 @@ export function GenshinCharacterInfoCardMaterial({
             tag="genshin/characters"
             key={character.id}
             name={character.name}
-            displayName={character.fullName}
+            displayName={character.displayName}
             rarity={character.rarity}
             badgeLeft={{
                 element: character.element,

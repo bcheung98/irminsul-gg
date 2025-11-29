@@ -168,7 +168,7 @@ function getSubStatLabel(weapon: GenshinWeapon, reverse: boolean) {
 }
 
 function getNames(a: any, b: any) {
-    const ai = a.fullName || a.displayName || a.name || "";
-    const bi = b.fullName || b.displayName || b.name || "";
+    const ai = a.displayName || a.name || "";
+    const bi = b.displayName || b.name || "";
     return { ai, bi };
 }

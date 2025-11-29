@@ -57,9 +57,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                (a.fullName || a.displayName).localeCompare(
-                    b.fullName || b.displayName
-                )
+                a.displayName.localeCompare(b.displayName)
         );
     const weapons = props.weapons
         .filter((weapon) => weapon.release.version === version)

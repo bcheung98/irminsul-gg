@@ -30,7 +30,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
 
     function getCurrentData(item: string) {
         const data = dataContext.find((d) => formatHref(d.url) === item);
-        if (data) return data.fullName || data.displayName || data.name;
+        if (data) return data.displayName || data.name;
         else return "";
     }
 

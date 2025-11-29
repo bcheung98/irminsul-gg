@@ -35,7 +35,7 @@ export function createBannerData<
     if (character) {
         data.id = character.id;
         data.name = character.name;
-        data.displayName = character.fullName || character.displayName;
+        data.displayName = character.displayName;
         data.rarity = character.rarity;
         data.element = character.element;
         data.weaponType = character.weaponType;

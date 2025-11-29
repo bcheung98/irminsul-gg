@@ -14,7 +14,6 @@ import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
 
 export interface GenshinCharacter extends BaseData {
     displayName: string;
-    fullName: string;
     title: string;
     rarity: GenshinRarity;
     element: GenshinElement;

@@ -10,7 +10,7 @@ export function parseData<T extends DataType, U extends DataType>(
     return {
         id: Number(item.id),
         name: item.name,
-        displayName: "fullName" in item ? item.fullName : item.displayName,
+        displayName: "fullName" in item ? item.displayName : item.displayName,
         rarity: item.rarity,
         element: "element" in item ? item.element : undefined,
         weaponType: item.weaponType,

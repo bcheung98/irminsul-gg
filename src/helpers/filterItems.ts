@@ -79,7 +79,7 @@ export function filterItems<T extends Record<string, any>>(
                 item.displayName
                     .toLowerCase()
                     .includes(searchValue.toLowerCase()) ||
-                item.fullName?.toLowerCase().includes(searchValue.toLowerCase())
+                item.displayName?.toLowerCase().includes(searchValue.toLowerCase())
         );
     }
 
