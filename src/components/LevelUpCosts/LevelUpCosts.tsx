@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Component imports
-import MaterialCard from "@/components/MaterialCard";
+import MaterialGrid from "@/components/MaterialGrid";
 import Text from "@/components/Text";
 import Slider from "@/components/Slider";
 import LevelUpSlider from "@/components/LevelUpSlider";
@@ -10,12 +10,9 @@ import LevelUpSlider from "@/components/LevelUpSlider";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { objectKeys } from "@/utils";
 import levelData from "@/data/levels";
 import { costs } from "@/helpers/costs";
 
@@ -40,7 +37,7 @@ export default function LevelUpCosts({
     materials,
     title = "",
     color,
-    iconSize = 60,
+    iconSize = 56,
     threshold = "@100",
     element,
     rarity = 3,
@@ -119,36 +116,16 @@ export default function LevelUpCosts({
         rarity: rarity,
     });
 
-    const materialArray: React.ReactNode[] = [];
-    objectKeys(materialCosts).forEach((key) =>
-        Object.entries(materialCosts[key]).forEach(
-            ([material, cost]) =>
-                cost &&
-                materialArray.push(
-                    <MaterialCard
-                        key={Number(material)}
-                        game={game}
-                        material={Number(material)}
-                        cost={cost}
-                        size={iconSize}
-                    />
-                )
-        )
-    );
-
     return (
         <Stack spacing={1}>
             <Text variant="h6" weight="highlight">
                 {title}
             </Text>
-            <Box sx={{ containerType: "inline-size" }}>
-                <Grid
-                    container
-                    spacing={2}
-                    sx={{ mb: levels.length > 0 ? "16px" : "0px" }}
-                >
-                    {materialArray.map((card) => card)}
-                </Grid>
+            <Stack
+                spacing={levels.length > 0 ? 2 : 0}
+                sx={{ containerType: "inline-size" }}
+            >
+                <MaterialGrid costs={materialCosts} size={iconSize} />
                 {levels.length > 0 && (
                     <LevelUpSlider
                         slider={slider}
@@ -156,7 +133,7 @@ export default function LevelUpCosts({
                         threshold={threshold}
                     />
                 )}
-            </Box>
+            </Stack>
         </Stack>
     );
 }
