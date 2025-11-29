@@ -24,7 +24,7 @@ export default function BetaTag({ version }: { version: string }) {
                     backgroundColor: theme.palette.error.dark,
                 })}
             >
-                <Text>{text}</Text>
+                <Text weight="highlight">{text}</Text>
             </Card>
         );
     } else return null;
