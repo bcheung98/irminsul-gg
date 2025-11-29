@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function GenshinArtifactPage({ params }: Props) {
+export default async function Page({ params }: Props) {
     const { artifact } = await params;
     const artifactData = await getData<GenshinArtifact>(
         "genshin/artifacts",

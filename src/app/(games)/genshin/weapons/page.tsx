@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "A list of all Genshin Impact Weapons",
 };
 
-export default async function GenshinWeaponsPage() {
+export default async function Page() {
     const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");
 
     return (

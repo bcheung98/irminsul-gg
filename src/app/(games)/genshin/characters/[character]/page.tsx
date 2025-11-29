@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function GenshinCharacterPage({ params }: Props) {
+export default async function Page({ params }: Props) {
     const { character } = await params;
     const charData = await getData<GenshinCharacter>(
         "genshin/characters",

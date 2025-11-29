@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "A list of all Genshin Impact Artifacts",
 };
 
-export default async function GenshinCharactersPage() {
+export default async function Page() {
     const equipment = await getDataSet<GenshinArtifact>("genshin/artifacts");
 
     return (

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description: "A list of all Genshin Impact Characters",
 };
 
-export default async function GenshinCharactersPage() {
+export default async function Page() {
     const characters = await getDataSet<GenshinCharacter>("genshin/characters");
 
     return (
