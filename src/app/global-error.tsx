@@ -2,10 +2,8 @@
 
 export default function GlobalError({
     error,
-    reset,
 }: {
     error: Error & { digest?: string };
-    reset: () => void;
 }) {
     return (
         <html>
@@ -19,7 +17,7 @@ export default function GlobalError({
             <body>
                 <img
                     src="https://assets.irminsul.gg/main/images/Irminsul.png"
-                    id="background-image"
+                    className="background-image"
                     style={{ filter: "brightness(0.25) grayscale(100%)" }}
                 />
                 <main style={{ position: "relative", marginTop: "32px" }}>
@@ -44,23 +42,6 @@ export default function GlobalError({
                             Here are some things you can try:
                         </p>
                         <ul>
-                            <li className="global-error-text">
-                                Click{" "}
-                                <span
-                                    onClick={() => {
-                                        console.clear();
-                                        reset();
-                                    }}
-                                    style={{
-                                        color: "rgb(30, 175, 255)",
-                                        textDecoration: "underline",
-                                        cursor: "pointer",
-                                    }}
-                                >
-                                    here
-                                </span>{" "}
-                                to try and reload the segment.
-                            </li>{" "}
                             <li className="global-error-text">
                                 Refresh the browser's cache by pressing{" "}
                                 <u>Ctrl + F5</u> (Windows) or{" "}
