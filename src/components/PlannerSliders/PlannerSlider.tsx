@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 
 // Component imports
 import FlexBox from "@/components/FlexBox";
@@ -16,25 +16,31 @@ import Grid from "@mui/material/Grid";
 // Helper imports
 import { useGameTag } from "@/context";
 import { skillKeys } from "@/data/skills";
+import { usePlannerStore } from "@/stores";
 
 // Type imports
 import { PlannerSliderProps } from "./PlannerSlider.types";
+import { GameNoUma } from "@/types";
 
 const threshold = "@500";
 
-export default function PlannerSlider({
+const PlannerSlider = memo(function PlannerSlider({
     mode,
     type,
+    id,
     skillKey,
     icon,
     levels,
     values,
+    materials,
     color,
 }: PlannerSliderProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const game = useGameTag();
+    const game = useGameTag() as GameNoUma;
+
+    const setItemValues = usePlannerStore()[`${game}/setItemValues`];
 
     const title = skillKeys[game][skillKey] || "Level";
 
@@ -45,30 +51,29 @@ export default function PlannerSlider({
 
     const minDistance = 1;
     const maxValue = levels.length;
-    const [sliderValue, setSliderValue] = useState([
-        values.start ?? 1,
-        values.stop ?? maxValue,
-    ]);
-    const handleSliderChange = (
-        _: Event,
-        newValue: number | number[],
-        activeThumb: number
-    ) => {
-        if (!Array.isArray(newValue)) {
-            return;
-        }
-        if (newValue[1] - newValue[0] < minDistance) {
-            if (activeThumb === 0) {
-                const clamped = Math.min(newValue[0], maxValue - minDistance);
-                setSliderValue([clamped, clamped + minDistance]);
-            } else {
-                const clamped = Math.max(newValue[1], minDistance + 1);
-                setSliderValue([clamped - minDistance, clamped]);
+    const [sliderValue, setSliderValue] = useState([values.start, values.stop]);
+    const handleSliderChange = useCallback(
+        (_: Event, newValue: number | number[], activeThumb: number) => {
+            if (!Array.isArray(newValue)) {
+                return;
             }
-        } else {
-            setSliderValue(newValue);
-        }
-    };
+            if (newValue[1] - newValue[0] < minDistance) {
+                if (activeThumb === 0) {
+                    const clamped = Math.min(
+                        newValue[0],
+                        maxValue - minDistance
+                    );
+                    setSliderValue(() => [clamped, clamped + minDistance]);
+                } else {
+                    const clamped = Math.max(newValue[1], minDistance + 1);
+                    setSliderValue(() => [clamped - minDistance, clamped]);
+                }
+            } else {
+                setSliderValue(() => newValue);
+            }
+        },
+        []
+    );
 
     const marks = levels.map((level, index) => ({
         value: index + 1,
@@ -90,7 +95,17 @@ export default function PlannerSlider({
         ),
     }));
 
-    useEffect(() => {}, [sliderValue, selected]);
+    useEffect(() => {
+        setItemValues({
+            id,
+            skillKey,
+            values: {
+                start: sliderValue[0],
+                stop: sliderValue[1],
+                selected,
+            },
+        });
+    }, [sliderValue, selected]);
 
     return (
         <Stack
@@ -111,6 +126,8 @@ export default function PlannerSlider({
                     <Image
                         src={icon}
                         size={40}
+                        responsive
+                        responsiveSize={0.2}
                         style={{
                             opacity: selected ? 1 : 0.35,
                             padding: "4px",
@@ -192,4 +209,6 @@ export default function PlannerSlider({
             </Grid>
         </Stack>
     );
-}
+});
+
+export default PlannerSlider;

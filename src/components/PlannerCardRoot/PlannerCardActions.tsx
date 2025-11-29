@@ -40,16 +40,16 @@ export default function PlannerCardActions({
     const store = usePlannerStore();
     const hiddenItems = store[`${game}/hidden`];
 
-    const toggleHidden = store[`${game}/toggleHidden`];
+    const setHiddenItems = store[`${game}/setHiddenItems`];
 
     const [hidden, setHidden] = useState(hiddenItems.includes(item.id));
     const handleHiddenChange = () => {
         setHidden(!hidden);
-        toggleHidden(item.id);
+        setHiddenItems(item.id);
     };
 
     const handleDelete = () => {
-        if (hidden) toggleHidden(item.id);
+        if (hidden) setHiddenItems(item.id);
         const newValues = store[`${game}/items`].filter(
             (i) => i.id !== item.id
         );

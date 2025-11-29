@@ -19,13 +19,13 @@ export const createHSRSlice: StateCreator<
     "hsr/setItems": function (items) {
         return set(() => ({}));
     },
-    "hsr/updateItemCosts": function () {
+    "hsr/setItemValues": function () {
+        return set(() => ({}));
+    },
+    "hsr/setHiddenItems": function (id) {
         return set(() => ({}));
     },
     "hsr/updateTotalCosts": function () {
-        return set(() => ({}));
-    },
-    "hsr/toggleHidden": function (id) {
         return set(() => ({}));
     },
 });

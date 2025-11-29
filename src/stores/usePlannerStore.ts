@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Game } from "@/types";
-import { PlannerItemData } from "@/types/planner";
+import { GameNoUma } from "@/types";
+import { PlannerItemData, SetItemValuesProps } from "@/types/planner";
 
 import {
     createGenshinSlice,
@@ -16,12 +16,12 @@ export interface PlannerSlice {
     items: PlannerItemData[];
     hidden: number[];
     setItems: (items: PlannerItemData[]) => void;
-    updateItemCosts: () => void;
+    setItemValues: (item: SetItemValuesProps) => void;
+    setHiddenItems: (id: number) => void;
     updateTotalCosts: () => void;
-    toggleHidden: (id: number) => void;
 }
 
-export type GamePlannerSlice<G extends Game, T> = {
+export type GamePlannerSlice<G extends GameNoUma, T> = {
     [K in keyof T as `${G}/${string & K}`]: T[K];
 };
 

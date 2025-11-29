@@ -19,13 +19,13 @@ export const createWuWaSlice: StateCreator<
     "wuwa/setItems": function (items) {
         return set(() => ({}));
     },
-    "wuwa/updateItemCosts": function () {
+    "wuwa/setItemValues": function () {
+        return set(() => ({}));
+    },
+    "wuwa/setHiddenItems": function (id) {
         return set(() => ({}));
     },
     "wuwa/updateTotalCosts": function () {
-        return set(() => ({}));
-    },
-    "wuwa/toggleHidden": function (id) {
         return set(() => ({}));
     },
 });

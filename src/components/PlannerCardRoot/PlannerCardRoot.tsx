@@ -3,6 +3,7 @@ import { useState } from "react";
 // Component imports
 import PlannerCardHeader from "./PlannerCardHeader";
 import PlannerCardActions from "./PlannerCardActions";
+import PlannerMaterials from "@/components/PlannerMaterials";
 import GenshinPlannerCard from "@/components/_genshin/PlannerCard";
 import ContentBox from "@/components/ContentBox";
 import Dropdown from "@/components/Dropdown";
@@ -82,8 +83,11 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
                         {components[game]}
                         <Dropdown
                             title="Materials Required"
+                            contentPadding={"16px 0"}
                             defaultOpen
-                        ></Dropdown>
+                        >
+                            <PlannerMaterials />
+                        </Dropdown>
                     </Stack>
                 </PlannerCardModeContext>
             </ContentBox>

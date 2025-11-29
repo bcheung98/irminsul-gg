@@ -2,6 +2,7 @@ import { BaseDataWithRelease } from ".";
 import { Materials } from "./materials";
 
 export type PlannerType = "characters" | "weapons";
+export type CardMode = "edit" | "view";
 
 export interface PlannerItemData extends BaseDataWithRelease {
     id: number;
@@ -21,4 +22,8 @@ export interface CostSliderValues {
     selected: boolean;
 }
 
-export type CardMode = "edit" | "view";
+export interface SetItemValuesProps {
+    id: number;
+    skillKey: string;
+    values: CostSliderValues;
+}

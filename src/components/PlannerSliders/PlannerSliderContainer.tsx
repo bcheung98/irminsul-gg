@@ -8,15 +8,15 @@ interface Props {
 
 export function MainContainer({ children, mode }: Props) {
     return (
-        <Grid container rowSpacing={1} columnSpacing={mode === "view" ? 2 : 6}>
+        <Grid container rowSpacing={1} columnSpacing={mode === "view" ? 1 : 6}>
             {children}
         </Grid>
     );
 }
 
-export function LevelSliderContainer({ children }: Omit<Props, "mode">) {
+export function LevelSliderContainer({ children, mode }: Props) {
     return (
-        <Grid size={12} sx={{ mb: 1 }}>
+        <Grid size={12} sx={{ mb: { xs: mode === "view" ? 1 : 0, md: 1 } }}>
             {children}
         </Grid>
     );
@@ -24,7 +24,7 @@ export function LevelSliderContainer({ children }: Omit<Props, "mode">) {
 
 export function SkillSliderContainer({ children, mode }: Props) {
     return (
-        <Grid size={mode === "view" ? { xs: 12, sm: 3 } : { xs: 12, md: 6 }}>
+        <Grid size={mode === "view" ? { xs: 6, sm: 3 } : { xs: 12, md: 6 }}>
             {children}
         </Grid>
     );

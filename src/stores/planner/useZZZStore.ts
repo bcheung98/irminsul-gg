@@ -19,13 +19,13 @@ export const createZZZSlice: StateCreator<
     "zzz/setItems": function (items) {
         return set(() => ({}));
     },
-    "zzz/updateItemCosts": function () {
+    "zzz/setItemValues": function () {
+        return set(() => ({}));
+    },
+    "zzz/setHiddenItems": function (id) {
         return set(() => ({}));
     },
     "zzz/updateTotalCosts": function () {
-        return set(() => ({}));
-    },
-    "zzz/toggleHidden": function (id) {
         return set(() => ({}));
     },
 });

@@ -14,7 +14,7 @@ export function parseData<T extends DataType, U extends DataType>(
         rarity: item.rarity,
         element: "element" in item ? item.element : undefined,
         weaponType: item.weaponType,
-        materials: parseMaterials(game, item.materials),
+        materials: item.materials,
         release: item.release,
         url: item.url,
         values: skillData[game],

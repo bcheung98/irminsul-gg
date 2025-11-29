@@ -71,7 +71,7 @@ export default function GenshinPlannerCard() {
         {
             skillKey: "burst",
             levels: skillLevel,
-            values: item.values.ultimate || defaultSkillValues,
+            values: item.values.burst || defaultSkillValues,
             icon: `genshin/characters/talents/${splitJoin(
                 item.name
             ).toLowerCase()}_burst`,
@@ -97,7 +97,7 @@ export default function GenshinPlannerCard() {
 
     return (
         <MainContainer mode={mode}>
-            <LevelSliderContainer>{Level}</LevelSliderContainer>
+            <LevelSliderContainer mode={mode}>{Level}</LevelSliderContainer>
             {type === "characters" &&
                 [Attack, Skill, Ultimate].map((slider) => (
                     <SkillSliderContainer key={slider.key} mode={mode}>
