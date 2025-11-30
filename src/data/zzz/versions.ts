@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const zzzVersions: VersionInfo[] = [
+    { version: "2.4", name: "On the Precipice of the Abyss" },
     { version: "2.3", name: "Memories of Dreams Bygone" },
     { version: "2.2", name: "Do Not Go Gentle Into That Good Night" },
     { version: "2.1", name: "The Impending Crash of Waves" },

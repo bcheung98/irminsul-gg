@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const wuwaVersions: VersionInfo[] = [
+    { version: "2.8", name: "To the City Set in Amber" },
     { version: "2.7", name: "Dawn Breaks on Dark Tides" },
     { version: "2.6", name: "By Sun's Scourge, By Moon's Revelation" },
     { version: "2.5", name: "Unfading Melody of Life" },
