@@ -59,7 +59,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     return (
         <TextLabel
-            icon={categoryImgURLs[`${game}/${type}`](item.name)}
+            icon={categoryImgURLs[`${game}/${type}`](item.id)}
             iconProps={{
                 size: 48,
                 styles: {

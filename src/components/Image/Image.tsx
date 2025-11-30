@@ -15,7 +15,7 @@ import { ImageProps } from "./Image.types";
 
 export default function Image({
     src,
-    fallbackSrc = "main/images/Unknown",
+    fallbackSrc = "_common/images/Unknown",
     size,
     alt = "",
     id = src,
@@ -52,7 +52,7 @@ export default function Image({
     };
 
     if (!src.startsWith("https")) {
-        src = `https://assets.irminsul.gg/${src.split(" ").join("_")}.png`;
+        src = `https://assets.irminsul.gg/v2/${src.split(" ").join("_")}.png`;
     }
 
     const imgStyle = combineStyles(defaultImageStyle, style);
@@ -63,7 +63,7 @@ export default function Image({
 
     function onError(event: React.SyntheticEvent<HTMLImageElement, Event>) {
         !supressLoadImageWarning && console.warn(`Failed to load image ${src}`);
-        event.currentTarget.src = `https://assets.irminsul.gg/${fallbackSrc}.png`;
+        event.currentTarget.src = `https://assets.irminsul.gg/v2/${fallbackSrc}.png`;
         onerror = null;
     }
 
@@ -87,7 +87,6 @@ export default function Image({
             ) : (
                 <img
                     src={src}
-                    alt={alt}
                     id={id}
                     style={imgStyle}
                     onError={onError}

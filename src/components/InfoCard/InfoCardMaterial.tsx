@@ -14,7 +14,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
-import { formatHref, splitJoin } from "@/utils";
+import { formatHref } from "@/utils";
 import { useMaterials } from "@/helpers/materials";
 
 // Type imports
@@ -22,13 +22,13 @@ import { InfoCardMaterialProps } from "./InfoCard.types";
 import { Game, GameData } from "@/types";
 
 export default function InfoCardMaterial({
+    id,
     tag,
     name,
-    displayName = name,
     rarity = 3,
     size = 96,
     background,
-    url = "avatars",
+    url,
     componentID,
     badgeLeft,
     badgeRight,
@@ -38,13 +38,18 @@ export default function InfoCardMaterial({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const id = `${componentID || formatHref(href)}-infoCard`;
+    componentID = `${componentID || formatHref(href)}-infoCard`;
 
     const [game, type] = tag.split("/") as [Game, string];
 
     let imgSize = size;
     if (matches) {
         imgSize = imgSize - imgSize * 0.3;
+    }
+
+    let imgURL = `${tag}/${id}`;
+    if (url) {
+        imgURL = `${tag}/${url}`;
     }
 
     const styles = infoCardStyles({
@@ -57,9 +62,10 @@ export default function InfoCardMaterial({
         variant: "material-card",
     });
 
-    function MaterialIcon(props: { material: string | number }) {
-        const material = useMaterials()[game](props.material);
-
+    function MaterialIcon(props: {
+        material: string | number;
+        category: string;
+    }) {
         const nums: GameData<string> = {
             genshin: "3",
             hsr: "3",
@@ -67,14 +73,14 @@ export default function InfoCardMaterial({
             zzz: "3",
             uma: "",
         };
-
-        let imgURL = `${game}/materials/${material.category}/${splitJoin(
-            material.tag
-        )}`;
-
-        if (["talent", "common"].includes(material.category)) {
-            imgURL += nums[game];
+        let materialTag = props.material;
+        if (["talent", "common"].includes(props.category)) {
+            materialTag += nums[game];
         }
+
+        const material = useMaterials()[game](materialTag);
+
+        let imgURL = `${game}/materials/${material.id}`;
 
         let tooltip = material.name;
         if (material.source) {
@@ -104,8 +110,8 @@ export default function InfoCardMaterial({
                 >
                     <Box sx={styles.imageContainer()}>
                         <Image
-                            src={`${tag}/${url}/${name}`}
-                            id={id}
+                            src={`${tag}/${id}`}
+                            id={componentID}
                             size={size}
                             responsive
                             responsiveSize={0.25}
@@ -118,15 +124,21 @@ export default function InfoCardMaterial({
                                 justifyContent: "center",
                             }}
                         >
-                            {Object.values(materials).map((material, index) => (
-                                <MaterialIcon key={index} material={material} />
-                            ))}
+                            {Object.entries(materials).map(
+                                ([key, material], index) => (
+                                    <MaterialIcon
+                                        key={index}
+                                        material={material}
+                                        category={key}
+                                    />
+                                )
+                            )}
                         </Grid>
                     </Box>
                     <Box sx={styles.textContainer()}>
                         <Text
                             variant={
-                                displayName.length > 20
+                                name.length > 20
                                     ? matches
                                         ? "body3"
                                         : "body2"
@@ -136,7 +148,7 @@ export default function InfoCardMaterial({
                             }
                             sx={styles.text()}
                         >
-                            {displayName}
+                            {name}
                         </Text>
                     </Box>
                 </ButtonBase>

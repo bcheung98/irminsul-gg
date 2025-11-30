@@ -44,7 +44,7 @@ export default function HomePage() {
             key={`background-image-${i}`}
             id={`background-image-${i}`}
             className="background-image inactive"
-            src={`https://assets.irminsul.gg/main/backgrounds/${game.shortName}.png`}
+            src={`https://assets.irminsul.gg/v2/${game.tag}/_common/Background.png`}
             style={{ filter: theme.backgroundImage.filterGame }}
         />
     ));

@@ -1,5 +1,3 @@
-import { splitJoin } from "@/utils";
-
 export const categories: Record<string, string> = {
     "genshin/characters": "Characters",
     "genshin/weapons": "Weapons",
@@ -18,12 +16,12 @@ export const categories: Record<string, string> = {
     "uma/supports": "Support Cards",
 };
 
-export const categoryImgURLs: Record<string, (args?: any) => string> = {
-    "genshin/characters": (name: string) =>
-        `genshin/characters/avatars/${splitJoin(name)}`,
-    "genshin/weapons": (name: string) => `genshin/weapons/${splitJoin(name)}`,
-    "genshin/equipment": (name: string) =>
-        `genshin/artifacts/sets/${splitJoin(name)}/${
-            name.startsWith("Prayers") ? "circlet" : "flower"
-        }`,
+export const categoryImgURLs: Record<
+    string,
+    (args0?: any, args1?: any) => string
+> = {
+    "genshin/characters": (id: number) => `genshin/characters/${id}`,
+    "genshin/weapons": (id: number) => `genshin/weapons/${id}`,
+    "genshin/equipment": (id: number, name: string) =>
+        `genshin/artifacts/${id}${name.startsWith("Prayers") ? "_5" : "_1"}`,
 };

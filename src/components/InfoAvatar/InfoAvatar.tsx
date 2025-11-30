@@ -17,14 +17,14 @@ import { useRarityColors } from "@/helpers/rarityColors";
 import { InfoAvatarProps } from "./InfoAvatar.types";
 
 export default function InfoAvatar({
+    id,
     tag,
     name,
-    displayName = name,
     rarity = 3,
     size = 64,
     background,
     disableZoomOnHover,
-    url = "icons",
+    url,
     componentID,
     href,
 }: InfoAvatarProps) {
@@ -34,9 +34,9 @@ export default function InfoAvatar({
 
     const rarityColors = useRarityColors()[game];
 
-    let imgURL = `${tag}/${name}`;
+    let imgURL = `${tag}/${id}`;
     if (url) {
-        imgURL = `${tag}/${url}/${name}`;
+        imgURL = `${tag}/${url}`;
     }
 
     const ImageRoot = (
@@ -49,7 +49,7 @@ export default function InfoAvatar({
     );
 
     return (
-        <Tooltip title={displayName} arrow placement="top">
+        <Tooltip title={name} arrow placement="top">
             <Card
                 elevation={0}
                 sx={{
@@ -60,7 +60,7 @@ export default function InfoAvatar({
                     }px solid ${rarityColors(rarity)}`,
                     borderRadius: theme.infoAvatar.border.radius,
                     backgroundColor: background || theme.background(1),
-                    backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
+                    backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
                     backgroundSize: "contain",
                 }}
             >

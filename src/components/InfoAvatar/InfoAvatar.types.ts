@@ -1,7 +1,7 @@
 export interface InfoAvatarProps {
+    id: number;
     tag: string;
     name: string;
-    displayName?: string;
     rarity?: number;
     size?: number;
     background?: string;

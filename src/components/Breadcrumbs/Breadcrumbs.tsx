@@ -37,7 +37,7 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
     return (
         <MuiBreadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
             <TextLabel
-                icon={matches && `main/game-icons/${website.shortName}`}
+                icon={matches && `${game}/_common/Icon`}
                 title={matches ? website.name : website.shortName}
                 titleProps={{
                     variant: matches ? "body2" : "subtitle2",

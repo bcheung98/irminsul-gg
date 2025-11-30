@@ -18,11 +18,10 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
-import { splitJoin } from "@/utils";
 import { useSkillKeyword } from "@/helpers/skills";
 
 // Type imports
-import { AttributeData, GameData } from "@/types";
+import { AttributeData } from "@/types";
 import { CharacterSkillsList, Skill, SkillKeyword } from "@/types/skill";
 
 interface CharacterUpgradesProps {
@@ -44,26 +43,8 @@ export default function CharacterUpgrades({
 
     const getSkillKeyword = useSkillKeyword()[game];
 
-    const upgradeNames: GameData<string> = {
-        genshin: "constellations",
-        hsr: "eidolons",
-        wuwa: "resonanceChains",
-        zzz: "mindscapes",
-        uma: "",
-    };
-
-    const upgradeURLs: GameData<string> = {
-        genshin: "c",
-        hsr: "e",
-        wuwa: "c",
-        zzz: "",
-        uma: "",
-    };
-
     function getIconURL(index: number) {
-        return `${game}/characters/${upgradeNames[game]}/${splitJoin(
-            attributes.name
-        ).toLocaleLowerCase()}_${upgradeURLs[game]}${index + 1}`;
+        return `${game}/skills/${attributes.id}_u${index + 1}`;
     }
 
     const skillsContext = useSkillContext();

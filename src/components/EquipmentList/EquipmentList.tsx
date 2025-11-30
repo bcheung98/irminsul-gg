@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // Helper imports
-import { formatHref, splitJoin } from "@/utils";
+import { formatHref } from "@/utils";
 import { useGameTag } from "@/context";
 import { equipmentTags } from "@/data/equipment";
 
@@ -64,8 +64,8 @@ export default function EquipmentList({
 
 export function textLabelIcon(game: Game, equipment: Equipment) {
     const items: GameData<string> = {
-        genshin: `genshin/artifacts/sets/${splitJoin(equipment.name)}/${
-            equipment.pieces.length > 1 ? "flower" : "circlet"
+        genshin: `genshin/artifacts/${equipment.id}${
+            equipment.pieces.length > 1 ? "_1" : "_5"
         }`,
         hsr: "",
         wuwa: "",

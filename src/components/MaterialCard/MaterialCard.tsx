@@ -43,10 +43,9 @@ export default function MaterialCard({
     const materials = useMaterials()[game];
 
     const {
+        id,
         name,
         displayName,
-        tag,
-        category,
         rarity: rarity = 3,
         source,
         imgURL,
@@ -65,10 +64,7 @@ export default function MaterialCard({
         <Card sx={styles.root()}>
             <Box sx={styles.imageContainer(theme)}>
                 <Image
-                    src={
-                        imgURL ||
-                        `${game}/materials/${category}/${splitJoin(tag)}`
-                    }
+                    src={imgURL || `${game}/materials/${id}`}
                     size={size}
                     tooltip={tooltip}
                     responsive

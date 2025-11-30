@@ -6,7 +6,6 @@ import {
     GenshinWeapon,
 } from "@/types/genshin";
 import { InfoCardProps } from "./InfoCard.types";
-import { splitJoin } from "@/utils";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -18,9 +17,9 @@ export function GenshinCharacterInfoCard({
     return (
         <InfoCard
             tag="genshin/characters"
+            id={Number(character.id)}
             key={character.id}
-            name={character.name}
-            displayName={character.displayName}
+            name={character.displayName}
             rarity={character.rarity}
             badgeLeft={{
                 element: character.element,
@@ -42,9 +41,9 @@ export function GenshinCharacterInfoCardMaterial({
     return (
         <InfoCardMaterial
             tag="genshin/characters"
+            id={Number(character.id)}
             key={character.id}
-            name={character.name}
-            displayName={character.displayName}
+            name={character.displayName}
             rarity={character.rarity}
             badgeLeft={{
                 element: character.element,
@@ -67,9 +66,9 @@ export function GenshinWeaponInfoCard({
     return (
         <InfoCard
             tag="genshin/weapons"
+            id={Number(weapon.id)}
             key={weapon.id}
-            name={weapon.name}
-            displayName={weapon.displayName}
+            name={weapon.displayName}
             rarity={weapon.rarity}
             badgeLeft={{
                 weaponType: weapon.weaponType,
@@ -92,13 +91,11 @@ export function GenshinArtifactInfoCard({
     return (
         <InfoCard
             tag="genshin/artifacts"
+            id={Number(artifact.id)}
             key={artifact.id}
-            name={`${splitJoin(artifact.name)}/${
-                artifact.pieces.length > 1 ? "flower" : "circlet"
-            }`}
-            displayName={artifact.displayName}
+            name={artifact.displayName}
             rarity={artifact.rarity}
-            url="sets"
+            url={`${artifact.id}_${artifact.pieces.length > 1 ? 1 : 5}`}
             href={artifact.url}
             {...props}
         />

@@ -42,8 +42,10 @@ export default function Page404() {
             sx={{ mt: "96px", textAlign: "center" }}
         >
             <Stack spacing={2}>
-                <Text variant="h4">404</Text>
-                <Text variant="h6">
+                <Text variant="h4" weight="highlight">
+                    404
+                </Text>
+                <Text variant="h6" weight="highlight">
                     The page you were looking for was not recorded in Irminsul.
                 </Text>
             </Stack>
@@ -60,6 +62,7 @@ export default function Page404() {
             <Button LinkComponent={Link} href={href} variant="contained">
                 <Text
                     variant="h6"
+                    weight="highlight"
                     sx={{
                         color:
                             getContrastRatio(

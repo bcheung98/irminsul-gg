@@ -19,7 +19,7 @@ import {
 
 // Type imports
 import { GenshinWeapon } from "@/types/genshin/weapon";
-import { AttributeData, GameData } from "@/types";
+import { AttributeData } from "@/types";
 
 export default function WeaponPage({ weapon }: { weapon: GenshinWeapon }) {
     const theme = useTheme();
@@ -27,23 +27,20 @@ export default function WeaponPage({ weapon }: { weapon: GenshinWeapon }) {
 
     const game = useGameTag();
 
-    const attributes: AttributeData = {
-        name: weapon.name,
-        displayName: weapon.displayName,
-        description: weapon.description,
-        weaponType: weapon.weaponType,
-        rarity: weapon.rarity,
-    };
+    const attributes: AttributeData = { ...weapon };
+
+    let imgURL = `${game}/weapons/${weapon.id}`;
+    if (matches) imgURL += "_large";
 
     const Splash = (
         <Image
-            src={`${imgURL[game]}/${weapon.name}`}
+            src={imgURL}
             style={{
                 width: matches ? "100%" : "128px",
                 maxWidth: "256px",
                 height: "auto",
                 backgroundColor: theme.background(2),
-                backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${weapon.rarity}_Star.png)`,
+                backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${weapon.rarity}.png)`,
                 backgroundSize: "contain",
                 backgroundRepeat: "repeat",
                 borderRadius: theme.contentBox.border.radius * 4,
@@ -81,11 +78,3 @@ export default function WeaponPage({ weapon }: { weapon: GenshinWeapon }) {
         />
     );
 }
-
-const imgURL: GameData<string> = {
-    genshin: "genshin/weapons",
-    hsr: "hsr/lightcones/large",
-    wuwa: "wuwa/weapons",
-    zzz: "zzz/w-engines",
-    uma: "",
-};

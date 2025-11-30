@@ -31,7 +31,7 @@ export default function getSkillKeyword({
             }
         } else if (["c1", "c2", "c3", "c4", "c5", "c6"].includes(skillKey)) {
             const index = Number(skillKey.slice(1));
-            iconURL = `genshin/characters/constellations/{name}_c${index}`;
+            iconURL = `genshin/skills/{id}_u${index}`;
             if (skillVersion !== "v1") {
                 skill =
                     upgrades.find(

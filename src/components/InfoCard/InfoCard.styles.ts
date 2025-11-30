@@ -49,7 +49,7 @@ export const infoCardStyles = ({
         backgroundImage:
             variant !== "material-card" && type === "characters"
                 ? null
-                : `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
+                : `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
         backgroundSize: "contain",
         backgroundRepeat: "repeat",
     }),

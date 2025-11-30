@@ -89,7 +89,7 @@ export default function GamesMenuList({
                             onClick={handleClose}
                         >
                             <TextLabel
-                                icon={`main/game-icons/${game.shortName}`}
+                                icon={`${game.tag}/_common/Icon`}
                                 iconProps={{ size: 32 }}
                                 title={game.name}
                                 titleProps={{

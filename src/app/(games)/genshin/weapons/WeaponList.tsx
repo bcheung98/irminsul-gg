@@ -38,7 +38,7 @@ export default function WeaponList({
                 label: {
                     title: weapon.displayName,
                     titleProps: { variant: "body1" },
-                    icon: `genshin/weapons/${splitJoin(weapon.name)}`,
+                    icon: `genshin/weapons/${weapon.id}`,
                     iconProps: {
                         size: 48,
                         borderRadius: "4px",
@@ -61,7 +61,7 @@ export default function WeaponList({
             weaponType: {
                 label: {
                     title: weapon.weaponType,
-                    icon: `genshin/weapons/icons/${weapon.weaponType}`,
+                    icon: `genshin/skills/Attack_${weapon.weaponType}`,
                     spacing: 1,
                 },
             },
@@ -73,7 +73,7 @@ export default function WeaponList({
             subStat: {
                 label: {
                     title: subStatLabel,
-                    icon: subStat && `genshin/icons/ascension_stats/${subStat}`,
+                    icon: subStat && `genshin/icons/stat-icons/${subStat}`,
                     spacing: 1,
                 },
             },

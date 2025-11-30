@@ -27,6 +27,7 @@ import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { getFarmableMaterials } from "@/helpers/genshin/getFarmableMaterials";
 import { Day, days } from "@/helpers/dates";
+import { useMaterials } from "@/helpers/materials";
 
 // Type imports
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
@@ -74,6 +75,8 @@ export default function FarmingSchedule(props: {
         }
         return day;
     };
+
+    const getMaterials = useMaterials().genshin;
 
     const { characterMats, weaponMats } = getFarmableMaterials(
         days[index],
@@ -137,9 +140,11 @@ export default function FarmingSchedule(props: {
         index: number;
     }) {
         const getImgSrc = (material = "") => {
-            return index
-                ? `genshin/materials/weapon/${material}4`
-                : `genshin/materials/talent/${material}3`;
+            return `genshin/materials/${
+                index
+                    ? getMaterials(`${material}4`).id
+                    : getMaterials(`${material}3`).id
+            }`;
         };
 
         const items = index ? weapons : characters;

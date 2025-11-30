@@ -28,30 +28,18 @@ export default function CharacterPage({
     const matches_up_lg = useMediaQuery(theme.breakpoints.up("lg"));
     const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
 
-    const attributes: AttributeData = {
-        name: character.name,
-        displayName: character.displayName,
-        title: character.title,
-        description: character.description,
-        element: character.element,
-        weaponType: character.weaponType,
-        rarity: character.rarity,
-        arkhe: character.arkhe,
-    };
-    const attributesMisc: AttributeDataMisc = {
-        constellation: character.constellation,
-        nation: character.nation,
-        birthday: character.birthday,
-        release: character.release,
-        voiceActors: character.voiceActors,
-    };
+    const attributes: AttributeData = { ...character };
+    const attributesMisc: AttributeDataMisc = { ...character };
 
     const skills: CharacterSkillsList = { ...character.skills };
     skills.passives = character.passives;
     skills.upgrades = character.upgrades;
 
     const Splash = (
-        <CharacterSplash name={character.name} outfits={character.outfits} />
+        <CharacterSplash
+            id={Number(character.id)}
+            outfits={character.outfits}
+        />
     );
 
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;

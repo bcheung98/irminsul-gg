@@ -16,7 +16,7 @@ export default function GlobalError({
             </head>
             <body>
                 <img
-                    src="https://assets.irminsul.gg/main/images/Irminsul.png"
+                    src="https://assets.irminsul.gg/v2/_common/images/Irminsul.png"
                     className="background-image"
                     style={{ filter: "brightness(0.25) grayscale(100%)" }}
                 />

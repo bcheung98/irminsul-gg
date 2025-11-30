@@ -1,9 +1,9 @@
-import { AttributeData } from "@/types";
+import { AttributeData, Game } from "@/types";
 import { SxProps, Theme, CSSProperties } from "@mui/material/styles";
 
 export interface InfoBadgeProps {
     data: AttributeData;
-    game: string;
+    game: Game;
     styles: {
         root: SxProps<Theme>;
         icon: CSSProperties;

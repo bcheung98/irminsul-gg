@@ -20,14 +20,14 @@ import { InfoCardProps } from "./InfoCard.types";
 import { Game } from "@/types";
 
 export default function InfoCard({
+    id,
     tag,
     name,
-    displayName = name,
     rarity = 3,
     size = 128,
     background,
     disableZoomOnHover,
-    url = "avatars",
+    url,
     componentID,
     badgeLeft,
     badgeRight,
@@ -36,7 +36,7 @@ export default function InfoCard({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const id = `${componentID || formatHref(href)}-infoCard`;
+    componentID = `${componentID || formatHref(href)}-infoCard`;
 
     const [game, type] = tag.split("/") as [Game, string];
 
@@ -58,15 +58,15 @@ export default function InfoCard({
         !disableZoomOnHover &&
             zoomImageOnHover({
                 direction,
-                id: id,
+                id: componentID,
                 baseScale: 1,
                 zoom: 1.05,
             });
     };
 
-    let imgURL = `${tag}/${name}`;
+    let imgURL = `${tag}/${id}`;
     if (url) {
-        imgURL = `${tag}/${url}/${name}`;
+        imgURL = `${tag}/${url}`;
     }
 
     return (
@@ -84,7 +84,7 @@ export default function InfoCard({
                     <Box sx={styles.imageContainer()}>
                         <Image
                             src={imgURL}
-                            id={id}
+                            id={componentID}
                             size={size}
                             responsive
                             responsiveSize={0.25}
@@ -92,12 +92,10 @@ export default function InfoCard({
                     </Box>
                     <Box sx={styles.textContainer()}>
                         <Text
-                            variant={
-                                displayName.length > 13 ? "body3" : "body2"
-                            }
+                            variant={name.length > 13 ? "body3" : "body2"}
                             sx={styles.text()}
                         >
-                            {displayName}
+                            {name}
                         </Text>
                     </Box>
                 </ButtonBase>

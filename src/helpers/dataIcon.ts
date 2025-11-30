@@ -15,11 +15,11 @@ export function getDataIconURL({ game, key, value }: Props) {
             tooltip = `${value}`;
         }
         if (key === "weaponType" && value) {
-            src = `genshin/weapons/icons/${value}`;
+            src = `genshin/skills/Attack_${value}`;
             tooltip = `${value}`;
         }
         if (key === "subStat" && value) {
-            src = `genshin/icons/ascension_stats/${value}`;
+            src = `genshin/icons/stat-icons/${value}`;
             tooltip = `${value}`;
         }
         if (key === "arkhe") {

@@ -12,13 +12,12 @@ export function GenshinCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="genshin/characters"
+            id={Number(character.id)}
             key={character.id}
-            name={character.name}
-            displayName={character.displayName}
+            name={character.displayName}
             rarity={character.rarity}
             href={character.url}
             background="transparent"
-            url="avatars"
             {...props}
         />
     );
@@ -34,12 +33,11 @@ export function GenshinWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="genshin/weapons"
+            id={Number(weapon.id)}
             key={weapon.id}
-            name={weapon.name}
-            displayName={weapon.displayName}
+            name={weapon.displayName}
             rarity={weapon.rarity}
             href={weapon.url}
-            url=""
             {...props}
         />
     );

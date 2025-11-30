@@ -31,7 +31,7 @@ export default function IrminsulLogo({
         <ButtonBase href={href} LinkComponent={NavLink}>
             <FlexBox spacing={1.5} sx={{ height: size }}>
                 <Image
-                    src={`main/logo/${imgURL}`}
+                    src={`_common/logo/${imgURL}`}
                     alt="IRMINSUL.GG"
                     size={size}
                     responsive

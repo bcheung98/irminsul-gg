@@ -43,9 +43,9 @@ export default function CharacterPassives({
     const getSkillKeyword = useSkillKeyword().genshin;
 
     function getIconURL(key: string) {
-        return `genshin/characters/talents/${splitJoin(
-            attributes.name
-        ).toLocaleLowerCase()}_${key}passive`;
+        return key
+            ? `genshin/skills/${attributes.id}_passive_${key}`
+            : `genshin/skills/${attributes.id}_passive`;
     }
 
     const skillsContext = useSkillContext();

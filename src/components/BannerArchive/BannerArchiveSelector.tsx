@@ -86,9 +86,7 @@ function RenderOption({
             })}
         >
             <TextLabel
-                icon={categoryImgURLs[`${game}/${option.category}`](
-                    option.name
-                )}
+                icon={categoryImgURLs[`${game}/${option.category}`](option.id)}
                 iconProps={{
                     size: 32,
                     styles: {

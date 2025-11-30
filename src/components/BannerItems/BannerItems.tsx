@@ -78,11 +78,11 @@ const BannerItems = memo(function BannerItems({
                           <Box key={index}>
                               {item.name === "TBA" ? (
                                   <InfoAvatar
+                                      id={0}
                                       componentID={`-${banner.version}-${index}`}
-                                      tag="main"
-                                      name="Unknown"
-                                      displayName="TBA"
-                                      url="images"
+                                      tag="_common/images"
+                                      name="TBA"
+                                      url="Unknown"
                                       rarity={1}
                                       disableZoomOnHover
                                   />

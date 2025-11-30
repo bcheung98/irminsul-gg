@@ -41,7 +41,7 @@ export default function WebsiteCard({
     const id = `${tag.split(" ").join("")}-websiteCard`;
 
     const href = enabled ? `/${tag}` : "";
-    const imgSrc = `main/wallpapers/${tag}/${shortName}_${version}`;
+    const imgSrc = `${tag}/_common/wallpapers/${shortName}_${version}`;
 
     const handleHover = (direction: "enter" | "leave") => {
         if (direction === "enter") {
@@ -100,7 +100,7 @@ export default function WebsiteCard({
                     <Box sx={imageContainerStyle}>
                         <Image
                             src={imgSrc}
-                            fallbackSrc={`main/wallpapers/${tag}/${shortName}`}
+                            fallbackSrc={`${tag}/_common/wallpapers/${shortName}`}
                             id={`${id}-img`}
                             style={imageStyle}
                         />

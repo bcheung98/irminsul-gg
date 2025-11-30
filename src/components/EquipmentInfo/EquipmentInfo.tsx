@@ -16,7 +16,7 @@ import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { splitJoin } from "@/utils";
+import { objectKeys } from "@/utils";
 import { equipmentPieceType, equipmentTags } from "@/data/equipment";
 
 // Type imports
@@ -25,7 +25,7 @@ import { Equipment } from "@/types/equipment";
 export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     const theme = useTheme();
 
-    const { name, displayName, rarity, pieces } = equipment;
+    const { id, displayName, rarity, pieces } = equipment;
 
     const game = useGameTag();
 
@@ -33,6 +33,14 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     const handleTabChange = (_: React.BaseSyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
+
+    function getImgURL(type: string) {
+        return `${game}/${equipmentTags[game]}/${id}_${
+            objectKeys(equipmentPieceType[game]).findIndex(
+                (piece) => piece === type
+            ) + 1
+        }`;
+    }
 
     function EquipmentTabsList() {
         return (
@@ -42,7 +50,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                         key={piece.type}
                         icon={
                             <SkillIcon
-                                icon={`${game}/${equipmentTags[game]}/icons/${piece.type}`}
+                                icon={`${game}/icons/${equipmentTags[game]}/${piece.type}`}
                                 selected={index === tabValue}
                                 borderRadius="8px"
                                 size={40}
@@ -89,15 +97,11 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                             <Grid container spacing={3}>
                                 <Grid size="auto">
                                     <Image
-                                        src={`${game}/${
-                                            equipmentTags[game]
-                                        }/sets/${splitJoin(name)}/${
-                                            piece.type
-                                        }`}
+                                        src={getImgURL(piece.type)}
                                         size={128}
                                         style={{
                                             borderRadius: "16px",
-                                            backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
+                                            backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
                                             backgroundSize: "contain",
                                         }}
                                     />

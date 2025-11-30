@@ -24,10 +24,10 @@ import { useGameTag } from "@/context";
 import { CharacterOutfit } from "@/types/character";
 
 export default function CharacterSplash({
-    name,
+    id,
     outfits,
 }: {
-    name: string;
+    id: number;
     outfits: CharacterOutfit[];
 }) {
     const theme = useTheme();
@@ -70,8 +70,8 @@ export default function CharacterSplash({
 
     const imgSrcSplash =
         tabValue === 0
-            ? `${game}/characters/splash/${name}`
-            : `${game}/characters/outfits/splash/${outfits[tabValue].name}`;
+            ? `${game}/characters/${id}_splash`
+            : `${game}/characters/${id}_splash${tabValue}`;
 
     return (
         <>
@@ -155,15 +155,15 @@ export default function CharacterSplash({
                                 <Image
                                     src={
                                         index === 0
-                                            ? `${game}/characters/icons/${name}`
-                                            : `${game}/characters/outfits/icon/${outfit.name}`
+                                            ? `${game}/characters/${id}_icon`
+                                            : `${game}/characters/${id}_icon${index}`
                                     }
                                     size={72}
                                     responsive
                                     style={{
                                         border: `2px solid ${theme.border.color.primary}`,
                                         borderRadius: "4px",
-                                        backgroundImage: `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${outfit.rarity}_Star.png)`,
+                                        backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${outfit.rarity}.png)`,
                                         backgroundSize: "contain",
                                     }}
                                 />

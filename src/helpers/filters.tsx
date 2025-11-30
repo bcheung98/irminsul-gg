@@ -54,10 +54,10 @@ interface CreateGroupFilterButtonsProps<T extends string | number>
 export function createGroupedFilterButtons<T extends string | number>({
     groupItems,
     groupUrl,
-    url,
+    ...props
 }: CreateGroupFilterButtonsProps<T>): GroupFilterButtons[] {
     return Object.entries(groupItems).map(([key, values]) => ({
-        buttons: createFilterButtons({ items: values, url }),
+        buttons: createFilterButtons({ items: values, ...props }),
         icon: `${groupUrl}/${key}`,
         label: key,
     }));

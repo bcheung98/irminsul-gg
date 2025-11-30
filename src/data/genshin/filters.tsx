@@ -67,7 +67,8 @@ export function genshinFilters<T extends Filters>({
             value: filters.weaponType,
             buttons: createFilterButtons({
                 items: weapons,
-                url: "genshin/weapons/icons",
+                url: "genshin/skills",
+                getURL: (item: string) => `Attack_${item}`,
             }),
             onChange: (
                 _: React.BaseSyntheticEvent,
@@ -100,7 +101,7 @@ export function genshinFilters<T extends Filters>({
             value: filters.ascStat,
             buttons: createFilterButtons({
                 items: objectKeys(characterAscensionStats).slice(1),
-                url: "genshin/icons/ascension_stats",
+                url: "genshin/icons/stat-icons",
                 getTooltip: (item: CharacterAscensionStat) =>
                     characterAscensionStats[item].title,
             }),
@@ -114,7 +115,7 @@ export function genshinFilters<T extends Filters>({
             value: filters.subStat,
             buttons: createFilterButtons({
                 items: objectKeys(weaponSubStats).slice(1),
-                url: "genshin/icons/ascension_stats",
+                url: "genshin/icons/stat-icons",
                 getTooltip: (item: GenshinWeaponSubStat) =>
                     weaponSubStats[item].title,
             }),
@@ -130,7 +131,13 @@ export function genshinFilters<T extends Filters>({
                 items: getMaterialCategory("talent")
                     .filter((material) => material.rarity === 4)
                     .map((material) => material.tag || ""),
-                url: "genshin/materials/talent",
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("talent").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("talent").find(
                         (material) => material.tag === item
@@ -151,8 +158,13 @@ export function genshinFilters<T extends Filters>({
                 items: getMaterialCategory("common")
                     .filter((material) => !material.rarity)
                     .map((material) => material.tag || ""),
-                url: "genshin/materials/common",
-                getURL: (item: string) => `${item}3`,
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("common").find(
+                        (material) => material.tag === `${item}3`
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("common").find(
                         (material) => material.tag === item
@@ -170,7 +182,13 @@ export function genshinFilters<T extends Filters>({
                 items: getMaterialCategory("boss").map(
                     (material) => material.tag || ""
                 ),
-                url: "genshin/materials/boss",
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("boss").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("boss").find(
                         (material) => material.tag === item
@@ -188,7 +206,13 @@ export function genshinFilters<T extends Filters>({
             groupButtons: createGroupedFilterButtons({
                 groupItems: getGroupedMatNames("weekly"),
                 groupUrl: "genshin/bosses",
-                url: "genshin/materials/weekly",
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("weekly").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
             }),
             onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "weeklyBossMat", newValues),
@@ -200,7 +224,13 @@ export function genshinFilters<T extends Filters>({
             groupButtons: createGroupedFilterButtons({
                 groupItems: getGroupedMatNames("local"),
                 groupUrl: "genshin/nations",
-                url: "genshin/materials/local",
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("local").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
             }),
             onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "localMat", newValues),
@@ -212,14 +242,19 @@ export function genshinFilters<T extends Filters>({
                 items: getMaterialCategory("weapon")
                     .filter((material) => material.rarity === undefined)
                     .map((material) => material.tag || ""),
-                url: "genshin/materials/weapon",
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
+                        (material) => material.tag === `${item}4`
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("weapon").find(
                         (material) => material.tag === item
                     );
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
-                endTag: "4",
             }),
             onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "weaponAscensionMat", newValues),
@@ -232,8 +267,13 @@ export function genshinFilters<T extends Filters>({
                 items: getMaterialCategory("elite")
                     .filter((material) => !material.rarity)
                     .map((material) => material.tag || ""),
-                url: "genshin/materials/elite",
-                getURL: (item: string) => `${item}3`,
+                url: "genshin/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("elite").find(
+                        (material) => material.tag === `${item}3`
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("elite").find(
                         (material) => material.tag === item

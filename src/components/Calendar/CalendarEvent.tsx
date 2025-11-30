@@ -11,7 +11,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 
 // Helper imports
-import { games } from "@/data/games";
 import { getBannerLabel } from "../BannerArchive/BannerArchive.utils";
 
 // Type imports
@@ -65,7 +64,7 @@ export default function CalendarEvent({
                 }}
             >
                 <TextLabel
-                    icon={matches && `main/game-icons/${games[game].shortName}`}
+                    icon={matches && `${game}/_common/Icon`}
                     iconProps={{ size: 20 }}
                     title={`${title}${isFuture ? " *" : ""}`}
                     titleProps={{ variant: "body2" }}
@@ -78,7 +77,7 @@ export default function CalendarEvent({
                 maxWidth="md"
                 header={
                     <TextLabel
-                        icon={`main/game-icons/${games[game].shortName}`}
+                        icon={`${game}/_common/Icon`}
                         iconProps={{ size: 40 }}
                         title={title}
                         titleProps={{ variant: "h6" }}

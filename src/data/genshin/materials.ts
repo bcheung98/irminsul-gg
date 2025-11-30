@@ -19,7 +19,6 @@ const otherMaterials: Material[] = [
         name: "Mora",
         tag: "Mora",
         rarity: 3,
-        imgURL: "genshin/materials/Mora",
         release: {
             version: "1.0",
         },
@@ -30,7 +29,6 @@ const otherMaterials: Material[] = [
         name: "Crown of Insight",
         tag: "Crown",
         rarity: 5,
-        imgURL: "genshin/materials/Crown_of_Insight",
         release: {
             version: "1.0",
         },

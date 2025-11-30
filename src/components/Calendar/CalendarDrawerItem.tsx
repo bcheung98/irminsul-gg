@@ -42,7 +42,7 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                 sx={{ justifyContent: "space-between" }}
             >
                 <TextLabel
-                    icon={`main/game-icons/${props.shortName}`}
+                    icon={`${props.tag}/_common/Icon`}
                     iconProps={{ size: 24 }}
                     title={props.name}
                     titleProps={{ variant: "subtitle1" }}

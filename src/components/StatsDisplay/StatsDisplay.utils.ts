@@ -56,25 +56,25 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
         data = [
             ["Level", ...levels],
             [
-                "Base HP|genshin/icons/ascension_stats/HP",
+                "Base HP|genshin/icons/stat-icons/HP",
                 ...levels.map((_, index) =>
                     (stats.hp[index] || 0).toLocaleString()
                 ),
             ],
             [
-                "Base ATK|genshin/icons/ascension_stats/ATK",
+                "Base ATK|genshin/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (stats.atk[index] || 0).toLocaleString()
                 ),
             ],
             [
-                "Base DEF|genshin/icons/ascension_stats/DEF",
+                "Base DEF|genshin/icons/stat-icons/DEF",
                 ...levels.map((_, index) =>
                     (stats.def[index] || 0).toLocaleString()
                 ),
             ],
             [
-                "CRIT Rate|genshin/icons/ascension_stats/CRIT_Rate",
+                "CRIT Rate|genshin/icons/stat-icons/CRIT_Rate",
                 ...levels.map(
                     (_, index) =>
                         (ascensionStats["CRIT Rate"] &&
@@ -83,7 +83,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                 ),
             ],
             [
-                "CRIT DMG|genshin/icons/ascension_stats/CRIT_DMG",
+                "CRIT DMG|genshin/icons/stat-icons/CRIT_DMG",
                 ...levels.map(
                     (_, index) =>
                         (ascensionStats["CRIT DMG"] &&
@@ -95,16 +95,14 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
         stats.em.reduce((a, c) => a + c) != 0 &&
             stats.ascensionStat !== "Elemental Mastery" &&
             data.push([
-                "Elemental Mastery|genshin/icons/ascension_stats/Elemental_Mastery",
+                "Elemental Mastery|genshin/icons/stat-icons/Elemental_Mastery",
                 ...levels.map((_, index) =>
                     (stats.em[index] || 0).toLocaleString()
                 ),
             ]);
         ascStatScaling &&
             data.push([
-                `${
-                    stats.ascensionStat
-                }|genshin/icons/ascension_stats/${splitJoin(
+                `${stats.ascensionStat}|genshin/icons/stat-icons/${splitJoin(
                     stats.ascensionStat
                 )}`,
                 ...levels.map((_, index) => ascStatScaling[index]),
@@ -135,7 +133,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
         data = [
             ["Level", ...levels],
             [
-                "Base ATK|genshin/icons/ascension_stats/ATK",
+                "Base ATK|genshin/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (
                         genshinBaseATKScaling[stats.atk][index] || 0
@@ -146,7 +144,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
         if (stats.subStat) {
             let subStatScaling = subStats[stats.atk][stats.subStat] as string[];
             data.push([
-                `${stats.subStat}|genshin/icons/ascension_stats/${splitJoin(
+                `${stats.subStat}|genshin/icons/stat-icons/${splitJoin(
                     stats.subStat
                 )}`,
                 ...levels.map((_, index) => subStatScaling[index] || 0),

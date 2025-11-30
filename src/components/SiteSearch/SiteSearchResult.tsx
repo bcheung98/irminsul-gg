@@ -88,7 +88,10 @@ export default function SiteSearchResult({
                 >
                     <NavLink href={item.url}>
                         <TextLabel
-                            icon={categoryImgURLs[item.category](item.name)}
+                            icon={categoryImgURLs[item.category](
+                                item.id,
+                                item.name
+                            )}
                             iconProps={{
                                 size: 48,
                                 styles: {
@@ -158,7 +161,7 @@ export default function SiteSearchResult({
                         />
                     )}
                     <Image
-                        src={`main/game-icons/${game.shortName}`}
+                        src={`${game.tag}/_common/Icon`}
                         size={24}
                         style={{ borderRadius: "4px" }}
                         tooltip={game.name}

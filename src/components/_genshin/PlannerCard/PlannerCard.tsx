@@ -10,7 +10,6 @@ import PlannerSlider, {
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
-import { splitJoin } from "@/utils";
 import { useTextColor } from "@/helpers/styles";
 import levelData from "@/data/levels";
 import {
@@ -58,23 +57,19 @@ export default function GenshinPlannerCard() {
             skillKey: "attack",
             levels: skillLevel,
             values: item.values.attack || defaultSkillValues,
-            icon: `genshin/weapons/icons/${item.weaponType}`,
+            icon: `genshin/skills/Attack_${item.weaponType}`,
         },
         {
             skillKey: "skill",
             levels: skillLevel,
             values: item.values.skill || defaultSkillValues,
-            icon: `genshin/characters/talents/${splitJoin(
-                item.name
-            ).toLowerCase()}_skill`,
+            icon: `genshin/skills/${item.id}_skill`,
         },
         {
             skillKey: "ultimate",
             levels: skillLevel,
             values: item.values.ultimate || defaultSkillValues,
-            icon: `genshin/characters/talents/${splitJoin(
-                item.name
-            ).toLowerCase()}_burst`,
+            icon: `genshin/skills/${item.id}_ultimate`,
         },
     ];
 

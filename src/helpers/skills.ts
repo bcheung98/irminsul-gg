@@ -7,6 +7,9 @@ export function formatSkillIconURL(
     attributes: AttributeData,
     index = 0
 ) {
+    if (attributes.id) {
+        url = url.replace("{id}", `${attributes.id}`);
+    }
     if (attributes.name) {
         url = url.replace("{name}", attributes.name.toLocaleLowerCase());
     }

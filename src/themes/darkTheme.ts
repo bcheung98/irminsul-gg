@@ -56,7 +56,7 @@ export const darkThemeData = {
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
     backgroundImage: {
-        imgURL: "https://assets.irminsul.gg/main/images/Irminsul.png",
+        imgURL: "https://assets.irminsul.gg/v2/_common/images/Irminsul.png",
         filter: "none",
         filterGame: "brightness(0.75) opacity(0.5)",
     },
@@ -290,7 +290,7 @@ export const darkThemeData = {
             color: borderColors.primary,
         },
         backgroundImage: (rarity: number) =>
-            `url(https://assets.irminsul.gg/wuwa/backgrounds/Background_${rarity}_Star.png)`,
+            `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
         color: {
             primary: textColors.primary,
         },
