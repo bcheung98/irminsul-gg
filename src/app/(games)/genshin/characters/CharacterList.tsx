@@ -4,7 +4,7 @@ import RarityStars from "@/components/RarityStars";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
-import { formatHref, splitJoin } from "@/utils";
+import { formatHref } from "@/utils";
 import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
 import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";

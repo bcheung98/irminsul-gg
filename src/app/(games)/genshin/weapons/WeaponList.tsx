@@ -3,7 +3,7 @@ import SortTable from "@/components/SortTable";
 import RarityStars from "@/components/RarityStars";
 
 // Helper imports
-import { formatHref, splitJoin } from "@/utils";
+import { formatHref } from "@/utils";
 import { baseATKScaling, subStats } from "@/data/genshin/weaponStats";
 
 // Type imports

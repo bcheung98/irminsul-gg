@@ -9,7 +9,6 @@ import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 
 // Helper imports
-import { splitJoin } from "@/utils";
 import { materialCardStyles } from "./MaterialCard.styles";
 import { useMaterials } from "@/helpers/materials";
 
