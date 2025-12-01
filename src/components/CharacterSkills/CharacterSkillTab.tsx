@@ -19,7 +19,11 @@ import Box from "@mui/material/Box";
 import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 import { skillKeys, skillIconURLs } from "@/data/skills";
-import { formatSkillIconURL, useSkillKeyword } from "@/helpers/skills";
+import {
+    formatSkillIconURL,
+    getKeywordPopupTitle,
+    useSkillKeyword,
+} from "@/helpers/skills";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
@@ -149,14 +153,18 @@ export default function CharacterSkillTab({
                         </Stack>
                     </Box>
                     <Stack spacing={2}>
-                        <CharacterSkillScaling
-                            skill={skill}
-                            color={textColor(game, attributes.element)}
-                        />
-                        {!["altsprint"].includes(skillKey) && (
+                        {!["technique"].includes(skillKey) && (
+                            <CharacterSkillScaling
+                                skill={skill}
+                                color={textColor(game, attributes.element)}
+                            />
+                        )}
+                        {!["altsprint", "technique"].includes(skillKey) && (
                             <CharacterSkillLevelUp
                                 materials={materials}
                                 color={textColor(game, attributes.element)}
+                                attributes={attributes}
+                                skillKey={skillKey}
                             />
                         )}
                     </Stack>
@@ -165,11 +173,7 @@ export default function CharacterSkillTab({
                     open={dialogOpen}
                     setOpen={setDialogOpen}
                     onClose={handleDialogClose}
-                    header={
-                        currentKeyword?.type
-                            ? "Related Talents"
-                            : "Related effects"
-                    }
+                    header={getKeywordPopupTitle(game, currentKeyword)}
                     maxWidth="md"
                 >
                     <KeywordPopup

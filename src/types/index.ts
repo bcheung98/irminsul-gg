@@ -51,6 +51,7 @@ export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {
     constellation?: string;
     nation?: string;
+    faction?: string;
     birthday?: string;
     voiceActors?: VoiceActorData;
     release?: VersionWithDate;

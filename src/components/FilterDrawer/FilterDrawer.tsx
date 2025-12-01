@@ -7,6 +7,10 @@ import {
     GenshinCharacterFilters,
     GenshinWeaponFilters,
 } from "@/components/_genshin/Filters";
+import {
+    HSRCharacterFilters,
+    HSRWeaponFilters,
+} from "@/components/_hsr/Filters";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -48,4 +52,6 @@ export default function FilterDrawer() {
 const components: Record<string, React.ReactNode> = {
     "/genshin/characters": <GenshinCharacterFilters />,
     "/genshin/weapons": <GenshinWeaponFilters />,
+    "/hsr/characters": <HSRCharacterFilters />,
+    "/hsr/lightcones": <HSRWeaponFilters />,
 };

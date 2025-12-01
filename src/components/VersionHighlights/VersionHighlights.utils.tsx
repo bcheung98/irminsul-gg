@@ -3,12 +3,16 @@ import {
     GenshinArtifactInfoCard,
     GenshinCharacterInfoCard,
     GenshinWeaponInfoCard,
+    HSRCharacterInfoCard,
+    HSRRelicInfoCard,
+    HSRWeaponInfoCard,
 } from "@/components/InfoCard";
 import {
     GenshinArtifact,
     GenshinCharacter,
     GenshinWeapon,
 } from "@/types/genshin";
+import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { Game, GameData } from "@/types";
 import {
     VersionHighlightsProps,
@@ -86,9 +90,30 @@ export function renderInfoCard(
             ),
         },
         hsr: {
-            characters: <></>,
-            weapons: <></>,
-            equipment: undefined,
+            characters: (
+                <HSRCharacterInfoCard
+                    key={item.id}
+                    character={item as HSRCharacter}
+                    props={{
+                        componentID: `${item.id}-versionHighlights`,
+                        background: backround,
+                    }}
+                />
+            ),
+            weapons: (
+                <HSRWeaponInfoCard
+                    key={item.id}
+                    weapon={item as HSRWeapon}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            equipment: (
+                <HSRRelicInfoCard
+                    key={item.id}
+                    relic={item as HSRRelic}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
         wuwa: {
             characters: <></>,

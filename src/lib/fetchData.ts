@@ -8,6 +8,12 @@ export const urls = {
         "https://api.irminsul.gg/v2/genshin/banner-weapons.json",
     "genshin/banner-chronicled":
         "https://api.irminsul.gg/v2/genshin/banner-chronicled.json",
+    "hsr/characters": "https://api.irminsul.gg/v2/hsr/characters.json",
+    "hsr/lightcones": "https://api.irminsul.gg/v2/hsr/weapons.json",
+    "hsr/relics": "https://api.irminsul.gg/v2/hsr/relics.json",
+    "hsr/banner-characters":
+        "https://api.irminsul.gg/v2/hsr/banner-characters.json",
+    "hsr/banner-weapons": "https://api.irminsul.gg/v2/hsr/banner-weapons.json",
 };
 
 export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {

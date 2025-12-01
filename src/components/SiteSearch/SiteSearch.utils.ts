@@ -1,4 +1,4 @@
-"server only";
+"use server";
 
 import { getDataSet } from "@/lib/fetchData";
 import { formatHref, splitJoin } from "@/utils";
@@ -11,6 +11,7 @@ import {
     GenshinCharacter,
     GenshinWeapon,
 } from "@/types/genshin";
+import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -32,6 +33,21 @@ export async function getItems(
             await getDataSet<GenshinArtifact>("genshin/artifacts"),
             "genshin"
         ),
+        "hsr/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<HSRCharacter>("hsr/characters"),
+            "hsr"
+        ),
+        "hsr/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<HSRWeapon>("hsr/lightcones"),
+            "hsr"
+        ),
+        "hsr/equipment": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<HSRRelic>("hsr/relics"),
+            "hsr"
+        ),
     })
         .map(([category, data]) =>
             data.map((item) => ({
@@ -45,7 +61,7 @@ export async function getItems(
                 url: `/${category.split("/")[0]}/${splitJoin(
                     categories[category],
                     " ",
-                    "-"
+                    ""
                 ).toLowerCase()}/${formatHref(item.url)}`,
             }))
         )

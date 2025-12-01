@@ -73,6 +73,11 @@ export default function CharacterSplash({
             ? `${game}/characters/${id}_splash`
             : `${game}/characters/${id}_splash${tabValue}`;
 
+    let imgSrcIcon =
+        game === "genshin"
+            ? `${game}/characters/${id}_icon`
+            : `${game}/characters/${id}`;
+
     return (
         <>
             <Card
@@ -155,8 +160,12 @@ export default function CharacterSplash({
                                 <Image
                                     src={
                                         index === 0
-                                            ? `${game}/characters/${id}_icon`
-                                            : `${game}/characters/${id}_icon${index}`
+                                            ? `${imgSrcIcon}`
+                                            : `${imgSrcIcon}${
+                                                  game === "hsr"
+                                                      ? `_${index}`
+                                                      : `${index}`
+                                              }`
                                     }
                                     size={72}
                                     responsive

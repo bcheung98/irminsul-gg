@@ -18,7 +18,7 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
-import { useSkillKeyword } from "@/helpers/skills";
+import { getKeywordPopupTitle, useSkillKeyword } from "@/helpers/skills";
 
 // Type imports
 import { AttributeData } from "@/types";
@@ -135,11 +135,7 @@ export default function CharacterUpgrades({
                     open={dialogOpen}
                     setOpen={setDialogOpen}
                     onClose={handleDialogClose}
-                    header={
-                        currentKeyword?.type
-                            ? "Related Talents"
-                            : "Related effects"
-                    }
+                    header={getKeywordPopupTitle(game, currentKeyword)}
                     maxWidth="md"
                 >
                     <KeywordPopup

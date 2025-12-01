@@ -78,6 +78,7 @@ function getRows(
             },
         ],
         hsr: [
+            { key: "Faction", value: attributes.faction },
             { key: "Release", value: `${releaseDate} (${releaseVersion})` },
             {
                 key: "Voice Actor (EN)",

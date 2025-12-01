@@ -9,6 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import { useGameTag } from "@/context";
 import { getStats } from "./StatsDisplay.utils";
 import { useTextColor } from "@/helpers/styles";
 import { useStore, useSettingsStore } from "@/stores";
@@ -18,7 +19,6 @@ import { StatsDisplayProps } from "./StatsDisplay.types";
 import { SkillDisplay } from "@/types";
 
 export default function StatsDisplay({
-    game,
     title = "Stats",
     stats,
     attributes,
@@ -26,7 +26,9 @@ export default function StatsDisplay({
 }: StatsDisplayProps) {
     const theme = useTheme();
 
-    const { levels, data } = getStats({ stats, attributes })[game];
+    const game = useGameTag();
+
+    const { levels, data } = getStats({ game, stats, attributes });
 
     const textColor = useTextColor(theme.text);
 

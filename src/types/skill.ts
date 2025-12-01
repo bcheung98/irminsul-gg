@@ -3,8 +3,7 @@ export interface Skill {
     description: string;
     tag?: string;
     splash?: string;
-    icon?: string;
-    showIcon?: boolean;
+    icon?: string | null;
     scaling?: string[][];
     version?: {
         value: string;

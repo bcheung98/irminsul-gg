@@ -2,8 +2,11 @@ import { BaseData, Game, GameData } from "@/types";
 import {
     GenshinCharacterInfoAvatar,
     GenshinWeaponInfoAvatar,
+    HSRCharacterInfoAvatar,
+    HSRWeaponInfoAvatar,
 } from "./InfoAvatar.variants";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
+import { HSRCharacter, HSRWeapon } from "@/types/hsr";
 
 export * from "./InfoAvatar";
 export * from "./InfoAvatar.variants";
@@ -46,8 +49,24 @@ export function renderInfoAvatar({
             ),
         },
         hsr: {
-            characters: undefined,
-            weapons: undefined,
+            characters: (
+                <HSRCharacterInfoAvatar
+                    character={item as HSRCharacter}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+            weapons: (
+                <HSRWeaponInfoAvatar
+                    weapon={item as HSRWeapon}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
         },
         wuwa: {
             characters: undefined,

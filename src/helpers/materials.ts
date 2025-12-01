@@ -2,18 +2,16 @@ import {
     getGenshinMaterial,
     getGenshinMaterialCategory,
 } from "@/helpers/genshin/getMaterials";
+import { getHSRMaterial, getHSRMaterialCategory } from "./hsr/getMaterials";
 import { GameData } from "@/types";
 import { Material } from "@/types/materials";
-import { GenshinMaterialCategory } from "@/types/genshin/materials";
 
 export function useMaterials(
     hideUnreleasedContent = false
 ): GameData<(material: string | number) => Material> {
     return {
         genshin: getGenshinMaterial(hideUnreleasedContent),
-        hsr: function (material: string | number): Material {
-            throw new Error("Function not implemented.");
-        },
+        hsr: getHSRMaterial(hideUnreleasedContent),
         wuwa: function (material: string | number): Material {
             throw new Error("Function not implemented.");
         },
@@ -28,19 +26,17 @@ export function useMaterials(
 
 export function useMaterialsCategory(
     hideUnreleasedContent = false
-): GameData<(category: GenshinMaterialCategory) => Material[]> {
+): GameData<(category: string) => Material[]> {
     return {
         genshin: getGenshinMaterialCategory(hideUnreleasedContent),
-        hsr: function (category: GenshinMaterialCategory): Material[] {
+        hsr: getHSRMaterialCategory(hideUnreleasedContent),
+        wuwa: function (category: string): Material[] {
             throw new Error("Function not implemented.");
         },
-        wuwa: function (category: GenshinMaterialCategory): Material[] {
+        zzz: function (category: string): Material[] {
             throw new Error("Function not implemented.");
         },
-        zzz: function (category: GenshinMaterialCategory): Material[] {
-            throw new Error("Function not implemented.");
-        },
-        uma: function (category: GenshinMaterialCategory): Material[] {
+        uma: function (category: string): Material[] {
             throw new Error("Function not implemented.");
         },
     };

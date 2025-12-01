@@ -39,7 +39,6 @@ export default function CharacterInfo(props: CharacterInfoProps) {
         >
             <Stack spacing={2} divider={<Divider />}>
                 <StatsDisplay
-                    game={game}
                     stats={props.stats}
                     attributes={props.attributes}
                     initialValue={game === "genshin" ? 14 : undefined}
@@ -50,7 +49,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
                     costKey="characterLevel"
                     materials={props.materials}
                     color={textColor(game, props.attributes.element)}
-                    element={props.attributes.element}
+                    {...props.attributes}
                 />
             </Stack>
         </ContentBox>

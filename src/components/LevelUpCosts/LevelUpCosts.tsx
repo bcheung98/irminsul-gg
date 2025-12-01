@@ -27,7 +27,9 @@ interface LevelUpCostsProps {
     color?: string;
     iconSize?: number;
     threshold?: string;
+    name?: string;
     element?: string;
+    weaponType?: string;
     rarity?: number;
 }
 
@@ -39,7 +41,9 @@ export default function LevelUpCosts({
     color,
     iconSize = 56,
     threshold = "@100",
+    name,
     element,
+    weaponType,
     rarity = 3,
 }: LevelUpCostsProps) {
     const theme = useTheme();
@@ -80,6 +84,7 @@ export default function LevelUpCosts({
         label: (
             <Text
                 variant={values.includes(index + 1) ? "subtitle1" : "subtitle2"}
+                weight={values.includes(index + 1) ? "highlight" : "primary"}
                 sx={{
                     userSelect: "none",
                     opacity: values.includes(index + 1)
@@ -112,8 +117,12 @@ export default function LevelUpCosts({
         stop: values[1],
         selected: true,
         withXP: false,
-        materials: materials,
-        rarity: rarity,
+        materials,
+        skillKey: levelKey,
+        name,
+        element,
+        weaponType,
+        rarity,
     });
 
     return (

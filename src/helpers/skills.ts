@@ -1,6 +1,7 @@
-import { AttributeData, GameData } from "@/types";
+import { AttributeData, Game, GameData } from "@/types";
 import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 import getGenshinSkillKeyword from "./genshin/getSkillKeyword";
+import getHSRSkillKeyword from "./hsr/getSkillKeyword";
 
 export function formatSkillIconURL(
     url: string,
@@ -37,9 +38,7 @@ type UseSkillKeywordFn = (
 export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
     return {
         genshin: getGenshinSkillKeyword,
-        hsr: function (args: GetSkillKeywordProps): SkillKeyword | undefined {
-            throw new Error("Function not implemented.");
-        },
+        hsr: getHSRSkillKeyword,
         wuwa: function (args: GetSkillKeywordProps): SkillKeyword | undefined {
             throw new Error("Function not implemented.");
         },
@@ -50,4 +49,20 @@ export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
             throw new Error("Function not implemented.");
         },
     };
+}
+
+export function getKeywordPopupTitle(
+    game: Game,
+    keyword?: SkillKeyword | null
+) {
+    switch (game) {
+        case "genshin":
+            return keyword?.type ? "Related Talents" : "Related effects";
+        case "hsr":
+            return "Glossary";
+        case "wuwa":
+        case "zzz":
+        case "uma":
+            return "Keywords";
+    }
 }

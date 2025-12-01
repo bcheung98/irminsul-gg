@@ -17,6 +17,7 @@ export default async function CalendarPage() {
             "genshin/banner-characters"
         ),
         // "genshin/weapons": await getDataSet<Banner>("genshin/banner-weapons"),
+        "hsr/characters": await getDataSet<Banner>("hsr/banner-characters"),
     };
     const data = await getItems(false);
 

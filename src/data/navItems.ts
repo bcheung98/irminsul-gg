@@ -44,7 +44,38 @@ export const navItems: GameData<NavItem[]> = {
             href: "banners",
         },
     ],
-    hsr: [],
+    hsr: [
+        {
+            icon: "icons/Home",
+            title: "Home",
+            href: "",
+        },
+        {
+            icon: "icons/Character",
+            title: "Characters",
+            href: "characters",
+        },
+        {
+            icon: "icons/Lightcone",
+            title: "Light Cones",
+            href: "lightcones",
+        },
+        {
+            icon: "icons/Relic",
+            title: "Relics",
+            href: "relics",
+        },
+        {
+            icon: "icons/Ascension",
+            title: "Ascension Planner",
+            href: "planner",
+        },
+        {
+            icon: "icons/Warp",
+            title: "Banner Archive",
+            href: "banners",
+        },
+    ],
     wuwa: [],
     zzz: [],
     uma: [],

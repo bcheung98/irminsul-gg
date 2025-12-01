@@ -88,7 +88,7 @@ export default function CharacterAttributes(props: AttributeData) {
 
 const gameAttributes: GameData<AttributeDataKey[]> = {
     genshin: ["rarity", "element", "weaponType", "arkhe"],
-    hsr: [],
+    hsr: ["rarity", "element", "weaponType"],
     wuwa: [],
     zzz: [],
     uma: [],

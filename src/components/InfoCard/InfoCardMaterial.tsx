@@ -74,7 +74,7 @@ export default function InfoCardMaterial({
             uma: "",
         };
         let materialTag = props.material;
-        if (["talent", "common"].includes(props.category)) {
+        if (["talent", "calyx", "common"].includes(props.category)) {
             materialTag += nums[game];
         }
 

@@ -18,6 +18,9 @@ export interface GalleryState {
     "genshin/characters": GallerySettings;
     "genshin/weapons": GallerySettings;
     "genshin/artifacts": GallerySettings;
+    "hsr/characters": GallerySettings;
+    "hsr/lightcones": GallerySettings;
+    "hsr/relics": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -38,6 +41,13 @@ export const initialState: GalleryState = {
         view: "icon",
     },
     "genshin/artifacts": defaultSettings,
+    "hsr/characters": defaultSettings,
+    "hsr/lightcones": {
+        sortBy: "version",
+        sortDirection: "asc",
+        view: "icon",
+    },
+    "hsr/relics": defaultSettings,
 };
 
 export const useGalleryStore = create(

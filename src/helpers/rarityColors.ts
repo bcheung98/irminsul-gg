@@ -3,13 +3,12 @@ import {
     getGenshinBackgroundColor,
     getGenshinRarityColor,
 } from "./genshin/rarityColors";
+import { getHSRBackgroundColor, getHSRRarityColor } from "./hsr/rarityColors";
 
 export function useRarityColors(): GameData<(rarity?: number) => string> {
     return {
         genshin: getGenshinRarityColor,
-        hsr: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        hsr: getHSRRarityColor,
         wuwa: function (rarity?: number): string {
             throw new Error("Function not implemented.");
         },
@@ -27,9 +26,7 @@ export function useBackgroundRarityColors(): GameData<
 > {
     return {
         genshin: getGenshinBackgroundColor,
-        hsr: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        hsr: getHSRBackgroundColor,
         wuwa: function (rarity?: number): string {
             throw new Error("Function not implemented.");
         },

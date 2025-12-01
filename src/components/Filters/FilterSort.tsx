@@ -110,4 +110,17 @@ const options = {
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Weapon" },
     ],
+    "hsr/characters": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "element", label: "Combat Type" },
+        { value: "weaponType", label: "Path" },
+    ],
+    "hsr/lightcones": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "weaponType", label: "Path" },
+    ],
 };

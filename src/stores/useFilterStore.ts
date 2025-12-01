@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import { GenshinCharacterFilterState } from "@/components/_genshin/Filters/CharacterFilters";
 import { GenshinWeaponFilterState } from "@/components/_genshin/Filters/WeaponFilters";
+import { HSRCharacterFilterState } from "@/components/_hsr/Filters/CharacterFilters";
+import { HSRWeaponFilterState } from "@/components/_hsr/Filters/WeaponFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
     "genshin/weapons": GenshinWeaponFilterState;
-    "hsr/characters": {};
-    "hsr/weapons": {};
+    "hsr/characters": HSRCharacterFilterState;
+    "hsr/weapons": HSRWeaponFilterState;
     "wuwa/characters": {};
     "wuwa/weapons": {};
     "zzz/characters": {};
@@ -55,11 +57,29 @@ export const genshinWeaponFilters: GenshinWeaponFilterState = {
     commonMat: [],
 };
 
+export const hsrCharacterFilters: HSRCharacterFilterState = {
+    element: [],
+    weaponType: [],
+    rarity: [],
+    calyxMat: [],
+    commonMat: [],
+    bossMat: [],
+    weeklyBossMat: [],
+    nation: [],
+};
+
+export const hsrWeaponFilters: HSRWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+    calyxMat: [],
+    commonMat: [],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
-    "hsr/characters": {},
-    "hsr/weapons": {},
+    "hsr/characters": hsrCharacterFilters,
+    "hsr/weapons": hsrWeaponFilters,
     "wuwa/characters": {},
     "wuwa/weapons": {},
     "zzz/characters": {},

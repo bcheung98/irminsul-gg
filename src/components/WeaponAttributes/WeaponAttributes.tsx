@@ -87,9 +87,17 @@ export default function WeaponAttributes({
                 </Stack>
             </FlexBox>
             {attributes.description && (
-                <Text variant="body2" weight="highlight">
-                    {parse(attributes.description)}
-                </Text>
+                <Box
+                    sx={{
+                        maxHeight: "128px",
+                        overflowY: "auto",
+                        scrollbarWidth: "thin",
+                    }}
+                >
+                    <Text variant="body2" weight="highlight">
+                        {parse(attributes.description)}
+                    </Text>
+                </Box>
             )}
         </Stack>
     );

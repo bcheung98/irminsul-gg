@@ -1,3 +1,4 @@
+import levelData from "@/data/levels";
 import {
     baseATKScaling as genshinBaseATKScaling,
     subStats,
@@ -5,6 +6,8 @@ import {
 import { StatsDisplayProps } from "./StatsDisplay.types";
 import { characterAscensionStatScalings } from "@/data/genshin/characterAscensionStats";
 import { splitJoin } from "@/utils";
+import { weaponStats as hsrWeaponStats } from "@/data/hsr/weaponStats";
+import { HSRWeaponStats } from "@/types/hsr/weapon";
 
 type Props = Omit<StatsDisplayProps, "game">;
 type StatsData = {
@@ -12,10 +15,22 @@ type StatsData = {
     data: (string | number)[][];
 };
 
-export function getStats({ stats, attributes }: Props): {
-    [key: string]: StatsData;
-} {
-    return { genshin: getGenshinStats({ stats, attributes }) };
+export function getStats({
+    game,
+    stats,
+    attributes,
+}: StatsDisplayProps): StatsData {
+    switch (game) {
+        case "genshin":
+            return getGenshinStats({ stats, attributes });
+        case "hsr":
+            return getHSRStats({ stats, attributes });
+        case "wuwa":
+        case "zzz":
+        case "uma":
+        default:
+            return { levels: [], data: [] };
+    }
 }
 
 function getGenshinStats({ stats, attributes }: Props): StatsData {
@@ -150,6 +165,75 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                 ...levels.map((_, index) => subStatScaling[index] || 0),
             ]);
         }
+    }
+
+    return { levels, data };
+}
+
+function getHSRStats({ stats }: Props): StatsData {
+    const levels = levelData["hsr"]("level-asc");
+    let data: (string | number)[][] = [];
+    if ("speed" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                `Base HP|hsr/icons/stat-icons/HP`,
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                `Base ATK|hsr/icons/stat-icons/ATK`,
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                `Base DEF|hsr/icons/stat-icons/DEF`,
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "SPD|hsr/icons/stat-icons/SPD",
+                ...levels.map((_, index) =>
+                    (stats.speed[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                `Taunt|hsr/icons/stat-icons/Taunt`,
+                ...levels.map((_, index) => stats.taunt[index]),
+            ],
+        ];
+    } else {
+        const weaponStats = stats as HSRWeaponStats;
+        data = [
+            ["Level", ...levels],
+            [
+                `HP|hsr/icons/stat-icons/HP`,
+                ...levels.map((_, index) =>
+                    (
+                        hsrWeaponStats.hp[weaponStats.hp][index] || 0
+                    ).toLocaleString()
+                ),
+            ],
+            [
+                `ATK|hsr/icons/stat-icons/ATK`,
+                ...levels.map((_, index) =>
+                    (
+                        hsrWeaponStats.atk[weaponStats.atk][index] || 0
+                    ).toLocaleString()
+                ),
+            ],
+            [
+                `DEF|hsr/icons/stat-icons/DEF`,
+                ...levels.map((_, index) =>
+                    (
+                        hsrWeaponStats.def[weaponStats.def][index] || 0
+                    ).toLocaleString()
+                ),
+            ],
+        ];
     }
 
     return { levels, data };

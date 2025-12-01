@@ -11,9 +11,6 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
-// Helper imports
-import { useGameTag } from "@/context";
-
 // Type imports
 import { AttributeData } from "@/types";
 import { Materials } from "@/types/materials";
@@ -29,7 +26,6 @@ interface WeaponInfoProps {
 export default function WeaponInfo(props: WeaponInfoProps) {
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
-    const game = useGameTag();
     return (
         <ContentBox
             header={
@@ -45,13 +41,12 @@ export default function WeaponInfo(props: WeaponInfoProps) {
                 <Stack spacing={2}>
                     <Box sx={{ width: { xs: "100%", md: "75%" } }}>
                         <StatsDisplay
-                            game={game}
                             stats={props.stats}
                             attributes={props.attributes}
                             title=""
                         />
                     </Box>
-                    {props.stats.passive && (
+                    {"passive" in props.stats && (
                         <WeaponPassive stats={props.stats} />
                     )}
                 </Stack>
@@ -60,7 +55,7 @@ export default function WeaponInfo(props: WeaponInfoProps) {
                     levelKey="level"
                     costKey="weaponLevel"
                     materials={props.materials}
-                    rarity={props.attributes.rarity}
+                    {...props.attributes}
                 />
             </Stack>
         </ContentBox>

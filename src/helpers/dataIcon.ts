@@ -27,5 +27,15 @@ export function getDataIconURL({ game, key, value }: Props) {
             tooltip = `${value}`;
         }
     }
+    if (game === "hsr") {
+        if (key === "element" && value) {
+            src = `hsr/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `hsr/paths/${value}`;
+            tooltip = `${value}`;
+        }
+    }
     return { src, tooltip };
 }

@@ -36,6 +36,11 @@ export function filterItems<T extends Record<string, any>>(
             filters.talentBook.includes(`${item.materials.talent}3`)
         );
     }
+    if ("calyxMat" in filters && filters.calyxMat.length > 0) {
+        res = res.filter((item) =>
+            filters.calyxMat.includes(item.materials.calyx)
+        );
+    }
     if ("commonMat" in filters && filters.commonMat.length > 0) {
         res = res.filter((item) =>
             filters.commonMat.includes(item.materials.common)
@@ -70,7 +75,9 @@ export function filterItems<T extends Record<string, any>>(
         );
     }
     if ("nation" in filters && filters.nation.length > 0) {
-        res = res.filter((item) => filters.nation.includes(item.nation));
+        res = res.filter((item) =>
+            filters.nation.includes(item.world || item.nation)
+        );
     }
     if (searchValue) {
         res = res.filter(
@@ -79,7 +86,9 @@ export function filterItems<T extends Record<string, any>>(
                 item.displayName
                     .toLowerCase()
                     .includes(searchValue.toLowerCase()) ||
-                item.displayName?.toLowerCase().includes(searchValue.toLowerCase())
+                item.displayName
+                    ?.toLowerCase()
+                    .includes(searchValue.toLowerCase())
         );
     }
 

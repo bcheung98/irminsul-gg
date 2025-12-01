@@ -1,4 +1,5 @@
 import { genshinFilters } from "@/data/genshin/filters";
+import { hsrFilters } from "./hsr/filters";
 import { FilterGroups, FilterGroupsProps, Filters, GameData } from "@/types";
 
 export function filterGroups<T extends Filters>(
@@ -6,7 +7,7 @@ export function filterGroups<T extends Filters>(
 ): GameData<FilterGroups> {
     return {
         genshin: genshinFilters(props),
-        hsr: {},
+        hsr: hsrFilters(props),
         wuwa: {},
         zzz: {},
         uma: {},

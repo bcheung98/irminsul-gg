@@ -1,11 +1,12 @@
 import InfoCard from "./InfoCard";
 import InfoCardMaterial from "./InfoCardMaterial";
+import { InfoCardProps } from "./InfoCard.types";
 import {
     GenshinArtifact,
     GenshinCharacter,
     GenshinWeapon,
 } from "@/types/genshin";
-import { InfoCardProps } from "./InfoCard.types";
+import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -97,6 +98,100 @@ export function GenshinArtifactInfoCard({
             rarity={artifact.rarity}
             url={`${artifact.id}_${artifact.pieces.length > 1 ? 1 : 5}`}
             href={artifact.url}
+            {...props}
+        />
+    );
+}
+
+export function HSRCharacterInfoCard({
+    character,
+    props,
+}: {
+    character: HSRCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="hsr/characters"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function HSRCharacterInfoCardMaterial({
+    character,
+    props,
+}: {
+    character: HSRCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardMaterial
+            tag="hsr/characters"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            materials={character.materials}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function HSRWeaponInfoCard({
+    weapon,
+    props,
+}: {
+    weapon: HSRWeapon;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="hsr/lightcones"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            badgeLeft={{
+                weaponType: weapon.weaponType,
+            }}
+            url=""
+            href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function HSRRelicInfoCard({
+    relic,
+    props,
+}: {
+    relic: HSRRelic;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="hsr/relics"
+            id={Number(relic.id)}
+            key={relic.id}
+            name={relic.displayName}
+            rarity={relic.rarity}
+            url={`${relic.id}`}
+            href={relic.url}
             {...props}
         />
     );

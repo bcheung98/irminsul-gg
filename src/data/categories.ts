@@ -24,4 +24,7 @@ export const categoryImgURLs: Record<
     "genshin/weapons": (id: number) => `genshin/weapons/${id}`,
     "genshin/equipment": (id: number, name: string) =>
         `genshin/artifacts/${id}${name.startsWith("Prayers") ? "_5" : "_1"}`,
+    "hsr/characters": (id: number) => `hsr/characters/${id}`,
+    "hsr/weapons": (id: number) => `hsr/lightcones/${id}_icon`,
+    "hsr/equipment": (id: number) => `hsr/relics/${id}`,
 };

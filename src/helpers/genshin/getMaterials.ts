@@ -1,6 +1,5 @@
 import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { genshinMaterials } from "@/data/genshin/materials";
-import { GenshinMaterialCategory } from "@/types/genshin/materials";
 import { Material } from "@/types/materials";
 
 const defaultMaterial: Material = {
@@ -42,7 +41,7 @@ export function getGenshinMaterial(hideUnreleasedContent = false) {
 
 export function getGenshinMaterialCategory(hideUnreleasedContent = false) {
     let materials = getMaterials(hideUnreleasedContent);
-    return (category: GenshinMaterialCategory) => {
+    return (category: string) => {
         return materials.filter((material) => material.category === category);
     };
 }

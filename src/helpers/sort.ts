@@ -1,5 +1,6 @@
 import { GameData } from "@/types";
 import sortGenshinItems from "./genshin/sortItems";
+import sortHSRItems from "./hsr/sortItems";
 
 export interface SortProps<T extends Record<string, any>> {
     items: T[];
@@ -12,9 +13,7 @@ type SortFunction = <T extends Record<string, any>>(props: SortProps<T>) => T[];
 export function useSort(): GameData<SortFunction> {
     return {
         genshin: sortGenshinItems,
-        hsr: function () {
-            throw new Error("Function not implemented.");
-        },
+        hsr: sortHSRItems,
         wuwa: function () {
             throw new Error("Function not implemented.");
         },

@@ -38,6 +38,7 @@ export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
         label: (
             <Text
                 variant={sliderValue === level ? "subtitle1" : "subtitle2"}
+                weight={sliderValue === level ? "highlight" : "primary"}
                 sx={{
                     userSelect: "none",
                     opacity: sliderValue === level ? 1 : 0.25,
@@ -76,7 +77,11 @@ export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
                             <SkillDescription
                                 game={game}
                                 description={passive.description}
-                                targetClassName="text-refinement"
+                                targetClassName={
+                                    game === "hsr"
+                                        ? "text-value"
+                                        : "text-refinement"
+                                }
                                 newClassName={className}
                             />
                         </Text>

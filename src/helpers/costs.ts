@@ -1,22 +1,37 @@
 import { GameData } from "@/types";
 import { CostArray, CostValue } from "@/types/costs";
 import {
-    getCharacterLevelCost,
-    getCharacterSkillCost,
-    getWeaponLevelCost,
+    getCharacterLevelCost as getGenshinCharacterLevelCost,
+    getCharacterSkillCost as getGenshinCharacterSkillCost,
+    getWeaponLevelCost as getGenshinWeaponLevelCost,
 } from "./genshin/getLevelUpCosts";
+import {
+    getCharacterLevelCost as getHSRCharacterLevelCost,
+    getCharacterSkillCost as getHSRCharacterSkillCost,
+    getWeaponLevelCost as getHSRWeaponLevelCost,
+    getCharacterMemosprite as getHSRCharacterMemosprite,
+    getCharacterTraceMain as getHSRCharacterTraceMain,
+    getCharacterTraceSmall as getHSRCharacterTraceSmall,
+} from "./hsr/getLevelUpCosts";
 
 interface Costs {
-    [tag: string]: (args: any) => { [key: string]: CostValue };
+    [tag: string]: (arg0: any) => { [key: string]: CostValue };
 }
 
 export const costs: GameData<Costs> = {
     genshin: {
-        characterLevel: getCharacterLevelCost,
-        characterSkill: getCharacterSkillCost,
-        weaponLevel: getWeaponLevelCost,
+        characterLevel: getGenshinCharacterLevelCost,
+        characterSkill: getGenshinCharacterSkillCost,
+        weaponLevel: getGenshinWeaponLevelCost,
     },
-    hsr: {},
+    hsr: {
+        characterLevel: getHSRCharacterLevelCost,
+        characterSkill: getHSRCharacterSkillCost,
+        characterMemosprite: getHSRCharacterMemosprite,
+        characterTraceMain: getHSRCharacterTraceMain,
+        characterTraceSmall: getHSRCharacterTraceSmall,
+        weaponLevel: getHSRWeaponLevelCost,
+    },
     wuwa: {},
     zzz: {},
     uma: {},
