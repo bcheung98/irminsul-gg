@@ -68,12 +68,7 @@ export default function CharacterSkills({
                 ))}
             </Tabs.List>
             {keys.map((key, index) => (
-                <Tabs.Panel
-                    key={key}
-                    index={index}
-                    value={tabValue}
-                    padding="8px 24px 16px"
-                >
+                <Tabs.Panel key={key} index={index} value={tabValue}>
                     <CharacterSkillTab
                         skillKey={key}
                         keywords={keywords}

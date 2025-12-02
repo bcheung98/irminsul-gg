@@ -40,6 +40,11 @@ export default function StatsDisplay({
         setMode(currentStatDisplay);
     }, [currentStatDisplay]);
 
+    const [sliderValue, setSliderValue] = useState(initialValue);
+    const handleSliderChange = (_: Event, newValue: number | number[]) => {
+        setSliderValue(newValue as number);
+    };
+
     return (
         <Stack spacing={mode === "slider" ? 1 : 0}>
             <Text variant="h6" weight="highlight">
@@ -50,8 +55,9 @@ export default function StatsDisplay({
                 levels={levels}
                 data={data}
                 orientation="column"
+                sliderValue={sliderValue || levels.length}
+                handleSliderChange={handleSliderChange}
                 sliderProps={{
-                    initialValue: initialValue || levels.length,
                     sx: {
                         minWidth: "100px",
                         maxWidth: "50%",

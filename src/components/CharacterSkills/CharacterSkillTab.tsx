@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 
 // Component imports
 import Text from "@/components/Text";
+import SkillCard from "@/components/SkillCard";
 import CharacterSkillDescription from "./CharacterSkillDescription";
 import CharacterSkillScaling from "./CharacterSkillScaling";
 import CharacterSkillLevelUp from "./CharacterSkillLevelUp";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { range } from "@/utils";
@@ -27,11 +30,13 @@ export default function CharacterSkillTab({
     attributes,
 }: CharacterSkillProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
     const game = useGameTag();
-    const buffs = useSkillVersionContext();
+
     const textColor = useTextColor(theme.text);
 
+    const skillVersion = useSkillVersionContext();
     const skillsContext = useSkillContext();
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
@@ -40,9 +45,9 @@ export default function CharacterSkillTab({
 
     if (skills && skills[skillKey]) {
         let skill = skills[skillKey];
-        if (buffs && buffs.value !== "v1" && skill.length > 1) {
+        if (skillVersion && skillVersion.value !== "v1" && skill.length > 1) {
             skill = skill.filter(
-                (skill) => skill.version?.value === buffs.value
+                (skill) => skill.version?.value === skillVersion.value
             );
         } else {
             skill = skill.filter((skill) => !skill.version);
@@ -73,46 +78,71 @@ export default function CharacterSkillTab({
             });
         }, [sliderValue]);
 
+        const LevelUp = !["altsprint", "technique"].includes(skillKey) ? (
+            <Stack sx={{ px: { xs: 0, md: 1 } }}>
+                <CharacterSkillLevelUp
+                    materials={materials}
+                    color={textColor(game, attributes.element)}
+                    attributes={attributes}
+                    skillKey={skillKey}
+                />
+            </Stack>
+        ) : (
+            <></>
+        );
+
         return (
-            <Stack spacing={3}>
-                <Stack spacing={2}>
-                    <Text weight="highlight" sx={{ color: theme.text.header }}>
-                        {skillKeys[game][skillKey]}
-                    </Text>
-                    <Stack spacing={2}>
-                        {skill?.map((skl, index) => (
-                            <CharacterSkillDescription
-                                key={`${skillKey}-${index}`}
-                                skill={skl}
-                                skillKey={skillKey}
-                                keywords={keywords}
-                                attributes={attributes}
-                                levels={levels}
-                                sliderValue={sliderValue}
-                                handleSliderChange={handleSliderChange}
+            <Stack spacing={2}>
+                <Grid container spacing={3}>
+                    <Grid size={{ xs: 12, md: "grow" }}>
+                        <Stack spacing={2}>
+                            <Text
+                                weight="highlight"
+                                sx={{ color: theme.text.header }}
+                            >
+                                {skillKeys[game][skillKey]}
+                            </Text>
+                            <Grid container spacing={2}>
+                                {skill.map((skl, index) => (
+                                    <SkillCard
+                                        key={`${skillKey}-${index}`}
+                                        size={12}
+                                    >
+                                        <CharacterSkillDescription
+                                            skill={skl}
+                                            skillKey={skillKey}
+                                            keywords={keywords}
+                                            attributes={attributes}
+                                            levels={levels}
+                                            sliderValue={sliderValue}
+                                            handleSliderChange={
+                                                handleSliderChange
+                                            }
+                                            index={index}
+                                        />
+                                    </SkillCard>
+                                ))}
+                            </Grid>
+                            {matches && LevelUp}
+                        </Stack>
+                    </Grid>
+                    {game !== "hsr" && (
+                        <Grid size={{ xs: 12, md: 5 }}>
+                            <CharacterSkillScaling
+                                skill={skill}
+                                color={textColor(game, attributes.element)}
                             />
-                        ))}
-                    </Stack>
-                </Stack>
-                <Stack spacing={2}>
-                    {game !== "hsr" && !["technique"].includes(skillKey) && (
-                        <CharacterSkillScaling
-                            skill={skill}
-                            color={textColor(game, attributes.element)}
-                        />
+                        </Grid>
                     )}
-                    {!["altsprint", "technique"].includes(skillKey) && (
-                        <CharacterSkillLevelUp
-                            materials={materials}
-                            color={textColor(game, attributes.element)}
-                            attributes={attributes}
-                            skillKey={skillKey}
-                        />
-                    )}
-                </Stack>
+                </Grid>
+                {!matches && LevelUp}
             </Stack>
         );
     } else {
-        return <></>;
+        return (
+            <Text variant="h6" weight="highlight">
+                Could not find skill
+            </Text>
+        );
     }
 }

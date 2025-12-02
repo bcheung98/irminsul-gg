@@ -35,6 +35,7 @@ export default function CharacterSkillDescription({
     levels,
     sliderValue = 1,
     handleSliderChange,
+    index = 0,
 }: CharacterSkillDescriptionProps) {
     const theme = useTheme();
 
@@ -76,16 +77,25 @@ export default function CharacterSkillDescription({
         setCurrentKeyword(null);
     };
 
+    function getSkillIcon() {
+        if (skill.icon) return skill.icon;
+        let icon = skillIconURL;
+        if (index > 0) icon += `${index}`;
+        return icon;
+    }
+
     return (
         <>
             <Stack spacing={3}>
                 <Stack spacing={2}>
                     <TextLabel
                         icon={
-                            <SkillIcon
-                                icon={skill.icon || skillIconURL}
-                                attributes={attributes}
-                            />
+                            skill.icon !== null && (
+                                <SkillIcon
+                                    icon={getSkillIcon()}
+                                    attributes={attributes}
+                                />
+                            )
                         }
                         title={skill.name}
                         titleProps={{ variant: "h6" }}

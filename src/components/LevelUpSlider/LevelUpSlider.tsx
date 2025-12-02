@@ -30,7 +30,6 @@ function LevelUpSlider({
                     [threshold]: "16px",
                 },
                 alignItems: "center",
-                width: { xs: "100%", sm: "50%" },
                 maxWidth: { lg: "500px" },
             }}
         >

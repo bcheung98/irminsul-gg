@@ -51,7 +51,7 @@ export default function WeaponInfo(props: WeaponInfoProps) {
                     )}
                 </Stack>
                 <LevelUpCosts
-                    title="Ascension"
+                    label="Ascension"
                     levelKey="level"
                     costKey="weaponLevel"
                     materials={props.materials}

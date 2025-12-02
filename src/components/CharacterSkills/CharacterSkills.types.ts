@@ -18,7 +18,7 @@ export interface CharacterSkillProps extends SkillProps {
 }
 
 export interface CharacterSkillScalingProps {
-    skill?: Skill[];
+    skill: Skill[];
     color?: string;
     index?: number;
 }
@@ -29,4 +29,5 @@ export interface CharacterSkillDescriptionProps
     levels: number[];
     sliderValue?: number;
     handleSliderChange: (_: Event, newValue: number | number[]) => void;
+    index?: number;
 }

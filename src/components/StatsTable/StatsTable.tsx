@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 
 // Component imports
-import FlexBox from "@/components/FlexBox";
+import LevelSlider from "@/components/LevelSlider";
 import * as Table from "@/components/Table";
-import Slider from "@/components/Slider";
-import Text from "@/components/Text";
 
 // MUI imports
-import { useTheme, SxProps } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { SxProps } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 
@@ -21,8 +18,9 @@ interface StatsTableProps {
     data: (string | number)[][];
     headColumns?: (string | number)[];
     orientation?: Orientation;
+    sliderValue: number;
+    handleSliderChange: (_: Event, newValue: number | number[]) => void;
     sliderProps?: {
-        initialValue?: number;
         sx?: SxProps;
     };
     tableProps?: {
@@ -38,20 +36,12 @@ export default function StatsTable({
     data,
     headColumns,
     orientation = "row",
+    sliderValue,
+    handleSliderChange,
     sliderProps,
     tableProps,
     textID = "text-value",
 }: StatsTableProps) {
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
-
-    const [sliderValue, setSliderValue] = useState(
-        sliderProps?.initialValue || levels.length
-    );
-    const handleSliderChange = (_: Event, newValue: number | number[]) => {
-        setSliderValue(newValue as number);
-    };
-
     useEffect(() => {
         const targets = document.getElementsByClassName(textID);
         data.forEach((subScaling: (string | number)[], index: number) => {
@@ -71,26 +61,14 @@ export default function StatsTable({
 
     return (
         <Stack spacing={2}>
-            {levels.length > 1 && (
-                <FlexBox
-                    sx={{
-                        display: mode === "slider" ? "flex" : "none",
-                        flexWrap: { xs: "wrap", md: "nowrap" },
-                    }}
-                >
-                    <Text weight="highlight" sx={{ minWidth: "60px" }}>
-                        Lv. {levels[sliderValue - 1]}
-                    </Text>
-                    <Slider
-                        value={sliderValue}
-                        step={1}
-                        min={1}
-                        max={levels.length}
-                        onChange={handleSliderChange}
-                        size={matches ? "medium" : "small"}
-                        sx={sliderProps?.sx}
-                    />
-                </FlexBox>
+            {mode === "slider" && levels.length > 1 && (
+                <LevelSlider
+                    mode={mode}
+                    levels={levels}
+                    value={sliderValue}
+                    handleSliderChange={handleSliderChange}
+                    sx={sliderProps?.sx}
+                />
             )}
             <Table.Container
                 component={Card}

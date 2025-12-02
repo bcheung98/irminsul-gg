@@ -44,7 +44,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
                     initialValue={game === "genshin" ? 14 : undefined}
                 />
                 <LevelUpCosts
-                    title="Ascension"
+                    label="Ascension"
                     levelKey="level"
                     costKey="characterLevel"
                     materials={props.materials}
