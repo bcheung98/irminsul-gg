@@ -23,7 +23,7 @@ interface LevelUpCostsProps {
     levelKey: string;
     costKey: string;
     materials: Materials;
-    title?: string;
+    label?: string;
     color?: string;
     iconSize?: number;
     threshold?: string;
@@ -37,7 +37,7 @@ export default function LevelUpCosts({
     levelKey,
     costKey,
     materials,
-    title = "",
+    label = "",
     color,
     iconSize = 56,
     threshold = "@100",
@@ -128,7 +128,7 @@ export default function LevelUpCosts({
     return (
         <Stack spacing={1}>
             <Text variant="h6" weight="highlight">
-                {title}
+                {label}
             </Text>
             <Stack
                 spacing={levels.length > 0 ? 2 : 0}
