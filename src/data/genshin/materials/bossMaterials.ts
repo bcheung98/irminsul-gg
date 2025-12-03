@@ -377,4 +377,13 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "Luna III" },
     },
+    {
+        id: 113084,
+        category: "boss",
+        tag: "Remnant of the Dreadwing",
+        name: "Remnant of the Dreadwing",
+        source: "Whisperer of Nightmares",
+        rarity: 4,
+        release: { version: "Luna IV" },
+    },
 ];

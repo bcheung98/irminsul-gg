@@ -5,9 +5,7 @@ export const gemstones = [
         name: "Pyro Gemstone",
         tag: "Pyro",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104111,
@@ -15,9 +13,7 @@ export const gemstones = [
         name: "Agnidus Agate Sliver",
         tag: "Pyro1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104112,
@@ -25,9 +21,7 @@ export const gemstones = [
         name: "Agnidus Agate Fragment",
         tag: "Pyro2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104113,
@@ -35,9 +29,7 @@ export const gemstones = [
         name: "Agnidus Agate Chunk",
         tag: "Pyro3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104114,
@@ -45,9 +37,7 @@ export const gemstones = [
         name: "Agnidus Agate Gemstone",
         tag: "Pyro4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 1,
@@ -55,9 +45,7 @@ export const gemstones = [
         name: "Hydro Gemstone",
         tag: "Hydro",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104121,
@@ -65,9 +53,7 @@ export const gemstones = [
         name: "Varunada Lazurite Sliver",
         tag: "Hydro1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104122,
@@ -75,9 +61,7 @@ export const gemstones = [
         name: "Varunada Lazurite Fragment",
         tag: "Hydro2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104123,
@@ -85,9 +69,7 @@ export const gemstones = [
         name: "Varunada Lazurite Chunk",
         tag: "Hydro3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104124,
@@ -95,9 +77,7 @@ export const gemstones = [
         name: "Varunada Lazurite Gemstone",
         tag: "Hydro4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 2,
@@ -105,9 +85,7 @@ export const gemstones = [
         name: "Dendro Gemstone",
         tag: "Dendro",
         rarity: 1,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104131,
@@ -115,9 +93,7 @@ export const gemstones = [
         name: "Nagadus Emerald Sliver",
         tag: "Dendro1",
         rarity: 2,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104132,
@@ -125,9 +101,7 @@ export const gemstones = [
         name: "Nagadus Emerald Fragment",
         tag: "Dendro2",
         rarity: 3,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104133,
@@ -135,9 +109,7 @@ export const gemstones = [
         name: "Nagadus Emerald Chunk",
         tag: "Dendro3",
         rarity: 4,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104134,
@@ -145,9 +117,7 @@ export const gemstones = [
         name: "Nagadus Emerald Gemstone",
         tag: "Dendro4",
         rarity: 5,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 3,
@@ -155,9 +125,7 @@ export const gemstones = [
         name: "Electro Gemstone",
         tag: "Electro",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104141,
@@ -165,9 +133,7 @@ export const gemstones = [
         name: "Vajrada Amethyst Sliver",
         tag: "Electro1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104142,
@@ -175,9 +141,7 @@ export const gemstones = [
         name: "Vajrada Amethyst Fragment",
         tag: "Electro2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104143,
@@ -185,9 +149,7 @@ export const gemstones = [
         name: "Vajrada Amethyst Chunk",
         tag: "Electro3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104144,
@@ -195,9 +157,7 @@ export const gemstones = [
         name: "Vajrada Amethyst Gemstone",
         tag: "Electro4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 4,
@@ -205,9 +165,7 @@ export const gemstones = [
         name: "Anemo Gemstone",
         tag: "Anemo",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104151,
@@ -215,9 +173,7 @@ export const gemstones = [
         name: "Vayuda Turquoise Sliver",
         tag: "Anemo1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104152,
@@ -225,9 +181,7 @@ export const gemstones = [
         name: "Vayuda Turquoise Fragment",
         tag: "Anemo2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104153,
@@ -235,9 +189,7 @@ export const gemstones = [
         name: "Vayuda Turquoise Chunk",
         tag: "Anemo3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104154,
@@ -245,9 +197,7 @@ export const gemstones = [
         name: "Vayuda Turquoise Gemstone",
         tag: "Anemo4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 5,
@@ -255,9 +205,7 @@ export const gemstones = [
         name: "Cryo Gemstone",
         tag: "Cryo",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104161,
@@ -265,9 +213,7 @@ export const gemstones = [
         name: "Shivada Jade Sliver",
         tag: "Cryo1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104162,
@@ -275,9 +221,7 @@ export const gemstones = [
         name: "Shivada Jade Fragment",
         tag: "Cryo2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104163,
@@ -285,9 +229,7 @@ export const gemstones = [
         name: "Shivada Jade Chunk",
         tag: "Cryo3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104164,
@@ -295,9 +237,7 @@ export const gemstones = [
         name: "Shivada Jade Gemstone",
         tag: "Cryo4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 6,
@@ -305,9 +245,7 @@ export const gemstones = [
         name: "Geo Gemstone",
         tag: "Geo",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104171,
@@ -315,9 +253,7 @@ export const gemstones = [
         name: "Prithiva Topaz Sliver",
         tag: "Geo1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104172,
@@ -325,9 +261,7 @@ export const gemstones = [
         name: "Prithiva Topaz Fragment",
         tag: "Geo2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104173,
@@ -335,9 +269,7 @@ export const gemstones = [
         name: "Prithiva Topaz Chunk",
         tag: "Geo3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104174,
@@ -345,8 +277,6 @@ export const gemstones = [
         name: "Prithiva Topaz Gemstone",
         tag: "Geo4",
         rarity: 5,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
 ];

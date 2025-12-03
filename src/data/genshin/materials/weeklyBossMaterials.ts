@@ -6,9 +6,7 @@ export const weeklyBossMaterials = [
         tag: "Dvalin's Plume",
         rarity: 5,
         source: "Stormterror",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113004,
@@ -17,9 +15,7 @@ export const weeklyBossMaterials = [
         tag: "Dvalin's Claw",
         rarity: 5,
         source: "Stormterror",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113005,
@@ -28,9 +24,7 @@ export const weeklyBossMaterials = [
         tag: "Dvalin's Sigh",
         rarity: 5,
         source: "Stormterror",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113006,
@@ -39,9 +33,7 @@ export const weeklyBossMaterials = [
         tag: "Tail of Boreas",
         rarity: 5,
         source: "Lupus Boreas",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113007,
@@ -50,9 +42,7 @@ export const weeklyBossMaterials = [
         tag: "Ring of Boreas",
         rarity: 5,
         source: "Lupus Boreas",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113008,
@@ -61,9 +51,7 @@ export const weeklyBossMaterials = [
         tag: "Spirit Locket of Boreas",
         rarity: 5,
         source: "Lupus Boreas",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 113013,
@@ -72,9 +60,7 @@ export const weeklyBossMaterials = [
         tag: "Tusk of Monoceros Caeli",
         rarity: 5,
         source: "Childe",
-        release: {
-            version: "1.1",
-        },
+        release: { version: "1.1" },
     },
     {
         id: 113014,
@@ -83,9 +69,7 @@ export const weeklyBossMaterials = [
         tag: "Shard of a Foul Legacy",
         rarity: 5,
         source: "Childe",
-        release: {
-            version: "1.1",
-        },
+        release: { version: "1.1" },
     },
     {
         id: 113015,
@@ -94,9 +78,7 @@ export const weeklyBossMaterials = [
         tag: "Shadow of the Warrior",
         rarity: 5,
         source: "Childe",
-        release: {
-            version: "1.1",
-        },
+        release: { version: "1.1" },
     },
     {
         id: 113017,
@@ -105,9 +87,7 @@ export const weeklyBossMaterials = [
         tag: "Dragon Lord's Crown",
         rarity: 5,
         source: "Azhdaha",
-        release: {
-            version: "1.5",
-        },
+        release: { version: "1.5" },
     },
     {
         id: 113018,
@@ -116,9 +96,7 @@ export const weeklyBossMaterials = [
         tag: "Bloodjade Branch",
         rarity: 5,
         source: "Azhdaha",
-        release: {
-            version: "1.5",
-        },
+        release: { version: "1.5" },
     },
     {
         id: 113019,
@@ -127,9 +105,7 @@ export const weeklyBossMaterials = [
         tag: "Gilded Scale",
         rarity: 5,
         source: "Azhdaha",
-        release: {
-            version: "1.5",
-        },
+        release: { version: "1.5" },
     },
     {
         id: 113025,
@@ -138,9 +114,7 @@ export const weeklyBossMaterials = [
         tag: "Molten Moment",
         rarity: 5,
         source: "La Signora",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 113026,
@@ -149,9 +123,7 @@ export const weeklyBossMaterials = [
         tag: "Hellfire Butterfly",
         rarity: 5,
         source: "La Signora",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 113027,
@@ -160,9 +132,7 @@ export const weeklyBossMaterials = [
         tag: "Ashen Heart",
         rarity: 5,
         source: "La Signora",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 113032,
@@ -171,9 +141,7 @@ export const weeklyBossMaterials = [
         tag: "Mudra of the Malefic General",
         rarity: 5,
         source: "Narukami no Mikoto",
-        release: {
-            version: "2.5",
-        },
+        release: { version: "2.5" },
     },
     {
         id: 113033,
@@ -182,9 +150,7 @@ export const weeklyBossMaterials = [
         tag: "Tears of the Calamitous God",
         rarity: 5,
         source: "Narukami no Mikoto",
-        release: {
-            version: "2.5",
-        },
+        release: { version: "2.5" },
     },
     {
         id: 113034,
@@ -193,9 +159,7 @@ export const weeklyBossMaterials = [
         tag: "The Meaning of Aeons",
         rarity: 5,
         source: "Narukami no Mikoto",
-        release: {
-            version: "2.5",
-        },
+        release: { version: "2.5" },
     },
     {
         id: 113041,
@@ -204,9 +168,7 @@ export const weeklyBossMaterials = [
         tag: "Puppet Strings",
         rarity: 5,
         source: "Shouki no Kami",
-        release: {
-            version: "3.2",
-        },
+        release: { version: "3.2" },
     },
     {
         id: 113042,
@@ -215,9 +177,7 @@ export const weeklyBossMaterials = [
         tag: "Mirror of Mushin",
         rarity: 5,
         source: "Shouki no Kami",
-        release: {
-            version: "3.2",
-        },
+        release: { version: "3.2" },
     },
     {
         id: 113043,
@@ -226,9 +186,7 @@ export const weeklyBossMaterials = [
         tag: "Daka's Bell",
         rarity: 5,
         source: "Shouki no Kami",
-        release: {
-            version: "3.2",
-        },
+        release: { version: "3.2" },
     },
     {
         id: 113046,
@@ -237,9 +195,7 @@ export const weeklyBossMaterials = [
         tag: "Worldspan Fern",
         rarity: 5,
         source: "Guardian of Apep's Oasis",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 113047,
@@ -248,9 +204,7 @@ export const weeklyBossMaterials = [
         tag: "Primordial Greenbloom",
         rarity: 5,
         source: "Guardian of Apep's Oasis",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 113048,
@@ -259,9 +213,7 @@ export const weeklyBossMaterials = [
         tag: "Everamber",
         rarity: 5,
         source: "Guardian of Apep's Oasis",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 113054,
@@ -270,9 +222,7 @@ export const weeklyBossMaterials = [
         tag: "Lightless Silk String",
         rarity: 5,
         source: "All-Devouring Narwhal",
-        release: {
-            version: "4.2",
-        },
+        release: { version: "4.2" },
     },
     {
         id: 113055,
@@ -281,9 +231,7 @@ export const weeklyBossMaterials = [
         tag: "Lightless Eye of the Maelstrom",
         rarity: 5,
         source: "All-Devouring Narwhal",
-        release: {
-            version: "4.2",
-        },
+        release: { version: "4.2" },
     },
     {
         id: 113056,
@@ -292,9 +240,7 @@ export const weeklyBossMaterials = [
         tag: "Lightless Mass",
         rarity: 5,
         source: "All-Devouring Narwhal",
-        release: {
-            version: "4.2",
-        },
+        release: { version: "4.2" },
     },
     {
         id: 113060,
@@ -303,9 +249,7 @@ export const weeklyBossMaterials = [
         tag: "Fading Candle",
         rarity: 5,
         source: "The Knave",
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 113061,
@@ -314,9 +258,7 @@ export const weeklyBossMaterials = [
         tag: "Silken Feather",
         rarity: 5,
         source: "The Knave",
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 113062,
@@ -325,9 +267,7 @@ export const weeklyBossMaterials = [
         tag: "Denial and Judgment",
         rarity: 5,
         source: "The Knave",
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 113068,
@@ -336,9 +276,7 @@ export const weeklyBossMaterials = [
         tag: "Eroded Horn",
         rarity: 5,
         source: "Lord of Eroded Primal Fire",
-        release: {
-            version: "5.3",
-        },
+        release: { version: "5.3" },
     },
     {
         id: 113069,
@@ -347,9 +285,7 @@ export const weeklyBossMaterials = [
         tag: "Eroded Sunfire",
         rarity: 5,
         source: "Lord of Eroded Primal Fire",
-        release: {
-            version: "5.3",
-        },
+        release: { version: "5.3" },
     },
     {
         id: 113070,
@@ -358,44 +294,60 @@ export const weeklyBossMaterials = [
         tag: "Eroded Scale-Feather",
         rarity: 5,
         source: "Lord of Eroded Primal Fire",
-        release: {
-            version: "5.3",
-        },
+        release: { version: "5.3" },
     },
     {
         id: 113073,
         category: "weekly",
-        name: "Ascended Sample Knight",
-        displayName: "Ascended Sample: Knight",
+        name: "Ascended Sample: Knight",
         tag: "Ascended Sample Knight",
         rarity: 5,
         source: "The Game Before The Gate",
-        release: {
-            version: "5.6",
-        },
+        release: { version: "5.6" },
     },
     {
         id: 113074,
         category: "weekly",
-        name: "Ascended Sample Rook",
-        displayName: "Ascended Sample: Rook",
+        name: "Ascended Sample: Rook",
         tag: "Ascended Sample Rook",
         rarity: 5,
         source: "The Game Before The Gate",
-        release: {
-            version: "5.6",
-        },
+        release: { version: "5.6" },
     },
     {
         id: 113075,
         category: "weekly",
-        name: "Ascended Sample Queen",
-        displayName: "Ascended Sample: Queen",
+        name: "Ascended Sample: Queen",
         tag: "Ascended Sample Queen",
         rarity: 5,
         source: "The Game Before The Gate",
-        release: {
-            version: "5.6",
-        },
+        release: { version: "5.6" },
+    },
+    {
+        id: 113081,
+        category: "weekly",
+        name: "Doctor1",
+        tag: "Doctor1",
+        rarity: 5,
+        source: "The Doctor",
+        release: { version: "Luna IV" },
+    },
+    {
+        id: 113082,
+        category: "weekly",
+        name: "Doctor2",
+        tag: "Doctor2",
+        rarity: 5,
+        source: "The Doctor",
+        release: { version: "Luna IV" },
+    },
+    {
+        id: 113083,
+        category: "weekly",
+        name: "Doctor3",
+        tag: "Doctor3",
+        rarity: 5,
+        source: "The Doctor",
+        release: { version: "Luna IV" },
     },
 ];

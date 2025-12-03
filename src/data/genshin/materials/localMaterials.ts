@@ -6,9 +6,7 @@ export const localMaterials = [
         tag: "Wolfhook",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100022,
@@ -17,9 +15,7 @@ export const localMaterials = [
         tag: "Valberry",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100023,
@@ -28,9 +24,7 @@ export const localMaterials = [
         tag: "Cecilia",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100024,
@@ -39,9 +33,7 @@ export const localMaterials = [
         tag: "Windwheel Aster",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100025,
@@ -50,9 +42,7 @@ export const localMaterials = [
         tag: "Philanemo Mushroom",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100027,
@@ -61,9 +51,7 @@ export const localMaterials = [
         tag: "Jueyun Chili",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100028,
@@ -72,9 +60,7 @@ export const localMaterials = [
         tag: "Noctilucous Jade",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100029,
@@ -83,9 +69,7 @@ export const localMaterials = [
         tag: "Silk Flower",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100030,
@@ -94,9 +78,7 @@ export const localMaterials = [
         tag: "Glaze Lily",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100031,
@@ -105,9 +87,7 @@ export const localMaterials = [
         tag: "Qingxin",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100033,
@@ -116,9 +96,7 @@ export const localMaterials = [
         tag: "Starconch",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100034,
@@ -127,9 +105,7 @@ export const localMaterials = [
         tag: "Violetgrass",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100055,
@@ -138,9 +114,7 @@ export const localMaterials = [
         tag: "Small Lamp Grass",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100056,
@@ -149,9 +123,7 @@ export const localMaterials = [
         tag: "Calla Lily",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100057,
@@ -160,9 +132,7 @@ export const localMaterials = [
         tag: "Dandelion Seed",
         rarity: 1,
         source: "Mondstadt",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 100058,
@@ -171,9 +141,7 @@ export const localMaterials = [
         tag: "Cor Lapis",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 101201,
@@ -182,9 +150,7 @@ export const localMaterials = [
         tag: "Onikabuto",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 101202,
@@ -193,9 +159,7 @@ export const localMaterials = [
         tag: "Sakura Bloom",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 101203,
@@ -204,9 +168,7 @@ export const localMaterials = [
         tag: "Crystal Marrow",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 101204,
@@ -215,9 +177,7 @@ export const localMaterials = [
         tag: "Dendrobium",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 101205,
@@ -226,9 +186,7 @@ export const localMaterials = [
         tag: "Naku Weed",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 101206,
@@ -237,9 +195,7 @@ export const localMaterials = [
         tag: "Sea Ganoderma",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "1.6",
-        },
+        release: { version: "1.6" },
     },
     {
         id: 101207,
@@ -248,9 +204,7 @@ export const localMaterials = [
         tag: "Sango Pearl",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 101208,
@@ -259,9 +213,7 @@ export const localMaterials = [
         tag: "Amakumo Fruit",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 101209,
@@ -270,9 +222,7 @@ export const localMaterials = [
         tag: "Fluorescent Fungus",
         rarity: 1,
         source: "Inazuma",
-        release: {
-            version: "2.2",
-        },
+        release: { version: "2.2" },
     },
     {
         id: 101213,
@@ -281,9 +231,7 @@ export const localMaterials = [
         tag: "Rukkhashava Mushrooms",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 101214,
@@ -292,9 +240,7 @@ export const localMaterials = [
         tag: "Padisarah",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 101215,
@@ -303,9 +249,7 @@ export const localMaterials = [
         tag: "Nilotpala Lotus",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 101217,
@@ -314,9 +258,7 @@ export const localMaterials = [
         tag: "Kalpalata Lotus",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 101220,
@@ -325,9 +267,7 @@ export const localMaterials = [
         tag: "Henna Berry",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 101222,
@@ -336,9 +276,7 @@ export const localMaterials = [
         tag: "Sand Grease Pupa",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.4",
-        },
+        release: { version: "3.4" },
     },
     {
         id: 101223,
@@ -347,9 +285,7 @@ export const localMaterials = [
         tag: "Mourning Flower",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 101224,
@@ -358,9 +294,7 @@ export const localMaterials = [
         tag: "Trishiraite",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 101225,
@@ -369,9 +303,7 @@ export const localMaterials = [
         tag: "Scarab",
         rarity: 1,
         source: "Sumeru",
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 101232,
@@ -380,9 +312,7 @@ export const localMaterials = [
         tag: "Beryl Conch",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 101233,
@@ -391,9 +321,7 @@ export const localMaterials = [
         tag: "Romaritime Flower",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 101235,
@@ -402,9 +330,7 @@ export const localMaterials = [
         tag: "Lumidouce Bell",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 101236,
@@ -413,9 +339,7 @@ export const localMaterials = [
         tag: "Rainbow Rose",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 101237,
@@ -424,9 +348,7 @@ export const localMaterials = [
         tag: "Lumitoile",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 101238,
@@ -435,9 +357,7 @@ export const localMaterials = [
         tag: "Lakelight Lily",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.2",
-        },
+        release: { version: "4.2" },
     },
     {
         id: 101239,
@@ -446,9 +366,7 @@ export const localMaterials = [
         tag: "Subdetection Unit",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 101240,
@@ -457,9 +375,7 @@ export const localMaterials = [
         tag: "Spring of the First Dewdrop",
         rarity: 1,
         source: "Fontaine",
-        release: {
-            version: "4.3",
-        },
+        release: { version: "4.3" },
     },
     {
         id: 101241,
@@ -468,9 +384,7 @@ export const localMaterials = [
         tag: "Clearwater Jade",
         rarity: 1,
         source: "Liyue",
-        release: {
-            version: "4.4",
-        },
+        release: { version: "4.4" },
     },
     {
         id: 101247,
@@ -479,9 +393,7 @@ export const localMaterials = [
         tag: "Sprayfeather Gill",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 101248,
@@ -490,9 +402,7 @@ export const localMaterials = [
         tag: "Brilliant Chrysanthemum",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 101249,
@@ -501,9 +411,7 @@ export const localMaterials = [
         tag: "Quenepa Berry",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 101250,
@@ -512,9 +420,7 @@ export const localMaterials = [
         tag: "Saurian Claw Succulent",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 101252,
@@ -523,9 +429,7 @@ export const localMaterials = [
         tag: "Glowing Hornshroom",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.2",
-        },
+        release: { version: "5.2" },
     },
     {
         id: 101253,
@@ -534,9 +438,7 @@ export const localMaterials = [
         tag: "Withering Purpurbloom",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.2",
-        },
+        release: { version: "5.2" },
     },
     {
         id: 101254,
@@ -545,9 +447,7 @@ export const localMaterials = [
         tag: "Skysplit Gembloom",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 101255,
@@ -556,9 +456,7 @@ export const localMaterials = [
         tag: "Dracolite",
         rarity: 1,
         source: "Natlan",
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 101257,
@@ -567,9 +465,7 @@ export const localMaterials = [
         tag: "Portable Bearing",
         rarity: 1,
         source: "Nod-Krai",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 101261,
@@ -578,9 +474,7 @@ export const localMaterials = [
         tag: "Frostlamp Flower",
         rarity: 1,
         source: "Nod-Krai",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 101263,
@@ -589,8 +483,24 @@ export const localMaterials = [
         tag: "Moonfall Silver",
         rarity: 1,
         source: "Nod-Krai",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
+    },
+    {
+        id: 101268,
+        category: "local",
+        name: "Winter Icelea",
+        tag: "Winter Icelea",
+        rarity: 1,
+        source: "Nod-Krai",
+        release: { version: "Luna IV" },
+    },
+    {
+        id: 101269,
+        category: "local",
+        name: "Pine Amber",
+        tag: "Pine Amber",
+        rarity: 1,
+        source: "Nod-Krai",
+        release: { version: "Luna IV" },
     },
 ];

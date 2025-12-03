@@ -4,9 +4,7 @@ export const commonMaterials = [
         category: "common",
         name: "Slime",
         tag: "Slime",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112002,
@@ -14,9 +12,7 @@ export const commonMaterials = [
         name: "Slime Condensate",
         tag: "Slime1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112003,
@@ -24,9 +20,7 @@ export const commonMaterials = [
         name: "Slime Secretions",
         tag: "Slime2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112004,
@@ -34,18 +28,14 @@ export const commonMaterials = [
         name: "Slime Concentrate",
         tag: "Slime3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 1,
         category: "common",
         name: "Hilichurl Mask",
         tag: "Mask",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112005,
@@ -53,9 +43,7 @@ export const commonMaterials = [
         name: "Damaged Mask",
         tag: "Mask1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112006,
@@ -63,9 +51,7 @@ export const commonMaterials = [
         name: "Stained Mask",
         tag: "Mask2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112007,
@@ -73,18 +59,14 @@ export const commonMaterials = [
         name: "Ominous Mask",
         tag: "Mask3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 2,
         category: "common",
         name: "Samachurl Scroll",
         tag: "Scroll",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112008,
@@ -92,9 +74,7 @@ export const commonMaterials = [
         name: "Divining Scroll",
         tag: "Scroll1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112009,
@@ -102,9 +82,7 @@ export const commonMaterials = [
         name: "Sealed Scroll",
         tag: "Scroll2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112010,
@@ -112,18 +90,14 @@ export const commonMaterials = [
         name: "Forbidden Curse Scroll",
         tag: "Scroll3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 3,
         category: "common",
         name: "Hilichurl Arrow",
         tag: "Arrow",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112011,
@@ -131,9 +105,7 @@ export const commonMaterials = [
         name: "Firm Arrowhead",
         tag: "Arrow1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112012,
@@ -141,9 +113,7 @@ export const commonMaterials = [
         name: "Sharp Arrowhead",
         tag: "Arrow2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112013,
@@ -151,18 +121,14 @@ export const commonMaterials = [
         name: "Weathered Arrowhead",
         tag: "Arrow3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 4,
         category: "common",
         name: "Fatui Insignia",
         tag: "Fatui Insignia",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112032,
@@ -170,9 +136,7 @@ export const commonMaterials = [
         name: "Recruit's Insignia",
         tag: "Fatui Insignia1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112033,
@@ -180,9 +144,7 @@ export const commonMaterials = [
         name: "Sergeant's Insignia",
         tag: "Fatui Insignia2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112034,
@@ -190,18 +152,14 @@ export const commonMaterials = [
         name: "Lieutenant's Insignia",
         tag: "Fatui Insignia3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 5,
         category: "common",
         name: "Treasure Hoarder Insignia",
         tag: "Treasure Hoarder Insignia",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112035,
@@ -209,9 +167,7 @@ export const commonMaterials = [
         name: "Treasure Hoarder Insignia",
         tag: "Treasure Hoarder Insignia1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112036,
@@ -219,9 +175,7 @@ export const commonMaterials = [
         name: "Silver Raven Insignia",
         tag: "Treasure Hoarder Insignia2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112037,
@@ -229,18 +183,14 @@ export const commonMaterials = [
         name: "Golden Raven Insignia",
         tag: "Treasure Hoarder Insignia3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 6,
         category: "common",
         name: "Whopperflower Nectar",
         tag: "Nectar",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112038,
@@ -248,9 +198,7 @@ export const commonMaterials = [
         name: "Whopperflower Nectar",
         tag: "Nectar1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112039,
@@ -258,9 +206,7 @@ export const commonMaterials = [
         name: "Shimmering Nectar",
         tag: "Nectar2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112040,
@@ -268,18 +214,14 @@ export const commonMaterials = [
         name: "Energy Nectar",
         tag: "Nectar3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 7,
         category: "common",
         name: "Nobushi Handguard",
         tag: "Handguard",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112044,
@@ -287,9 +229,7 @@ export const commonMaterials = [
         name: "Old Handguard",
         tag: "Handguard1",
         rarity: 1,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112045,
@@ -297,9 +237,7 @@ export const commonMaterials = [
         name: "Kageuchi Handguard",
         tag: "Handguard2",
         rarity: 2,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112046,
@@ -307,18 +245,14 @@ export const commonMaterials = [
         name: "Famed Handguard",
         tag: "Handguard3",
         rarity: 3,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 8,
         category: "common",
         name: "Specter Core",
         tag: "Specter",
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 112053,
@@ -326,9 +260,7 @@ export const commonMaterials = [
         name: "Spectral Husk",
         tag: "Specter1",
         rarity: 1,
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 112054,
@@ -336,9 +268,7 @@ export const commonMaterials = [
         name: "Spectral Heart",
         tag: "Specter2",
         rarity: 2,
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 112055,
@@ -346,18 +276,14 @@ export const commonMaterials = [
         name: "Spectral Nucleus",
         tag: "Specter3",
         rarity: 3,
-        release: {
-            version: "2.1",
-        },
+        release: { version: "2.1" },
     },
     {
         id: 9,
         category: "common",
         name: "Fungal Spore Powder",
         tag: "Fungi",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112059,
@@ -365,9 +291,7 @@ export const commonMaterials = [
         name: "Fungal Spores",
         tag: "Fungi1",
         rarity: 1,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112060,
@@ -375,9 +299,7 @@ export const commonMaterials = [
         name: "Luminescent Pollen",
         tag: "Fungi2",
         rarity: 2,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112061,
@@ -385,18 +307,14 @@ export const commonMaterials = [
         name: "Crystalline Cyst Dust",
         tag: "Fungi3",
         rarity: 3,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 10,
         category: "common",
         name: "Eremite Headband",
         tag: "Headband",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112065,
@@ -404,9 +322,7 @@ export const commonMaterials = [
         name: "Faded Red Satin",
         tag: "Headband1",
         rarity: 1,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112066,
@@ -414,9 +330,7 @@ export const commonMaterials = [
         name: "Trimmed Red Silk",
         tag: "Headband2",
         rarity: 2,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112067,
@@ -424,18 +338,14 @@ export const commonMaterials = [
         name: "Rich Red Brocade",
         tag: "Headband3",
         rarity: 3,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 11,
         category: "common",
         name: "Aberrant Pearl",
         tag: "Aberrant",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112080,
@@ -443,9 +353,7 @@ export const commonMaterials = [
         name: "Transoceanic Pearl",
         tag: "Aberrant1",
         rarity: 1,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112081,
@@ -453,9 +361,7 @@ export const commonMaterials = [
         name: "Transoceanic Chunk",
         tag: "Aberrant2",
         rarity: 2,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112082,
@@ -463,18 +369,14 @@ export const commonMaterials = [
         name: "Xenochromatic Crystal",
         tag: "Aberrant3",
         rarity: 3,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 12,
         category: "common",
         name: "Clockwork Meka Gear",
         tag: "Gear",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112083,
@@ -482,9 +384,7 @@ export const commonMaterials = [
         name: "Meshing Gear",
         tag: "Gear1",
         rarity: 1,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112084,
@@ -492,9 +392,7 @@ export const commonMaterials = [
         name: "Mechanical Spur Gear",
         tag: "Gear2",
         rarity: 2,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112085,
@@ -502,18 +400,14 @@ export const commonMaterials = [
         name: "Artificed Dynamic Gear",
         tag: "Gear3",
         rarity: 3,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 13,
         category: "common",
         name: "Saurian Fang",
         tag: "Fang",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112101,
@@ -521,9 +415,7 @@ export const commonMaterials = [
         name: "Juvenile Fang",
         tag: "Fang1",
         rarity: 1,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112102,
@@ -531,9 +423,7 @@ export const commonMaterials = [
         name: "Seasoned Fang",
         tag: "Fang2",
         rarity: 2,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112103,
@@ -541,18 +431,14 @@ export const commonMaterials = [
         name: "Tyrant's Fang",
         tag: "Fang3",
         rarity: 3,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 14,
         category: "common",
         name: "Tribal Warrior Whistle",
         tag: "Whistle",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112104,
@@ -560,9 +446,7 @@ export const commonMaterials = [
         name: "Sentry's Wooden Whistle",
         tag: "Whistle1",
         rarity: 1,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112105,
@@ -570,9 +454,7 @@ export const commonMaterials = [
         name: "Warrior's Metal Whistle",
         tag: "Whistle2",
         rarity: 2,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112106,
@@ -580,18 +462,14 @@ export const commonMaterials = [
         name: "Saurian-Crowned Warrior's Golden Whistle",
         tag: "Whistle3",
         rarity: 3,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 15,
         category: "common",
         name: "Landcruiser Shaft",
         tag: "Shaft",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112122,
@@ -599,9 +477,7 @@ export const commonMaterials = [
         name: "Broken Drive Shaft",
         tag: "Shaft1",
         rarity: 1,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112123,
@@ -609,9 +485,7 @@ export const commonMaterials = [
         name: "Reinforced Drive Shaft",
         tag: "Shaft2",
         rarity: 2,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112124,
@@ -619,18 +493,14 @@ export const commonMaterials = [
         name: "Precision Drive Shaft",
         tag: "Shaft3",
         rarity: 3,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 16,
         category: "common",
         name: "Fatui Oprichniki Warrant",
         tag: "Warrant",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112125,
@@ -638,9 +508,7 @@ export const commonMaterials = [
         name: "Tattered Warrant",
         tag: "Warrant1",
         rarity: 1,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112126,
@@ -648,9 +516,7 @@ export const commonMaterials = [
         name: "Immaculate Warrant",
         tag: "Warrant2",
         rarity: 2,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112127,
@@ -658,8 +524,6 @@ export const commonMaterials = [
         name: "Frost-Etched Warrant",
         tag: "Warrant3",
         rarity: 3,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
 ];

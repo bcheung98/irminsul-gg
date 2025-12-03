@@ -4,9 +4,7 @@ export const eliteMaterials = [
         category: "elite",
         name: "Hilichurl Horn",
         tag: "Horn",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112014,
@@ -14,9 +12,7 @@ export const eliteMaterials = [
         name: "Heavy Horn",
         tag: "Horn1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112015,
@@ -24,9 +20,7 @@ export const eliteMaterials = [
         name: "Black Bronze Horn",
         tag: "Horn2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112016,
@@ -34,18 +28,14 @@ export const eliteMaterials = [
         name: "Black Crystal Horn",
         tag: "Horn3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 1,
         category: "elite",
         name: "Abyssal Statuette",
         tag: "Statuette",
-        release: {
-            version: "2.6",
-        },
+        release: { version: "2.6" },
     },
     {
         id: 112017,
@@ -53,9 +43,7 @@ export const eliteMaterials = [
         name: "Gloomy Statuette",
         tag: "Statuette1",
         rarity: 2,
-        release: {
-            version: "2.6",
-        },
+        release: { version: "2.6" },
     },
     {
         id: 112018,
@@ -63,9 +51,7 @@ export const eliteMaterials = [
         name: "Dark Statuette",
         tag: "Statuette2",
         rarity: 3,
-        release: {
-            version: "2.6",
-        },
+        release: { version: "2.6" },
     },
     {
         id: 112019,
@@ -73,18 +59,14 @@ export const eliteMaterials = [
         name: "Deathly Statuette",
         tag: "Statuette3",
         rarity: 4,
-        release: {
-            version: "2.6",
-        },
+        release: { version: "2.6" },
     },
     {
         id: 2,
         category: "elite",
         name: "Ley Line Branch",
         tag: "Ley Line Branch",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112020,
@@ -92,9 +74,7 @@ export const eliteMaterials = [
         name: "Dead Ley Line Branch",
         tag: "Ley Line Branch1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112021,
@@ -102,9 +82,7 @@ export const eliteMaterials = [
         name: "Dead Ley Line Leaves",
         tag: "Ley Line Branch2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112022,
@@ -112,18 +90,14 @@ export const eliteMaterials = [
         name: "Ley Line Sprout",
         tag: "Ley Line Branch3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 3,
         category: "elite",
         name: "Ruin Machine Core",
         tag: "Chaos Part",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112023,
@@ -131,9 +105,7 @@ export const eliteMaterials = [
         name: "Chaos Device",
         tag: "Chaos Part1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112024,
@@ -141,9 +113,7 @@ export const eliteMaterials = [
         name: "Chaos Circuit",
         tag: "Chaos Part2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112025,
@@ -151,18 +121,14 @@ export const eliteMaterials = [
         name: "Chaos Core",
         tag: "Chaos Part3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 4,
         category: "elite",
         name: "Cicin Mage Mist Grass",
         tag: "Mist Grass",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112026,
@@ -170,9 +136,7 @@ export const eliteMaterials = [
         name: "Mist Grass Pollen",
         tag: "Mist Grass1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112027,
@@ -180,9 +144,7 @@ export const eliteMaterials = [
         name: "Mist Grass",
         tag: "Mist Grass2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112028,
@@ -190,18 +152,14 @@ export const eliteMaterials = [
         name: "Mist Grass Wick",
         tag: "Mist Grass3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 5,
         category: "elite",
         name: "Pyro Agent Knife",
         tag: "Sacrificial Knife",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112030,
@@ -209,9 +167,7 @@ export const eliteMaterials = [
         name: "Agent's Sacrificial Knife",
         tag: "Sacrificial Knife2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112031,
@@ -219,18 +175,14 @@ export const eliteMaterials = [
         name: "Inspector's Sacrificial Knife",
         tag: "Sacrificial Knife3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 6,
         category: "elite",
         name: "Geovishap Bone Shard",
         tag: "Bone Shard",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112041,
@@ -238,9 +190,7 @@ export const eliteMaterials = [
         name: "Fragile Bone Shard",
         tag: "Bone Shard1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112042,
@@ -248,9 +198,7 @@ export const eliteMaterials = [
         name: "Sturdy Bone Shard",
         tag: "Bone Shard2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 112043,
@@ -258,18 +206,14 @@ export const eliteMaterials = [
         name: "Fossilized Bone Shard",
         tag: "Bone Shard3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 7,
         category: "elite",
         name: "Ruin Sentinel Core",
         tag: "Sentinel Chaos Part",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112047,
@@ -277,9 +221,7 @@ export const eliteMaterials = [
         name: "Chaos Gear",
         tag: "Sentinel Chaos Part1",
         rarity: 2,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112048,
@@ -287,9 +229,7 @@ export const eliteMaterials = [
         name: "Chaos Axis",
         tag: "Sentinel Chaos Part2",
         rarity: 3,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112049,
@@ -297,18 +237,14 @@ export const eliteMaterials = [
         name: "Chaos Oculus",
         tag: "Sentinel Chaos Part3",
         rarity: 4,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 8,
         category: "elite",
         name: "Mirror Maiden Prism",
         tag: "Mirror Maiden Prism",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112050,
@@ -316,9 +252,7 @@ export const eliteMaterials = [
         name: "Dismal Prism",
         tag: "Mirror Maiden Prism1",
         rarity: 2,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112051,
@@ -326,9 +260,7 @@ export const eliteMaterials = [
         name: "Crystal Prism",
         tag: "Mirror Maiden Prism2",
         rarity: 3,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 112052,
@@ -336,18 +268,14 @@ export const eliteMaterials = [
         name: "Polarizing Prism",
         tag: "Mirror Maiden Prism3",
         rarity: 4,
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 9,
         category: "elite",
         name: "Riftwolf Claw",
         tag: "Riftwolf Claw",
-        release: {
-            version: "2.2",
-        },
+        release: { version: "2.2" },
     },
     {
         id: 112056,
@@ -355,9 +283,7 @@ export const eliteMaterials = [
         name: "Concealed Claw",
         tag: "Riftwolf Claw1",
         rarity: 2,
-        release: {
-            version: "2.2",
-        },
+        release: { version: "2.2" },
     },
     {
         id: 112057,
@@ -365,9 +291,7 @@ export const eliteMaterials = [
         name: "Concealed Unguis",
         tag: "Riftwolf Claw2",
         rarity: 3,
-        release: {
-            version: "2.2",
-        },
+        release: { version: "2.2" },
     },
     {
         id: 112058,
@@ -375,18 +299,14 @@ export const eliteMaterials = [
         name: "Concealed Talon",
         tag: "Riftwolf Claw3",
         rarity: 4,
-        release: {
-            version: "2.2",
-        },
+        release: { version: "2.2" },
     },
     {
         id: 10,
         category: "elite",
         name: "Fungal Nucleus",
         tag: "Fungal Nucleus",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112062,
@@ -394,9 +314,7 @@ export const eliteMaterials = [
         name: "Inactivated Fungal Nucleus",
         tag: "Fungal Nucleus1",
         rarity: 2,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112063,
@@ -404,9 +322,7 @@ export const eliteMaterials = [
         name: "Dormant Fungal Nucleus",
         tag: "Fungal Nucleus2",
         rarity: 3,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112064,
@@ -414,18 +330,14 @@ export const eliteMaterials = [
         name: "Robust Fungal Nucleus",
         tag: "Fungal Nucleus3",
         rarity: 4,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 11,
         category: "elite",
         name: "Ruin Drake Core",
         tag: "Drake Chaos Part",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112068,
@@ -433,9 +345,7 @@ export const eliteMaterials = [
         name: "Chaos Storage",
         tag: "Drake Chaos Part1",
         rarity: 2,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112069,
@@ -443,9 +353,7 @@ export const eliteMaterials = [
         name: "Chaos Module",
         tag: "Drake Chaos Part2",
         rarity: 3,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 112070,
@@ -453,18 +361,14 @@ export const eliteMaterials = [
         name: "Chaos Bolt",
         tag: "Drake Chaos Part3",
         rarity: 4,
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 12,
         category: "elite",
         name: "Primal Construct Prism",
         tag: "Primal Construct Prism",
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 112071,
@@ -472,9 +376,7 @@ export const eliteMaterials = [
         name: "Damaged Prism",
         tag: "Primal Construct Prism1",
         rarity: 2,
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 112072,
@@ -482,9 +384,7 @@ export const eliteMaterials = [
         name: "Turbid Prism",
         tag: "Primal Construct Prism2",
         rarity: 3,
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 112073,
@@ -492,18 +392,14 @@ export const eliteMaterials = [
         name: "Radiant Prism",
         tag: "Primal Construct Prism3",
         rarity: 4,
-        release: {
-            version: "3.1",
-        },
+        release: { version: "3.1" },
     },
     {
         id: 13,
         category: "elite",
         name: "Consecrated Beast Shell",
         tag: "Shell",
-        release: {
-            version: "3.4",
-        },
+        release: { version: "3.4" },
     },
     {
         id: 112074,
@@ -511,9 +407,7 @@ export const eliteMaterials = [
         name: "Desiccated Shell",
         tag: "Shell1",
         rarity: 2,
-        release: {
-            version: "3.4",
-        },
+        release: { version: "3.4" },
     },
     {
         id: 112075,
@@ -521,9 +415,7 @@ export const eliteMaterials = [
         name: "Sturdy Shell",
         tag: "Shell2",
         rarity: 3,
-        release: {
-            version: "3.4",
-        },
+        release: { version: "3.4" },
     },
     {
         id: 112076,
@@ -531,18 +423,14 @@ export const eliteMaterials = [
         name: "Marked Shell",
         tag: "Shell3",
         rarity: 4,
-        release: {
-            version: "3.4",
-        },
+        release: { version: "3.4" },
     },
     {
         id: 14,
         category: "elite",
         name: "Hilichurl Flower",
         tag: "Flower",
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 112077,
@@ -550,9 +438,7 @@ export const eliteMaterials = [
         name: "A Flower Yet to Bloom",
         tag: "Flower1",
         rarity: 2,
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 112078,
@@ -560,9 +446,7 @@ export const eliteMaterials = [
         name: "Treasured Flower",
         tag: "Flower2",
         rarity: 3,
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 112079,
@@ -570,18 +454,14 @@ export const eliteMaterials = [
         name: "Wanderer's Blooming Flower",
         tag: "Flower3",
         rarity: 4,
-        release: {
-            version: "3.6",
-        },
+        release: { version: "3.6" },
     },
     {
         id: 15,
         category: "elite",
         name: "Hydro Phantasm Water",
         tag: "Tainted Water",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112086,
@@ -589,9 +469,7 @@ export const eliteMaterials = [
         name: "Drop of Tainted Water",
         tag: "Tainted Water1",
         rarity: 2,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112087,
@@ -599,9 +477,7 @@ export const eliteMaterials = [
         name: "Scoop of Tainted Water",
         tag: "Tainted Water2",
         rarity: 3,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112088,
@@ -609,18 +485,14 @@ export const eliteMaterials = [
         name: "Newborn Tainted Hydro Phantasm",
         tag: "Tainted Water3",
         rarity: 4,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 16,
         category: "elite",
         name: "Breacher Primus Core",
         tag: "Rift Core",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112089,
@@ -628,9 +500,7 @@ export const eliteMaterials = [
         name: "Rift Core",
         tag: "Rift Core1",
         rarity: 2,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112090,
@@ -638,9 +508,7 @@ export const eliteMaterials = [
         name: "Foreign Synapse",
         tag: "Rift Core2",
         rarity: 3,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 112091,
@@ -648,18 +516,14 @@ export const eliteMaterials = [
         name: "Alien Life Core",
         tag: "Rift Core3",
         rarity: 4,
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 17,
         category: "elite",
         name: "Fatui Operative Watch",
         tag: "Watch",
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 112092,
@@ -667,9 +531,7 @@ export const eliteMaterials = [
         name: "Old Operative's Pocket Watch",
         tag: "Watch1",
         rarity: 2,
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 112093,
@@ -677,9 +539,7 @@ export const eliteMaterials = [
         name: "Operative's Standard Pocket Watch",
         tag: "Watch2",
         rarity: 3,
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 112094,
@@ -687,18 +547,14 @@ export const eliteMaterials = [
         name: "Operative's Constancy",
         tag: "Watch3",
         rarity: 4,
-        release: {
-            version: "4.1",
-        },
+        release: { version: "4.1" },
     },
     {
         id: 18,
         category: "elite",
         name: "Xuanwen Beast Fin",
         tag: "Fin",
-        release: {
-            version: "4.4",
-        },
+        release: { version: "4.4" },
     },
     {
         id: 112095,
@@ -706,9 +562,7 @@ export const eliteMaterials = [
         name: "Feathery Fin",
         tag: "Fin1",
         rarity: 2,
-        release: {
-            version: "4.4",
-        },
+        release: { version: "4.4" },
     },
     {
         id: 112096,
@@ -716,9 +570,7 @@ export const eliteMaterials = [
         name: "Lunar Fin",
         tag: "Fin2",
         rarity: 3,
-        release: {
-            version: "4.4",
-        },
+        release: { version: "4.4" },
     },
     {
         id: 112097,
@@ -726,18 +578,14 @@ export const eliteMaterials = [
         name: "Chasmlight Fin",
         tag: "Fin3",
         rarity: 4,
-        release: {
-            version: "4.4",
-        },
+        release: { version: "4.4" },
     },
     {
         id: 19,
         category: "elite",
         name: "Praetorian Golem Hilt",
         tag: "Hilt",
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 112098,
@@ -745,9 +593,7 @@ export const eliteMaterials = [
         name: "Ruined Hilt",
         tag: "Hilt1",
         rarity: 2,
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 112099,
@@ -755,9 +601,7 @@ export const eliteMaterials = [
         name: "Splintered Hilt",
         tag: "Hilt2",
         rarity: 3,
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 112100,
@@ -765,18 +609,14 @@ export const eliteMaterials = [
         name: "Still-Smoldering Hilt",
         tag: "Hilt3",
         rarity: 4,
-        release: {
-            version: "4.6",
-        },
+        release: { version: "4.6" },
     },
     {
         id: 20,
         category: "elite",
         name: "Wayob Manifestation Will",
         tag: "Will",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112107,
@@ -784,9 +624,7 @@ export const eliteMaterials = [
         name: "Shard of a Shattered Will",
         tag: "Will1",
         rarity: 2,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112108,
@@ -794,9 +632,7 @@ export const eliteMaterials = [
         name: "Locus of a Clear Will",
         tag: "Will2",
         rarity: 3,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112109,
@@ -804,18 +640,14 @@ export const eliteMaterials = [
         name: "Sigil of a Striding Will",
         tag: "Will3",
         rarity: 4,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 21,
         category: "elite",
         name: "Avatar of Lava Core",
         tag: "Ignited Core",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112110,
@@ -823,9 +655,7 @@ export const eliteMaterials = [
         name: "Ignited Stone",
         tag: "Ignited Core1",
         rarity: 2,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112111,
@@ -833,9 +663,7 @@ export const eliteMaterials = [
         name: "Ignited Seed of Life",
         tag: "Ignited Core2",
         rarity: 3,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112112,
@@ -843,18 +671,14 @@ export const eliteMaterials = [
         name: "Ignited Seeing Eye",
         tag: "Ignited Core3",
         rarity: 4,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 22,
         category: "elite",
         name: "Secret Source Automaton Core",
         tag: "Secret Source",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112113,
@@ -862,9 +686,7 @@ export const eliteMaterials = [
         name: "Axis of the Secret Source",
         tag: "Secret Source1",
         rarity: 2,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112114,
@@ -872,9 +694,7 @@ export const eliteMaterials = [
         name: "Sheath of the Secret Source",
         tag: "Secret Source2",
         rarity: 3,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 112115,
@@ -882,18 +702,14 @@ export const eliteMaterials = [
         name: "Heart of the Secret Source",
         tag: "Secret Source3",
         rarity: 4,
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 23,
         category: "elite",
         name: "Mimiflora Leafcoil",
         tag: "Leafcoil",
-        release: {
-            version: "5.1",
-        },
+        release: { version: "5.1" },
     },
     {
         id: 112116,
@@ -901,9 +717,7 @@ export const eliteMaterials = [
         name: "Refractive Bud",
         tag: "Leafcoil1",
         rarity: 2,
-        release: {
-            version: "5.1",
-        },
+        release: { version: "5.1" },
     },
     {
         id: 112117,
@@ -911,9 +725,7 @@ export const eliteMaterials = [
         name: "Bewildering Broadleaf",
         tag: "Leafcoil2",
         rarity: 3,
-        release: {
-            version: "5.1",
-        },
+        release: { version: "5.1" },
     },
     {
         id: 112118,
@@ -921,18 +733,14 @@ export const eliteMaterials = [
         name: "Illusory Leafcoil",
         tag: "Leafcoil3",
         rarity: 4,
-        release: {
-            version: "5.1",
-        },
+        release: { version: "5.1" },
     },
     {
         id: 24,
         category: "elite",
         name: "Furnace Shell",
         tag: "Jackal",
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 112119,
@@ -940,9 +748,7 @@ export const eliteMaterials = [
         name: "Cold-Cracked Shellshard",
         tag: "Jackal1",
         rarity: 2,
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 112120,
@@ -950,9 +756,7 @@ export const eliteMaterials = [
         name: "Warm Back-Shell",
         tag: "Jackal2",
         rarity: 3,
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 112121,
@@ -960,18 +764,14 @@ export const eliteMaterials = [
         name: "Blazing Prismshell",
         tag: "Jackal3",
         rarity: 4,
-        release: {
-            version: "5.5",
-        },
+        release: { version: "5.5" },
     },
     {
         id: 25,
         category: "elite",
         name: "Frostnight Scion Crown",
         tag: "Frostnight",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112128,
@@ -979,9 +779,7 @@ export const eliteMaterials = [
         name: "Frostnight's Glimmer",
         tag: "Frostnight1",
         rarity: 2,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112129,
@@ -989,9 +787,7 @@ export const eliteMaterials = [
         name: "Frostnight's Glow",
         tag: "Frostnight2",
         rarity: 3,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112130,
@@ -999,18 +795,14 @@ export const eliteMaterials = [
         name: "Frostnight's Glory",
         tag: "Frostnight3",
         rarity: 4,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 26,
         category: "elite",
         name: "Radiant Beast Bone",
         tag: "Mutant",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112131,
@@ -1018,9 +810,7 @@ export const eliteMaterials = [
         name: "Lightless Bone",
         tag: "Mutant1",
         rarity: 2,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112132,
@@ -1028,9 +818,7 @@ export const eliteMaterials = [
         name: "Duskshard Remains",
         tag: "Mutant2",
         rarity: 3,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112133,
@@ -1038,18 +826,14 @@ export const eliteMaterials = [
         name: "Radiant Exoskeleton",
         tag: "Mutant3",
         rarity: 4,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 27,
         category: "elite",
         name: "Wild Hunt Mist",
         tag: "Wild Mist",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112134,
@@ -1057,9 +841,7 @@ export const eliteMaterials = [
         name: "Solidified Mist",
         tag: "Wild Mist1",
         rarity: 2,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112135,
@@ -1067,9 +849,7 @@ export const eliteMaterials = [
         name: "Mist Plate",
         tag: "Wild Mist2",
         rarity: 3,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 112136,
@@ -1077,8 +857,37 @@ export const eliteMaterials = [
         name: "Mist Helmet",
         tag: "Wild Mist3",
         rarity: 4,
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
+    },
+    {
+        id: 28,
+        category: "elite",
+        name: "Angler Shadow",
+        tag: "Shadow",
+        release: { version: "Luna I" },
+    },
+    {
+        id: 112137,
+        category: "elite",
+        name: "Fractured Eye of the Deep Shadow",
+        tag: "Shadow1",
+        rarity: 2,
+        release: { version: "Luna IV" },
+    },
+    {
+        id: 112138,
+        category: "elite",
+        name: "Aberrant Core of the Deep Shadow",
+        tag: "Shadow2",
+        rarity: 3,
+        release: { version: "Luna IV" },
+    },
+    {
+        id: 112139,
+        category: "elite",
+        name: "Beak of the Deep Shadow",
+        tag: "Shadow3",
+        rarity: 4,
+        release: { version: "Luna IV" },
     },
 ];

@@ -5,9 +5,7 @@ export const characterXPMaterials = [
         name: "Wanderer's Advice",
         tag: "CharacterXP1",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104002,
@@ -15,9 +13,7 @@ export const characterXPMaterials = [
         name: "Adventurer's Experience",
         tag: "CharacterXP2",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104003,
@@ -25,9 +21,7 @@ export const characterXPMaterials = [
         name: "Hero's Wit",
         tag: "CharacterXP3",
         rarity: 4,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
 ];
 
@@ -38,9 +32,7 @@ export const weaponXPMaterials = [
         name: "Enhancement Ore",
         tag: "WeaponXP1",
         rarity: 1,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104012,
@@ -48,9 +40,7 @@ export const weaponXPMaterials = [
         name: "Fine Enhancement Ore",
         tag: "WeaponXP2",
         rarity: 2,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104013,
@@ -58,8 +48,6 @@ export const weaponXPMaterials = [
         name: "Mystic Enhancement Ore",
         tag: "WeaponXP3",
         rarity: 3,
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
 ];

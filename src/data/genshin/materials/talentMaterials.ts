@@ -6,9 +6,7 @@ export const talentMaterials = [
         tag: "Freedom",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104301,
@@ -17,9 +15,7 @@ export const talentMaterials = [
         tag: "Freedom1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104302,
@@ -28,9 +24,7 @@ export const talentMaterials = [
         tag: "Freedom2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104303,
@@ -39,9 +33,7 @@ export const talentMaterials = [
         tag: "Freedom3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 1,
@@ -50,9 +42,7 @@ export const talentMaterials = [
         tag: "Resistance",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104304,
@@ -61,9 +51,7 @@ export const talentMaterials = [
         tag: "Resistance1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104305,
@@ -72,9 +60,7 @@ export const talentMaterials = [
         tag: "Resistance2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104306,
@@ -83,9 +69,7 @@ export const talentMaterials = [
         tag: "Resistance3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 2,
@@ -94,9 +78,7 @@ export const talentMaterials = [
         tag: "Ballad",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104307,
@@ -105,9 +87,7 @@ export const talentMaterials = [
         tag: "Ballad1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104308,
@@ -116,9 +96,7 @@ export const talentMaterials = [
         tag: "Ballad2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104309,
@@ -127,9 +105,7 @@ export const talentMaterials = [
         tag: "Ballad3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 3,
@@ -138,9 +114,7 @@ export const talentMaterials = [
         tag: "Prosperity",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104310,
@@ -149,9 +123,7 @@ export const talentMaterials = [
         tag: "Prosperity1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104311,
@@ -160,9 +132,7 @@ export const talentMaterials = [
         tag: "Prosperity2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104312,
@@ -171,9 +141,7 @@ export const talentMaterials = [
         tag: "Prosperity3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 4,
@@ -182,9 +150,7 @@ export const talentMaterials = [
         tag: "Diligence",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104313,
@@ -193,9 +159,7 @@ export const talentMaterials = [
         tag: "Diligence1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104314,
@@ -204,9 +168,7 @@ export const talentMaterials = [
         tag: "Diligence2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104315,
@@ -215,9 +177,7 @@ export const talentMaterials = [
         tag: "Diligence3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 5,
@@ -226,9 +186,7 @@ export const talentMaterials = [
         tag: "Gold",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104316,
@@ -237,9 +195,7 @@ export const talentMaterials = [
         tag: "Gold1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104317,
@@ -248,9 +204,7 @@ export const talentMaterials = [
         tag: "Gold2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 104318,
@@ -259,9 +213,7 @@ export const talentMaterials = [
         tag: "Gold3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "1.0",
-        },
+        release: { version: "1.0" },
     },
     {
         id: 6,
@@ -270,9 +222,7 @@ export const talentMaterials = [
         tag: "Transience",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104320,
@@ -281,9 +231,7 @@ export const talentMaterials = [
         tag: "Transience1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104321,
@@ -292,9 +240,7 @@ export const talentMaterials = [
         tag: "Transience2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104322,
@@ -303,9 +249,7 @@ export const talentMaterials = [
         tag: "Transience3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 7,
@@ -314,9 +258,7 @@ export const talentMaterials = [
         tag: "Elegance",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104323,
@@ -325,9 +267,7 @@ export const talentMaterials = [
         tag: "Elegance1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104324,
@@ -336,9 +276,7 @@ export const talentMaterials = [
         tag: "Elegance2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104325,
@@ -347,9 +285,7 @@ export const talentMaterials = [
         tag: "Elegance3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 8,
@@ -358,9 +294,7 @@ export const talentMaterials = [
         tag: "Light",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104326,
@@ -369,9 +303,7 @@ export const talentMaterials = [
         tag: "Light1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104327,
@@ -380,9 +312,7 @@ export const talentMaterials = [
         tag: "Light2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 104328,
@@ -391,9 +321,7 @@ export const talentMaterials = [
         tag: "Light3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "2.0",
-        },
+        release: { version: "2.0" },
     },
     {
         id: 9,
@@ -402,9 +330,7 @@ export const talentMaterials = [
         tag: "Admonition",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104329,
@@ -413,9 +339,7 @@ export const talentMaterials = [
         tag: "Admonition1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104330,
@@ -424,9 +348,7 @@ export const talentMaterials = [
         tag: "Admonition2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104331,
@@ -435,9 +357,7 @@ export const talentMaterials = [
         tag: "Admonition3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 10,
@@ -446,9 +366,7 @@ export const talentMaterials = [
         tag: "Ingenuity",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104332,
@@ -457,9 +375,7 @@ export const talentMaterials = [
         tag: "Ingenuity1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104333,
@@ -468,9 +384,7 @@ export const talentMaterials = [
         tag: "Ingenuity2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104334,
@@ -479,9 +393,7 @@ export const talentMaterials = [
         tag: "Ingenuity3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 11,
@@ -490,9 +402,7 @@ export const talentMaterials = [
         tag: "Praxis",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104335,
@@ -501,9 +411,7 @@ export const talentMaterials = [
         tag: "Praxis1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104336,
@@ -512,9 +420,7 @@ export const talentMaterials = [
         tag: "Praxis2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 104337,
@@ -523,9 +429,7 @@ export const talentMaterials = [
         tag: "Praxis3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "3.0",
-        },
+        release: { version: "3.0" },
     },
     {
         id: 12,
@@ -534,9 +438,7 @@ export const talentMaterials = [
         tag: "Equity",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104338,
@@ -545,9 +447,7 @@ export const talentMaterials = [
         tag: "Equity1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104339,
@@ -556,9 +456,7 @@ export const talentMaterials = [
         tag: "Equity2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104340,
@@ -567,9 +465,7 @@ export const talentMaterials = [
         tag: "Equity3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 13,
@@ -578,9 +474,7 @@ export const talentMaterials = [
         tag: "Justice",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104341,
@@ -589,9 +483,7 @@ export const talentMaterials = [
         tag: "Justice1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104342,
@@ -600,9 +492,7 @@ export const talentMaterials = [
         tag: "Justice2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104343,
@@ -611,9 +501,7 @@ export const talentMaterials = [
         tag: "Justice3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 14,
@@ -622,9 +510,7 @@ export const talentMaterials = [
         tag: "Order",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104344,
@@ -633,9 +519,7 @@ export const talentMaterials = [
         tag: "Order1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104345,
@@ -644,9 +528,7 @@ export const talentMaterials = [
         tag: "Order2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 104346,
@@ -655,9 +537,7 @@ export const talentMaterials = [
         tag: "Order3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "4.0",
-        },
+        release: { version: "4.0" },
     },
     {
         id: 15,
@@ -666,9 +546,7 @@ export const talentMaterials = [
         tag: "Contention",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104347,
@@ -677,9 +555,7 @@ export const talentMaterials = [
         tag: "Contention1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104348,
@@ -688,9 +564,7 @@ export const talentMaterials = [
         tag: "Contention2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104349,
@@ -699,9 +573,7 @@ export const talentMaterials = [
         tag: "Contention3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 16,
@@ -710,9 +582,7 @@ export const talentMaterials = [
         tag: "Kindling",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104350,
@@ -721,9 +591,7 @@ export const talentMaterials = [
         tag: "Kindling1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104351,
@@ -732,9 +600,7 @@ export const talentMaterials = [
         tag: "Kindling2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104352,
@@ -743,9 +609,7 @@ export const talentMaterials = [
         tag: "Kindling3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 17,
@@ -754,9 +618,7 @@ export const talentMaterials = [
         tag: "Conflict",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104353,
@@ -765,9 +627,7 @@ export const talentMaterials = [
         tag: "Conflict1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104354,
@@ -776,9 +636,7 @@ export const talentMaterials = [
         tag: "Conflict2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 104355,
@@ -787,9 +645,7 @@ export const talentMaterials = [
         tag: "Conflict3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "5.0",
-        },
+        release: { version: "5.0" },
     },
     {
         id: 18,
@@ -798,9 +654,7 @@ export const talentMaterials = [
         tag: "Moonlight",
         rarity: 1,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104356,
@@ -809,9 +663,7 @@ export const talentMaterials = [
         tag: "Moonlight1",
         rarity: 2,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104357,
@@ -820,9 +672,7 @@ export const talentMaterials = [
         tag: "Moonlight2",
         rarity: 3,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104358,
@@ -831,9 +681,7 @@ export const talentMaterials = [
         tag: "Moonlight3",
         rarity: 4,
         source: "Mon/Thu",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 19,
@@ -842,9 +690,7 @@ export const talentMaterials = [
         tag: "Elysium",
         rarity: 1,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104359,
@@ -853,9 +699,7 @@ export const talentMaterials = [
         tag: "Elysium1",
         rarity: 2,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104360,
@@ -864,9 +708,7 @@ export const talentMaterials = [
         tag: "Elysium2",
         rarity: 3,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104361,
@@ -875,9 +717,7 @@ export const talentMaterials = [
         tag: "Elysium3",
         rarity: 4,
         source: "Tue/Fri",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 20,
@@ -886,9 +726,7 @@ export const talentMaterials = [
         tag: "Vagrancy",
         rarity: 1,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104362,
@@ -897,9 +735,7 @@ export const talentMaterials = [
         tag: "Vagrancy1",
         rarity: 2,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104363,
@@ -908,9 +744,7 @@ export const talentMaterials = [
         tag: "Vagrancy2",
         rarity: 3,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
     {
         id: 104364,
@@ -919,8 +753,6 @@ export const talentMaterials = [
         tag: "Vagrancy3",
         rarity: 4,
         source: "Wed/Sat",
-        release: {
-            version: "Luna I",
-        },
+        release: { version: "Luna I" },
     },
 ];
