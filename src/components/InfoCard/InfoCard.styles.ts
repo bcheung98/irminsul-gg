@@ -29,6 +29,7 @@ export const infoCardStyles = ({
         position: "relative",
         overflow: "visible",
         width: variant !== "material-card" ? imgSize : "auto",
+        height: "auto",
         borderRadius: border.radius,
         background: `linear-gradient(to bottom, transparent, ${theme.infoCard.backgroundColor.main})`,
     }),

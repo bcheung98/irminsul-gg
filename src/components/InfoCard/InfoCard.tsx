@@ -85,7 +85,7 @@ export default function InfoCard({
                         <Image
                             src={imgURL}
                             id={componentID}
-                            size={size}
+                            size={[size, 0]}
                             responsive
                             responsiveSize={0.25}
                         />

@@ -80,6 +80,7 @@ export function HSRWeaponInfoAvatar({
             name={weapon.displayName}
             rarity={weapon.rarity}
             href={weapon.url}
+            url={`${weapon.id}_icon`}
             {...props}
         />
     );
