@@ -106,8 +106,6 @@ export type HSRCharacterMemospriteSkillKey = Exclude<
 >;
 export interface HSRCharacterMemosprite {
     name: string;
-    skill: MemospriteSkill[];
-    talent: MemospriteSkill[];
+    skill: HSRCharacterSkill[];
+    talent: HSRCharacterSkill[];
 }
-
-export type MemospriteSkill = Partial<HSRCharacterSkill>;
