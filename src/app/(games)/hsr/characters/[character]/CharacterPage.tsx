@@ -6,7 +6,6 @@ import CharacterSplash from "@/components/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
-
 import CharacterUpgrades from "@/components/CharacterUpgrades";
 import BetaTag from "@/components/BetaTag";
 
@@ -33,6 +32,11 @@ export default function CharacterPage({
 
     const skills: CharacterSkillsList = { ...character.skills };
     skills.upgrades = character.upgrades;
+
+    if (character.memosprite) {
+        skills["memo-skill"] = character.memosprite.skill;
+        skills["memo-talent"] = character.memosprite.talent;
+    }
 
     const Splash = (
         <CharacterSplash
@@ -61,6 +65,16 @@ export default function CharacterPage({
         />
     );
 
+    const Memosprite = (
+        <CharacterSkills
+            title={`Memosprite "${character.memosprite?.name}"`}
+            keys={["memo-skill", "memo-talent"]}
+            keywords={character.keywords}
+            materials={character.materials}
+            attributes={attributes}
+        />
+    );
+
     const Upgrades = (
         <CharacterUpgrades
             title="Eidolons"
@@ -79,7 +93,9 @@ export default function CharacterPage({
     if (matches_up_md) rightColumn.push(InfoMain);
     if (matches_up_md && !matches_up_lg) rightColumn.push(InfoMisc);
 
-    const children = [Skills, Upgrades];
+    const children = [Skills];
+    if (character.memosprite) children.push(Memosprite);
+    children.push(Upgrades);
     if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (
