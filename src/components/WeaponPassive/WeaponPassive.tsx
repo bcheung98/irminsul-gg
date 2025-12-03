@@ -77,11 +77,7 @@ export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
                             <SkillDescription
                                 game={game}
                                 description={passive.description}
-                                targetClassName={
-                                    game === "hsr"
-                                        ? "text-value"
-                                        : "text-refinement"
-                                }
+                                targetClassName="text-refinement"
                                 newClassName={className}
                             />
                         </Text>
