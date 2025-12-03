@@ -43,7 +43,7 @@ export function genshinFilters<T extends Filters>({
         });
         materials.forEach((mat) => {
             if (mat.source) {
-                res[mat.source].push(mat.name);
+                res[mat.source].push(mat.tag || mat.name);
             }
         });
         return res;
@@ -212,6 +212,12 @@ export function genshinFilters<T extends Filters>({
                         (material) => material.tag === item
                     );
                     return mat ? `${mat.id}` : "0";
+                },
+                getTooltip: (item: string) => {
+                    const mat = getMaterialCategory("weekly").find(
+                        (material) => material.tag === item
+                    );
+                    return mat ? `${mat.name}` : "";
                 },
             }),
             onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
