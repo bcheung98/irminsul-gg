@@ -163,6 +163,7 @@ export const nextThemeData = {
         },
         hsr: {
             highlight: "#f29e38",
+            highlight2: "#dcc491",
             header: "#f29e38",
             refinement: "#f29e38",
             value: "#f29e38",
@@ -174,6 +175,7 @@ export const nextThemeData = {
             wind: "#42c38c",
             quantum: "#6778fd",
             imaginary: "#e5b909",
+            special: "#f9b0f0",
         },
         wuwa: {
             highlight: "#f7ca2f",
