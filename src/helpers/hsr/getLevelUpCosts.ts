@@ -206,13 +206,13 @@ export function getCharacterMemosprite({
 }
 
 export function getCharacterTraceMain({
-    node,
+    skillKey,
     rarity,
     selected,
     weaponType,
     materials,
 }: {
-    node: Extract<HSRCharacterUnlockKeys, "A2" | "A4" | "A6">;
+    skillKey: Extract<HSRCharacterUnlockKeys, "A2" | "A4" | "A6">;
     rarity: number;
     selected: boolean;
     weaponType: string;
@@ -220,8 +220,8 @@ export function getCharacterTraceMain({
 }) {
     const costs =
         weaponType === "Remembrance"
-            ? { ...characterTraceMainCostsRemembrance[node] }
-            : { ...characterTraceMainCosts[node] };
+            ? { ...characterTraceMainCostsRemembrance[skillKey] }
+            : { ...characterTraceMainCosts[skillKey] };
     const index = rarity - 4;
     let { credits, calyx1, calyx2, calyx3, weekly, crown } = costs;
     return {
@@ -246,13 +246,13 @@ export function getCharacterTraceMain({
 }
 
 export function getCharacterTraceSmall({
-    node,
+    skillKey,
     rarity,
     selected,
     weaponType,
     materials,
 }: {
-    node: HSRCharacterUnlockKeys;
+    skillKey: HSRCharacterUnlockKeys;
     rarity: number;
     selected: boolean;
     weaponType: string;
@@ -260,8 +260,8 @@ export function getCharacterTraceSmall({
 }) {
     const costs =
         weaponType === "Remembrance"
-            ? { ...characterTraceSmallCostsRemembrance[node] }
-            : { ...characterTraceSmallCosts[node] };
+            ? { ...characterTraceSmallCostsRemembrance[skillKey] }
+            : { ...characterTraceSmallCosts[skillKey] };
     const index = rarity - 4;
     let { credits, calyx1, calyx2, calyx3, common1, common2, common3 } = costs;
     return {

@@ -6,6 +6,7 @@ import CharacterSplash from "@/components/CharacterSplash";
 import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
+import CharacterTraces from "@/components/_hsr/CharacterTraces";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
 import BetaTag from "@/components/BetaTag";
 
@@ -75,6 +76,15 @@ export default function CharacterPage({
         />
     );
 
+    const Traces = (
+        <CharacterTraces
+            traces={character.traces}
+            keywords={character.keywords}
+            materials={character.materials}
+            attributes={attributes}
+        />
+    );
+
     const Upgrades = (
         <CharacterUpgrades
             title="Eidolons"
@@ -95,7 +105,7 @@ export default function CharacterPage({
 
     const children = [Skills];
     if (character.memosprite) children.push(Memosprite);
-    children.push(Upgrades);
+    children.push(Traces, Upgrades);
     if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (
