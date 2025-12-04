@@ -68,6 +68,9 @@ export default function MaterialCard({
                     tooltip={tooltip}
                     responsive
                     responsiveSize={responsiveSize}
+                    style={{
+                        padding: game === "hsr" ? "4px" : 0,
+                    }}
                 />
             </Box>
             <Box sx={styles.label()}>
