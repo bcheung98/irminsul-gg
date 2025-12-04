@@ -16,6 +16,7 @@ import {
     formatCharacterBonusStatTitle,
 } from "./CharacterTraces.utils";
 import { characterBonusStats } from "@/data/hsr/characterBonusStats";
+import { incrementTraceNodeID } from "@/helpers/hsr/incrementTraceNodeID";
 
 // Type imports
 import { AttributeData } from "@/types";
@@ -138,9 +139,3 @@ export default function CharacterTraceNode({
         </FlexBox>
     );
 }
-
-const incrementTraceNodeID = (id: string) => {
-    let splitID = id.split("-");
-    splitID[1] = (parseInt(splitID[1]) + 1).toString();
-    return splitID.join("-");
-};
