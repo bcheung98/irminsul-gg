@@ -1,10 +1,8 @@
-import { DataType, GameData, GameNoUma } from "@/types";
-import { Materials } from "@/types/materials";
-import { CostSliderValues, PlannerItemData } from "@/types/planner";
-import { useMaterials } from "./materials";
+import { DataType, GameNoUma } from "@/types";
+import { PlannerItemData } from "@/types/planner";
 
 export function parseData<T extends DataType, U extends DataType>(
-    game: GameNoUma,
+    _: GameNoUma,
     item: T | U
 ): PlannerItemData {
     return {
@@ -17,24 +15,6 @@ export function parseData<T extends DataType, U extends DataType>(
         materials: item.materials,
         release: item.release,
         url: item.url,
-        values: skillData[game],
+        values: {},
     };
 }
-
-export function parseMaterials(game: GameNoUma, materials: Materials) {
-    const getMaterials = useMaterials()[game];
-    return Object.fromEntries(
-        Object.entries(materials).map(([key, material]) => [
-            key,
-            getMaterials(material).id,
-        ])
-    );
-}
-
-const skillData: GameData<Record<string, CostSliderValues>> = {
-    genshin: {},
-    hsr: {},
-    wuwa: {},
-    zzz: {},
-    uma: {},
-};
