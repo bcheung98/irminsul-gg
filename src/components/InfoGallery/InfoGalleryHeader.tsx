@@ -26,6 +26,7 @@ export default function InfoGalleryHeader({
     title,
     buttonKeys: buttons = ["icon", "card", "list"],
     customButtons,
+    extraButtons,
     view,
     handleView,
     searchValue,
@@ -76,6 +77,9 @@ export default function InfoGalleryHeader({
                         highlightOnHover={false}
                     />
                 </Grid>
+            )}
+            {extraButtons && (
+                <Grid size={{ xs: 6, sm: "auto" }}>{extraButtons}</Grid>
             )}
             {!hideSearchBar && (
                 <Grid size={{ xs: 12, sm: "auto" }}>

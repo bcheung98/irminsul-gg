@@ -5,6 +5,7 @@ export interface InfoGalleryProps {
     title?: string;
     buttonKeys?: string[];
     customButtons?: InfoGalleryButtonProps[];
+    extraButtons?: React.ReactNode;
     view: GalleryView;
     searchValue: string;
     handleView: (_: React.BaseSyntheticEvent, view: GalleryView) => void;
