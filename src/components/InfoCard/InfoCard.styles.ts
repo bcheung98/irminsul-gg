@@ -40,7 +40,7 @@ export const infoCardStyles = ({
         borderRadius: border.radius,
         backgroundColor: "transparent",
     }),
-    imageContainer: (): SxProps => () => ({
+    imageContainer: (): SxProps<Theme> => (theme) => ({
         display: "flex",
         overflow: "clip",
         width:
@@ -48,9 +48,11 @@ export const infoCardStyles = ({
         backgroundColor:
             type === "characters" ? backgroundColor : "transparent",
         backgroundImage:
-            variant !== "material-card" && type === "characters"
+            variant !== "material-card" &&
+            type === "characters" &&
+            game === "genshin"
                 ? null
-                : `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
+                : theme.materialCard.backgroundImage(rarity),
         backgroundSize: "contain",
         backgroundRepeat: "repeat",
     }),
