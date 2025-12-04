@@ -67,7 +67,7 @@ export function textLabelIcon(game: Game, equipment: Equipment) {
         genshin: `genshin/artifacts/${equipment.id}${
             equipment.pieces.length > 1 ? "_1" : "_5"
         }`,
-        hsr: "",
+        hsr: `hsr/relics/${equipment.id}`,
         wuwa: "",
         zzz: "",
         uma: "",
