@@ -25,26 +25,49 @@ export default function PlannerMaterials() {
     if (game === "genshin" && type === "characters") {
         item.materials = { ...item.materials, gemstone: item.element || "" };
     }
+    if (
+        game === "hsr" &&
+        type === "characters" &&
+        item.name.startsWith("Trailblazer")
+    ) {
+        item.rarity = 4;
+    }
 
     // Get material costs for each source based on current input values
     const costSourceMap = Object.entries(item.values).map(([key, value]) => {
-        let skillKey;
-        switch (key) {
-            case "level":
-                skillKey =
-                    type === "characters" ? "characterLevel" : "weaponLevel";
-                break;
-            case "attack":
-            case "skill":
-            case "ultimate":
-            default:
-                skillKey = "characterSkill";
+        let costKey;
+        let skillKey = key;
+        if (key.startsWith("trace")) {
+            costKey =
+                value.type === "main"
+                    ? "characterTraceMain"
+                    : "characterTraceSmall";
+            skillKey = `${value.skillKey}`;
+        } else {
+            switch (key) {
+                case "level":
+                    costKey =
+                        type === "characters"
+                            ? "characterLevel"
+                            : "weaponLevel";
+                    break;
+                case "memo-skill":
+                case "memo-talent":
+                    costKey = "characterMemosprite";
+                    break;
+                case "attack":
+                case "skill":
+                case "ultimate":
+                default:
+                    costKey = "characterSkill";
+            }
         }
-        return costs[game][skillKey]({
+
+        return costs[game][costKey]({
             ...value,
+            ...item,
             withXP: true,
-            materials: item.materials,
-            rarity: item.rarity,
+            skillKey,
         });
     });
 

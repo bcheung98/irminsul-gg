@@ -8,8 +8,8 @@ import { useTheme } from "@mui/material/styles";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { formatHref } from "@/utils";
-import { categoryImgURLs } from "@/data/categories";
+import { formatHref, splitJoin } from "@/utils";
+import { categories, categoryImgURLs } from "@/data/categories";
 import { useRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
 import { usePlannerData } from "../Planner/Planner.utils";
@@ -35,7 +35,22 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     const game = useGameTag() as GameNoUma;
 
+    const rarity =
+        game === "hsr" &&
+        type === "characters" &&
+        item.name.startsWith("Trailblazer")
+            ? 5
+            : item.rarity;
+
     const rarityColors = useRarityColors()[game];
+
+    function getURL() {
+        return `${splitJoin(
+            categories[`${game}/${type}`],
+            " ",
+            ""
+        ).toLowerCase()}/${formatHref(href)}`;
+    }
 
     const { src: elementSrc, tooltip: elementTooltip } = getDataIconURL({
         game,
@@ -63,11 +78,9 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             iconProps={{
                 size: 48,
                 styles: {
-                    border: `2px solid ${rarityColors(item.rarity)}`,
+                    border: `2px solid ${rarityColors(rarity)}`,
                     backgroundColor: theme.background(2),
-                    backgroundImage: theme.materialCard.backgroundImage(
-                        item.rarity
-                    ),
+                    backgroundImage: theme.materialCard.backgroundImage(rarity),
                     backgroundSize: "contain",
                 },
             }}
@@ -91,7 +104,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             }
             spacing={2}
             textSpacing={0.5}
-            href={href && `${type}/${formatHref(href)}`}
+            href={href && getURL()}
         />
     );
 }

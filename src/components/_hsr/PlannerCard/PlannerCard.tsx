@@ -5,9 +5,13 @@ import PlannerSlider, {
     SkillSliderContainer,
     SliderList,
 } from "@/components/PlannerSliders";
+import FlexBox from "@/components/FlexBox";
+import StatNode from "./StatNode";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useTextColor } from "@/helpers/styles";
@@ -16,9 +20,11 @@ import {
     usePlannerCardData,
     usePlannerCardMode,
 } from "@/components/PlannerCardRoot/PlannerCard.utils";
+import { characterTraceIDs } from "@/data/hsr/characterTraceIDs";
 
 // Type imports
 import { CostSliderValues, PlannerType } from "@/types/planner";
+import { HSRWeaponType } from "@/types/hsr";
 
 export default function HSRPlannerCard() {
     const theme = useTheme();
@@ -51,6 +57,12 @@ export default function HSRPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
+        selected: true,
+    };
+
+    const defaultNodeValues: CostSliderValues = {
+        start: 0,
+        stop: 0,
         selected: true,
     };
 
@@ -87,16 +99,23 @@ export default function HSRPlannerCard() {
         {
             skillKey: "memo-skill",
             levels: atkLevel,
-            values: item.values.skill || defaultAtkValues,
+            values: item.values["memo-skill"] || defaultAtkValues,
             icon: `hsr/skills/${item.id}_memo_skill`,
         },
         {
             skillKey: "memo-talent",
             levels: atkLevel,
-            values: item.values.skill || defaultAtkValues,
+            values: item.values["memo-talent"] || defaultAtkValues,
             icon: `hsr/skills/${item.id}_memo_talent`,
         },
     ];
+
+    const nodes = Object.fromEntries(
+        characterTraceIDs[item.weaponType as HSRWeaponType].map((node) => [
+            `trace-${node}`,
+            item.values[`trace-${node}`] || defaultNodeValues,
+        ])
+    );
 
     const textColor = useTextColor(theme.text);
     const color =
@@ -117,20 +136,38 @@ export default function HSRPlannerCard() {
         ));
 
     return (
-        <MainContainer mode={mode}>
-            <LevelSliderContainer mode={mode}>{Level}</LevelSliderContainer>
-            {type === "characters" &&
-                [Attack, Skill, Ultimate, Talent].map((slider) => (
-                    <SkillSliderContainer key={slider.key} mode={mode}>
-                        {slider}
-                    </SkillSliderContainer>
-                ))}
-            {item.weaponType === "Remembrance" &&
-                [MemoSkill, MemoTalent].map((slider) => (
-                    <SkillSliderContainer key={slider.key} mode={mode}>
-                        {slider}
-                    </SkillSliderContainer>
-                ))}
-        </MainContainer>
+        <Stack spacing={2} divider={<Divider />}>
+            <MainContainer mode={mode}>
+                <LevelSliderContainer mode={mode}>{Level}</LevelSliderContainer>
+                {type === "characters" &&
+                    [Attack, Skill, Ultimate, Talent].map((slider) => (
+                        <SkillSliderContainer key={slider.key} mode={mode}>
+                            {slider}
+                        </SkillSliderContainer>
+                    ))}
+                {type === "characters" &&
+                    item.weaponType === "Remembrance" &&
+                    [MemoSkill, MemoTalent].map((slider) => (
+                        <SkillSliderContainer key={slider.key} mode={mode}>
+                            {slider}
+                        </SkillSliderContainer>
+                    ))}
+            </MainContainer>
+            {type === "characters" && (
+                <FlexBox spacing={[2, 4]} sx={{ px: 1 }} wrap>
+                    {item.traces &&
+                        item.traces.map((trace, index) => (
+                            <StatNode
+                                key={`${String.fromCharCode(index + 65)}-1`}
+                                id={`${String.fromCharCode(index + 65)}-1`}
+                                mode={mode}
+                                trace={trace}
+                                values={nodes}
+                                attributes={{ ...item }}
+                            />
+                        ))}
+                </FlexBox>
+            )}
+        </Stack>
     );
 }
