@@ -4,6 +4,7 @@ import Xarrow from "react-xarrows";
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import Image from "@/components/Image";
+import SkillDescription from "@/components/SkillDescription";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -93,7 +94,7 @@ export default function StatNode({
                     cursor: mode === "edit" ? "pointer" : "default",
                     opacity: selected ? 1 : 0.35,
                 }}
-                tooltip={title}
+                tooltip={<SkillDescription game="hsr" description={title} />}
                 onClick={mode === "edit" ? handleSelect : undefined}
             />
             {trace.subTraces && (
