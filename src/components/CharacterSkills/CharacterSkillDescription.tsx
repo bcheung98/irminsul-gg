@@ -8,6 +8,7 @@ import TextLabel from "@/components/TextLabel";
 import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
 import LevelSlider from "@/components/LevelSlider";
+import CharacterSkillAdvancedStats from "@/components/_hsr/CharacterSkillAdvancedStats";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -26,6 +27,7 @@ import {
 // Type imports
 import { CharacterSkillDescriptionProps } from "./CharacterSkills.types";
 import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
+import { HSRCharacterSkill } from "@/types/hsr/character";
 
 export default function CharacterSkillDescription({
     skill,
@@ -106,6 +108,11 @@ export default function CharacterSkillDescription({
                         }}
                         spacing={2}
                     />
+                    {game === "hsr" && (
+                        <CharacterSkillAdvancedStats
+                            skill={skill as HSRCharacterSkill}
+                        />
+                    )}
                     <Text
                         component="span"
                         variant="subtitle1"
