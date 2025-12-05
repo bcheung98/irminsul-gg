@@ -20,11 +20,13 @@ import {
     isCurrentBanner,
     isFutureBanner,
 } from "@/components/BannerArchive/BannerArchive.utils";
+import { categories } from "@/data/categories";
 
 // Type imports
+import { Game, GameData } from "@/types";
 import { BannerOption, BannerProps } from "@/types/banner";
 import { BannerArchiveProps } from "@/components/BannerArchive";
-import { GameData } from "@/types";
+import { VersionHighlightsProps } from "@/components/VersionHighlights/VersionHighlights.types";
 
 export default function CurrentBanners<
     T extends BannerOption,
@@ -83,7 +85,9 @@ export default function CurrentBanners<
             <FlexBox wrap spacing={[2, 8]}>
                 {character.length > 0 && (
                     <Stack spacing={1}>
-                        <Text weight="highlight">{`Character Banner`}</Text>
+                        <Text weight="highlight">
+                            {bannerTitle(game, "characters")}
+                        </Text>
                         <Stack spacing={2}>
                             {character.map((banner) => (
                                 <BannerItems
@@ -97,7 +101,9 @@ export default function CurrentBanners<
                 )}
                 {weapon.length > 0 && (
                     <Stack spacing={1}>
-                        <Text weight="highlight">{`Weapon Banner`}</Text>
+                        <Text weight="highlight">
+                            {bannerTitle(game, "weapons")}
+                        </Text>
                         <Stack spacing={2}>
                             {weapon.map((banner) => (
                                 <BannerItems
@@ -154,7 +160,13 @@ export default function CurrentBanners<
                             reverse
                             defaultOpen={!activeBanners}
                         >
-                            <Box sx={{ maxHeight: "320px", overflowY: "auto" }}>
+                            <Box
+                                sx={{
+                                    maxHeight: "350px",
+                                    overflowY: "auto",
+                                    scrollbarWidth: "thin",
+                                }}
+                            >
                                 <Banners
                                     character={futureCharacterBanners}
                                     weapon={futureWeaponBanners}
@@ -170,9 +182,13 @@ export default function CurrentBanners<
 }
 
 const title: GameData<string> = {
-    genshin: "Event Wishes",
-    hsr: "Event Warps",
+    genshin: "Wishes",
+    hsr: "Warps",
     wuwa: "Convenes",
     zzz: "Signal Searches",
     uma: "Spotlight Scouts",
 };
+
+function bannerTitle(game: Game, tag: keyof VersionHighlightsProps) {
+    return `${categories[`${game}/${tag}`].slice(0, -1)} Banner`;
+}
