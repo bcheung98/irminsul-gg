@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Component imports
 import SiteSearchRoot from "./SiteSearchRoot";
@@ -18,6 +19,8 @@ export interface SearchResult extends BaseDataWithRelease {
 }
 
 export default function SiteSearch() {
+    const router = useRouter();
+
     const { addRecentSearch } = useSiteSearchStore();
 
     const [searchOpen, setSearchOpen] = useState(false);
@@ -26,9 +29,10 @@ export default function SiteSearch() {
     };
     const handleSearchClose = () => setSearchOpen(false);
 
-    const handleSelect = (item: SearchResult) => {
+    const handleSelect = (item: SearchResult, keypress?: boolean) => {
         setSearchOpen(false);
         addRecentSearch(item);
+        if (keypress) router.push(item.url);
     };
 
     const keyDownHandler = (event: KeyboardEvent) => {

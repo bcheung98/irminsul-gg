@@ -32,12 +32,18 @@ interface SearchResultButtons {
 
 export default function SiteSearchResult({
     item,
+    index,
+    focus,
     buttons,
     handleSelect,
+    handleFocusChange,
 }: {
     item: SearchResult;
+    index: number;
+    focus: number;
     buttons?: SearchResultButtons;
     handleSelect: (option: SearchResult, keyPress?: boolean) => void;
+    handleFocusChange: (index: number) => void;
 }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -51,6 +57,8 @@ export default function SiteSearchResult({
         <MenuItem
             key={item.url}
             id={item.url}
+            autoFocus={focus === index}
+            onMouseMove={() => handleFocusChange(index)}
             sx={{
                 borderRadius: "4px",
                 px: { xs: 1, sm: 2 },

@@ -13,8 +13,10 @@ import SearchDialog from "@/components/SearchDialog";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
+import Switch from "@/components/Switch";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -23,12 +25,12 @@ import HistoryIcon from "@mui/icons-material/History";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
-import { useTheme } from "@mui/material/styles";
-import { useGameTag } from "@/context";
+import { useGame, useGameTag } from "@/context";
 import { useStore, useSettingsStore, useSiteSearchStore } from "@/stores";
 import { getItems } from "./SiteSearch.utils";
 
 // Type imports
+import { Game } from "@/types";
 import { SearchResult } from "./SiteSearch";
 import { ContentDialogProps } from "@/components/ContentDialog";
 
@@ -45,11 +47,17 @@ export default function SiteSearchPopup({
     const theme = useTheme();
 
     const game = useGameTag();
+    const gameTitle = useGame();
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
         (state) => state.hideUnreleasedContent
     );
+
+    const [gameFilter, setGameFilter] = useState(game !== undefined);
+    const handleSwitchChange = () => {
+        setGameFilter(!gameFilter);
+    };
 
     const pinnedSearches =
         useStore(useSiteSearchStore, (state) => state.pinned) || [];
@@ -64,15 +72,18 @@ export default function SiteSearchPopup({
     const [data, setData] = useState<SearchResult[]>([]);
     useEffect(() => {
         startDataTransition(async () => {
-            const items = await getItems(hideUnreleasedContent, game);
+            let currentGame: Game | undefined = game;
+            if (!gameFilter) currentGame = undefined;
+            const items = await getItems(hideUnreleasedContent, currentGame);
             startDataTransition(() => {
                 setData(items);
             });
         });
-    }, [hideUnreleasedContent]);
+    }, [game, gameFilter, hideUnreleasedContent]);
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
+        setFocus(-1);
         setSearchValue(() => event.target.value);
     }, []);
 
@@ -81,12 +92,45 @@ export default function SiteSearchPopup({
         startHitsTransition(() => {
             setSearchResults(() => filterSearchResults(data, searchValue));
         });
-    }, [searchValue]);
+    }, [data, searchValue]);
     const hits = useMemo(() => [...searchResults], [data, searchResults]);
 
     useEffect(() => {
+        setFocus(-1);
         setSearchValue("");
+        setGameFilter(game !== undefined);
     }, [open]);
+
+    const [focus, setFocus] = useState(-1);
+    const handleFocusChange = useCallback((index: number) => {
+        setFocus(index);
+    }, []);
+    const handleFocusChangeKey = useCallback(
+        (direction: "ArrowUp" | "ArrowDown") => {
+            const values =
+                searchValue === ""
+                    ? [...pinnedSearches, ...recentSearches]
+                    : searchResults;
+            let index;
+            if (direction === "ArrowUp") {
+                index = focus - 1;
+                if (index < 0) {
+                    index = values.length - 1;
+                }
+            } else {
+                index = focus + 1;
+                if (index > values.length - 1) {
+                    index = 0;
+                }
+            }
+            setFocus(index);
+            const element = document.getElementById(
+                values[index].url
+            ) as HTMLMenuElement;
+            element?.scrollIntoView({ behavior: "instant", block: "nearest" });
+        },
+        [focus, searchValue, pinnedSearches, recentSearches, searchResults]
+    );
 
     const Loader = (
         <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
@@ -105,14 +149,17 @@ export default function SiteSearchPopup({
                             transform: "rotate(45deg)",
                         }}
                     />
-                    <Text>Pinned</Text>
+                    <Text weight="highlight">Pinned</Text>
                 </FlexBox>
                 <Stack spacing={1}>
-                    {pinnedSearches.map((item) => (
+                    {pinnedSearches.map((item, index) => (
                         <SiteSearchResult
                             key={item.url}
+                            index={index}
+                            focus={focus}
                             item={item}
                             handleSelect={handleSelect}
+                            handleFocusChange={handleFocusChange}
                             buttons={{ removePin: true }}
                         />
                     ))}
@@ -129,22 +176,27 @@ export default function SiteSearchPopup({
                             fontSize="small"
                             sx={{ color: theme.text.primary }}
                         />
-                        <Text>Recent</Text>
+                        <Text weight="highlight">Recent</Text>
                     </FlexBox>
                     <Button
                         variant="contained"
                         onClick={() => removeRecentSearch()}
                         endIcon={<DeleteIcon fontSize="small" />}
                     >
-                        <Text variant="subtitle2">Clear All</Text>
+                        <Text variant="subtitle2" weight="highlight">
+                            Clear All
+                        </Text>
                     </Button>
                 </FlexBox>
                 <Stack spacing={1}>
-                    {recentSearches.map((item) => (
+                    {recentSearches.map((item, index) => (
                         <SiteSearchResult
                             key={item.url}
+                            index={index + pinnedSearches.length}
+                            focus={focus}
                             item={item}
                             handleSelect={handleSelect}
+                            handleFocusChange={handleFocusChange}
                             buttons={{ addPin: true, removeRecent: true }}
                         />
                     ))}
@@ -198,10 +250,13 @@ export default function SiteSearchPopup({
     const SearchResults =
         hits.length > 0 ? (
             <Stack spacing={1}>
-                {hits.map((item) => (
+                {hits.map((item, index) => (
                     <SiteSearchResult
                         key={item.url}
+                        index={index}
+                        focus={focus}
                         item={item}
+                        handleFocusChange={handleFocusChange}
                         handleSelect={handleSelect}
                     />
                 ))}
@@ -212,6 +267,41 @@ export default function SiteSearchPopup({
 
     const SearchContent = searchValue !== "" ? SearchResults : SearchHistory;
 
+    const GameFilter =
+        game && searchValue !== "" ? (
+            <FlexBox spacing={2}>
+                <Switch
+                    checked={gameFilter}
+                    onChange={handleSwitchChange}
+                    size="small"
+                />
+                <Text
+                    variant="subtitle1"
+                    weight="highlight"
+                >{`Limit search results to ${gameTitle?.name}`}</Text>
+            </FlexBox>
+        ) : null;
+
+    function keydownHandler(event: React.KeyboardEvent<HTMLDivElement>) {
+        const values =
+            searchValue === ""
+                ? [...pinnedSearches, ...recentSearches]
+                : searchResults;
+        if (event.key === "Tab") {
+            event.preventDefault();
+        }
+        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+            event.preventDefault();
+            handleFocusChangeKey(event.key);
+        }
+        if (event.key === "Enter") {
+            if (focus !== -1) {
+                event.preventDefault();
+                handleSelect(values[focus], true);
+            }
+        }
+    }
+
     return (
         <SearchDialog
             open={open}
@@ -220,8 +310,12 @@ export default function SiteSearchPopup({
             handleInputChange={handleInputChange}
             placeholder="Search Irminsul..."
             backgroundBlur="4px"
+            onKeyDown={(event) => keydownHandler(event)}
         >
-            {!dataLoading ? SearchContent : Loader}
+            <Stack spacing={2}>
+                {GameFilter}
+                {!dataLoading ? SearchContent : Loader}
+            </Stack>
         </SearchDialog>
     );
 }
