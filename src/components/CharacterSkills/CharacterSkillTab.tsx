@@ -63,9 +63,7 @@ export default function CharacterSkillTab({
             setSliderValue(newValue as number);
         };
         const levels = range(1, maxLevel);
-        const scaling = skills[skillKey]
-            .map((skill) => skill.scaling || [])
-            .flat();
+        const scaling = skill.map((skill) => skill.scaling || []).flat();
         const targets = document.getElementsByClassName(
             "character-skill-value"
         );
@@ -76,7 +74,7 @@ export default function CharacterSkillTab({
                     target.innerHTML = subScaling[sliderValue - 1];
                 }
             });
-        }, [sliderValue]);
+        }, [skillVersion.value, sliderValue]);
 
         const LevelUp = !["altsprint", "technique"].includes(skillKey) ? (
             <Stack sx={{ px: { xs: 0, md: 1 } }}>

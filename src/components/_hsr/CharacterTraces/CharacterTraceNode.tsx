@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Xarrow from "react-xarrows";
 
 // Component imports
@@ -10,6 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import { useSkillVersionContext } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 import {
     formatCharacterBonusStatDescription,
@@ -47,6 +48,8 @@ export default function CharacterTraceNode({
     const textColor = useTextColor(theme.text);
     const color = textColor("hsr", attributes.element);
 
+    const skillVersion = useSkillVersionContext();
+
     let title = "";
     let description = "";
     let stat = undefined;
@@ -57,6 +60,12 @@ export default function CharacterTraceNode({
     if ("name" in trace) {
         title = trace.name;
         description = trace.description;
+        if (trace.variants && skillVersion.value !== "v1") {
+            description =
+                trace.variants.find(
+                    (variant) => variant.version.value === skillVersion.value
+                )?.description || trace.description;
+        }
         imgSrc = `hsr/skills/${attributes.id}_${unlock.toLowerCase()}`;
     } else {
         title = formatCharacterBonusStatTitle(trace.stat);
@@ -69,21 +78,31 @@ export default function CharacterTraceNode({
         imgSize = 32;
     }
 
-    const traceNodeData: HSRCharacterTraceNodeData = {
-        id,
-        title,
-        description,
-        unlock,
-        stat,
-    };
+    const traceNodeData: HSRCharacterTraceNodeData = useMemo(
+        () => ({
+            id,
+            title,
+            description,
+            unlock,
+            stat,
+        }),
+        [skillVersion.value]
+    );
 
     useEffect(() => {
-        if (attributes.weaponType === "Preservation" && id === "A-2-0") {
+        if (selected) {
             setTrace(traceNodeData);
-        } else if (attributes.weaponType !== "Preservation" && id === "A-1") {
-            setTrace(traceNodeData);
+        } else if (selectedID === "0") {
+            if (attributes.weaponType === "Preservation" && id === "A-2-0") {
+                setTrace(traceNodeData);
+            } else if (
+                attributes.weaponType !== "Preservation" &&
+                id === "A-1"
+            ) {
+                setTrace(traceNodeData);
+            }
         }
-    }, [trace]);
+    }, [skillVersion.value]);
 
     return (
         <FlexBox spacing={5}>

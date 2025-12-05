@@ -4,6 +4,7 @@ import { useState } from "react";
 import CharacterTraceNode from "./CharacterTraceNode";
 import CharacterTraceInfo from "./CharacterTraceInfo";
 import CharacterTraceTotalStat from "./CharacterTraceTotalStat";
+import CharacterBuffs from "@/components/CharacterBuffs";
 import ContentBox from "@/components/ContentBox";
 
 // MUI imports
@@ -13,7 +14,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 // Helper imports
-import { useSkillContext } from "@/context";
+import { useSkillContext, useSkillVersionContext } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 
 // Type imports
@@ -43,6 +44,8 @@ export default function CharacterTraces({
 
     const textColor = useTextColor(theme.text);
 
+    const buffs = useSkillVersionContext();
+
     const skillsContext = useSkillContext();
     let skills: CharacterSkillsList | undefined;
     if (skillsContext) {
@@ -55,13 +58,11 @@ export default function CharacterTraces({
     const setTrace = (trace: HSRCharacterTraceNodeData) => {
         if (JSON.stringify(trace) !== JSON.stringify(currentTrace)) {
             setCurrentTrace(trace);
-        } else {
-            setCurrentTrace(null);
         }
     };
 
     return (
-        <ContentBox header="Traces">
+        <ContentBox header="Traces" actions={<CharacterBuffs {...buffs} />}>
             <Stack spacing={2} divider={<Divider />}>
                 <Grid
                     container

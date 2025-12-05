@@ -4,7 +4,12 @@ import { VersionWithDate } from "../version";
 import { CharacterOutfit, CharacterStats } from "@/types/character";
 import { characterBonusStats } from "@/data/hsr/characterBonusStats";
 import { HSRCharacterMaterials } from "./materials";
-import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
+import {
+    CharacterSkillsList,
+    Skill,
+    SkillKeyword,
+    SkillVersion,
+} from "../skill";
 
 export interface HSRCharacter extends BaseData {
     displayName: string;
@@ -87,6 +92,11 @@ export interface HSRCharacterTraceNodeMain {
     description: string;
     unlock: HSRCharacterUnlockKeys;
     subTraces?: HSRCharacterTraceNodeSmall[];
+    version?: SkillVersion;
+    variants?: Pick<
+        Required<HSRCharacterTraceNodeMain>,
+        "description" | "version"
+    >[];
 }
 
 export interface HSRCharacterTraceNodeSmall {

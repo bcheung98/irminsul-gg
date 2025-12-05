@@ -5,10 +5,7 @@ export interface Skill {
     splash?: string;
     icon?: string | null;
     scaling?: string[][];
-    version?: {
-        value: string;
-        label: string;
-    };
+    version?: SkillVersion;
     index?: number;
 }
 
@@ -22,4 +19,9 @@ export interface SkillKeyword {
     type?: string;
     icon?: string;
     description: string;
+}
+
+export interface SkillVersion {
+    value: string;
+    label: string;
 }
