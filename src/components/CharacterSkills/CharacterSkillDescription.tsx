@@ -104,7 +104,7 @@ export default function CharacterSkillDescription({
                         subtitle={skill.tag && `[${skill.tag}]`}
                         subtitleProps={{
                             color: textColor(game, "header"),
-                            variant: "body1",
+                            variant: "subtitle1",
                         }}
                         spacing={2}
                     />

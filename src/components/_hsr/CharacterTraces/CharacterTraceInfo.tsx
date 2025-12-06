@@ -89,7 +89,11 @@ export default function CharacterTraceInfo({
                         <Text variant="h6" weight="highlight">
                             {title}
                         </Text>
-                        <Text component="span" variant="subtitle1">
+                        <Text
+                            component="span"
+                            variant="subtitle1"
+                            sx={{ color: theme.text.description }}
+                        >
                             <SkillDescription
                                 game="hsr"
                                 description={description}
@@ -113,6 +117,7 @@ export default function CharacterTraceInfo({
                             <InfoChip
                                 chipProps={{
                                     background: theme.palette.info.main,
+                                    height: "24px",
                                 }}
                                 title={`Requires Character ${formatUnlock(
                                     unlock

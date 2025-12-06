@@ -114,7 +114,7 @@ export default function CharacterPassives({
                                         }
                                         subtitleProps={{
                                             color: theme.text.header,
-                                            variant: "body1",
+                                            variant: "subtitle1",
                                         }}
                                         spacing={2}
                                     />
