@@ -20,6 +20,9 @@ export default function SkillCard({
                 p: 2,
                 backgroundColor: backgroundColor || theme.background(0, "dark"),
                 borderRadius: theme.contentBox.border.radius,
+                maxHeight: "640px",
+                overflowY: "auto",
+                scrollbarWidth: "thin",
             }}
         >
             {children}
