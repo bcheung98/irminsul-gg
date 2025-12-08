@@ -13,7 +13,7 @@ import { AttributeDataKey, Game } from "@/types";
 export interface DataIconProps {
     game: Game;
     property: AttributeDataKey;
-    value: string;
+    value: string | number | (string | number)[];
     styles: CSSProperties;
 }
 
@@ -23,7 +23,16 @@ export default function DataIcon({
     value,
     styles,
 }: DataIconProps) {
-    const { src, tooltip } = getDataIconURL({ game, key: property, value });
-    if (!src && !tooltip) return <></>;
-    return <Image src={src} tooltip={tooltip} style={styles} />;
+    if (!Array.isArray(value)) {
+        value = [value];
+    }
+    return value.map((v, i) => {
+        const { src, tooltip } = getDataIconURL({
+            game,
+            key: property,
+            value: v,
+        });
+        if (!src && !tooltip) return null;
+        return <Image key={i} src={src} tooltip={tooltip} style={styles} />;
+    });
 }
