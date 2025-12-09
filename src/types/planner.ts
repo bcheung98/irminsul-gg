@@ -4,6 +4,7 @@ import {
     HSRCharacterTraceNodeSmall,
 } from "./hsr/character";
 import { Materials } from "./materials";
+import { WuWaCharacterBonusStats } from "./wuwa/character";
 
 export type PlannerType = "characters" | "weapons";
 export type CardMode = "edit" | "view";
@@ -18,6 +19,7 @@ export interface PlannerItemData extends BaseDataWithRelease {
     weaponType: string;
     materials: Materials;
     traces?: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[];
+    bonusStats?: WuWaCharacterBonusStats;
     values: Record<string, CostSliderValues>;
 }
 

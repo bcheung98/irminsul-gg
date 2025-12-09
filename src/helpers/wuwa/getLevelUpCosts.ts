@@ -203,7 +203,7 @@ export function getCharacterBonusStatCost({
             2: selected && credits ? credits : 0,
         },
         weekly: {
-            weekly: selected && weekly ? weekly : 0,
+            [mats(materials.weekly).id]: selected && weekly ? weekly : 0,
         },
         forgery: {
             [mats(`${materials.forgery}1`).id]: 0,

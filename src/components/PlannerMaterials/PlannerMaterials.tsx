@@ -43,6 +43,12 @@ export default function PlannerMaterials() {
                     ? "characterTraceMain"
                     : "characterTraceSmall";
             skillKey = `${value.skillKey}`;
+        } else if (key.startsWith("node")) {
+            costKey =
+                value.type === "main"
+                    ? "characterPassive"
+                    : "characterBonusStat";
+            skillKey = `${value.skillKey}`;
         } else {
             switch (key) {
                 case "level":

@@ -8,6 +8,7 @@ import PlannerCardActions from "./PlannerCardActions";
 import PlannerMaterials from "@/components/PlannerMaterials";
 import GenshinPlannerCard from "@/components/_genshin/PlannerCard";
 import HSRPlannerCard from "@/components/_hsr/PlannerCard";
+import WuWaPlannerCard from "@/components/_wuwa/PlannerCard/PlannerCard";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -106,7 +107,7 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
 const components: GameData<React.ReactNode> = {
     genshin: <GenshinPlannerCard />,
     hsr: <HSRPlannerCard />,
-    wuwa: <div></div>,
+    wuwa: <WuWaPlannerCard />,
     zzz: <div></div>,
     uma: undefined,
 };

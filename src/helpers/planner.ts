@@ -14,6 +14,7 @@ export function parseData<T extends DataType, U extends DataType>(
         weaponType: item.weaponType,
         materials: item.materials,
         traces: "traces" in item ? item.traces : undefined,
+        bonusStats: "bonusStats" in item ? item.bonusStats : undefined,
         release: item.release,
         url: item.url,
         values: {},
