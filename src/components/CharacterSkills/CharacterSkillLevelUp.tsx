@@ -2,8 +2,10 @@
 import Text from "@/components/Text";
 import Dropdown from "@/components/Dropdown";
 import LevelUpCosts from "@/components/LevelUpCosts";
+import InfoChip from "@/components/InfoChip";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
@@ -18,12 +20,18 @@ export default function CharacterSkillLevelUp({
     color,
     skillKey,
     attributes,
+    title = "Level Up Cost",
+    unlock,
 }: {
     materials: Materials;
     color?: string;
     skillKey: string;
     attributes: AttributeData;
+    title?: string;
+    unlock?: string;
 }) {
+    const theme = useTheme();
+
     const game = useGameTag();
 
     let levelKey = "skill";
@@ -37,23 +45,42 @@ export default function CharacterSkillLevelUp({
             costKey = "characterMemosprite";
         }
     }
+    if (game === "wuwa") {
+        if (skillKey.startsWith("passive")) {
+            levelKey = skillKey.slice(-1);
+            costKey = "characterPassive";
+        }
+        if (skillKey.startsWith("bonus")) {
+            levelKey = skillKey.slice(-1);
+            costKey = "characterBonusStat";
+        }
+    }
 
     const Root = (
-        <LevelUpCosts
-            levelKey={levelKey}
-            costKey={costKey}
-            materials={materials}
-            color={color}
-            {...attributes}
-        />
+        <Stack spacing={2}>
+            <LevelUpCosts
+                levelKey={levelKey}
+                costKey={costKey}
+                materials={materials}
+                color={color}
+                {...attributes}
+            />
+            {unlock && (
+                <InfoChip
+                    chipProps={{
+                        background: theme.palette.info.main,
+                        height: "24px",
+                    }}
+                    title={unlock}
+                />
+            )}
+        </Stack>
     );
-
-    const title = "Level Up Cost";
 
     return (
         <Stack>
             <Stack sx={{ display: { xs: "block", md: "none" } }}>
-                <Dropdown title="Level Up Cost" iconColor={color}>
+                <Dropdown title={title} textVariant="body1" iconColor={color}>
                     {Root}
                 </Dropdown>
             </Stack>

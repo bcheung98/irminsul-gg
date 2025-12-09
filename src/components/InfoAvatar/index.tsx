@@ -4,13 +4,12 @@ import {
     GenshinWeaponInfoAvatar,
     HSRCharacterInfoAvatar,
     HSRWeaponInfoAvatar,
+    WuWaCharacterInfoAvatar,
+    WuWaWeaponInfoAvatar,
 } from "./InfoAvatar.variants";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon } from "@/types/hsr";
-
-export * from "./InfoAvatar";
-export * from "./InfoAvatar.variants";
-export { default } from "./InfoAvatar";
+import { WuWaCharacter, WuWaWeapon } from "@/types/wuwa";
 
 type Data<T> = Record<"characters" | "weapons", T>;
 
@@ -69,8 +68,24 @@ export function renderInfoAvatar({
             ),
         },
         wuwa: {
-            characters: undefined,
-            weapons: undefined,
+            characters: (
+                <WuWaCharacterInfoAvatar
+                    character={item as WuWaCharacter}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+            weapons: (
+                <WuWaWeaponInfoAvatar
+                    weapon={item as WuWaWeapon}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
         },
         zzz: {
             characters: undefined,
@@ -83,3 +98,7 @@ export function renderInfoAvatar({
     };
     return items[game][tag];
 }
+
+export * from "./InfoAvatar";
+export * from "./InfoAvatar.variants";
+export { default } from "./InfoAvatar";

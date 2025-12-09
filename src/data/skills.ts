@@ -17,7 +17,7 @@ export const skillKeys: GameData<Record<string, string>> = {
         moon: "Moonsign Benediction",
         special: "",
         "": "Passive Talent",
-    } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
+    },
     hsr: {
         attack: "Basic ATK",
         skill: "Skill",
@@ -27,7 +27,14 @@ export const skillKeys: GameData<Record<string, string>> = {
         "memo-skill": "Memosprite Skill",
         "memo-talent": "Memosprite Talent",
     },
-    wuwa: {},
+    wuwa: {
+        attack: "Basic Attack",
+        skill: "Resonance Skill",
+        ultimate: "Resonance Liberation",
+        forte: "Forte Circuit",
+        intro: "Intro Skill",
+        outro: "Outro Skill",
+    },
     zzz: {},
     uma: {},
 };
@@ -45,7 +52,7 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         moon: "genshin/skills/{id}_passive_moon",
         special: "genshin/skills/{id}_passive_special",
         "": "genshin/skills/{id}_passive",
-    } as Record<GenshinSkillKey | GenshinCharacterPassiveType, string>,
+    },
     hsr: {
         attack: "hsr/skills/{id}_attack",
         skill: "hsr/skills/{id}_skill",
@@ -55,7 +62,16 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         "memo-skill": "hsr/skills/{id}_memo_skill",
         "memo-talent": "hsr/skills/{id}_memo_talent",
     },
-    wuwa: {},
+    wuwa: {
+        attack: "wuwa/skills/Attack_{weaponType}",
+        skill: "wuwa/skills/{id}_skill",
+        ultimate: "wuwa/skills/{id}_ultimate",
+        forte: "wuwa/skills/{id}_forte",
+        passive1: "wuwa/skills/{id}_passive1",
+        passive2: "wuwa/skills/{id}_passive2",
+        intro: "wuwa/skills/{id}_intro",
+        outro: "wuwa/skills/{id}_outro",
+    },
     zzz: {},
     uma: {},
 };

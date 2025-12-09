@@ -187,7 +187,7 @@ export const nextThemeData = {
             electro: "#ac70f1",
             fusion: "#f0744e",
             glacio: "#49abf7",
-            havoc: "#c989b1",
+            havoc: "#e649a6",
             spectro: "#fae56c",
         },
         zzz: {

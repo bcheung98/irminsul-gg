@@ -6,6 +6,7 @@ import InfoChip from "@/components/InfoChip";
 import RarityStars from "@/components/RarityStars";
 import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
+import CharacterCombatRoles from "@/components/_wuwa/CharacterCombatRoles";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -60,9 +61,12 @@ export default function CharacterAttributes(props: AttributeData) {
             <Stack spacing={1}>
                 <TextLabel
                     title={attributes.displayName}
-                    subtitle={<i>{attributes.title}</i>}
+                    subtitle={
+                        <Text weight="highlight">
+                            <i>{attributes.title}</i>
+                        </Text>
+                    }
                     titleProps={{ variant: "h4" }}
-                    subtitleProps={{ variant: "body1" }}
                     textSpacing={0.5}
                 />
                 <FlexBox spacing={1} wrap>
@@ -77,10 +81,9 @@ export default function CharacterAttributes(props: AttributeData) {
                     )}
                 </FlexBox>
             </Stack>
+            {game === "wuwa" && <CharacterCombatRoles {...attributes} />}
             {attributes.description && (
-                <Text variant="body2" weight="highlight">
-                    {parse(attributes.description)}
-                </Text>
+                <Text variant="body2">{parse(attributes.description)}</Text>
             )}
         </Stack>
     );
@@ -89,7 +92,7 @@ export default function CharacterAttributes(props: AttributeData) {
 const gameAttributes: GameData<AttributeDataKey[]> = {
     genshin: ["rarity", "element", "weaponType", "arkhe"],
     hsr: ["rarity", "element", "weaponType"],
-    wuwa: [],
+    wuwa: ["rarity", "element", "weaponType"],
     zzz: [],
     uma: [],
 };

@@ -69,8 +69,20 @@ export function filterActions(
     filters: Filters,
     clearFilters: ClearFilterState
 ) {
+    const values = Object.values(filters)
+        .flat()
+        .filter((i) => !["true", "false"].includes(`${i}`));
+
     return {
-        clearFilters: () => clearFilters(key, initialState),
-        activeFilters: Object.values(filters).flat().length > 0,
+        clearFilters: () =>
+            clearFilters(
+                key,
+                Object.fromEntries(
+                    Object.entries(initialState).map(([k, v]) =>
+                        !k.startsWith("_") ? [k, v] : [k, filters[k]]
+                    )
+                )
+            ),
+        activeFilters: values.length > 0,
     };
 }

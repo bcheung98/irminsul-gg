@@ -68,15 +68,48 @@ export default function CharacterSplash({
         },
     };
 
-    const imgSrcSplash =
-        tabValue === 0
-            ? `${game}/characters/${id}_splash`
-            : `${game}/characters/${id}_splash${tabValue}`;
+    function getSplashImg(popup?: boolean) {
+        let url = "";
+        switch (game) {
+            case "genshin":
+            case "hsr":
+            default:
+                url = `${game}/characters/${id}_splash`;
+                break;
+            case "wuwa":
+                popup
+                    ? (url = `${game}/resonators/${id}_splash`)
+                    : (url = `${game}/resonators/${id}_card`);
+                break;
+            case "zzz":
+                url = `${game}/agents/${id}_splash`;
+                break;
+            case "uma":
+                url = `${game}/characters/${id}_card`;
+                break;
+        }
+        return `${url}${tabValue !== 0 ? tabValue : ""}`;
+    }
 
-    let imgSrcIcon =
-        game === "genshin"
-            ? `${game}/characters/${id}_icon`
-            : `${game}/characters/${id}`;
+    function getIconImg(index: number) {
+        switch (game) {
+            case "genshin":
+                return `${game}/characters/${id}_icon${
+                    index !== 0 ? `${index}` : ""
+                }`;
+            case "wuwa":
+                return `${game}/resonators/${id}${
+                    index !== 0 ? `_${index}` : ""
+                }`;
+            case "hsr":
+            case "zzz":
+            case "uma":
+            default:
+                return `${game}/characters/${id}${
+                    index !== 0 ? `_${index}` : ""
+                }`;
+        }
+    }
 
     return (
         <>
@@ -96,7 +129,7 @@ export default function CharacterSplash({
                         padding={0}
                     >
                         <Image
-                            src={imgSrcSplash}
+                            src={getSplashImg()}
                             style={{
                                 width: "100%",
                                 height: "600px",
@@ -158,15 +191,7 @@ export default function CharacterSplash({
                             key={index}
                             icon={
                                 <Image
-                                    src={
-                                        index === 0
-                                            ? `${imgSrcIcon}`
-                                            : `${imgSrcIcon}${
-                                                  game === "hsr"
-                                                      ? `_${index}`
-                                                      : `${index}`
-                                              }`
-                                    }
+                                    src={getIconImg(index)}
                                     size={72}
                                     responsive
                                     style={{
@@ -199,7 +224,7 @@ export default function CharacterSplash({
                             </Text>
                         </Stack>
                         <Image
-                            src={imgSrcSplash}
+                            src={getSplashImg(true)}
                             alt={outfit.name}
                             style={{
                                 width: "100%",

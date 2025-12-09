@@ -90,6 +90,7 @@ function getRows(
             },
         ],
         wuwa: [
+            { key: "Nation", value: attributes.nation },
             { key: "Release", value: `${releaseDate} (${releaseVersion})` },
             {
                 key: "Voice Actor (EN)",

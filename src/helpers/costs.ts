@@ -13,6 +13,13 @@ import {
     getCharacterTraceMain as getHSRCharacterTraceMain,
     getCharacterTraceSmall as getHSRCharacterTraceSmall,
 } from "./hsr/getLevelUpCosts";
+import {
+    getCharacterLevelCost as getWuWaCharacterLevelCost,
+    getCharacterSkillCost as getWuWaCharacterSkillCost,
+    getCharacterPassiveCost as getWuWaCharacterPassiveCost,
+    getCharacterBonusStatCost as getWuWaCharacterBonusStatCost,
+    getWeaponLevelCost as getWuWaWeaponLevelCost,
+} from "./wuwa/getLevelUpCosts";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -32,7 +39,13 @@ export const costs: GameData<Costs> = {
         characterTraceSmall: getHSRCharacterTraceSmall,
         weaponLevel: getHSRWeaponLevelCost,
     },
-    wuwa: {},
+    wuwa: {
+        characterLevel: getWuWaCharacterLevelCost,
+        characterSkill: getWuWaCharacterSkillCost,
+        characterPassive: getWuWaCharacterPassiveCost,
+        characterBonusStat: getWuWaCharacterBonusStatCost,
+        weaponLevel: getWuWaWeaponLevelCost,
+    },
     zzz: {},
     uma: {},
 };

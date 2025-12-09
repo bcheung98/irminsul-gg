@@ -3,6 +3,7 @@ import {
     getGenshinMaterialCategory,
 } from "@/helpers/genshin/getMaterials";
 import { getHSRMaterial, getHSRMaterialCategory } from "./hsr/getMaterials";
+import { getWuWaMaterial, getWuWaMaterialCategory } from "./wuwa/getMaterials";
 import { GameData } from "@/types";
 import { Material } from "@/types/materials";
 
@@ -12,9 +13,7 @@ export function useMaterials(
     return {
         genshin: getGenshinMaterial(hideUnreleasedContent),
         hsr: getHSRMaterial(hideUnreleasedContent),
-        wuwa: function (material: string | number): Material {
-            throw new Error("Function not implemented.");
-        },
+        wuwa: getWuWaMaterial(hideUnreleasedContent),
         zzz: function (material: string | number): Material {
             throw new Error("Function not implemented.");
         },
@@ -30,9 +29,7 @@ export function useMaterialsCategory(
     return {
         genshin: getGenshinMaterialCategory(hideUnreleasedContent),
         hsr: getHSRMaterialCategory(hideUnreleasedContent),
-        wuwa: function (category: string): Material[] {
-            throw new Error("Function not implemented.");
-        },
+        wuwa: getWuWaMaterialCategory(hideUnreleasedContent),
         zzz: function (category: string): Material[] {
             throw new Error("Function not implemented.");
         },

@@ -6,18 +6,22 @@ import {
     HSRCharacterInfoCard,
     HSRRelicInfoCard,
     HSRWeaponInfoCard,
+    WuWaCharacterInfoCard,
+    WuWaEchoInfoCard,
+    WuWaWeaponInfoCard,
 } from "@/components/InfoCard";
+import { Game, GameData } from "@/types";
+import {
+    VersionHighlightsProps,
+    VersionItemData,
+} from "./VersionHighlights.types";
 import {
     GenshinArtifact,
     GenshinCharacter,
     GenshinWeapon,
 } from "@/types/genshin";
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
-import { Game, GameData } from "@/types";
-import {
-    VersionHighlightsProps,
-    VersionItemData,
-} from "./VersionHighlights.types";
+import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
 
 type Data<T> = Record<keyof VersionHighlightsProps, T>;
 
@@ -116,9 +120,30 @@ export function renderInfoCard(
             ),
         },
         wuwa: {
-            characters: <></>,
-            weapons: <></>,
-            equipment: undefined,
+            characters: (
+                <WuWaCharacterInfoCard
+                    key={item.id}
+                    character={item as WuWaCharacter}
+                    props={{
+                        componentID: `${item.id}-versionHighlights`,
+                        background: backround,
+                    }}
+                />
+            ),
+            weapons: (
+                <WuWaWeaponInfoCard
+                    key={item.id}
+                    weapon={item as WuWaWeapon}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            equipment: (
+                <WuWaEchoInfoCard
+                    key={item.id}
+                    echo={item as WuWaEcho}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
         zzz: {
             characters: <></>,

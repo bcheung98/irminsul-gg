@@ -41,6 +41,11 @@ export function filterItems<T extends Record<string, any>>(
             filters.calyxMat.includes(item.materials.calyx)
         );
     }
+    if ("forgeryMat" in filters && filters.forgeryMat.length > 0) {
+        res = res.filter((item) =>
+            filters.forgeryMat.includes(item.materials.forgery)
+        );
+    }
     if ("commonMat" in filters && filters.commonMat.length > 0) {
         res = res.filter((item) =>
             filters.commonMat.includes(item.materials.common)
@@ -78,6 +83,35 @@ export function filterItems<T extends Record<string, any>>(
         res = res.filter((item) =>
             filters.nation.includes(item.world || item.nation)
         );
+    }
+    if ("combatRoles" in filters && filters.combatRoles.length > 0) {
+        if (filters._combatRoles.includes("true")) {
+            res = res.filter((item) =>
+                filters.combatRoles.every((role) =>
+                    item.combatRoles.includes(role)
+                )
+            );
+        } else {
+            res = res.filter((item) =>
+                filters.combatRoles.some((role) =>
+                    item.combatRoles.includes(role)
+                )
+            );
+        }
+    }
+    if ("echoRarity" in filters && filters.echoRarity.length > 0) {
+        res = res.filter((item) => filters.echoRarity.includes(item.rarity));
+    }
+    if ("sonata" in filters && filters.sonata.length > 0) {
+        if (filters._sonata.includes("true")) {
+            res = res.filter((item) =>
+                filters.sonata.every((sonata) => item.sonata.includes(sonata))
+            );
+        } else {
+            res = res.filter((item) =>
+                filters.sonata.some((sonata) => item.sonata.includes(sonata))
+            );
+        }
     }
     if (searchValue) {
         res = res.filter(

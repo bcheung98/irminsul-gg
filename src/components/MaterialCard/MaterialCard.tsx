@@ -69,7 +69,7 @@ export default function MaterialCard({
                     responsive
                     responsiveSize={responsiveSize}
                     style={{
-                        padding: game === "hsr" ? "4px" : 0,
+                        padding: ["hsr", "wuwa"].includes(game) ? "4px" : 0,
                     }}
                 />
             </Box>

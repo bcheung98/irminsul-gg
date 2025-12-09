@@ -1,9 +1,11 @@
+import { sonataEffects } from "@/data/wuwa/sonataEffects";
+import { isUnreleasedContent } from "./isUnreleasedContent";
 import { AttributeDataKey, Game } from "@/types";
 
 interface Props {
     game: Game;
     key: AttributeDataKey;
-    value?: string | number;
+    value?: string | number | (string | number)[];
 }
 
 export function getDataIconURL({ game, key, value }: Props) {
@@ -35,6 +37,26 @@ export function getDataIconURL({ game, key, value }: Props) {
         if (key === "weaponType" && value) {
             src = `hsr/paths/${value}`;
             tooltip = `${value}`;
+        }
+    }
+    if (game === "wuwa") {
+        if (key === "element" && value) {
+            src = `wuwa/icons/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `wuwa/skills/Attack_${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "sonata" && value) {
+            src = `wuwa/sonata/${value}`;
+            tooltip = `${
+                sonataEffects
+                    .filter((sonata) =>
+                        isUnreleasedContent(sonata.release.version, "wuwa")
+                    )
+                    .find((sonata) => sonata.id === value)?.displayName
+            }`;
         }
     }
     return { src, tooltip };

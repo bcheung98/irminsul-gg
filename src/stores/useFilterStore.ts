@@ -3,14 +3,18 @@ import { GenshinCharacterFilterState } from "@/components/_genshin/Filters/Chara
 import { GenshinWeaponFilterState } from "@/components/_genshin/Filters/WeaponFilters";
 import { HSRCharacterFilterState } from "@/components/_hsr/Filters/CharacterFilters";
 import { HSRWeaponFilterState } from "@/components/_hsr/Filters/WeaponFilters";
+import { WuWaCharacterFilterState } from "@/components/_wuwa/Filters/CharacterFilters";
+import { WuWaWeaponFilterState } from "@/components/_wuwa/Filters/WeaponFilters";
+import { WuWaEchoFilterState } from "@/components/_wuwa/Filters/EchoFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
     "genshin/weapons": GenshinWeaponFilterState;
     "hsr/characters": HSRCharacterFilterState;
     "hsr/weapons": HSRWeaponFilterState;
-    "wuwa/characters": {};
-    "wuwa/weapons": {};
+    "wuwa/characters": WuWaCharacterFilterState;
+    "wuwa/weapons": WuWaWeaponFilterState;
+    "wuwa/echoes": WuWaEchoFilterState;
     "zzz/characters": {};
     "zzz/weapons": {};
     "uma/characters": {};
@@ -75,13 +79,41 @@ export const hsrWeaponFilters: HSRWeaponFilterState = {
     commonMat: [],
 };
 
+export const wuwaCharacterFilters: WuWaCharacterFilterState = {
+    element: [],
+    weaponType: [],
+    rarity: [],
+    combatRoles: [],
+    _combatRoles: ["true"],
+    forgeryMat: [],
+    commonMat: [],
+    localMat: [],
+    bossMat: [],
+    weeklyBossMat: [],
+};
+
+export const wuwaWeaponFilters: WuWaWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+    subStat: [],
+    forgeryMat: [],
+    commonMat: [],
+};
+
+export const wuwaEchoFilters: WuWaEchoFilterState = {
+    echoRarity: [],
+    sonata: [],
+    _sonata: ["true"],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
     "hsr/characters": hsrCharacterFilters,
     "hsr/weapons": hsrWeaponFilters,
-    "wuwa/characters": {},
-    "wuwa/weapons": {},
+    "wuwa/characters": wuwaCharacterFilters,
+    "wuwa/weapons": wuwaWeaponFilters,
+    "wuwa/echoes": wuwaEchoFilters,
     "zzz/characters": {},
     "zzz/weapons": {},
     "uma/characters": {},

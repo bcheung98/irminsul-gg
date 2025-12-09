@@ -44,8 +44,11 @@ export interface AttributeData {
     weaponType?: string;
     rarity?: number;
     subStat?: string;
-    cost?: string;
     arkhe?: string | string[];
+    cost?: string | number;
+    sonata?: (string | number)[];
+    combatRoles?: string[];
+    bonusStats?: string[];
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {
@@ -90,6 +93,7 @@ export interface FilterGroup {
     value: (string | number)[];
     buttons: FilterButtons[];
     onChange: (...args: any) => any;
+    toggle?: React.ReactNode;
     padding?: string | number;
     width?: string;
     groupButtons?: GroupFilterButtons[];

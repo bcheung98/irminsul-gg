@@ -11,17 +11,20 @@ import {
     HSRCharacterFilters,
     HSRWeaponFilters,
 } from "@/components/_hsr/Filters";
+import {
+    WuWaCharacterFilters,
+    WuWaEchoFilters,
+    WuWaWeaponFilters,
+} from "@/components/_wuwa/Filters";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Helper imports
 import { useDrawerStore } from "@/stores";
 
 export default function FilterDrawer() {
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("lg"));
+    const matches = useMediaQuery((theme) => theme.breakpoints.up("lg"));
 
     const pathname = usePathname();
 
@@ -54,4 +57,7 @@ const components: Record<string, React.ReactNode> = {
     "/genshin/weapons": <GenshinWeaponFilters />,
     "/hsr/characters": <HSRCharacterFilters />,
     "/hsr/lightcones": <HSRWeaponFilters />,
+    "/wuwa/resonators": <WuWaCharacterFilters />,
+    "/wuwa/weapons": <WuWaWeaponFilters />,
+    "/wuwa/echoes": <WuWaEchoFilters />,
 };

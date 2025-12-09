@@ -41,9 +41,7 @@ export default function CharacterSkillScaling({
     const Root = (
         <Stack spacing={3}>
             {skill.map((skl, index) => {
-                if (!skl.scaling) {
-                    return <></>;
-                }
+                if (!skl.scaling) return null;
                 const data = skl.scaling.map((subScaling) =>
                     subScaling.slice(0, maxLevel + 1)
                 )!;
@@ -66,7 +64,7 @@ export default function CharacterSkillScaling({
                                 sx: {
                                     minWidth: "100px",
                                     maxWidth: "500px",
-                                    ml: "8px",
+                                    mx: "8px",
                                     color: color,
                                 },
                             }}
@@ -95,16 +93,32 @@ export default function CharacterSkillScaling({
 
     return (
         <Stack>
-            <Stack sx={{ display: { xs: "block", md: "none" } }}>
+            <Stack
+                sx={{
+                    display: {
+                        xs: "block",
+                        md: mode === "table" ? "block" : "none",
+                    },
+                }}
+            >
                 <Dropdown
                     title={title}
+                    textVariant="body1"
                     iconColor={color}
                     contentPadding={mode === "slider" ? "8px 24px" : "8px 0px"}
                 >
                     {Root}
                 </Dropdown>
             </Stack>
-            <Stack sx={{ display: { xs: "none", md: "block" } }} spacing={2}>
+            <Stack
+                sx={{
+                    display: {
+                        xs: "none",
+                        md: mode === "slider" ? "block" : "none",
+                    },
+                }}
+                spacing={2}
+            >
                 <Text weight="highlight">{title}</Text>
                 {Root}
             </Stack>

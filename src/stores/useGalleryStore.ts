@@ -21,6 +21,9 @@ export interface GalleryState {
     "hsr/characters": GallerySettings;
     "hsr/lightcones": GallerySettings;
     "hsr/relics": GallerySettings;
+    "wuwa/resonators": GallerySettings;
+    "wuwa/weapons": GallerySettings;
+    "wuwa/echoes": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -48,6 +51,17 @@ export const initialState: GalleryState = {
         view: "icon",
     },
     "hsr/relics": defaultSettings,
+    "wuwa/resonators": defaultSettings,
+    "wuwa/weapons": {
+        sortBy: "version",
+        sortDirection: "asc",
+        view: "icon",
+    },
+    "wuwa/echoes": {
+        sortBy: "rarity",
+        sortDirection: "asc",
+        view: "icon",
+    },
 };
 
 export const useGalleryStore = create(

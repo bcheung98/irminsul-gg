@@ -2,7 +2,7 @@ import { AttributeData } from "@/types";
 import { Skill, SkillKeyword } from "@/types/skill";
 import { Materials } from "@/types/materials";
 
-interface SkillProps {
+export interface SkillProps {
     materials: Materials;
     keywords?: SkillKeyword[];
     attributes: AttributeData;

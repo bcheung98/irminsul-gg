@@ -7,6 +7,7 @@ import {
     GenshinWeapon,
 } from "@/types/genshin";
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
+import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -192,6 +193,106 @@ export function HSRRelicInfoCard({
             rarity={relic.rarity}
             url={`${relic.id}`}
             href={relic.url}
+            {...props}
+        />
+    );
+}
+
+export function WuWaCharacterInfoCard({
+    character,
+    props,
+}: {
+    character: WuWaCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="wuwa/resonators"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function WuWaCharacterInfoCardMaterial({
+    character,
+    props,
+}: {
+    character: WuWaCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardMaterial
+            tag="wuwa/resonators"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            materials={character.materials}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function WuWaWeaponInfoCard({
+    weapon,
+    props,
+}: {
+    weapon: WuWaWeapon;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="wuwa/weapons"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            badgeLeft={{
+                weaponType: weapon.weaponType,
+                subStat: weapon.stats.subStat,
+            }}
+            url=""
+            href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function WuWaEchoInfoCard({
+    echo,
+    props,
+}: {
+    echo: WuWaEcho;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="wuwa/echoes"
+            id={Number(echo.id)}
+            key={echo.id}
+            name={echo.displayName}
+            rarity={echo.rarity}
+            badgeLeft={{
+                sonata: echo.sonata,
+            }}
+            badgeRight={{
+                cost: echo.cost,
+            }}
+            href={echo.url}
             {...props}
         />
     );

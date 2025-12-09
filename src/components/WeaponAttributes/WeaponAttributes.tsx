@@ -94,9 +94,7 @@ export default function WeaponAttributes({
                         scrollbarWidth: "thin",
                     }}
                 >
-                    <Text variant="body2" weight="highlight">
-                        {parse(attributes.description)}
-                    </Text>
+                    <Text variant="body2">{parse(attributes.description)}</Text>
                 </Box>
             )}
         </Stack>

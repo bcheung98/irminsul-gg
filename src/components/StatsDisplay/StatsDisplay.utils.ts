@@ -1,13 +1,21 @@
+import { splitJoin } from "@/utils";
 import levelData from "@/data/levels";
+import { StatsDisplayProps } from "./StatsDisplay.types";
 import {
     baseATKScaling as genshinBaseATKScaling,
-    subStats,
+    GenshinWeaponBaseATK,
+    GenshinWeaponSubStat,
+    subStats as genshinSubstats,
 } from "@/data/genshin/weaponStats";
-import { StatsDisplayProps } from "./StatsDisplay.types";
 import { characterAscensionStatScalings } from "@/data/genshin/characterAscensionStats";
-import { splitJoin } from "@/utils";
 import { weaponStats as hsrWeaponStats } from "@/data/hsr/weaponStats";
 import { HSRWeaponStats } from "@/types/hsr/weapon";
+import {
+    baseATKScaling as wuwaBaseATKScaling,
+    WuWaWeaponBaseATK,
+    WuWaWeaponSubStat,
+    subStats as wuwaSubstats,
+} from "@/data/wuwa/weaponStats";
 
 type Props = Omit<StatsDisplayProps, "game">;
 type StatsData = {
@@ -26,6 +34,7 @@ export function getStats({
         case "hsr":
             return getHSRStats({ stats, attributes });
         case "wuwa":
+            return getWuWaStats({ stats, attributes });
         case "zzz":
         case "uma":
         default:
@@ -151,13 +160,17 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                 "Base ATK|genshin/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (
-                        genshinBaseATKScaling[stats.atk][index] || 0
+                        genshinBaseATKScaling[
+                            stats.atk as GenshinWeaponBaseATK
+                        ][index] || 0
                     ).toLocaleString()
                 ),
             ],
         ];
         if (stats.subStat) {
-            let subStatScaling = subStats[stats.atk][stats.subStat] as string[];
+            let subStatScaling = genshinSubstats[
+                stats.atk as GenshinWeaponBaseATK
+            ][stats.subStat as GenshinWeaponSubStat] as string[];
             data.push([
                 `${stats.subStat}|genshin/icons/stat-icons/${splitJoin(
                     stats.subStat
@@ -234,6 +247,61 @@ function getHSRStats({ stats }: Props): StatsData {
                 ),
             ],
         ];
+    }
+
+    return { levels, data };
+}
+
+function getWuWaStats({ stats, attributes }: Props): StatsData {
+    const levels = levelData["wuwa"]("level-asc", attributes.rarity);
+    let data: (string | number)[][] = [];
+    if ("hp" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base HP|wuwa/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base ATK|wuwa/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base DEF|wuwa/icons/stat-icons/DEF",
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString()
+                ),
+            ],
+        ];
+    } else if ("subStat" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base ATK|wuwa/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (
+                        wuwaBaseATKScaling[stats.atk as WuWaWeaponBaseATK][
+                            index
+                        ] || 0
+                    ).toLocaleString()
+                ),
+            ],
+        ];
+        if (stats.subStat) {
+            let subStatScaling = wuwaSubstats[stats.atk as WuWaWeaponBaseATK][
+                stats.subStat as WuWaWeaponSubStat
+            ] as string[];
+            data.push([
+                `${stats.subStat}|wuwa/icons/stat-icons/${splitJoin(
+                    stats.subStat
+                )}`,
+                ...levels.map((_, index) => subStatScaling[index] || 0),
+            ]);
+        }
     }
 
     return { levels, data };

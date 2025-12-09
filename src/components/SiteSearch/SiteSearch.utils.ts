@@ -12,6 +12,7 @@ import {
     GenshinWeapon,
 } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
+import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -47,6 +48,21 @@ export async function getItems(
             hideUnreleasedContent,
             await getDataSet<HSRRelic>("hsr/relics"),
             "hsr"
+        ),
+        "wuwa/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<WuWaCharacter>("wuwa/resonators"),
+            "wuwa"
+        ),
+        "wuwa/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<WuWaWeapon>("wuwa/weapons"),
+            "wuwa"
+        ),
+        "wuwa/equipment": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<WuWaEcho>("wuwa/echoes"),
+            "wuwa"
         ),
     })
         .map(([category, data]) =>

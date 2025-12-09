@@ -123,4 +123,22 @@ const options = {
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Path" },
     ],
+    "wuwa/resonators": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "element", label: "Attribute" },
+        { value: "weaponType", label: "Weapon" },
+    ],
+    "wuwa/weapons": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "weaponType", label: "Weapon" },
+    ],
+    "wuwa/echoes": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Class" },
+    ],
 };
