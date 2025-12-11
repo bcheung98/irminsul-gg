@@ -47,6 +47,7 @@ export default function TextLabel({
                 responsiveSize={0.2}
                 supressLoadImageWarning={iconProps?.supressLoadImageWarning}
                 fallbackSrc={iconProps?.fallbackSrc}
+                format={iconProps?.format || "png"}
             />
         ) : (
             icon

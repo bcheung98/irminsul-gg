@@ -12,6 +12,7 @@ export interface IconProps {
     styles?: CSSProperties;
     supressLoadImageWarning?: boolean;
     fallbackSrc?: string;
+    format?: "png" | "gif" | "webp";
 }
 
 export interface TitleProps {
