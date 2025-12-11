@@ -8,7 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Helper imports
-import { combineStyles, zoomImageOnHover } from "@/utils";
+import { combineStyles, splitJoin, zoomImageOnHover } from "@/utils";
 
 // Type imports
 import { ImageProps } from "./Image.types";
@@ -29,6 +29,7 @@ export default function Image({
     onClick,
     useNext = false,
     supressLoadImageWarning = false,
+    format = "png",
 }: ImageProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -52,7 +53,11 @@ export default function Image({
     };
 
     if (!src.startsWith("https")) {
-        src = `https://assets.irminsul.gg/v2/${src.split(" ").join("_")}.png`;
+        src = `https://assets.irminsul.gg/v2/${splitJoin(src)}.${format}`;
+    }
+
+    if (!fallbackSrc.startsWith("https")) {
+        fallbackSrc = `https://assets.irminsul.gg/v2/${fallbackSrc}.png`;
     }
 
     const imgStyle = combineStyles(defaultImageStyle, style);
@@ -63,7 +68,7 @@ export default function Image({
 
     function onError(event: React.SyntheticEvent<HTMLImageElement, Event>) {
         !supressLoadImageWarning && console.warn(`Failed to load image ${src}`);
-        event.currentTarget.src = `https://assets.irminsul.gg/v2/${fallbackSrc}.png`;
+        event.currentTarget.src = fallbackSrc;
         onerror = null;
     }
 

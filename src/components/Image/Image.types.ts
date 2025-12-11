@@ -18,4 +18,5 @@ export interface ImageProps {
     onClick?: () => void;
     useNext?: boolean;
     supressLoadImageWarning?: boolean;
+    format?: "png" | "gif" | "webp";
 }
