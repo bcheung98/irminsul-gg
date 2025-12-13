@@ -35,18 +35,20 @@ export function createBannerData<
     if (character) {
         data.id = character.id;
         data.name = character.name;
-        data.displayName = character.displayName;
+        data.displayName = character.displayName || character.name;
         data.rarity = character.rarity;
         data.element = character.element;
         data.weaponType = character.weaponType;
+        if (character.outfit) data.outfit = character.outfit;
         data.url = character.url;
     } else if (weapon) {
         data.category = "weapons";
         data.id = weapon.id;
         data.name = weapon.name;
-        data.displayName = weapon.displayName;
+        data.displayName = weapon.displayName || weapon.name;
         data.rarity = weapon.rarity;
         data.weaponType = weapon.weaponType;
+        if (weapon.specialty) data.specialty = weapon.specialty;
         data.url = weapon.url;
     } else {
         name !== "TBA" && console.warn(`Could not find an entry with ID ${id}`);
@@ -65,6 +67,7 @@ export function createBannerOptions<
                 if (item !== "TBA") {
                     options.push(
                         createBannerData({
+                            id: typeof item === "number" ? item : undefined,
                             name: `${item}`,
                             characters,
                             weapons,

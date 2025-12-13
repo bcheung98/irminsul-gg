@@ -39,7 +39,7 @@ export default function CalendarEventPopup(props: {
             url: `${item.id}`,
         })) as BannerOption[];
     const server = useServerStore()[game];
-    const isFuture = isFutureBanner(props.eventProps, server);
+    const isFuture = isFutureBanner(props.eventProps, server, game);
 
     let title = getBannerLabel(props.eventProps, server, "date");
     if (props.eventProps.isFuture !== undefined && props.eventProps.isFuture) {

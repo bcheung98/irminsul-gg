@@ -129,21 +129,36 @@ export default function BannerArchive<
     });
     useEffect(() => {
         startTransition(async () => {
-            let items = await getBannerData(banners);
+            let items = await getBannerData(banners, game, server);
             startTransition(() => setBannerData(items));
         });
-    }, [banners]);
+    }, [banners, game, server]);
 
     const [values, setValues] = useState<BannerOption[]>([]);
 
     const characterBanners = useMemo(
         () =>
-            filterBanners(bannerData.character, values, unique, sortDirection),
-        [bannerData.character, values, unique, sortDirection]
+            filterBanners(
+                bannerData.character,
+                values,
+                unique,
+                sortDirection,
+                game,
+                server
+            ),
+        [bannerData.character, values, unique, sortDirection, game, server]
     );
     const weaponBanners = useMemo(
-        () => filterBanners(bannerData.weapon, values, unique, sortDirection),
-        [bannerData.weapon, values, unique, sortDirection]
+        () =>
+            filterBanners(
+                bannerData.weapon,
+                values,
+                unique,
+                sortDirection,
+                game,
+                server
+            ),
+        [bannerData.weapon, values, unique, sortDirection, game, server]
     );
     const chronicledBanners = useMemo(
         () =>
@@ -151,20 +166,22 @@ export default function BannerArchive<
                 bannerData.chronicled || [],
                 values,
                 unique,
-                sortDirection
+                sortDirection,
+                game,
+                server
             ),
-        [bannerData.chronicled, values, unique, sortDirection]
+        [bannerData.chronicled, values, unique, sortDirection, game, server]
     );
 
     const bannerOptions = useMemo(() => {
-        let items = createBannerOptions(banners, characters, weapons);
+        let items = createBannerOptions(bannerData, characters, weapons);
         if (filterCharacter && filterWeapon) return items;
         if (filterCharacter)
             return items.filter((item) => item.category === "characters");
         if (filterWeapon)
             return items.filter((item) => item.category === "weapons");
         return items;
-    }, [banners, filterCharacter, filterWeapon]);
+    }, [bannerData, filterCharacter, filterWeapon]);
 
     const HeaderRoot = (
         <Card

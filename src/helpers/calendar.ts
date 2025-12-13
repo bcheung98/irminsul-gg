@@ -1,3 +1,4 @@
+import { getVersionDates } from "@/components/BannerArchive/BannerArchive.utils";
 import DateObject from "./dates";
 import { games } from "@/data/games";
 import { Game, Server } from "@/types";
@@ -50,9 +51,17 @@ export function createEventSourceObject({
     showFullDuration: boolean;
 }): EventObject[] {
     const game = tag.split("/")[0] as Game;
+    if (game === "uma" && server === "NA") {
+        banners = banners.filter((banner) => banner.start !== "");
+    }
     return createVersionInfo({ game, banners }).map((version) => {
-        const start = new DateObject(version.start, server, game).date;
-        const end = new DateObject(version.end, server, game).date;
+        const { versionStart, versionEnd } = getVersionDates(
+            version,
+            server,
+            game
+        );
+        const start = new DateObject(versionStart, server, game).date;
+        const end = new DateObject(versionEnd, server, game).date;
         return {
             id: `${game}-${version.id}`,
             title: `${games[game].shortName} ${version.version}`,

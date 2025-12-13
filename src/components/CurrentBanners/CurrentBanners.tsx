@@ -24,7 +24,7 @@ import { categories } from "@/data/categories";
 
 // Type imports
 import { Game, GameData } from "@/types";
-import { BannerOption, BannerProps } from "@/types/banner";
+import { Banner, BannerOption, BannerProps } from "@/types/banner";
 import { BannerArchiveProps } from "@/components/BannerArchive";
 import { VersionHighlightsProps } from "@/components/VersionHighlights/VersionHighlights.types";
 
@@ -41,25 +41,32 @@ export default function CurrentBanners<
     const game = useGameTag();
     const server = useStore(useServerStore, (state) => state[game]) || "NA";
 
-    const currentCharacterBanners = characterBanners.filter((banner) =>
-        isCurrentBanner(banner, server)
-    );
-    const currentWeaponBanners = weaponBanners.filter((banner) =>
-        isCurrentBanner(banner, server)
-    );
-    const currentChronicledBanners =
-        chronicledBanners &&
-        chronicledBanners.filter((banner) => isCurrentBanner(banner, server));
+    function filterUmaBanner(banner: Banner) {
+        if (game === "uma" && server === "NA") return banner.start !== "";
+        else return banner;
+    }
 
-    const futureCharacterBanners = characterBanners.filter((banner) =>
-        isFutureBanner(banner, server)
-    );
-    const futureWeaponBanners = weaponBanners.filter((banner) =>
-        isFutureBanner(banner, server)
-    );
+    function filterCurrentBanners(banners: Banner[]) {
+        return banners
+            .filter(filterUmaBanner)
+            .filter((banner) => isCurrentBanner(banner, server, game));
+    }
+
+    function filterFutureBanners(banners: Banner[]) {
+        return banners
+            .filter(filterUmaBanner)
+            .filter((banner) => isFutureBanner(banner, server, game));
+    }
+
+    const currentCharacterBanners = filterCurrentBanners(characterBanners);
+    const currentWeaponBanners = filterCurrentBanners(weaponBanners);
+    const currentChronicledBanners =
+        chronicledBanners && filterCurrentBanners(chronicledBanners);
+
+    const futureCharacterBanners = filterFutureBanners(characterBanners);
+    const futureWeaponBanners = filterFutureBanners(weaponBanners);
     const futureChronicledBanners =
-        chronicledBanners &&
-        chronicledBanners.filter((banner) => isFutureBanner(banner, server));
+        chronicledBanners && filterFutureBanners(chronicledBanners);
 
     const activeBanners =
         [
@@ -84,7 +91,7 @@ export default function CurrentBanners<
         return (
             <FlexBox wrap spacing={[2, 8]}>
                 {character.length > 0 && (
-                    <Stack spacing={1}>
+                    <Stack spacing={1} sx={{ minWidth: "192px" }}>
                         <Text weight="highlight">
                             {bannerTitle(game, "characters")}
                         </Text>
@@ -102,7 +109,10 @@ export default function CurrentBanners<
                 {weapon.length > 0 && (
                     <Stack spacing={1}>
                         <Text weight="highlight">
-                            {bannerTitle(game, "weapons")}
+                            {bannerTitle(
+                                game,
+                                game === "uma" ? "supports" : "weapons"
+                            )}
                         </Text>
                         <Stack spacing={2}>
                             {weapon.map((banner) => (

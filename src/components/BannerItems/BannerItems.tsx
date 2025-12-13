@@ -14,6 +14,7 @@ import Skeleton from "@mui/material/Skeleton";
 // Helper imports
 import { useGameTag } from "@/context";
 import {
+    getVersionDates,
     isFutureBanner,
     useBannerData,
 } from "@/components/BannerArchive/BannerArchive.utils";
@@ -45,7 +46,12 @@ const BannerItems = memo(function BannerItems({
         startTransition(() => {
             const data = banner.rateUps
                 .map((item) =>
-                    createBannerData({ name: `${item}`, characters, weapons })
+                    createBannerData({
+                        id: typeof item === "number" ? item : undefined,
+                        name: `${item}`,
+                        characters,
+                        weapons,
+                    })
                 )
                 .sort((a, b) => sortBy(a.rarity, b.rarity));
             setBannerData(data);
@@ -62,7 +68,9 @@ const BannerItems = memo(function BannerItems({
         />
     ));
 
-    const upcoming = isFutureBanner(banner, server);
+    const upcoming = isFutureBanner(banner, server, game);
+
+    const { versionStart, versionEnd } = getVersionDates(banner, server, game);
 
     const textColor = getContrastText(
         theme.text.primary,
@@ -99,7 +107,7 @@ const BannerItems = memo(function BannerItems({
             </Grid>
             {showCountdown && (
                 <Countdown
-                    date={upcoming ? banner.start : banner.end}
+                    date={upcoming ? versionStart : versionEnd}
                     server={server}
                     startText={upcoming ? "Starts in" : ""}
                     endText="Banner has ended"

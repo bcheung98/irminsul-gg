@@ -58,7 +58,11 @@ export default function Calendar(props: {
     const characters =
         props.data.filter((item) => item.category.endsWith("characters")) || [];
     const weapons =
-        props.data.filter((item) => item.category.endsWith("weapons")) || [];
+        props.data.filter(
+            (item) =>
+                item.category.endsWith("weapons") ||
+                item.category.endsWith("supports")
+        ) || [];
 
     const eventSources = useMemo(() => {
         return Object.entries(banners).map(([tag, banners]) => {
@@ -71,7 +75,7 @@ export default function Calendar(props: {
                 showFullDuration,
             });
         });
-    }, [banners, JSON.stringify(fullDurationGames)]);
+    }, [banners, JSON.stringify(server), JSON.stringify(fullDurationGames)]);
 
     return (
         <Box>
