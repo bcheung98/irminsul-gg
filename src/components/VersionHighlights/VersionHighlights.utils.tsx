@@ -9,6 +9,10 @@ import {
     WuWaCharacterInfoCard,
     WuWaEchoInfoCard,
     WuWaWeaponInfoCard,
+    ZZZBangbooInfoCard,
+    ZZZCharacterInfoCard,
+    ZZZDriveDiscInfoCard,
+    ZZZWeaponInfoCard,
 } from "@/components/InfoCard";
 import { Game, GameData } from "@/types";
 import {
@@ -22,8 +26,9 @@ import {
 } from "@/types/genshin";
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
+import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 
-type Data<T> = Record<keyof VersionHighlightsProps, T>;
+type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
 
 export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
     const items: GameData<Data<string>> = {
@@ -46,6 +51,7 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
             characters: "zzz/icons/Characters",
             weapons: "zzz/icons/W-Engine",
             equipment: "zzz/icons/Drive_Disc",
+            bangboos: "zzz/icons/Bangboo",
         },
         uma: {
             characters: "",
@@ -146,9 +152,37 @@ export function renderInfoCard(
             ),
         },
         zzz: {
-            characters: <></>,
-            weapons: <></>,
-            equipment: undefined,
+            characters: (
+                <ZZZCharacterInfoCard
+                    key={item.id}
+                    character={item as ZZZCharacter}
+                    props={{
+                        componentID: `${item.id}-versionHighlights`,
+                        background: backround,
+                    }}
+                />
+            ),
+            weapons: (
+                <ZZZWeaponInfoCard
+                    key={item.id}
+                    weapon={item as ZZZWeapon}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            equipment: (
+                <ZZZDriveDiscInfoCard
+                    key={item.id}
+                    disc={item as ZZZDriveDisc}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            bangboos: (
+                <ZZZBangbooInfoCard
+                    key={item.id}
+                    bangboo={item as ZZZBangboo}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
         uma: {
             characters: <></>,

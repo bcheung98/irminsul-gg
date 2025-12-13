@@ -21,6 +21,13 @@ export const urls = {
         "https://api.irminsul.gg/v2/wuwa/banner-characters.json",
     "wuwa/banner-weapons":
         "https://api.irminsul.gg/v2/wuwa/banner-weapons.json",
+    "zzz/agents": "https://api.irminsul.gg/v2/zzz/characters.json",
+    "zzz/w-engines": "https://api.irminsul.gg/v2/zzz/weapons.json",
+    "zzz/drive-discs": "https://api.irminsul.gg/v2/zzz/drive-discs.json",
+    "zzz/bangboos": "https://api.irminsul.gg/v2/zzz/bangboo.json",
+    "zzz/banner-characters":
+        "https://api.irminsul.gg/v2/zzz/banner-characters.json",
+    "zzz/banner-weapons": "https://api.irminsul.gg/v2/zzz/banner-weapons.json",
 };
 
 export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {

@@ -20,6 +20,12 @@ import {
     getCharacterBonusStatCost as getWuWaCharacterBonusStatCost,
     getWeaponLevelCost as getWuWaWeaponLevelCost,
 } from "./wuwa/getLevelUpCosts";
+import {
+    getCharacterLevelCost as getZZZCharacterLevelCost,
+    getCharacterSkillCost as getZZZCharacterSkillCost,
+    getCharacterCoreSkillCost as getZZZCharacterCoreSkillCost,
+    getWeaponLevelCost as getZZZWeaponLevelCost,
+} from "./zzz/getLevelUpCosts";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -46,7 +52,12 @@ export const costs: GameData<Costs> = {
         characterBonusStat: getWuWaCharacterBonusStatCost,
         weaponLevel: getWuWaWeaponLevelCost,
     },
-    zzz: {},
+    zzz: {
+        characterLevel: getZZZCharacterLevelCost,
+        characterSkill: getZZZCharacterSkillCost,
+        characterCoreSkill: getZZZCharacterCoreSkillCost,
+        weaponLevel: getZZZWeaponLevelCost,
+    },
     uma: {},
 };
 

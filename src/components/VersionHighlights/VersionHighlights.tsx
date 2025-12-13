@@ -73,6 +73,13 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                 b.rarity - a.rarity ||
                 a.displayName.localeCompare(b.displayName)
         );
+    const bangboo = props.bangboos
+        ?.filter((bangboo) => bangboo.release.version === version)
+        .sort(
+            (a, b) =>
+                b.rarity - a.rarity ||
+                a.displayName.localeCompare(b.displayName)
+        );
 
     const selectProps = {
         index,
@@ -168,6 +175,21 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {equipment.map((item) =>
                                         renderInfoCard(game, "equipment", item)
+                                    )}
+                                </Grid>
+                            </Grid>
+                        )}
+                        {bangboo && bangboo.length > 0 && (
+                            <Grid sx={gridContainerStyle} size="auto">
+                                <TextLabel
+                                    icon={textLabelIcon(game, "bangboos")}
+                                    iconProps={{ size: 32 }}
+                                    title={textLabelTitle(game, "bangboos")}
+                                    titleProps={{ variant: "h6" }}
+                                />
+                                <Grid container spacing={3} sx={gridStyle}>
+                                    {bangboo.map((item) =>
+                                        renderInfoCard(game, "bangboos", item)
                                     )}
                                 </Grid>
                             </Grid>

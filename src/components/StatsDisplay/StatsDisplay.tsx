@@ -31,6 +31,8 @@ export default function StatsDisplay({
     const { levels, data } = getStats({ game, stats, attributes });
 
     const textColor = useTextColor(theme.text);
+    const color =
+        attributes.colors?.accent || textColor(game, attributes.element);
 
     const currentStatDisplay =
         useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
@@ -62,7 +64,7 @@ export default function StatsDisplay({
                         minWidth: "100px",
                         maxWidth: "50%",
                         ml: "8px",
-                        color: textColor(game, attributes.element),
+                        color,
                     },
                 }}
                 tableProps={{

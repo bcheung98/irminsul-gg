@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { range } from "@/utils";
 import { useStore, useSettingsStore } from "@/stores";
+import { useGameTag } from "@/context";
 
 // Type imports
 import { CharacterSkillScalingProps } from "./CharacterSkills.types";
@@ -18,12 +19,11 @@ import { SkillDisplay } from "@/types";
 
 export default function CharacterSkillScaling({
     skill,
+    initialValue,
+    maxLevel,
     color,
 }: CharacterSkillScalingProps) {
-    const maxLevel = skill.map((skl) =>
-        skl.scaling ? skl.scaling[0].length - 1 : 1
-    )[0];
-    const initialLevel = Math.min(10, maxLevel);
+    const game = useGameTag();
 
     const currentStatDisplay =
         useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
@@ -33,31 +33,38 @@ export default function CharacterSkillScaling({
         setMode(currentStatDisplay);
     }, [currentStatDisplay]);
 
-    const [sliderValue, setSliderValue] = useState(initialLevel);
+    const [sliderValue, setSliderValue] = useState(initialValue);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {
         setSliderValue(newValue as number);
     };
 
     const Root = (
-        <Stack spacing={3}>
+        <Stack
+            spacing={3}
+            sx={{
+                maxHeight: "840px",
+                overflowY: "auto",
+                scrollbarWidth: "thin",
+                scrollbarGutter: "stable",
+            }}
+        >
             {skill.map((skl, index) => {
                 if (!skl.scaling) return null;
                 const data = skl.scaling.map((subScaling) =>
                     subScaling.slice(0, maxLevel + 1)
                 )!;
-                const levels = data.length > 0 ? data[0].length - 1 : maxLevel;
                 return (
                     <Stack spacing={1} key={index}>
-                        {skill.length > 1 && (
+                        {(skill.length > 1 || game === "zzz") && (
                             <Text variant="h6" weight="highlight">
                                 {skl.name}
                             </Text>
                         )}
                         <StatsTable
                             mode={mode}
-                            levels={range(1, levels)}
+                            levels={range(1, maxLevel)}
                             data={data}
-                            headColumns={["Level", ...range(1, levels)]}
+                            headColumns={["Level", ...range(1, maxLevel)]}
                             sliderValue={sliderValue}
                             handleSliderChange={handleSliderChange}
                             sliderProps={{
@@ -73,7 +80,7 @@ export default function CharacterSkillScaling({
                                     width:
                                         mode === "slider"
                                             ? { sm: "100%", md: "100%" }
-                                            : "max-content",
+                                            : "100%",
                                     maxWidth:
                                         mode === "slider"
                                             ? { lg: "100%" }

@@ -6,6 +6,8 @@ import SkillCard from "@/components/SkillCard";
 import CharacterSkillDescription from "./CharacterSkillDescription";
 import CharacterSkillScaling from "./CharacterSkillScaling";
 import CharacterSkillLevelUp from "./CharacterSkillLevelUp";
+import CharacterBonusStats from "../_wuwa/CharacterBonusStats";
+import CharacterPassives from "../_wuwa/CharacterPassives";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -25,8 +27,6 @@ import { skillKeys } from "@/data/skills";
 import { CharacterSkillProps } from "./CharacterSkills.types";
 import { CharacterSkillsList } from "@/types/skill";
 import { SkillDisplay } from "@/types";
-import CharacterBonusStats from "../_wuwa/CharacterBonusStats";
-import CharacterPassives from "../_wuwa/CharacterPassives";
 
 export default function CharacterSkillTab({
     skillKey,
@@ -40,6 +40,8 @@ export default function CharacterSkillTab({
     const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
+    const color =
+        attributes.colors?.accent || textColor(game, attributes.element);
 
     const currentStatDisplay =
         useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
@@ -66,11 +68,40 @@ export default function CharacterSkillTab({
             skill = skill.filter((skill) => !skill.version);
         }
 
-        // HSR specific
-        const initialValue =
-            skillKey === "attack" || skillKey.startsWith("memo") ? 6 : 10;
-        const maxLevel =
-            skillKey === "attack" || skillKey.startsWith("memo") ? 7 : 12;
+        let initialValue = 10;
+        let maxLevel = 10;
+        if (game === "genshin") {
+            initialValue = skillKey === "altsprint" ? 1 : 10;
+            maxLevel = skillKey === "altsprint" ? 1 : 15;
+        }
+        if (game === "hsr") {
+            initialValue =
+                skillKey === "attack" || skillKey.startsWith("memo") ? 6 : 10;
+            maxLevel =
+                skillKey === "attack" || skillKey.startsWith("memo") ? 7 : 12;
+        }
+        if (game === "zzz") {
+            switch (skillKey) {
+                case "core":
+                    initialValue = 7;
+                    maxLevel = 7;
+                    break;
+                case "A":
+                case "C":
+                    initialValue = 10;
+                    maxLevel = 10;
+                    break;
+                case "B":
+                    initialValue = 5;
+                    maxLevel = 5;
+                    break;
+                default:
+                    initialValue = 12;
+                    maxLevel = 16;
+                    break;
+            }
+        }
+
         const [sliderValue, setSliderValue] = useState(initialValue);
         const handleSliderChange = (_: Event, newValue: number | number[]) => {
             setSliderValue(newValue as number);
@@ -78,7 +109,7 @@ export default function CharacterSkillTab({
         const levels = range(1, maxLevel);
         const scaling = skill.map((skill) => skill.scaling || []).flat();
         const targets = document.getElementsByClassName(
-            "character-skill-value"
+            game === "zzz" ? "character-skill-value-0" : "character-skill-value"
         );
         useEffect(() => {
             scaling.forEach((subScaling: string[], index: number) => {
@@ -89,13 +120,18 @@ export default function CharacterSkillTab({
             });
         }, [skillVersion.value, sliderValue]);
 
-        const LevelUp = !["altsprint", "technique", "outro"].includes(
-            skillKey
-        ) ? (
+        const LevelUp = ![
+            "altsprint",
+            "technique",
+            "outro",
+            "A",
+            "B",
+            "C",
+        ].includes(skillKey) ? (
             <Stack sx={{ px: { xs: 0, md: 1 } }}>
                 <CharacterSkillLevelUp
                     materials={materials}
-                    color={textColor(game, attributes.element)}
+                    color={color}
                     attributes={attributes}
                     skillKey={skillKey}
                 />
@@ -105,11 +141,13 @@ export default function CharacterSkillTab({
         );
 
         const SkillScaling =
-            game !== "hsr" && !["outro"].includes(skillKey) ? (
+            game !== "hsr" && !["outro", "core"].includes(skillKey) ? (
                 <Grid size={{ xs: 12, md: mode === "slider" ? 5 : 12 }}>
                     <CharacterSkillScaling
                         skill={skill}
-                        color={textColor(game, attributes.element)}
+                        initialValue={initialValue}
+                        maxLevel={maxLevel}
+                        color={color}
                     />
                 </Grid>
             ) : (
@@ -145,26 +183,40 @@ export default function CharacterSkillTab({
                                 >
                                     {skillKeys[game][skillKey]}
                                 </Text>
-                                <Grid container spacing={2}>
-                                    {skill.map((skl, index) => (
-                                        <SkillCard
-                                            key={`${skillKey}-${index}`}
-                                            size={12}
-                                        >
-                                            <CharacterSkillDescription
-                                                skill={skl}
-                                                skillKey={skillKey}
-                                                keywords={keywords}
-                                                attributes={attributes}
-                                                levels={levels}
-                                                sliderValue={sliderValue}
-                                                handleSliderChange={
-                                                    handleSliderChange
-                                                }
-                                                index={index}
-                                            />
-                                        </SkillCard>
-                                    ))}
+                                <Grid
+                                    container
+                                    spacing={2}
+                                    sx={{
+                                        maxHeight: "840px",
+                                        overflowY: "auto",
+                                        scrollbarWidth: "thin",
+                                        scrollbarGutter: "stable",
+                                    }}
+                                >
+                                    {skill.map(
+                                        (skl, index) =>
+                                            skl.description && (
+                                                <SkillCard
+                                                    key={`${skillKey}-${index}`}
+                                                    size={12}
+                                                >
+                                                    <CharacterSkillDescription
+                                                        skill={skl}
+                                                        skillKey={skillKey}
+                                                        keywords={keywords}
+                                                        attributes={attributes}
+                                                        levels={levels}
+                                                        sliderValue={
+                                                            sliderValue
+                                                        }
+                                                        handleSliderChange={
+                                                            handleSliderChange
+                                                        }
+                                                        index={index}
+                                                    />
+                                                </SkillCard>
+                                            )
+                                    )}
                                 </Grid>
                                 {matches && mode === "slider" && LevelUp}
                             </Stack>

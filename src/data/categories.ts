@@ -11,9 +11,27 @@ export const categories: Record<string, string> = {
     "zzz/characters": "Agents",
     "zzz/weapons": "W-Engines",
     "zzz/equipment": "Drive Discs",
-    "zzz/bangboo": "Bangboo",
+    "zzz/bangboos": "Bangboos",
     "uma/characters": "Characters",
     "uma/supports": "Support Cards",
+};
+
+export const categoryURLs: Record<string, string> = {
+    "genshin/characters": "genshin/characters",
+    "genshin/weapons": "genshin/weapons",
+    "genshin/equipment": "genshin/artifacts",
+    "hsr/characters": "hsr/characters",
+    "hsr/weapons": "hsr/lightcones",
+    "hsr/equipment": "hsr/relics",
+    "wuwa/characters": "wuwa/resonators",
+    "wuwa/weapons": "wuwa/weapons",
+    "wuwa/equipment": "wuwa/echoes",
+    "zzz/characters": "zzz/agents",
+    "zzz/weapons": "zzz/w-engines",
+    "zzz/equipment": "zzz/drive-discs",
+    "zzz/bangboos": "zzz/bangboos",
+    "uma/characters": "uma/characters",
+    "uma/supports": "uma/support-cards",
 };
 
 export const categoryImgURLs: Record<
@@ -33,5 +51,5 @@ export const categoryImgURLs: Record<
     "zzz/characters": (id: number) => `zzz/agents/${id}`,
     "zzz/weapons": (id: number) => `zzz/w-engines/${id}`,
     "zzz/equipment": (id: number) => `zzz/drive-discs/${id}`,
-    "zzz/bangboo": (id: number) => `zzz/bangboo/${id}`,
+    "zzz/bangboos": (id: number) => `zzz/bangboo/${id}`,
 };

@@ -55,6 +55,12 @@ export default function CharacterSkillLevelUp({
             costKey = "characterBonusStat";
         }
     }
+    if (game === "zzz") {
+        if (skillKey === "core") {
+            levelKey = "core-skill";
+            costKey = "characterCoreSkill";
+        }
+    }
 
     const Root = (
         <Stack spacing={2}>

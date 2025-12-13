@@ -8,6 +8,7 @@ import {
 } from "@/types/genshin";
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
+import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -97,7 +98,7 @@ export function GenshinArtifactInfoCard({
             key={artifact.id}
             name={artifact.displayName}
             rarity={artifact.rarity}
-            url={`${artifact.id}_${artifact.pieces.length > 1 ? 1 : 5}`}
+            url={`${artifact.id}_${artifact.pieces!.length > 1 ? 1 : 5}`}
             href={artifact.url}
             {...props}
         />
@@ -293,6 +294,121 @@ export function WuWaEchoInfoCard({
                 cost: echo.cost,
             }}
             href={echo.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZCharacterInfoCard({
+    character,
+    props,
+}: {
+    character: ZZZCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="zzz/agents"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.subElement || character.element,
+                weaponType: character.weaponType,
+            }}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZCharacterInfoCardMaterial({
+    character,
+    props,
+}: {
+    character: ZZZCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardMaterial
+            tag="zzz/agents"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.subElement || character.element,
+                weaponType: character.weaponType,
+            }}
+            materials={character.materials}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZWeaponInfoCard({
+    weapon,
+    props,
+}: {
+    weapon: ZZZWeapon;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="zzz/w-engines"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            badgeLeft={{
+                weaponType: weapon.weaponType,
+                subStat: weapon.stats.subStat,
+            }}
+            url={`${weapon.id}_large`}
+            href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZDriveDiscInfoCard({
+    disc,
+    props,
+}: {
+    disc: ZZZDriveDisc;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="zzz/drive-discs"
+            id={Number(disc.id)}
+            key={disc.id}
+            name={disc.displayName}
+            rarity={disc.rarity}
+            url={`${disc.id}_icon`}
+            href={disc.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZBangbooInfoCard({
+    bangboo,
+    props,
+}: {
+    bangboo: ZZZBangboo;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="zzz/bangboos"
+            id={Number(bangboo.id)}
+            key={bangboo.id}
+            name={bangboo.displayName}
+            rarity={bangboo.rarity}
+            href={bangboo.url}
             {...props}
         />
     );

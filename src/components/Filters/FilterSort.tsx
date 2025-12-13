@@ -141,4 +141,17 @@ const options = {
         { value: "name", label: "Name" },
         { value: "rarity", label: "Class" },
     ],
+    "zzz/agents": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rank" },
+        { value: "element", label: "Attribute" },
+        { value: "weaponType", label: "Specialty" },
+    ],
+    "zzz/w-engines": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rank" },
+        { value: "weaponType", label: "Specialty" },
+    ],
 };

@@ -37,6 +37,7 @@ export default function SkillIcon({
     const game = useGameTag();
 
     const color =
+        attributes?.colors?.accent ||
         useTextColor(theme.text)(game, attributes?.element) ||
         theme.border.color.primary;
 

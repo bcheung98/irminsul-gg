@@ -6,6 +6,8 @@ import { HSRWeaponFilterState } from "@/components/_hsr/Filters/WeaponFilters";
 import { WuWaCharacterFilterState } from "@/components/_wuwa/Filters/CharacterFilters";
 import { WuWaWeaponFilterState } from "@/components/_wuwa/Filters/WeaponFilters";
 import { WuWaEchoFilterState } from "@/components/_wuwa/Filters/EchoFilters";
+import { ZZZCharacterFilterState } from "@/components/_zzz/Filters/CharacterFilters";
+import { ZZZWeaponFilterState } from "@/components/_zzz/Filters/WeaponFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
@@ -15,8 +17,8 @@ export interface FilterState {
     "wuwa/characters": WuWaCharacterFilterState;
     "wuwa/weapons": WuWaWeaponFilterState;
     "wuwa/echoes": WuWaEchoFilterState;
-    "zzz/characters": {};
-    "zzz/weapons": {};
+    "zzz/characters": ZZZCharacterFilterState;
+    "zzz/weapons": ZZZWeaponFilterState;
     "uma/characters": {};
     "uma/weapons": {};
 }
@@ -106,6 +108,22 @@ export const wuwaEchoFilters: WuWaEchoFilterState = {
     _sonata: ["true"],
 };
 
+export const zzzCharacterFilters: ZZZCharacterFilterState = {
+    element: [],
+    weaponType: [],
+    attackType: [],
+    rarity: [],
+    bossMat: [],
+    weeklyBossMat: [],
+    nation: [],
+};
+
+export const zzzWeaponFilters: ZZZWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+    subStat: [],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
@@ -114,8 +132,8 @@ export const initialState: FilterState = {
     "wuwa/characters": wuwaCharacterFilters,
     "wuwa/weapons": wuwaWeaponFilters,
     "wuwa/echoes": wuwaEchoFilters,
-    "zzz/characters": {},
-    "zzz/weapons": {},
+    "zzz/characters": zzzCharacterFilters,
+    "zzz/weapons": zzzWeaponFilters,
     "uma/characters": {},
     "uma/weapons": {},
 };

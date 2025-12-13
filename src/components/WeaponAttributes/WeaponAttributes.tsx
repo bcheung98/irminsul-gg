@@ -16,6 +16,7 @@ import Divider from "@mui/material/Divider";
 // Helper imports
 import { useGameTag } from "@/context";
 import { getDataIconURL } from "@/helpers/dataIcon";
+import { rarityMap } from "@/data/zzz/common";
 
 // Type imports
 import { AttributeData, AttributeDataKey } from "@/types";
@@ -69,6 +70,13 @@ export default function WeaponAttributes({
                 <Box sx={{ display: { xs: "block", md: "none" } }}>{image}</Box>
                 <Stack spacing={1}>
                     <TextLabel
+                        icon={
+                            game === "zzz" &&
+                            `zzz/ranks/item/${
+                                rarityMap[attributes.rarity || 3]
+                            }`
+                        }
+                        iconProps={{ size: 48 }}
                         title={attributes.displayName}
                         titleProps={{ variant: matches ? "h4" : "h6" }}
                         textSpacing={0.5}

@@ -130,9 +130,12 @@ const PlannerSlider = memo(function PlannerSlider({
                         responsiveSize={0.2}
                         style={{
                             opacity: selected ? 1 : 0.35,
-                            padding: "4px",
+                            padding: game === "zzz" ? 0 : "4px",
                             borderRadius: "64px",
-                            border: `2px solid ${theme.border.color.primary}`,
+                            border:
+                                game === "zzz"
+                                    ? "1px solid black"
+                                    : `2px solid ${theme.border.color.primary}`,
                             backgroundColor: theme.iconBackground.primary,
                         }}
                         tooltip={mode === "view" ? title : ""}

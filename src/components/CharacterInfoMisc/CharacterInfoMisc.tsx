@@ -102,6 +102,8 @@ function getRows(
             },
         ],
         zzz: [
+            { key: "Faction", value: attributes.faction },
+            { key: "Birthday", value: attributes.birthday },
             { key: "Release", value: `${releaseDate} (${releaseVersion})` },
             {
                 key: "Voice Actor (EN)",

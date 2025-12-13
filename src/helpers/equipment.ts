@@ -7,8 +7,10 @@ export function filterEquipment(
 ) {
     let res = [...items];
     if (type && type !== "all") {
-        res = res.filter((item) =>
-            item.pieces.map((piece) => piece.type).includes(type)
+        res = res.filter(
+            (item) =>
+                item.pieces &&
+                item.pieces.map((piece) => piece.type).includes(type)
         );
     }
     if (searchValue !== "") {

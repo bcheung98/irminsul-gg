@@ -4,6 +4,7 @@ import { useState } from "react";
 import EquipmentSetEffect from "@/components/EquipmentSetEffect";
 import ContentBox from "@/components/ContentBox";
 import { default as Tabs } from "@/components/Tabs";
+import SkillCard from "@/components/SkillCard";
 import SkillIcon from "@/components/SkillIcon";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
@@ -20,7 +21,7 @@ import { objectKeys } from "@/utils";
 import { equipmentPieceType, equipmentTags } from "@/data/equipment";
 
 // Type imports
-import { Equipment } from "@/types/equipment";
+import { Equipment, SetPieces } from "@/types/equipment";
 
 export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     const theme = useTheme();
@@ -42,7 +43,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
         }`;
     }
 
-    function EquipmentTabsList() {
+    function EquipmentTabsList({ pieces }: { pieces: SetPieces[] }) {
         return (
             <Tabs.List value={tabValue} onChange={handleTabChange}>
                 {pieces.map((piece, index) => (
@@ -62,6 +63,89 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
         );
     }
 
+    function EquipmentTab({
+        piece,
+        index,
+    }: {
+        piece: SetPieces;
+        index: number;
+    }) {
+        return (
+            <Tabs.Panel
+                index={index}
+                value={tabValue}
+                padding={"8px 24px 16px"}
+                timeout={0}
+            >
+                <Stack spacing={2} divider={<Divider />}>
+                    <Stack spacing={2}>
+                        <Stack spacing={1}>
+                            <Text
+                                weight="highlight"
+                                sx={{ color: theme.text.header }}
+                            >
+                                {equipmentPieceType[game][piece.type]}
+                            </Text>
+                            <Text variant="h6" weight="highlight">
+                                {piece.name}
+                            </Text>
+                        </Stack>
+                        <Grid container spacing={3}>
+                            <Grid size="auto">
+                                <Image
+                                    src={getImgURL(piece.type)}
+                                    size={128}
+                                    style={{
+                                        borderRadius: "16px",
+                                        backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
+                                        backgroundSize: "contain",
+                                    }}
+                                />
+                            </Grid>
+                            <SkillCard size={{ sm: "grow", lg: 6 }}>
+                                <EquipmentSetEffect
+                                    equipment={equipment}
+                                    textVariant="body1"
+                                />
+                            </SkillCard>
+                        </Grid>
+                    </Stack>
+                    <Text variant="body2">{piece.description}</Text>
+                </Stack>
+            </Tabs.Panel>
+        );
+    }
+
+    function EquipmentNoTab() {
+        return (
+            <Stack spacing={2} divider={<Divider />} sx={{ p: "16px 24px" }}>
+                <Stack spacing={2}>
+                    <Grid container spacing={3}>
+                        <Grid size="auto">
+                            <Image
+                                src={`${game}/${equipmentTags[game]}/${id}_icon`}
+                                size={128}
+                                style={{
+                                    borderRadius: "16px",
+                                    backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
+                                    backgroundSize: "contain",
+                                    padding: "4px",
+                                }}
+                            />
+                        </Grid>
+                        <SkillCard size={{ sm: "grow", lg: 6 }}>
+                            <EquipmentSetEffect
+                                equipment={equipment}
+                                textVariant="body1"
+                            />
+                        </SkillCard>
+                    </Grid>
+                </Stack>
+                <Text variant="body2">{equipment.description}</Text>
+            </Stack>
+        );
+    }
+
     return (
         <ContentBox
             header={
@@ -72,54 +156,20 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
             headerProps={{ dense: false, padding: "12px 16px" }}
             contentProps={{ padding: 0 }}
         >
-            <EquipmentTabsList />
-            {pieces.map((piece, index) => (
-                <Tabs.Panel
-                    key={piece.type}
-                    index={index}
-                    value={tabValue}
-                    padding={"8px 24px 16px"}
-                    timeout={0}
-                >
-                    <Stack spacing={2} divider={<Divider />}>
-                        <Stack spacing={2}>
-                            <Stack spacing={1}>
-                                <Text
-                                    weight="highlight"
-                                    sx={{ color: theme.text.header }}
-                                >
-                                    {equipmentPieceType[game][piece.type]}
-                                </Text>
-                                <Text variant="h6" weight="highlight">
-                                    {piece.name}
-                                </Text>
-                            </Stack>
-                            <Grid container spacing={3}>
-                                <Grid size="auto">
-                                    <Image
-                                        src={getImgURL(piece.type)}
-                                        size={128}
-                                        style={{
-                                            borderRadius: "16px",
-                                            backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
-                                            backgroundSize: "contain",
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid size={{ sm: "grow", lg: 6 }}>
-                                    <EquipmentSetEffect
-                                        equipment={equipment}
-                                        textVariant="body1"
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Stack>
-                        <Text variant="body2" weight="highlight">
-                            {piece.description}
-                        </Text>
-                    </Stack>
-                </Tabs.Panel>
-            ))}
+            {pieces ? (
+                <>
+                    <EquipmentTabsList pieces={pieces} />
+                    {pieces.map((piece, index) => (
+                        <EquipmentTab
+                            key={piece.type}
+                            piece={piece}
+                            index={index}
+                        />
+                    ))}
+                </>
+            ) : (
+                <EquipmentNoTab />
+            )}
         </ContentBox>
     );
 }

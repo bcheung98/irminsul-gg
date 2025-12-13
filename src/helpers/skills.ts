@@ -3,6 +3,7 @@ import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 import getGenshinSkillKeyword from "./genshin/getSkillKeyword";
 import getHSRSkillKeyword from "./hsr/getSkillKeyword";
 import getWuWaSkillKeyword from "./wuwa/getSkillKeyword";
+import getZZZSkillKeyword from "./zzz/getSkillKeyword";
 
 export function formatSkillIconURL(
     url: string,
@@ -41,9 +42,7 @@ export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
         genshin: getGenshinSkillKeyword,
         hsr: getHSRSkillKeyword,
         wuwa: getWuWaSkillKeyword,
-        zzz: function (args: GetSkillKeywordProps): SkillKeyword | undefined {
-            throw new Error("Function not implemented.");
-        },
+        zzz: getZZZSkillKeyword,
         uma: function (args: GetSkillKeywordProps): SkillKeyword | undefined {
             throw new Error("Function not implemented.");
         },

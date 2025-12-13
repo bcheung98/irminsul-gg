@@ -24,6 +24,9 @@ export interface GalleryState {
     "wuwa/resonators": GallerySettings;
     "wuwa/weapons": GallerySettings;
     "wuwa/echoes": GallerySettings;
+    "zzz/agents": GallerySettings;
+    "zzz/w-engines": GallerySettings;
+    "zzz/drive-discs": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -62,6 +65,13 @@ export const initialState: GalleryState = {
         sortDirection: "asc",
         view: "icon",
     },
+    "zzz/agents": defaultSettings,
+    "zzz/w-engines": {
+        sortBy: "version",
+        sortDirection: "asc",
+        view: "icon",
+    },
+    "zzz/drive-discs": defaultSettings,
 };
 
 export const useGalleryStore = create(

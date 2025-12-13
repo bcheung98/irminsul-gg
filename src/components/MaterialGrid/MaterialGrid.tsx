@@ -71,6 +71,9 @@ function sortItems(items: string[], pathname: string) {
               "weapon",
               "elite",
               "common",
+              "characterLevel",
+              "characterSkill",
+              "weaponLevel",
           ]
         : [
               "credits",
@@ -85,6 +88,9 @@ function sortItems(items: string[], pathname: string) {
               "weapon",
               "elite",
               "common",
+              "characterLevel",
+              "characterSkill",
+              "weaponLevel",
               "weekly",
               "crown",
           ];

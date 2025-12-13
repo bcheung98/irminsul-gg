@@ -45,9 +45,16 @@ export default function StatsTable({
     useEffect(() => {
         const targets = document.getElementsByClassName(textID);
         data.forEach((subScaling: (string | number)[], index: number) => {
-            const target = targets[index];
+            const target = targets[index] as HTMLElement;
             if (target) {
-                target.innerHTML = subScaling[sliderValue].toString();
+                if (target.dataset.index) {
+                    target.innerHTML =
+                        data[Number(target.dataset.index)][
+                            sliderValue
+                        ].toString();
+                } else {
+                    target.innerHTML = subScaling[sliderValue].toString();
+                }
             }
         });
     }, [sliderValue]);

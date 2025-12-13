@@ -72,7 +72,9 @@ export default function Planner({
                         </Dropdown>
                     ) : (
                         <Text weight="highlight">
-                            {`Add a ${titleCharacters} or ${titleWeapons} to get started!`}
+                            {`Add ${
+                                titleCharacters.startsWith("A") ? "an" : "a"
+                            } ${titleCharacters} or ${titleWeapons} to get started!`}
                         </Text>
                     )}
                 </ContentBox>

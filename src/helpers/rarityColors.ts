@@ -8,15 +8,14 @@ import {
     getWuWaBackgroundColor,
     getWuWaRarityColor,
 } from "./wuwa/rarityColors";
+import { getZZZBackgroundColor, getZZZRarityColor } from "./zzz/rarityColors";
 
 export function useRarityColors(): GameData<(rarity?: number) => string> {
     return {
         genshin: getGenshinRarityColor,
         hsr: getHSRRarityColor,
         wuwa: getWuWaRarityColor,
-        zzz: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        zzz: getZZZRarityColor,
         uma: function (rarity?: number): string {
             throw new Error("Function not implemented.");
         },
@@ -30,9 +29,7 @@ export function useBackgroundRarityColors(): GameData<
         genshin: getGenshinBackgroundColor,
         hsr: getHSRBackgroundColor,
         wuwa: getWuWaBackgroundColor,
-        zzz: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        zzz: getZZZBackgroundColor,
         uma: function (rarity?: number): string {
             throw new Error("Function not implemented.");
         },

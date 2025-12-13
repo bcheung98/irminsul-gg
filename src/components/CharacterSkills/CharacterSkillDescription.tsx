@@ -9,6 +9,7 @@ import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
 import LevelSlider from "@/components/LevelSlider";
 import CharacterSkillAdvancedStats from "@/components/_hsr/CharacterSkillAdvancedStats";
+import CharacterCoreSkillScaling from "../_zzz/CharacterCoreSkillScaling";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -89,9 +90,10 @@ export default function CharacterSkillDescription({
     return (
         <>
             <Stack spacing={3}>
-                <Stack spacing={2}>
+                <Stack spacing={game === "zzz" ? 1 : 2}>
                     <TextLabel
                         icon={
+                            game !== "zzz" &&
                             skill.icon !== null && (
                                 <SkillIcon
                                     icon={getSkillIcon()}
@@ -113,6 +115,15 @@ export default function CharacterSkillDescription({
                             skill={skill as HSRCharacterSkill}
                         />
                     )}
+                    {skills?.ascension &&
+                        game === "zzz" &&
+                        skillKey === "core" &&
+                        index === 0 && (
+                            <CharacterCoreSkillScaling
+                                value={sliderValue}
+                                ascension={skills.ascension[0]}
+                            />
+                        )}
                     <Text
                         component="span"
                         variant="subtitle1"
@@ -123,24 +134,32 @@ export default function CharacterSkillDescription({
                         <SkillDescription
                             game={game}
                             description={skill.description}
-                            newClassName="character-skill-value"
+                            attributes={attributes}
+                            newClassName={
+                                game === "zzz"
+                                    ? "character-skill-value-0"
+                                    : "character-skill-value"
+                            }
                             onClick={handleDialogOpen}
+                            index={index}
                         />
                     </Text>
-                    {game === "hsr" && skill.scaling && (
-                        <LevelSlider
-                            mode="slider"
-                            levels={levels}
-                            value={sliderValue}
-                            handleSliderChange={handleSliderChange}
-                            sx={{
-                                minWidth: "100px",
-                                maxWidth: "500px",
-                                ml: "8px",
-                                color: textColor(game, attributes.element),
-                            }}
-                        />
-                    )}
+                    {skill.scaling &&
+                        (game === "hsr" ||
+                            (game === "zzz" && skillKey === "core")) && (
+                            <LevelSlider
+                                mode="slider"
+                                levels={levels}
+                                value={sliderValue}
+                                handleSliderChange={handleSliderChange}
+                                sx={{
+                                    minWidth: "100px",
+                                    maxWidth: "500px",
+                                    mx: "8px",
+                                    color: textColor(game, attributes.element),
+                                }}
+                            />
+                        )}
                 </Stack>
                 {skill.splash && (
                     <Text variant="body2" sx={{ fontStyle: "italic" }}>

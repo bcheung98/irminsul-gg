@@ -4,7 +4,8 @@ export interface Equipment extends BaseDataWithRelease {
     displayName: string;
     rarity: number;
     setEffect: SetEffect;
-    pieces: SetPieces[];
+    pieces?: SetPieces[];
+    description?: string;
 }
 
 export interface SetEffect {

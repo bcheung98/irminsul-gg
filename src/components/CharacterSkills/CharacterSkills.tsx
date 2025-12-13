@@ -39,6 +39,12 @@ export default function CharacterSkills({
         setTabValue(newValue);
     };
 
+    const skillIcon = (key: string) => {
+        if (key === "special" && attributes.weaponType === "Rupture")
+            return "zzz/skills/SpecialEX2";
+        return formatSkillIconURL(skillIconURLs[game][key], attributes);
+    };
+
     return (
         <ContentBox
             header={title}
@@ -55,13 +61,11 @@ export default function CharacterSkills({
                         key={key}
                         icon={
                             <SkillIcon
-                                icon={formatSkillIconURL(
-                                    skillIconURLs[game][key],
-                                    attributes
-                                )}
+                                icon={skillIcon(key)}
                                 attributes={attributes}
                                 selected={index === tabValue}
                                 borderWidth="3px"
+                                padding={game === "zzz" ? "0px" : "4px"}
                             />
                         }
                     />

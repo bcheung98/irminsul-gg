@@ -46,11 +46,12 @@ export default function EquipmentList({
                     <Grid size={{ xs: 12, md: 3 }}>
                         <TextLabel
                             icon={textLabelIcon(game, item)}
-                            iconProps={{ size: 72 }}
+                            iconProps={{ size: game === "zzz" ? 48 : 72 }}
                             title={item.displayName}
                             href={`${equipmentTags[game]}/${formatHref(
                                 item.url
                             )}`}
+                            spacing={2}
                         />
                     </Grid>
                     <Grid size="grow">
@@ -65,11 +66,11 @@ export default function EquipmentList({
 export function textLabelIcon(game: Game, equipment: Equipment) {
     const items: GameData<string> = {
         genshin: `genshin/artifacts/${equipment.id}${
-            equipment.pieces.length > 1 ? "_1" : "_5"
+            equipment.pieces && equipment.pieces.length > 1 ? "_1" : "_5"
         }`,
         hsr: `hsr/relics/${equipment.id}`,
         wuwa: "",
-        zzz: "",
+        zzz: `zzz/drive-discs/${equipment.id}`,
         uma: "",
     };
     return items[game];

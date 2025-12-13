@@ -20,7 +20,8 @@ export interface CharacterSkillProps extends SkillProps {
 export interface CharacterSkillScalingProps {
     skill: Skill[];
     color?: string;
-    index?: number;
+    initialValue: number;
+    maxLevel: number;
 }
 
 export interface CharacterSkillDescriptionProps

@@ -3,6 +3,7 @@ import { InfoAvatarProps } from "./InfoAvatar.types";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
+import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 
 export function GenshinCharacterInfoAvatar({
     character,
@@ -143,6 +144,48 @@ export function WuWaEchoInfoAvatar({
             name={echo.displayName}
             rarity={echo.rarity}
             href={echo.url}
+            {...props}
+        />
+    );
+}
+
+export function ZZZCharacterInfoAvatar({
+    character,
+    props,
+}: {
+    character: ZZZCharacter;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="zzz/agents"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            href={character.url}
+            background="transparent"
+            {...props}
+        />
+    );
+}
+
+export function ZZZWeaponInfoAvatar({
+    weapon,
+    props,
+}: {
+    weapon: ZZZWeapon;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="zzz/w-engines"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            href={weapon.url}
+            url={`${weapon.id}_large`}
             {...props}
         />
     );

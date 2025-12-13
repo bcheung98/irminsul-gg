@@ -8,4 +8,5 @@ export interface VersionHighlightsProps {
     characters: VersionItemData[];
     weapons: VersionItemData[];
     equipment: VersionItemData[];
+    bangboos?: VersionItemData[];
 }

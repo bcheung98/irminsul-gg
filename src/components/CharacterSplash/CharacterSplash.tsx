@@ -101,8 +101,9 @@ export default function CharacterSplash({
                 return `${game}/resonators/${id}${
                     index !== 0 ? `_${index}` : ""
                 }`;
-            case "hsr":
             case "zzz":
+                return `${game}/agents/${id}${index !== 0 ? `_${index}` : ""}`;
+            case "hsr":
             case "uma":
             default:
                 return `${game}/characters/${id}${
@@ -177,9 +178,9 @@ export default function CharacterSplash({
             <ContentDialog
                 open={dialogOpen}
                 setOpen={setDialogOpen}
+                maxWidth="xl"
                 header="Outfits"
                 contentProps={{ padding: 0 }}
-                maxWidth={false}
             >
                 <Tabs.List
                     value={tabValue}

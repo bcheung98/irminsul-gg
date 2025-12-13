@@ -45,6 +45,7 @@ export default function MaterialCard({
         id,
         name,
         displayName,
+        category,
         rarity: rarity = 3,
         source,
         imgURL,
@@ -69,8 +70,15 @@ export default function MaterialCard({
                     responsive
                     responsiveSize={responsiveSize}
                     style={{
-                        padding: ["hsr", "wuwa"].includes(game) ? "4px" : 0,
+                        padding: ["hsr", "wuwa", "zzz"].includes(game)
+                            ? "4px"
+                            : 0,
                     }}
+                    format={
+                        game === "zzz" && ["boss", "weekly"].includes(category)
+                            ? "gif"
+                            : "png"
+                    }
                 />
             </Box>
             <Box sx={styles.label()}>

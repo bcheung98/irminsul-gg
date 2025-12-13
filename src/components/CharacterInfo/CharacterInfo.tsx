@@ -27,9 +27,12 @@ interface CharacterInfoProps {
 export default function CharacterInfo(props: CharacterInfoProps) {
     const theme = useTheme();
 
-    const textColor = useTextColor(theme.text);
-
     const game = useGameTag();
+
+    const textColor = useTextColor(theme.text);
+    const color =
+        props.attributes.colors?.accent ||
+        textColor(game, props.attributes.element);
 
     return (
         <ContentBox
@@ -48,7 +51,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
                     levelKey="level"
                     costKey="characterLevel"
                     materials={props.materials}
-                    color={textColor(game, props.attributes.element)}
+                    color={color}
                     {...props.attributes}
                 />
             </Stack>

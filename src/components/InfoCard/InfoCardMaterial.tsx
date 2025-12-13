@@ -82,7 +82,23 @@ export default function InfoCardMaterial({
 
         let imgURL = `${game}/materials/${material.id}`;
 
-        let tooltip = material.name;
+        let tooltip;
+        switch (props.category) {
+            case "talent":
+            case "calyx":
+            case "forgery":
+            case "common":
+                tooltip = material.tag?.slice(0, -1);
+                break;
+            case "characterSkill":
+                tooltip = `${badgeLeft?.element} Chip`;
+                break;
+            case "characterLevel":
+                tooltip = `${badgeLeft?.weaponType} Seal`;
+                break;
+            default:
+                tooltip = material.name;
+        }
         if (material.source) {
             tooltip += ` (${material.source})`;
         }
@@ -97,8 +113,24 @@ export default function InfoCardMaterial({
                     borderRadius: "4px",
                     backgroundColor: theme.background(1),
                 }}
+                format={
+                    game === "zzz" &&
+                    ["boss", "weekly"].includes(props.category)
+                        ? "gif"
+                        : "png"
+                }
             />
         );
+    }
+
+    if (game === "zzz") {
+        materials = {
+            ...{
+                characterLevel: `Character${badgeLeft?.weaponType}3`,
+                characterSkill: `${badgeLeft?.element}3`,
+            },
+            ...materials,
+        };
     }
 
     return (

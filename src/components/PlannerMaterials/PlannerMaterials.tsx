@@ -61,6 +61,9 @@ export default function PlannerMaterials() {
                 case "memo-talent":
                     costKey = "characterMemosprite";
                     break;
+                case "core":
+                    costKey = "characterCoreSkill";
+                    break;
                 case "attack":
                 case "skill":
                 case "ultimate":

@@ -19,3 +19,10 @@ export interface CharacterBuffs {
     value?: string;
     onChange?: (arg0: any, arg1: any) => void;
 }
+
+
+export interface CharacterColors {
+    primary: string;
+    secondary: string;
+    accent: string;
+}

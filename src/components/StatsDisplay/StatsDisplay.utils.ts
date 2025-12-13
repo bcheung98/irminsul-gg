@@ -16,6 +16,12 @@ import {
     WuWaWeaponSubStat,
     subStats as wuwaSubstats,
 } from "@/data/wuwa/weaponStats";
+import {
+    weaponMainStats as zzzMainStatScaling,
+    weaponSubStats as zzzSubstats,
+    ZZZWeaponSubStat,
+} from "@/data/zzz/weaponStats";
+import { ZZZRarity } from "@/types/zzz";
 
 type Props = Omit<StatsDisplayProps, "game">;
 type StatsData = {
@@ -36,6 +42,7 @@ export function getStats({
         case "wuwa":
             return getWuWaStats({ stats, attributes });
         case "zzz":
+            return getZZZStats({ stats, attributes });
         case "uma":
         default:
             return { levels: [], data: [] };
@@ -302,6 +309,122 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
                 ...levels.map((_, index) => subStatScaling[index] || 0),
             ]);
         }
+    }
+
+    return { levels, data };
+}
+
+function getZZZStats({ stats, attributes }: Props): StatsData {
+    const levels = levelData["zzz"]("level-asc");
+    let data: (string | number)[][] = [];
+    if ("ascension" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base HP|zzz/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base ATK|zzz/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base DEF|zzz/icons/stat-icons/DEF",
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Impact|zzz/icons/stat-icons/Impact",
+                ...levels.map((_, index) =>
+                    (stats.impact[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Anomaly Mastery|zzz/icons/stat-icons/Anomaly_Mastery",
+                ...levels.map((_, index) =>
+                    (stats.am[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Anomaly Proficiency|zzz/icons/stat-icons/Anomaly_Proficiency",
+                ...levels.map((_, index) =>
+                    (stats.ap[index] || 0).toLocaleString()
+                ),
+            ],
+        ];
+    } else if ("mainStat" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                `${stats.mainStat.type}|zzz/icons/stat-icons/ATK`,
+                ...levels.map((_, index) =>
+                    (
+                        zzzMainStatScaling[stats.mainStat.type].scaling[
+                            stats.mainStat.value
+                        ][index] || 0
+                    ).toLocaleString()
+                ),
+            ],
+        ];
+        if (stats.subStat) {
+            let subStatScaling = zzzSubstats[stats.subStat as ZZZWeaponSubStat]
+                .scaling[
+                attributes.rarity as Exclude<ZZZRarity, 2 | 1>
+            ] as string[];
+            data.push([
+                `${stats.subStat}|zzz/icons/stat-icons/${splitJoin(
+                    stats.subStat
+                )}`,
+                ...levels.map((_, index) => subStatScaling[index] || 0),
+            ]);
+        }
+    } else if ("critRate" in stats && "am" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base HP|zzz/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base ATK|zzz/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Base DEF|zzz/icons/stat-icons/DEF",
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString()
+                ),
+            ],
+            [
+                "Crit Rate|zzz/icons/stat-icons/CRIT_Rate",
+                ...levels.map(
+                    (_, index) =>
+                        `${(stats.critRate[index] || 0).toLocaleString()}%`
+                ),
+            ],
+            [
+                "Crit DMG|zzz/icons/stat-icons/CRIT_DMG",
+                ...levels.map(
+                    (_, index) =>
+                        `${(stats.critDMG[index] || 0).toLocaleString()}%`
+                ),
+            ],
+            [
+                "Anomaly Mastery|zzz/icons/stat-icons/Anomaly_Mastery",
+                ...levels.map((_, index) =>
+                    (stats.am[index] || 0).toLocaleString()
+                ),
+            ],
+        ];
     }
 
     return { levels, data };

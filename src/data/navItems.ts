@@ -108,6 +108,42 @@ export const navItems: GameData<NavItem[]> = {
             href: "banners",
         },
     ],
-    zzz: [],
+    zzz: [
+        {
+            icon: "icons/Home",
+            title: "Home",
+            href: "",
+        },
+        {
+            icon: "icons/Agents",
+            title: "Agents",
+            href: "agents",
+        },
+        {
+            icon: "icons/W-Engine",
+            title: "W-Engines",
+            href: "w-engines",
+        },
+        {
+            icon: "icons/Drive_Disc",
+            title: "Drive Discs",
+            href: "drive-discs",
+        },
+        {
+            icon: "icons/Bangboo",
+            title: "Bangboos",
+            href: "bangboos",
+        },
+        {
+            icon: "icons/Check",
+            title: "Ascension Planner",
+            href: "planner",
+        },
+        {
+            icon: "icons/Signal_Search",
+            title: "Banner Archive",
+            href: "banners",
+        },
+    ],
     uma: [],
 };

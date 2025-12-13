@@ -1,3 +1,12 @@
+import {
+    GenshinWeaponSubStat,
+    weaponSubStats as genshinWeaponSubStats,
+} from "@/data/genshin/weaponStats";
+import { formatWeaponStats, WuWaWeaponSubStat } from "@/data/wuwa/weaponStats";
+import {
+    ZZZWeaponSubStat,
+    weaponSubStats as zzzWeaponSubStats,
+} from "@/data/zzz/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
 import { isUnreleasedContent } from "./isUnreleasedContent";
 import { AttributeDataKey, Game } from "@/types";
@@ -22,7 +31,9 @@ export function getDataIconURL({ game, key, value }: Props) {
         }
         if (key === "subStat" && value) {
             src = `genshin/icons/stat-icons/${value}`;
-            tooltip = `${value}`;
+            tooltip = `${
+                genshinWeaponSubStats[value as GenshinWeaponSubStat].title
+            }`;
         }
         if (key === "arkhe") {
             src = `genshin/tcg/icons/factions/${value}`;
@@ -48,6 +59,10 @@ export function getDataIconURL({ game, key, value }: Props) {
             src = `wuwa/skills/Attack_${value}`;
             tooltip = `${value}`;
         }
+        if (key === "subStat" && value) {
+            src = `wuwa/icons/stat-icons/${value}`;
+            tooltip = `${formatWeaponStats(value as WuWaWeaponSubStat)}`;
+        }
         if (key === "sonata" && value) {
             src = `wuwa/sonata/${value}`;
             tooltip = `${
@@ -57,6 +72,24 @@ export function getDataIconURL({ game, key, value }: Props) {
                     )
                     .find((sonata) => sonata.id === value)?.displayName
             }`;
+        }
+    }
+    if (game === "zzz") {
+        if (key === "element" && value) {
+            src = `zzz/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `zzz/icons/specialties/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "attackType" && value) {
+            src = `zzz/icons/attack-types/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "subStat" && value) {
+            src = `zzz/icons/stat-icons/${value}`;
+            tooltip = `${zzzWeaponSubStats[value as ZZZWeaponSubStat].title}`;
         }
     }
     return { src, tooltip };

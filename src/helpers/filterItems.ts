@@ -81,7 +81,7 @@ export function filterItems<T extends Record<string, any>>(
     }
     if ("nation" in filters && filters.nation.length > 0) {
         res = res.filter((item) =>
-            filters.nation.includes(item.world || item.nation)
+            filters.nation.includes(item.world || item.nation || item.faction)
         );
     }
     if ("combatRoles" in filters && filters.combatRoles.length > 0) {
@@ -112,6 +112,13 @@ export function filterItems<T extends Record<string, any>>(
                 filters.sonata.some((sonata) => item.sonata.includes(sonata))
             );
         }
+    }
+    if ("attackType" in filters && filters.attackType.length > 0) {
+        res = res.filter((item) =>
+            filters.attackType.some((filter) =>
+                item.attackType.includes(filter)
+            )
+        );
     }
     if (searchValue) {
         res = res.filter(

@@ -2,6 +2,7 @@ import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
 import { UmaVersion, Version, VersionWithDate } from "./version";
 import { FilterState, SetFilterState } from "@/stores/useFilterStore";
+import { CharacterColors } from "./character";
 
 // General
 export type Orientation = "row" | "column";
@@ -40,8 +41,10 @@ export interface AttributeData {
     title?: string;
     description?: string;
     element?: string;
+    subElement?: string;
     weapon?: string;
     weaponType?: string;
+    attackType?: string;
     rarity?: number;
     subStat?: string;
     arkhe?: string | string[];
@@ -49,6 +52,7 @@ export interface AttributeData {
     sonata?: (string | number)[];
     combatRoles?: string[];
     bonusStats?: string[];
+    colors?: CharacterColors;
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {

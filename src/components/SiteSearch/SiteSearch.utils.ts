@@ -3,7 +3,7 @@
 import { getDataSet } from "@/lib/fetchData";
 import { formatHref, splitJoin } from "@/utils";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { categories } from "@/data/categories";
+import { categories, categoryURLs } from "@/data/categories";
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
+import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -64,6 +65,26 @@ export async function getItems(
             await getDataSet<WuWaEcho>("wuwa/echoes"),
             "wuwa"
         ),
+        "zzz/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<ZZZCharacter>("zzz/agents"),
+            "zzz"
+        ),
+        "zzz/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<ZZZWeapon>("zzz/w-engines"),
+            "zzz"
+        ),
+        "zzz/equipment": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<ZZZDriveDisc>("zzz/drive-discs"),
+            "zzz"
+        ),
+        "zzz/bangboos": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<ZZZBangboo>("zzz/bangboos"),
+            "zzz"
+        ),
     })
         .map(([category, data]) =>
             data.map((item) => ({
@@ -74,11 +95,7 @@ export async function getItems(
                 rarity: item.rarity,
                 category: category,
                 release: item.release,
-                url: `/${category.split("/")[0]}/${splitJoin(
-                    categories[category],
-                    " ",
-                    ""
-                ).toLowerCase()}/${formatHref(item.url)}`,
+                url: `/${categoryURLs[category]}/${formatHref(item.url)}`,
             }))
         )
         .flat();

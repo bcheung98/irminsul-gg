@@ -14,6 +14,7 @@ interface CreateButtonProps {
 interface CreateFilterButtonsProps<T extends string | number>
     extends CreateButtonProps {
     items: readonly T[];
+    imgFormat?: "png" | "gif" | "webp";
 }
 
 export function createFilterButtons<T extends string | number>({
@@ -23,6 +24,7 @@ export function createFilterButtons<T extends string | number>({
     getTooltip,
     getLabel,
     endTag = "",
+    imgFormat = "png",
 }: CreateFilterButtonsProps<T>): FilterButtons[] {
     return items.map((item) => {
         const src = getURL !== undefined ? getURL(item) : item;
@@ -38,6 +40,7 @@ export function createFilterButtons<T extends string | number>({
                             getTooltip !== undefined
                                 ? getTooltip(item)
                                 : `${item}`,
+                        format: imgFormat,
                     }}
                     title={getLabel !== undefined && getLabel(item)}
                 />

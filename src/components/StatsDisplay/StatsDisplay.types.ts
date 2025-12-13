@@ -5,15 +5,21 @@ import { HSRCharacterStats } from "@/types/hsr/character";
 import { HSRWeaponStats } from "@/types/hsr/weapon";
 import { WuWaCharacterStats } from "@/types/wuwa/character";
 import { WuWaWeaponStats } from "@/types/wuwa/weapon";
+import { ZZZBangbooStats } from "@/types/zzz/bangboo";
+import { ZZZCharacterStats } from "@/types/zzz/character";
+import { ZZZWeaponStats } from "@/types/zzz/weapon";
 
 export type TCharacterStats =
     | GenshinCharacterStats
     | HSRCharacterStats
-    | WuWaCharacterStats;
+    | WuWaCharacterStats
+    | ZZZCharacterStats
+    | ZZZBangbooStats;
 export type TWeaponStats =
     | GenshinWeaponStats
     | HSRWeaponStats
-    | WuWaWeaponStats;
+    | WuWaWeaponStats
+    | ZZZWeaponStats;
 
 export interface StatsDisplayProps {
     game?: Game;

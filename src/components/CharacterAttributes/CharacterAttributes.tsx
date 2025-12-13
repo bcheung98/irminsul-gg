@@ -9,18 +9,23 @@ import Text from "@/components/Text";
 import CharacterCombatRoles from "@/components/_wuwa/CharacterCombatRoles";
 
 // MUI imports
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { getDataIconURL } from "@/helpers/dataIcon";
 import { useGameTag } from "@/context";
+import { rarityMap } from "@/data/zzz/common";
 
 // Type imports
 import { AttributeData, AttributeDataKey, GameData } from "@/types";
 
 export default function CharacterAttributes(props: AttributeData) {
     const game = useGameTag();
+
+    const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
     const { ...attributes } = props;
 
@@ -45,7 +50,10 @@ export default function CharacterAttributes(props: AttributeData) {
 
     function Chip(props: { attrKey: AttributeDataKey }) {
         const key = props.attrKey;
-        const value = attributes[key];
+        let value = attributes[key];
+        if (game === "zzz" && key === "element" && attributes.subElement) {
+            value = attributes.subElement;
+        }
         const values = !Array.isArray(value) ? [value] : value;
 
         return values.map((value) => {
@@ -60,14 +68,20 @@ export default function CharacterAttributes(props: AttributeData) {
         <Stack spacing={2} divider={<Divider />} sx={{ width: "100%" }}>
             <Stack spacing={1}>
                 <TextLabel
+                    icon={
+                        game === "zzz" &&
+                        `zzz/ranks/agent/${rarityMap[attributes.rarity || 3]}`
+                    }
+                    iconProps={{ size: [48, 0] }}
                     title={attributes.displayName}
                     subtitle={
                         <Text weight="highlight">
                             <i>{attributes.title}</i>
                         </Text>
                     }
-                    titleProps={{ variant: "h4" }}
+                    titleProps={{ variant: matches ? "h4" : "h6" }}
                     textSpacing={0.5}
+                    spacing={2}
                 />
                 <FlexBox spacing={1} wrap>
                     {gameAttributes[game].map(
@@ -83,7 +97,15 @@ export default function CharacterAttributes(props: AttributeData) {
             </Stack>
             {game === "wuwa" && <CharacterCombatRoles {...attributes} />}
             {attributes.description && (
-                <Text variant="body2">{parse(attributes.description)}</Text>
+                <Box
+                    sx={{
+                        maxHeight: "128px",
+                        overflowY: "auto",
+                        scrollbarWidth: "thin",
+                    }}
+                >
+                    <Text variant="body2">{parse(attributes.description)}</Text>
+                </Box>
             )}
         </Stack>
     );
@@ -93,6 +115,6 @@ const gameAttributes: GameData<AttributeDataKey[]> = {
     genshin: ["rarity", "element", "weaponType", "arkhe"],
     hsr: ["rarity", "element", "weaponType"],
     wuwa: ["rarity", "element", "weaponType"],
-    zzz: [],
+    zzz: ["rarity", "element", "weaponType", "attackType"],
     uma: [],
 };

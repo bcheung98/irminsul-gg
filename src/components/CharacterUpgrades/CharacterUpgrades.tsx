@@ -10,11 +10,15 @@ import TextLabel from "@/components/TextLabel";
 import SkillCard from "@/components/SkillCard";
 import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
+import FlexBox from "@/components/FlexBox";
+import MindscapeCinemaPopup from "@/components/_zzz/MindscapeCinemaPopup";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 // Helper imports
 import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
@@ -36,6 +40,7 @@ export default function CharacterUpgrades({
     attributes,
 }: CharacterUpgradesProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const game = useGameTag();
 
@@ -75,6 +80,14 @@ export default function CharacterUpgrades({
         setCurrentKeyword(null);
     };
 
+    const [openMCArt, setOpenMCArt] = useState(false);
+    const handleClickOpenMCArt = () => {
+        setOpenMCArt(true);
+    };
+    const handleCloseMCArt = () => {
+        setOpenMCArt(false);
+    };
+
     if (skills?.upgrades) {
         const indexes: number[] = [];
         const upgrades: Skill[] = [];
@@ -94,7 +107,33 @@ export default function CharacterUpgrades({
             <>
                 <ContentBox
                     header={title}
-                    actions={<CharacterBuffs {...buffs} />}
+                    actions={
+                        <FlexBox spacing={2}>
+                            {game === "zzz" && (
+                                <Button
+                                    variant="outlined"
+                                    onClick={handleClickOpenMCArt}
+                                    disableRipple
+                                    sx={{
+                                        p: "4px 16px",
+                                        backgroundColor: theme.background(
+                                            0,
+                                            "dark"
+                                        ),
+                                        borderRadius: "4px",
+                                        borderColor: theme.border.color.primary,
+                                        "&:hover": {
+                                            backgroundColor:
+                                                theme.background(0),
+                                        },
+                                    }}
+                                >
+                                    <Text variant="subtitle1">View Art</Text>
+                                </Button>
+                            )}
+                            <CharacterBuffs {...buffs} />
+                        </FlexBox>
+                    }
                 >
                     <Grid container spacing={3}>
                         {upgrades.map((upgrade, index) => (
@@ -142,6 +181,17 @@ export default function CharacterUpgrades({
                         keyword={currentKeyword}
                         attributes={attributes}
                     />
+                </ContentDialog>
+                <ContentDialog
+                    open={openMCArt}
+                    setOpen={setOpenMCArt}
+                    onClose={handleCloseMCArt}
+                    maxWidth={false}
+                    fullScreen={!matches}
+                    header="Mindscape"
+                    contentProps={{ padding: 0 }}
+                >
+                    <MindscapeCinemaPopup attributes={attributes} />
                 </ContentDialog>
             </>
         );

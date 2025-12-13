@@ -1,8 +1,4 @@
 import { GameData } from "@/types";
-import {
-    GenshinCharacterPassiveType,
-    GenshinSkillKey,
-} from "@/types/genshin/character";
 
 export const skillKeys: GameData<Record<string, string>> = {
     genshin: {
@@ -35,7 +31,14 @@ export const skillKeys: GameData<Record<string, string>> = {
         intro: "Intro Skill",
         outro: "Outro Skill",
     },
-    zzz: {},
+    zzz: {
+        attack: "Basic Attack",
+        dodge: "Dodge",
+        assist: "Assist",
+        special: "Special Attack",
+        chain: "Chain Attack",
+        core: "Core Skill",
+    },
     uma: {},
 };
 
@@ -72,6 +75,16 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         intro: "wuwa/skills/{id}_intro",
         outro: "wuwa/skills/{id}_outro",
     },
-    zzz: {},
+    zzz: {
+        attack: "zzz/skills/Attack",
+        dodge: "zzz/skills/Dodge",
+        assist: "zzz/skills/Assist",
+        special: "zzz/skills/SpecialEX",
+        chain: "zzz/skills/Ultimate",
+        core: "zzz/skills/Core",
+        A: "zzz/skills/Bangboo_A",
+        B: "zzz/skills/Bangboo_B",
+        C: "zzz/skills/Bangboo_C",
+    },
     uma: {},
 };
