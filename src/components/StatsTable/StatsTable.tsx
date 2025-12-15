@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 // Component imports
 import LevelSlider from "@/components/LevelSlider";
@@ -28,6 +28,7 @@ interface StatsTableProps {
         sx?: SxProps;
     };
     textID?: string;
+    hideSlider?: boolean;
 }
 
 export default function StatsTable({
@@ -41,6 +42,7 @@ export default function StatsTable({
     sliderProps,
     tableProps,
     textID = "text-value",
+    hideSlider = false,
 }: StatsTableProps) {
     useEffect(() => {
         const targets = document.getElementsByClassName(textID);
@@ -68,7 +70,7 @@ export default function StatsTable({
 
     return (
         <Stack spacing={2}>
-            {mode === "slider" && levels.length > 1 && (
+            {!hideSlider && mode === "slider" && levels.length > 1 && (
                 <LevelSlider
                     mode={mode}
                     levels={levels}

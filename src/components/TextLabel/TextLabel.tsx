@@ -24,6 +24,7 @@ export default function TextLabel({
     alignItems = "center",
     justifyContent = "left",
     reverse = false,
+    invertText = false,
 }: TextLabelProps) {
     const theme = useTheme();
 
@@ -123,10 +124,10 @@ export default function TextLabel({
                 (!subtitle ? (
                     <Stack spacing={textSpacing ?? 0}>{Title()}</Stack>
                 ) : (
-                    <Box>
+                    <Stack direction={invertText ? "column-reverse" : "column"}>
                         <Box sx={{ textAlign: "left" }}>{Title()}</Box>
                         <Box sx={{ mt: textSpacing ?? 0 }}>{Subtitle}</Box>
-                    </Box>
+                    </Stack>
                 ))}
         </Stack>
     );

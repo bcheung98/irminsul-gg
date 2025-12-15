@@ -37,4 +37,5 @@ export interface TextLabelProps {
     alignItems?: StackProps["alignItems"];
     justifyContent?: "left" | "center" | "right";
     reverse?: boolean;
+    invertText?: boolean;
 }
