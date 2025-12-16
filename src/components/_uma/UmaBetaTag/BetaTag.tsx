@@ -5,18 +5,15 @@ import Text from "@/components/Text";
 import Card from "@mui/material/Card";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
+import { isUnreleasedContentUma } from "@/helpers/isUnreleasedContent";
 
 // Type imports
-import { GameNoUma } from "@/types";
+import { UmaVersion } from "@/types/version";
 
-export default function BetaTag({ version }: { version: string }) {
-    const game = useGameTag() as GameNoUma;
+export default function UmaBetaTag({ release }: { release: UmaVersion }) {
+    const text = "This content is only available on the JP server!";
 
-    const text = "Viewing beta content, all content is subject to change!";
-
-    if (!isUnreleasedContent(version, game)) {
+    if (isUnreleasedContentUma(release)) {
         return (
             <Card
                 sx={(theme) => ({
