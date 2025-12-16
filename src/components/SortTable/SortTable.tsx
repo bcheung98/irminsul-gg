@@ -63,6 +63,7 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
             <Table.Container>
                 <Table.Root>
                     <SortTableHead
+                        rows={rows}
                         columns={columns}
                         sortBy={sortBy}
                         sortOrder={sortOrder}

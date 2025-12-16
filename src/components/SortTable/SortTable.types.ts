@@ -18,6 +18,7 @@ export interface SortTableProps<T extends ColumnHeaders, U extends BaseData> {
 }
 
 export interface SortTableHeadProps<T extends ColumnHeaders> {
+    rows: SortTableRow[];
     columns: T;
     sortBy: keyof T;
     sortOrder: SortOrder;

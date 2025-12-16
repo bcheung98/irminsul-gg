@@ -28,6 +28,8 @@ export default function SortTableRow<T extends ColumnHeaders>({
         },
     };
 
+    const rowLength = Object.keys(row).length;
+
     return (
         <Table.Row
             color="secondary"
@@ -42,7 +44,10 @@ export default function SortTableRow<T extends ColumnHeaders>({
                 <TableCell
                     key={`${key}.${index}`}
                     sx={{
-                        p: "8px 16px",
+                        p:
+                            index === 0 || index === rowLength - 1
+                                ? "4px 16px"
+                                : value.padding ?? "4px 16px",
                         borderColor: theme.border.color.primary,
                     }}
                 >

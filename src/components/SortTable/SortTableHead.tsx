@@ -13,12 +13,20 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ColumnHeaders, SortTableHeadProps } from "./SortTable.types";
 
 export default function SortTableHead<T extends ColumnHeaders>({
+    rows,
     columns,
     sortBy,
     sortOrder,
     handleRequestSort,
 }: SortTableHeadProps<T>) {
     const theme = useTheme();
+
+    let rowLength = 0;
+    if (rows.length > 0) {
+        rowLength = Object.keys(rows[0]).length;
+    } else {
+        return null;
+    }
 
     return (
         <TableHead>
@@ -28,8 +36,17 @@ export default function SortTableHead<T extends ColumnHeaders>({
                     borderBottom: `1px solid ${theme.border.color.primary}`,
                 }}
             >
-                {Object.entries(columns).map(([key, value]) => (
-                    <TableCell key={value} sx={{ p: "4px 16px 8px" }}>
+                {Object.entries(columns).map(([key, value], index) => (
+                    <TableCell
+                        key={value}
+                        sx={{
+                            p:
+                                rows.length > 0 &&
+                                (index === 0 || index === rowLength - 1)
+                                    ? "4px 16px"
+                                    : rows[0][key].padding ?? "4px 16px",
+                        }}
+                    >
                         <TableSortLabel
                             active={key === sortBy}
                             direction={key === sortBy ? sortOrder : "asc"}
