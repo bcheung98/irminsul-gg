@@ -2,8 +2,13 @@ import InfoAvatar from "./InfoAvatar";
 import { InfoAvatarProps } from "./InfoAvatar.types";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon } from "@/types/hsr";
+import { UmaSupport } from "@/types/uma";
+import { UmaCharacter } from "@/types/uma/character";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
+import InfoAvatarSupport, {
+    InfoAvatarSupportProps,
+} from "../_uma/InfoAvatarSupport";
 
 export function GenshinCharacterInfoAvatar({
     character,
@@ -186,6 +191,49 @@ export function ZZZWeaponInfoAvatar({
             rarity={weapon.rarity}
             href={weapon.url}
             url={`${weapon.id}_large`}
+            {...props}
+        />
+    );
+}
+
+export function UmaCharacterInfoAvatar({
+    character,
+    props,
+}: {
+    character: UmaCharacter;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="uma/characters"
+            id={Number(character.id)}
+            key={character.id}
+            name={`${character.name} (${character.outfit || "Original"})`}
+            rarity={character.rarity}
+            href={character.url}
+            background="transparent"
+            {...props}
+        />
+    );
+}
+
+export function UmaSupportInfoAvatar({
+    support,
+    props,
+}: {
+    support: UmaSupport;
+    props?: Partial<InfoAvatarSupportProps>;
+}) {
+    return (
+        <InfoAvatarSupport
+            tag="uma/supports"
+            id={Number(support.id)}
+            key={support.id}
+            name={support.name}
+            rarity={support.rarity}
+            type={support.specialty}
+            href={support.url}
+            url={`${support.id}_icon`}
             {...props}
         />
     );

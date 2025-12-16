@@ -4,6 +4,8 @@ import {
     GenshinWeaponInfoAvatar,
     HSRCharacterInfoAvatar,
     HSRWeaponInfoAvatar,
+    UmaCharacterInfoAvatar,
+    UmaSupportInfoAvatar,
     WuWaCharacterInfoAvatar,
     WuWaWeaponInfoAvatar,
     ZZZCharacterInfoAvatar,
@@ -13,6 +15,8 @@ import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 import { HSRCharacter, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
+import { UmaCharacter } from "@/types/uma/character";
+import { UmaSupport } from "@/types/uma";
 
 type Data<T> = Record<"characters" | "weapons", T>;
 
@@ -111,8 +115,24 @@ export function renderInfoAvatar({
             ),
         },
         uma: {
-            characters: undefined,
-            weapons: undefined,
+            characters: (
+                <UmaCharacterInfoAvatar
+                    character={item as UmaCharacter}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+            weapons: (
+                <UmaSupportInfoAvatar
+                    support={item as UmaSupport}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
         },
     };
     return items[game][tag];
