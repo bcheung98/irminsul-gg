@@ -9,6 +9,7 @@ import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import { useGameTag } from "@/context";
 import {
     getBannerLabel,
     isCurrentBanner,
@@ -25,10 +26,12 @@ const BannerListRow = memo(function BannerListRow({
 }: BannerListRowProps) {
     const theme = useTheme();
 
+    const game = useGameTag();
+
     const { server } = useBannerData();
 
-    const current = isCurrentBanner(banner, server);
-    const upcoming = isFutureBanner(banner, server);
+    const current = isCurrentBanner(banner, server, game);
+    const upcoming = isFutureBanner(banner, server, game);
 
     const backgroundColor = current
         ? theme.palette.info.dark
@@ -58,7 +61,11 @@ const BannerListRow = memo(function BannerListRow({
                     color: getContrastText(theme.text.primary, backgroundColor),
                 }}
             >
-                {getBannerLabel(banner, server)}
+                {getBannerLabel(
+                    banner,
+                    server,
+                    game === "uma" ? "date" : undefined
+                )}
             </Text>
             <BannerItems
                 banner={banner}

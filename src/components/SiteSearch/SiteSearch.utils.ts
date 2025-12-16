@@ -14,6 +14,7 @@ import {
 import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
+import { UmaCharacter, UmaSupport } from "@/types/uma";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -85,14 +86,25 @@ export async function getItems(
             await getDataSet<ZZZBangboo>("zzz/bangboos"),
             "zzz"
         ),
+        "uma/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<UmaCharacter>("uma/characters"),
+            "uma"
+        ),
+        "uma/supports": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<UmaSupport>("uma/supports"),
+            "uma"
+        ),
     })
         .map(([category, data]) =>
             data.map((item) => ({
                 id: item.id,
                 name: item.name,
-                displayName:
-                    "fullName" in item ? item.displayName : item.displayName,
+                displayName: item.displayName || item.name,
                 rarity: item.rarity,
+                outfit: "outfit" in item && item.outfit,
+                specialty: "specialty" in item && item.specialty,
                 category: category,
                 release: item.release,
                 url: `/${categoryURLs[category]}/${formatHref(item.url)}`,

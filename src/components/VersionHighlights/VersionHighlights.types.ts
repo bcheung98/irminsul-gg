@@ -9,4 +9,5 @@ export interface VersionHighlightsProps {
     weapons: VersionItemData[];
     equipment: VersionItemData[];
     bangboos?: VersionItemData[];
+    supports?: VersionItemData[];
 }

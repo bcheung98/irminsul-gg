@@ -17,6 +17,7 @@ import { variantMap } from "@/themes/theme";
 // Type imports
 import { TextLabelProps } from "@/components/TextLabel/TextLabel.types";
 import { ColorVariants } from "@/types/theme";
+import { ImageSize } from "../Image/Image.types";
 
 export interface RowProps {
     color?: ColorVariants;
@@ -26,6 +27,7 @@ export interface HeadProps {
     data: (string | number)[];
     align?: "left" | "center" | "right";
     textVariant?: TypographyVariant;
+    iconSize?: ImageSize;
 }
 
 export interface CellProps {
@@ -43,6 +45,7 @@ export function Head({
     data,
     align = "center",
     textVariant = "subtitle1",
+    iconSize,
 }: HeadProps) {
     const theme = useTheme();
 
@@ -63,6 +66,7 @@ export function Head({
                                 color: theme.table.color.header,
                                 variant: textVariant,
                             },
+                            iconProps: { size: iconSize },
                         }}
                         align={align}
                     />
@@ -97,6 +101,9 @@ export function Cell({
                     variant: label.titleProps?.variant || "body2",
                 }}
                 icon={icon}
+                iconProps={{
+                    size: label.iconProps?.size,
+                }}
                 justifyContent={align}
             />
         </TableCell>

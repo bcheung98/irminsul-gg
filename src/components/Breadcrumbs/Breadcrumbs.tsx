@@ -13,6 +13,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useDataContext } from "@/context";
 import { formatHref } from "@/utils";
 import { navItems } from "@/data/navItems";
+import { rarityMap } from "@/data/uma/common";
 
 // Type imports
 import { Game, GameInfo } from "@/types";
@@ -30,8 +31,17 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
 
     function getCurrentData(item: string) {
         const data = dataContext.find((d) => formatHref(d.url) === item);
-        if (data) return data.displayName || data.name;
-        else return "";
+        if (data) {
+            let res = data.displayName || data.name;
+            if (game === "uma") {
+                if ("specialty" in data) {
+                    res += ` (${rarityMap[data.rarity]} ${data.specialty})`;
+                } else {
+                    res += ` (${data.outfit || "Original"})`;
+                }
+            }
+            return res;
+        } else return "";
     }
 
     return (
