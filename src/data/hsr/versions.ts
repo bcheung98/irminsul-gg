@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const hsrVersions: VersionInfo[] = [
+    { version: "3.8", name: "Memories are the Prelude to Dreams" },
     { version: "3.7", name: "As Tomorrow Became Yesterday" },
     { version: "3.6", name: "Back to Earth in Evernight" },
     { version: "3.5", name: "Before Their Deaths" },
