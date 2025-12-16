@@ -17,7 +17,6 @@ import { rarityMap } from "@/data/uma/common";
 // Type imports
 import { InfoAvatarProps } from "@/components/InfoAvatar/InfoAvatar.types";
 import { UmaSpecialty } from "@/types/uma";
-import Box from "@mui/material/Box";
 
 export interface InfoAvatarSupportProps extends InfoAvatarProps {
     type: UmaSpecialty;

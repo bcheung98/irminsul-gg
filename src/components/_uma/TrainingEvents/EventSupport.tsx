@@ -8,7 +8,7 @@ import Loader from "@/components/Loader";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { CardIDContext, useUmaContext } from "@/context";
+import { CardIDContext, CharIDContext, useUmaContext } from "@/context";
 import { rarityMap } from "@/data/uma/common";
 
 // Type imports
@@ -105,32 +105,44 @@ export default function EventSupport({
 
     return (
         <CardIDContext value={support.id}>
-            <Stack spacing={2}>
-                {Object.entries(eventList).map(
-                    ([title, events], i) =>
-                        events &&
-                        events.length > 0 && (
-                            <Stack key={title} spacing={1}>
-                                <Text weight="highlight">{title}</Text>
-                                <FlexBox
-                                    spacing={2}
-                                    wrap
-                                    sx={{ alignItems: "flex-start" }}
-                                >
-                                    {events.map((event, index) => (
-                                        <EventInfo
-                                            key={index}
-                                            event={event}
-                                            index={index}
-                                            isChain={i === 0}
-                                            expand={expand}
-                                        />
-                                    ))}
-                                </FlexBox>
-                            </Stack>
-                        )
-                )}
-            </Stack>
+            <CharIDContext
+                value={
+                    support.specialty === "Group"
+                        ? support.name
+                        : support.charID
+                }
+            >
+                <Stack spacing={2}>
+                    {Object.entries(eventList).map(
+                        ([title, events], i) =>
+                            events &&
+                            events.length > 0 && (
+                                <Stack key={title} spacing={1}>
+                                    <Text weight="highlight">{title}</Text>
+                                    <FlexBox
+                                        spacing={2}
+                                        wrap
+                                        sx={{ alignItems: "flex-start" }}
+                                    >
+                                        {events.map((event, index) => (
+                                            <EventInfo
+                                                key={index}
+                                                event={event}
+                                                index={index}
+                                                isChain={
+                                                    i === 0 &&
+                                                    support.specialty !==
+                                                        "Group"
+                                                }
+                                                expand={expand}
+                                            />
+                                        ))}
+                                    </FlexBox>
+                                </Stack>
+                            )
+                    )}
+                </Stack>
+            </CharIDContext>
         </CardIDContext>
     );
 }

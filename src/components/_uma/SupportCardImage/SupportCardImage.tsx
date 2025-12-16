@@ -4,6 +4,8 @@ import Image from "@/components/Image";
 // MUI imports
 import { SxProps, Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { TooltipProps } from "@mui/material/Tooltip";
 
 // Helper imports
 import { getSupportCardRarityColor } from "@/helpers/uma/rarityColors";
@@ -11,16 +13,19 @@ import { rarityMap } from "@/data/uma/common";
 
 // Type imports
 import { UmaSupport } from "@/types/uma";
-import Stack from "@mui/material/Stack";
 
 export default function SupportImage({
     support,
+    componentID,
     style,
     handleClickOpen,
+    tooltipArrow = "bottom",
 }: {
     support: UmaSupport;
-    style: React.CSSProperties;
+    componentID?: string;
+    style?: React.CSSProperties;
     handleClickOpen?: () => void;
+    tooltipArrow?: TooltipProps["placement"];
 }) {
     const { id, rarity, specialty } = support;
 
@@ -48,7 +53,11 @@ export default function SupportImage({
             }}
         >
             <Box sx={supportImageStyle(rarity)} onClick={handleClickOpen}>
-                <Image src={`uma/supports/${id}`} style={style} />
+                <Image
+                    id={componentID}
+                    src={`uma/supports/${id}`}
+                    style={style}
+                />
             </Box>
             <Stack
                 sx={{
@@ -79,7 +88,7 @@ export default function SupportImage({
                     src={`uma/icons/specialties/${specialty}`}
                     style={{ width: "100%", borderRadius: "4px" }}
                     tooltip={specialty}
-                    tooltipArrow="bottom"
+                    tooltipArrow={tooltipArrow}
                 />
             </Box>
         </Box>
