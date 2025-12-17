@@ -31,8 +31,8 @@ export interface TextLabelProps {
     titleProps?: TitleProps;
     subtitle?: string | number | React.ReactNode;
     subtitleProps?: TitleProps;
-    spacing?: number;
-    textSpacing?: number;
+    spacing?: StackProps["spacing"];
+    textSpacing?: StackProps["spacing"];
     href?: string;
     alignItems?: StackProps["alignItems"];
     justifyContent?: "left" | "center" | "right";
