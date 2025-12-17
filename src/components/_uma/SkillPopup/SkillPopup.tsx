@@ -29,7 +29,7 @@ import { isUnreleasedContentUma } from "@/helpers/isUnreleasedContent";
 // Type imports
 import { UmaCharacter, UmaRarity, UmaSpecialty, UmaSupport } from "@/types/uma";
 import { UmaSkill } from "@/types/uma/skill";
-import { Scenario } from "@/types/uma/scenario";
+import { UmaScenario } from "@/types/uma/scenario";
 
 export default function SkillPopup({
     skill,
@@ -92,7 +92,7 @@ export default function SkillPopup({
         );
     }
 
-    function ItemImageScenario({ scenario }: { scenario: Scenario }) {
+    function ItemImageScenario({ scenario }: { scenario: UmaScenario }) {
         return (
             <Image
                 src={`uma/scenarios/${scenario.id}`}
@@ -140,8 +140,7 @@ export default function SkillPopup({
         .filter(filterSources)
         .sort((a, b) => sortBy(a.rarity, b.rarity) || sortBy(b.id, a.id));
 
-    let scenarioSources: Scenario[] = [];
-
+    let scenarioSources: UmaScenario[] = [];
     scenarioSources = scenarios.filter((s) => {
         if (skill.scenarioEvents) {
             if (server === "Asia") {
