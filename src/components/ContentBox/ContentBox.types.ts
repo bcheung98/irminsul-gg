@@ -1,10 +1,14 @@
-import { TypographyVariant } from "@mui/material/styles";
+import { TypographyProps } from "@mui/material/Typography";
+import { BoxProps } from "@mui/system/Box";
+import { StackProps } from "@mui/system/Stack";
 
 export interface HeaderProps {
     dense?: boolean;
-    padding?: string | number;
+    padding?: BoxProps["padding"];
+    gap?: StackProps["spacing"];
     backgroundColor?: string;
-    textVariant?: TypographyVariant;
+    textVariant?: TypographyProps["variant"];
+    justifyContent?: StackProps["justifyContent"];
 }
 
 export interface ContentProps {

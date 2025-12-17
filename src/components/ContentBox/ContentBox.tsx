@@ -9,31 +9,40 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 
 // Type imports
-import { ContentBoxProps } from "./ContentBox.types";
+import { ContentBoxProps, ContentProps, HeaderProps } from "./ContentBox.types";
 
 export default function ContentBox({
     component = "div",
     children,
     header = "",
     actions,
-    headerProps = {
-        dense: true,
-        padding: "8px 16px",
-        textVariant: "h6",
-    },
-    contentProps = {
-        padding: "16px",
-        overflowX: "visible",
-    },
+    headerProps,
+    contentProps,
     elevation,
 }: ContentBoxProps) {
     const theme = useTheme();
+
+    const hProps: HeaderProps = {
+        ...{
+            dense: true,
+            padding: "8px 16px",
+            textVariant: "h6",
+            gap: "8px",
+            justifyContent: "space-between",
+        },
+        ...headerProps,
+    };
+
+    const cProps: ContentProps = {
+        ...{ padding: "16px", overflowX: "visible" },
+        ...contentProps,
+    };
 
     return (
         <Card
             sx={{
                 backgroundColor: alpha(
-                    contentProps.backgroundColor ||
+                    cProps.backgroundColor ||
                         theme.contentBox.backgroundColor.main,
                     0.95
                 ),
@@ -53,22 +62,22 @@ export default function ContentBox({
             >
                 <Toolbar
                     variant={
-                        headerProps.dense || typeof header !== "string"
+                        hProps.dense || typeof header !== "string"
                             ? "dense"
                             : "regular"
                     }
                     disableGutters
                     sx={{
-                        p: headerProps.padding,
+                        p: hProps.padding,
                         flexGrow: 1,
                         flexWrap: "wrap",
-                        justifyContent: "space-between",
-                        gap: "8px",
+                        justifyContent: hProps.justifyContent,
+                        gap: hProps.gap,
                     }}
                 >
                     {typeof header === "string" ? (
                         <Text
-                            variant={headerProps.textVariant}
+                            variant={hProps.textVariant}
                             weight="highlight"
                             sx={{ color: theme.contentBox.color.header }}
                         >
@@ -83,8 +92,8 @@ export default function ContentBox({
             {children && (
                 <Box
                     sx={{
-                        m: contentProps.padding,
-                        overflowX: contentProps.overflowX,
+                        m: cProps.padding,
+                        overflowX: cProps.overflowX,
                     }}
                     component={component}
                 >
