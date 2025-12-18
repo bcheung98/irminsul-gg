@@ -84,8 +84,8 @@ export default function SettingsList() {
             ),
             description: (
                 <Text variant="subtitle2">
-                    Enabling this option will allow you to view content from the
-                    game's beta version.
+                    Enabling this option will allow you to view content from
+                    beta version of each game.
                     <br />
                     Any information from the beta is heavily subject to change
                     and will usually be incomplete and/or inaccurate.
@@ -144,7 +144,7 @@ export default function SettingsList() {
                 />
             ),
         };
-        if (["genshin", "wuwa", "zzz"].includes(gameTag)) {
+        if (["genshin", "hsr", "wuwa", "zzz"].includes(gameTag)) {
             group1.push(statDisplaySettings);
         }
         group1.push(serverSettings);
