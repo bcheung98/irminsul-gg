@@ -83,6 +83,16 @@ export default function EventText({
                     text: "Have the <> status effect at the end of training",
                     count,
                 });
+            case "debuff_healed":
+                return SkillText({
+                    event: outcome,
+                    text: "※ <> was healed",
+                });
+            case "debuff_not_healed":
+                return SkillText({
+                    event: outcome,
+                    text: "※ <> was not healed",
+                });
             case "status_healed":
                 return StatusEffect({
                     effectID: data,

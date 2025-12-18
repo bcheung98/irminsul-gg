@@ -93,7 +93,13 @@ export function SkillHint({
     return hint;
 }
 
-export function SkillText({ event }: { event: EventRewards }) {
+export function SkillText({
+    event,
+    text = "Obtain",
+}: {
+    event: EventRewards;
+    text?: string;
+}) {
     const theme = useTheme();
 
     const { skills } = useUmaContext();
@@ -103,13 +109,16 @@ export function SkillText({ event }: { event: EventRewards }) {
         setOpen(true);
     };
 
-    const { value } = event;
-    const skill = skills.find((skill) => skill.id === value);
+    const { value, data } = event;
+    const skill = skills.find(
+        (skill) => skill.id === value || skill.id === data
+    );
+    const [s1, s2] = text.split("<>");
     let res = <></>;
     if (skill) {
         res = (
             <>
-                {`Obtain `}
+                {s1 || `Obtain `}
                 <span
                     onClick={handleClickOpen}
                     style={{
@@ -121,6 +130,7 @@ export function SkillText({ event }: { event: EventRewards }) {
                 >
                     {skill.name.global || skill.name.jp}
                 </span>
+                {s2 && ` ${s2}`}
                 <ContentDialog
                     open={open}
                     setOpen={setOpen}
