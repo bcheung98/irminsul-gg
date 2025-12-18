@@ -26,7 +26,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
 import { useGame, useGameTag } from "@/context";
-import { useStore, useSettingsStore, useSiteSearchStore } from "@/stores";
+import {
+    useStore,
+    useSettingsStore,
+    useSiteSearchStore,
+    useServerStore,
+} from "@/stores";
 import { getItems } from "./SiteSearch.utils";
 
 // Type imports
@@ -54,6 +59,10 @@ export default function SiteSearchPopup({
         (state) => state.hideUnreleasedContent
     );
 
+    // Uma specific
+    const server = useServerStore().uma;
+    const hideUmaJPContent = game === "uma" && server === "NA";
+
     const [gameFilter, setGameFilter] = useState(game !== undefined);
     const handleSwitchChange = () => {
         setGameFilter(!gameFilter);
@@ -74,7 +83,11 @@ export default function SiteSearchPopup({
         startDataTransition(async () => {
             let currentGame: Game | undefined = game;
             if (!gameFilter) currentGame = undefined;
-            const items = await getItems(hideUnreleasedContent, currentGame);
+            const items = await getItems(
+                hideUnreleasedContent,
+                currentGame,
+                hideUmaJPContent
+            );
             startDataTransition(() => {
                 setData(items);
             });

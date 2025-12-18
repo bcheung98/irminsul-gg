@@ -3,7 +3,7 @@
 import { getDataSet } from "@/lib/fetchData";
 import { formatHref, splitJoin } from "@/utils";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { categories, categoryURLs } from "@/data/categories";
+import { categoryURLs } from "@/data/categories";
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
 import {
@@ -18,7 +18,8 @@ import { UmaCharacter, UmaSupport } from "@/types/uma";
 
 export async function getItems(
     hideUnreleasedContent = true,
-    game?: Game
+    game?: Game,
+    hideUmaJPContent = true
 ): Promise<SearchResult[]> {
     let data = Object.entries({
         "genshin/characters": filterUnreleasedContent(
@@ -87,12 +88,12 @@ export async function getItems(
             "zzz"
         ),
         "uma/characters": filterUnreleasedContent(
-            hideUnreleasedContent,
+            hideUmaJPContent,
             await getDataSet<UmaCharacter>("uma/characters"),
             "uma"
         ),
         "uma/supports": filterUnreleasedContent(
-            hideUnreleasedContent,
+            hideUmaJPContent,
             await getDataSet<UmaSupport>("uma/supports"),
             "uma"
         ),
@@ -103,8 +104,9 @@ export async function getItems(
                 name: item.name,
                 displayName: item.displayName || item.name,
                 rarity: item.rarity,
-                outfit: "outfit" in item && item.outfit,
-                specialty: "specialty" in item && item.specialty,
+                outfit: "outfit" in item ? item.outfit : undefined,
+                specialty: "specialty" in item ? item.specialty : undefined,
+                aptitude: "aptitude" in item ? "" : undefined, // "Fake" key to format Uma title
                 category: category,
                 release: item.release,
                 url: `/${categoryURLs[category]}/${formatHref(item.url)}`,

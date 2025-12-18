@@ -19,10 +19,12 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import { categories, categoryImgURLs } from "@/data/categories";
 import { games } from "@/data/games";
 import { useSiteSearchStore } from "@/stores";
+import { formatTitle } from "@/helpers/uma/formatTitle";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";
 import { Game } from "@/types";
+import { UmaCharacter, UmaSupport } from "@/types/uma";
 
 interface SearchResultButtons {
     addPin?: boolean;
@@ -107,7 +109,15 @@ export default function SiteSearchResult({
                                     backgroundColor: theme.background(2),
                                 },
                             }}
-                            title={item.displayName}
+                            title={
+                                item.category.startsWith("uma")
+                                    ? formatTitle(
+                                          item as unknown as
+                                              | UmaCharacter
+                                              | UmaSupport
+                                      )
+                                    : item.displayName
+                            }
                             titleProps={{
                                 variant: matches ? "body1" : "body2",
                             }}

@@ -10,11 +10,14 @@ import { useSiteSearchStore } from "@/stores";
 
 // Type imports
 import { BaseDataWithRelease } from "@/types";
+import { UmaSpecialty } from "@/types/uma";
 
 export interface SearchResult extends BaseDataWithRelease {
     displayName: string;
     category: string;
     rarity: number;
+    specialty?: UmaSpecialty;
+    outfit?: string;
     url: string;
 }
 
