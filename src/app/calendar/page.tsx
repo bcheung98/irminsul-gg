@@ -20,6 +20,8 @@ export default async function CalendarPage() {
         "hsr/characters": await getDataSet<Banner>("hsr/banner-characters"),
         "wuwa/characters": await getDataSet<Banner>("wuwa/banner-characters"),
         "zzz/characters": await getDataSet<Banner>("zzz/banner-characters"),
+        "uma/characters": await getDataSet<Banner>("uma/banner-characters"),
+        "uma/weapons": await getDataSet<Banner>("uma/banner-supports"),
     };
     const data = await getItems(false);
 
