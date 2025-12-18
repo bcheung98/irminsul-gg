@@ -32,8 +32,6 @@ export default function EventInfo({
 
     const server = useStore(useServerStore, (state) => state.uma);
 
-    const expanded = expand; // TODO: Update when adding planner settings
-
     let name: string;
     if (server === "Asia") {
         if (event.name === event.nameJP) {
@@ -81,7 +79,7 @@ export default function EventInfo({
         return null;
     }
 
-    return expanded ? (
+    return expand ? (
         <Card>{renderEventPopup()}</Card>
     ) : (
         <>
