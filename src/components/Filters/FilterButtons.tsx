@@ -30,20 +30,28 @@ const FilterButtons = memo(function ({ filter }: FilterButtonsProps) {
         >
             {filter.groupButtons ? (
                 <Stack spacing={1}>
-                    {filter.groupButtons.map((group, index) => (
-                        <Dropdown
-                            key={index}
-                            img={group.icon}
-                            imgStyle={{ borderRadius: "4px" }}
-                            title={group.label}
-                            titleColor={theme.text.primary}
-                        >
+                    {filter.groupButtons.map((group, index) =>
+                        group.dropdown ? (
+                            <Dropdown
+                                key={index}
+                                img={group.icon}
+                                imgStyle={{ borderRadius: "4px" }}
+                                title={group.label}
+                                titleColor={theme.text.primary}
+                            >
+                                <FilterButtonsRoot
+                                    filter={filter}
+                                    buttons={group.buttons}
+                                />
+                            </Dropdown>
+                        ) : (
                             <FilterButtonsRoot
+                                key={index}
                                 filter={filter}
                                 buttons={group.buttons}
                             />
-                        </Dropdown>
-                    ))}
+                        )
+                    )}
                 </Stack>
             ) : (
                 <FilterButtonsRoot filter={filter} buttons={filter.buttons} />

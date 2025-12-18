@@ -17,6 +17,11 @@ import {
     WuWaWeaponFilters,
 } from "@/components/_wuwa/Filters";
 import { ZZZCharacterFilters, ZZZWeaponFilters } from "../_zzz/Filters";
+import {
+    UmaCharacterFilters,
+    UmaSkillFilters,
+    UmaSupportFilters,
+} from "../_uma/Filters";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -63,4 +68,7 @@ const components: Record<string, React.ReactNode> = {
     "/wuwa/echoes": <WuWaEchoFilters />,
     "/zzz/agents": <ZZZCharacterFilters />,
     "/zzz/w-engines": <ZZZWeaponFilters />,
+    "/uma/characters": <UmaCharacterFilters />,
+    "/uma/supports": <UmaSupportFilters />,
+    "/uma/skills": <UmaSkillFilters />,
 };

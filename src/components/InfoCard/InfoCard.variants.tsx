@@ -1,5 +1,6 @@
 import InfoCard from "./InfoCard";
 import InfoCardMaterial from "./InfoCardMaterial";
+import InfoCardSupport from "../_uma/InfoCardSupport";
 import { InfoCardProps } from "./InfoCard.types";
 import {
     GenshinArtifact,
@@ -9,6 +10,7 @@ import {
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
+import { UmaCharacter, UmaSupport } from "@/types/uma";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -409,6 +411,49 @@ export function ZZZBangbooInfoCard({
             name={bangboo.displayName}
             rarity={bangboo.rarity}
             href={bangboo.url}
+            {...props}
+        />
+    );
+}
+
+export function UmaCharacterInfoCard({
+    character,
+    props,
+}: {
+    character: UmaCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="uma/characters"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.name}
+            title={`(${character.outfit || "Original"})`}
+            rarity={character.rarity + 2}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function UmaSupportInfoCard({
+    support,
+    props,
+}: {
+    support: UmaSupport;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardSupport
+            tag="uma/supports"
+            id={Number(support.id)}
+            key={support.id}
+            name={support.name}
+            title={support.title}
+            specialty={support.specialty}
+            rarity={support.rarity}
+            href={support.url}
             {...props}
         />
     );

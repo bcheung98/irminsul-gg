@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 interface SearchBarProps {
     autoFocus?: boolean;
     onChange?: (event: React.BaseSyntheticEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
     value?: string;
     placeholder?: string;
     inputIcon?: React.ReactNode;
@@ -18,6 +19,7 @@ interface SearchBarProps {
 export default function SearchBar({
     autoFocus,
     onChange,
+    onKeyDown,
     value,
     placeholder = "Search",
     inputIcon,
@@ -35,6 +37,7 @@ export default function SearchBar({
             value={value}
             placeholder={placeholder}
             onChange={onChange}
+            onKeyDown={onKeyDown}
             fullWidth
             autoComplete="off"
             spellCheck={false}

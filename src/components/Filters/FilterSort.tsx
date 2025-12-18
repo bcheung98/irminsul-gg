@@ -154,4 +154,20 @@ const options = {
         { value: "rarity", label: "Rank" },
         { value: "weaponType", label: "Specialty" },
     ],
+    "uma/characters": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+    ],
+    "uma/supports": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "specialty", label: "Specialty" },
+    ],
+    "uma/skills": [
+        { value: "skillName", label: "Name" },
+        { value: "skillRarity", label: "Rarity" },
+        { value: "skillType", label: "Type" },
+    ],
 };

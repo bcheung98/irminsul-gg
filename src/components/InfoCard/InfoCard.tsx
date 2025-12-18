@@ -23,6 +23,7 @@ export default function InfoCard({
     id,
     tag,
     name,
+    title,
     rarity = 3,
     size = 128,
     background,
@@ -91,6 +92,11 @@ export default function InfoCard({
                         />
                     </Box>
                     <Box sx={styles.textContainer()}>
+                        {title && (
+                            <Text variant="body3" sx={styles.text()}>
+                                {title}
+                            </Text>
+                        )}
                         <Text
                             variant={name.length > 13 ? "body3" : "body2"}
                             sx={styles.text()}

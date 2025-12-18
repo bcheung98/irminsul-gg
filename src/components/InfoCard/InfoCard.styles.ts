@@ -48,16 +48,17 @@ export const infoCardStyles = ({
         backgroundColor:
             type === "characters" ? backgroundColor : "transparent",
         backgroundImage:
-            variant !== "material-card" &&
-            type === "characters" &&
-            game === "genshin"
+            (variant !== "material-card" &&
+                type === "characters" &&
+                game === "genshin") ||
+            game === "uma"
                 ? null
                 : theme.materialCard.backgroundImage(rarity),
         backgroundSize: "contain",
         backgroundRepeat: "repeat",
     }),
     textContainer: (): SxProps => () => ({
-        p: "8px",
+        p: 1,
         borderTop: `calc(${imgSize} / 20) solid ${useRarityColors()[game](
             rarity
         )}`,
