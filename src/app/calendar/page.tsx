@@ -23,7 +23,7 @@ export default async function CalendarPage() {
         "uma/characters": await getDataSet<Banner>("uma/banner-characters"),
         "uma/weapons": await getDataSet<Banner>("uma/banner-supports"),
     };
-    const data = await getItems(false);
+    const data = await getItems(false, undefined, false);
 
     return (
         <Suspense fallback={<Loader />}>
