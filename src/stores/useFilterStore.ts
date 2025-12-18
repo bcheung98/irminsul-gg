@@ -8,6 +8,9 @@ import { WuWaWeaponFilterState } from "@/components/_wuwa/Filters/WeaponFilters"
 import { WuWaEchoFilterState } from "@/components/_wuwa/Filters/EchoFilters";
 import { ZZZCharacterFilterState } from "@/components/_zzz/Filters/CharacterFilters";
 import { ZZZWeaponFilterState } from "@/components/_zzz/Filters/WeaponFilters";
+import { UmaCharacterFilterState } from "@/components/_uma/Filters/CharacterFilters";
+import { UmaSupportFilterState } from "@/components/_uma/Filters/SupportFilters";
+import { UmaSkillFilterState } from "@/components/_uma/Filters/SkillFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
@@ -19,8 +22,9 @@ export interface FilterState {
     "wuwa/echoes": WuWaEchoFilterState;
     "zzz/characters": ZZZCharacterFilterState;
     "zzz/weapons": ZZZWeaponFilterState;
-    "uma/characters": {};
-    "uma/weapons": {};
+    "uma/characters": UmaCharacterFilterState;
+    "uma/supports": UmaSupportFilterState;
+    "uma/skills": UmaSkillFilterState;
 }
 
 export type SetFilterState = (
@@ -124,6 +128,21 @@ export const zzzWeaponFilters: ZZZWeaponFilterState = {
     subStat: [],
 };
 
+export const umaCharacterFilters: UmaCharacterFilterState = {
+    aptitude: [],
+    rarity: [],
+};
+
+export const umaSupportFilters: UmaSupportFilterState = {
+    specialty: [],
+    rarity: [],
+};
+
+export const umaSkillFilters: UmaSkillFilterState = {
+    conditions: [],
+    skillRarity: [],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
@@ -134,8 +153,9 @@ export const initialState: FilterState = {
     "wuwa/echoes": wuwaEchoFilters,
     "zzz/characters": zzzCharacterFilters,
     "zzz/weapons": zzzWeaponFilters,
-    "uma/characters": {},
-    "uma/weapons": {},
+    "uma/characters": umaCharacterFilters,
+    "uma/supports": umaSupportFilters,
+    "uma/skills": umaSkillFilters,
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

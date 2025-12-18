@@ -8,6 +8,7 @@ import { usePlannerStore } from "./usePlannerStore";
 import { useServerStore } from "./useServerStore";
 import { useSettingsStore } from "./useSettingsStore";
 import { useSiteSearchStore } from "./useSiteSearchStore";
+import { useTEHelperStore } from "./useTEHelperStore";
 
 export {
     useStore,
@@ -20,5 +21,6 @@ export {
     useServerStore,
     useSettingsStore,
     useSiteSearchStore,
+    useTEHelperStore,
 };
 export default useStore;

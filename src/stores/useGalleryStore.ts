@@ -27,6 +27,9 @@ export interface GalleryState {
     "zzz/agents": GallerySettings;
     "zzz/w-engines": GallerySettings;
     "zzz/drive-discs": GallerySettings;
+    "uma/characters": GallerySettings;
+    "uma/supports": GallerySettings;
+    "uma/skills": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -72,6 +75,17 @@ export const initialState: GalleryState = {
         view: "icon",
     },
     "zzz/drive-discs": defaultSettings,
+    "uma/characters": defaultSettings,
+    "uma/supports": {
+        sortBy: "specialty",
+        sortDirection: "asc",
+        view: "icon",
+    },
+    "uma/skills": {
+        sortBy: "skillType",
+        sortDirection: "asc",
+        view: "icon",
+    },
 };
 
 export const useGalleryStore = create(
