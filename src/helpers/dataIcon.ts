@@ -10,11 +10,12 @@ import {
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
 import { isUnreleasedContent } from "./isUnreleasedContent";
 import { AttributeDataKey, Game } from "@/types";
+import { CharacterColors } from "@/types/character";
 
 interface Props {
     game: Game;
     key: AttributeDataKey;
-    value?: string | number | (string | number)[];
+    value?: string | number | (string | number)[] | CharacterColors;
 }
 
 export function getDataIconURL({ game, key, value }: Props) {
@@ -90,6 +91,12 @@ export function getDataIconURL({ game, key, value }: Props) {
         if (key === "subStat" && value) {
             src = `zzz/icons/stat-icons/${value}`;
             tooltip = `${zzzWeaponSubStats[value as ZZZWeaponSubStat].title}`;
+        }
+    }
+    if (game === "uma") {
+        if (key === "specialty") {
+            src = `uma/icons/specialties/${value}`;
+            tooltip = `${value}`;
         }
     }
     return { src, tooltip };

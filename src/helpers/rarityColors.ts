@@ -9,6 +9,7 @@ import {
     getWuWaRarityColor,
 } from "./wuwa/rarityColors";
 import { getZZZBackgroundColor, getZZZRarityColor } from "./zzz/rarityColors";
+import { getUmaBackgroundColor, getUmaRarityColor } from "./uma/rarityColors";
 
 export function useRarityColors(): GameData<(rarity?: number) => string> {
     return {
@@ -16,9 +17,7 @@ export function useRarityColors(): GameData<(rarity?: number) => string> {
         hsr: getHSRRarityColor,
         wuwa: getWuWaRarityColor,
         zzz: getZZZRarityColor,
-        uma: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        uma: getUmaRarityColor,
     };
 }
 
@@ -30,8 +29,6 @@ export function useBackgroundRarityColors(): GameData<
         hsr: getHSRBackgroundColor,
         wuwa: getWuWaBackgroundColor,
         zzz: getZZZBackgroundColor,
-        uma: function (rarity?: number): string {
-            throw new Error("Function not implemented.");
-        },
+        uma: getUmaBackgroundColor,
     };
 }

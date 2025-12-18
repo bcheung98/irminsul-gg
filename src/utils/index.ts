@@ -133,3 +133,7 @@ export function formatHref(href = "") {
 export function splitJoin(string = "", split = " ", join = "_") {
     return string.split(split).join(join);
 }
+
+export function getOrdinal(n = 1) {
+    return ["0", "1st", "2nd", "3rd", "4th", "5th"][n];
+}

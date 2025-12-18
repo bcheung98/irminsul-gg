@@ -3,6 +3,7 @@ import sortGenshinItems from "./genshin/sortItems";
 import sortHSRItems from "./hsr/sortItems";
 import sortWuWaItems from "./wuwa/sortItems";
 import sortZZZItems from "./zzz/sortItems";
+import sortUmaItems from "./uma/sortItems";
 
 export interface SortProps<T extends Record<string, any>> {
     items: T[];
@@ -18,8 +19,6 @@ export function useSort(): GameData<SortFunction> {
         hsr: sortHSRItems,
         wuwa: sortWuWaItems,
         zzz: sortZZZItems,
-        uma: function () {
-            throw new Error("Function not implemented.");
-        },
+        uma: sortUmaItems,
     };
 }

@@ -31,7 +31,8 @@ export const categoryURLs: Record<string, string> = {
     "zzz/equipment": "zzz/drive-discs",
     "zzz/bangboos": "zzz/bangboos",
     "uma/characters": "uma/characters",
-    "uma/supports": "uma/support-cards",
+    "uma/weapons": "uma/supports", // Need this for category sorting
+    "uma/supports": "uma/supports",
 };
 
 export const categoryImgURLs: Record<
@@ -52,4 +53,7 @@ export const categoryImgURLs: Record<
     "zzz/weapons": (id: number) => `zzz/w-engines/${id}`,
     "zzz/equipment": (id: number) => `zzz/drive-discs/${id}`,
     "zzz/bangboos": (id: number) => `zzz/bangboo/${id}`,
+    "uma/characters": (id: number) => `uma/characters/${id}`,
+    "uma/weapons": (id: number) => `uma/supports/${id}_icon`, // Need this for category sorting
+    "uma/supports": (id: number) => `uma/supports/${id}_icon`,
 };

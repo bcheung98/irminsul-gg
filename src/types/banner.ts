@@ -17,6 +17,8 @@ export interface BannerOption extends BaseData {
     rarity: number;
     element?: string;
     weaponType?: string;
+    outfit?: string;
+    specialty?: string;
 }
 
 export interface BannerProps {

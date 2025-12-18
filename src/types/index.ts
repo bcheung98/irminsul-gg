@@ -53,6 +53,7 @@ export interface AttributeData {
     combatRoles?: string[];
     bonusStats?: string[];
     colors?: CharacterColors;
+    specialty?: string;
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {
@@ -111,4 +112,5 @@ export interface GroupFilterButtons {
     buttons: FilterButtons[];
     icon?: string;
     label?: string;
+    dropdown?: boolean;
 }

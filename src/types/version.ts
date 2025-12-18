@@ -13,4 +13,7 @@ export interface VersionInfo {
     name: string;
 }
 
-export interface UmaVersion extends VoiceActorData {}
+export interface UmaVersion extends Version {
+    global: string;
+    jp: string;
+}

@@ -145,5 +145,36 @@ export const navItems: GameData<NavItem[]> = {
             href: "banners",
         },
     ],
-    uma: [],
+    uma: [
+        {
+            icon: "icons/Home",
+            title: "Home",
+            href: "",
+        },
+        {
+            icon: "icons/Horse",
+            title: "Characters",
+            href: "characters",
+        },
+        {
+            icon: "icons/Card",
+            title: "Support Cards",
+            href: "supports",
+        },
+        {
+            icon: "icons/Skill",
+            title: "Skills",
+            href: "skills",
+        },
+        {
+            icon: "icons/Training",
+            title: "Training Event Helper",
+            href: "training-event-helper",
+        },
+        {
+            icon: "icons/Ticket",
+            title: "Banner Archive",
+            href: "banners",
+        },
+    ],
 };

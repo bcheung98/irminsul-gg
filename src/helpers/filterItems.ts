@@ -120,17 +120,45 @@ export function filterItems<T extends Record<string, any>>(
             )
         );
     }
-    if (searchValue) {
-        res = res.filter(
-            (item) =>
-                item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.displayName
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase()) ||
-                item.displayName
-                    ?.toLowerCase()
-                    .includes(searchValue.toLowerCase())
+    if ("aptitude" in filters && filters.aptitude.length > 0) {
+        res = res.filter((character) => {
+            const aptitudes: string[] = [];
+            Object.values(character.aptitude).forEach((values: any) =>
+                Object.entries(values).forEach(
+                    ([key, value]) => value === "A" && aptitudes.push(key)
+                )
+            );
+            return filters.aptitude.every((f) =>
+                aptitudes.includes(`${f}`.toLocaleLowerCase())
+            );
+        });
+    }
+    if ("specialty" in filters && filters.specialty.length > 0) {
+        res = res.filter((item) => filters.specialty.includes(item.specialty));
+    }
+    if ("conditions" in filters && filters.conditions.length > 0) {
+        res = res.filter((item) =>
+            filters.conditions.every((skill) => item.tags.includes(skill))
         );
+    }
+    if ("skillRarity" in filters && filters.skillRarity.length > 0) {
+        res = res.filter((item) => filters.skillRarity.includes(item.rarity));
+    }
+    if (searchValue) {
+        res = res.filter((item) => {
+            // Case for Uma skills
+            if ("conditions" in item) {
+                return (item.name.global || item.name.jp)
+                    .toLocaleLowerCase()
+                    .includes(searchValue.toLocaleLowerCase());
+            }
+            return (
+                item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                (item.displayName || item.name)
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+            );
+        });
     }
 
     const value = sort.sortBy;

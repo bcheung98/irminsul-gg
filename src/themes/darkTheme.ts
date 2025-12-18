@@ -201,6 +201,12 @@ export const darkThemeData = {
             ether: "#fe437e",
             wind: "#48eea7",
         },
+        uma: {
+            highlight: "#f7ca2f",
+            header: "#ffe7b9",
+            star: "#ffee9d",
+            value: "#3bb1ff",
+        },
     },
     appbar: {
         backgroundColor: {
