@@ -209,7 +209,7 @@ export function UmaCharacterInfoAvatar({
             id={Number(character.id)}
             key={character.id}
             name={`${character.name} (${character.outfit || "Original"})`}
-            rarity={character.rarity}
+            rarity={character.rarity + 2}
             href={character.url}
             background="transparent"
             {...props}

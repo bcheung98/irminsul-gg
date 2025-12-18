@@ -60,7 +60,9 @@ export default function InfoAvatar({
                     }px solid ${rarityColors(rarity)}`,
                     borderRadius: theme.infoAvatar.border.radius,
                     backgroundColor: background || theme.background(1),
-                    backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
+                    backgroundImage: !tag.startsWith("uma")
+                        ? `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`
+                        : "none",
                     backgroundSize: "contain",
                 }}
             >
