@@ -64,7 +64,7 @@ export default function CharacterSkillDescription({
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
         const keyword = getSkillKeyword({
-            tag: event.target.className.split("-")[1],
+            tag: event.target.dataset.tag,
             skills: skills,
             skillVersion: buffs.value,
             keywords: keywords,
