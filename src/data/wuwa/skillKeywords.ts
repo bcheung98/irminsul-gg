@@ -44,6 +44,12 @@ export const skillKeywords: SkillKeyword[] = [
             '<ul><li>While Electro Flare lasts, it deals periodic <span class="text-electro">Eletro DMG</span> to the target. The target loses half of the effect stacks with each instance of damage.</li><li>At maximum stacks of Electro Flare, any new stack inflicted becomes stackable Electro Rage.</li><li>Electro Rage increases the DMG dealt by the next Electro Flare trigger. This effect is removed once triggered.</li><li>Electro Flare and Electro Rage stack up to 10 times by default. The higher the stacks, the more DMG dealt.</li></ul>',
     },
     {
+        tag: "electro rage",
+        name: "Electro Rage",
+        description:
+            "Electro Rage increases the damage dealt by the next Electro Flare. This effect is removed once triggered.",
+    },
+    {
         tag: "glacio chafe",
         name: "Glacio Chafe",
         description:
@@ -60,5 +66,29 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Tune Break",
         description:
             'When the target\'s <span class="text-highlight">Off-Tune</span> Level is maxed, they enter the <span class="text-highlight">Mistune</span> state:<br />The active Resonator in the team may perform <span class="text-highlight">Tune Break Skill</span> on the target, dealing DMG and causing the target to leave the <span class="text-highlight">Mistune</span> state.<br />If the target is of the Common Class, Resonators in the team may directly deal <span class="text-highlight">Tune Break DMG</span> with some of their regular skills on hit. The target leaves the <span class="text-highlight">Mistune</span> state afterward.',
+    },
+    {
+        tag: "tune rupture shifting",
+        name: "Tune Rupture - Shifting",
+        description:
+            'Certain Resonators can inflict <span class="text-highlight">Tune Rupture - Shifting</span> on the target. During this state, if the affected target is hit by <span class="text-highlight">Tune Break</span>, their <span class="text-highlight">Tune Rupture - Shifting</span> state is replaced with <span class="text-highlight">Tune Rupture - Interfered</span>.',
+    },
+    {
+        tag: "tune rupture interfered",
+        name: "Tune Rupture - Interfered",
+        description:
+            'A target enters this state when they are hit by <span class="text-highlight">Tune Break</span> under the <span class="text-highlight">Tune Rupture - Shifting</span> state. Resonators who can respond to <span class="text-highlight">Tune Rupture - Interfered</span> cause additional effects when attacking targets in this state.',
+    },
+    {
+        tag: "tune strain shifting",
+        name: "Tune Strain - Shifting",
+        description:
+            'Certain Resonators can inflict <span class="text-highlight">Tune Strain - Shifting</span> on the target. During this state, if the affected target is hit by <span class="text-highlight">Tune Break</span>, their <span class="text-highlight">Tune Strain - Shifting</span> state is replaced with <span class="text-highlight">Tune Strain - Interfered</span>.',
+    },
+    {
+        tag: "tune strain interfered",
+        name: "Tune Strain - Interfered",
+        description:
+            'A target enters this state when they are hit by <span class="text-highlight">Tune Break</span> under the <span class="text-highlight">Tune Strain - Shifting</span> state. Resonators who can respond to <span class="text-highlight">Tune Strain - Interfered</span> cause additional effects when attacking targets in this state.',
     },
 ];
