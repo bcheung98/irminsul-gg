@@ -1,10 +1,9 @@
-import { skillKeywords } from "@/data/hsr/skillKeywords";
+import { skillKeywords } from "@/data/wuwa/skillKeywords";
 import { GetSkillKeywordProps } from "../skills";
 
 export default function getSkillKeyword({
     tag,
     keywords = [],
-    attributes,
 }: GetSkillKeywordProps) {
     let keyword = skillKeywords.find((kwrd) => kwrd.tag === tag);
     if (!keyword) {

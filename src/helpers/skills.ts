@@ -43,7 +43,7 @@ export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
         hsr: getHSRSkillKeyword,
         wuwa: getWuWaSkillKeyword,
         zzz: getZZZSkillKeyword,
-        uma: function (args: GetSkillKeywordProps): SkillKeyword | undefined {
+        uma: function (): SkillKeyword | undefined {
             throw new Error("Function not implemented.");
         },
     };
@@ -57,8 +57,8 @@ export function getKeywordPopupTitle(
         case "genshin":
             return keyword?.type ? "Related Talents" : "Related effects";
         case "hsr":
-            return "Glossary";
         case "wuwa":
+            return "Glossary";
         case "zzz":
         case "uma":
             return "Keywords";

@@ -1,6 +1,7 @@
 import { AttributeData } from "@/types";
 import { Skill, SkillKeyword } from "@/types/skill";
 import { Materials } from "@/types/materials";
+import { WuWaSkillTutorial } from "@/types/wuwa/character";
 
 export interface SkillProps {
     materials: Materials;
@@ -10,6 +11,7 @@ export interface SkillProps {
 
 export interface CharacterSkillsProps extends SkillProps {
     title?: string;
+    tutorial?: WuWaSkillTutorial;
     keys: string[];
 }
 

@@ -6,6 +6,7 @@ import CharacterBuffs from "@/components/CharacterBuffs";
 import ContentBox from "@/components/ContentBox";
 import SkillIcon from "@/components/SkillIcon";
 import { default as Tabs } from "@/components/Tabs";
+import CharacterSkillTutorial from "../_wuwa/CharacterSkillTutorial";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -25,6 +26,7 @@ export default function CharacterSkills({
     keywords,
     materials,
     attributes,
+    tutorial,
 }: CharacterSkillsProps) {
     const theme = useTheme();
 
@@ -48,8 +50,18 @@ export default function CharacterSkills({
     return (
         <ContentBox
             header={title}
+            actions={
+                <>
+                    {game === "wuwa" && (
+                        <CharacterSkillTutorial
+                            attributes={attributes}
+                            tutorial={tutorial}
+                        />
+                    )}
+                    <CharacterBuffs {...buffs} />
+                </>
+            }
             contentProps={{ padding: "8px 0px" }}
-            actions={<CharacterBuffs {...buffs} />}
         >
             <Tabs.List
                 value={tabValue}

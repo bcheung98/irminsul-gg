@@ -15,6 +15,7 @@ export interface WuWaCharacter extends BaseData {
     skills: WuWaCharacterSkills;
     upgrades: Skill[];
     keywords?: SkillKeyword[];
+    tutorial?: WuWaSkillTutorial;
     stats: WuWaCharacterStats;
     bonusStats: WuWaCharacterBonusStats;
     combatRoles: string[];
@@ -37,6 +38,7 @@ export interface WuWaCharacterSkills extends CharacterSkillsList {
     passive2: Skill[];
     intro: Skill[];
     outro: Skill[];
+    break?: Skill[];
 }
 
 export type WuWaSkillKey = keyof WuWaCharacterSkills;
@@ -45,3 +47,9 @@ export type WuWaBonusStat = keyof typeof characterBonusStats;
 export type WuWaCharacterBonusStats = [WuWaBonusStat, WuWaBonusStat];
 
 export interface WuWaCharacterStats extends CharacterStats {}
+
+export interface WuWaSkillTutorial {
+    imgCount?: number;
+    description: Skill[];
+    combos: Skill[];
+}

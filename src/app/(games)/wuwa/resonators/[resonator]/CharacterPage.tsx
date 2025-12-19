@@ -33,6 +33,17 @@ export default function CharacterPage({
     const skills: CharacterSkillsList = { ...character.skills };
     skills.upgrades = character.upgrades;
 
+    if (!skills.break) {
+        skills.break = [
+            {
+                name: `Tune Break: ${character.weaponType}`,
+                description:
+                    'When the target\'s <span class="text-highlight">Off-Tune Level</span> is full, deal <span class="tooltipHighlight-tune break">Tune Break</span> DMG.',
+                icon: `wuwa/skills/Break_${character.weaponType}`,
+            },
+        ];
+    }
+
     const Splash = (
         <CharacterSplash
             id={Number(character.id)}
@@ -53,10 +64,19 @@ export default function CharacterPage({
     const Skills = (
         <CharacterSkills
             title="Forte"
-            keys={["attack", "skill", "forte", "ultimate", "intro", "outro"]}
+            keys={[
+                "attack",
+                "skill",
+                "forte",
+                "ultimate",
+                "intro",
+                "outro",
+                "break",
+            ]}
             keywords={character.keywords}
             materials={character.materials}
             attributes={attributes}
+            tutorial={character.tutorial}
         />
     );
 

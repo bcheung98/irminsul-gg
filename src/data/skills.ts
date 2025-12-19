@@ -30,6 +30,7 @@ export const skillKeys: GameData<Record<string, string>> = {
         forte: "Forte Circuit",
         intro: "Intro Skill",
         outro: "Outro Skill",
+        break: "Tune Break",
     },
     zzz: {
         attack: "Basic Attack",
@@ -74,6 +75,7 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         passive2: "wuwa/skills/{id}_passive2",
         intro: "wuwa/skills/{id}_intro",
         outro: "wuwa/skills/{id}_outro",
+        break: "wuwa/skills/Break_{weaponType}",
     },
     zzz: {
         attack: "zzz/skills/Attack",

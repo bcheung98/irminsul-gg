@@ -57,7 +57,8 @@ export default function SkillDescription({
                             className={getClassName(className)}
                             data-index={domNode.attribs["data-index"]}
                             style={{
-                                color: textColor(game, tag),
+                                color:
+                                    textColor(game, tag) || theme.text.primary,
                                 fontWeight:
                                     tag === "highlight"
                                         ? theme.font.weight.highlight
@@ -68,13 +69,14 @@ export default function SkillDescription({
                         </span>
                     );
                 } else if (className.split("-")[0].startsWith("tooltip")) {
+                    const tag = className.split("-")[1];
                     return (
                         <span
                             className={className}
+                            data-tag={domNode.attribs["data-tag"]}
                             style={{
                                 color:
-                                    textColor(game, getTextColor(className)) ||
-                                    theme.text.primary,
+                                    textColor(game, tag) || theme.text.primary,
                                 fontWeight: theme.font.weight.highlight,
                                 textDecoration: !disableLink
                                     ? "underline"
@@ -90,7 +92,7 @@ export default function SkillDescription({
                     const skill = className.split(" ")[1];
                     return (
                         <Image
-                            src={zzzSkillKeys[skill]}
+                            src={iconSkillKeys[skill]}
                             style={{
                                 verticalAlign: "middle",
                                 width: "auto",
@@ -107,6 +109,14 @@ export default function SkillDescription({
     };
 
     let text = description;
+
+    if (game === "wuwa") {
+        text = description
+            .replaceAll(`Icon_LMB`, `<span class="icon lmb"></span>`)
+            .replaceAll(`Icon_RMB`, `<span class="icon rmb"></span>`)
+            .replaceAll(`Icon_E`, `<span class="icon e"></span>`)
+            .replaceAll(`Icon_R`, `<span class="icon r"></span>`);
+    }
     if (game === "zzz") {
         text = description
             .replaceAll(`Icon_Basic`, `<span class="icon attack"></span>`)
@@ -128,15 +138,11 @@ export default function SkillDescription({
     return parse(text, options);
 }
 
-function getTextColor(className: string) {
-    if (className.startsWith("tooltipHighlight-")) {
-        return "highlight";
-    } else {
-        return "primary";
-    }
-}
-
-const zzzSkillKeys: Record<string, string> = {
+const iconSkillKeys: Record<string, string> = {
+    lmb: "wuwa/icons/inputs/LMB",
+    rmb: "wuwa/icons/inputs/RMB",
+    e: "wuwa/icons/inputs/E",
+    r: "wuwa/icons/inputs/R",
     attack: "zzz/skills/Attack",
     dodge: "zzz/skills/Dodge",
     assist: "zzz/skills/Assist",

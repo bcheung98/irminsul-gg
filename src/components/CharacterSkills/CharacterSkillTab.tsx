@@ -124,6 +124,7 @@ export default function CharacterSkillTab({
             "altsprint",
             "technique",
             "outro",
+            "break",
             "A",
             "B",
             "C",
@@ -141,7 +142,7 @@ export default function CharacterSkillTab({
         );
 
         const SkillScaling =
-            game !== "hsr" && !["outro", "core"].includes(skillKey) ? (
+            game !== "hsr" && !["outro", "core", "break"].includes(skillKey) ? (
                 <Grid size={{ xs: 12, md: mode === "slider" ? 5 : 12 }}>
                     <CharacterSkillScaling
                         skill={skill}
@@ -154,22 +155,21 @@ export default function CharacterSkillTab({
                 <></>
             );
 
-        const WuWaExtraSkillInfo =
-            skillKey !== "outro" ? (
-                skillKey === "forte" ? (
-                    <CharacterPassives
-                        attributes={attributes}
-                        materials={materials}
-                        keywords={keywords}
-                    />
-                ) : (
-                    <CharacterBonusStats
-                        attributes={attributes}
-                        skillKey={skillKey}
-                        materials={materials}
-                    />
-                )
-            ) : null;
+        const WuWaExtraSkillInfo = !["outro", "break"].includes(skillKey) ? (
+            skillKey === "forte" ? (
+                <CharacterPassives
+                    attributes={attributes}
+                    materials={materials}
+                    keywords={keywords}
+                />
+            ) : (
+                <CharacterBonusStats
+                    attributes={attributes}
+                    skillKey={skillKey}
+                    materials={materials}
+                />
+            )
+        ) : null;
 
         return (
             <Stack spacing={2} divider={<Divider />}>
