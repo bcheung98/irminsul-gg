@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "cmd.exe /c start chrome.exe http://localhost:8080 && next dev --port 8080 --turbopack",
-        "build": "next build --turbopack",
+        "dev": "cmd.exe /c start chrome.exe http://localhost:8080 && next dev --port 8080",
+        "build": "next build",
         "start": "next start",
         "lint": "eslint"
     },
@@ -21,14 +21,14 @@
         "@fullcalendar/rrule": "^6.1.15",
         "@mui/icons-material": "^7.3.4",
         "@mui/material": "^7.3.4",
-        "@mui/material-nextjs": "^7.3.3",
-        "@next/eslint-plugin-next": "^15.5.4",
+        "@mui/material-nextjs": "^7.3.6",
+        "@next/eslint-plugin-next": "16.1.0",
         "@reduxjs/toolkit": "^2.9.0",
         "html-react-parser": "^5.1.18",
         "match-sorter": "^8.0.0",
-        "next": "15.5.4",
-        "react": "19.1.0",
-        "react-dom": "19.1.0",
+        "next": "16.1.0",
+        "react": "19.2.3",
+        "react-dom": "19.2.3",
         "react-xarrows": "^2.0.2",
         "swr": "^2.3.6",
         "zustand": "^5.0.8"
@@ -37,14 +37,18 @@
         "@eslint/eslintrc": "^3",
         "@eslint/js": "^9.37.0",
         "@types/node": "^20",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
+        "@types/react": "19.2.7",
+        "@types/react-dom": "19.2.3",
         "eslint": "^9",
-        "eslint-config-next": "15.5.4",
+        "eslint-config-next": "16.1.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-refresh": "^0.4.23",
         "globals": "^15.11.0",
         "typescript": "^5"
+    },
+    "overrides": {
+        "@types/react": "19.2.7",
+        "@types/react-dom": "19.2.3"
     }
 }
