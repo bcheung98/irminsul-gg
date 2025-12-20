@@ -68,7 +68,7 @@ export default function WuWaPlannerCard() {
             skillKey: "attack",
             levels: skillLevel,
             values: item.values.attack || defaultSkillValues,
-            icon: `wuwa/skills/${item.id}_skill`,
+            icon: `wuwa/skills/Attack_${item.weaponType}`,
         },
         {
             skillKey: "skill",
