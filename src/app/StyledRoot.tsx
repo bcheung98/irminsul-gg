@@ -127,7 +127,11 @@ export default function StyledRoot({
                     </GameContext>
                 </GameListContext>
                 <ActionFab
-                    position={{ bottom: 50, left: 18 }}
+                    position={{
+                        bottom: { xs: 60, lg: 30 },
+                        left: { xs: undefined, md: 18 },
+                        right: { xs: 18, md: undefined },
+                    }}
                     action={scrollToTop}
                     icon={<KeyboardArrowUpIcon />}
                     tooltip="Scroll to top"

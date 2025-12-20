@@ -4,7 +4,7 @@ import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Fab, { FabProps } from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -20,10 +20,10 @@ interface ActionFabProps {
     tooltipArrow?: TooltipProps["placement"];
     color?: FabProps["color"];
     position?: {
-        top?: string | number;
-        right?: string | number;
-        bottom?: string | number;
-        left?: string | number;
+        top?: BoxProps["padding"];
+        right?: BoxProps["padding"];
+        bottom?: BoxProps["padding"];
+        left?: BoxProps["padding"];
     };
     zIndex?: number;
 }
@@ -51,7 +51,10 @@ function ActionFab({
         <Fade in={trigger}>
             <Box
                 onClick={action}
-                sx={[{ position: "fixed", zIndex: zIndex }, { ...position }]}
+                sx={[
+                    { position: "fixed", zIndex: zIndex, width: "40px" },
+                    { ...position },
+                ]}
             >
                 <Tooltip title={tooltip} arrow placement={tooltipArrow}>
                     <Fab
