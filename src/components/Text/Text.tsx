@@ -2,7 +2,7 @@ import { styled, Typography, TypographyProps } from "@mui/material";
 
 export type TextWeight = "primary" | "element" | "highlight" | "home" | number;
 
-interface TextProps extends TypographyProps {
+export interface TextProps extends TypographyProps {
     weight?: TextWeight;
 }
 
