@@ -20,24 +20,22 @@ export default function StyledRoot({
             <Box
                 sx={{
                     px: { xs: 1, md: 2 },
-                    py: 5,
-                    pb: 8,
+                    pt: 5,
+                    pb: 1,
                     minWidth: "0vw",
                     width: "100vw",
-                    minHeight: "100vh",
                 }}
             >
-                {children}
-                <Toolbar variant="dense" />
                 <Box
                     sx={{
-                        position: "absolute",
-                        bottom: 0,
-                        px: 1,
+                        width: "100%",
+                        minHeight: "100vh",
                     }}
                 >
-                    <NavBarBottom />
+                    {children}
                 </Box>
+                <Toolbar />
+                <NavBarBottom />
             </Box>
             <FilterDrawer />
         </Box>
