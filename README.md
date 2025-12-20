@@ -1,24 +1,20 @@
-# <img src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="Irminsul.GG" width="64" /> **[IRMINSUL.GG](https://irminsul.gg/)**
+# <img src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="Irminsul.GG" width="48" /> **[IRMINSUL.GG](https://irminsul.gg/)**
 
 **IRMINSUL.GG** is a database and companion website for various gacha games.
 
 **Irminsul.GG** branches:
 
-- [**Genshin Impact**](https://genshin.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-irminsul))
+- [**Genshin Impact**](https://genshin.irminsul.gg/)
 
-- [**Honkai: Star Rail**](https://hsr.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-stellaron))
+- [**Honkai: Star Rail**](https://hsr.irminsul.gg/)
 
-- [**Wuthering Waves**](https://wuwa.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-tacetite))
+- [**Wuthering Waves**](https://wuwa.irminsul.gg/)
 
-- [**Zenless Zone Zero**](https://zzz.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-phaethon))
+- [**Zenless Zone Zero**](https://zzz.irminsul.gg/)
 
-- [**Arknights: Endfield**](https://endfield.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-talos))
-
-- [**Umamusume: Pretty Derby**](https://uma.irminsul.gg/) ([Repo](https://github.com/bcheung98/project-uma))
+- [**Umamusume: Pretty Derby**](https://uma.irminsul.gg/)
 
 ## **Previews**
-
-_Check respective repos for more preview images_!
 
 **Genshin Impact**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/genshin/preview.png)
@@ -31,6 +27,9 @@ _Check respective repos for more preview images_!
 
 **Zenless Zone Zero**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/zzz/preview.png)
+
+**Umamusume: Pretty Derby**:
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/uma/preview.png)
 
 ---
 
