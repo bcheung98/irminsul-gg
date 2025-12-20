@@ -57,7 +57,7 @@ export const darkThemeData = {
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
     backgroundImage: {
         imgURL: "https://assets.irminsul.gg/v2/_common/images/Irminsul.png",
-        filter: "none",
+        filter: "brightness(0.75) opacity(0.25)",
         filterGame: "brightness(0.75) opacity(0.5)",
     },
     irminsulLogo: {
