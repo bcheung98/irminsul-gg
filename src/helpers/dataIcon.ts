@@ -8,7 +8,6 @@ import {
     weaponSubStats as zzzWeaponSubStats,
 } from "@/data/zzz/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
-import { isUnreleasedContent } from "./isUnreleasedContent";
 import { AttributeDataKey, Game } from "@/types";
 import { CharacterColors } from "@/types/character";
 
@@ -67,11 +66,8 @@ export function getDataIconURL({ game, key, value }: Props) {
         if (key === "sonata" && value) {
             src = `wuwa/sonata/${value}`;
             tooltip = `${
-                sonataEffects
-                    .filter((sonata) =>
-                        isUnreleasedContent(sonata.release.version, "wuwa")
-                    )
-                    .find((sonata) => sonata.id === value)?.displayName
+                sonataEffects.find((sonata) => sonata.id === value)
+                    ?.displayName || "???"
             }`;
         }
     }

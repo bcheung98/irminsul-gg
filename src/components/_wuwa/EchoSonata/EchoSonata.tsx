@@ -9,7 +9,6 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
-import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
 import { Equipment } from "@/types/equipment";
@@ -21,11 +20,7 @@ export default function EchoSonata({ sonataIDs }: { sonataIDs: number[] }) {
                 Sonata Effect
             </Text>
             {sonataIDs.map((id) => {
-                const sonata = sonataEffects
-                    .filter((sonata) =>
-                        isUnreleasedContent(sonata.release.version, "wuwa")
-                    )
-                    .find((effect) => effect.id === id);
+                const sonata = sonataEffects.find((effect) => effect.id === id);
                 if (!sonata) return null;
                 return (
                     <SkillCard key={id} size={12}>

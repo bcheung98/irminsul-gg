@@ -31,6 +31,13 @@ export function wuwaFilters<T extends Filters>({
         hideUnreleasedContent
     ).wuwa;
 
+    let sonatas = [...sonataEffects];
+    if (hideUnreleasedContent) {
+        sonatas = sonatas.filter((sonata) =>
+            isUnreleasedContent(sonata.release.version, "wuwa")
+        );
+    }
+
     return {
         element: {
             name: "Attribute",
@@ -251,11 +258,7 @@ export function wuwaFilters<T extends Filters>({
             name: "Sonata Effects",
             value: filters.sonata,
             buttons: createFilterButtons({
-                items: sonataEffects
-                    .filter((sonata) =>
-                        isUnreleasedContent(sonata.release.version, "wuwa")
-                    )
-                    .map((sonata) => sonata.id),
+                items: sonatas.map((sonata) => sonata.id),
                 url: "wuwa/sonata",
                 getTooltip: (item: number) => {
                     const sonata = sonataEffects.find(
