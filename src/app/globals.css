@@ -1,0 +1,96 @@
+:root {
+    color-scheme: dark;
+    scrollbar-gutter: stable;
+    background-color: inherit;
+}
+
+body {
+    margin: 0;
+    padding-right: 0 !important;
+    background-color: transparent;
+    font-family: Geist, "Segoe UI", Roboto, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body:has(.lock-scroll):not(.nav-mobile) {
+    overflow: hidden;
+}
+
+code {
+    font-family: Consolas, "Courier New", Menlo, Monaco, monospace;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+span > a {
+    color: rgb(30, 175, 255);
+}
+
+ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+img,
+video {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+.background-image {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    scale: 1.05;
+    z-index: -1;
+    transition: opacity 0.5s;
+}
+
+.background-image.inactive {
+    opacity: 0;
+}
+
+.background-image.active {
+    opacity: 1;
+}
+
+.background-video {
+    transition: opacity 1s;
+}
+
+.background-video.inactive {
+    opacity: 0;
+}
+
+#global-error {
+    background-color: rgba(16, 16, 16, 0.75);
+    border-radius: 8px;
+}
+
+.global-error-text,
+.global-error-code-text {
+    color: white;
+}
+
+.global-error-text {
+    font-family: Geist;
+    font-weight: 600;
+}
+
+.global-error-code-text {
+    font-size: 11pt;
+}

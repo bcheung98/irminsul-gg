@@ -1,0 +1,97 @@
+"use client";
+
+// Component imports
+import PlannerSelector from "@/components/PlannerSelector";
+import PlannerSorter from "@/components/PlannerSorter";
+import PlannerTotalCost from "@/components/PlannerTotalCost";
+import PlannerCardRoot from "@/components/PlannerCardRoot";
+import FlexBox from "@/components/FlexBox";
+import ContentBox from "@/components/ContentBox";
+import Dropdown from "@/components/Dropdown";
+import Text from "@/components/Text";
+
+// MUI imports
+import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+
+// Helper imports
+import { useGameTag } from "@/context";
+import { usePlannerStore } from "@/stores";
+import { categories } from "@/data/categories";
+
+// Type imports
+import { GameNoUma } from "@/types";
+import { PlannerDataContext } from "./Planner.utils";
+import { PlannerItemData } from "@/types/planner";
+
+export default function Planner({
+    characters,
+    weapons,
+}: {
+    characters: PlannerItemData[];
+    weapons: PlannerItemData[];
+}) {
+    const theme = useTheme();
+
+    const game = useGameTag() as GameNoUma;
+
+    const store = usePlannerStore();
+    const items = store[`${game}/items`];
+
+    const titleCharacters = `${categories[`${game}/characters`].slice(0, -1)}`;
+    const titleWeapons = `${categories[`${game}/weapons`].slice(0, -1)}`;
+
+    return (
+        <PlannerDataContext value={{ characters, weapons }}>
+            <Stack
+                spacing={2}
+                sx={{ p: 1, maxWidth: theme.breakpoints.values.xl }}
+            >
+                <Text variant="h5" weight="highlight">
+                    Ascension Planner
+                </Text>
+                <ContentBox
+                    header={
+                        <FlexBox spacing={2} wrap>
+                            <PlannerSelector type="characters" />
+                            <PlannerSelector type="weapons" />
+                            <PlannerSorter />
+                        </FlexBox>
+                    }
+                    headerProps={{ padding: "16px" }}
+                >
+                    {items.length > 0 ? (
+                        <Dropdown
+                            title="Total Materials Required"
+                            textVariant="body1"
+                            contentPadding="16px 0"
+                            defaultOpen
+                        >
+                            <PlannerTotalCost />
+                        </Dropdown>
+                    ) : (
+                        <Text weight="highlight">
+                            {`Add ${
+                                titleCharacters.startsWith("A") ? "an" : "a"
+                            } ${titleCharacters} or ${titleWeapons} to get started!`}
+                        </Text>
+                    )}
+                </ContentBox>
+                <Grid container spacing={2}>
+                    {items.map((item) => (
+                        <Grid key={item.id} size={{ xs: 12, lg: 6 }}>
+                            <PlannerCardRoot
+                                item={item}
+                                type={
+                                    "element" in item ? "characters" : "weapons"
+                                }
+                                chipColor={theme.background(0)}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Stack>
+        </PlannerDataContext>
+    );
+}

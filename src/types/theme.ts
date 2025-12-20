@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 import { SxProps } from "@mui/material";
 import { themeNames } from "themes/theme";
 import { darkThemeData } from "themes/darkTheme";
 import { Variant } from "@mui/material/styles/createTypography";
+=======
+import { SxProps, TypographyVariant } from "@mui/material";
+import { themeNames } from "@/themes/theme";
+import { darkThemeData } from "@/themes/darkTheme";
+import { nextThemeData } from "@/themes/nextTheme";
+>>>>>>> irminsul-gg-v2/v2-merge
 
 export type ThemeNames = (typeof themeNames)[number];
 
 type DarkTheme = typeof darkThemeData;
+<<<<<<< HEAD
 type ThemeData = DarkTheme;
+=======
+type ModernTheme = typeof nextThemeData;
+type ThemeData = DarkTheme & ModernTheme;
+>>>>>>> irminsul-gg-v2/v2-merge
 
 export type CustomTheme = {
     [Key in keyof ThemeData]: ThemeData[Key];
@@ -34,11 +46,20 @@ declare module "@mui/material/styles" {
 }
 
 type StyledTypographyVariants = {
+<<<<<<< HEAD
     [Property in Variant as `${string & Property}-styled`]: true;
+=======
+    [Property in TypographyVariant as `${string & Property}-styled`]: true;
+>>>>>>> irminsul-gg-v2/v2-merge
 };
 
 type NewTypographyVariants = {
     sitename: true;
+<<<<<<< HEAD
+=======
+    body3: true;
+    subtitle3: true;
+>>>>>>> irminsul-gg-v2/v2-merge
 };
 
 type TypographyOverrides = StyledTypographyVariants & NewTypographyVariants;

@@ -1,70 +1,168 @@
-import type {} from "@mui/lab/themeAugmentation";
-import { createTheme, SxProps } from "@mui/material";
-import { darkTheme } from "./darkTheme";
+"use client";
 
-export const themeList = [
-    { name: "Dark", label: "Default", data: darkTheme },
-] as const;
+import { createTheme } from "@mui/material/styles";
+import { darkTheme } from "./darkTheme";
+import { nextTheme } from "./nextTheme";
+import { getContrastText } from "@/utils/getContrastText";
+
+export const themeList = [nextTheme, darkTheme] as const;
 
 export const themeNames = themeList.map((t) => t.name);
 
-export function getTheme(name: string) {
+export default function getTheme(id: number) {
     let theme =
-        themeList[themeList.findIndex((theme) => theme.name === name)].data;
+        themeList[themeList.findIndex((theme) => theme.id === id)] || nextTheme;
+
     const baseThemeData = {
-        palette: {
-            background: {
-                default: theme.background(0),
-                paper: theme.background(1),
+        breakpoints: {
+            values: {
+                xs: 0,
+                sm: 425,
+                md: 768,
+                lg: 1024,
+                xl: 1440,
             },
         },
         components: {
+            // MuiUseMediaQuery: {
+            //     defaultProps: {
+            //         noSsr: true,
+            //     },
+            // },
             MuiAppBar: {
                 styleOverrides: {
                     root: {
-                        backgroundColor: theme.appbar.backgroundColor,
+                        backgroundColor: theme.appbar.backgroundColor.main,
                         borderWidth: "0 0 1px 0",
                         borderStyle: "solid",
                         borderColor: theme.border.color.primary,
                     },
                 },
             },
+            MuiAutocomplete: {
+                styleOverrides: {
+                    noOptions: {
+                        color: theme.appbar.color.primary,
+                        backgroundColor: theme.menu.backgroundColor.primary,
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: theme.font.weight.primary,
+                        fontSize: {
+                            xs: theme.font.sizes.subtitle1.xs,
+                            sm: theme.font.sizes.subtitle1.sm,
+                        },
+                    },
+                },
+                defaultProps: {
+                    slotProps: {
+                        chip: {
+                            sx: {
+                                height: "24px",
+                                backgroundColor: theme.palette.info.main,
+                                fontFamily: theme.typography.fontFamily,
+                                fontSize: {
+                                    xs: theme.font.sizes.subtitle2.xs,
+                                    sm: theme.font.sizes.subtitle2.sm,
+                                },
+                                color: getContrastText(
+                                    theme.text.primary,
+                                    theme.palette.info.main
+                                ),
+                                "& .MuiChip-deleteIcon": {
+                                    fontSize: {
+                                        xs: theme.font.sizes.h6.xs,
+                                        sm: theme.font.sizes.h6.sm,
+                                    },
+                                    color: getContrastText(
+                                        theme.text.primary,
+                                        theme.palette.info.main
+                                    ),
+                                    "&:hover": {
+                                        color: getContrastText(
+                                            theme.text.description,
+                                            theme.palette.info.main
+                                        ),
+                                    },
+                                },
+                            },
+                        },
+                        listbox: {
+                            sx: { p: 0 },
+                        },
+                        paper: {
+                            sx: {
+                                backgroundColor:
+                                    theme.menu.backgroundColor.primary,
+                                borderRadius: theme.contentBox.border.radius,
+                            },
+                        },
+                    },
+                },
+            },
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        color: theme.appbar.color,
-                        fontFamily: theme.font.styled.family,
-                        fontWeight: theme.font.styled.weight,
+                        color: theme.appbar.color.primary,
+                        fontFamily: theme.typography.fontFamily,
+                        fontWeight: theme.font.weight.highlight,
                         textTransform: "none",
                     },
                 },
             },
+            MuiButtonBase: {
+                defaultProps: {
+                    // disableRipple: true,
+                    // disableTouchRipple: true,
+                },
+            },
+            MuiDialog: {
+                styleOverrides: {
+                    container: {
+                        backgroundColor: "rgba(26, 30, 35, 0.6)",
+                    },
+                    paper: {
+                        outline: `1px solid ${theme.border.color.secondary}`,
+                    },
+                },
+            },
             MuiIconButton: {
+                defaultProps: {
+                    // disableRipple: true,
+                    // disableTouchRipple: true,
+                },
                 styleOverrides: {
                     root: {
                         color: theme.text.primary,
                     },
                 },
             },
-            MuiMenu: {
+            MuiSelect: {
                 styleOverrides: {
-                    paper: {
-                        backgroundColor: theme.menu.primary,
-                    },
-                    list: {
-                        backgroundColor: theme.menu.primary,
+                    icon: {
                         color: theme.text.primary,
                     },
+                },
+            },
+            MuiSlider: {
+                defaultProps: {
+                    color: "info",
+                },
+            },
+            MuiSwitch: {
+                defaultProps: {
+                    color: "info",
                 },
             },
             MuiTypography: {
                 defaultProps: {
                     variantMapping: {
-                        "h4-styled": "h4",
-                        "h5-styled": "h5",
-                        "h6-styled": "h6",
-                        "body1-styled": "p",
-                        "body2-styled": "p",
+                        body3: "p",
+                        subtitle3: "p",
+                    },
+                },
+                styleOverrides: {
+                    root: {
+                        color: theme.text.primary,
+                        fontWeight: theme.font.weight.primary,
                     },
                 },
             },
@@ -81,7 +179,7 @@ export function getTheme(name: string) {
                     letterSpacing: ".1rem",
                 },
                 fontWeight: "400 !important",
-                color: theme.appbar.color,
+                color: "rgb(255, 255, 255) !important",
             },
             h4: {
                 [theme.breakpoints.up("xs")]: {
@@ -89,19 +187,6 @@ export function getTheme(name: string) {
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h4.sm),
-                },
-            },
-            "h4-styled": {
-                ...theme.typography.h4,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h4-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h4-styled"].sm
-                    ),
                 },
             },
             h5: {
@@ -112,38 +197,12 @@ export function getTheme(name: string) {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h5.sm),
                 },
             },
-            "h5-styled": {
-                ...theme.typography.h5,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h5-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h5-styled"].sm
-                    ),
-                },
-            },
             h6: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h6.xs),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h6.sm),
-                },
-            },
-            "h6-styled": {
-                ...theme.typography.h6,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h6-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["h6-styled"].sm
-                    ),
                 },
             },
             body1: {
@@ -158,20 +217,8 @@ export function getTheme(name: string) {
                     ),
                 },
             },
-            "body1-styled": {
-                ...theme.typography.body1,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["body1-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["body1-styled"].sm
-                    ),
-                },
-            },
             subtitle1: {
+                lineHeight: theme.font.lineHeight.subtitle1,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle1.xs
@@ -180,19 +227,6 @@ export function getTheme(name: string) {
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle1.sm
-                    ),
-                },
-            },
-            "subtitle1-styled": {
-                ...theme.typography.subtitle1,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["subtitle1-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["subtitle1-styled"].sm
                     ),
                 },
             },
@@ -208,20 +242,8 @@ export function getTheme(name: string) {
                     ),
                 },
             },
-            "body2-styled": {
-                ...theme.typography.body2,
-                [theme.breakpoints.up("xs")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["body2-styled"].xs
-                    ),
-                },
-                [theme.breakpoints.up("sm")]: {
-                    fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["body2-styled"].sm
-                    ),
-                },
-            },
             subtitle2: {
+                lineHeight: theme.font.lineHeight.subtitle2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
                         theme.font.sizes.subtitle2.xs
@@ -233,45 +255,40 @@ export function getTheme(name: string) {
                     ),
                 },
             },
-            "subtitle2-styled": {
-                ...theme.typography.subtitle2,
+            body3: {
+                ...theme.typography.body2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["subtitle2-styled"].xs
+                        theme.font.sizes.body3.xs
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes["subtitle2-styled"].sm
+                        theme.font.sizes.body3.sm
+                    ),
+                },
+            },
+            subtitle3: {
+                ...theme.typography.subtitle2,
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle3.xs
+                    ),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(
+                        theme.font.sizes.subtitle3.sm
                     ),
                 },
             },
         },
-        styles: {
-            drawer: (matches: boolean, width = 320): SxProps => {
-                return matches
-                    ? {
-                          flexShrink: 0,
-                          "& .MuiDrawer-paper": {
-                              width: width,
-                              borderLeft: `1px solid ${theme.border.color.primary}`,
-                              backgroundColor: theme.appbar.backgroundColor,
-                              py: 2.5,
-                              scrollbarWidth: "none",
-                          },
-                      }
-                    : {
-                          "& .MuiDrawer-paper": {
-                              borderTop: `1px solid ${theme.border.color.primary}`,
-                              backgroundColor: theme.appbar.backgroundColor,
-                              height: "auto",
-                              maxHeight: "88%",
-                          },
-                      };
-            },
-        },
     };
 
-    theme = createTheme(theme, baseThemeData);
-    return theme;
+    return createTheme(theme, baseThemeData);
 }
+
+export const variantMap = {
+    primary: 0,
+    secondary: 1,
+    tertiary: 2,
+};
