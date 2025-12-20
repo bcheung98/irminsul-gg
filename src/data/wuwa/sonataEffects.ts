@@ -170,7 +170,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 15,
+        id: 16,
         name: "Gusts of Welkin",
         displayName: "Gusts of Welkin",
         setEffect: {
@@ -182,7 +182,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 16,
+        id: 17,
         name: "Windward Pilgrimage",
         displayName: "Windward Pilgrimage",
         setEffect: {
@@ -194,7 +194,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 17,
+        id: 18,
         name: "Flaming Clawprint",
         displayName: "Flaming Clawprint",
         setEffect: {
@@ -206,7 +206,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 18,
+        id: 19,
         name: "Dream of the Lost",
         displayName: "Dream of the Lost",
         setEffect: {
@@ -217,7 +217,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 19,
+        id: 20,
         name: "Crown of Valor",
         displayName: "Crown of Valor",
         setEffect: {
@@ -228,7 +228,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 20,
+        id: 21,
         name: "Law of Harmony",
         displayName: "Law of Harmony",
         setEffect: {
@@ -239,7 +239,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 21,
+        id: 22,
         name: "Flamewing's Shadow",
         displayName: "Flamewing's Shadow",
         setEffect: {
@@ -250,7 +250,7 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 22,
+        id: 23,
         name: "Thread of Severed Fate",
         displayName: "Thread of Severed Fate",
         setEffect: {
@@ -261,24 +261,12 @@ export const sonataEffects: SonataEffect[] = [
         },
     },
     {
-        id: 23,
+        id: 24,
         name: "Pact of Neonlight Leap",
         displayName: "Pact of Neonlight Leap",
         setEffect: {
             "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
-            "5": "After casting Outro Skill, additionally increases ATK of the next Resonator entering with Intro Skill by 0.3% up to 15% for 15s or until the Resonator is switched out.",
-        },
-        release: {
-            version: "3.0",
-        },
-    },
-    {
-        id: 24,
-        name: "Halo of Starry Radiance",
-        displayName: "Halo of Starry Radiance",
-        setEffect: {
-            "2": "Healing Bonus + 10%.",
-            "5": "When a Resonator heals an ally, every 1% points of Off-Tune Buildup Rate grants 0.2% All-Attribute DMG Bonus to all Resonators in the team, up to 25% for 4s.",
+            "5": "Casting Outro Skill increases the ATK of the incoming Resonator by 15%, with each point of Tune Break Boost additionally increasing ATK by 0.3%, up to 15%. This effect lasts for 15s, or until the Resonator is switched out.",
         },
         release: {
             version: "3.0",
@@ -286,11 +274,23 @@ export const sonataEffects: SonataEffect[] = [
     },
     {
         id: 25,
+        name: "Halo of Starry Radiance",
+        displayName: "Halo of Starry Radiance",
+        setEffect: {
+            "2": "Healing Bonus + 10%.",
+            "5": "When healing a Resonator in the team, every 1% of Off-Tune Buildup Rate grants a 0.2% ATK increase to all Resonators in the team for 4s, up to 25%. Effects of the same name cannot be stacked.",
+        },
+        release: {
+            version: "3.0",
+        },
+    },
+    {
+        id: 26,
         name: "Rite of Gilded Revelation",
         displayName: "Rite of Gilded Revelation",
         setEffect: {
             "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
-            "5": 'Dealing Basic Attack DMG increases <span class="text-spectro">Spectro DMG</span> by 10%, stacking up to 3 times for 5s. With 3 stacks, casting Resonance Liberation grants 40% Basic Attack DMG Bonus.',
+            "5": 'Dealing Basic Attack DMG increases <span class="text-spectro">Spectro DMG</span> by 10% for 5s, stacking up to 3 times. With 3 stacks, casting Resonance Liberation grants 40% Basic Attack DMG Bonus.',
         },
         release: {
             version: "3.0",

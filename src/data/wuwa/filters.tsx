@@ -12,7 +12,7 @@ import HelpIcon from "@mui/icons-material/Help";
 import { createFilterButtons } from "@/helpers/filters";
 import { useMaterialsCategory } from "@/helpers/materials";
 import { echoClass, elements, rarities, weapons } from "@/data/wuwa/common";
-import { combatRoleNames } from "./combatRoles";
+import { combatRoleNames, combatRoles } from "./combatRoles";
 import { WuWaWeaponSubStat, weaponSubStats } from "./weaponStats";
 import { sonataEffects } from "./sonataEffects";
 import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
@@ -87,6 +87,12 @@ export function wuwaFilters<T extends Filters>({
             buttons: createFilterButtons({
                 items: combatRoleNames,
                 url: "wuwa/icons/tags",
+                getURL: (item: string) => {
+                    const tag = combatRoles.find((tag) => tag.name === item);
+                    return tag
+                        ? tag.icon.split("/").slice(-1)[0]
+                        : "_common/images/Unknown";
+                },
             }),
             toggle: (
                 <FlexBox spacing={1} wrap>

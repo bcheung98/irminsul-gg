@@ -160,4 +160,22 @@ export const bossMaterials = [
         source: "Lady of the Sea",
         release: { version: "2.6" },
     },
+    {
+        id: 41400264,
+        category: "boss",
+        name: "Suncoveter's Reach",
+        tag: "Suncoveter's Reach",
+        rarity: 4,
+        source: "???",
+        release: { version: "3.0" },
+    },
+    {
+        id: 41400274,
+        category: "boss",
+        name: "Burning Judgment",
+        tag: "Burning Judgment",
+        rarity: 4,
+        source: "???",
+        release: { version: "3.0" },
+    },
 ];
