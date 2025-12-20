@@ -2,7 +2,6 @@ import { useState } from "react";
 
 // Component imports
 import FlexBox from "@/components/FlexBox";
-import Image from "@/components/Image";
 import Tooltip from "@/components/Tooltip";
 import ContentDialog from "@/components/ContentDialog";
 import TextLabel from "@/components/TextLabel";
@@ -10,6 +9,7 @@ import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
@@ -24,6 +24,7 @@ import { AttributeData } from "@/types";
 
 export default function CharacterCombatRoles({ combatRoles }: AttributeData) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
@@ -32,29 +33,53 @@ export default function CharacterCombatRoles({ combatRoles }: AttributeData) {
 
     if (!combatRoles) return <></>;
 
-    const tagImageStyle = (role: string) => ({
-        border: `2px solid ${
-            tags.find((tag) => tag.name === role)?.color ||
-            theme.border.color.primary
-        }`,
-        borderRadius: "4px",
-        backgroundColor: theme.iconBackground.primary,
-        padding: "4px",
-    });
+    function CombatRole({
+        role,
+        label = false,
+    }: {
+        role: string;
+        label?: boolean;
+    }) {
+        const tag = tags.find((tag) => tag.name === role);
+        if (!tag) return null;
+
+        return (
+            <TextLabel
+                icon={tag.icon}
+                iconProps={{
+                    size: label ? 40 : 32,
+                    styles: {
+                        border: `2px solid ${tag.color}`,
+                        borderRadius: "4px",
+                        backgroundColor: theme.iconBackground.primary,
+                        padding: "4px",
+                    },
+                    tooltip: !label ? tag.name : "",
+                }}
+                title={label ? role : ""}
+                subtitle={
+                    label && (
+                        <Text
+                            variant="body2"
+                            sx={{ color: theme.text.description }}
+                        >
+                            {tags.find((tag) => tag.name === role)
+                                ?.description || ""}
+                        </Text>
+                    )
+                }
+                spacing={2}
+                textSpacing={0.5}
+            />
+        );
+    }
 
     return (
         <>
             <FlexBox spacing={1}>
                 <Grid container spacing={1}>
                     {combatRoles.map((role) => (
-                        <Image
-                            key={role}
-                            src={`wuwa/icons/tags/${role}`}
-                            size={32}
-                            responsive
-                            style={tagImageStyle(role)}
-                            tooltip={role}
-                        />
+                        <CombatRole key={role} role={role} />
                     ))}
                 </Grid>
                 <Tooltip
@@ -74,31 +99,13 @@ export default function CharacterCombatRoles({ combatRoles }: AttributeData) {
             <ContentDialog
                 open={open}
                 setOpen={setOpen}
-                maxWidth="sm"
+                maxWidth="md"
+                fullScreen={!matches}
                 header="Combat Roles"
             >
                 <Stack spacing={2} divider={<Divider />}>
                     {combatRoles.map((role) => (
-                        <TextLabel
-                            key={role}
-                            icon={`wuwa/icons/tags/${role}`}
-                            iconProps={{
-                                size: 40,
-                                styles: tagImageStyle(role),
-                            }}
-                            title={role}
-                            subtitle={
-                                <Text
-                                    variant="body2"
-                                    sx={{ color: theme.text.description }}
-                                >
-                                    {tags.find((tag) => tag.name === role)
-                                        ?.description || ""}
-                                </Text>
-                            }
-                            spacing={2}
-                            textSpacing={0.5}
-                        />
+                        <CombatRole key={role} role={role} label />
                     ))}
                 </Stack>
             </ContentDialog>
