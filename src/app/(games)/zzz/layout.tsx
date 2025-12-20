@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Zenless Zone Zero - Irminsul.GG",
-        template: "%s - Zenless Zone Zero - Irminsul.GG",
+        default: "Zenless Zone Zero",
+        template: "%s - Zenless Zone Zero",
     },
     description:
         "The Zenless Zone Zero branch of Irminsul.GG - a database and companion website for various gacha games.",

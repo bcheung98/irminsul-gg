@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Umamusume - Irminsul.GG",
-        template: "%s - Umamusume - Irminsul.GG",
+        default: "Umamusume",
+        template: "%s - Umamusume",
     },
     description:
         "The Umamusume: Pretty Derby branch of Irminsul.GG - a database and companion website for various gacha games.",

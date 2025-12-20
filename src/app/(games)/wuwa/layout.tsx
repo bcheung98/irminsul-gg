@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Wuthering Waves - Irminsul.GG",
-        template: "%s - Wuthering Waves - Irminsul.GG",
+        default: "Wuthering Waves",
+        template: "%s - Wuthering Waves",
     },
     description:
         "The Wuthering Waves branch of Irminsul.GG - a database and companion website for various gacha games.",

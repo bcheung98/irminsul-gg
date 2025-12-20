@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Genshin Impact - Irminsul.GG",
-        template: "%s - Genshin Impact - Irminsul.GG",
+        default: "Genshin Impact",
+        template: "%s - Genshin Impact",
     },
     description:
         "The Genshin Impact branch of Irminsul.GG - a database and companion website for various gacha games.",

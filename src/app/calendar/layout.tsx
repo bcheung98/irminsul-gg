@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "Gacha Calendar - Irminsul.GG",
-        template: "%s - Gacha Calendar - Irminsul.GG",
+        default: "Gacha Calendar",
+        template: "%s - Gacha Calendar",
     },
     description: "A calendar to view the release dates of each game's updates",
 };
