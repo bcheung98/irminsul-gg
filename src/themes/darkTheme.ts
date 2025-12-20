@@ -1,37 +1,76 @@
+"use client";
+
+import { Rowdies } from "next/font/google";
 import { createTheme } from "@mui/material";
-import { getThemeBackgroundColors } from "helpers/utils";
-import { Shade } from "types/theme";
+import { getThemeBackgroundColors } from "@/helpers/styles";
+import { Shade } from "@/types/theme";
+
+const font = Rowdies({
+    weight: ["300", "400", "700"],
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-rowdies",
+});
 
 const appbarColors = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
 
-const border = {
-    color: "rgb(168, 147, 105)",
-    highlight: `rgb(233, 194, 39)`,
+const borderColors = {
+    primary: "rgb(168, 147, 105)",
+    secondary: "rgb(30, 73, 118)",
+    highlight: "rgb(233, 194, 39)",
+    accent: "rgb(168, 147, 105)",
 };
 
 const backgroundColors = [
     {
-        main: "rgb(32, 56, 96)",
         light: "rgb(42, 66, 106)",
+        main: "rgb(32, 56, 96)",
         dark: "rgb(22, 46, 86)",
     },
     {
-        main: "rgb(8, 32, 72)",
         light: "rgb(10, 42, 82)",
+        main: "rgb(8, 32, 72)",
         dark: "rgb(6, 22, 62)",
     },
     {
-        main: "rgb(0, 16, 32)",
         light: "rgb(0, 21, 42)",
+        main: "rgb(0, 16, 32)",
         dark: "rgb(0, 11, 22)",
     },
 ];
 
+const textColors = {
+    primary: "rgb(255, 255, 255)",
+    contrast: "rgb(0, 0, 0)",
+    selected: "rgb(30, 175, 255)",
+    description: "rgb(205, 205, 205)",
+    header: "rgb(255, 204, 51)",
+    star: "rgb(255, 204, 51)",
+};
+
+const iconBackgrounds = ["rgb(0, 16, 32)", "rgb(8, 32, 72)", "rgb(32, 56, 96)"];
+
 export const darkThemeData = {
-    name: "Dark",
+    id: 0,
+    name: "Classic",
     background: (index: number, shade?: Shade) =>
         getThemeBackgroundColors({ colors: backgroundColors, index, shade }),
+    backgroundImage: {
+        imgURL: "https://assets.irminsul.gg/v2/_common/images/Irminsul.png",
+        filter: "brightness(0.75) opacity(0.25)",
+        filterGame: "brightness(0.75) opacity(0.5)",
+    },
+    irminsulLogo: {
+        imgURL: "logo_red",
+        filter: "brightness(1) invert(0)",
+        textBackground: textColors.primary,
+        textBackgroundHover: textColors.selected,
+    },
     palette: {
+        background: {
+            default: backgroundColors[0].main,
+            paper: backgroundColors[1].main,
+        },
         primary: {
             main: "rgb(0, 16, 32)",
         },
@@ -39,58 +78,26 @@ export const darkThemeData = {
             main: "rgb(8, 32, 72)",
         },
         tertiary: {
-            main: "rgb(32, 56, 96)",
             light: "rgb(52, 76, 116)",
+            main: "rgb(32, 56, 96)",
             dark: "rgb(22, 46, 86)",
         },
         info: {
             main: "rgb(25, 118, 210)",
         },
-        divider: border.color,
+        divider: borderColors.primary,
     },
     font: {
-        main: {
-            family: "Rowdies, Roboto, sans-serif",
-            weight: 300,
-        },
-        styled: {
-            family: "Rowdies, Roboto, sans-serif",
-            weight: 300,
-        },
-        element: {
-            weight: 300,
-        },
-        highlight: {
-            weight: 300,
+        weight: {
+            primary: 300,
+            element: 300,
+            highlight: 300,
+            home: 400,
         },
         sizes: {
-            "h4-styled": {
-                xs: 26,
-                sm: 28,
-            },
-            "h5-styled": {
-                xs: 22,
-                sm: 24,
-            },
-            "h6-styled": {
-                xs: 18,
-                sm: 20,
-            },
-            "body1-styled": {
-                xs: 14,
-                sm: 16,
-            },
-            "subtitle1-styled": {
-                xs: 13,
-                sm: 15,
-            },
-            "body2-styled": {
-                xs: 12,
-                sm: 14,
-            },
-            "subtitle2-styled": {
-                xs: 11,
-                sm: 13,
+            h3: {
+                xs: 28,
+                sm: 30,
             },
             h4: {
                 xs: 26,
@@ -120,53 +127,201 @@ export const darkThemeData = {
                 xs: 11,
                 sm: 13,
             },
+            body3: {
+                xs: 10,
+                sm: 12,
+            },
+            subtitle3: {
+                xs: 9,
+                sm: 11,
+            },
         },
+        lineHeight: {
+            subtitle1: 1.5,
+            subtitle2: 1.43,
+        },
+    },
+    typography: {
+        fontFamily: font.style.fontFamily,
     },
     text: {
-        primary: "rgb(255, 255, 255)",
-        contrast: "rgb(0, 0, 0)",
-        selected: "rgb(30, 175, 255)",
-        description: "rgb(205, 205, 205)",
-        highlight: "#F7CA2F",
-        header: "#EEC477",
-    },
-    appbar: {
-        backgroundColor: appbarColors[0],
-        hover: appbarColors[1],
-        selectedHover: appbarColors[2],
-        color: "rgb(255, 255, 255)",
-    },
-    border: {
-        color: {
-            primary: border.color,
-            highlight: border.highlight,
+        ...textColors,
+        genshin: {
+            highlight: "#ffe7b9",
+            header: "#ffe7b9",
+            refinement: "#3bb1ff",
+            value: "#3bb1ff",
+            star: "#ffcc33",
+            pyro: "#e46052",
+            hydro: "#4faaff",
+            electro: "#d85dd8",
+            cryo: "#90e1fa",
+            anemo: "#4bcfa3",
+            geo: "#ecd133",
+            dendro: "#9cdf3f",
+        },
+        hsr: {
+            highlight: "#f29e38",
+            highlight2: "#dcc491",
+            header: "#f29e38",
+            refinement: "#f29e38",
+            value: "#f29e38",
+            star: "#ffd070",
+            physical: "#a8a8a8",
+            fire: "#e62a29",
+            ice: "#07a0ff",
+            lightning: "#b54bd3",
+            wind: "#42c38c",
+            quantum: "#6778fd",
+            imaginary: "#e5b909",
+            special: "#f9b0f0",
+        },
+        wuwa: {
+            highlight: "#f7ca2f",
+            header: "#eec477",
+            refinement: "#f7ca2f",
+            value: "#f7ca2f",
+            star: "#ffee9d",
+            aero: "#55ffb5",
+            electro: "#ac70f1",
+            fusion: "#f0744e",
+            glacio: "#49abf7",
+            havoc: "#e649a6",
+            spectro: "#fae56c",
+        },
+        zzz: {
+            highlight: "#ffffff",
+            header: "#e0bb00",
+            refinement: "#2bad00",
+            value: "#2bad00",
+            physical: "#f0d12b",
+            ice: "#98eff0",
+            fire: "#ff5521",
+            electric: "#2eb6ff",
+            ether: "#fe437e",
+            wind: "#48eea7",
+        },
+        uma: {
+            highlight: "#f7ca2f",
+            header: "#ffe7b9",
+            star: "#ffee9d",
+            value: "#3bb1ff",
         },
     },
-    displayCard: {
-        borderWidth: 0,
-        border: `0px solid ${border.color}`,
-        borderRadius: "4px",
-        backgroundColor: backgroundColors[2].main,
+    appbar: {
+        backgroundColor: {
+            main: appbarColors[0],
+            hover: appbarColors[1],
+            selectedHover: appbarColors[2],
+        },
+        color: {
+            primary: textColors.primary,
+        },
     },
-    icon: {
-        backgroundColor: appbarColors[1],
+    border: {
+        color: { ...borderColors },
     },
-    mainContentBox: {
-        borderWidth: 0,
-        border: `0px solid ${border.color}`,
-        borderRadius: "4px",
-        backgroundColor: backgroundColors[1].main,
+    contentBox: {
+        backgroundColor: {
+            main: backgroundColors[1].main,
+            header: appbarColors[0],
+            headerHover: appbarColors[1],
+            headerSelectedHover: appbarColors[2],
+        },
+        border: {
+            radius: 1,
+            width: 0,
+            color: borderColors.primary,
+        },
+        color: {
+            primary: textColors.primary,
+            header: textColors.primary,
+        },
+    },
+    drawer: {
+        backgroundColor: {
+            main: appbarColors[1],
+            hover: appbarColors[2],
+            selectedHover: appbarColors[0],
+        },
+        color: {
+            primary: textColors.primary,
+        },
+        indicator: {
+            main: "rgb(30, 175, 255)",
+            hover: "rgb(101, 201, 255)",
+        },
+    },
+    infoAvatar: {
+        backgroundColor: {
+            main: appbarColors[0],
+        },
+        border: {
+            radius: 1,
+            width: 2,
+            color: borderColors.primary,
+        },
+        color: {
+            primary: textColors.primary,
+        },
+    },
+    infoCard: {
+        backgroundColor: {
+            main: appbarColors[0],
+        },
+        border: {
+            radius: 4,
+            width: 0,
+            color: borderColors.primary,
+        },
+        color: {
+            primary: textColors.primary,
+        },
+    },
+    iconBackground: {
+        primary: iconBackgrounds[0],
+        secondary: iconBackgrounds[1],
+    },
+    materialCard: {
+        backgroundColor: {
+            main: appbarColors[0],
+            label: appbarColors[0],
+        },
+        border: {
+            radius: 4,
+            width: 0,
+            color: borderColors.primary,
+        },
+        imageBorder: {
+            radius: 4,
+            width: 0,
+            color: borderColors.primary,
+        },
+        backgroundImage: (rarity: number) =>
+            `url(https://assets.irminsul.gg/v2/_common/rarity-background/${rarity}.png)`,
+        color: {
+            primary: textColors.primary,
+        },
     },
     menu: {
-        primary: backgroundColors[0].dark,
-        hover: backgroundColors[0].light,
-        selected: backgroundColors[1].dark,
-        selectedHover: backgroundColors[1].light,
-    },
-    table: {
-        body: {
+        backgroundColor: {
             primary: backgroundColors[0].dark,
             hover: backgroundColors[0].light,
+            selected: backgroundColors[1].dark,
+            selectedHover: backgroundColors[1].light,
+        },
+        color: {
+            primary: textColors.primary,
+        },
+    },
+    table: {
+        backgroundColor: {
+            header: appbarColors[0],
+            main: backgroundColors[1],
+        },
+        color: {
+            header: textColors.primary,
+            primary: textColors.primary,
         },
     },
 };
