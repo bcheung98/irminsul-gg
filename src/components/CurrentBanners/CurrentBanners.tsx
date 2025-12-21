@@ -89,7 +89,7 @@ export default function CurrentBanners<
 
     function Banners({ character, weapon, chronicled }: BannerProps) {
         return (
-            <FlexBox wrap spacing={[2, 8]}>
+            <FlexBox wrap spacing={[2, 8]} sx={{ alignItems: "flex-start" }}>
                 {character.length > 0 && (
                     <Stack spacing={1} sx={{ minWidth: "192px" }}>
                         <Text weight="highlight">
