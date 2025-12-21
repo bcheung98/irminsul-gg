@@ -29,14 +29,12 @@ export default function Blog() {
                     Blog
                 </Text>
                 <Text>
-                    Updates on the latest news and content with Irminsul.GG
+                    Keep up with the latest news and content of Irminsul.GG.
+                    <br />
+                    Join the Discord server for more updates.
                 </Text>
             </Box>
-            <Container
-                maxWidth="xl"
-                disableGutters
-                sx={{ px: { xs: 2, lg: 6 } }}
-            >
+            <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
                 <Grid container spacing={4}>
                     {blogList.reverse().map((post) => (
                         <Grid key={post.slug} size={{ xs: 12, sm: 6, lg: 4 }}>

@@ -116,6 +116,7 @@ export default function StyledRoot({
                                         sx={{
                                             width: "100%",
                                             minHeight: "100vh",
+                                            mb: pathname === "/" ? 4 : 0,
                                         }}
                                     >
                                         {children}
