@@ -16,7 +16,8 @@ export function filterBanners(
     if (values.length > 0) {
         items = items.filter((banner) => {
             function filterFn(item: BannerOption) {
-                return banner.rateUps.map((item) => item).includes(item.name);
+                const rateUps = banner.rateUps.map((item) => item);
+                return rateUps.includes(item.name) || rateUps.includes(item.id);
             }
             return unique ? values.every(filterFn) : values.some(filterFn);
         });

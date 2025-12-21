@@ -9,6 +9,8 @@ import Grid from "@mui/material/Grid";
 // Type imports
 import { ActiveBanners, Banner, BannerProps, BannerType } from "@/types/banner";
 import { sortBanners } from "@/helpers/filterBanners";
+import { useGameTag } from "@/context";
+import { useServerStore } from "@/stores";
 
 export interface BannerListProps {
     activeBanners: ActiveBanners;
@@ -90,12 +92,15 @@ function BannerListMobile({
     banners,
     reverse = false,
 }: BannerListProps) {
+    const game = useGameTag();
+    const server = useServerStore()[game];
+
     let bannerList: Banner[] = [];
     Object.entries(banners).forEach(
         ([key, value]) =>
             activeBanners[key as BannerType] && bannerList.push(value)
     );
-    bannerList = sortBanners(bannerList.flat(), reverse);
+    bannerList = sortBanners(bannerList.flat(), game, server, reverse);
 
     return (
         <Stack spacing={1} sx={{ display: { xs: "flex", lg: "none" } }}>
