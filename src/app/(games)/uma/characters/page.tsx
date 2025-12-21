@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { UmaCharacter } from "@/types/uma/character";
 
-export const metadata: Metadata = {
-    title: "Characters",
-    description: "A list of all Umamusume Characters",
-};
+export const metadata = getMetadata({ game: "uma", tag: "characters" });
 
 export default async function Page() {
     const characters = await getDataSet<UmaCharacter>("uma/characters");

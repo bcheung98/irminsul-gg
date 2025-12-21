@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { GenshinWeapon } from "@/types/genshin/weapon";
 
-export const metadata: Metadata = {
-    title: "Weapons",
-    description: "A list of all Genshin Impact Weapons",
-};
+export const metadata = getMetadata({ game: "genshin", tag: "weapons" });
 
 export default async function Page() {
     const weapons = await getDataSet<GenshinWeapon>("genshin/weapons");

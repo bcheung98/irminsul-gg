@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { ZZZCharacter } from "@/types/zzz/character";
 
-export const metadata: Metadata = {
-    title: "Agents",
-    description: "A list of all Zenless Zone Zero Agents",
-};
+export const metadata = getMetadata({ game: "zzz", tag: "characters" });
 
 export default async function Page() {
     const characters = await getDataSet<ZZZCharacter>("zzz/agents");

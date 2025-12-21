@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
+import { getMetadata } from "@/helpers/metadata";
 
-export const metadata: Metadata = {
-    title: {
-        default: "Honkai: Star Rail",
-        template: "%s - Honkai: Star Rail - Irminsul.GG",
-    },
-    description:
-        "The Honkai: Star Rail branch of Irminsul.GG - a database and companion website for various gacha games.",
-};
+export const metadata = getMetadata({ game: "hsr" });
 
 export default function HSRPageLayout({
     children,

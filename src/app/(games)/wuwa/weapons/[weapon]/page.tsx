@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
@@ -23,11 +24,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (wep) => formatHref(wep.url) === formatHref(weapon)
     );
 
-    return {
-        title: weaponData?.displayName,
-        description: weaponData?.description,
-        keywords: [weaponData.displayName, weaponData.name],
-    };
+    return getMetadata({
+        game: "wuwa",
+        tag: "weapons",
+        attributes: {
+            id: weaponData.id,
+            name: weaponData.name,
+            displayName: weaponData.displayName,
+            rarity: weaponData.rarity,
+            weaponType: weaponData.weaponType,
+            description: weaponData.description,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

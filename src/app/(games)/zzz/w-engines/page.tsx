@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { ZZZWeapon } from "@/types/zzz/weapon";
 
-export const metadata: Metadata = {
-    title: "W-Engines",
-    description: "A list of all Zenless Zone Zero W-Engines",
-};
+export const metadata = getMetadata({ game: "zzz", tag: "weapons" });
 
 export default async function Page() {
     const weapons = await getDataSet<ZZZWeapon>("zzz/w-engines");

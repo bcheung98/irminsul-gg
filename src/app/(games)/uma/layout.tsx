@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
+import { getMetadata } from "@/helpers/metadata";
 
-export const metadata: Metadata = {
-    title: {
-        default: "Umamusume",
-        template: "%s - Umamusume - Irminsul.GG",
-    },
-    description:
-        "The Umamusume: Pretty Derby branch of Irminsul.GG - a database and companion website for various gacha games.",
-};
+export const metadata = getMetadata({ game: "uma" });
 
 export default function HSRPageLayout({
     children,

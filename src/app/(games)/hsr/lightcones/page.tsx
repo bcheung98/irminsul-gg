@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { HSRWeapon } from "@/types/hsr/weapon";
 
-export const metadata: Metadata = {
-    title: "Weapons",
-    description: "A list of all Honkai: Star Rail Light",
-};
+export const metadata = getMetadata({ game: "hsr", tag: "weapons" });
 
 export default async function Page() {
     const weapons = await getDataSet<HSRWeapon>("hsr/lightcones");

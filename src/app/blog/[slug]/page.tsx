@@ -5,6 +5,8 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { blogList } from "@/data/blog-list";
+import { getMetadata } from "@/helpers/metadata";
+import DateObject from "@/helpers/dates";
 
 // Type imports
 import { Metadata } from "next/types";
@@ -17,9 +19,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const blogData = blogList.find((post) => slug === post.slug);
 
-    return {
-        title: blogData?.title,
-    };
+    const date = blogData ? new DateObject(blogData?.date).string : "";
+
+    return getMetadata({
+        overrides: {
+            title: blogData?.title,
+            description: blogData?.description,
+            siteName: date,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

@@ -1,13 +1,15 @@
 import StyledRoot from "./StyledRoot";
-import type { Metadata } from "next";
+import { getMetadata } from "@/helpers/metadata";
 
-export const metadata: Metadata = {
-    title: {
-        default: "Gacha Calendar",
-        template: "%s - Gacha Calendar",
+export const metadata = getMetadata({
+    overrides: {
+        title: {
+            default: "Blog",
+            template: "%s - Irminsul.GG",
+        },
+        description: "Keep up with the latest news and content of Irminsul.GG",
     },
-    description: "A calendar to view the release dates of each game's updates",
-};
+});
 
 export default function GamesLayout({
     children,

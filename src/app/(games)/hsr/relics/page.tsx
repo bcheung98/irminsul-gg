@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { HSRRelic } from "@/types/hsr";
 
-export const metadata: Metadata = {
-    title: "Relics",
-    description: "A list of all Honkai: Star Rail Relics",
-};
+export const metadata = getMetadata({ game: "hsr", tag: "equipment" });
 
 export default async function Page() {
     const equipment = await getDataSet<HSRRelic>("hsr/relics");
