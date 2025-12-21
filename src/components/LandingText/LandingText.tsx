@@ -11,7 +11,7 @@ export default function LandingText() {
     const theme = useTheme();
 
     return (
-        <Stack spacing={1}>
+        <Stack spacing={1} sx={{ px: 3 }}>
             <Text variant="h4" weight="home">
                 Welcome to IRMINSUL.GG!
             </Text>
