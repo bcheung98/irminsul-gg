@@ -59,7 +59,7 @@ export function getMetadata({
                 if (`${game}/${tag}` in categoryImgURLs) {
                     icon = `https://assets.irminsul.gg/v2/${categoryImgURLs[
                         `${game}/${tag}`
-                    ](attributes.id, attributes.name)}`;
+                    ](attributes.id, attributes.name)}.png`;
                     siteName = getSitename({
                         game,
                         tag,
@@ -72,8 +72,8 @@ export function getMetadata({
     const images = [
         {
             url: icon,
-            width: 128,
-            height: 128,
+            width: 96,
+            height: 96,
             alt: title.default,
         },
     ];
