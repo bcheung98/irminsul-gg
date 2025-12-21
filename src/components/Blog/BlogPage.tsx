@@ -4,7 +4,7 @@ import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -37,7 +37,6 @@ export default function BlogPage({
                         width: "max-content",
                         height: "32px",
                         px: 2,
-                        py: 0.5,
                         borderRadius: "4px",
                         backgroundColor: theme.palette.info.main,
                         "&:hover": {
@@ -57,15 +56,10 @@ export default function BlogPage({
                         }
                         title="Back to blog"
                         titleProps={{ variant: "body2" }}
+                        spacing={0.5}
                     />
                 </ButtonBase>
-                <Card
-                    sx={{
-                        p: 3,
-                        backgroundColor: theme.background(1),
-                        borderRadius: theme.contentBox.border.radius,
-                    }}
-                >
+                <Box sx={{ backdropFilter: "blur(4px)" }}>
                     {post ? (
                         <Stack spacing={3}>
                             <Stack spacing={1}>
@@ -96,7 +90,7 @@ export default function BlogPage({
                             Error: Could not find blog post
                         </Text>
                     )}
-                </Card>
+                </Box>
             </Stack>
         </Container>
     );

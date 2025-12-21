@@ -3,7 +3,7 @@ export const blogList = [
         slug: "irminsul-gg-v2-release-notes",
         title: "Irminsul.GG v2.0 Release Notes",
         description: "Check out what's new in Irminsul.GG v2.0.",
-        date: "2025-12-22 10:00:00",
+        date: "2025-12-21 10:00:00",
         image: "https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/genshin/preview.png",
     },
     {
@@ -26,7 +26,7 @@ export const blogList = [
         title: "Irminsul.GG v1.0 Release Notes",
         description: "Check out what's new in Irminsul.GG v1.0.",
         date: "2025-01-16 10:00:00",
-        lastEdit: "2025-12-22 10:00:00",
+        lastEdit: "2025-12-21 10:00:00",
         image: "https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/_v1/genshin/preview.png",
     },
     {
@@ -34,7 +34,7 @@ export const blogList = [
         title: "Irminsul.GG v0.6 Release Notes",
         description: "Check out what's new in Irminsul.GG v0.6.",
         date: "2024-11-22 10:00:00",
-        lastEdit: "2025-12-22 10:00:00",
+        lastEdit: "2025-12-21 10:00:00",
     },
     {
         slug: "1.0-roadmap",
@@ -47,7 +47,7 @@ export const blogList = [
         title: "The Story of Irminsul.GG",
         description: "Learn about the origins of Irminsul.GG.",
         date: "2024-09-21 10:00:00",
-        lastEdit: "2025-12-22 10:00:00",
+        lastEdit: "2025-12-21 10:00:00",
     },
 ];
 
