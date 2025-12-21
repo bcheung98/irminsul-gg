@@ -4,7 +4,6 @@ import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -28,6 +27,8 @@ export default function BlogPage({
         <Container
             sx={{
                 mt: { xs: 4, md: 12 },
+                p: { xs: 2, md: 0 },
+                backdropFilter: "blur(4px)",
             }}
         >
             <Stack spacing={2}>
@@ -59,38 +60,36 @@ export default function BlogPage({
                         spacing={0.5}
                     />
                 </ButtonBase>
-                <Box sx={{ backdropFilter: "blur(4px)" }}>
-                    {post ? (
-                        <Stack spacing={3}>
-                            <Stack spacing={1}>
-                                <Text variant="subtitle1">
-                                    {new DateObject(post.date).string}
+                {post ? (
+                    <Stack spacing={3}>
+                        <Stack spacing={1}>
+                            <Text variant="subtitle1">
+                                {new DateObject(post.date).string}
+                            </Text>
+                            <Text variant="h4" weight="highlight">
+                                {post.title}
+                            </Text>
+                            {post.lastEdit && (
+                                <Text
+                                    variant="subtitle2"
+                                    sx={{
+                                        color: theme.text.description,
+                                        fontStyle: "italic",
+                                    }}
+                                >
+                                    {`Edited: ${
+                                        new DateObject(post.lastEdit).string
+                                    }`}
                                 </Text>
-                                <Text variant="h4" weight="highlight">
-                                    {post.title}
-                                </Text>
-                                {post.lastEdit && (
-                                    <Text
-                                        variant="subtitle2"
-                                        sx={{
-                                            color: theme.text.description,
-                                            fontStyle: "italic",
-                                        }}
-                                    >
-                                        {`Edited: ${
-                                            new DateObject(post.lastEdit).string
-                                        }`}
-                                    </Text>
-                                )}
-                            </Stack>
-                            <div>{children}</div>
+                            )}
                         </Stack>
-                    ) : (
-                        <Text variant="h6" weight="highlight">
-                            Error: Could not find blog post
-                        </Text>
-                    )}
-                </Box>
+                        <div>{children}</div>
+                    </Stack>
+                ) : (
+                    <Text variant="h6" weight="highlight">
+                        Error: Could not find blog post
+                    </Text>
+                )}
             </Stack>
         </Container>
     );
