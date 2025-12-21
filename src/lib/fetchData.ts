@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { Events, EventTypes } from "@/types/uma/event";
 
 export const urls = {
@@ -47,23 +46,21 @@ export const urls = {
         "https://api.irminsul.gg/v2/uma/banner-supports.json",
 };
 
-export const getDataSet = cache(async function <T>(
-    url: keyof typeof urls
-): Promise<T[]> {
+export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
     const res = await fetch(urls[url]);
     return res.json();
-});
+}
 
-export const getData = cache(async function <T>(
+export async function getData<T>(
     url: keyof typeof urls,
     params: (value: T) => unknown
 ): Promise<T> {
     const res = await fetch(urls[url]);
     const data = await res.json();
     return data.find(params);
-});
+}
 
-export const getUmaEvents = cache(async function (
+export async function getUmaEvents(
     type: EventTypes,
     port?: number
 ): Promise<Events[]> {
@@ -74,4 +71,33 @@ export const getUmaEvents = cache(async function (
     }
     const res = await fetch(url);
     return res.json();
-});
+}
+
+// export const getDataSet = cache(async function <T>(
+//     url: keyof typeof urls
+// ): Promise<T[]> {
+//     const res = await fetch(urls[url]);
+//     return res.json();
+// });
+
+// export const getData = cache(async function <T>(
+//     url: keyof typeof urls,
+//     params: (value: T) => unknown
+// ): Promise<T> {
+//     const res = await fetch(urls[url]);
+//     const data = await res.json();
+//     return data.find(params);
+// });
+
+// export const getUmaEvents = cache(async function (
+//     type: EventTypes,
+//     port?: number
+// ): Promise<Events[]> {
+//     let url: string = `https://api.irminsul.gg/v2/uma/events-${type}.json`;
+//     if (port) {
+//         // URL for localhost development
+//         url = `http://localhost:${port}/events-${type}`;
+//     }
+//     const res = await fetch(url);
+//     return res.json();
+// });
