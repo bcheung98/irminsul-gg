@@ -2,6 +2,7 @@
 import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
+import BlogButton from "@/components/Blog/BlogButton";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
 import SiteSearch from "@/components/SiteSearch";
@@ -59,6 +60,7 @@ export default function NavBar() {
                     <FlexBox spacing={1}>
                         <GamesMenu />
                         <CalendarButton />
+                        <BlogButton />
                     </FlexBox>
                     <FlexBox spacing={{ xs: 1, md: 3 }}>
                         <FlexBox
