@@ -52,7 +52,7 @@ export const categoryImgURLs: Record<
     "zzz/characters": (id: number) => `zzz/agents/${id}`,
     "zzz/weapons": (id: number) => `zzz/w-engines/${id}`,
     "zzz/equipment": (id: number) => `zzz/drive-discs/${id}`,
-    "zzz/bangboos": (id: number) => `zzz/bangboo/${id}`,
+    "zzz/bangboos": (id: number) => `zzz/bangboos/${id}`,
     "uma/characters": (id: number) => `uma/characters/${id}`,
     "uma/weapons": (id: number) => `uma/supports/${id}_icon`, // Need this for category sorting
     "uma/supports": (id: number) => `uma/supports/${id}_icon`,

@@ -28,7 +28,7 @@ export default function BangbooPage({ bangboo }: { bangboo: ZZZBangboo }) {
 
     const attributes: AttributeData = { ...bangboo };
 
-    let imgURL = `zzz/bangboo/${bangboo.id}`;
+    let imgURL = `zzz/bangboos/${bangboo.id}`;
 
     const Splash = (
         <Image
