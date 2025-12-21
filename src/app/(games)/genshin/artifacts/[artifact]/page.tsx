@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
@@ -23,10 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (a) => formatHref(a.url) === formatHref(artifact)
     );
 
-    return {
-        title: artifactData?.displayName,
-        keywords: [artifactData.displayName, artifactData.name],
-    };
+    return getMetadata({
+        game: "genshin",
+        tag: "equipment",
+        attributes: {
+            id: artifactData.id,
+            name: artifactData.name,
+            displayName: artifactData.displayName,
+            rarity: artifactData.rarity,
+            description: artifactData.description,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

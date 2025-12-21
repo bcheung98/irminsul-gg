@@ -6,16 +6,15 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { bannerArchiveMetaData, getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 import { Banner } from "@/types/banner";
 
-export const metadata: Metadata = {
-    title: "Banner Archive",
-    description: "A list of all Zenless Zone Zero Banners.",
-};
+export const metadata = getMetadata({
+    overrides: bannerArchiveMetaData("zzz"),
+});
 
 export default async function Page() {
     const characterData = await getDataSet<ZZZCharacter>("zzz/agents");

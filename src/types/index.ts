@@ -53,6 +53,7 @@ export interface AttributeData {
     bonusStats?: string[];
     colors?: CharacterColors;
     specialty?: string;
+    outfit?: string;
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {

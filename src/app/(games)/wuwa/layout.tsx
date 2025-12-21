@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
+import { getMetadata } from "@/helpers/metadata";
 
-export const metadata: Metadata = {
-    title: {
-        default: "Wuthering Waves",
-        template: "%s - Wuthering Waves - Irminsul.GG",
-    },
-    description:
-        "The Wuthering Waves branch of Irminsul.GG - a database and companion website for various gacha games.",
-};
+export const metadata = getMetadata({ game: "wuwa" });
 
 export default function WuWaPageLayout({
     children,

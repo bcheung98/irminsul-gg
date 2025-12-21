@@ -7,14 +7,14 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData, getDataSet, getUmaEvents } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
-import { UmaCharacter, UmaCharacterProfile } from "@/types/uma/character";
+import { UmaCharacterProfile } from "@/types/uma/character";
 import { UmaSkill } from "@/types/uma/skill";
 import { EventList } from "@/types/uma/event";
 import { UmaSupport } from "@/types/uma";
-import { rarityMap } from "@/data/uma/common";
 
 interface Props {
     params: Promise<{ support: string }>;
@@ -27,18 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (supp) => formatHref(supp.url) === formatHref(support)
     );
 
-    return {
-        title: `${suppData?.name} (${rarityMap[suppData?.rarity]} ${
-            suppData?.specialty
-        })`,
-        description: suppData?.title,
-        keywords: [
-            suppData?.name,
-            suppData?.title,
-            suppData?.specialty,
-            rarityMap[suppData?.rarity],
-        ],
-    };
+    return getMetadata({
+        game: "uma",
+        tag: "supports",
+        attributes: {
+            id: suppData.id,
+            name: suppData.name,
+            displayName: suppData.displayName,
+            title: suppData.title,
+            rarity: suppData.rarity,
+            specialty: suppData.specialty,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

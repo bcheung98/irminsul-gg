@@ -86,7 +86,10 @@ export default function HomePage() {
                     Background video courtesy of /u/lunimater on Reddit
                     https://redd.it/1bombpo
                 */}
-                <source src="/IRMINSUL.mp4" type="video/mp4" />
+                <source
+                    src="https://assets.irminsul.gg/v2/_common/IRMINSUL.mp4"
+                    type="video/mp4"
+                />
             </video>
             {images}
             <Stack

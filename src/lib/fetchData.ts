@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Events, EventTypes } from "@/types/uma/event";
 
 export const urls = {
@@ -46,21 +47,23 @@ export const urls = {
         "https://api.irminsul.gg/v2/uma/banner-supports.json",
 };
 
-export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
+export const getDataSet = cache(async function <T>(
+    url: keyof typeof urls
+): Promise<T[]> {
     const res = await fetch(urls[url]);
     return res.json();
-}
+});
 
-export async function getData<T>(
+export const getData = cache(async function <T>(
     url: keyof typeof urls,
     params: (value: T) => unknown
 ): Promise<T> {
     const res = await fetch(urls[url]);
     const data = await res.json();
     return data.find(params);
-}
+});
 
-export async function getUmaEvents(
+export const getUmaEvents = cache(async function (
     type: EventTypes,
     port?: number
 ): Promise<Events[]> {
@@ -71,4 +74,4 @@ export async function getUmaEvents(
     }
     const res = await fetch(url);
     return res.json();
-}
+});

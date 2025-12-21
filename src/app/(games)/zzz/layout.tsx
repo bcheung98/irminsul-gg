@@ -1,13 +1,6 @@
-import type { Metadata } from "next";
+import { getMetadata } from "@/helpers/metadata";
 
-export const metadata: Metadata = {
-    title: {
-        default: "Zenless Zone Zero",
-        template: "%s - Zenless Zone Zero - Irminsul.GG",
-    },
-    description:
-        "The Zenless Zone Zero branch of Irminsul.GG - a database and companion website for various gacha games.",
-};
+export const metadata = getMetadata({ game: "zzz" });
 
 export default function ZZZPageLayout({
     children,

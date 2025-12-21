@@ -6,18 +6,20 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet, getUmaEvents } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
+import { UmaCharacterProfile } from "@/types/uma/character";
 import { UmaSkill } from "@/types/uma/skill";
 import { EventList } from "@/types/uma/event";
-import { UmaCharacterProfile } from "@/types/uma/character";
 
-export const metadata: Metadata = {
-    title: "Training Event Helper",
-    description: "Tool for viewing Training Events in Umamusume.",
-};
+export const metadata = getMetadata({
+    overrides: {
+        title: "Training Event Helper",
+        description: "Tool for viewing Training Events in Umamusume.",
+    },
+});
 
 export default async function Page() {
     const characterData = await getDataSet<UmaCharacter>("uma/characters");

@@ -6,16 +6,15 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { bannerArchiveMetaData, getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 import { Banner } from "@/types/banner";
 
-export const metadata: Metadata = {
-    title: "Banner Archive",
-    description: "A list of all Genshin Impact Banners.",
-};
+export const metadata = getMetadata({
+    overrides: bannerArchiveMetaData("genshin"),
+});
 
 export default async function Page() {
     const characterData = await getDataSet<GenshinCharacter>(

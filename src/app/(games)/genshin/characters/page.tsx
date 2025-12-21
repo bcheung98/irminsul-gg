@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { GenshinCharacter } from "@/types/genshin/character";
 
-export const metadata: Metadata = {
-    title: "Characters",
-    description: "A list of all Genshin Impact Characters",
-};
+export const metadata = getMetadata({ game: "genshin", tag: "characters" });
 
 export default async function Page() {
     const characters = await getDataSet<GenshinCharacter>("genshin/characters");

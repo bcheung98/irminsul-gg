@@ -6,15 +6,12 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { WuWaWeapon } from "@/types/wuwa";
 
-export const metadata: Metadata = {
-    title: "Weapons",
-    description: "A list of all Wuthering Waves Weapons",
-};
+export const metadata = getMetadata({ game: "wuwa", tag: "weapons" });
 
 export default async function Page() {
     const weapons = await getDataSet<WuWaWeapon>("wuwa/weapons");

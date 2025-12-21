@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
@@ -23,11 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (e) => formatHref(e.url) === formatHref(echo)
     );
 
-    return {
-        title: echoData?.displayName,
-        description: echoData?.description,
-        keywords: [echoData.displayName, echoData.name],
-    };
+    return getMetadata({
+        game: "wuwa",
+        tag: "equipment",
+        attributes: {
+            id: echoData.id,
+            name: echoData.name,
+            displayName: echoData.displayName,
+            rarity: echoData.rarity,
+            description: echoData.description,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

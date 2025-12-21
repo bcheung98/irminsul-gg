@@ -6,16 +6,15 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/lib/fetchData";
+import { bannerArchiveMetaData, getMetadata } from "@/helpers/metadata";
 
 // Type imports
-import type { Metadata } from "next";
 import { WuWaCharacter, WuWaWeapon } from "@/types/wuwa";
 import { Banner } from "@/types/banner";
 
-export const metadata: Metadata = {
-    title: "Banner Archive",
-    description: "A list of all Wuthering Waves Banners.",
-};
+export const metadata = getMetadata({
+    overrides: bannerArchiveMetaData("wuwa"),
+});
 
 export default async function Page() {
     const characterData = await getDataSet<WuWaCharacter>("wuwa/resonators");

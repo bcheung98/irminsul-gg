@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData, getDataSet, getUmaEvents } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
@@ -25,15 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (char) => formatHref(char.url) === formatHref(character)
     );
 
-    return {
-        title: `${charData?.name} (${charData.outfit || "Original"})`,
-        description: charData?.title,
-        keywords: [
-            charData?.name,
-            charData?.title,
-            charData?.outfit || "Original",
-        ],
-    };
+    return getMetadata({
+        game: "uma",
+        tag: "characters",
+        attributes: {
+            id: charData.id,
+            name: charData.name,
+            title: charData.title,
+            rarity: charData.rarity,
+            outfit: charData.outfit,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

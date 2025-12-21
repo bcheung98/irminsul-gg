@@ -7,6 +7,7 @@ import Loader from "@/components/Loader";
 // Helper imports
 import { getData } from "@/lib/fetchData";
 import { formatHref } from "@/utils";
+import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
@@ -23,10 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (a) => formatHref(a.url) === formatHref(relic)
     );
 
-    return {
-        title: relicData?.displayName,
-        keywords: [relicData.displayName, relicData.name],
-    };
+    return getMetadata({
+        game: "hsr",
+        tag: "equipment",
+        attributes: {
+            id: relicData.id,
+            name: relicData.name,
+            displayName: relicData.displayName,
+            rarity: relicData.rarity,
+            description: relicData.description,
+        },
+    });
 }
 
 export default async function Page({ params }: Props) {

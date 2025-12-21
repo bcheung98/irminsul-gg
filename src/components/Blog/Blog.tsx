@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { blogList } from "@/data/blog-list";
+import { sortBy } from "@/utils";
 
 export default function Blog() {
     return (
@@ -36,11 +37,16 @@ export default function Blog() {
             </Box>
             <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
                 <Grid container spacing={4}>
-                    {blogList.reverse().map((post) => (
-                        <Grid key={post.slug} size={{ xs: 12, sm: 6, lg: 4 }}>
-                            <BlogCard post={post} />
-                        </Grid>
-                    ))}
+                    {blogList
+                        .sort((a, b) => sortBy(a.date, b.date))
+                        .map((post) => (
+                            <Grid
+                                key={post.slug}
+                                size={{ xs: 12, sm: 6, lg: 4 }}
+                            >
+                                <BlogCard post={post} />
+                            </Grid>
+                        ))}
                 </Grid>
             </Container>
         </Stack>
