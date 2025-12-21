@@ -35,10 +35,9 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(a.rarity, b.rarity, reverse) ||
                     sortBy(
                         SpecialtyMap[b.specialty],
-                        SpecialtyMap[a.specialty],
-                        reverse
+                        SpecialtyMap[a.specialty]
                     ) ||
-                    sortBy(b.id, a.id, a.specialty === undefined)
+                    sortBy(a.id, b.id, true)
                 );
             });
             break;
@@ -120,11 +119,14 @@ export default function sortItems<T extends Record<string, any>>({
             res = res.sort((a, b) => {
                 const d1 = new DateObject(a.release.jp).date.getTime();
                 const d2 = new DateObject(b.release.jp).date.getTime();
-                const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(d1, d2, reverse) ||
-                    sortBy(b.rarity, a.rarity, !reverse) ||
-                    sortBy(bi, ai, !reverse)
+                    sortBy(a.rarity, b.rarity) ||
+                    sortBy(
+                        SpecialtyMap[b.specialty],
+                        SpecialtyMap[a.specialty]
+                    ) ||
+                    sortBy(a.id, b.id, true)
                 );
             });
             break;
