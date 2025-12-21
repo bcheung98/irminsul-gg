@@ -42,9 +42,8 @@ export interface AttributeData {
     description?: string;
     element?: string;
     subElement?: string;
-    weapon?: string;
     weaponType?: string;
-    attackType?: string;
+    attackType?: string[];
     rarity?: number;
     subStat?: string;
     arkhe?: string | string[];
