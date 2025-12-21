@@ -38,7 +38,6 @@ export default function SiteSearchResult({
     focus,
     buttons,
     handleSelect,
-    handleFocusChange,
 }: {
     item: SearchResult;
     index: number;
@@ -60,7 +59,7 @@ export default function SiteSearchResult({
             key={item.url}
             id={item.url}
             autoFocus={focus === index}
-            onMouseMove={() => handleFocusChange(index)}
+            // onMouseMove={() => handleFocusChange(index)}
             sx={{
                 borderRadius: "4px",
                 px: { xs: 1, sm: 2 },
