@@ -1,18 +1,18 @@
-# <img src="https://assets.irminsul.gg/main/icons/Irminsul.png" alt="Irminsul.GG" width="48" /> **[IRMINSUL.GG](https://irminsul.gg/)**
+# <img src="https://assets.irminsul.gg/v2/_common/logo/logo_red.png" alt="Irminsul.GG" width="48" /> **[IRMINSUL.GG](https://irminsul.gg/)**
 
 **IRMINSUL.GG** is a database and companion website for various gacha games.
 
 **Irminsul.GG** branches:
 
-- [**Genshin Impact**](https://genshin.irminsul.gg/)
+-   [**Genshin Impact**](https://irminsul.gg/genshin)
 
-- [**Honkai: Star Rail**](https://hsr.irminsul.gg/)
+-   [**Honkai: Star Rail**](https://irminsul.gg/hsr)
 
-- [**Wuthering Waves**](https://wuwa.irminsul.gg/)
+-   [**Wuthering Waves**](https://irminsul.gg/wuwa)
 
-- [**Zenless Zone Zero**](https://zzz.irminsul.gg/)
+-   [**Zenless Zone Zero**](https://irminsul.gg/zzz)
 
-- [**Umamusume: Pretty Derby**](https://uma.irminsul.gg/)
+-   [**Umamusume: Pretty Derby**](https://irminsul.gg/uma)
 
 ## **Previews**
 
