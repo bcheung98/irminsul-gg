@@ -47,7 +47,7 @@ export const urls = {
 };
 
 export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
-    const res = await fetch(urls[url], { next: { revalidate: 120 } });
+    const res = await fetch(urls[url]);
     return res.json();
 }
 
@@ -55,7 +55,7 @@ export async function getData<T>(
     url: keyof typeof urls,
     params: (value: T) => unknown
 ): Promise<T> {
-    const res = await fetch(urls[url], { next: { revalidate: 120 } });
+    const res = await fetch(urls[url]);
     const data = await res.json();
     return data.find(params);
 }
@@ -69,7 +69,7 @@ export async function getUmaEvents(
         // URL for localhost development
         url = `http://localhost:${port}/events-${type}`;
     }
-    const res = await fetch(url, { next: { revalidate: 120 } });
+    const res = await fetch(url);
     return res.json();
 }
 
