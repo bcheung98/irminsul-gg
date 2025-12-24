@@ -1,10 +1,8 @@
-"use server";
-
 // Type imports
 import { Banner, BannerProps, BannerType } from "@/types/banner";
 import { Game, Server } from "@/types";
 
-export async function getBannerData(
+export function getBannerData(
     banners: BannerProps,
     game: Game,
     server: Server

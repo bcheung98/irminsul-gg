@@ -128,8 +128,8 @@ export default function BannerArchive<
         weapon: [],
     });
     useEffect(() => {
-        startTransition(async () => {
-            let items = await getBannerData(banners, game, server);
+        startTransition(() => {
+            let items = getBannerData(banners, game, server);
             startTransition(() => setBannerData(items));
         });
     }, [banners, game, server]);
