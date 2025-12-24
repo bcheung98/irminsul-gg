@@ -194,16 +194,8 @@ export const localMaterials = [
     {
         id: 42601400,
         category: "local",
-        name: "???",
+        name: "Arithmetic Shell",
         tag: "42601400",
-        rarity: 1,
-        release: { version: "3.0" },
-    },
-    {
-        id: 42601410,
-        category: "local",
-        name: "???",
-        tag: "42601410",
         rarity: 1,
         release: { version: "3.0" },
     },

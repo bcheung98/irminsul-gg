@@ -166,7 +166,7 @@ export const bossMaterials = [
         name: "Suncoveter's Reach",
         tag: "Suncoveter's Reach",
         rarity: 4,
-        source: "???",
+        source: "Hyvatia",
         release: { version: "3.0" },
     },
     {
@@ -175,7 +175,7 @@ export const bossMaterials = [
         name: "Burning Judgment",
         tag: "Burning Judgment",
         rarity: 4,
-        source: "???",
+        source: "Reactor Husk",
         release: { version: "3.0" },
     },
 ];
