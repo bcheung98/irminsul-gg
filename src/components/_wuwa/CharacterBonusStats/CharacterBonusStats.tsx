@@ -38,7 +38,7 @@ export default function CharacterBonusStats({
     return (
         <Grid container spacing={2}>
             {[0, 1].map((index) => (
-                <SkillCard key={index} size={{ xs: 6, md: 3.5 }}>
+                <SkillCard key={index} size={{ xs: 12, md: 3.5 }}>
                     <Stack spacing={2} divider={<Divider />}>
                         <TextLabel
                             icon={
