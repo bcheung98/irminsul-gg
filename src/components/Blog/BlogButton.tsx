@@ -17,7 +17,7 @@ export default function BlogButton() {
 
     const href = "/blog";
     const pathname = usePathname();
-    const linkActive = pathname === href;
+    const linkActive = pathname.includes("blog");
 
     return matches ? (
         <NavLink href={href}>
