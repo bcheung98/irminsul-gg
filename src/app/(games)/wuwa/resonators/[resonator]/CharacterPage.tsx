@@ -38,7 +38,7 @@ export default function CharacterPage({
             {
                 name: `Tune Break: ${character.weaponType}`,
                 description:
-                    'When the target\'s <span class="text-highlight">Off-Tune Level</span> is full, deal <span class="tooltip-highlight" data-tag="tune break">Tune Break</span> DMG.',
+                    'When the target\'s <span class="text-highlight">Off-Tune Level</span> is full, the Resonator may cast <span class="tooltip-highlight" data-tag="tune break">Tune Break</span> on the target.',
                 icon: `wuwa/skills/Break_${character.weaponType}`,
             },
         ];
