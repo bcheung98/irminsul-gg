@@ -65,7 +65,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "tune break",
         name: "Tune Break",
         description:
-            'When the target\'s <span class="text-highlight">Off-Tune</span> Level is maxed, they enter the <span class="text-highlight">Mistune</span> state:<br />The active Resonator in the team may perform <span class="text-highlight">Tune Break Skill</span> on the target, dealing DMG and causing the target to leave the <span class="text-highlight">Mistune</span> state.<br />If the target is of the Common Class, Resonators in the team may directly deal <span class="text-highlight">Tune Break DMG</span> with some of their regular skills on hit. The target leaves the <span class="text-highlight">Mistune</span> state afterward.',
+            'When the target\'s <span class="text-highlight">Off-Tune Level</span> is maxed, they enter the <span class="text-highlight">Mistune</span> state:<br />The active Resonator in the team may perform <span class="text-highlight">Tune Break Skill</span> on the target, dealing DMG and causing the target to leave the <span class="text-highlight">Mistune</span> state.<br />If the target is of the Common Class, Resonators in the team may directly deal <span class="text-highlight">Tune Break DMG</span> with some of their regular skills on hit. The target leaves the <span class="text-highlight">Mistune</span> state afterward.',
     },
     {
         tag: "tune rupture shifting",
