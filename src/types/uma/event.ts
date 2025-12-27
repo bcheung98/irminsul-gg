@@ -133,7 +133,10 @@ export interface EventExtraProps {
     charName?: number | string;
     charList?: number[];
     conditions?: EventRewards[];
+    eventHints?: EventSubHint;
 }
+
+export type EventSubHint = Required<EventRewards>[];
 
 export interface StatusEffect {
     id: number;
