@@ -16,7 +16,7 @@ import { getRaceName } from "@/helpers/uma/races";
 import { raceSeries } from "@/data/uma/races";
 
 // Type imports
-import { EventRewards } from "@/types/uma/event";
+import { EventRewards, EventSubHint } from "@/types/uma/event";
 
 const dialogStyle = {
     ".MuiDialog-paper": {
@@ -143,6 +143,28 @@ export function SkillText({
         );
     }
     return res;
+}
+
+export function SkillTextRandom({ eventHints }: { eventHints?: EventSubHint }) {
+    if (eventHints) {
+        const hints = eventHints.map((hint) =>
+            SkillHint({ event: hint, isHint: true })
+        );
+        return (
+            <>
+                {hints.map((hint, index) => (
+                    <span key={index}>
+                        {hint}
+                        {index < hints.length - 1 && (
+                            <TextHighlight>{` or `}</TextHighlight>
+                        )}
+                    </span>
+                ))}
+            </>
+        );
+    } else {
+        return <></>;
+    }
 }
 
 export function StatusEffect({

@@ -7,6 +7,7 @@ import {
     RaceMulti,
     RaceSeries,
     SkillText,
+    SkillTextRandom,
 } from "./EventTextRender";
 
 // MUI imports
@@ -197,6 +198,8 @@ export default function EventText({
                 });
             case "skill":
                 return SkillText({ event: outcome });
+            case "skill_random":
+                return SkillTextRandom({ eventHints: props?.eventHints });
             case "conditions":
                 return props?.conditions?.map((con) => (
                     <EventText outcome={con} prefix="※" />
