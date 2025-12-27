@@ -99,7 +99,7 @@ export default function WuWaPlannerCard() {
     const nodes = Object.fromEntries(
         range(0, 9).map((index) => [
             getNodeKey(index),
-            item.values[getNodeKey(index)] || defaultNodeValues,
+            item.values[`node-${getNodeKey(index)}`] || defaultNodeValues,
         ])
     );
 
