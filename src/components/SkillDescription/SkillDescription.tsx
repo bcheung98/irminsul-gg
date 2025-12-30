@@ -41,7 +41,11 @@ export default function SkillDescription({
     const textColor = useTextColor(theme.text);
 
     function getClassName(className: string) {
-        if (game === "zzz" && className.startsWith("text-value"))
+        if (
+            game === "zzz" &&
+            className.startsWith("text-value") &&
+            newClassName !== "character-potential-value"
+        )
             return `character-skill-value-${index}`;
         return className === targetClassName ? newClassName : className;
     }

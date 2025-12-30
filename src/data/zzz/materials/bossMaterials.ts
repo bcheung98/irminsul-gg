@@ -110,10 +110,10 @@ export const bossMaterials = [
     {
         id: 110513,
         category: "boss",
-        name: "Core Corrosion",
-        tag: "Core Corrosion",
+        name: "Spiked Corruption Core",
+        tag: "Spiked Corruption Core",
         rarity: 4,
-        source: "Miasmic Scorpse",
+        source: "Miasma Walker - Scorpse",
         release: { version: "2.5" },
     },
 ];

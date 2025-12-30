@@ -65,10 +65,10 @@ export const weeklyBossMaterials = [
     {
         id: 110008,
         category: "weekly",
-        name: "Turbid Crystal",
-        tag: "Turbid Crystal",
+        name: "Clouded Crystalline Substance",
+        tag: "Clouded Crystalline Substance",
         rarity: 5,
-        source: "Misama Herald - Sobek",
+        source: "Sobek",
         release: { version: "2.5" },
     },
 ];

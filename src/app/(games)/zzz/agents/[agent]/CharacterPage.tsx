@@ -7,6 +7,7 @@ import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import CharacterPotential from "@/components/_zzz/CharacterPotential";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
@@ -85,6 +86,15 @@ export default function CharacterPage({
         />
     );
 
+    const Potential = character.potential ? (
+        <CharacterPotential
+            potential={character.potential}
+            attributes={attributes}
+        />
+    ) : (
+        <></>
+    );
+
     const Upgrades = (
         <CharacterUpgrades
             title="Mindscape Cinema"
@@ -103,7 +113,9 @@ export default function CharacterPage({
     if (matches_up_md) rightColumn.push(InfoMain);
     if (matches_up_md && !matches_up_lg) rightColumn.push(InfoMisc);
 
-    const children = [Skills, Upgrades];
+    const children = [Skills];
+    if (character.potential) children.push(Potential);
+    children.push(Upgrades);
     if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (
