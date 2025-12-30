@@ -20,6 +20,7 @@ export interface ZZZCharacter extends BaseData {
     weaponType: ZZZWeaponType;
     attackType: ZZZAttackType[];
     skills: ZZZCharacterSkills;
+    potential?: Skill[];
     upgrades: Skill[];
     keywords?: SkillKeyword[];
     stats: ZZZCharacterStats;

@@ -47,6 +47,11 @@ export default function CharacterSkillDescription({
     const textColor = useTextColor(theme.text);
     const getSkillKeyword = useSkillKeyword()[game];
 
+    const color =
+        game === "zzz"
+            ? attributes.colors?.accent
+            : textColor(game, attributes.element);
+
     const skillIconURL = formatSkillIconURL(
         skillIconURLs[game][skillKey],
         attributes
@@ -156,7 +161,7 @@ export default function CharacterSkillDescription({
                                     minWidth: "100px",
                                     maxWidth: "500px",
                                     mx: "8px",
-                                    color: textColor(game, attributes.element),
+                                    color,
                                 }}
                             />
                         )}
