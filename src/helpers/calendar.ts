@@ -85,6 +85,8 @@ export function createVersionInfo({
     banners: Banner[];
 }): CalendarVersionInfo[] {
     const versions: CalendarVersionInfo[] = [...banners];
+
+    // Create future version info
     if (game !== "uma") {
         const lastVersion = versions.slice(-1)[0];
         let { id, version } = lastVersion;
@@ -93,22 +95,73 @@ export function createVersionInfo({
         let startTime, startUTC, endTime, endUTC;
         id++;
         for (let i = 0; i < 32; i++) {
-            start.setDate(end.getDate() + 1);
+            if (["genshin", "wuwa"].includes(game) && i % 2 === 1) {
+                start.setDate(end.getDate());
+            } else {
+                start.setDate(end.getDate() + 1);
+            }
             if (lastVersion.version.endsWith(".1")) {
                 end.setDate(end.getDate() + 42);
             } else {
-                end.setDate(end.getDate() + 21);
+                if (game === "wuwa") {
+                    if (i % 2 === 0) {
+                        end.setDate(end.getDate() + 22);
+                    } else {
+                        end.setDate(end.getDate() + 20);
+                    }
+                } else {
+                    end.setDate(end.getDate() + 21);
+                }
             }
+            // Phase 1
             if (i % 2 === 0) {
                 version = incrementVersionNumber(version, game);
                 startTime = "11:00:00";
                 startUTC = " UTC+8";
-                endTime = "17:59:59";
+                switch (game) {
+                    case "genshin":
+                        endTime = "17:59:59";
+                        break;
+                    case "hsr":
+                        endTime = "11:59:59";
+                        break;
+                    case "wuwa":
+                        endTime = "09:59:59";
+                        break;
+                    case "zzz":
+                        endTime = "11:59:59";
+                        break;
+                    default:
+                        endTime = "17:59:59";
+                        break;
+                }
                 endUTC = "";
-            } else {
-                startTime = "18:00:00";
+            }
+            // Phase 2
+            else {
+                switch (game) {
+                    case "genshin":
+                        startTime = "18:00:00";
+                        endTime = "14:59:59";
+                        break;
+                    case "hsr":
+                        startTime = "12:00:00";
+                        endTime = "14:59:59";
+                        break;
+                    case "wuwa":
+                        startTime = "10:00:00";
+                        endTime = "11:59:59";
+                        break;
+                    case "zzz":
+                        startTime = "12:00:00";
+                        endTime = "14:59:59";
+                        break;
+                    default:
+                        startTime = "18:00:00";
+                        endTime = "14:59:59";
+                        break;
+                }
                 startUTC = "";
-                endTime = "14:59:59";
                 endUTC = "";
             }
             const newStartString = `${
