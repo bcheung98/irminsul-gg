@@ -19,7 +19,7 @@ import { useGalleryStore } from "@/stores";
 export default function FilterSort() {
     const theme = useTheme();
 
-    const key = usePathname().slice(1) as keyof typeof options;
+    const key = usePathname().slice(1) as keyof typeof sortOptions;
 
     const { setGalleryState } = useGalleryStore();
     const { sortBy, sortDirection, view } = useGalleryStore(
@@ -37,6 +37,23 @@ export default function FilterSort() {
             setGalleryState(key, "sortDirection", "asc");
         }
     };
+
+    let options = sortOptions[key];
+    if (key === "genshin/tcg") {
+        if (view === "icon") {
+            options = [
+                { value: "tcg-version", label: "Release Date" },
+                { value: "name", label: "Name" },
+                { value: "id", label: "Element" },
+            ];
+        } else {
+            options = [
+                { value: "tcg-version", label: "Release Date" },
+                { value: "name", label: "Name" },
+                { value: "id", label: "Card Type" },
+            ];
+        }
+    }
 
     return (
         <Stack
@@ -61,7 +78,7 @@ export default function FilterSort() {
                     }}
                     sx={{ width: "min-content", minWidth: "100px" }}
                 >
-                    {options[key].map(({ value, label }) => (
+                    {options.map(({ value, label }) => (
                         <MenuItem key={value} value={value}>
                             <Text variant="subtitle1">{label}</Text>
                         </MenuItem>
@@ -96,7 +113,7 @@ export default function FilterSort() {
     );
 }
 
-const options = {
+const sortOptions = {
     "genshin/characters": [
         { value: "release", label: "Release Date" },
         { value: "name", label: "Name" },
@@ -109,6 +126,10 @@ const options = {
         { value: "name", label: "Name" },
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Weapon" },
+    ],
+    "genshin/tcg": [
+        { value: "id", label: "Default" },
+        { value: "tcg-version", label: "Release Date" },
     ],
     "hsr/characters": [
         { value: "release", label: "Release Date" },

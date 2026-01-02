@@ -144,6 +144,26 @@ export function filterItems<T extends Record<string, any>>(
     if ("skillRarity" in filters && filters.skillRarity.length > 0) {
         res = res.filter((item) => filters.skillRarity.includes(item.rarity));
     }
+    if ("tcg-element" in filters && filters["tcg-element"].length > 0) {
+        res = res.filter((item) =>
+            filters["tcg-element"].some((tag) => item.tags.includes(tag))
+        );
+    }
+    if ("tcg-weaponType" in filters && filters["tcg-weaponType"].length > 0) {
+        res = res.filter((item) =>
+            filters["tcg-weaponType"].some((tag) => item.tags.includes(tag))
+        );
+    }
+    if ("tcg-faction" in filters && filters["tcg-faction"].length > 0) {
+        res = res.filter((item) =>
+            filters["tcg-faction"].some((tag) => item.tags.includes(tag))
+        );
+    }
+    if ("tcg-group" in filters && filters["tcg-group"].length > 0) {
+        res = res.filter((item) =>
+            filters["tcg-group"].some((tag) => item.tags.includes(tag))
+        );
+    }
     if (searchValue) {
         res = res.filter((item) => {
             // Case for Uma skills

@@ -80,6 +80,9 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                 b.rarity - a.rarity ||
                 a.displayName.localeCompare(b.displayName)
         );
+    const cards = props.cards
+        ?.filter((card) => card.release.version === version)
+        .sort((a, b) => a.id - b.id);
 
     const selectProps = {
         index,
@@ -98,6 +101,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         p: 2,
         maxHeight: "720px",
         overflowY: "auto",
+        scrollbarWidth: "thin",
     };
 
     return (
@@ -190,6 +194,21 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {bangboo.map((item) =>
                                         renderInfoCard(game, "bangboos", item)
+                                    )}
+                                </Grid>
+                            </Grid>
+                        )}
+                        {cards && cards.length > 0 && (
+                            <Grid sx={gridContainerStyle} size="auto">
+                                <TextLabel
+                                    icon={textLabelIcon(game, "cards")}
+                                    iconProps={{ size: 32 }}
+                                    title={textLabelTitle(game, "cards")}
+                                    titleProps={{ variant: "h6" }}
+                                />
+                                <Grid container spacing={3} sx={gridStyle}>
+                                    {cards.map((item) =>
+                                        renderInfoCard(game, "cards", item)
                                     )}
                                 </Grid>
                             </Grid>

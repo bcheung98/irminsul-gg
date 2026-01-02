@@ -10,4 +10,5 @@ export interface VersionHighlightsProps {
     equipment: VersionItemData[];
     bangboos?: VersionItemData[];
     supports?: VersionItemData[];
+    cards?: VersionItemData[];
 }

@@ -9,6 +9,7 @@ import { getDataSet } from "@/lib/fetchData";
 
 // Type imports
 import type { Metadata } from "next";
+import { TCGCharacterCard } from "@/types/genshin/tcg";
 
 export const metadata: Metadata = {
     title: "TCG",
@@ -16,9 +17,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+    const cards = await getDataSet<TCGCharacterCard>("genshin/tcg");
+
     return (
         <Suspense fallback={<Loader />}>
-            <TCGGallery />
+            <TCGGallery cards={cards} />
         </Suspense>
     );
 }

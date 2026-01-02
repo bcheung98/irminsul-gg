@@ -13,16 +13,19 @@ import {
     GenshinWeapon,
 } from "@/types/genshin";
 import { BannerProps } from "@/types/banner";
+import { GenshinTCGCard } from "@/types/genshin/tcg";
 
 export default function GenshinHome({
     characters,
     weapons,
     equipment,
+    cards,
     banners,
 }: {
     characters: GenshinCharacter[];
     weapons: GenshinWeapon[];
     equipment: GenshinArtifact[];
+    cards: GenshinTCGCard[];
     banners: BannerProps;
 }) {
     return (
@@ -39,6 +42,7 @@ export default function GenshinHome({
                     characters={characters}
                     weapons={weapons}
                     equipment={equipment}
+                    cards={cards}
                 />
             </Grid>
             <Grid size={{ xs: 12, lg: 6 }}>

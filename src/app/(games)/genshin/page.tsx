@@ -13,6 +13,7 @@ import {
     GenshinWeapon,
     GenshinArtifact,
 } from "@/types/genshin";
+import { TCGActionCard, TCGCharacterCard } from "@/types/genshin/tcg";
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
@@ -23,19 +24,27 @@ export default async function Page() {
     const equipmentData = await getDataSet<GenshinArtifact>(
         "genshin/artifacts"
     );
+    const cardData = await getDataSet<TCGCharacterCard>("genshin/tcg");
     const characterBannerData = await getDataSet<Banner>(
         "genshin/banner-characters"
     );
     const weaponBannerData = await getDataSet<Banner>("genshin/banner-weapons");
 
-    const [characters, weapons, equipment, characterBanners, weaponBanners] =
-        await Promise.all([
-            characterData,
-            weaponData,
-            equipmentData,
-            characterBannerData,
-            weaponBannerData,
-        ]);
+    const [
+        characters,
+        weapons,
+        equipment,
+        cards,
+        characterBanners,
+        weaponBanners,
+    ] = await Promise.all([
+        characterData,
+        weaponData,
+        equipmentData,
+        cardData,
+        characterBannerData,
+        weaponBannerData,
+    ]);
 
     return (
         <Suspense fallback={<Loader />}>
@@ -43,6 +52,7 @@ export default async function Page() {
                 characters={characters}
                 weapons={weapons}
                 equipment={equipment}
+                cards={cards}
                 banners={{ character: characterBanners, weapon: weaponBanners }}
             />
         </Suspense>

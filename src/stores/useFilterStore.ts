@@ -11,10 +11,12 @@ import { ZZZWeaponFilterState } from "@/components/_zzz/Filters/WeaponFilters";
 import { UmaCharacterFilterState } from "@/components/_uma/Filters/CharacterFilters";
 import { UmaSupportFilterState } from "@/components/_uma/Filters/SupportFilters";
 import { UmaSkillFilterState } from "@/components/_uma/Filters/SkillFilters";
+import { GenshinTCGFilterState } from "@/components/_genshin/Filters/TCGFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
     "genshin/weapons": GenshinWeaponFilterState;
+    "genshin/tcg": {};
     "hsr/characters": HSRCharacterFilterState;
     "hsr/weapons": HSRWeaponFilterState;
     "wuwa/characters": WuWaCharacterFilterState;
@@ -65,6 +67,13 @@ export const genshinWeaponFilters: GenshinWeaponFilterState = {
     weaponAscensionMat: [],
     eliteMat: [],
     commonMat: [],
+};
+
+export const genshinTCGFilters: GenshinTCGFilterState = {
+    "tcg-element": [],
+    "tcg-weaponType": [],
+    "tcg-faction": [],
+    "tcg-group": [],
 };
 
 export const hsrCharacterFilters: HSRCharacterFilterState = {
@@ -146,6 +155,7 @@ export const umaSkillFilters: UmaSkillFilterState = {
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
+    "genshin/tcg": genshinTCGFilters,
     "hsr/characters": hsrCharacterFilters,
     "hsr/weapons": hsrWeaponFilters,
     "wuwa/characters": wuwaCharacterFilters,

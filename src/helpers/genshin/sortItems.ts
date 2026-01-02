@@ -12,6 +12,9 @@ export default function sortItems<T extends Record<string, any>>({
 }: SortProps<T>) {
     let res = [...items];
     switch (value) {
+        case "id":
+            res = res.sort((a, b) => sortBy(a.id, b.id, !reverse));
+            break;
         case "name":
             res = res.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
@@ -120,6 +123,32 @@ export default function sortItems<T extends Record<string, any>>({
                     ) ||
                     sortBy(b.rarity, a.rarity, !reverse) ||
                     sortBy(bi, ai, !reverse)
+                );
+            });
+            break;
+        case "tcg-version":
+            res = res.sort((a, b) => {
+                return (
+                    sortBy(
+                        parseVersionNumber(a.release.version),
+                        parseVersionNumber(b.release.version),
+                        reverse
+                    ) || sortBy(a.id, b.id, reverse)
+                );
+            });
+            break;
+        case "tcg-hp":
+            res = res.sort((a, b) => {
+                return (
+                    sortBy(a.hp, b.hp, reverse) || sortBy(a.id, b.id, reverse)
+                );
+            });
+            break;
+        case "tcg-energy":
+            res = res.sort((a, b) => {
+                return (
+                    sortBy(a.cost, b.cost, reverse) ||
+                    sortBy(a.id, b.id, reverse)
                 );
             });
             break;

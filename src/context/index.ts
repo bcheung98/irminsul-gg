@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { Game, GameInfo } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
+import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 import { CharacterBuffs } from "@/types/character";
 import { UmaSkill } from "@/types/uma/skill";
 import { EventList, Events } from "@/types/uma/event";
@@ -33,6 +33,7 @@ export const SkillContext = createContext<CharacterSkillsList | null>(null);
 export const SkillVersionContext =
     createContext<CharacterBuffs>(defaultCharacterBuff);
 export const SearchContext = createContext<string>("");
+export const TCGKeywordContext = createContext<SkillKeyword[]>([]);
 export const CharIDContext = createContext<number | string>(0);
 export const CardIDContext = createContext<number>(0);
 export const UmaContext = createContext<UmaContext>({
@@ -68,6 +69,10 @@ export function useSkillVersionContext() {
 
 export function useSearchContext() {
     return useContext(SearchContext);
+}
+
+export function useTCGKeywordContext() {
+    return useContext(TCGKeywordContext);
 }
 
 export function useCharIDContext() {
