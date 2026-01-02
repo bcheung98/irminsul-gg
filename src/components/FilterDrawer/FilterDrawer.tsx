@@ -5,6 +5,7 @@ import DrawerDesktop from "./FilterDrawerDesktop";
 import DrawerMobile from "./FilterDrawerMobile";
 import {
     GenshinCharacterFilters,
+    GenshinTCGFilters,
     GenshinWeaponFilters,
 } from "@/components/_genshin/Filters";
 import {
@@ -61,6 +62,7 @@ export default function FilterDrawer() {
 const components: Record<string, React.ReactNode> = {
     "/genshin/characters": <GenshinCharacterFilters />,
     "/genshin/weapons": <GenshinWeaponFilters />,
+    "/genshin/tcg": <GenshinTCGFilters />,
     "/hsr/characters": <HSRCharacterFilters />,
     "/hsr/lightcones": <HSRWeaponFilters />,
     "/wuwa/resonators": <WuWaCharacterFilters />,

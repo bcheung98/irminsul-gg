@@ -2,6 +2,7 @@ export const categories: Record<string, string> = {
     "genshin/characters": "Characters",
     "genshin/weapons": "Weapons",
     "genshin/equipment": "Artifacts",
+    "genshin/cards": "TCG Cards",
     "hsr/characters": "Characters",
     "hsr/weapons": "Light Cones",
     "hsr/equipment": "Relics",
@@ -20,6 +21,7 @@ export const categoryURLs: Record<string, string> = {
     "genshin/characters": "genshin/characters",
     "genshin/weapons": "genshin/weapons",
     "genshin/equipment": "genshin/artifacts",
+    "genshin/cards": "genshin/tcg",
     "hsr/characters": "hsr/characters",
     "hsr/weapons": "hsr/lightcones",
     "hsr/equipment": "hsr/relics",
@@ -43,6 +45,7 @@ export const categoryImgURLs: Record<
     "genshin/weapons": (id: number) => `genshin/weapons/${id}`,
     "genshin/equipment": (id: number, name: string) =>
         `genshin/artifacts/${id}${name.startsWith("Prayers") ? "_5" : "_1"}`,
+    "genshin/cards": (id: number) => `genshin/tcg/cards/${id}`,
     "hsr/characters": (id: number) => `hsr/characters/${id}`,
     "hsr/weapons": (id: number) => `hsr/lightcones/${id}_icon`,
     "hsr/equipment": (id: number) => `hsr/relics/${id}`,

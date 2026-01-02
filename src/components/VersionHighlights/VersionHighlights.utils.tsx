@@ -1,4 +1,4 @@
-import { categories } from "@/data/categories";
+// Component imports
 import {
     GenshinArtifactInfoCard,
     GenshinCharacterInfoCard,
@@ -14,6 +14,12 @@ import {
     ZZZDriveDiscInfoCard,
     ZZZWeaponInfoCard,
 } from "@/components/InfoCard";
+import TCGCard from "@/components/_genshin/TCGCard";
+
+// Helper imports
+import { categories } from "@/data/categories";
+
+// Type imports
 import { Game, GameData } from "@/types";
 import {
     VersionHighlightsProps,
@@ -36,6 +42,7 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
             characters: "genshin/icons/Aether",
             weapons: "genshin/icons/Weapons",
             equipment: "genshin/icons/Artifact",
+            cards: "genshin/icons/TCG",
         },
         hsr: {
             characters: "hsr/icons/Character",
@@ -96,6 +103,15 @@ export function renderInfoCard(
                     key={item.id}
                     artifact={item as GenshinArtifact}
                     props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            cards: (
+                <TCGCard
+                    key={item.id}
+                    id={item.id}
+                    name={item.displayName}
+                    componentID={`${item.id}-versionHighlights`}
+                    href={item.url}
                 />
             ),
         },

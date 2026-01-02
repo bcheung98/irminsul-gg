@@ -5,6 +5,9 @@ export const urls = {
     "genshin/characters": "https://api.irminsul.gg/v2/genshin/characters.json",
     "genshin/weapons": "https://api.irminsul.gg/v2/genshin/weapons.json",
     "genshin/artifacts": "https://api.irminsul.gg/v2/genshin/artifacts.json",
+    "genshin/tcg": "https://api.irminsul.gg/v2/genshin/tcg.json",
+    "genshin/tcg-keywords":
+        "https://api.irminsul.gg/v2/genshin/tcg-keywords.json",
     "genshin/banner-characters":
         "https://api.irminsul.gg/v2/genshin/banner-characters.json",
     "genshin/banner-weapons":

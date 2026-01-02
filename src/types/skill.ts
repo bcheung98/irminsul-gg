@@ -18,6 +18,7 @@ export interface SkillKeyword {
     name?: string;
     type?: string;
     icon?: string;
+    cost?: string;
     description: string;
 }
 

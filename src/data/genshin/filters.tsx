@@ -11,6 +11,7 @@ import { useMaterialsCategory } from "@/helpers/materials";
 import { elements, nations, rarities, weapons } from "@/data/genshin/common";
 import { characterAscensionStats } from "./characterAscensionStats";
 import { GenshinWeaponSubStat, weaponSubStats } from "./weaponStats";
+import { tcgActionCardSubTypes, tcgFactions, tcgWeaponTypes } from "./tcg";
 
 // Type imports
 import { Filters, FilterGroupsProps, FilterGroups } from "@/types";
@@ -22,6 +23,11 @@ import {
 } from "@/types/genshin";
 import { CharacterAscensionStat } from "@/types/genshin/character";
 import { GenshinMaterialCategory } from "@/types/genshin/materials";
+import {
+    TCGActionCardSubType,
+    TCGFaction,
+    TCGWeaponType,
+} from "@/types/genshin/tcg";
 
 export function genshinFilters<T extends Filters>({
     key,
@@ -301,6 +307,52 @@ export function genshinFilters<T extends Filters>({
                 _: React.BaseSyntheticEvent,
                 newValues: GenshinNation[]
             ) => setFilters(key, "nation", newValues),
+        },
+        "tcg-element": {
+            name: "Element",
+            value: filters["tcg-element"],
+            buttons: createFilterButtons({
+                items: elements,
+                url: "genshin/elements",
+            }),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: GenshinElement[]
+            ) => setFilters(key, "tcg-element", newValues),
+        },
+        "tcg-weaponType": {
+            name: "Weapon",
+            value: filters["tcg-weaponType"],
+            buttons: createFilterButtons({
+                items: tcgWeaponTypes,
+                url: "genshin/tcg/icons/weapons",
+            }),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: TCGWeaponType[]
+            ) => setFilters(key, "tcg-weaponType", newValues),
+        },
+        "tcg-faction": {
+            name: "Faction",
+            value: filters["tcg-faction"],
+            buttons: createFilterButtons({
+                items: tcgFactions,
+                url: "genshin/tcg/icons/factions",
+            }),
+            onChange: (_: React.BaseSyntheticEvent, newValues: TCGFaction[]) =>
+                setFilters(key, "tcg-faction", newValues),
+        },
+        "tcg-group": {
+            name: "Group",
+            value: filters["tcg-group"],
+            buttons: createFilterButtons({
+                items: tcgActionCardSubTypes,
+                url: "genshin/tcg/icons/subtypes",
+            }),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: TCGActionCardSubType[]
+            ) => setFilters(key, "tcg-group", newValues),
         },
     };
 }

@@ -18,6 +18,7 @@ export interface GalleryState {
     "genshin/characters": GallerySettings;
     "genshin/weapons": GallerySettings;
     "genshin/artifacts": GallerySettings;
+    "genshin/tcg": GallerySettings;
     "hsr/characters": GallerySettings;
     "hsr/lightcones": GallerySettings;
     "hsr/relics": GallerySettings;
@@ -50,6 +51,11 @@ export const initialState: GalleryState = {
         view: "icon",
     },
     "genshin/artifacts": defaultSettings,
+    "genshin/tcg": {
+        sortBy: "tcg-version",
+        sortDirection: "asc",
+        view: "icon",
+    },
     "hsr/characters": defaultSettings,
     "hsr/lightcones": {
         sortBy: "version",
