@@ -26,7 +26,9 @@ export default function GamesMenuList({
     const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const gameTag = useGameTag();
-    const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
+    const games = useGameList()
+        .filter((game) => game.enabled)
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     if (gameTag) {
         const index = games.findIndex((game) => game.tag === gameTag);
