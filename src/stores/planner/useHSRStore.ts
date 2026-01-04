@@ -47,8 +47,8 @@ export const createHSRSlice: StateCreator<
         const totalCosts = get()["hsr/totalCost"];
         const itemIDs = get()["hsr/items"].map((item) => item.id);
         Object.keys(totalCosts).forEach((costID) => {
-            if (!itemIDs.includes(Number(costID))) {
-                delete totalCosts[Number(costID)];
+            if (!itemIDs.includes(costID)) {
+                delete totalCosts[costID];
             }
         });
         if (id !== undefined && costs !== undefined) {

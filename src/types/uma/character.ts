@@ -3,6 +3,7 @@ import { BaseData, VoiceActorData } from "..";
 import { UmaVersion } from "../version";
 
 export interface UmaCharacter extends BaseData {
+    id: number;
     charID: number;
     name: string;
     displayName: string;

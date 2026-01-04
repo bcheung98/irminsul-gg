@@ -13,13 +13,16 @@ import { createWuWaSlice, WuWaPlannerSlice } from "./planner/useWuWaStore";
 import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
 
 export interface PlannerSlice {
-    totalCost: Record<number, Record<string, CostValue>>;
+    totalCost: Record<number | string, Record<string, CostValue>>;
     items: PlannerItemData[];
-    hidden: number[];
+    hidden: (number | string)[];
     setItems: (items: PlannerItemData[]) => void;
     setItemValues: (item: SetItemValuesProps) => void;
-    setHiddenItems: (id: number) => void;
-    updateTotalCosts: (id?: number, costs?: Record<string, CostValue>) => void;
+    setHiddenItems: (id: number | string) => void;
+    updateTotalCosts: (
+        id?: number | string,
+        costs?: Record<string, CostValue>
+    ) => void;
 }
 
 export type GamePlannerSlice<G extends GameNoUma, T> = {
