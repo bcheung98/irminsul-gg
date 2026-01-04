@@ -47,8 +47,8 @@ export const createZZZSlice: StateCreator<
         const totalCosts = get()["zzz/totalCost"];
         const itemIDs = get()["zzz/items"].map((item) => item.id);
         Object.keys(totalCosts).forEach((costID) => {
-            if (!itemIDs.includes(costID)) {
-                delete totalCosts[costID];
+            if (!itemIDs.includes(Number(costID))) {
+                delete totalCosts[Number(costID)];
             }
         });
         if (id !== undefined && costs !== undefined) {

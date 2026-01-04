@@ -47,8 +47,8 @@ export const createWuWaSlice: StateCreator<
         const totalCosts = get()["wuwa/totalCost"];
         const itemIDs = get()["wuwa/items"].map((item) => item.id);
         Object.keys(totalCosts).forEach((costID) => {
-            if (!itemIDs.includes(costID)) {
-                delete totalCosts[costID];
+            if (!itemIDs.includes(Number(costID))) {
+                delete totalCosts[Number(costID)];
             }
         });
         if (id !== undefined && costs !== undefined) {

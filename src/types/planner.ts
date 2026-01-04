@@ -10,7 +10,7 @@ export type PlannerType = "characters" | "weapons";
 export type CardMode = "edit" | "view";
 
 export interface PlannerItemData extends BaseDataWithRelease {
-    id: number | string;
+    id: number;
     name: string;
     displayName: string;
     fullName?: string;
@@ -32,7 +32,7 @@ export interface CostSliderValues {
 }
 
 export interface SetItemValuesProps {
-    id: number | string;
+    id: number;
     skillKey: string;
     values: CostSliderValues;
 }

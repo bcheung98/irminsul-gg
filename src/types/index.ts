@@ -22,7 +22,7 @@ export type NestedKeyOf<T extends object> = {
 
 // General data
 export interface BaseData {
-    id: number | string;
+    id: number;
     name: string;
     url?: string;
 }
@@ -35,7 +35,7 @@ export type DataType = BaseDataWithRelease & {
 
 // Attribute data
 export interface AttributeData {
-    id?: number | string;
+    id?: number;
     name?: string;
     displayName?: string;
     title?: string;

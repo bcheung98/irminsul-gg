@@ -4,7 +4,7 @@ import { CardMode, CostSliderValues, PlannerType } from "@/types/planner";
 export interface PlannerSliderProps {
     mode: CardMode;
     type: PlannerType;
-    id: string | number;
+    id: number;
     skillKey: string;
     icon?: string;
     levels: (string | number)[];

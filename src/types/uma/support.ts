@@ -3,7 +3,6 @@ import { BaseData } from "..";
 import { UmaVersion } from "../version";
 
 export interface UmaSupport extends BaseData {
-    id: number;
     charID: number;
     displayName: string;
     title: string;
