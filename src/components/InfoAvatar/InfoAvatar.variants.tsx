@@ -20,7 +20,7 @@ export function GenshinCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="genshin/characters"
-            id={Number(character.id)}
+            id={character.id}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -41,7 +41,7 @@ export function GenshinWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="genshin/weapons"
-            id={Number(weapon.id)}
+            id={weapon.id}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -61,7 +61,7 @@ export function HSRCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="hsr/characters"
-            id={Number(character.id)}
+            id={character.id}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -82,7 +82,7 @@ export function HSRWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="hsr/lightcones"
-            id={Number(weapon.id)}
+            id={weapon.id}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -103,7 +103,7 @@ export function WuWaCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="wuwa/resonators"
-            id={Number(character.id)}
+            id={character.id}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -124,7 +124,7 @@ export function WuWaWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="wuwa/weapons"
-            id={Number(weapon.id)}
+            id={weapon.id}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -144,7 +144,7 @@ export function WuWaEchoInfoAvatar({
     return (
         <InfoAvatar
             tag="wuwa/echoes"
-            id={Number(echo.id)}
+            id={echo.id}
             key={echo.id}
             name={echo.displayName}
             rarity={echo.rarity}
@@ -164,7 +164,7 @@ export function ZZZCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="zzz/agents"
-            id={Number(character.id)}
+            id={character.id}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -185,7 +185,7 @@ export function ZZZWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="zzz/w-engines"
-            id={Number(weapon.id)}
+            id={weapon.id}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -206,7 +206,7 @@ export function UmaCharacterInfoAvatar({
     return (
         <InfoAvatar
             tag="uma/characters"
-            id={Number(character.id)}
+            id={character.id}
             key={character.id}
             name={`${character.name} (${character.outfit || "Original"})`}
             rarity={character.rarity + 2}
@@ -227,7 +227,7 @@ export function UmaSupportInfoAvatar({
     return (
         <InfoAvatarSupport
             tag="uma/supports"
-            id={Number(support.id)}
+            id={support.id}
             key={support.id}
             name={support.name}
             rarity={support.rarity}

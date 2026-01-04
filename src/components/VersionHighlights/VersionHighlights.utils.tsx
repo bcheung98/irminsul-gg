@@ -108,7 +108,7 @@ export function renderInfoCard(
             cards: (
                 <TCGCard
                     key={item.id}
-                    id={item.id}
+                    id={Number(item.id)}
                     name={item.displayName}
                     componentID={`${item.id}-versionHighlights`}
                     href={item.url}
