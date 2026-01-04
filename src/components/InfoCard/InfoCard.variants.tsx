@@ -22,7 +22,7 @@ export function GenshinCharacterInfoCard({
     return (
         <InfoCard
             tag="genshin/characters"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -46,7 +46,7 @@ export function GenshinCharacterInfoCardMaterial({
     return (
         <InfoCardMaterial
             tag="genshin/characters"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -71,7 +71,7 @@ export function GenshinWeaponInfoCard({
     return (
         <InfoCard
             tag="genshin/weapons"
-            id={weapon.id}
+            id={Number(weapon.id)}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -96,7 +96,7 @@ export function GenshinArtifactInfoCard({
     return (
         <InfoCard
             tag="genshin/artifacts"
-            id={artifact.id}
+            id={Number(artifact.id)}
             key={artifact.id}
             name={artifact.displayName}
             rarity={artifact.rarity}
@@ -117,7 +117,7 @@ export function HSRCharacterInfoCard({
     return (
         <InfoCard
             tag="hsr/characters"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -141,7 +141,7 @@ export function HSRCharacterInfoCardMaterial({
     return (
         <InfoCardMaterial
             tag="hsr/characters"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -166,7 +166,7 @@ export function HSRWeaponInfoCard({
     return (
         <InfoCard
             tag="hsr/lightcones"
-            id={weapon.id}
+            id={Number(weapon.id)}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -190,7 +190,7 @@ export function HSRRelicInfoCard({
     return (
         <InfoCard
             tag="hsr/relics"
-            id={relic.id}
+            id={Number(relic.id)}
             key={relic.id}
             name={relic.displayName}
             rarity={relic.rarity}
@@ -211,7 +211,7 @@ export function WuWaCharacterInfoCard({
     return (
         <InfoCard
             tag="wuwa/resonators"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -235,7 +235,7 @@ export function WuWaCharacterInfoCardMaterial({
     return (
         <InfoCardMaterial
             tag="wuwa/resonators"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -260,7 +260,7 @@ export function WuWaWeaponInfoCard({
     return (
         <InfoCard
             tag="wuwa/weapons"
-            id={weapon.id}
+            id={Number(weapon.id)}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -285,7 +285,7 @@ export function WuWaEchoInfoCard({
     return (
         <InfoCard
             tag="wuwa/echoes"
-            id={echo.id}
+            id={Number(echo.id)}
             key={echo.id}
             name={echo.displayName}
             rarity={echo.rarity}
@@ -311,7 +311,7 @@ export function ZZZCharacterInfoCard({
     return (
         <InfoCard
             tag="zzz/agents"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -335,7 +335,7 @@ export function ZZZCharacterInfoCardMaterial({
     return (
         <InfoCardMaterial
             tag="zzz/agents"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.displayName}
             rarity={character.rarity}
@@ -360,7 +360,7 @@ export function ZZZWeaponInfoCard({
     return (
         <InfoCard
             tag="zzz/w-engines"
-            id={weapon.id}
+            id={Number(weapon.id)}
             key={weapon.id}
             name={weapon.displayName}
             rarity={weapon.rarity}
@@ -385,7 +385,7 @@ export function ZZZDriveDiscInfoCard({
     return (
         <InfoCard
             tag="zzz/drive-discs"
-            id={disc.id}
+            id={Number(disc.id)}
             key={disc.id}
             name={disc.displayName}
             rarity={disc.rarity}
@@ -406,7 +406,7 @@ export function ZZZBangbooInfoCard({
     return (
         <InfoCard
             tag="zzz/bangboos"
-            id={bangboo.id}
+            id={Number(bangboo.id)}
             key={bangboo.id}
             name={bangboo.displayName}
             rarity={bangboo.rarity}
@@ -426,7 +426,7 @@ export function UmaCharacterInfoCard({
     return (
         <InfoCard
             tag="uma/characters"
-            id={character.id}
+            id={Number(character.id)}
             key={character.id}
             name={character.name}
             title={`(${character.outfit || "Original"})`}
@@ -447,7 +447,7 @@ export function UmaSupportInfoCard({
     return (
         <InfoCardSupport
             tag="uma/supports"
-            id={support.id}
+            id={Number(support.id)}
             key={support.id}
             name={support.name}
             title={support.title}

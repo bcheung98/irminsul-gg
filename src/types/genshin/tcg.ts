@@ -16,7 +16,6 @@ export type TCGActionCardSubType = (typeof tcgActionCardSubTypes)[number];
 export type TCGCardType = "character" | "action";
 
 export interface TCGCard extends BaseData {
-    id: number;
     displayName: string;
     tags: string[];
     splash: {
