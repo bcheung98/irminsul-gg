@@ -15,7 +15,9 @@ export default function Websites({
 }: {
     action: (newIndex: number) => void;
 }) {
-    const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
+    const games = useGameList()
+        .filter((game) => game.enabled)
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
