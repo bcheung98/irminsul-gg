@@ -126,6 +126,12 @@ export const skillKeywords: SkillKeyword[] = [
             "Multiple targets respectively use attacks on enemy targets in one action.",
     },
     {
+        tag: "merrymaking",
+        name: "Merrymaking",
+        description:
+            "Affects Elation DMG's special effects. Can additionally boost Elation DMG dealt.",
+    },
+    {
         tag: "out of bounds",
         name: "Out-of-Bounds",
         description:
