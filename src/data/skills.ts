@@ -22,6 +22,7 @@ export const skillKeys: GameData<Record<string, string>> = {
         technique: "Technique",
         "memo-skill": "Memosprite Skill",
         "memo-talent": "Memosprite Talent",
+        elation: "Elation Skill",
     },
     wuwa: {
         attack: "Basic Attack",
@@ -65,6 +66,7 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         technique: "hsr/skills/{id}_technique",
         "memo-skill": "hsr/skills/{id}_memo_skill",
         "memo-talent": "hsr/skills/{id}_memo_talent",
+        elation: "hsr/skills/{id}_elation",
     },
     wuwa: {
         attack: "wuwa/skills/Attack_{weaponType}",

@@ -19,6 +19,7 @@ export function formatCharacterBonusStatTitle(stat: BonusStat) {
         case "CRIT DMG":
         case "Effect RES":
         case "Effect Hit Rate":
+        case "Elation":
             return `${stat} Boost`;
         case "Break Effect":
             return "Break Boost";
@@ -49,6 +50,7 @@ export function formatCharacterBonusStatDescription(
         case "Effect RES":
         case "Effect Hit Rate":
         case "Break Effect":
+        case "Elation":
             return `${stat} increases by ${value}`;
         case "Physical DMG Boost":
         case "Fire DMG Boost":

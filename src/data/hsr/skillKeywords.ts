@@ -20,6 +20,12 @@ export const skillKeywords: SkillKeyword[] = [
             "Causes the target being hit to take extra DMG, which is not considered an attack.",
     },
     {
+        tag: "aha",
+        name: "Aha",
+        description:
+            'When taking action, triggers an Aha Instant and causes units capable of using Elation Skills to each use their Elation Skill 1 time. If there are no units capable of using Elation Skills when Aha takes action, Aha will use "Let There Be Laughter."<br />The Aha Instant lasts until the final Elation Skill finishes this time.<br />When the Aha Instant ends, participating characters gain the "Certified Banger" state for the Punchline points taken into account this time, lasting for 2 turns.',
+    },
+    {
         tag: "backup",
         name: "Backup",
         description:
@@ -42,6 +48,12 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Buff",
         description:
             "Can buff combat ability for a period of time, which can be dispelled unless otherwise specified.",
+    },
+    {
+        tag: "certified banger",
+        name: "Certified Banger",
+        description:
+            'Characters participating in the Aha Instant obtain the "Certified Banger" state, and Punchline from the current Aha Instant are taken into account for this state, lasting for 2 turns. Ability effects and Elation DMG produced by the "Certified Banger" state are calculated based on the Punchline points taken into account.<br />Punchlines taken into account for multiple "Certified Banger" states are combined for calculation.<br />The duration of each "Certified Banger" state is calculated independently.',
     },
     {
         tag: "continuous effect",
@@ -85,6 +97,12 @@ export const skillKeywords: SkillKeyword[] = [
             "An ally will be incapacitated once their HP is reduced to 0.",
     },
     {
+        tag: "elation dmg",
+        name: "Elation DMG",
+        description:
+            "The more Punchline points taken into account, the higher the Elation and Character Level, and thus higher the Elation DMG dealt.<br />Elation DMG is not affected by DMG Boost effects.",
+    },
+    {
         tag: "extra turn",
         name: "Extra Turn",
         description:
@@ -108,10 +126,22 @@ export const skillKeywords: SkillKeyword[] = [
             "Multiple targets respectively use attacks on enemy targets in one action.",
     },
     {
+        tag: "merrymaking",
+        name: "Merrymaking",
+        description:
+            "Affects Elation DMG's special effects. Can additionally boost Elation DMG dealt.",
+    },
+    {
         tag: "out of bounds",
         name: "Out-of-Bounds",
         description:
             "Neither allies nor enemies can actively select Out-of-Bounds units.",
+    },
+    {
+        tag: "punchline",
+        name: "Punchline",
+        description:
+            "Punchline is shared by the whole team. When dealing Elation DMG, the more Punchline points taken into account, the higher the Elation DMG.",
     },
     {
         tag: "res pen",
