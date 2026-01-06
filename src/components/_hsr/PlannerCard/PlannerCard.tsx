@@ -97,6 +97,12 @@ export default function HSRPlannerCard() {
             icon: `hsr/skills/${item.id}_talent`,
         },
         {
+            skillKey: "elation",
+            levels: skillLevel,
+            values: item.values.elation || defaultSkillValues,
+            icon: `hsr/skills/${item.id}_elation`,
+        },
+        {
             skillKey: "memo-skill",
             levels: atkLevel,
             values: item.values["memo-skill"] || defaultAtkValues,
@@ -123,17 +129,25 @@ export default function HSRPlannerCard() {
             ? textColor("hsr", item.element)
             : theme.text.selected;
 
-    const [Level, Attack, Skill, Ultimate, Talent, MemoSkill, MemoTalent] =
-        sliders.map((slider) => (
-            <PlannerSlider
-                key={slider.skillKey}
-                mode={mode}
-                type={type}
-                color={color}
-                {...item}
-                {...slider}
-            />
-        ));
+    const [
+        Level,
+        Attack,
+        Skill,
+        Ultimate,
+        Talent,
+        Elation,
+        MemoSkill,
+        MemoTalent,
+    ] = sliders.map((slider) => (
+        <PlannerSlider
+            key={slider.skillKey}
+            mode={mode}
+            type={type}
+            color={color}
+            {...item}
+            {...slider}
+        />
+    ));
 
     return (
         <Stack spacing={2} divider={<Divider />}>
@@ -141,6 +155,13 @@ export default function HSRPlannerCard() {
                 <LevelSliderContainer mode={mode}>{Level}</LevelSliderContainer>
                 {type === "characters" &&
                     [Attack, Skill, Ultimate, Talent].map((slider) => (
+                        <SkillSliderContainer key={slider.key} mode={mode}>
+                            {slider}
+                        </SkillSliderContainer>
+                    ))}
+                {type === "characters" &&
+                    item.weaponType === "Elation" &&
+                    [Elation].map((slider) => (
                         <SkillSliderContainer key={slider.key} mode={mode}>
                             {slider}
                         </SkillSliderContainer>

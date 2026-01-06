@@ -61,10 +61,18 @@ export const characterSkill = (
     skillKey: string,
     path: string
 ) => {
-    const costArray =
-        path === "Remembrance"
-            ? characterSkillCostsRemembrance
-            : characterSkillCosts;
+    let costArray;
+    switch (path) {
+        case "Remembrance":
+            costArray = characterSkillCostsRemembrance;
+            break;
+        case "Elation":
+            costArray = characterSkillCostsElation;
+            break;
+        default:
+            costArray = characterSkillCosts;
+            break;
+    }
     const index = rarity - 4;
     const key = skillKey === "attack" ? "attack" : "skill";
     return {
@@ -285,6 +293,87 @@ export const characterMemospriteCosts = {
     ],
 };
 
+// Costs for Elation characters
+// [4-Star Cost, 5-Star Cost]
+export const characterSkillCostsElation = {
+    attack: {
+        credits: [
+            [0, 2800, 5600, 12800, 28000, 112000],
+            [0, 4000, 8000, 16000, 32000, 120000],
+        ],
+        calyx1: [
+            [0, 1, 0, 0, 0, 0],
+            [0, 2, 0, 0, 0, 0],
+        ],
+        calyx2: [
+            [0, 0, 1, 3, 0, 0],
+            [0, 0, 2, 3, 0, 0],
+        ],
+        calyx3: [
+            [0, 0, 0, 0, 2, 5],
+            [0, 0, 0, 0, 3, 5],
+        ],
+        common1: [
+            [0, 3, 0, 0, 0, 0],
+            [0, 5, 0, 0, 0, 0],
+        ],
+        common2: [
+            [0, 0, 1, 2, 0, 0],
+            [0, 0, 2, 3, 0, 0],
+        ],
+        common3: [
+            [0, 0, 0, 0, 2, 2],
+            [0, 0, 0, 0, 2, 2],
+        ],
+        weekly: [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        ],
+        crown: [
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+        ],
+    },
+    skill: {
+        credits: [
+            [0, 2000, 2800, 5600, 12800, 20000, 28000, 56000, 112000, 192000],
+            [0, 2000, 4000, 8000, 15000, 24000, 32000, 65000, 120000, 250000],
+        ],
+        calyx1: [
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+        ],
+        calyx2: [
+            [0, 0, 0, 1, 3, 5, 0, 0, 0, 0],
+            [0, 0, 0, 2, 4, 6, 0, 0, 0, 0],
+        ],
+        calyx3: [
+            [0, 0, 0, 0, 0, 0, 2, 3, 5, 9],
+            [0, 0, 0, 0, 0, 0, 2, 4, 6, 12],
+        ],
+        common1: [
+            [0, 2, 3, 0, 0, 0, 0, 0, 0, 0],
+            [0, 2, 5, 0, 0, 0, 0, 0, 0, 0],
+        ],
+        common2: [
+            [0, 0, 0, 1, 2, 5, 0, 0, 0, 0],
+            [0, 0, 0, 3, 3, 5, 0, 0, 0, 0],
+        ],
+        common3: [
+            [0, 0, 0, 0, 0, 0, 2, 2, 0, 0],
+            [0, 0, 0, 0, 0, 0, 2, 4, 0, 0],
+        ],
+        weekly: [
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        ],
+        crown: [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        ],
+    },
+};
+
 interface CharacterTraceCost {
     credits: [number, number];
     calyx1: [number, number];
@@ -334,6 +423,28 @@ export const characterTraceMainCostsRemembrance = {
     } as CharacterTraceCost,
     A6: {
         credits: [128000, 160000],
+        calyx3: [6, 8],
+        weekly: [1, 1],
+        crown: [1, 1],
+    } as CharacterTraceCost,
+};
+
+// Costs for Elation characters
+// [4-Star Cost, 5-Star Cost]
+export const characterTraceMainCostsElation = {
+    A2: {
+        credits: [4000, 5000],
+        calyx1: [2, 2],
+        weekly: [1, 1],
+    } as CharacterTraceCost,
+    A4: {
+        credits: [16000, 20000],
+        calyx2: [5, 4],
+        weekly: [1, 1],
+        crown: [1, 1],
+    } as CharacterTraceCost,
+    A6: {
+        credits: [128000, 140000],
         calyx3: [6, 8],
         weekly: [1, 1],
         crown: [1, 1],
@@ -413,6 +524,50 @@ export const characterTraceSmallCostsRemembrance = {
     } as CharacterTraceCost,
     "Lv. 1": {
         credits: [2000, 2500],
+        common1: [2, 2],
+    } as CharacterTraceCost,
+    "Lv. 75": {
+        credits: [128000, 160000],
+        calyx3: [6, 8],
+        common3: [6, 8],
+    } as CharacterTraceCost,
+    "Lv. 80": {
+        credits: [128000, 160000],
+        calyx3: [6, 8],
+        common3: [6, 8],
+    } as CharacterTraceCost,
+};
+
+// Costs for Elation characters
+// [4-Star Cost, 5-Star Cost]
+export const characterTraceSmallCostsElation = {
+    A2: {
+        credits: [3200, 5000],
+        calyx1: [1, 2],
+        common1: [2, 6],
+    } as CharacterTraceCost,
+    A3: {
+        credits: [7200, 10000],
+        calyx2: [2, 4],
+        common2: [2, 2],
+    } as CharacterTraceCost,
+    A4: {
+        credits: [15200, 18000],
+        calyx2: [5, 4],
+        common2: [2, 3],
+    } as CharacterTraceCost,
+    A5: {
+        credits: [36000, 45000],
+        calyx3: [2, 3],
+        common3: [2, 2],
+    } as CharacterTraceCost,
+    A6: {
+        credits: [112000, 120000],
+        calyx3: [5, 5],
+        common3: [3, 2],
+    } as CharacterTraceCost,
+    "Lv. 1": {
+        credits: [2000, 2000],
         common1: [2, 2],
     } as CharacterTraceCost,
     "Lv. 75": {

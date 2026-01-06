@@ -225,6 +225,15 @@ export const bossMaterials = [
         release: { version: "3.5" },
     },
     {
+        id: 110434,
+        category: "boss",
+        name: "Thunder Strum",
+        tag: "Thunder Strum",
+        rarity: 4,
+        source: "",
+        release: { version: "4.0" },
+    },
+    {
         id: 110435,
         category: "boss",
         name: "Charred Bud of Twilight",

@@ -4,8 +4,10 @@ import {
     characterMemosprite,
     characterSkill,
     characterTraceMainCosts,
+    characterTraceMainCostsElation,
     characterTraceMainCostsRemembrance,
     characterTraceSmallCosts,
+    characterTraceSmallCostsElation,
     characterTraceSmallCostsRemembrance,
     weaponLevel,
 } from "@/data/hsr/levelUpCosts";
@@ -218,10 +220,18 @@ export function getCharacterTraceMain({
     weaponType: string;
     materials: HSRMaterials;
 }) {
-    const costs =
-        weaponType === "Remembrance"
-            ? { ...characterTraceMainCostsRemembrance[skillKey] }
-            : { ...characterTraceMainCosts[skillKey] };
+    let costs;
+    switch (weaponType) {
+        case "Remembrance":
+            costs = { ...characterTraceMainCostsRemembrance[skillKey] };
+            break;
+        case "Elation":
+            costs = { ...characterTraceMainCostsElation[skillKey] };
+            break;
+        default:
+            costs = { ...characterTraceMainCosts[skillKey] };
+            break;
+    }
     const index = rarity - 4;
     let { credits, calyx1, calyx2, calyx3, weekly, crown } = costs;
     return {
@@ -258,10 +268,18 @@ export function getCharacterTraceSmall({
     weaponType: string;
     materials: HSRMaterials;
 }) {
-    const costs =
-        weaponType === "Remembrance"
-            ? { ...characterTraceSmallCostsRemembrance[skillKey] }
-            : { ...characterTraceSmallCosts[skillKey] };
+    let costs;
+    switch (weaponType) {
+        case "Remembrance":
+            costs = { ...characterTraceSmallCostsRemembrance[skillKey] };
+            break;
+        case "Elation":
+            costs = { ...characterTraceSmallCostsElation[skillKey] };
+            break;
+        default:
+            costs = { ...characterTraceSmallCosts[skillKey] };
+            break;
+    }
     const index = rarity - 4;
     let { credits, calyx1, calyx2, calyx3, common1, common2, common3 } = costs;
     return {

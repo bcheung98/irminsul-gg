@@ -1,6 +1,6 @@
 export const commonMaterials = [
     {
-        id: 99999999990,
+        id: 900000000,
         category: "common",
         name: "Flamespawn Core",
         tag: "Core",
@@ -31,7 +31,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999999,
+        id: 900000001,
         category: "common",
         name: "Reaver Antimatter",
         tag: "Antimatter",
@@ -62,7 +62,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999991,
+        id: 900000002,
         category: "common",
         name: "Silvermane Insignia",
         tag: "Silvermane",
@@ -93,7 +93,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999992,
+        id: 900000003,
         category: "common",
         name: "Automaton Engine",
         tag: "Engine",
@@ -124,7 +124,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999993,
+        id: 900000004,
         category: "common",
         name: "Mara-Struck Flower",
         tag: "Immortal",
@@ -155,7 +155,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999994,
+        id: 900000005,
         category: "common",
         name: "Ingenia Artifex",
         tag: "Artifex",
@@ -186,7 +186,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: 99999999995,
+        id: 900000006,
         category: "common",
         name: "Dreamjolt Troupe Core",
         tag: "Dreamjolt",
@@ -217,7 +217,7 @@ export const commonMaterials = [
         release: { version: "2.0" },
     },
     {
-        id: 99999999996,
+        id: 900000007,
         category: "common",
         name: "Memory Zone Meme Fragment",
         tag: "Memoria",
@@ -248,7 +248,7 @@ export const commonMaterials = [
         release: { version: "2.0" },
     },
     {
-        id: 99999999997,
+        id: 900000008,
         category: "common",
         name: "Titankin Fragment",
         tag: "Titankin",
@@ -279,7 +279,7 @@ export const commonMaterials = [
         release: { version: "3.0" },
     },
     {
-        id: 99999999998,
+        id: 900000009,
         category: "common",
         name: "Black Tide Fragment",
         tag: "Black Tide",
@@ -308,5 +308,36 @@ export const commonMaterials = [
         tag: "Black Tide3",
         rarity: 4,
         release: { version: "3.1" },
+    },
+    {
+        id: 900000010,
+        category: "common",
+        name: "Imagenae Fragment",
+        tag: "Imagenae",
+        release: { version: "4.0" },
+    },
+    {
+        id: 116001,
+        category: "common",
+        name: "Whimsy Wax",
+        tag: "Imagenae1",
+        rarity: 2,
+        release: { version: "4.0" },
+    },
+    {
+        id: 116002,
+        category: "common",
+        name: "Dreamweave Steel",
+        tag: "Imagenae2",
+        rarity: 3,
+        release: { version: "4.0" },
+    },
+    {
+        id: 116003,
+        category: "common",
+        name: "Lucid Awl",
+        tag: "Imagenae3",
+        rarity: 4,
+        release: { version: "4.0" },
     },
 ];

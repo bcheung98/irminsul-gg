@@ -17,6 +17,7 @@ export const weapons = [
     "Preservation",
     "Abundance",
     "Remembrance",
+    "Elation",
 ] as const;
 
 export const rarities = [5, 4, 3, 2, 1] as const;
