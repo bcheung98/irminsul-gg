@@ -89,7 +89,8 @@ export default class DateObject {
      * Splits a Date object into an array.
      */
     private createDateArray() {
-        return this.createDateObject().toLocaleString().split(",");
+        // Must set locale to "en-US" to ensure proper formatting
+        return this.createDateObject().toLocaleString("en-US").split(",");
     }
 
     /**
