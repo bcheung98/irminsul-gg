@@ -885,7 +885,7 @@ export const eliteMaterials = [
     {
         id: 112139,
         category: "elite",
-        name: "Beak of the Deep Shadow",
+        name: "Hooked Beak of the Deep Shadow",
         tag: "Shadow3",
         rarity: 4,
         release: { version: "Luna IV" },

@@ -326,8 +326,8 @@ export const weeklyBossMaterials = [
     {
         id: 113081,
         category: "weekly",
-        name: "Doctor1",
-        tag: "Doctor1",
+        name: "Mask of the Virtuous Doctor",
+        tag: "Mask of the Virtuous Doctor",
         rarity: 5,
         source: "The Doctor",
         release: { version: "Luna IV" },
@@ -335,8 +335,8 @@ export const weeklyBossMaterials = [
     {
         id: 113082,
         category: "weekly",
-        name: "Doctor2",
-        tag: "Doctor2",
+        name: "Madman's Restraint",
+        tag: "Madman's Restraint",
         rarity: 5,
         source: "The Doctor",
         release: { version: "Luna IV" },
@@ -344,8 +344,8 @@ export const weeklyBossMaterials = [
     {
         id: 113083,
         category: "weekly",
-        name: "Doctor3",
-        tag: "Doctor3",
+        name: "Elixir of the Heretic",
+        tag: "Elixir of the Heretic",
         rarity: 5,
         source: "The Doctor",
         release: { version: "Luna IV" },
