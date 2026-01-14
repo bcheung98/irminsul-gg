@@ -386,4 +386,13 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "Luna IV" },
     },
+    {
+        id: 113085,
+        category: "boss",
+        tag: "113085",
+        name: "",
+        source: "?",
+        rarity: 4,
+        release: { version: "Luna V" },
+    },
 ];
