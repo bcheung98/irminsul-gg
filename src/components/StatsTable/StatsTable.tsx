@@ -59,7 +59,7 @@ export default function StatsTable({
                 }
             }
         });
-    }, [sliderValue]);
+    }, [data, sliderValue]);
 
     const tableHeadData = headColumns || data.map((row) => row[0]);
     const tableRows =
