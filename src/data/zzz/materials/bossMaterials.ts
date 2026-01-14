@@ -116,4 +116,13 @@ export const bossMaterials = [
         source: "Miasma Walker - Scorpse",
         release: { version: "2.5" },
     },
+    {
+        id: 110514,
+        category: "boss",
+        name: "",
+        tag: "",
+        rarity: 4,
+        source: "?",
+        release: { version: "2.6" },
+    },
 ];
