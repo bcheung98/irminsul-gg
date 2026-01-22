@@ -29,7 +29,7 @@ export interface FilterState {
     "uma/characters": UmaCharacterFilterState;
     "uma/supports": UmaSupportFilterState;
     "uma/skills": UmaSkillFilterState;
-    "endfield/operators": EndfieldCharacterFilterState;
+    "endfield/characters": EndfieldCharacterFilterState;
     "endfield/weapons": EndfieldWeaponFilterState;
 }
 
@@ -182,7 +182,7 @@ export const initialState: FilterState = {
     "uma/characters": umaCharacterFilters,
     "uma/supports": umaSupportFilters,
     "uma/skills": umaSkillFilters,
-    "endfield/operators": endfieldCharacterFilters,
+    "endfield/characters": endfieldCharacterFilters,
     "endfield/weapons": endfieldWeaponFilters,
 };
 

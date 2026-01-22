@@ -31,7 +31,7 @@ export interface EndfieldCharacterFilterState extends Filters {
 
 export default function CharacterFilters() {
     const game = useGameTag();
-    const key = "endfield/operators";
+    const key = "endfield/characters";
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
