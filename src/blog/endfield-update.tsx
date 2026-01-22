@@ -12,7 +12,7 @@ import Divider from "@mui/material/Divider";
 import { blogList } from "@/data/blog-list";
 
 export default function Post() {
-    const slug = "uma-update";
+    const slug = "endfield-update";
     const post = blogList.find((post) => slug === post.slug);
 
     return (
@@ -20,17 +20,18 @@ export default function Post() {
             <Stack spacing={3} divider={<Divider />}>
                 <Stack spacing={1}>
                     <Description>
-                        So I got addicted to Umamusume, and I decided that it
-                        would only be appropiate to make a site for it on
-                        Irminsul. After a few weeks of working, the first
-                        release of the Umamusume site is here!
+                        Endmins! The Arknights: Endfield website is now live!
                     </Description>
                     <Description>
-                        The site is still a work-in-progress, and I have a
-                        couple features that I'm planning to add later on. If
-                        you want to know more about the roadmap for the site or
-                        have any suggestions on how to improve it, please join
-                        the Discord!
+                        The site is still pretty barebones for now, and
+                        currently only features pages for the Operators and
+                        Weapons. I will continue working on adding more familiar
+                        features such as the Banner Archive and Ascension
+                        Planner, but these may come out later than expected
+                        since I will be busy with life stuff soon.
+                    </Description>
+                    <Description>
+                        Please let me know in the Discord if anything is broken!
                     </Description>
                 </Stack>
             </Stack>

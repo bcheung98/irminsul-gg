@@ -33,10 +33,12 @@ export default function CharacterGallery(props: {
     characters: EndfieldCharacter[];
 }) {
     const game = "endfield";
-    const tag = "endfield/operators";
+    const tag = "endfield/characters";
 
     const filters = useFilterStore(useShallow((state) => state[tag]));
-    const sortParams = useGalleryStore(useShallow((state) => state[tag]));
+    const sortParams = useGalleryStore(
+        useShallow((state) => state["endfield/operators"]),
+    );
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
@@ -102,7 +104,7 @@ export default function CharacterGallery(props: {
 
     const params = {
         view: sortParams.view,
-        handleView: useView(tag),
+        handleView: useView("endfield/operators"),
         searchValue,
         handleInputChange: (event: BaseSyntheticEvent) => {
             setSearchValue(event.target.value);

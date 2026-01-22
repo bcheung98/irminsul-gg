@@ -1,5 +1,12 @@
 export const blogList = [
     {
+        slug: "endfield-update",
+        title: "Arknights: Endfield is here!",
+        description: "Check out the new Endfield site for Irminsul.GG.",
+        date: "2026-01-21 10:00:00",
+        image: "endfield/_common/wallpapers/Endfield_1.0",
+    },
+    {
         slug: "irminsul-gg-v2-release-notes",
         title: "Irminsul.GG v2.0 Release Notes",
         description: "Check out what's new in Irminsul.GG v2.0.",
