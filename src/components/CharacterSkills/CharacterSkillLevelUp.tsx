@@ -61,6 +61,9 @@ export default function CharacterSkillLevelUp({
             costKey = "characterCoreSkill";
         }
     }
+    if (game === "endfield") {
+        levelKey = skillKey;
+    }
 
     const Root = (
         <Stack spacing={2}>

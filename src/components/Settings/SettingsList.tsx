@@ -144,12 +144,12 @@ export default function SettingsList() {
                 />
             ),
         };
-        if (["genshin", "hsr", "wuwa", "zzz"].includes(gameTag)) {
+        if (["genshin", "hsr", "wuwa", "zzz", "endfield"].includes(gameTag)) {
             group1.push(statDisplaySettings);
         }
         group1.push(serverSettings);
 
-        if (gameTag !== "uma") {
+        if (!["uma", "endfield"].includes(gameTag)) {
             settings.push(group2);
         }
     }

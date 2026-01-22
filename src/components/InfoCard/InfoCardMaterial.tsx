@@ -72,6 +72,7 @@ export default function InfoCardMaterial({
             wuwa: "4",
             zzz: "3",
             uma: "",
+            endfield: "",
         };
         let materialTag = props.material;
         if (["talent", "calyx", "forgery", "common"].includes(props.category)) {
@@ -163,7 +164,7 @@ export default function InfoCardMaterial({
                                         material={material}
                                         category={key}
                                     />
-                                )
+                                ),
                             )}
                         </Grid>
                     </Box>
@@ -175,8 +176,8 @@ export default function InfoCardMaterial({
                                         ? "body3"
                                         : "body2"
                                     : matches
-                                    ? "body2"
-                                    : "body1"
+                                      ? "body2"
+                                      : "body1"
                             }
                             sx={styles.text()}
                         >

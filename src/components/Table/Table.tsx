@@ -99,6 +99,7 @@ export function Cell({
                 title={title}
                 titleProps={{
                     variant: label.titleProps?.variant || "body2",
+                    color: label.titleProps?.color || theme.text.primary,
                 }}
                 icon={icon}
                 iconProps={{

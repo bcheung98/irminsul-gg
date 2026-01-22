@@ -9,6 +9,7 @@ import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 import InfoAvatarSupport, {
     InfoAvatarSupportProps,
 } from "../_uma/InfoAvatarSupport";
+import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 export function GenshinCharacterInfoAvatar({
     character,
@@ -234,6 +235,47 @@ export function UmaSupportInfoAvatar({
             type={support.specialty}
             href={support.url}
             url={`${support.id}_icon`}
+            {...props}
+        />
+    );
+}
+
+export function EndfieldCharacterInfoAvatar({
+    character,
+    props,
+}: {
+    character: EndfieldCharacter;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="endfield/operators"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            href={character.url}
+            background="transparent"
+            {...props}
+        />
+    );
+}
+
+export function EndfieldWeaponInfoAvatar({
+    weapon,
+    props,
+}: {
+    weapon: EndfieldWeapon;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="endfield/weapons"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            href={weapon.url}
             {...props}
         />
     );

@@ -7,6 +7,10 @@ import { getWuWaMaterial, getWuWaMaterialCategory } from "./wuwa/getMaterials";
 import { GameData } from "@/types";
 import { Material } from "@/types/materials";
 import { getZZZMaterial, getZZZMaterialCategory } from "./zzz/getMaterials";
+import {
+    getEndfieldMaterial,
+    getEndfieldMaterialCategory,
+} from "./endfield/getMaterials";
 
 export function useMaterials(
     hideUnreleasedContent = false
@@ -16,9 +20,10 @@ export function useMaterials(
         hsr: getHSRMaterial(hideUnreleasedContent),
         wuwa: getWuWaMaterial(hideUnreleasedContent),
         zzz: getZZZMaterial(hideUnreleasedContent),
-        uma: function (material: string | number): Material {
+        uma: function (): Material {
             throw new Error("Function not implemented.");
         },
+        endfield: getEndfieldMaterial(hideUnreleasedContent),
     };
 }
 
@@ -30,8 +35,9 @@ export function useMaterialsCategory(
         hsr: getHSRMaterialCategory(hideUnreleasedContent),
         wuwa: getWuWaMaterialCategory(hideUnreleasedContent),
         zzz: getZZZMaterialCategory(hideUnreleasedContent),
-        uma: function (category: string): Material[] {
+        uma: function (): Material[] {
             throw new Error("Function not implemented.");
         },
+        endfield: getEndfieldMaterialCategory(hideUnreleasedContent),
     };
 }

@@ -87,6 +87,9 @@ export default function CharacterSplash({
             case "uma":
                 url = `${game}/characters/${id}_card`;
                 break;
+            case "endfield":
+                url = `${game}/operators/${id}_splash`;
+                break;
         }
         return `${url}${tabValue !== 0 ? tabValue : ""}`;
     }
@@ -103,6 +106,10 @@ export default function CharacterSplash({
                 }`;
             case "zzz":
                 return `${game}/agents/${id}${index !== 0 ? `_${index}` : ""}`;
+            case "endfield":
+                return `${game}/operators/${id}${
+                    index !== 0 ? `${index}` : ""
+                }`;
             case "hsr":
             case "uma":
             default:

@@ -23,7 +23,7 @@ export default function FilterSort() {
 
     const { setGalleryState } = useGalleryStore();
     const { sortBy, sortDirection, view } = useGalleryStore(
-        useShallow((state) => state[key])
+        useShallow((state) => state[key]),
     );
 
     const handleSelectChange = (event: SelectChangeEvent) => {
@@ -190,5 +190,19 @@ const sortOptions = {
         { value: "skillName", label: "Name" },
         { value: "skillRarity", label: "Rarity" },
         { value: "skillType", label: "Type" },
+    ],
+    "endfield/operators": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "element", label: "Element" },
+        { value: "specialty", label: "Class" },
+        { value: "weaponType", label: "Weapon" },
+    ],
+    "endfield/weapons": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "weaponType", label: "Weapon" },
     ],
 };

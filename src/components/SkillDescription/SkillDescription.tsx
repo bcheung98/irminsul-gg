@@ -53,6 +53,16 @@ export default function SkillDescription({
         return className === targetClassName ? newClassName : className;
     }
 
+    function iconHeight() {
+        let height = matches
+            ? `calc(${theme.typography.subtitle1.fontSize} + 0.5rem)`
+            : `calc(${theme.typography.subtitle1.fontSize} + 0.1rem)`;
+        if (game === "endfield") {
+            height = `calc(${height} - 0.5rem)`;
+        }
+        return height;
+    }
+
     const options: HTMLReactParserOptions = {
         replace: (domNode) => {
             if (domNode instanceof DOMElement && domNode.attribs.class) {
@@ -65,7 +75,13 @@ export default function SkillDescription({
                             data-index={domNode.attribs["data-index"]}
                             style={{
                                 color:
-                                    textColor(game, tag) || theme.text.primary,
+                                    textColor(
+                                        game,
+                                        domNode.attribs["data-color"],
+                                    ) ||
+                                    textColor(game, tag.split(" ")[1]) ||
+                                    textColor(game, tag) ||
+                                    theme.text.primary,
                                 fontWeight:
                                     tag === "highlight"
                                         ? theme.font.weight.highlight
@@ -99,19 +115,11 @@ export default function SkillDescription({
                     const skill = className.split(" ")[1];
                     return (
                         <Image
-                            src={
-                                game === "genshin"
-                                    ? `genshin/tcg/icons/${getGenshinIcon(
-                                          skill
-                                      )}`
-                                    : iconSkillKeys[skill]
-                            }
+                            src={getIcon(game, skill)}
                             style={{
                                 verticalAlign: "middle",
                                 width: "auto",
-                                height: matches
-                                    ? `calc(${theme.typography.subtitle1.fontSize} + 0.5rem)`
-                                    : `calc(${theme.typography.subtitle1.fontSize} + 0.1rem)`,
+                                height: iconHeight(),
                                 marginBottom: "1.5px",
                                 userSelect: "auto",
                                 pointerEvents: "none",
@@ -130,26 +138,26 @@ export default function SkillDescription({
             .replaceAll(`Icon_PyroDice `, `<span class="icon pyroDice"></span>`)
             .replaceAll(
                 `Icon_HydroDice `,
-                `<span class="icon hydroDice"></span>`
+                `<span class="icon hydroDice"></span>`,
             )
             .replaceAll(
                 `Icon_ElectroDice `,
-                `<span class="icon electroDice"></span>`
+                `<span class="icon electroDice"></span>`,
             )
             .replaceAll(`Icon_CryoDice `, `<span class="icon cryoDice"></span>`)
             .replaceAll(
                 `Icon_AnemoDice `,
-                `<span class="icon anemoDice"></span>`
+                `<span class="icon anemoDice"></span>`,
             )
             .replaceAll(`Icon_GeoDice `, `<span class="icon geoDice"></span>`)
             .replaceAll(
                 `Icon_DendroDice `,
-                `<span class="icon dendroDice"></span>`
+                `<span class="icon dendroDice"></span>`,
             )
             .replaceAll(`Icon_OmniDice `, `<span class="icon omniDice"></span>`)
             .replaceAll(
                 `Icon_UnalignedDice `,
-                `<span class="icon unalignedDice"></span>`
+                `<span class="icon unalignedDice"></span>`,
             )
             .replaceAll(`Icon_Energy `, `<span class="icon energy"></span>`)
 
@@ -170,20 +178,20 @@ export default function SkillDescription({
 
             .replaceAll(
                 `Icon_ConsecratedBeast `,
-                `<span class="icon consecrated_beast"></span>`
+                `<span class="icon consecrated_beast"></span>`,
             )
             .replaceAll(`Icon_Eremite `, `<span class="icon eremite"></span>`)
             .replaceAll(`Icon_Fatui `, `<span class="icon fatui"></span>`)
             .replaceAll(`Icon_Fontaine `, `<span class="icon fontaine"></span>`)
             .replaceAll(
                 `Icon_Hilichurl `,
-                `<span class="icon hilichurl"></span>`
+                `<span class="icon hilichurl"></span>`,
             )
             .replaceAll(`Icon_Inazuma `, `<span class="icon inazuma"></span>`)
             .replaceAll(`Icon_Liyue `, `<span class="icon liyue"></span>`)
             .replaceAll(
                 `Icon_Mondstadt `,
-                `<span class="icon mondstadt"></span>`
+                `<span class="icon mondstadt"></span>`,
             )
             .replaceAll(`Icon_Monster `, `<span class="icon monster"></span>`)
             .replaceAll(`Icon_Natlan `, `<span class="icon natlan"></span>`)
@@ -197,24 +205,24 @@ export default function SkillDescription({
 
             .replaceAll(
                 `Icon_ArcaneLegend `,
-                `<span class="icon arcane_legend"></span>`
+                `<span class="icon arcane_legend"></span>`,
             )
             .replaceAll(`Icon_Artifact `, `<span class="icon artifact"></span>`)
             .replaceAll(
                 `Icon_Companion `,
-                `<span class="icon companion"></span>`
+                `<span class="icon companion"></span>`,
             )
             .replaceAll(`Icon_Food `, `<span class="icon food"></span>`)
             .replaceAll(
                 `Icon_ElementalResonance `,
-                `<span class="icon elemental_resonance"></span>`
+                `<span class="icon elemental_resonance"></span>`,
             )
             .replaceAll(`Icon_Item `, `<span class="icon item"></span>`)
             .replaceAll(`Icon_Location `, `<span class="icon location"></span>`)
             .replaceAll(`Icon_Talent `, `<span class="icon talent"></span>`)
             .replaceAll(
                 `Icon_Technique `,
-                `<span class="icon technique"></span>`
+                `<span class="icon technique"></span>`,
             )
             .replaceAll(`Icon_Weapon `, `<span class="icon weapon"></span>`);
     }
@@ -237,13 +245,156 @@ export default function SkillDescription({
                     attributes?.weaponType === "Rupture"
                         ? "special2"
                         : "special"
-                }"></span>`
+                }"></span>`,
             )
             .replaceAll(`Icon_Ultimate`, `<span class="icon ultimate"></span>`)
             .replaceAll(`Icon_Core`, `<span class="icon core"></span>`);
     }
+    if (game === "endfield") {
+        text = description
+            .replaceAll(`Icon_Crush`, `<span class="icon crush"></span>`)
+            .replaceAll(
+                `Icon_Vulnerable`,
+                `<span class="icon vulnerable"></span>`,
+            )
+            .replaceAll(`Icon_Lift`, `<span class="icon lift"></span>`)
+            .replaceAll(
+                `Icon_KnockDown`,
+                `<span class="icon knockDown"></span>`,
+            )
+            .replaceAll(`Icon_Breach`, `<span class="icon breach"></span>`)
+
+            .replaceAll(
+                `Icon_ElectricInfliction`,
+                `<span class="icon electricInfliction"></span>`,
+            )
+            .replaceAll(
+                `Icon_Electrification`,
+                `<span class="icon electrification"></span>`,
+            )
+            .replaceAll(
+                `Icon_HeatInfliction`,
+                `<span class="icon heatInfliction"></span>`,
+            )
+            .replaceAll(
+                `Icon_Combustion`,
+                `<span class="icon combustion"></span>`,
+            )
+            .replaceAll(
+                `Icon_CryoInfliction`,
+                `<span class="icon cryoInfliction"></span>`,
+            )
+            .replaceAll(
+                `Icon_Solidification`,
+                `<span class="icon solidification"></span>`,
+            )
+            .replaceAll(`Icon_Shatter`, `<span class="icon shatter"></span>`)
+            .replaceAll(
+                `Icon_NatureInfliction`,
+                `<span class="icon natureInfliction"></span>`,
+            )
+            .replaceAll(
+                `Icon_Corrosion`,
+                `<span class="icon corrosion"></span>`,
+            )
+            .replaceAll(
+                `Icon_Protection`,
+                `<span class="icon protection"></span>`,
+            )
+            .replaceAll(
+                `Icon_ElectricAmp`,
+                `<span class="icon electricAmp"></span>`,
+            )
+            .replaceAll(`Icon_HeatAmp`, `<span class="icon heatAmp"></span>`)
+            .replaceAll(`Icon_CryoAmp`, `<span class="icon cryoAmp"></span>`)
+            .replaceAll(
+                `Icon_NatureAmp`,
+                `<span class="icon natureAmp"></span>`,
+            )
+            .replaceAll(`Icon_Amp`, `<span class="icon amp"></span>`)
+            .replaceAll(`Icon_ArtsAmp`, `<span class="icon artsAmp"></span>`)
+            .replaceAll(
+                `Icon_PhysicalSusceptibility`,
+                `<span class="icon physicalSusceptibility"></span>`,
+            )
+            .replaceAll(
+                `Icon_ElectricSusceptibility`,
+                `<span class="icon electricSusceptibility"></span>`,
+            )
+            .replaceAll(
+                `Icon_HeatSusceptibility`,
+                `<span class="icon heatSusceptibility"></span>`,
+            )
+            .replaceAll(
+                `Icon_CryoSusceptibility`,
+                `<span class="icon cryoSusceptibility"></span>`,
+            )
+            .replaceAll(
+                `Icon_NatureSusceptibility`,
+                `<span class="icon natureSusceptibility"></span>`,
+            )
+            .replaceAll(
+                `Icon_ArtsSusceptibility`,
+                `<span class="icon artsSusceptibility"></span>`,
+            )
+            .replaceAll(`Icon_Slow`, `<span class="icon slow"></span>`)
+            .replaceAll(`Icon_Weaken`, `<span class="icon weaken"></span>`)
+            .replaceAll(`Icon_Link`, `<span class="icon link"></span>`);
+    }
 
     return parse(text, options);
+}
+
+function getIcon(game: Game | undefined, skill: string) {
+    switch (game) {
+        case "genshin":
+            return `genshin/tcg/icons/${getGenshinIcon(skill)}`;
+        case "endfield":
+            return `endfield/icons/tags/${getEndfieldIcon(skill)}`;
+        default:
+            return iconSkillKeys[skill];
+    }
+}
+
+function getEndfieldIcon(icon: string) {
+    switch (icon) {
+        case "knockDown":
+            return "Knock_Down";
+        case "electricInfliction":
+            return "Electric_Infliction";
+        case "heatInfliction":
+            return "Heat_Infliction";
+        case "cryoInfliction":
+            return "Cryo_Infliction";
+        case "natureInfliction":
+            return "Nature_Infliction";
+        case "electricAmp":
+            return "Electric_Amp";
+        case "heatAmp":
+            return "Heat_Amp";
+        case "cryoAmp":
+            return "Cryo_Amp";
+        case "natureAmp":
+            return "Nature_Amp";
+        case "artsAmp":
+            return "Arts_Amp";
+        case "physicalSusceptibility":
+            return "Physical_Susceptibility";
+        case "electricSusceptibility":
+            return "Electric_Susceptibility";
+        case "heatSusceptibility":
+            return "Heat_Susceptibility";
+        case "cryoSusceptibility":
+            return "Cryo_Susceptibility";
+        case "natureSusceptibility":
+            return "Nature_Susceptibility";
+        case "artsSusceptibility":
+            return "Arts_Susceptibility";
+        case "protection":
+            return "Protect";
+        default:
+            return toTitleCase(icon);
+    }
 }
 
 function getGenshinIcon(icon: string) {

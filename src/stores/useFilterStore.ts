@@ -12,11 +12,13 @@ import { UmaCharacterFilterState } from "@/components/_uma/Filters/CharacterFilt
 import { UmaSupportFilterState } from "@/components/_uma/Filters/SupportFilters";
 import { UmaSkillFilterState } from "@/components/_uma/Filters/SkillFilters";
 import { GenshinTCGFilterState } from "@/components/_genshin/Filters/TCGFilters";
+import { EndfieldCharacterFilterState } from "@/components/_endfield/Filters/CharacterFilters";
+import { EndfieldWeaponFilterState } from "@/components/_endfield/Filters/WeaponFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
     "genshin/weapons": GenshinWeaponFilterState;
-    "genshin/tcg": {};
+    "genshin/tcg": GenshinTCGFilterState;
     "hsr/characters": HSRCharacterFilterState;
     "hsr/weapons": HSRWeaponFilterState;
     "wuwa/characters": WuWaCharacterFilterState;
@@ -27,17 +29,19 @@ export interface FilterState {
     "uma/characters": UmaCharacterFilterState;
     "uma/supports": UmaSupportFilterState;
     "uma/skills": UmaSkillFilterState;
+    "endfield/operators": EndfieldCharacterFilterState;
+    "endfield/weapons": EndfieldWeaponFilterState;
 }
 
 export type SetFilterState = (
     key: keyof FilterState,
     tag: string,
-    filters: (string | number)[]
+    filters: (string | number)[],
 ) => void;
 
 export type ClearFilterState = (
     key: keyof FilterState,
-    initialState: Record<string, (string | number)[]>
+    initialState: Record<string, (string | number)[]>,
 ) => void;
 
 export interface FilterActions {
@@ -152,6 +156,18 @@ export const umaSkillFilters: UmaSkillFilterState = {
     skillRarity: [],
 };
 
+export const endfieldCharacterFilters: EndfieldCharacterFilterState = {
+    element: [],
+    specialty: [],
+    weaponType: [],
+    rarity: [],
+};
+
+export const endfieldWeaponFilters: EndfieldWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
@@ -166,6 +182,8 @@ export const initialState: FilterState = {
     "uma/characters": umaCharacterFilters,
     "uma/supports": umaSupportFilters,
     "uma/skills": umaSkillFilters,
+    "endfield/operators": endfieldCharacterFilters,
+    "endfield/weapons": endfieldWeaponFilters,
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

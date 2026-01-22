@@ -1,4 +1,6 @@
 import { AttributeData, Game } from "@/types";
+import { EndfieldCharacterStats } from "@/types/endfield/character";
+import { EndfieldWeaponStats } from "@/types/endfield/weapon";
 import { GenshinCharacterStats } from "@/types/genshin/character";
 import { GenshinWeaponStats } from "@/types/genshin/weapon";
 import { HSRCharacterStats } from "@/types/hsr/character";
@@ -14,12 +16,14 @@ export type TCharacterStats =
     | HSRCharacterStats
     | WuWaCharacterStats
     | ZZZCharacterStats
-    | ZZZBangbooStats;
+    | ZZZBangbooStats
+    | EndfieldCharacterStats;
 export type TWeaponStats =
     | GenshinWeaponStats
     | HSRWeaponStats
     | WuWaWeaponStats
-    | ZZZWeaponStats;
+    | ZZZWeaponStats
+    | EndfieldWeaponStats;
 
 export interface StatsDisplayProps {
     game?: Game;

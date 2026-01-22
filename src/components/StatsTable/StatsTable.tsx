@@ -5,12 +5,13 @@ import LevelSlider from "@/components/LevelSlider";
 import * as Table from "@/components/Table";
 
 // MUI imports
-import { SxProps } from "@mui/material/styles";
+import { SxProps, useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 
 // Type imports
 import { Orientation, SkillDisplay } from "@/types";
+import { EndfieldCharacterStatAttributes } from "@/types/endfield/character";
 
 interface StatsTableProps {
     mode?: SkillDisplay;
@@ -29,6 +30,7 @@ interface StatsTableProps {
     };
     textID?: string;
     hideSlider?: boolean;
+    endfieldAttr?: EndfieldCharacterStatAttributes;
 }
 
 export default function StatsTable({
@@ -43,7 +45,10 @@ export default function StatsTable({
     tableProps,
     textID = "text-value",
     hideSlider = false,
+    endfieldAttr,
 }: StatsTableProps) {
+    const theme = useTheme();
+
     useEffect(() => {
         const targets = document.getElementsByClassName(textID);
         data.forEach((subScaling: (string | number)[], index: number) => {
@@ -67,6 +72,26 @@ export default function StatsTable({
             ? data
             : levels.map((_, level) => data.map((row) => row[level + 1]));
     const sliderRows = data.filter((row) => row[0] !== "Level");
+
+    // Text color for Endfield stats
+    function getTextColor(value: string | number) {
+        if (endfieldAttr) {
+            const attr = `${value}`.split("|")[0];
+            if (
+                endfieldAttr[0] ===
+                endfieldAttributes[attr as keyof typeof endfieldAttributes]
+            ) {
+                return theme.text.header;
+            }
+            if (
+                endfieldAttr[1] ===
+                endfieldAttributes[attr as keyof typeof endfieldAttributes]
+            ) {
+                return theme.text.genshin.anemo;
+            }
+        }
+        return undefined;
+    }
 
     return (
         <Stack spacing={2}>
@@ -94,12 +119,22 @@ export default function StatsTable({
                                   <Table.Row key={i}>
                                       <Table.Cell
                                           align="left"
-                                          label={{ title: row[0] }}
+                                          label={{
+                                              title: row[0],
+                                              titleProps: {
+                                                  color: getTextColor(row[0]),
+                                              },
+                                          }}
                                           padding="8px 16px"
                                       />
                                       <Table.Cell
                                           align="right"
-                                          label={{ title: row[sliderValue] }}
+                                          label={{
+                                              title: row[sliderValue],
+                                              titleProps: {
+                                                  color: getTextColor(row[0]),
+                                              },
+                                          }}
                                           padding="8px 16px"
                                       />
                                   </Table.Row>
@@ -120,3 +155,10 @@ export default function StatsTable({
         </Stack>
     );
 }
+
+const endfieldAttributes = {
+    Strength: "str",
+    Agility: "agi",
+    Intellect: "int",
+    Will: "wil",
+};

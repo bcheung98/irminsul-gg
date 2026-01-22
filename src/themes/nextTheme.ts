@@ -208,6 +208,19 @@ export const nextThemeData = {
             star: "#ffee9d",
             value: "#3bb1ff",
         },
+        endfield: {
+            highlight: "#33c2ff",
+            header: "#f29e38",
+            value: "#8da2df",
+            refinement: "#8da2df",
+            physical: "#dfbb92",
+            cryo: "#00c0cb",
+            electric: "#fdc038",
+            heat: "#ff853f",
+            nature: "#9cd54a",
+            aether: "#c59eff",
+            heal: "#abd040",
+        },
     },
     appbar: {
         backgroundColor: {

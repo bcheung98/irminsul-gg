@@ -1,0 +1,42 @@
+export const plantMaterials = [
+    {
+        id: "item_plant_crylplant_1_1",
+        category: "plant",
+        name: "Kalkodendra",
+        tag: "Dendra1",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_crylplant_1_2",
+        category: "plant",
+        name: "Chrysodendra",
+        tag: "Dendra2",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_crylplant_1_3",
+        category: "plant",
+        name: "Vitrodendra",
+        tag: "Dendra3",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_crylplant_2_1",
+        category: "plant",
+        name: "Blighted Jadeleaf",
+        tag: "Blighted Jadeleaf",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_crylplant_2_2",
+        category: "plant",
+        name: "False Aggela",
+        tag: "False Aggela",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+];

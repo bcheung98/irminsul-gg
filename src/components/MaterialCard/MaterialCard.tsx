@@ -49,7 +49,7 @@ export default function MaterialCard({
         rarity: rarity = 3,
         source,
         imgURL,
-    } = materials(material);
+    } = materials(Boolean(Number(material)) ? Number(material) : material);
 
     const styles = materialCardStyles({ rarity, size: imgSize });
 

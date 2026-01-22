@@ -11,6 +11,7 @@ import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
+import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -454,6 +455,83 @@ export function UmaSupportInfoCard({
             specialty={support.specialty}
             rarity={support.rarity}
             href={support.url}
+            {...props}
+        />
+    );
+}
+
+export function EndfieldCharacterInfoCard({
+    character,
+    props,
+}: {
+    character: EndfieldCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="endfield/operators"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                specialty: character.specialty,
+            }}
+            badgeRight={{
+                weaponType: character.weaponType,
+            }}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function EndfieldCharacterInfoCardMaterial({
+    character,
+    props,
+}: {
+    character: EndfieldCharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardMaterial
+            tag="endfield/operators"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                specialty: character.specialty,
+                weaponType: character.weaponType,
+            }}
+            materials={character.materials}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function EndfieldWeaponInfoCard({
+    weapon,
+    props,
+}: {
+    weapon: EndfieldWeapon;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="endfield/weapons"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            badgeLeft={{
+                weaponType: weapon.weaponType,
+            }}
+            url=""
+            href={weapon.url}
             {...props}
         />
     );

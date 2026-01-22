@@ -42,6 +42,12 @@ export const skillKeys: GameData<Record<string, string>> = {
         core: "Core Skill",
     },
     uma: {},
+    endfield: {
+        attack: "Basic Attack",
+        skill: "Battle Skill",
+        combo: "Combo Skill",
+        ultimate: "Ultimate",
+    },
 };
 
 export const skillIconURLs: GameData<Record<string, string>> = {
@@ -91,4 +97,11 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         C: "zzz/skills/Bangboo_C",
     },
     uma: {},
+    endfield: {
+        attack: "endfield/skills/Attack_{weaponType}",
+        skill: "endfield/skills/{id}_skill",
+        combo: "endfield/skills/{id}_combo",
+        ultimate: "endfield/skills/{id}_ultimate",
+        passive: "endfield/skills/{id}_talent",
+    },
 };

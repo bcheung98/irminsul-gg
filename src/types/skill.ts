@@ -7,6 +7,7 @@ export interface Skill {
     scaling?: string[][];
     version?: SkillVersion;
     index?: number;
+    levels?: number[];
 }
 
 export interface CharacterSkillsList {

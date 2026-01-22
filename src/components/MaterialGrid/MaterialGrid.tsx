@@ -7,14 +7,13 @@ import MaterialCard from "@/components/MaterialCard";
 import Grid, { GridProps } from "@mui/material/Grid";
 
 // Helper imports
-import { objectKeys } from "@/utils";
 import { useGameTag } from "@/context";
 
 // Type imports
 import { CostValue } from "@/types/costs";
 
 interface MaterialGridProps {
-    costs: Record<string, CostValue>;
+    costs: Record<string | number, CostValue>;
     size?: number;
     spacing?: GridProps["spacing"];
 }
@@ -29,15 +28,15 @@ export default function MaterialGrid({
     const pathname = usePathname();
 
     const materialArray: React.ReactNode[] = [];
-    sortItems(objectKeys(costs), pathname).forEach((key) =>
+    sortItems(Object.keys(costs), pathname).forEach((key) =>
         Object.entries(costs[key]).forEach(
-            ([material, cost]) =>
+            ([material, cost]: [string | number, number]) =>
                 cost &&
                 materialArray.push(
-                    <Grid key={Number(material)}>
+                    <Grid key={material}>
                         <MaterialCard
                             game={game}
-                            material={Number(material)}
+                            material={material}
                             cost={cost}
                             size={size}
                         />
@@ -92,6 +91,14 @@ function sortItems(items: string[], pathname: string) {
               "characterSkill",
               "weaponLevel",
               "weekly",
+              "disk",
+              "fungi",
+              "level",
+              "prism",
+              "plant",
+              "mineral",
+              "rare",
+              "skill",
               "crown",
           ];
     sortOrder.forEach((item, index) => {

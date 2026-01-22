@@ -1,0 +1,42 @@
+export const mineralMaterials = [
+    {
+        id: "item_plant_spcstone_1_1",
+        category: "mineral",
+        name: "Kalkonyx",
+        tag: "Stone1",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_spcstone_1_2",
+        category: "mineral",
+        name: "Auronyx",
+        tag: "Stone2",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_spcstone_1_3",
+        category: "mineral",
+        name: "Umbronyx",
+        tag: "Stone3",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_spcstone_2_1",
+        category: "mineral",
+        name: "Igneosite",
+        tag: "Igneosite",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_spcstone_2_2",
+        category: "mineral",
+        name: "Wulingstone",
+        tag: "Wulingstone",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+];

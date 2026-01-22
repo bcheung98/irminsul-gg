@@ -75,6 +75,7 @@ export default function StatsDisplay({
                                 : "100%",
                     },
                 }}
+                endfieldAttr={"str" in stats ? stats.attributes : undefined}
             />
         </Stack>
     );
