@@ -115,11 +115,11 @@ export enum EndfieldWeaponMap {
 }
 export enum EndfieldSpecialtyMap {
     "Guard",
-    "Defender",
     "Caster",
     "Striker",
-    "Supporter",
     "Vanguard",
+    "Defender",
+    "Supporter",
 }
 
 function getNames(a: any, b: any) {

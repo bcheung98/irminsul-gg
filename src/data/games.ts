@@ -56,6 +56,6 @@ export const games: Record<Game, GameInfo> = {
         shortName: "Endfield",
         enabled: true,
         color: "rgb(255, 211, 136)",
-        dev: "Hypergryph",
+        dev: "Gryphline",
     },
 } as const;

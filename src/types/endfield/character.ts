@@ -10,7 +10,6 @@ import { VersionWithDate } from "@/types/version";
 import { CharacterOutfit, CharacterStats } from "@/types/character";
 import { EndfieldCharacterMaterials } from "./materials";
 import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
-import { baseSkills } from "@/data/endfield/baseSkills";
 
 export interface EndfieldCharacter extends BaseData {
     displayName: string;
@@ -21,7 +20,7 @@ export interface EndfieldCharacter extends BaseData {
     combatRoles: string[];
     skills: EndfieldCharacterSkills;
     passives: EndfieldCharacterPassive[];
-    baseSkills: EndfieldCharacterBaseSkill[];
+    baseSkills: EndfieldCharacterPassive[];
     upgrades: Skill[];
     keywords?: SkillKeyword[];
     stats: EndfieldCharacterStats;
@@ -46,10 +45,6 @@ export type EndfieldSkillKey = keyof EndfieldCharacterSkills;
 
 export interface EndfieldCharacterPassive extends Skill {
     levels: number[];
-}
-
-export interface EndfieldCharacterBaseSkill extends EndfieldCharacterPassive {
-    tag: keyof typeof baseSkills;
 }
 
 export type EndfieldCharacterStatAttributes = [
