@@ -49,7 +49,7 @@ export default function EquipmentList({
                             iconProps={{ size: game === "zzz" ? 48 : 72 }}
                             title={item.displayName}
                             href={`${equipmentTags[game]}/${formatHref(
-                                item.url
+                                item.url,
                             )}`}
                             spacing={2}
                         />
@@ -72,6 +72,7 @@ export function textLabelIcon(game: Game, equipment: Equipment) {
         wuwa: "",
         zzz: `zzz/drive-discs/${equipment.id}`,
         uma: "",
+        endfield: "",
     };
     return items[game];
 }
