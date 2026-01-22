@@ -14,9 +14,6 @@ import BetaTag from "@/components/BetaTag";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-// Helper imports
-import { baseSkills } from "@/data/endfield/baseSkills";
-
 // Type imports
 import { AttributeData, AttributeDataMisc } from "@/types";
 import { CharacterSkillsList } from "@/types/skill";
@@ -39,7 +36,7 @@ export default function CharacterPage({
         ...character.passives,
         {
             name: attributeTitleMap[character.stats.attributes[0]],
-            description: `Operator ${attributeMap[character.stats.attributes[0]]} <span class="text-value">$A</span>.`,
+            description: `Operator ${attributeMap[character.stats.attributes[0]]} $A.`,
             scaling: [["+10", "+15", "+15", "+20"]],
             levels: [1, 2, 3, 4],
             icon: `endfield/icons/stat-icons/${character.stats.attributes[0].toUpperCase()}`,
@@ -52,13 +49,7 @@ export default function CharacterPage({
             icon: "endfield/icons/Gear",
         },
     ];
-    skills.baseSkills = character.baseSkills.map((skill) => ({
-        name: skill.name,
-        description: baseSkills[skill.tag]?.description || "",
-        scaling: baseSkills[skill.tag]?.scaling || [],
-        levels: skill.levels,
-        icon: skill.tag,
-    }));
+    skills.baseSkills = character.baseSkills;
     skills.upgrades = character.upgrades;
 
     const Splash = (

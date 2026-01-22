@@ -16,11 +16,11 @@ export const weapons = [
 
 export const opClasses = [
     "Guard",
-    "Defender",
     "Caster",
     "Striker",
-    "Supporter",
     "Vanguard",
+    "Defender",
+    "Supporter",
 ] as const;
 
 export const rarities = [6, 5, 4, 3, 2, 1] as const;
