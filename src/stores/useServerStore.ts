@@ -17,6 +17,7 @@ export const initialState: ServerState = {
     wuwa: "NA",
     zzz: "NA",
     uma: "NA",
+    endfield: "NA",
 };
 
 export const useServerStore = create(
@@ -27,6 +28,6 @@ export const useServerStore = create(
                 return set(() => ({ [`${game}`]: server }));
             },
         }),
-        { name: "v2/server" }
-    )
+        { name: "v2/server" },
+    ),
 );
