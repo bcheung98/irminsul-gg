@@ -62,7 +62,7 @@ export function endfieldFilters<T extends Filters>({
             name: "Rarity",
             value: filters.rarity,
             buttons: rarities
-                .slice(0, key === "endfield/operators" ? 3 : 4)
+                .slice(0, key === "endfield/characters" ? 3 : 4)
                 .map((rarity) => ({
                     value: rarity,
                     label: (
