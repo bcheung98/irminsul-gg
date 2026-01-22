@@ -10,6 +10,7 @@ import {
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
 import { AttributeDataKey, Game } from "@/types";
 import { CharacterColors } from "@/types/character";
+import { splitJoin } from "@/utils";
 
 interface Props {
     game: Game;
@@ -92,6 +93,20 @@ export function getDataIconURL({ game, key, value }: Props) {
     if (game === "uma") {
         if (key === "specialty") {
             src = `uma/icons/specialties/${value}`;
+            tooltip = `${value}`;
+        }
+    }
+    if (game === "endfield") {
+        if (key === "element" && value) {
+            src = `endfield/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `endfield/icons/weapons/${splitJoin(`${value}`)}`;
+            tooltip = `${value}`;
+        }
+        if (key === "specialty" && value) {
+            src = `endfield/classes/${value}`;
             tooltip = `${value}`;
         }
     }

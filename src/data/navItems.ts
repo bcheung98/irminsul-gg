@@ -177,4 +177,21 @@ export const navItems: GameData<NavItem[]> = {
             href: "banners",
         },
     ],
+    endfield: [
+        {
+            icon: "icons/World",
+            title: "Home",
+            href: "",
+        },
+        {
+            icon: "icons/Operators",
+            title: "Operators",
+            href: "operators",
+        },
+        {
+            icon: "icons/Weapons",
+            title: "Weapons",
+            href: "weapons",
+        },
+    ],
 };

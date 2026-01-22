@@ -6,6 +6,7 @@ export const equipmentTags: GameData<string> = {
     wuwa: "echoes",
     zzz: "drive-discs",
     uma: "",
+    endfield: "",
 };
 
 export const equipmentPieceType: GameData<Record<string, string>> = {
@@ -27,4 +28,5 @@ export const equipmentPieceType: GameData<Record<string, string>> = {
     wuwa: {},
     zzz: {},
     uma: {},
+    endfield: {},
 };

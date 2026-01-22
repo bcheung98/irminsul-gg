@@ -59,7 +59,7 @@ export default function CharacterUpgrades({
     }
 
     const [currentKeyword, setCurrentKeyword] = useState<SkillKeyword | null>(
-        null
+        null,
     );
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
@@ -87,6 +87,28 @@ export default function CharacterUpgrades({
     const handleCloseMCArt = () => {
         setOpenMCArt(false);
     };
+
+    function getSkillIcon(index: number) {
+        switch (game) {
+            case "zzz":
+                return <></>;
+            case "endfield":
+                return (
+                    <SkillIcon
+                        icon={`endfield/icons/skills/Potential${index + 1}`}
+                        size={40}
+                        attributes={attributes}
+                    />
+                );
+            default:
+                return (
+                    <SkillIcon
+                        icon={getIconURL(index)}
+                        attributes={attributes}
+                    />
+                );
+        }
+    }
 
     if (skills?.upgrades) {
         const indexes: number[] = [];
@@ -118,7 +140,7 @@ export default function CharacterUpgrades({
                                         p: "4px 16px",
                                         backgroundColor: theme.background(
                                             0,
-                                            "dark"
+                                            "dark",
                                         ),
                                         borderRadius: "4px",
                                         borderColor: theme.border.color.primary,
@@ -140,14 +162,7 @@ export default function CharacterUpgrades({
                             <SkillCard key={index}>
                                 <Stack spacing={1}>
                                     <TextLabel
-                                        icon={
-                                            game !== "zzz" && (
-                                                <SkillIcon
-                                                    icon={getIconURL(index)}
-                                                    attributes={attributes}
-                                                />
-                                            )
-                                        }
+                                        icon={getSkillIcon(index)}
                                         title={`${upgrade.index}. ${upgrade.name}`}
                                         titleProps={{ variant: "h6" }}
                                         spacing={2}

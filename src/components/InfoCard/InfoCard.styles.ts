@@ -75,9 +75,9 @@ export const infoCardStyles = ({
             zIndex: 5,
             top: side === "left" ? -4 : -2,
             left: side === "left" ? -12 : null,
-            right: side === "right" ? 2 : null,
+            right: side === "right" ? 0 : null,
             backgroundColor: theme.infoCard.backgroundColor.main,
-            borderRadius: "16px",
+            borderRadius: game === "endfield" ? "8px" : "16px",
         }),
     badgeIcon: (matches = true): CSSProperties => ({
         width: `calc(${imgSize} / 8 + 12px)`,

@@ -4,6 +4,7 @@ import sortHSRItems from "./hsr/sortItems";
 import sortWuWaItems from "./wuwa/sortItems";
 import sortZZZItems from "./zzz/sortItems";
 import sortUmaItems from "./uma/sortItems";
+import sortEndfieldItems from "./endfield/sortItems";
 
 export interface SortProps<T extends Record<string, any>> {
     items: T[];
@@ -20,5 +21,6 @@ export function useSort(): GameData<SortFunction> {
         wuwa: sortWuWaItems,
         zzz: sortZZZItems,
         uma: sortUmaItems,
+        endfield: sortEndfieldItems,
     };
 }

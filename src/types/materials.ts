@@ -5,7 +5,7 @@ export interface Materials {
 }
 
 export interface Material {
-    id: number;
+    id: string | number;
     name: string;
     displayName?: string;
     tag?: string;

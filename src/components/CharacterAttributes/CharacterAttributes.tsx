@@ -91,11 +91,18 @@ export default function CharacterAttributes(props: AttributeData) {
                                 <Rarity key={key} />
                             ) : (
                                 <Chip key={key} attrKey={key} />
-                            ))
+                            )),
                     )}
                 </FlexBox>
             </Stack>
             {game === "wuwa" && <CharacterCombatRoles {...attributes} />}
+            {game === "endfield" && (
+                <FlexBox spacing={1} wrap>
+                    {attributes.combatRoles?.map((role, index) => (
+                        <InfoChip key={index} title={role} />
+                    ))}
+                </FlexBox>
+            )}
             {attributes.description && (
                 <Box
                     sx={{
@@ -117,4 +124,5 @@ const gameAttributes: GameData<AttributeDataKey[]> = {
     wuwa: ["rarity", "element", "weaponType"],
     zzz: ["rarity", "element", "weaponType", "attackType"],
     uma: [],
+    endfield: ["rarity", "element", "specialty", "weaponType"],
 };

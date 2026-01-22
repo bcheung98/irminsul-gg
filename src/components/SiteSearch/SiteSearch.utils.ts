@@ -15,87 +15,98 @@ import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
+import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 export async function getItems(
     hideUnreleasedContent = true,
     game?: Game,
-    hideUmaJPContent = true
+    hideUmaJPContent = true,
 ): Promise<SearchResult[]> {
     let data = Object.entries({
         "genshin/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinCharacter>("genshin/characters"),
-            "genshin"
+            "genshin",
         ),
         "genshin/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinWeapon>("genshin/weapons"),
-            "genshin"
+            "genshin",
         ),
         "genshin/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinArtifact>("genshin/artifacts"),
-            "genshin"
+            "genshin",
         ),
         "hsr/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRCharacter>("hsr/characters"),
-            "hsr"
+            "hsr",
         ),
         "hsr/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRWeapon>("hsr/lightcones"),
-            "hsr"
+            "hsr",
         ),
         "hsr/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRRelic>("hsr/relics"),
-            "hsr"
+            "hsr",
         ),
         "wuwa/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaCharacter>("wuwa/resonators"),
-            "wuwa"
+            "wuwa",
         ),
         "wuwa/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaWeapon>("wuwa/weapons"),
-            "wuwa"
+            "wuwa",
         ),
         "wuwa/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaEcho>("wuwa/echoes"),
-            "wuwa"
+            "wuwa",
         ),
         "zzz/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZCharacter>("zzz/agents"),
-            "zzz"
+            "zzz",
         ),
         "zzz/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZWeapon>("zzz/w-engines"),
-            "zzz"
+            "zzz",
         ),
         "zzz/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZDriveDisc>("zzz/drive-discs"),
-            "zzz"
+            "zzz",
         ),
         "zzz/bangboos": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZBangboo>("zzz/bangboos"),
-            "zzz"
+            "zzz",
         ),
         "uma/characters": filterUnreleasedContent(
             hideUmaJPContent,
             await getDataSet<UmaCharacter>("uma/characters"),
-            "uma"
+            "uma",
         ),
         "uma/supports": filterUnreleasedContent(
             hideUmaJPContent,
             await getDataSet<UmaSupport>("uma/supports"),
-            "uma"
+            "uma",
+        ),
+        "endfield/operators": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<EndfieldCharacter>("endfield/operators"),
+            "endfield",
+        ),
+        "endfield/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<EndfieldWeapon>("endfield/weapons"),
+            "endfield",
         ),
     })
         .map(([category, data]) =>
@@ -110,7 +121,7 @@ export async function getItems(
                 category: category,
                 release: item.release,
                 url: `/${categoryURLs[category]}/${formatHref(item.url)}`,
-            }))
+            })),
         )
         .flat();
     if (game) {

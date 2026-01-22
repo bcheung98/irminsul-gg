@@ -62,7 +62,7 @@ export default function CharacterSkillTab({
         let skill = skills[skillKey];
         if (skillVersion && skillVersion.value !== "v1" && skill.length > 1) {
             skill = skill.filter(
-                (skill) => skill.version?.value === skillVersion.value
+                (skill) => skill.version?.value === skillVersion.value,
             );
         } else {
             skill = skill.filter((skill) => !skill.version);
@@ -101,6 +101,10 @@ export default function CharacterSkillTab({
                     break;
             }
         }
+        if (game === "endfield") {
+            initialValue = 12;
+            maxLevel = 12;
+        }
 
         const [sliderValue, setSliderValue] = useState(initialValue);
         const handleSliderChange = (_: Event, newValue: number | number[]) => {
@@ -109,7 +113,9 @@ export default function CharacterSkillTab({
         const levels = range(1, maxLevel);
         const scaling = skill.map((skill) => skill.scaling || []).flat();
         const targets = document.getElementsByClassName(
-            game === "zzz" ? "character-skill-value-0" : "character-skill-value"
+            game === "zzz"
+                ? "character-skill-value-0"
+                : "character-skill-value",
         );
         useEffect(() => {
             scaling.forEach((subScaling: string[], index: number) => {
@@ -215,7 +221,7 @@ export default function CharacterSkillTab({
                                                         index={index}
                                                     />
                                                 </SkillCard>
-                                            )
+                                            ),
                                     )}
                                 </Grid>
                                 {matches && mode === "slider" && LevelUp}

@@ -4,11 +4,12 @@ import getGenshinSkillKeyword from "./genshin/getSkillKeyword";
 import getHSRSkillKeyword from "./hsr/getSkillKeyword";
 import getWuWaSkillKeyword from "./wuwa/getSkillKeyword";
 import getZZZSkillKeyword from "./zzz/getSkillKeyword";
+import getEndfieldSkillKeyword from "./endfield/getSkillKeyword";
 
 export function formatSkillIconURL(
     url: string,
     attributes: AttributeData,
-    index = 0
+    index = 0,
 ) {
     if (attributes.id) {
         url = url.replace("{id}", `${attributes.id}`);
@@ -34,7 +35,7 @@ export interface GetSkillKeywordProps {
 }
 
 type UseSkillKeywordFn = (
-    args: GetSkillKeywordProps
+    args: GetSkillKeywordProps,
 ) => SkillKeyword | undefined;
 
 export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
@@ -46,21 +47,24 @@ export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
         uma: function (): SkillKeyword | undefined {
             throw new Error("Function not implemented.");
         },
+        endfield: getEndfieldSkillKeyword,
     };
 }
 
 export function getKeywordPopupTitle(
     game: Game,
-    keyword?: SkillKeyword | null
+    keyword?: SkillKeyword | null,
 ) {
     switch (game) {
         case "genshin":
             return keyword?.type ? "Related Talents" : "Related effects";
         case "hsr":
         case "wuwa":
+        case "endfield":
             return "Glossary";
         case "zzz":
         case "uma":
+        default:
             return "Keywords";
     }
 }

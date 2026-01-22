@@ -138,6 +138,17 @@ function getSitename({
         case "uma":
             res = attributes.title;
             break;
+        case "endfield":
+            if (attributes.specialty) {
+                res = `${attributes.displayName || attributes.name} (${
+                    attributes.rarity
+                }★) - ${attributes.element} | ${attributes.specialty} |${attributes.weaponType}`;
+            } else {
+                res = `${attributes.displayName || attributes.name} (${
+                    attributes.rarity
+                }★) - ${attributes.weaponType}`;
+            }
+            break;
     }
     return res || "Irminsul.GG";
 }

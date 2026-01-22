@@ -55,7 +55,7 @@ export default function CharacterInfoMisc(props: AttributeDataMisc) {
 
 function getRows(
     attributes: AttributeDataMisc,
-    server: Server | undefined
+    server: Server | undefined,
 ): GameData<{ key: string; value: string | undefined }[]> {
     const releaseDate = attributes.release?.date
         ? new DateObject(attributes.release.date, server).string
@@ -115,5 +115,18 @@ function getRows(
             },
         ],
         uma: [],
+        endfield: [
+            { key: "Faction", value: attributes.faction },
+            { key: "Birthday", value: attributes.birthday },
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
     };
 }

@@ -1,0 +1,25 @@
+import { Suspense } from "react";
+
+// Component imports
+import CharacterGallery from "./CharacterGallery";
+import Loader from "@/components/Loader";
+
+// Helper imports
+import { getDataSet } from "@/lib/fetchData";
+import { getMetadata } from "@/helpers/metadata";
+
+// Type imports
+import { EndfieldCharacter } from "@/types/endfield/character";
+
+export const metadata = getMetadata({ game: "endfield", tag: "characters" });
+
+export default async function Page() {
+    const characters =
+        await getDataSet<EndfieldCharacter>("endfield/operators");
+
+    return (
+        <Suspense fallback={<Loader />}>
+            <CharacterGallery characters={characters} />
+        </Suspense>
+    );
+}

@@ -31,13 +31,15 @@ export interface GalleryState {
     "uma/characters": GallerySettings;
     "uma/supports": GallerySettings;
     "uma/skills": GallerySettings;
+    "endfield/operators": GallerySettings;
+    "endfield/weapons": GallerySettings;
 }
 
 export interface GalleryActions {
     setGalleryState: (
         key: keyof GalleryState,
         tag: keyof GallerySettings,
-        settings: string
+        settings: string,
     ) => void;
 }
 
@@ -92,6 +94,12 @@ export const initialState: GalleryState = {
         sortDirection: "asc",
         view: "icon",
     },
+    "endfield/operators": defaultSettings,
+    "endfield/weapons": {
+        sortBy: "version",
+        sortDirection: "asc",
+        view: "icon",
+    },
 };
 
 export const useGalleryStore = create(
@@ -104,6 +112,6 @@ export const useGalleryStore = create(
                 }));
             },
         }),
-        { name: "v2/gallery" }
-    )
+        { name: "v2/gallery" },
+    ),
 );

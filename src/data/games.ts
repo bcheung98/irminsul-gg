@@ -6,7 +6,7 @@ export const gameNames = [
     "wuwa",
     "zzz",
     "uma",
-    // "endfield",
+    "endfield",
 ] as const;
 
 export const games: Record<Game, GameInfo> = {
@@ -50,12 +50,12 @@ export const games: Record<Game, GameInfo> = {
         color: "rgb(44, 159, 4)",
         dev: "Cygames",
     },
-    // endfield: {
-    //     tag: "endfield",
-    //     name: "Arknights: Endfield",
-    //     shortName: "Endfield",
-    //     enabled: false,
-    //     color: "rgb(192, 120, 0)",
-    //     dev: "Hypergryph",
-    // },
+    endfield: {
+        tag: "endfield",
+        name: "Arknights: Endfield",
+        shortName: "Endfield",
+        enabled: true,
+        color: "rgb(255, 211, 136)",
+        dev: "Hypergryph",
+    },
 } as const;

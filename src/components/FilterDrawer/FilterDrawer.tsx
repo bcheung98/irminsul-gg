@@ -23,6 +23,10 @@ import {
     UmaSkillFilters,
     UmaSupportFilters,
 } from "../_uma/Filters";
+import {
+    EndfieldCharacterFilters,
+    EndfieldWeaponFilters,
+} from "../_endfield/Filters";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -73,4 +77,6 @@ const components: Record<string, React.ReactNode> = {
     "/uma/characters": <UmaCharacterFilters />,
     "/uma/supports": <UmaSupportFilters />,
     "/uma/skills": <UmaSkillFilters />,
+    "/endfield/operators": <EndfieldCharacterFilters />,
+    "/endfield/weapons": <EndfieldWeaponFilters />,
 };

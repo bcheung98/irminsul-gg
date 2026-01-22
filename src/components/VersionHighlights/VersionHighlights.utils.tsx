@@ -1,5 +1,7 @@
 // Component imports
 import {
+    EndfieldCharacterInfoCard,
+    EndfieldWeaponInfoCard,
     GenshinArtifactInfoCard,
     GenshinCharacterInfoCard,
     GenshinWeaponInfoCard,
@@ -33,6 +35,7 @@ import {
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
+import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
 
@@ -63,6 +66,11 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
         uma: {
             characters: "",
             weapons: "",
+            equipment: "",
+        },
+        endfield: {
+            characters: "endfield/icons/Operators",
+            weapons: "endfield/icons/Weapons",
             equipment: "",
         },
     };
@@ -203,6 +211,25 @@ export function renderInfoCard(
         uma: {
             characters: <></>,
             weapons: <></>,
+            equipment: undefined,
+        },
+        endfield: {
+            characters: (
+                <EndfieldCharacterInfoCard
+                    key={item.id}
+                    character={item as EndfieldCharacter}
+                    props={{
+                        componentID: `${item.id}-versionHighlights`,
+                    }}
+                />
+            ),
+            weapons: (
+                <EndfieldWeaponInfoCard
+                    key={item.id}
+                    weapon={item as EndfieldWeapon}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
             equipment: undefined,
         },
     };

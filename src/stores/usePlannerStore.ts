@@ -11,6 +11,10 @@ import {
 import { createHSRSlice, HSRPlannerSlice } from "./planner/useHSRStore";
 import { createWuWaSlice, WuWaPlannerSlice } from "./planner/useWuWaStore";
 import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
+import {
+    createEndfieldSlice,
+    EndfieldPlannerSlice,
+} from "./planner/useEndfieldStore";
 
 export interface PlannerSlice {
     totalCost: Record<number, Record<string, CostValue>>;
@@ -29,7 +33,8 @@ export type GamePlannerSlice<G extends GameNoUma, T> = {
 export type CombinedPlannerSlice = GenshinPlannerSlice &
     HSRPlannerSlice &
     WuWaPlannerSlice &
-    ZZZPlannerSlice;
+    ZZZPlannerSlice &
+    EndfieldPlannerSlice;
 
 export const usePlannerStore = create(
     persist<CombinedPlannerSlice>(
@@ -38,6 +43,7 @@ export const usePlannerStore = create(
             ...createHSRSlice(...args),
             ...createWuWaSlice(...args),
             ...createZZZSlice(...args),
+            ...createEndfieldSlice(...args),
         }),
         {
             name: "v2/planner",

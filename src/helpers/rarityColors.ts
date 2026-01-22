@@ -10,6 +10,10 @@ import {
 } from "./wuwa/rarityColors";
 import { getZZZBackgroundColor, getZZZRarityColor } from "./zzz/rarityColors";
 import { getUmaBackgroundColor, getUmaRarityColor } from "./uma/rarityColors";
+import {
+    getEndfieldBackgroundColor,
+    getEndfieldRarityColor,
+} from "./endfield/rarityColors";
 
 export function useRarityColors(): GameData<(rarity?: number) => string> {
     return {
@@ -18,6 +22,7 @@ export function useRarityColors(): GameData<(rarity?: number) => string> {
         wuwa: getWuWaRarityColor,
         zzz: getZZZRarityColor,
         uma: getUmaRarityColor,
+        endfield: getEndfieldRarityColor,
     };
 }
 
@@ -30,5 +35,6 @@ export function useBackgroundRarityColors(): GameData<
         wuwa: getWuWaBackgroundColor,
         zzz: getZZZBackgroundColor,
         uma: getUmaBackgroundColor,
+        endfield: getEndfieldBackgroundColor,
     };
 }

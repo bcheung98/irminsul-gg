@@ -41,6 +41,7 @@ export const initialState: CalendarState = {
         enabled: true,
         fullDuration: false,
     },
+    endfield: { enabled: true, fullDuration: false },
 };
 
 export const useCalendarStore = create(

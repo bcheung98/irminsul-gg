@@ -21,6 +21,10 @@ import {
     weaponSubStats as zzzSubstats,
     ZZZWeaponSubStat,
 } from "@/data/zzz/weaponStats";
+import {
+    baseATKScaling as endfieldBaseATKScaling,
+    EndfieldWeaponBaseATK,
+} from "@/data/endfield/weaponStats";
 import { ZZZRarity } from "@/types/zzz";
 
 type Props = Omit<StatsDisplayProps, "game">;
@@ -43,6 +47,8 @@ export function getStats({
             return getWuWaStats({ stats, attributes });
         case "zzz":
             return getZZZStats({ stats, attributes });
+        case "endfield":
+            return getEndfieldStats({ stats, attributes });
         case "uma":
         default:
             return { levels: [], data: [] };
@@ -57,10 +63,10 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
         const ascensionStats = characterAscensionStatScalings(
             rarity,
             stats.ascensionStat,
-            { em: stats.em }
+            { em: stats.em },
         );
         const ascStatScaling = !["CRIT Rate", "CRIT DMG"].includes(
-            stats.ascensionStat
+            stats.ascensionStat,
         )
             ? ascensionStats[stats.ascensionStat]
             : undefined;
@@ -89,19 +95,19 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
             [
                 "Base HP|genshin/icons/stat-icons/HP",
                 ...levels.map((_, index) =>
-                    (stats.hp[index] || 0).toLocaleString()
+                    (stats.hp[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base ATK|genshin/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
-                    (stats.atk[index] || 0).toLocaleString()
+                    (stats.atk[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base DEF|genshin/icons/stat-icons/DEF",
                 ...levels.map((_, index) =>
-                    (stats.def[index] || 0).toLocaleString()
+                    (stats.def[index] || 0).toLocaleString(),
                 ),
             ],
             [
@@ -110,7 +116,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                     (_, index) =>
                         (ascensionStats["CRIT Rate"] &&
                             ascensionStats["CRIT Rate"][index]) ||
-                        0
+                        0,
                 ),
             ],
             [
@@ -119,7 +125,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                     (_, index) =>
                         (ascensionStats["CRIT DMG"] &&
                             ascensionStats["CRIT DMG"][index]) ||
-                        0
+                        0,
                 ),
             ],
         ];
@@ -128,13 +134,13 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
             data.push([
                 "Elemental Mastery|genshin/icons/stat-icons/Elemental_Mastery",
                 ...levels.map((_, index) =>
-                    (stats.em[index] || 0).toLocaleString()
+                    (stats.em[index] || 0).toLocaleString(),
                 ),
             ]);
         ascStatScaling &&
             data.push([
                 `${stats.ascensionStat}|genshin/icons/stat-icons/${splitJoin(
-                    stats.ascensionStat
+                    stats.ascensionStat,
                 )}`,
                 ...levels.map((_, index) => ascStatScaling[index]),
             ]);
@@ -170,7 +176,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                         genshinBaseATKScaling[
                             stats.atk as GenshinWeaponBaseATK
                         ][index] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
         ];
@@ -180,7 +186,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
             ][stats.subStat as GenshinWeaponSubStat] as string[];
             data.push([
                 `${stats.subStat}|genshin/icons/stat-icons/${splitJoin(
-                    stats.subStat
+                    stats.subStat,
                 )}`,
                 ...levels.map((_, index) => subStatScaling[index] || 0),
             ]);
@@ -199,25 +205,25 @@ function getHSRStats({ stats }: Props): StatsData {
             [
                 `Base HP|hsr/icons/stat-icons/HP`,
                 ...levels.map((_, index) =>
-                    (stats.hp[index] || 0).toLocaleString()
+                    (stats.hp[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 `Base ATK|hsr/icons/stat-icons/ATK`,
                 ...levels.map((_, index) =>
-                    (stats.atk[index] || 0).toLocaleString()
+                    (stats.atk[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 `Base DEF|hsr/icons/stat-icons/DEF`,
                 ...levels.map((_, index) =>
-                    (stats.def[index] || 0).toLocaleString()
+                    (stats.def[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "SPD|hsr/icons/stat-icons/SPD",
                 ...levels.map((_, index) =>
-                    (stats.speed[index] || 0).toLocaleString()
+                    (stats.speed[index] || 0).toLocaleString(),
                 ),
             ],
             [
@@ -234,7 +240,7 @@ function getHSRStats({ stats }: Props): StatsData {
                 ...levels.map((_, index) =>
                     (
                         hsrWeaponStats.hp[weaponStats.hp][index] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
             [
@@ -242,7 +248,7 @@ function getHSRStats({ stats }: Props): StatsData {
                 ...levels.map((_, index) =>
                     (
                         hsrWeaponStats.atk[weaponStats.atk][index] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
             [
@@ -250,7 +256,7 @@ function getHSRStats({ stats }: Props): StatsData {
                 ...levels.map((_, index) =>
                     (
                         hsrWeaponStats.def[weaponStats.def][index] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
         ];
@@ -268,19 +274,19 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
             [
                 "Base HP|wuwa/icons/stat-icons/HP",
                 ...levels.map((_, index) =>
-                    (stats.hp[index] || 0).toLocaleString()
+                    (stats.hp[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base ATK|wuwa/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
-                    (stats.atk[index] || 0).toLocaleString()
+                    (stats.atk[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base DEF|wuwa/icons/stat-icons/DEF",
                 ...levels.map((_, index) =>
-                    (stats.def[index] || 0).toLocaleString()
+                    (stats.def[index] || 0).toLocaleString(),
                 ),
             ],
         ];
@@ -294,7 +300,7 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
                         wuwaBaseATKScaling[stats.atk as WuWaWeaponBaseATK][
                             index
                         ] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
         ];
@@ -304,7 +310,7 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
             ] as string[];
             data.push([
                 `${stats.subStat}|wuwa/icons/stat-icons/${splitJoin(
-                    stats.subStat
+                    stats.subStat,
                 )}`,
                 ...levels.map((_, index) => subStatScaling[index] || 0),
             ]);
@@ -323,37 +329,37 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
             [
                 "Base HP|zzz/icons/stat-icons/HP",
                 ...levels.map((_, index) =>
-                    (stats.hp[index] || 0).toLocaleString()
+                    (stats.hp[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base ATK|zzz/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
-                    (stats.atk[index] || 0).toLocaleString()
+                    (stats.atk[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base DEF|zzz/icons/stat-icons/DEF",
                 ...levels.map((_, index) =>
-                    (stats.def[index] || 0).toLocaleString()
+                    (stats.def[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Impact|zzz/icons/stat-icons/Impact",
                 ...levels.map((_, index) =>
-                    (stats.impact[index] || 0).toLocaleString()
+                    (stats.impact[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Anomaly Mastery|zzz/icons/stat-icons/Anomaly_Mastery",
                 ...levels.map((_, index) =>
-                    (stats.am[index] || 0).toLocaleString()
+                    (stats.am[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Anomaly Proficiency|zzz/icons/stat-icons/Anomaly_Proficiency",
                 ...levels.map((_, index) =>
-                    (stats.ap[index] || 0).toLocaleString()
+                    (stats.ap[index] || 0).toLocaleString(),
                 ),
             ],
         ];
@@ -367,7 +373,7 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
                         zzzMainStatScaling[stats.mainStat.type].scaling[
                             stats.mainStat.value
                         ][index] || 0
-                    ).toLocaleString()
+                    ).toLocaleString(),
                 ),
             ],
         ];
@@ -378,7 +384,7 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
             ] as string[];
             data.push([
                 `${stats.subStat}|zzz/icons/stat-icons/${splitJoin(
-                    stats.subStat
+                    stats.subStat,
                 )}`,
                 ...levels.map((_, index) => subStatScaling[index] || 0),
             ]);
@@ -389,39 +395,103 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
             [
                 "Base HP|zzz/icons/stat-icons/HP",
                 ...levels.map((_, index) =>
-                    (stats.hp[index] || 0).toLocaleString()
+                    (stats.hp[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base ATK|zzz/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
-                    (stats.atk[index] || 0).toLocaleString()
+                    (stats.atk[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Base DEF|zzz/icons/stat-icons/DEF",
                 ...levels.map((_, index) =>
-                    (stats.def[index] || 0).toLocaleString()
+                    (stats.def[index] || 0).toLocaleString(),
                 ),
             ],
             [
                 "Crit Rate|zzz/icons/stat-icons/CRIT_Rate",
                 ...levels.map(
                     (_, index) =>
-                        `${(stats.critRate[index] || 0).toLocaleString()}%`
+                        `${(stats.critRate[index] || 0).toLocaleString()}%`,
                 ),
             ],
             [
                 "Crit DMG|zzz/icons/stat-icons/CRIT_DMG",
                 ...levels.map(
                     (_, index) =>
-                        `${(stats.critDMG[index] || 0).toLocaleString()}%`
+                        `${(stats.critDMG[index] || 0).toLocaleString()}%`,
                 ),
             ],
             [
                 "Anomaly Mastery|zzz/icons/stat-icons/Anomaly_Mastery",
                 ...levels.map((_, index) =>
-                    (stats.am[index] || 0).toLocaleString()
+                    (stats.am[index] || 0).toLocaleString(),
+                ),
+            ],
+        ];
+    }
+
+    return { levels, data };
+}
+
+function getEndfieldStats({ stats, attributes }: Props): StatsData {
+    let levels;
+    let data: (string | number)[][] = [];
+    if ("str" in stats) {
+        levels = levelData["endfield"]("level-asc");
+        data = [
+            ["Level", ...levels],
+            [
+                "HP|endfield/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "ATK|endfield/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Strength|endfield/icons/stat-icons/STR",
+                ...levels.map((_, index) =>
+                    (stats.str[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Agility|endfield/icons/stat-icons/AGI",
+                ...levels.map((_, index) =>
+                    (stats.agi[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Intellect|endfield/icons/stat-icons/INT",
+                ...levels.map((_, index) =>
+                    (stats.int[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Will|endfield/icons/stat-icons/WIL",
+                ...levels.map((_, index) =>
+                    (stats.wil[index] || 0).toLocaleString(),
+                ),
+            ],
+        ];
+    } else {
+        levels = ["1", "20", "40", "60", "80", "99"];
+        data = [
+            ["Level", ...levels],
+            [
+                "Base ATK|endfield/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (
+                        endfieldBaseATKScaling[
+                            stats.atk as EndfieldWeaponBaseATK
+                        ][index] || 0
+                    ).toLocaleString(),
                 ),
             ],
         ];

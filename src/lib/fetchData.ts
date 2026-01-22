@@ -47,6 +47,9 @@ export const urls = {
         "https://api.irminsul.gg/v2/uma/banner-characters.json",
     "uma/banner-supports":
         "https://api.irminsul.gg/v2/uma/banner-supports.json",
+    // Endfield
+    "endfield/operators": "https://api.irminsul.gg/v2/endfield/characters.json",
+    "endfield/weapons": "https://api.irminsul.gg/v2/endfield/weapons.json",
 };
 
 export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
@@ -56,7 +59,7 @@ export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
 
 export async function getData<T>(
     url: keyof typeof urls,
-    params: (value: T) => unknown
+    params: (value: T) => unknown,
 ): Promise<T> {
     const res = await fetch(urls[url], { next: { revalidate: 120 } });
     const data = await res.json();
@@ -65,7 +68,7 @@ export async function getData<T>(
 
 export async function getUmaEvents(
     type: EventTypes,
-    port?: number
+    port?: number,
 ): Promise<Events[]> {
     let url: string = `https://api.irminsul.gg/v2/uma/events-${type}.json`;
     if (port) {

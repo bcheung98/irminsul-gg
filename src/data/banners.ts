@@ -56,4 +56,14 @@ export const banners: GameData<ToggleButtonProps[]> = {
             label: "Support Card",
         },
     ],
+    endfield: [
+        {
+            value: "character",
+            label: "Operator",
+        },
+        {
+            value: "weapon",
+            label: "Weapon",
+        },
+    ],
 };

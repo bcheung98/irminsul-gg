@@ -1,0 +1,42 @@
+export const rareMaterials = [
+    {
+        id: "item_char_skill_specialize_1",
+        category: "rare",
+        name: "Metadiastima Photoemission Tube",
+        tag: "Metadiastima Photoemission Tube",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_char_skill_specialize_2",
+        category: "rare",
+        name: "D96 Steel Sample 4",
+        tag: "D96 Steel Sample 4",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_char_skill_specialize_3",
+        category: "rare",
+        name: "Tachyon Screening Lattice",
+        tag: "Tachyon Screening Lattice",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_char_skill_specialize_4",
+        category: "rare",
+        name: "Quadrant Fitting Fluid",
+        tag: "Quadrant Fitting Fluid",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_char_skill_specialize_5",
+        category: "rare",
+        name: "Triphasic Nanoflake",
+        tag: "Triphasic Nanoflake",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+];

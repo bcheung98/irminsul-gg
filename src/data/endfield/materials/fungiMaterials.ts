@@ -1,0 +1,42 @@
+export const fungiMaterials = [
+    {
+        id: "item_plant_mushroom_1_1",
+        category: "fungi",
+        name: "Pink Bolete",
+        tag: "Bolete1",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_mushroom_1_2",
+        category: "fungi",
+        name: "Red Bolete",
+        tag: "Bolete2",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_mushroom_1_3",
+        category: "fungi",
+        name: "Ruby Bolete",
+        tag: "Bolete3",
+        rarity: 4,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_mushroom_2_1",
+        category: "fungi",
+        name: "Bloodcap",
+        tag: "Bloodcap",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+    {
+        id: "item_plant_mushroom_2_2",
+        category: "fungi",
+        name: "Cosmagaric",
+        tag: "Cosmagaric",
+        rarity: 5,
+        release: { version: "1.0" },
+    },
+];

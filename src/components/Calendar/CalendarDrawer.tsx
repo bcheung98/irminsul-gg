@@ -16,7 +16,9 @@ export default function CalendarDrawer() {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
+    const games = useGameList()
+        .filter((game) => game.enabled)
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <>

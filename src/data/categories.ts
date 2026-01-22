@@ -15,6 +15,9 @@ export const categories: Record<string, string> = {
     "zzz/bangboos": "Bangboos",
     "uma/characters": "Characters",
     "uma/supports": "Support Cards",
+    "endfield/characters": "Operators",
+    "endfield/operators": "Operators",
+    "endfield/weapons": "Weapons",
 };
 
 export const categoryURLs: Record<string, string> = {
@@ -35,6 +38,9 @@ export const categoryURLs: Record<string, string> = {
     "uma/characters": "uma/characters",
     "uma/weapons": "uma/supports", // Need this for category sorting
     "uma/supports": "uma/supports",
+    "endfield/characters": "endfield/operators",
+    "endfield/operators": "endfield/operators",
+    "endfield/weapons": "endfield/weapons",
 };
 
 export const categoryImgURLs: Record<
@@ -59,4 +65,7 @@ export const categoryImgURLs: Record<
     "uma/characters": (id: number) => `uma/characters/${id}`,
     "uma/weapons": (id: number) => `uma/supports/${id}_icon`, // Need this for category sorting
     "uma/supports": (id: number) => `uma/supports/${id}_icon`,
+    "endfield/characters": (id: number) => `endfield/operators/${id}`,
+    "endfield/operators": (id: number) => `endfield/operators/${id}`,
+    "endfield/weapons": (id: number) => `endfield/weapons/${id}`,
 };

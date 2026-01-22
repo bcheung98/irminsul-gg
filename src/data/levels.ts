@@ -3,6 +3,7 @@ import { genshinLevels } from "./genshin/levels";
 import { hsrLevels } from "./hsr/levels";
 import { wuwaLevels } from "./wuwa/levels";
 import { zzzLevels } from "./zzz/levels";
+import { endfieldLevels } from "./endfield/levels";
 
 const levels: GameData<(key: string, rarity?: number) => (string | number)[]> =
     {
@@ -13,6 +14,7 @@ const levels: GameData<(key: string, rarity?: number) => (string | number)[]> =
         uma: function (key: string): (string | number)[] {
             throw new Error("Function not implemented.");
         },
+        endfield: endfieldLevels,
     };
 
 export default levels;

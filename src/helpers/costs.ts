@@ -26,6 +26,11 @@ import {
     getCharacterCoreSkillCost as getZZZCharacterCoreSkillCost,
     getWeaponLevelCost as getZZZWeaponLevelCost,
 } from "./zzz/getLevelUpCosts";
+import {
+    getCharacterLevelCost as getEndfieldCharacterLevelCost,
+    getCharacterSkillCost as getEndfieldCharacterSkillCost,
+    getWeaponLevelCost as getEndfieldWeaponLevelCost,
+} from "./endfield/getLevelUpCosts";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -59,10 +64,15 @@ export const costs: GameData<Costs> = {
         weaponLevel: getZZZWeaponLevelCost,
     },
     uma: {},
+    endfield: {
+        characterLevel: getEndfieldCharacterLevelCost,
+        characterSkill: getEndfieldCharacterSkillCost,
+        weaponLevel: getEndfieldWeaponLevelCost,
+    },
 };
 
 export function calculateCosts(costs: CostArray, start: number, stop: number) {
     return Object.values(costs).map((arr) =>
-        arr.slice(start, stop).reduce((a, c) => a + c)
+        arr.slice(start, stop).reduce((a, c) => a + c),
     );
 }
