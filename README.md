@@ -14,6 +14,8 @@
 
 -   [**Umamusume: Pretty Derby**](https://irminsul.gg/uma)
 
+-   [**Arknights: Endfield**](https://irminsul.gg/endfield)
+
 ## **Previews**
 
 **Genshin Impact**:
@@ -30,6 +32,9 @@
 
 **Umamusume: Pretty Derby**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/uma/preview.png)
+
+**Arknights: Endfield**:
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/endfield/preview.png)
 
 ---
 
