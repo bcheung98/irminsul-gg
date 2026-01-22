@@ -30,7 +30,7 @@ import { VersionHighlightsProps } from "@/components/VersionHighlights/VersionHi
 
 export default function CurrentBanners<
     T extends BannerOption,
-    U extends BannerOption
+    U extends BannerOption,
 >({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
     const {
         character: characterBanners,
@@ -111,7 +111,7 @@ export default function CurrentBanners<
                         <Text weight="highlight">
                             {bannerTitle(
                                 game,
-                                game === "uma" ? "supports" : "weapons"
+                                game === "uma" ? "supports" : "weapons",
                             )}
                         </Text>
                         <Stack spacing={2}>
@@ -197,6 +197,7 @@ const title: GameData<string> = {
     wuwa: "Convenes",
     zzz: "Signal Searches",
     uma: "Spotlight Scouts",
+    endfield: "Headhunts",
 };
 
 function bannerTitle(game: Game, tag: keyof VersionHighlightsProps) {

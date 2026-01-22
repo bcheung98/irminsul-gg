@@ -42,7 +42,7 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
     // Updates the item's data in case the names or materials change
     function validateItem(inputItem: PlannerItemData) {
         const item = [...characters, ...weapons].find(
-            (item) => item.id === inputItem.id
+            (item) => item.id === inputItem.id,
         );
         if (!item) throw new Error("Item not found");
         inputItem.name = item.name;
@@ -111,4 +111,5 @@ const components: GameData<React.ReactNode> = {
     wuwa: <WuWaPlannerCard />,
     zzz: <ZZZPlannerCard />,
     uma: undefined,
+    endfield: undefined,
 };
