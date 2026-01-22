@@ -1,5 +1,7 @@
 import { BaseData, Game, GameData } from "@/types";
 import {
+    EndfieldCharacterInfoAvatar,
+    EndfieldWeaponInfoAvatar,
     GenshinCharacterInfoAvatar,
     GenshinWeaponInfoAvatar,
     HSRCharacterInfoAvatar,
@@ -17,6 +19,7 @@ import { WuWaCharacter, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter } from "@/types/uma/character";
 import { UmaSupport } from "@/types/uma";
+import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 type Data<T> = Record<"characters" | "weapons", T>;
 
@@ -127,6 +130,26 @@ export function renderInfoAvatar({
             weapons: (
                 <UmaSupportInfoAvatar
                     support={item as UmaSupport}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+        },
+        endfield: {
+            characters: (
+                <EndfieldCharacterInfoAvatar
+                    character={item as EndfieldCharacter}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+            weapons: (
+                <EndfieldWeaponInfoAvatar
+                    weapon={item as EndfieldWeapon}
                     props={{
                         componentID: `${item.id}${id}`,
                         background: background,
