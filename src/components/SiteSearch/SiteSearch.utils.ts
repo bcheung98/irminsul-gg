@@ -98,7 +98,7 @@ export async function getItems(
             await getDataSet<UmaSupport>("uma/supports"),
             "uma",
         ),
-        "endfield/operators": filterUnreleasedContent(
+        "endfield/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<EndfieldCharacter>("endfield/operators"),
             "endfield",

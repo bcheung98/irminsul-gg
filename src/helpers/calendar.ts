@@ -58,7 +58,7 @@ export function createEventSourceObject({
         const { versionStart, versionEnd } = getVersionDates(
             version,
             server,
-            game
+            game,
         );
         const start = new DateObject(versionStart, server, game).date;
         const end = new DateObject(versionEnd, server, game).date;
@@ -87,7 +87,8 @@ export function createVersionInfo({
     const versions: CalendarVersionInfo[] = [...banners];
 
     // Create future version info
-    if (game !== "uma") {
+    // TODO: Remove Endfield from list once consistent banner schedule is known
+    if (!["uma", "endfield"].includes(game)) {
         const lastVersion = versions.slice(-1)[0];
         let { id, version } = lastVersion;
         let start = new DateObject(lastVersion.end).date;

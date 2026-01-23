@@ -50,6 +50,10 @@ export const urls = {
     // Endfield
     "endfield/operators": "https://api.irminsul.gg/v2/endfield/characters.json",
     "endfield/weapons": "https://api.irminsul.gg/v2/endfield/weapons.json",
+    "endfield/banner-characters":
+        "https://api.irminsul.gg/v2/endfield/banner-characters.json",
+    "endfield/banner-weapons":
+        "https://api.irminsul.gg/v2/endfield/banner-weapons.json",
 };
 
 function shouldRevalidate(url: string) {
