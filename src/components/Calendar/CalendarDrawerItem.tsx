@@ -16,7 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Helper imports
 import { useCalendarStore, useServerStore } from "@/stores";
-import { serverButtons, serverButtonsUma } from "@/data/settings";
+import { getServerButtons } from "@/data/settings";
 
 // Type imports
 import { GameInfo, Server } from "@/types";
@@ -64,16 +64,12 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                         textVariant="body2"
                         input={
                             <ToggleButtons
-                                buttons={
-                                    props.tag === "uma"
-                                        ? serverButtonsUma
-                                        : serverButtons
-                                }
+                                buttons={getServerButtons(props.tag)}
                                 value={server[props.tag]}
                                 exclusive
                                 onChange={(
                                     _: React.BaseSyntheticEvent,
-                                    newValue: Server
+                                    newValue: Server,
                                 ) => {
                                     if (newValue !== null) {
                                         server.setServer(props.tag, newValue);
@@ -97,7 +93,7 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                                     setCalendarSettings(
                                         props.tag,
                                         "enabled",
-                                        event.target.checked
+                                        event.target.checked,
                                     )
                                 }
                             />
@@ -115,7 +111,7 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                                     setCalendarSettings(
                                         props.tag,
                                         "fullDuration",
-                                        event.target.checked
+                                        event.target.checked,
                                     )
                                 }
                             />
