@@ -296,4 +296,40 @@ export const sonataEffects: SonataEffect[] = [
             version: "3.0",
         },
     },
+    {
+        id: 27,
+        name: "Trailblazing Star",
+        displayName: "Trailblazing Star",
+        setEffect: {
+            "2": '<span class="text-fusion">Fusion DMG</span> +10%.',
+            "5": 'Inflicting <span class="text-fusion">Fusion Burst</span> or <span class="text-highlight">Tune Rupture - Shifting</span> increases the Resonator\'s Crit. Rate by 20% and grants 20% <span class="text-fusion">Fusion DMG Bonus</span> for 8s.',
+        },
+        release: {
+            version: "3.1",
+        },
+    },
+    {
+        id: 28,
+        name: "Chromatic Foam",
+        displayName: "Chromatic Foam",
+        setEffect: {
+            "2": '<span class="text-fusion">Fusion DMG</span> +10%.',
+            "5": 'When the Resonator inflicts <span class="text-fusion">Fusion Burst</span> on the enemies, they gain the following effects: Gain 10% <span class="text-fusion">Fusion DMG Bonus</span> for 15s. While this effect is active, casting an Outro Skill grants the incoming Resonator 25% <span class="text-fusion">Fusion DMG Bonus</span> for 15s or until they\'re switched out.',
+        },
+        release: {
+            version: "3.1",
+        },
+    },
+    {
+        id: 29,
+        name: "Sound of True Name",
+        displayName: "Sound of True Name",
+        setEffect: {
+            "2": '<span class="text-aero">Aero DMG</span> +10%.',
+            "5": 'Dealing Echo Skill DMG to enemies increases the Resonator\'s Echo Skill Crit. Rate by 20%, and grants 15% <span class="text-aero">Aero DMG Bonus</span> for 5s.',
+        },
+        release: {
+            version: "3.1",
+        },
+    },
 ];

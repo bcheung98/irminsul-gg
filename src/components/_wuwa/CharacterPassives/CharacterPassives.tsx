@@ -34,7 +34,7 @@ export default function CharacterPassives({
 
     const textColor = useTextColor(theme.text);
 
-    const getSkillKeyword = useSkillKeyword().genshin;
+    const getSkillKeyword = useSkillKeyword().wuwa;
 
     const skillVersion = useSkillVersionContext();
     const skillsContext = useSkillContext();
@@ -44,7 +44,7 @@ export default function CharacterPassives({
     }
 
     const [currentKeyword, setCurrentKeyword] = useState<SkillKeyword | null>(
-        null
+        null,
     );
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
@@ -76,9 +76,9 @@ export default function CharacterPassives({
             passive &&
             passive.length > 1
                 ? passive.filter(
-                      (skill) => skill.version?.value === skillVersion.value
+                      (skill) => skill.version?.value === skillVersion.value,
                   )
-                : passive?.filter((skill) => !skill.version)
+                : passive?.filter((skill) => !skill.version),
         )
         .flat()
         .filter(Boolean) as Skill[];
