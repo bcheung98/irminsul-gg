@@ -1,5 +1,6 @@
 import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
 import { themeList } from "@/themes/theme";
+import { Game } from "@/types";
 
 export const themeButtons: ToggleButtonProps[] = themeList.map((theme) => ({
     value: theme.id,
@@ -22,6 +23,11 @@ export const serverButtonsUma: ToggleButtonProps[] = [
     { value: "Asia", label: "JP" },
 ];
 
+export const serverButtonsEndfield: ToggleButtonProps[] = [
+    { value: "NA", label: "NA/EU" },
+    { value: "Asia", label: "Asia" },
+];
+
 export const forbiddenKnowledge: ToggleButtonProps[] = [
     // The boolean determines if unreleased content should be hidden,
     // but the label determines if unreleased content should be shown,
@@ -29,3 +35,18 @@ export const forbiddenKnowledge: ToggleButtonProps[] = [
     { value: true, label: "Disable" },
     { value: false, label: "Enable" },
 ];
+
+export function getServerButtons(game: Game) {
+    switch (game) {
+        case "genshin":
+        case "hsr":
+        case "wuwa":
+        case "zzz":
+        default:
+            return serverButtons;
+        case "uma":
+            return serverButtonsUma;
+        case "endfield":
+            return serverButtonsEndfield;
+    }
+}

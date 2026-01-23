@@ -10,11 +10,11 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { formatHref } from "@/utils";
-import { useGameTag } from "@/context";
 import { useRarityColors } from "@/helpers/rarityColors";
 
 // Type imports
 import { InfoAvatarProps } from "./InfoAvatar.types";
+import { Game } from "@/types";
 
 export default function InfoAvatar({
     id,
@@ -30,7 +30,7 @@ export default function InfoAvatar({
 }: InfoAvatarProps) {
     const theme = useTheme();
 
-    const game = useGameTag() || "genshin";
+    const game = tag.split("/")[0] as Game;
 
     const rarityColors = useRarityColors()[game];
 

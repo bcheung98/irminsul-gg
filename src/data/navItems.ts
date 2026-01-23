@@ -193,5 +193,10 @@ export const navItems: GameData<NavItem[]> = {
             title: "Weapons",
             href: "weapons",
         },
+        {
+            icon: "icons/Headhunt",
+            title: "Banner Archive",
+            href: "banners",
+        },
     ],
 };

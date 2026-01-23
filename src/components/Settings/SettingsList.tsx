@@ -12,8 +12,7 @@ import { useGame } from "@/context";
 import { useSettingsStore, useServerStore } from "@/stores";
 import {
     forbiddenKnowledge,
-    serverButtons,
-    serverButtonsUma,
+    getServerButtons,
     statDisplayButtons,
     themeButtons,
 } from "@/data/settings";
@@ -51,7 +50,7 @@ export default function SettingsList() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newValue: number
+                        newValue: number,
                     ) => {
                         if (newValue !== null) {
                             setTheme(newValue);
@@ -73,7 +72,7 @@ export default function SettingsList() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newValue: boolean
+                        newValue: boolean,
                     ) => {
                         if (newValue !== null) {
                             setUnreleasedContent(newValue);
@@ -112,7 +111,7 @@ export default function SettingsList() {
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newValue: SkillDisplay
+                        newValue: SkillDisplay,
                     ) => {
                         if (newValue !== null) {
                             setStatDisplay(newValue);
@@ -127,14 +126,12 @@ export default function SettingsList() {
             label: `Server (${game.name})`,
             input: (
                 <ToggleButtons
-                    buttons={
-                        gameTag === "uma" ? serverButtonsUma : serverButtons
-                    }
+                    buttons={getServerButtons(gameTag)}
                     value={server[gameTag]}
                     exclusive
                     onChange={(
                         _: React.BaseSyntheticEvent,
-                        newValue: Server
+                        newValue: Server,
                     ) => {
                         if (newValue !== null) {
                             server.setServer(gameTag, newValue);

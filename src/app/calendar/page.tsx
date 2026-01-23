@@ -14,7 +14,7 @@ import { Banner } from "@/types/banner";
 export default async function CalendarPage() {
     const banners = {
         "genshin/characters": await getDataSet<Banner>(
-            "genshin/banner-characters"
+            "genshin/banner-characters",
         ),
         // "genshin/weapons": await getDataSet<Banner>("genshin/banner-weapons"),
         "hsr/characters": await getDataSet<Banner>("hsr/banner-characters"),
@@ -22,6 +22,9 @@ export default async function CalendarPage() {
         "zzz/characters": await getDataSet<Banner>("zzz/banner-characters"),
         "uma/characters": await getDataSet<Banner>("uma/banner-characters"),
         "uma/weapons": await getDataSet<Banner>("uma/banner-supports"),
+        "endfield/characters": await getDataSet<Banner>(
+            "endfield/banner-characters",
+        ),
     };
     const data = await getItems(false, undefined, false);
 

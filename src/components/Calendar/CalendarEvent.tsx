@@ -6,12 +6,14 @@ import ContentDialog from "@/components/ContentDialog";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
-import { alpha } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 
 // Helper imports
 import { getBannerLabel } from "../BannerArchive/BannerArchive.utils";
+import { getContrastText } from "@/utils/getContrastText";
+import { games } from "@/data/games";
 
 // Type imports
 import { EventContentArg } from "@fullcalendar/core/index.js";
@@ -27,7 +29,8 @@ export default function CalendarEvent({
     characters: SearchResult[];
     weapons: SearchResult[];
 }) {
-    const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const { event, isPast } = eventInfo;
     const eventProps = event.extendedProps as EventObjectExtendedProps;
@@ -67,7 +70,13 @@ export default function CalendarEvent({
                     icon={matches && `${game}/_common/Icon`}
                     iconProps={{ size: 20 }}
                     title={`${title}${isFuture ? " *" : ""}`}
-                    titleProps={{ variant: "body2" }}
+                    titleProps={{
+                        variant: "body2",
+                        color: getContrastText(
+                            theme.text.primary,
+                            games[game].color,
+                        ),
+                    }}
                 />
             </Card>
             <ContentDialog
