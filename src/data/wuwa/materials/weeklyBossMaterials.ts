@@ -62,4 +62,13 @@ export const weeklyBossMaterials = [
         source: "Threnodian: Leviathan",
         release: { version: "2.7" },
     },
+    {
+        id: 41400294,
+        category: "weekly",
+        name: "Gold in Memory",
+        tag: "Gold in Memory",
+        rarity: 4,
+        source: "???",
+        release: { version: "3.1" },
+    },
 ];

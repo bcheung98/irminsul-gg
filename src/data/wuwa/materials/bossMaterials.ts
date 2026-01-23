@@ -178,4 +178,13 @@ export const bossMaterials = [
         source: "Reactor Husk",
         release: { version: "3.0" },
     },
+    {
+        id: 41400284,
+        category: "boss",
+        name: "Our Choice",
+        tag: "Our Choice",
+        rarity: 4,
+        source: "???",
+        release: { version: "3.1" },
+    },
 ];
