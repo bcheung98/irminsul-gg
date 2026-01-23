@@ -481,7 +481,7 @@ function getEndfieldStats({ stats, attributes }: Props): StatsData {
             ],
         ];
     } else {
-        levels = ["1", "20", "40", "60", "80", "99"];
+        levels = ["1", "20", "40", "60", "80", "90"];
         data = [
             ["Level", ...levels],
             [
