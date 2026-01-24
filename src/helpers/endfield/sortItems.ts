@@ -1,6 +1,10 @@
 import { SortProps } from "@/helpers/sort";
 import DateObject from "@/helpers/dates";
 import { sortBy } from "@/utils";
+import {
+    baseATKScaling,
+    EndfieldWeaponBaseATK,
+} from "@/data/endfield/weaponStats";
 
 export default function sortItems<T extends Record<string, any>>({
     items,
@@ -70,6 +74,22 @@ export default function sortItems<T extends Record<string, any>>({
             res = res.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(b.faction, a.faction, reverse) || sortBy(bi, ai);
+            });
+            break;
+        case "baseATK":
+            res = res.sort((a, b) => {
+                const atkA =
+                    baseATKScaling[a.stats.atk as EndfieldWeaponBaseATK].slice(
+                        -1,
+                    )[0];
+                const atkB =
+                    baseATKScaling[b.stats.atk as EndfieldWeaponBaseATK].slice(
+                        -1,
+                    )[0];
+                return (
+                    sortBy(atkA, atkB, reverse) ||
+                    sortBy(b.displayName, a.displayName)
+                );
             });
             break;
         case "release":
