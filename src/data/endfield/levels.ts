@@ -3,7 +3,7 @@ import { range } from "@/utils";
 export function endfieldLevels(key: string) {
     switch (key) {
         case "level":
-            return ["20", "40", "60", "80", "99"];
+            return ["20", "40", "60", "80", "90"];
         case "level-asc":
             return [
                 "1",
@@ -15,7 +15,7 @@ export function endfieldLevels(key: string) {
                 "60+",
                 "80",
                 "80+",
-                "99",
+                "90",
             ];
         case "attack":
         case "skill":

@@ -436,11 +436,11 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
     return { levels, data };
 }
 
-function getEndfieldStats({ stats, attributes }: Props): StatsData {
+function getEndfieldStats({ stats }: Props): StatsData {
     let levels;
     let data: (string | number)[][] = [];
     if ("str" in stats) {
-        levels = levelData["endfield"]("level-asc");
+        levels = ["1", "20", "40", "60", "80", "90"];
         data = [
             ["Level", ...levels],
             [
@@ -481,7 +481,7 @@ function getEndfieldStats({ stats, attributes }: Props): StatsData {
             ],
         ];
     } else {
-        levels = ["1", "20", "40", "60", "80", "99"];
+        levels = ["1", "20", "40", "60", "80", "90"];
         data = [
             ["Level", ...levels],
             [
