@@ -128,6 +128,12 @@ export const skillKeywords: SkillKeyword[] = [
             'An enemy with Icon_Solidification <span class="text-cryo">Solidification</span> cannot move, and applying Icon_Vulnerable <span class="text-physical">Vulnerable</span> or a <span class="text-physical">Physical Status</span> to the enemy triggers the Icon_Shatter <span class="text-cryo">Shatter</span> effect.<br />Icon_Solidification <span class="text-cryo">Solidification</span> = A <span class="text-highlight">non-Cryo Infliction</span> (Icon_HeatInfliction/Icon_ElectricInfliction/Icon_NatureInfliction) + Icon_CryoInfliction <span class="text-cryo">Cryo Infliction</span>',
     },
     {
+        tag: "corrosion",
+        name: "Arts Reaction: Corrosion",
+        description:
+            'An enemy with Icon_Corrosion <span class="text-nature">Corrosion</span> gradually loses resistance against all Elements.<br />Icon_Corrosion <span class="text-nature">Corrosion</span> = A <span class="text-highlight">non-Nature Infliction</span> (Icon_HeatInfliction/Icon_ElectricInfliction/Icon_CryoInfliction) + Icon_NatureInfliction <span class="text-nature">Nature Infliction</span>',
+    },
+    {
         tag: "amp",
         name: "Amp",
         description:
