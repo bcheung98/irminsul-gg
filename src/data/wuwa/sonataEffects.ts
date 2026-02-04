@@ -314,7 +314,7 @@ export const sonataEffects: SonataEffect[] = [
         displayName: "Chromatic Foam",
         setEffect: {
             "2": '<span class="text-fusion">Fusion DMG</span> +10%.',
-            "5": 'When the Resonator inflicts <span class="text-fusion">Fusion Burst</span> on the enemies, they gain the following effects: Gain 10% <span class="text-fusion">Fusion DMG Bonus</span> for 15s. While this effect is active, casting an Outro Skill grants the incoming Resonator 25% <span class="text-fusion">Fusion DMG Bonus</span> for 15s or until they\'re switched out.',
+            "5": 'When the Resonator inflicts <span class="text-fusion">Fusion Burst</span> on the enemies, they gain the following effects: Gain 10% <span class="text-fusion">Fusion DMG Bonus</span> for 15s. While this effect is active, casting an Outro Skill grants the incoming Resonator 25% <span class="text-fusion">Fusion DMG Bonus</span> for 15s.',
         },
         release: {
             version: "3.1",
