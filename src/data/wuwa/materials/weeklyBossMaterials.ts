@@ -68,7 +68,7 @@ export const weeklyBossMaterials = [
         name: "Gold in Memory",
         tag: "Gold in Memory",
         rarity: 4,
-        source: "???",
+        source: "Sigillum",
         release: { version: "3.1" },
     },
 ];

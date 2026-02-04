@@ -184,7 +184,7 @@ export const bossMaterials = [
         name: "Our Choice",
         tag: "Our Choice",
         rarity: 4,
-        source: "???",
+        source: "Nameless Explorer",
         release: { version: "3.1" },
     },
 ];
