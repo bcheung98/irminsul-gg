@@ -28,6 +28,7 @@ export type ZZZWeaponSubStat =
     | "CRIT Rate"
     | "CRIT DMG"
     | "Anomaly Proficiency"
+    | "Anomaly Mastery"
     | "Energy Regen"
     | "Impact"
     | "PEN Ratio";
@@ -80,6 +81,14 @@ export const weaponSubStats: Record<ZZZWeaponSubStat, WeaponSubStatInfo> = {
     },
     "Anomaly Proficiency": {
         title: "Anomaly Proficiency",
+        scaling: {
+            5: ["36", "36", "46.8", "46.8", "57.6", "57.6", "68.4", "68.4", "79.2", "79.2", "90", "90"],
+            4: ["30", "30", "39", "39", "48", "48", "57", "57", "66", "66", "75", "75"],
+            3: ["24", "24", "31.2", "31.2", "38.4", "38.4", "45.6", "45.6", "52.8", "52.8", "60", "60"],
+        }
+    },
+    "Anomaly Mastery": {
+        title: "Anomaly Mastery",
         scaling: {
             5: ["36", "36", "46.8", "46.8", "57.6", "57.6", "68.4", "68.4", "79.2", "79.2", "90", "90"],
             4: ["30", "30", "39", "39", "48", "48", "57", "57", "66", "66", "75", "75"],
