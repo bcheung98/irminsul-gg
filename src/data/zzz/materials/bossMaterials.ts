@@ -119,10 +119,10 @@ export const bossMaterials = [
     {
         id: 110514,
         category: "boss",
-        name: "",
-        tag: "",
+        name: "Bloodstained Miasma Feather",
+        tag: "Bloodstained Miasma Feather",
         rarity: 4,
-        source: "?",
+        source: "Sacrifice - Covenant Guardian",
         release: { version: "2.6" },
     },
 ];
