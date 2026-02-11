@@ -40,9 +40,9 @@ export default function MaterialGrid({
                             cost={cost}
                             size={size}
                         />
-                    </Grid>
-                )
-        )
+                    </Grid>,
+                ),
+        ),
     );
 
     return (
@@ -73,6 +73,15 @@ function sortItems(items: string[], pathname: string) {
               "characterLevel",
               "characterSkill",
               "weaponLevel",
+              "disk",
+              "fungi",
+              "level",
+              "prism",
+              "dice",
+              "plant",
+              "skill",
+              "mineral",
+              "rare",
           ]
         : [
               "credits",
@@ -92,6 +101,7 @@ function sortItems(items: string[], pathname: string) {
               "weaponLevel",
               "weekly",
               "disk",
+              "dice",
               "fungi",
               "level",
               "prism",

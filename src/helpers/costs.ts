@@ -29,6 +29,10 @@ import {
 import {
     getCharacterLevelCost as getEndfieldCharacterLevelCost,
     getCharacterSkillCost as getEndfieldCharacterSkillCost,
+    getCharacterAttributeCost as getEndfieldCharacterAttributeCost,
+    getCharacterTalentCost as getEndfieldCharacterTalentCost,
+    getCharacterBaseSkillCost as getEndfieldCharacterBaseSkillCost,
+    getCharacterOutfittingCost as getEndfieldCharacterOutfittingCost,
     getWeaponLevelCost as getEndfieldWeaponLevelCost,
 } from "./endfield/getLevelUpCosts";
 
@@ -67,6 +71,10 @@ export const costs: GameData<Costs> = {
     endfield: {
         characterLevel: getEndfieldCharacterLevelCost,
         characterSkill: getEndfieldCharacterSkillCost,
+        characterAttribute: getEndfieldCharacterAttributeCost,
+        characterTalent: getEndfieldCharacterTalentCost,
+        characterBaseSkill: getEndfieldCharacterBaseSkillCost,
+        characterOutfitting: getEndfieldCharacterOutfittingCost,
         weaponLevel: getEndfieldWeaponLevelCost,
     },
 };

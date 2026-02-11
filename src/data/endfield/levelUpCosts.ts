@@ -33,8 +33,43 @@ export const characterSkill = {
 export const characterAttribute = {
     credits: [1000, 1800, 6000, 18000],
     prism1: [5, 10, 0, 0],
-    prism2: [0, 0, 10, 25],
+    prism2: [0, 0, 10, 20],
 };
+
+export const characterPassives = (levels: number[]) => {
+    if (JSON.stringify(levels) === JSON.stringify([1, 2, 3])) {
+        return {
+            credits: [2400, 10800, 32000],
+            prism1: [12, 48, 0],
+            prism2: [0, 0, 36],
+        };
+    } else if (JSON.stringify(levels) === JSON.stringify([1, 3, 2, 3])) {
+        return {
+            credits: [2400, 16000, 10800, 16000],
+            prism1: [12, 0, 48, 0],
+            prism2: [0, 18, 0, 18],
+        };
+    } else {
+        return {
+            credits: [2400, 8600, 10000, 24000],
+            prism1: [12, 40, 48, 0],
+            prism2: [0, 0, 0, 28],
+        };
+    }
+};
+
+export const characterPassivesCost = [
+    {
+        credits: [2400, 8600, 0, 0],
+        prism1: [12, 40, 0, 0],
+        prism2: [0, 0, 0, 0],
+    },
+    {
+        credits: [0, 10000, 24000, 0],
+        prism1: [0, 48, 0, 0],
+        prism2: [0, 0, 28, 0],
+    },
+];
 
 export const characterBaseSkill = [
     {
@@ -43,12 +78,16 @@ export const characterBaseSkill = [
         prism2: [0, 12],
     },
     {
-        credits: [3000, 0],
+        credits: [3000, 20000],
         prism1: [12, 0],
         prism2: [0, 20],
-        level: [0, 12],
     },
 ];
+
+// Character outfitting nodes
+export const characterOutfitting = {
+    credits: [1600, 6500, 18000],
+};
 
 export const weaponLevel = {
     credits: [0, 640, 2200, 10400, 8500, 29010, 25000, 132410, 90000, 873010],

@@ -1,12 +1,17 @@
 import { objectKeys, range } from "@/utils";
 import {
+    characterAttribute,
+    characterBaseSkill,
     characterLevel,
+    characterOutfitting,
+    characterPassives,
     characterSkill,
     weaponLevel,
 } from "@/data/endfield/levelUpCosts";
 import { getEndfieldMaterial } from "./getMaterials";
 import { EndfieldMaterials } from "@/types/endfield/materials";
 import { calculateCosts } from "../costs";
+import { EndfieldCharacterPassive } from "@/types/endfield/character";
 
 const mats = getEndfieldMaterial();
 
@@ -19,6 +24,8 @@ export interface GetLevelUpCostsProps {
     rarity?: number;
     materials: EndfieldMaterials;
     skillKey?: string;
+    baseSkills?: EndfieldCharacterPassive[];
+    talents?: EndfieldCharacterPassive[];
 }
 
 export function getCharacterLevelCost({
@@ -154,12 +161,90 @@ export function getCharacterSkillCost({
             item_plant_crylplant_1_3: plant3,
             [mats(materials.plant).id]: plant4,
         },
-        skill: {
-            [mats(
-                materials[
-                    ["attack", "combo"].includes(skillKey) ? "skillA" : "skillB"
-                ],
-            ).id]: skill,
+        rare: {
+            [mats(materials["skillA"]).id]: ["attack", "combo"].includes(
+                skillKey,
+            )
+                ? skill
+                : 0,
+            [mats(materials["skillB"]).id]: ["skill", "ultimate"].includes(
+                skillKey,
+            )
+                ? skill
+                : 0,
+        },
+    };
+}
+
+export function getCharacterAttributeCost({
+    skillKey,
+    selected,
+}: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
+    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const costs = { ...characterAttribute };
+    let { credits, prism1, prism2 } = costs;
+    return {
+        credits: {
+            item_gold: selected ? credits[index] : 0,
+        },
+        prism: {
+            item_char_skill_level_1_6: selected ? prism1[index] : 0,
+            item_char_skill_level_7_12: selected ? prism2[index] : 0,
+        },
+    };
+}
+
+export function getCharacterTalentCost({
+    skillKey,
+    selected,
+    talents,
+}: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected" | "talents">>) {
+    const levels = talents
+        .map((skill) => skill.levels.filter((i) => i != 0))
+        .flat();
+    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const costs = characterPassives(levels);
+    let { credits, prism1, prism2 } = costs;
+    return {
+        credits: {
+            item_gold: selected ? credits[index] : 0,
+        },
+        prism: {
+            item_char_skill_level_1_6: selected ? prism1[index] : 0,
+            item_char_skill_level_7_12: selected ? prism2[index] : 0,
+        },
+    };
+}
+
+export function getCharacterBaseSkillCost({
+    skillKey,
+    selected,
+}: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
+    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const costs = { ...characterBaseSkill[index < 2 ? 0 : 1] };
+    let { credits, prism1, prism2 } = costs;
+
+    return {
+        credits: {
+            item_gold: selected ? credits[index % 2] : 0,
+        },
+        prism: {
+            item_char_skill_level_1_6: selected ? prism1[index % 2] : 0,
+            item_char_skill_level_7_12: selected ? prism2[index % 2] : 0,
+        },
+    };
+}
+
+export function getCharacterOutfittingCost({
+    skillKey,
+    selected,
+}: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
+    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const costs = { ...characterOutfitting };
+    let { credits } = costs;
+    return {
+        credits: {
+            item_gold: selected ? credits[index] : 0,
         },
     };
 }
