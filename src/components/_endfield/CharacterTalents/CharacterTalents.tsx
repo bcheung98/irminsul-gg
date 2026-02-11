@@ -96,14 +96,13 @@ export default function CharacterTalents({
                                                         size={40}
                                                     />
                                                 ) : (
-                                                    // <SkillIcon
-                                                    //     icon={`endfield/icons/base-skills/${passive.icon}`}
-                                                    //     borderRadius="4px"
-                                                    //     borderWidth={0}
-                                                    //     padding={0}
-                                                    //     size={40}
-                                                    // />
-                                                    <></>
+                                                    <SkillIcon
+                                                        icon={`endfield/icons/base-skills/${passive.icon}`}
+                                                        borderRadius="4px"
+                                                        borderWidth={0}
+                                                        padding={0}
+                                                        size={40}
+                                                    />
                                                 )
                                             }
                                             title={passive.name}
