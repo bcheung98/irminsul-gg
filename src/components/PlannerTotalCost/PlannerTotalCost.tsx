@@ -26,10 +26,10 @@ export default function PlannerTotalCost() {
                     materialCosts[key] = {};
                 }
                 Object.entries(value).forEach(([material, cost]) => {
-                    if (materialCosts[key][Number(material)] === undefined) {
-                        materialCosts[key][Number(material)] = 0;
+                    if (materialCosts[key][material] === undefined) {
+                        materialCosts[key][material] = 0;
                     }
-                    materialCosts[key][Number(material)] += cost;
+                    materialCosts[key][material] += cost;
                 });
             });
         }

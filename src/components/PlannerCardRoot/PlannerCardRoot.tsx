@@ -10,6 +10,7 @@ import GenshinPlannerCard from "@/components/_genshin/PlannerCard";
 import HSRPlannerCard from "@/components/_hsr/PlannerCard";
 import WuWaPlannerCard from "@/components/_wuwa/PlannerCard/PlannerCard";
 import ZZZPlannerCard from "@/components/_zzz/PlannerCard/PlannerCard";
+import EndfieldPlannerCard from "@/components/_endfield/PlannerCard/PlannerCard";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -111,5 +112,5 @@ const components: GameData<React.ReactNode> = {
     wuwa: <WuWaPlannerCard />,
     zzz: <ZZZPlannerCard />,
     uma: undefined,
-    endfield: undefined,
+    endfield: <EndfieldPlannerCard />,
 };

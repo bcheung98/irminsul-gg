@@ -49,6 +49,14 @@ export default function PlannerMaterials() {
                     ? "characterPassive"
                     : "characterBonusStat";
             skillKey = `${value.skillKey}`;
+        } else if (key.startsWith("outfitting")) {
+            costKey = "characterOutfitting";
+        } else if (key.startsWith("attribute")) {
+            costKey = "characterAttribute";
+        } else if (key.startsWith("baseSkill")) {
+            costKey = "characterBaseSkill";
+        } else if (key.startsWith("talent")) {
+            costKey = "characterTalent";
         } else {
             switch (key) {
                 case "level":
@@ -67,6 +75,7 @@ export default function PlannerMaterials() {
                 case "attack":
                 case "skill":
                 case "ultimate":
+                case "combo":
                 default:
                     costKey = "characterSkill";
             }
@@ -89,11 +98,14 @@ export default function PlannerMaterials() {
                     Object.entries(value).map(([material, cost]) => [
                         material,
                         cost,
-                    ])
+                    ]),
                 );
             } else {
                 Object.entries(value).forEach(([material, cost]) => {
-                    materialCosts[key][Number(material)] += cost;
+                    if (!materialCosts[key][material]) {
+                        materialCosts[key][material] = 0;
+                    }
+                    materialCosts[key][material] += cost;
                 });
             }
         });

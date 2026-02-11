@@ -1,4 +1,6 @@
 import { BaseDataWithRelease } from ".";
+import { EndfieldClass, EndfieldStatAttribute } from "./endfield";
+import { EndfieldCharacterPassive } from "./endfield/character";
 import {
     HSRCharacterTraceNodeMain,
     HSRCharacterTraceNodeSmall,
@@ -17,9 +19,13 @@ export interface PlannerItemData extends BaseDataWithRelease {
     rarity: number;
     element?: string;
     weaponType: string;
+    specialty?: EndfieldClass;
     materials: Materials;
     traces?: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[];
     bonusStats?: WuWaCharacterBonusStats;
+    mainAttribute?: EndfieldStatAttribute;
+    baseSkills?: EndfieldCharacterPassive[];
+    talents?: EndfieldCharacterPassive[];
     values: Record<string, CostSliderValues>;
 }
 

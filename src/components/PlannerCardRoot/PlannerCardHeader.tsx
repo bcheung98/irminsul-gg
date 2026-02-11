@@ -48,7 +48,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         return `${splitJoin(
             categories[`${game}/${type}`],
             " ",
-            ""
+            "",
         ).toLowerCase()}/${formatHref(href)}`;
     }
 
@@ -61,6 +61,11 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         game,
         key: "weaponType",
         value: item.weaponType,
+    });
+    const { src: classSrc, tooltip: classTooltip } = getDataIconURL({
+        game,
+        key: "specialty",
+        value: item.specialty,
     });
     const chipParams: InfoChipProps = {
         chipProps: {
@@ -92,6 +97,13 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
                         <InfoChip
                             icon={elementSrc}
                             title={elementTooltip}
+                            {...chipParams}
+                        />
+                    )}
+                    {item.specialty && (
+                        <InfoChip
+                            icon={classSrc}
+                            title={classTooltip}
                             {...chipParams}
                         />
                     )}
