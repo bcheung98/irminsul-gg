@@ -55,7 +55,7 @@ export default function PlannerMaterials() {
             costKey = "characterAttribute";
         } else if (key.startsWith("baseSkill")) {
             costKey = "characterBaseSkill";
-        } else if (key.startsWith("talent")) {
+        } else if (game === "endfield" && key.startsWith("talent")) {
             costKey = "characterTalent";
         } else {
             switch (key) {
@@ -76,10 +76,13 @@ export default function PlannerMaterials() {
                 case "skill":
                 case "ultimate":
                 case "combo":
+                case "elation":
                 default:
                     costKey = "characterSkill";
             }
         }
+
+        console.log(costKey);
 
         return costs[game][costKey]({
             ...value,

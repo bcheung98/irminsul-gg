@@ -23,7 +23,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "aha",
         name: "Aha",
         description:
-            'When taking action, triggers an Aha Instant and causes units capable of using Elation Skills to each use their Elation Skill 1 time. If there are no units capable of using Elation Skills when Aha takes action, Aha will use "Let There Be Laughter."<br />The Aha Instant lasts until the final Elation Skill finishes this time.<br />When the Aha Instant ends, participating characters gain the "Certified Banger" state for the Punchline points taken into account this time, lasting for 2 turns.',
+            'When taking action, triggers an Aha Instant and causes units capable of using Elation Skills to each use their Elation Skill 1 time. If there are no units capable of using Elation Skills when Aha takes action, Aha will use "Let There Be Laughter."<br />The Aha Instant lasts until the final Elation Skill finishes this time.<br />When the Aha Instant ends, participating characters gain the "Certified Banger" state for the Punchline points taken into account this time, lasting for 2 turns. After Aha takes action, all Punchlines will be consumed.',
     },
     {
         tag: "backup",
@@ -129,7 +129,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "merrymaking",
         name: "Merrymaking",
         description:
-            "Affects Elation DMG's special effects. Can additionally boost Elation DMG dealt.",
+            "A special effect that affects Elation DMG and can additionally boost Elation DMG dealt.",
     },
     {
         tag: "out of bounds",
@@ -141,7 +141,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "punchline",
         name: "Punchline",
         description:
-            "Punchline is shared by the whole team. When dealing Elation DMG, the more Punchline points taken into account, the higher the Elation DMG.",
+            "Punchline is shared by the whole team. When dealing Elation DMG, the more Punchline taken into account, the higher the Elation DMG.",
     },
     {
         tag: "res pen",
