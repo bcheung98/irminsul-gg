@@ -474,7 +474,7 @@ export const calyxMaterials = [
     {
         id: 110261,
         category: "calyx",
-        name: '"The Fluffy" Hand-drawn Storyboard',
+        name: '"The Fluffy" Hand-drawn Storyboards',
         tag: "Comic1",
         rarity: 2,
         release: { version: "4.0" },
