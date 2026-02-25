@@ -389,9 +389,9 @@ export const bossMaterials = [
     {
         id: 113085,
         category: "boss",
-        tag: "113085",
-        name: "",
-        source: "?",
+        tag: "Prismatic Severed Tail",
+        name: "Prismatic Severed Tail",
+        source: "Radiant Moongecko",
         rarity: 4,
         release: { version: "Luna V" },
     },
