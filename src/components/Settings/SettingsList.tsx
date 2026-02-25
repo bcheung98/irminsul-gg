@@ -146,9 +146,10 @@ export default function SettingsList() {
         }
         group1.push(serverSettings);
 
-        if (!["uma", "endfield"].includes(gameTag)) {
-            settings.push(group2);
-        }
+        // Remove unreleased content setting
+        // if (!["uma", "endfield"].includes(gameTag)) {
+        //     settings.push(group2);
+        // }
     }
 
     return (
