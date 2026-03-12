@@ -127,7 +127,7 @@ export default function CurrentBanners<
                 )}
                 {chronicled && chronicled.length > 0 && (
                     <Stack spacing={1}>
-                        <Text>{`Chronicled Wish Banner`}</Text>
+                        <Text weight="highlight">{`Chronicled Wish`}</Text>
                         <Stack spacing={2}>
                             {chronicled.map((banner) => (
                                 <BannerItems

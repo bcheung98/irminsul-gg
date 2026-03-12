@@ -17,18 +17,19 @@ import { TCGActionCard, TCGCharacterCard } from "@/types/genshin/tcg";
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
-    const characterData = await getDataSet<GenshinCharacter>(
-        "genshin/characters"
-    );
+    const characterData =
+        await getDataSet<GenshinCharacter>("genshin/characters");
     const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
-    const equipmentData = await getDataSet<GenshinArtifact>(
-        "genshin/artifacts"
-    );
+    const equipmentData =
+        await getDataSet<GenshinArtifact>("genshin/artifacts");
     const cardData = await getDataSet<TCGCharacterCard>("genshin/tcg");
     const characterBannerData = await getDataSet<Banner>(
-        "genshin/banner-characters"
+        "genshin/banner-characters",
     );
     const weaponBannerData = await getDataSet<Banner>("genshin/banner-weapons");
+    const chronicledBannerData = await getDataSet<Banner>(
+        "genshin/banner-chronicled",
+    );
 
     const [
         characters,
@@ -37,6 +38,7 @@ export default async function Page() {
         cards,
         characterBanners,
         weaponBanners,
+        chronicledBanners,
     ] = await Promise.all([
         characterData,
         weaponData,
@@ -44,6 +46,7 @@ export default async function Page() {
         cardData,
         characterBannerData,
         weaponBannerData,
+        chronicledBannerData,
     ]);
 
     return (
@@ -53,7 +56,11 @@ export default async function Page() {
                 weapons={weapons}
                 equipment={equipment}
                 cards={cards}
-                banners={{ character: characterBanners, weapon: weaponBanners }}
+                banners={{
+                    character: characterBanners,
+                    weapon: weaponBanners,
+                    chronicled: chronicledBanners,
+                }}
             />
         </Suspense>
     );
