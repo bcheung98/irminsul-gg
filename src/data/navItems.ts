@@ -28,11 +28,11 @@ export const navItems: GameData<NavItem[]> = {
             title: "Artifacts",
             href: "artifacts",
         },
-        {
-            icon: "icons/TCG",
-            title: "TCG",
-            href: "tcg",
-        },
+        // {
+        //     icon: "icons/TCG",
+        //     title: "TCG",
+        //     href: "tcg",
+        // },
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",

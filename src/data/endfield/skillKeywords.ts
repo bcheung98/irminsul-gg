@@ -223,6 +223,12 @@ export const skillKeywords: SkillKeyword[] = [
             "Arts Susceptible targets temporarily take more <span class=text-highlight>Arts DMG</span>. The number represents the degree of increase. Effects of the same type can stack.",
     },
     {
+        tag: "haste",
+        name: "Haste",
+        description:
+            "Temporarily raises the movement speed of a target. The number represents the degree of the speed increase. Effects of the same type can stack until hitting the speed cap.",
+    },
+    {
         tag: "slow",
         name: "Slow",
         description:

@@ -57,28 +57,28 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName)
+                a.displayName.localeCompare(b.displayName),
         );
     const weapons = props.weapons
         .filter((weapon) => weapon.release.version === version)
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName)
+                a.displayName.localeCompare(b.displayName),
         );
     const equipment = props.equipment
         .filter((equipment) => equipment.release.version === version)
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName)
+                a.displayName.localeCompare(b.displayName),
         );
     const bangboo = props.bangboos
         ?.filter((bangboo) => bangboo.release.version === version)
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName)
+                a.displayName.localeCompare(b.displayName),
         );
     const cards = props.cards
         ?.filter((card) => card.release.version === version)
@@ -147,8 +147,8 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                             game,
                                             "characters",
                                             character,
-                                            theme.background(0)
-                                        )
+                                            theme.background(0),
+                                        ),
                                     )}
                                 </Grid>
                             </Grid>
@@ -163,7 +163,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {weapons.map((weapon) =>
-                                        renderInfoCard(game, "weapons", weapon)
+                                        renderInfoCard(game, "weapons", weapon),
                                     )}
                                 </Grid>
                             </Grid>
@@ -178,7 +178,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {equipment.map((item) =>
-                                        renderInfoCard(game, "equipment", item)
+                                        renderInfoCard(game, "equipment", item),
                                     )}
                                 </Grid>
                             </Grid>
@@ -193,12 +193,12 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
                                     {bangboo.map((item) =>
-                                        renderInfoCard(game, "bangboos", item)
+                                        renderInfoCard(game, "bangboos", item),
                                     )}
                                 </Grid>
                             </Grid>
                         )}
-                        {cards && cards.length > 0 && (
+                        {/* cards && cards.length > 0 && (
                             <Grid sx={gridContainerStyle} size="auto">
                                 <TextLabel
                                     icon={textLabelIcon(game, "cards")}
@@ -212,7 +212,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                     )}
                                 </Grid>
                             </Grid>
-                        )}
+                        )*/}
                     </Grid>
                 </Stack>
             </ContentBox>

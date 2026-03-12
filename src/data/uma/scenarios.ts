@@ -17,7 +17,7 @@ export const scenarios: UmaScenario[] = [
         id: 4,
         name: "Make a New Track",
         nameJP: "Make a New Track",
-        global: false,
+        global: true,
     },
     {
         id: 3,
