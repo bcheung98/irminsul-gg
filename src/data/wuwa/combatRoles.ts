@@ -231,6 +231,12 @@ export const combatRoles = [
         color: "#ff7777",
         icon: "wuwa/icons/tags/I2",
     },
+    {
+        name: "Echo Skill DMG",
+        description: "Deals higher Echo Skill DMG",
+        color: "#ff7777",
+        icon: "wuwa/icons/tags/I4",
+    },
 ];
 
 export const combatRoleNames = combatRoles.map((tag) => tag.name);
