@@ -71,4 +71,13 @@ export const weeklyBossMaterials = [
         source: "Sobek",
         release: { version: "2.5" },
     },
+    {
+        id: 110009,
+        category: "weekly",
+        name: "Marrow-Draining Thorn",
+        tag: "Marrow-Draining Thorn",
+        rarity: 5,
+        source: "Sanguine Sweeper",
+        release: { version: "2.7" },
+    },
 ];
