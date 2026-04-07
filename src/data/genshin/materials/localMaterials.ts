@@ -503,4 +503,13 @@ export const localMaterials = [
         source: "Nod-Krai",
         release: { version: "Luna IV" },
     },
+    {
+        id: 101272,
+        category: "local",
+        name: "Etherwing Moth",
+        tag: "Etherwing Moth",
+        rarity: 1,
+        source: "Mondstadt",
+        release: { version: "Luna VI" },
+    },
 ];
