@@ -395,4 +395,13 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "Luna V" },
     },
+    {
+        id: 113086,
+        category: "boss",
+        tag: "Plume of the Fallen Watcher",
+        name: "Plume of the Fallen Watcher",
+        source: "Watchers: Fallen Vigil",
+        rarity: 4,
+        release: { version: "Luna VI" },
+    },
 ];
