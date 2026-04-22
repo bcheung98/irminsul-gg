@@ -63,18 +63,25 @@ export default function CharacterTraceNode({
         if (trace.variants && skillVersion.value !== "v1") {
             description =
                 trace.variants.find(
-                    (variant) => variant.version.value === skillVersion.value
+                    (variant) => variant.version.value === skillVersion.value,
                 )?.description || trace.description;
         }
         imgSrc = `hsr/skills/${attributes.id}_${unlock.toLowerCase()}`;
     } else {
-        title = formatCharacterBonusStatTitle(trace.stat);
-        description = formatCharacterBonusStatDescription(
-            trace.stat,
-            characterBonusStats[trace.stat][unlock]
-        );
         stat = trace.stat;
-        imgSrc = `hsr/icons/stat-icons/${trace.stat}`;
+        if (
+            trace.variants &&
+            skillVersion.value &&
+            skillVersion.value !== "v1"
+        ) {
+            stat = trace.variants[skillVersion.value];
+        }
+        title = formatCharacterBonusStatTitle(stat);
+        description = formatCharacterBonusStatDescription(
+            stat,
+            characterBonusStats[stat][unlock],
+        );
+        imgSrc = `hsr/icons/stat-icons/${stat}`;
         imgSize = 32;
     }
 
@@ -86,7 +93,7 @@ export default function CharacterTraceNode({
             unlock,
             stat,
         }),
-        [skillVersion.value]
+        [skillVersion.value],
     );
 
     useEffect(() => {
