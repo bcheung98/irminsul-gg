@@ -103,6 +103,7 @@ export interface HSRCharacterTraceNodeSmall {
     stat: BonusStat;
     unlock: HSRCharacterUnlockKeys;
     subTraces?: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[];
+    variants?: Record<string, BonusStat>;
 }
 
 export interface HSRCharacterStats extends CharacterStats {

@@ -7,6 +7,7 @@ import Text from "@/components/Text";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
+import { useSkillVersionContext } from "@/context";
 import { characterBonusStats } from "@/data/hsr/characterBonusStats";
 import { formatCharacterBonusStats } from "./CharacterTraces.utils";
 
@@ -28,12 +29,21 @@ export default function CharacterTraceTotalStat({
 
     const traceStats = {} as Record<BonusStat, number>;
 
+    const skillVersion = useSkillVersionContext();
+
     function calculateTraceStats(
-        traces: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[]
+        traces: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[],
     ) {
         traces.forEach((trace) => {
             if ("stat" in trace) {
-                const stat = trace.stat;
+                let stat = trace.stat;
+                if (
+                    trace.variants &&
+                    skillVersion.value &&
+                    skillVersion.value !== "v1"
+                ) {
+                    stat = trace.variants[skillVersion.value];
+                }
                 let value = characterBonusStats[trace.stat][trace.unlock];
                 if (stat !== "SPD") {
                     value = value.slice(0, -1);
@@ -71,7 +81,7 @@ export default function CharacterTraceTotalStat({
                         <SkillDescription
                             game="hsr"
                             description={`${formatCharacterBonusStats(
-                                stat as BonusStat
+                                stat as BonusStat,
                             )} +${parseFloat(value.toFixed(1))}${
                                 stat !== "SPD" ? "%" : ""
                             }`}

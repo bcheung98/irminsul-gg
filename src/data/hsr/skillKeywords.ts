@@ -3,13 +3,13 @@ import { SkillKeyword } from "@/types/skill";
 export const skillKeywords: SkillKeyword[] = [
     {
         tag: "action advanced",
-        name: "Action advanced",
+        name: "Action Advance",
         description:
             "Reduces the target's waiting interval before the next action.",
     },
     {
         tag: "action delayed",
-        name: "Action delayed",
+        name: "Action Delayed",
         description:
             "Increases the target's waiting interval before the next action.",
     },
@@ -36,6 +36,12 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Base Chance",
         description:
             "The base chance of applying debuffs to targets hit.<br />The final probability is affected by the attacker's Effect Hit Rate and enemy targets' Effect RES.",
+    },
+    {
+        tag: "base res",
+        name: "Base RES",
+        description:
+            "The fixed DMG Type RES a target has when entering combat. Under normal circumstances, it cannot be modified.",
     },
     {
         tag: "break dmg",
@@ -70,7 +76,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "crowd control debuff",
         name: "Crowd Control debuff",
         description:
-            "Freeze, Entanglement, Imprisonment, Dominated, Outrage, Strong Reverberation, Alien Dream, Snarelock, Terrified.",
+            "Freeze, Entanglement, Imprisonment, Dominance, Outrage, Strong Reverberation, Alien Dream, Snarelock, Terrified, Action Lock, Happiness Puppet.",
     },
     {
         tag: "debuff",
@@ -95,6 +101,12 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Downed State",
         description:
             "An ally will be incapacitated once their HP is reduced to 0.",
+    },
+    {
+        tag: "effect hit rate",
+        name: "Effect Hit Rate",
+        description:
+            "Effect Hit Rate increases the chance of applying debuffs to enemy targets.<br />A higher Effect Hit Rate will result in higher chances of successfully applying a debuff.",
     },
     {
         tag: "elation dmg",
