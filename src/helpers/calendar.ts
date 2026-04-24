@@ -30,7 +30,7 @@ function incrementVersionNumber(version: string, game: Game) {
     }
 
     // Game specific adjustments
-    if (game === "genshin" && versionNumber === "Luna X") {
+    if (game === "genshin" && versionNumber === "Luna IX") {
         return "7.0";
     }
 
@@ -87,7 +87,7 @@ export function createVersionInfo({
     const versions: CalendarVersionInfo[] = [...banners];
 
     // Create future version info
-    // TODO: Remove Endfield from list once consistent banner schedule is known
+    // TODO: Remove Endfield from exclusion list once consistent banner schedule is known
     if (!["uma", "endfield"].includes(game)) {
         const lastVersion = versions.slice(-1)[0];
         let { id, version } = lastVersion;
