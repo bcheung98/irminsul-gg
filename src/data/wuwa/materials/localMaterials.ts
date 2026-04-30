@@ -215,4 +215,28 @@ export const localMaterials = [
         rarity: 1,
         release: { version: "3.1" },
     },
+    {
+        id: 42601480,
+        category: "local",
+        name: "Dream of Stars",
+        tag: "Dream of Stars",
+        rarity: 1,
+        release: { version: "3.3" },
+    },
+    {
+        id: 42601490,
+        category: "local",
+        name: "Redbell",
+        tag: "Redbell",
+        rarity: 1,
+        release: { version: "3.3" },
+    },
+    {
+        id: 42601500,
+        category: "local",
+        name: "Forget-Me-Not",
+        tag: "Forget-Me-Not",
+        rarity: 1,
+        release: { version: "3.3" },
+    },
 ];

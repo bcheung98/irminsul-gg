@@ -71,4 +71,13 @@ export const weeklyBossMaterials = [
         source: "Sigillum",
         release: { version: "3.1" },
     },
+    {
+        id: 41400304,
+        category: "weekly",
+        name: "We Who Question",
+        tag: "We Who Question",
+        rarity: 4,
+        source: "Denia",
+        release: { version: "3.3" },
+    },
 ];

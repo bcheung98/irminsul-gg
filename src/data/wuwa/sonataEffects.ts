@@ -332,4 +332,28 @@ export const sonataEffects: SonataEffect[] = [
             version: "3.1",
         },
     },
+    {
+        id: 30,
+        name: "Wishes of Quiet Snowfall",
+        displayName: "Wishes of Quiet Snowfall",
+        setEffect: {
+            "2": '<span class="text-glacio">Glacio DMG</span> +10%.',
+            "5": 'Inflicting Glacio Chafe on enemies increases <span class="text-glacio">Glacio DMG</span> dealt by 10% for 15s. The Resonator gains the Snowfall effect for 15s, which can be triggered once every 25s. While Snowfall is active:<ul><li>Dealing Resonance Liberation DMG removes Snowfall and increases the Resonator\'s Crit. Rate by 25% for 6s. While the effect is active, dealing Resonance Liberation DMG extends its duration by 4s, triggered once every 0.5s, up to 6 times.</li><li>Casting Outro Skill removes Snowfall and grants 25% <span class="text-glacio">Glacio DMG Bonus</span> to the incoming Resonator for 15s.</li></ul>When Snowfall is removed, only one of the effects above can be triggered.',
+        },
+        release: {
+            version: "3.3",
+        },
+    },
+    {
+        id: 31,
+        name: "Reel of Spliced Memories",
+        displayName: "Reel of Spliced Memories",
+        setEffect: {
+            "2": "ATK +10%",
+            "5": 'Inflicting <span class="text-highlight">Tune Rupture - Shifting</span> or <span class="text-highlight">Tune Strain - Shifting</span> on enemies increases the Tune Break Boost of Resonators in the team by 20 for 30s. Effects of the same name do not stack.',
+        },
+        release: {
+            version: "3.3",
+        },
+    },
 ];

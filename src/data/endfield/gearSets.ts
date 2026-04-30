@@ -100,7 +100,7 @@ export const gearSets = [
         name: "Pulser Labs",
         displayName: "Pulser Labs",
         setEffect: {
-            "3": 'Wearer\'s Arts Intensity <span class="text-highlight">+30</span>. After the wearer applies Electrification, the wearer gains Electric DMG <span class="text-highlight">+50%</span> for <span class="text-highlight">10s</span>. After the wearer applies Solidification, the wearer gains Cryo DMG <span class="text-highlight">+50%</span> for <span class="text-highlight">10</span>s. The aforementioned effects cannot stack.',
+            "3": 'Wearer\'s Arts Intensity <span class="text-highlight">+30</span>. After the wearer applies Icon_Electrification <span class=\"tooltip-electric\" data-tag=\"electrification\">Electrification</span>, the wearer gains <span class=\"text-electric\">Electric DMG</span> <span class="text-highlight">+50%</span> for <span class="text-highlight">10s</span>. After the wearer applies Icon_Solidification <span class=\"tooltip-cryo\" data-tag=\"solidification\">Solidification</span>, the wearer gains <span class=\"text-cryo\">Cryo DMG</span> <span class="text-highlight">+50%</span> for <span class="text-highlight">10</span>s. The aforementioned effects cannot stack.',
         },
     },
     {
@@ -149,6 +149,22 @@ export const gearSets = [
         displayName: "Eternal Xiranite",
         setEffect: {
             "3": 'Wearer\'s HP <span class="text-highlight">+1000</span>. After the wearer applies Amp, Protected, Susceptibility, or Weakened, other teammates gain DMG Dealt <span class="text-highlight">+16%</span> for <span class="text-highlight">15</span>s. This effect cannot stack.',
+        },
+    },
+    {
+        id: 120,
+        name: "Qingbo",
+        displayName: "Qingbo",
+        setEffect: {
+            "3": 'Wearer\'s Combo Skill Cooldown Reduction <span class="text-highlight">+15%</span>. When the wearer casts a combo skill, the wearer gains Skill DMG Dealt <span class="text-highlight">+20%</span> (for every skill) for 15s. This effect can reach 2 stacks. Duration of each stack is counted separately.',
+        },
+    },
+    {
+        id: 121,
+        name: "Xiranflow",
+        displayName: "Xiranflow",
+        setEffect: {
+            "3": 'Wearer\'s ATK <span class="text-highlight">+10%</span>. Whenever the wearer <span class=\"tooltip\" data-tag=\"debuff consume\">consumes</span> Icon_Electrification <span class=\"tooltip-electric\" data-tag=\"electrification\">Electrification</span> or Icon_Corrosion <span class=\"tooltip-nature\" data-tag=\"corrosion\">Corrosion</span>, the wearer gains a number of buff stacks equal to the <span class=\"tooltip-highlight\" data-tag=\"status level\">Status Level</span> of the Arts Reaction consumed, with each buff stack giving <span class=\"text-electric\">Electric DMG Dealt</span> and <span class=\"text-nature\">Nature DMG Dealt</span> <span class="text-highlight">+15%</span> for 25s. The number of buff stacks maxes out at 3 stacks. Duration of each stack is counted separately.',
         },
     },
 ];
