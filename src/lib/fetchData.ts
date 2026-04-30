@@ -60,7 +60,7 @@ function shouldRevalidate(url: string) {
     if (url.includes("localhost")) {
         return undefined;
     } else {
-        return 120;
+        return undefined;
     }
 }
 
