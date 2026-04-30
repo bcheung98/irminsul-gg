@@ -23,7 +23,6 @@
         "@mui/material": "^7.3.4",
         "@mui/material-nextjs": "^7.3.6",
         "@next/eslint-plugin-next": "16.1.0",
-        "@reduxjs/toolkit": "^2.9.0",
         "html-react-parser": "^5.1.18",
         "match-sorter": "^8.0.0",
         "next": "16.1.0",
