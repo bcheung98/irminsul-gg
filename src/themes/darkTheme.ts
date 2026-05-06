@@ -199,7 +199,7 @@ export const darkThemeData = {
             fire: "#ff5521",
             electric: "#2eb6ff",
             ether: "#fe437e",
-            wind: "#48eea7",
+            wind: "#a6c5fd",
         },
         uma: {
             highlight: "#f7ca2f",

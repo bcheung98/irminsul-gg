@@ -4,6 +4,7 @@ export const elements = [
     "Ice",
     "Electric",
     "Ether",
+    "Wind",
 ] as const;
 
 export const weapons = [
@@ -41,4 +42,5 @@ export const factions = [
     "Spook Shack",
     "Krampus Compliance Authority",
     "Angels of Delusion",
+    "Metropolitan Order Division",
 ] as const;
