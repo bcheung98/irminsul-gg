@@ -1,7 +1,6 @@
 // Component imports
+import GamesMenuItem from "./GamesMenuItem";
 import Text from "@/components/Text";
-import TextLabel from "@/components/TextLabel";
-import NavLink from "@/components/NavLink";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
 import CloseButton from "@/components/CloseButton";
@@ -10,8 +9,6 @@ import CloseButton from "@/components/CloseButton";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
-import ButtonBase from "@mui/material/ButtonBase";
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 
 // Helper imports
@@ -61,51 +58,11 @@ export default function GamesMenuList({
             )}
             <Stack spacing={0.5}>
                 {games.map((game, index) => (
-                    <ButtonBase
+                    <GamesMenuItem
                         key={index}
-                        href={`/${game.tag.toLocaleLowerCase()}`}
-                        sx={{ display: "flex" }}
-                        LinkComponent={NavLink}
-                    >
-                        <Box
-                            sx={[
-                                {
-                                    p: "4px 16px",
-                                    "&:hover": {
-                                        backgroundColor:
-                                            theme.drawer.backgroundColor.hover,
-                                    },
-                                },
-                                game.tag === gameTag
-                                    ? {
-                                          backgroundColor:
-                                              theme.drawer.backgroundColor
-                                                  .hover,
-                                          textShadow: `${theme.text.selected} 1px 1px 16px`,
-                                      }
-                                    : {
-                                          backgroundColor: "transparent",
-                                          textShadow: "none",
-                                      },
-                            ]}
-                            onClick={handleClose}
-                        >
-                            <TextLabel
-                                icon={`${game.tag}/_common/Icon`}
-                                iconProps={{ size: 32 }}
-                                title={game.name}
-                                titleProps={{
-                                    variant: "subtitle1",
-                                    color:
-                                        game.tag === gameTag
-                                            ? theme.text.selected
-                                            : theme.text.primary,
-                                    defaultCursor: "pointer",
-                                }}
-                                spacing={2}
-                            />
-                        </Box>
-                    </ButtonBase>
+                        game={game}
+                        handleClose={handleClose}
+                    />
                 ))}
             </Stack>
             {!matches && (
