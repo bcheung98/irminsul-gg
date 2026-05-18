@@ -14,7 +14,7 @@ export interface CalendarActions {
     setCalendarSettings: (
         game: Game,
         key: keyof CalendarSettings,
-        newValue: boolean
+        newValue: boolean,
     ) => void;
 }
 
@@ -41,7 +41,14 @@ export const initialState: CalendarState = {
         enabled: true,
         fullDuration: false,
     },
-    endfield: { enabled: true, fullDuration: false },
+    endfield: {
+        enabled: true,
+        fullDuration: false,
+    },
+    nte: {
+        enabled: true,
+        fullDuration: false,
+    },
 };
 
 export const useCalendarStore = create(
@@ -54,6 +61,6 @@ export const useCalendarStore = create(
                 }));
             },
         }),
-        { name: "v2/calendar" }
-    )
+        { name: "v2/calendar" },
+    ),
 );
