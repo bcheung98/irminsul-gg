@@ -6,6 +6,7 @@ import { hsrVersions } from "./hsr/versions";
 import { umaVersions } from "./uma/versions";
 import { wuwaVersions } from "./wuwa/versions";
 import { zzzVersions } from "./zzz/versions";
+import { nteVersions } from "./nte/versions";
 
 const versions: GameData<VersionInfo[]> = {
     genshin: genshinVersions,
@@ -14,6 +15,7 @@ const versions: GameData<VersionInfo[]> = {
     zzz: zzzVersions,
     uma: umaVersions,
     endfield: endfieldVersions,
+    nte: nteVersions,
 };
 
 export default versions;

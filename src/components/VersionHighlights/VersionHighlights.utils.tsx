@@ -73,6 +73,11 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
             weapons: "endfield/icons/Weapons",
             equipment: "",
         },
+        nte: {
+            characters: "",
+            weapons: "",
+            equipment: "",
+        },
     };
     return items[game][tag];
 }
@@ -85,7 +90,7 @@ export function renderInfoCard(
     game: Game,
     tag: keyof VersionHighlightsProps,
     item: VersionItemData,
-    backround = ""
+    backround = "",
 ) {
     const items: GameData<Data<React.ReactNode>> = {
         genshin: {
@@ -231,6 +236,11 @@ export function renderInfoCard(
                 />
             ),
             equipment: undefined,
+        },
+        nte: {
+            characters: <></>,
+            weapons: <></>,
+            equipment: <></>,
         },
     };
     return items[game][tag];
