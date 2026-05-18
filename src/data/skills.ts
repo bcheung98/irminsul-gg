@@ -48,6 +48,14 @@ export const skillKeys: GameData<Record<string, string>> = {
         combo: "Combo Skill",
         ultimate: "Ultimate",
     },
+    nte: {
+        attack: "Basic Attack",
+        skill: "Skill",
+        ultimate: "Ultimate",
+        support: "Support Skill",
+        passive: "Passive Skill",
+        life: "Life Skills",
+    },
 };
 
 export const skillIconURLs: GameData<Record<string, string>> = {
@@ -103,5 +111,14 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         combo: "endfield/skills/{id}_combo",
         ultimate: "endfield/skills/{id}_ultimate",
         passive: "endfield/skills/{id}_talent",
+    },
+    nte: {
+        attack: "nte/skills/Attack_{weaponType}",
+        skill: "nte/skills/{id}_skill",
+        ultimate: "nte/skills/{id}_ultimate",
+        support: "nte/skills/{id}_support",
+        passive1: "nte/skills/{id}_passive1",
+        passive2: "nte/skills/{id}_passive2",
+        life: "nte/skills/{id}_life",
     },
 };

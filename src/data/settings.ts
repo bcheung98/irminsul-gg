@@ -42,6 +42,7 @@ export function getServerButtons(game: Game) {
         case "hsr":
         case "wuwa":
         case "zzz":
+        case "nte":
         default:
             return serverButtons;
         case "uma":

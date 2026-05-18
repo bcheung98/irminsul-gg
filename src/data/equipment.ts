@@ -7,6 +7,7 @@ export const equipmentTags: GameData<string> = {
     zzz: "drive-discs",
     uma: "",
     endfield: "",
+    nte: "cartridges",
 };
 
 export const equipmentPieceType: GameData<Record<string, string>> = {
@@ -29,4 +30,5 @@ export const equipmentPieceType: GameData<Record<string, string>> = {
     zzz: {},
     uma: {},
     endfield: {},
+    nte: {},
 };

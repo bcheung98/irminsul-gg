@@ -66,4 +66,14 @@ export const banners: GameData<ToggleButtonProps[]> = {
             label: "Weapon",
         },
     ],
+    nte: [
+        {
+            value: "character",
+            label: "Character",
+        },
+        {
+            value: "weapon",
+            label: "Arc",
+        },
+    ],
 };
