@@ -54,6 +54,13 @@ export const urls = {
         "https://api.irminsul.gg/v2/endfield/banner-characters.json",
     "endfield/banner-weapons":
         "https://api.irminsul.gg/v2/endfield/banner-weapons.json",
+    // NTE
+    "nte/characters": "https://api.irminsul.gg/v2/nte/characters.json",
+    "nte/arcs": "https://api.irminsul.gg/v2/nte/weapons.json",
+    "nte/cartridges": "https://api.irminsul.gg/v2/nte/cartridges.json",
+    "nte/banner-characters":
+        "https://api.irminsul.gg/v2/nte/banner-characters.json",
+    "nte/banner-weapons": "https://api.irminsul.gg/v2/nte/banner-weapons.json",
 };
 
 // function shouldRevalidate(url: string) {
