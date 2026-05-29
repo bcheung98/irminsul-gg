@@ -27,7 +27,7 @@ export interface UmaSupport extends BaseData {
 export interface UmaSupportSkills {
     event: number[];
     hint: number[];
-    stat: StatHint[];
+    stat: StatHint[][];
 }
 
 export interface SupportPerks {

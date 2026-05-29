@@ -44,41 +44,51 @@ export default function SupportSkills({
                                     ))}
                                 </Grid>
                             </Stack>
-                        )
+                        ),
                 )}
                 {skills.stat.length > 0 && (
                     <Stack spacing={1}>
                         <Text weight="highlight">Stat Hints</Text>
-                        <Grid container>
-                            <Grid
-                                size={{ xs: 12, md: 6 }}
-                                sx={{
-                                    p: 1,
-                                    backgroundColor: theme.background(0),
-                                    borderRadius: "4px",
-                                }}
-                            >
-                                <FlexBox
-                                    spacing={1.5}
-                                    sx={{ alignItems: "flex-start" }}
-                                >
-                                    <KeyboardDoubleArrowUpIcon
-                                        sx={{
-                                            color: theme.text.primary,
-                                            fontSize: "24px",
-                                        }}
-                                    />
-                                    <Stack>
-                                        {skills.stat.map((stat) => (
-                                            <Text
-                                                key={stat.type}
-                                                variant="body2"
-                                                weight="highlight"
-                                            >{`${stat.type} +${stat.value}`}</Text>
-                                        ))}
-                                    </Stack>
-                                </FlexBox>
-                            </Grid>
+                        <Grid container spacing={2}>
+                            {skills.stat.map(
+                                (hint, index) =>
+                                    hint.length > 0 && (
+                                        <Grid
+                                            key={index}
+                                            size={{ xs: 12, md: 6 }}
+                                            sx={{
+                                                p: 1,
+                                                backgroundColor:
+                                                    theme.background(0),
+                                                borderRadius: "4px",
+                                            }}
+                                        >
+                                            <FlexBox
+                                                spacing={1.5}
+                                                sx={{
+                                                    alignItems: "flex-start",
+                                                }}
+                                            >
+                                                <KeyboardDoubleArrowUpIcon
+                                                    sx={{
+                                                        color: theme.text
+                                                            .primary,
+                                                        fontSize: "24px",
+                                                    }}
+                                                />
+                                                <Stack>
+                                                    {hint.map((stat) => (
+                                                        <Text
+                                                            key={stat.type}
+                                                            variant="body2"
+                                                            weight="highlight"
+                                                        >{`${stat.type} +${stat.value}`}</Text>
+                                                    ))}
+                                                </Stack>
+                                            </FlexBox>
+                                        </Grid>
+                                    ),
+                            )}
                         </Grid>
                     </Stack>
                 )}
