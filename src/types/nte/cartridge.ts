@@ -1,5 +1,3 @@
-import { BaseData } from "..";
+import { Equipment } from "../equipment";
 
-export interface NTECartridge extends BaseData {
-    
-}
+export interface NTECartridge extends Equipment {}

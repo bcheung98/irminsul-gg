@@ -204,4 +204,11 @@ export const navItems: GameData<NavItem[]> = {
             href: "banners",
         },
     ],
+    nte: [
+        {
+            icon: "",
+            title: "Home",
+            href: "",
+        },
+    ],
 };
