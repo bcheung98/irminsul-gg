@@ -48,7 +48,7 @@ export interface UniqueEffect {
 }
 
 export interface SupportHints {
-    stats: StatHint[];
+    stats: StatHint[][];
     skills: number[];
 }
 
