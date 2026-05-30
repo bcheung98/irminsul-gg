@@ -18,7 +18,7 @@ export const categories: Record<string, string> = {
     "endfield/characters": "Operators",
     "endfield/operators": "Operators",
     "endfield/weapons": "Weapons",
-    "nte/characters": "Characters",
+    "nte/characters": "Espers",
     "nte/weapons": "Arcs",
     "nte/equipment": "Cartridges",
 };
@@ -44,7 +44,7 @@ export const categoryURLs: Record<string, string> = {
     "endfield/characters": "endfield/operators",
     "endfield/operators": "endfield/operators",
     "endfield/weapons": "endfield/weapons",
-    "nte/characters": "nte/characters",
+    "nte/characters": "nte/espers",
     "nte/weapons": "nte/arcs",
     "nte/equipment": "nte/cartridges",
 };
@@ -74,7 +74,7 @@ export const categoryImgURLs: Record<
     "endfield/characters": (id: number) => `endfield/operators/${id}`,
     "endfield/operators": (id: number) => `endfield/operators/${id}`,
     "endfield/weapons": (id: number) => `endfield/weapons/${id}`,
-    "nte/characters": (id: number) => `nte/characters/${id}`,
+    "nte/characters": (id: number) => `nte/espers/${id}`,
     "nte/weapons": (id: number) => `nte/arcs/${id}`,
     "nte/equipment": (id: number) => `nte/cartridges/${id}`,
 };
