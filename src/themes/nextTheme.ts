@@ -221,6 +221,20 @@ export const nextThemeData = {
             aether: "#c59eff",
             heal: "#abd040",
         },
+        nte: {
+            highlight: "#fe62a6",
+            header: "#ffe7b9",
+            refinement: "#53cec4",
+            number: "#53cec4",
+            value: "#53cec4",
+            star: "#ffcc33",
+            anima: "#3bc198",
+            chaos: "#9971da",
+            cosmos: "#d5cba9",
+            incantation: "#e24977",
+            lakshana: "#e4ca69",
+            psyche: "#4875f3",
+        },
     },
     appbar: {
         backgroundColor: {
