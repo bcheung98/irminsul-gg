@@ -205,4 +205,17 @@ const sortOptions = {
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Weapon" },
     ],
+    "nte/espers": [
+        { value: "release", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "element", label: "Element" },
+        { value: "weaponType", label: "Arc Type" },
+    ],
+    "nte/arcs": [
+        { value: "version", label: "Release Date" },
+        { value: "name", label: "Name" },
+        { value: "rarity", label: "Rarity" },
+        { value: "weaponType", label: "Arc Type" },
+    ],
 };

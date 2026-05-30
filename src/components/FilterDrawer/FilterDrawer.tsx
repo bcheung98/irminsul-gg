@@ -27,6 +27,7 @@ import {
     EndfieldCharacterFilters,
     EndfieldWeaponFilters,
 } from "../_endfield/Filters";
+import { NTECharacterFilters, NTEWeaponFilters } from "../_nte/Filters";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -79,4 +80,6 @@ const components: Record<string, React.ReactNode> = {
     "/uma/skills": <UmaSkillFilters />,
     "/endfield/operators": <EndfieldCharacterFilters />,
     "/endfield/weapons": <EndfieldWeaponFilters />,
+    "/nte/espers": <NTECharacterFilters />,
+    "/nte/arcs": <NTEWeaponFilters />,
 };
