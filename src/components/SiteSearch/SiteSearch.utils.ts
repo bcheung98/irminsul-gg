@@ -1,7 +1,7 @@
 "use server";
 
 import { getDataSet } from "@/lib/fetchData";
-import { formatHref, splitJoin } from "@/utils";
+import { formatHref } from "@/utils";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { categoryURLs } from "@/data/categories";
 import { SearchResult } from "./SiteSearch";
@@ -16,6 +16,7 @@ import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import { NTECharacter, NTEWeapon } from "@/types/nte";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -107,6 +108,16 @@ export async function getItems(
             hideUnreleasedContent,
             await getDataSet<EndfieldWeapon>("endfield/weapons"),
             "endfield",
+        ),
+        "nte/characters": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<NTECharacter>("nte/espers"),
+            "nte",
+        ),
+        "nte/weapons": filterUnreleasedContent(
+            hideUnreleasedContent,
+            await getDataSet<NTEWeapon>("nte/arcs"),
+            "nte",
         ),
     })
         .map(([category, data]) =>

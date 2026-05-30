@@ -55,7 +55,7 @@ export const urls = {
     "endfield/banner-weapons":
         "https://api.irminsul.gg/v2/endfield/banner-weapons.json",
     // NTE
-    "nte/characters": "https://api.irminsul.gg/v2/nte/characters.json",
+    "nte/espers": "https://api.irminsul.gg/v2/nte/characters.json",
     "nte/arcs": "https://api.irminsul.gg/v2/nte/weapons.json",
     "nte/cartridges": "https://api.irminsul.gg/v2/nte/cartridges.json",
     "nte/banner-characters":
