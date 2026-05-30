@@ -19,7 +19,7 @@ export interface GetLevelUpCostsProps {
     withXP?: boolean;
     rarity?: number;
     materials: NTEMaterials;
-    index?: number;
+    skillKey?: string;
 }
 
 export function getCharacterLevelCost({
@@ -122,11 +122,13 @@ export function getCharacterSkillCost({
 }
 
 export function getCharacterPassiveCost({
-    index,
+    skillKey,
     selected,
     materials,
-}: Required<Pick<GetLevelUpCostsProps, "index" | "selected" | "materials">>) {
-    const costs = { ...characterPassive[index - 1] };
+}: Required<
+    Pick<GetLevelUpCostsProps, "skillKey" | "selected" | "materials">
+>) {
+    const costs = { ...characterPassive[Number(skillKey) - 1] };
     let { credits, common2, common3, weekly } = costs;
     return {
         credits: {

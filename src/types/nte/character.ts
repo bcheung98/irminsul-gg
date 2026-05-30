@@ -1,4 +1,4 @@
-import { NTEElement, NTERarity } from ".";
+import { NTEElement, NTERarity, NTEWeaponType } from ".";
 import { BaseData, VoiceActorData } from "..";
 import { CharacterOutfit, CharacterStats } from "../character";
 import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
@@ -10,15 +10,18 @@ export interface NTECharacter extends BaseData {
     title?: string;
     rarity: NTERarity;
     element: NTEElement;
+    weaponType: NTEWeaponType;
     skills: NTECharacterSkills;
     passives: NTECharacterPassive[];
     upgrades: Skill[];
     keywords?: SkillKeyword[];
     stats: NTECharacterStats;
+    combatRoles: string[];
     materials: NTECharacterMaterials;
     description: string;
     birthday: string;
     gender: "Male" | "Female" | "Adaptive";
+    faction: string;
     outfits: CharacterOutfit[];
     voiceActors: VoiceActorData;
     release: VersionWithDate;
@@ -33,7 +36,7 @@ export interface NTECharacterSkills extends CharacterSkillsList {
 
 export type NTESkillKey = keyof NTECharacterSkills;
 
-export type NTECharacterPassiveType = "passive" | "life" | "";
+export type NTECharacterPassiveType = "passive" | "peculiarity" | "life";
 
 export interface NTECharacterPassive extends Skill {
     type: NTECharacterPassiveType;
