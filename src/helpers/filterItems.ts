@@ -51,6 +51,11 @@ export function filterItems<T extends Record<string, any>>(
             filters.skillMat.includes(item.materials.skill),
         );
     }
+    if ("weaponMat" in filters && filters.weaponMat.length > 0) {
+        res = res.filter((item) =>
+            filters.weaponMat.includes(item.materials.weapon),
+        );
+    }
     if ("commonMat" in filters && filters.commonMat.length > 0) {
         res = res.filter((item) =>
             filters.commonMat.includes(item.materials.common),

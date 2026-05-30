@@ -53,12 +53,18 @@ export function nteFilters<T extends Filters>({
         rarity: {
             name: "Rarity",
             value: filters.rarity,
-            buttons: rarities.slice(0, -3).map((rarity) => ({
-                value: rarity,
-                label: (
-                    <RarityStars rarity={rarity} useRarityColor variant="h6" />
-                ),
-            })),
+            buttons: rarities
+                .slice(0, key === "nte/characters" ? -3 : -2)
+                .map((rarity) => ({
+                    value: rarity,
+                    label: (
+                        <RarityStars
+                            rarity={rarity}
+                            useRarityColor
+                            variant="h6"
+                        />
+                    ),
+                })),
             onChange: (_: React.BaseSyntheticEvent, newValues: NTERarity[]) =>
                 setFilters(key, "rarity", newValues),
             padding: "4px 8px",
@@ -101,8 +107,10 @@ export function nteFilters<T extends Filters>({
             name: "Substat",
             value: filters.subStat,
             buttons: createFilterButtons({
-                items: Object.keys(weaponSubStats),
+                items: Object.keys(weaponSubStats).slice(1),
                 url: "nte/icons/stat-icons",
+                getTooltip: (item: NTEWeaponSubStat) =>
+                    weaponSubStats[item].title,
             }),
             onChange: (
                 _: React.BaseSyntheticEvent,
@@ -132,6 +140,30 @@ export function nteFilters<T extends Filters>({
             }),
             onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
                 setFilters(key, "skillMat", newValues),
+        },
+        weaponMat: {
+            name: "Weapon Material",
+            value: filters.weaponMat,
+            buttons: createFilterButtons({
+                items: getMaterialCategory("weapon")
+                    .filter((material) => material.rarity === 1)
+                    .map((material) => material.tag || ""),
+                url: "nte/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
+                        (material) => material.tag === `${item}3`,
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
+                getTooltip: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
+                        (material) => material.tag === item,
+                    );
+                    return mat ? `${mat.name}` : "";
+                },
+            }),
+            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
+                setFilters(key, "weaponMat", newValues),
         },
         commonMat: {
             name: "Common Material",
