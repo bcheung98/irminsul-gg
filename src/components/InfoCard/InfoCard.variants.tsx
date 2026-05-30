@@ -12,6 +12,7 @@ import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import { NTECharacter } from "@/types/nte";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -532,6 +533,30 @@ export function EndfieldWeaponInfoCard({
             }}
             url=""
             href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function NTECharacterInfoCard({
+    character,
+    props,
+}: {
+    character: NTECharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="nte/espers"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            href={character.url}
             {...props}
         />
     );

@@ -49,6 +49,8 @@ export function getStats({
             return getZZZStats({ stats, attributes });
         case "endfield":
             return getEndfieldStats({ stats, attributes });
+        case "nte":
+            return getNTEStats({ stats, attributes });
         case "uma":
         default:
             return { levels: [], data: [] };
@@ -495,6 +497,37 @@ function getEndfieldStats({ stats }: Props): StatsData {
                 ),
             ],
         ];
+    }
+
+    return { levels, data };
+}
+
+function getNTEStats({ stats, attributes }: Props): StatsData {
+    const levels = levelData["nte"]("level-asc", attributes.rarity);
+    let data: (string | number)[][] = [];
+    if ("hp" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base HP|nte/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Base ATK|nte/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Base DEF|nte/icons/stat-icons/DEF",
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString(),
+                ),
+            ],
+        ];
+    } else if ("subStat" in stats) {
     }
 
     return { levels, data };

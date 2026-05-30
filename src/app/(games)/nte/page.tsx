@@ -12,7 +12,7 @@ import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
-    const characterData = await getDataSet<NTECharacter>("nte/characters");
+    const characterData = await getDataSet<NTECharacter>("nte/espers");
     const weaponData = await getDataSet<NTEWeapon>("nte/arcs");
     const equipmentData = await getDataSet<NTECartridge>("nte/cartridges");
     const characterBannerData = await getDataSet<Banner>(

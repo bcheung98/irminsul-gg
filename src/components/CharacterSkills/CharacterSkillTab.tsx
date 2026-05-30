@@ -105,6 +105,9 @@ export default function CharacterSkillTab({
             initialValue = 12;
             maxLevel = 12;
         }
+        if (game === "nte") {
+            maxLevel = 13;
+        }
 
         const [sliderValue, setSliderValue] = useState(initialValue);
         const handleSliderChange = (_: Event, newValue: number | number[]) => {

@@ -100,6 +100,18 @@ export default function CharacterUpgrades({
                         attributes={attributes}
                     />
                 );
+            case "nte":
+                return index > 5 ? (
+                    <SkillIcon
+                        icon={"nte/skills/resonance"}
+                        attributes={attributes}
+                    />
+                ) : (
+                    <SkillIcon
+                        icon={getIconURL(index)}
+                        attributes={attributes}
+                    />
+                );
             default:
                 return (
                     <SkillIcon
@@ -163,8 +175,21 @@ export default function CharacterUpgrades({
                                 <Stack spacing={1}>
                                     <TextLabel
                                         icon={getSkillIcon(index)}
-                                        title={`${upgrade.index}. ${upgrade.name}`}
+                                        title={
+                                            game === "nte"
+                                                ? upgrade.name
+                                                : `${upgrade.index}. ${upgrade.name}`
+                                        }
                                         titleProps={{ variant: "h6" }}
+                                        subtitle={
+                                            game === "nte" &&
+                                            index > 5 &&
+                                            `Resonance Lv. ${index === 6 ? "3" : "6"}`
+                                        }
+                                        subtitleProps={{
+                                            color: theme.text.header,
+                                            variant: "subtitle1",
+                                        }}
                                         spacing={2}
                                     />
                                     <Text
