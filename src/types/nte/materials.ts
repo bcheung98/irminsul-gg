@@ -17,9 +17,7 @@ export type NTEMaterials = {
 
 export type NTECharacterMaterials =
     | Materials
-    | Required<
-          Pick<NTEMaterials, "skill" | "common" | "city" | "boss" | "weekly">
-      >;
+    | Required<Pick<NTEMaterials, "skill" | "common" | "boss" | "weekly">>;
 export type NTEWeaponMaterials = Required<
     Pick<NTEMaterials, "weapon" | "common">
 >;

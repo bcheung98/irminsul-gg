@@ -100,7 +100,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: "OrdinaryMonMaterial_03_lv1",
+        id: "OrdinaryMonMaterial_04_lv1",
         category: "common",
         name: "Suspended Delusions",
         tag: "Delusion1",
@@ -108,7 +108,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: "OrdinaryMonMaterial_03_lv2",
+        id: "OrdinaryMonMaterial_04_lv2",
         category: "common",
         name: "Yearning Delusions",
         tag: "Delusion2",
@@ -116,7 +116,7 @@ export const commonMaterials = [
         release: { version: "1.0" },
     },
     {
-        id: "OrdinaryMonMaterial_03_lv3",
+        id: "OrdinaryMonMaterial_04_lv3",
         category: "common",
         name: "Transcendent Delusions",
         tag: "Delusion3",

@@ -122,7 +122,7 @@ export const skillMaterials = [
     {
         id: "SkillUpMaterial_04_lv3",
         category: "skill",
-        name: "Heart",
+        name: "Heart-Racing Night",
         tag: "Heart3",
         rarity: 4,
         release: { version: "1.0" },
