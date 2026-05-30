@@ -110,5 +110,15 @@ export function getDataIconURL({ game, key, value }: Props) {
             tooltip = `${value}`;
         }
     }
+    if (game === "nte") {
+        if (key === "element" && value) {
+            src = `nte/icons/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `nte/icons/arcs/${splitJoin(`${value}`)}`;
+            tooltip = `${value}`;
+        }
+    }
     return { src, tooltip };
 }

@@ -35,6 +35,10 @@ import {
     getCharacterOutfittingCost as getEndfieldCharacterOutfittingCost,
     getWeaponLevelCost as getEndfieldWeaponLevelCost,
 } from "./endfield/getLevelUpCosts";
+import {
+    getCharacterLevelCost as getNTECharacterLevelCost,
+    getCharacterSkillCost as getNTECharacterSkillCost,
+} from "./nte/getLevelUpCosts";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -76,6 +80,10 @@ export const costs: GameData<Costs> = {
         characterBaseSkill: getEndfieldCharacterBaseSkillCost,
         characterOutfitting: getEndfieldCharacterOutfittingCost,
         weaponLevel: getEndfieldWeaponLevelCost,
+    },
+    nte: {
+        characterLevel: getNTECharacterLevelCost,
+        characterSkill: getNTECharacterSkillCost,
     },
 };
 

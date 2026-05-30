@@ -3,12 +3,14 @@ import { range } from "@/utils";
 export function nteLevels(key: string) {
     switch (key) {
         case "level":
-            return ["20", "40", "50", "60", "70", "80"];
+            return ["20", "30", "40", "50", "60", "70", "80"];
         case "level-asc":
             return [
                 "1",
                 "20",
                 "20+",
+                "30",
+                "30+",
                 "40",
                 "40+",
                 "50",

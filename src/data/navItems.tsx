@@ -1,7 +1,9 @@
 import { GameData } from "@/types";
+import HomeIcon from "@mui/icons-material/Home";
+// import CasinoIcon from "@mui/icons-material/Casino";
 
 export interface NavItem {
-    icon: string;
+    icon: string | React.ReactNode;
     title: string;
     href: string;
 }
@@ -206,9 +208,32 @@ export const navItems: GameData<NavItem[]> = {
     ],
     nte: [
         {
-            icon: "",
+            icon: (
+                <HomeIcon
+                    sx={(theme) => ({
+                        color: theme.drawer.color.primary,
+                        width: "28px",
+                        height: "28px",
+                    })}
+                />
+            ),
             title: "Home",
             href: "",
+        },
+        {
+            icon: "icons/Esper",
+            title: "Espers",
+            href: "espers",
+        },
+        {
+            icon: "icons/Arc",
+            title: "Arcs",
+            href: "arcs",
+        },
+        {
+            icon: "icons/Equipment",
+            title: "Cartridges",
+            href: "cartridges",
         },
     ],
 };

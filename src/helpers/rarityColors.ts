@@ -14,6 +14,7 @@ import {
     getEndfieldBackgroundColor,
     getEndfieldRarityColor,
 } from "./endfield/rarityColors";
+import { getNTEBackgroundColor, getNTERarityColor } from "./nte/rarityColors";
 
 export function useRarityColors(): GameData<(rarity?: number) => string> {
     return {
@@ -23,6 +24,7 @@ export function useRarityColors(): GameData<(rarity?: number) => string> {
         zzz: getZZZRarityColor,
         uma: getUmaRarityColor,
         endfield: getEndfieldRarityColor,
+        nte: getNTERarityColor,
     };
 }
 
@@ -36,5 +38,6 @@ export function useBackgroundRarityColors(): GameData<
         zzz: getZZZBackgroundColor,
         uma: getUmaBackgroundColor,
         endfield: getEndfieldBackgroundColor,
+        nte: getNTEBackgroundColor,
     };
 }
