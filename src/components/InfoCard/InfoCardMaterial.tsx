@@ -73,9 +73,14 @@ export default function InfoCardMaterial({
             zzz: "3",
             uma: "",
             endfield: "",
+            nte: "3",
         };
         let materialTag = props.material;
-        if (["talent", "calyx", "forgery", "common"].includes(props.category)) {
+        if (
+            ["talent", "calyx", "forgery", "common", "skill"].includes(
+                props.category,
+            )
+        ) {
             materialTag += nums[game];
         }
 
@@ -89,6 +94,7 @@ export default function InfoCardMaterial({
             case "calyx":
             case "forgery":
             case "common":
+            case "skill":
                 tooltip = material.tag?.slice(0, -1);
                 break;
             case "characterSkill":

@@ -12,7 +12,7 @@ import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
-import { NTECharacter } from "@/types/nte";
+import { NTECharacter, NTEWeapon } from "@/types/nte";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -557,6 +557,56 @@ export function NTECharacterInfoCard({
                 weaponType: character.weaponType,
             }}
             href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function NTECharacterInfoCardMaterial({
+    character,
+    props,
+}: {
+    character: NTECharacter;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCardMaterial
+            tag="nte/espers"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            badgeLeft={{
+                element: character.element,
+                weaponType: character.weaponType,
+            }}
+            materials={character.materials}
+            href={character.url}
+            {...props}
+        />
+    );
+}
+
+export function NTEWeaponInfoCard({
+    weapon,
+    props,
+}: {
+    weapon: NTEWeapon;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="nte/arcs"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            badgeLeft={{
+                weaponType: weapon.weaponType,
+                subStat: weapon.stats.subStat,
+            }}
+            url=""
+            href={weapon.url}
             {...props}
         />
     );
