@@ -224,7 +224,7 @@ export const nextThemeData = {
         nte: {
             highlight: "#fe62a6",
             header: "#ffe7b9",
-            refinement: "#53cec4",
+            refinement: "#fe62a6",
             number: "#53cec4",
             value: "#53cec4",
             star: "#ffcc33",
