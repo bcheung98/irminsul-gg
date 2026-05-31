@@ -198,6 +198,7 @@ const title: GameData<string> = {
     zzz: "Signal Searches",
     uma: "Spotlight Scouts",
     endfield: "Headhunts",
+    nte: "Scarborough Fair",
 };
 
 function bannerTitle(game: Game, tag: keyof VersionHighlightsProps) {
