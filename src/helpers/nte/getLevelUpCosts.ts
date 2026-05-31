@@ -128,7 +128,8 @@ export function getCharacterPassiveCost({
 }: Required<
     Pick<GetLevelUpCostsProps, "skillKey" | "selected" | "materials">
 >) {
-    const costs = { ...characterPassive[Number(skillKey) - 1] };
+    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const costs = { ...characterPassive[index] };
     let { credits, common2, common3, weekly } = costs;
     return {
         credits: {

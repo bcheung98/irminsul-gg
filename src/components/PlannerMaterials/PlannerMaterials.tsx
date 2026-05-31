@@ -57,6 +57,8 @@ export default function PlannerMaterials() {
             costKey = "characterBaseSkill";
         } else if (game === "endfield" && key.startsWith("talent")) {
             costKey = "characterTalent";
+        } else if (game === "nte" && key.startsWith("passive")) {
+            costKey = "characterPassive";
         } else {
             switch (key) {
                 case "level":
@@ -72,6 +74,9 @@ export default function PlannerMaterials() {
                 case "core":
                     costKey = "characterCoreSkill";
                     break;
+                case "life":
+                    costKey = "characterLifeSkill";
+                    break;
                 case "attack":
                 case "skill":
                 case "ultimate":
@@ -81,8 +86,6 @@ export default function PlannerMaterials() {
                     costKey = "characterSkill";
             }
         }
-
-        console.log(costKey);
 
         return costs[game][costKey]({
             ...value,
