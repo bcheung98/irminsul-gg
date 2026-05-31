@@ -64,7 +64,7 @@ export const games: Record<Game, GameInfo> = {
         name: "Neverness to Everness",
         shortName: "NTE",
         enabled: true,
-        color: "rgb(6, 179, 167)",
+        color: "rgb(0, 146, 136)",
         dev: "Hotta Studio",
     },
 } as const;
