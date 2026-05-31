@@ -17,7 +17,7 @@ import { blogList } from "@/data/blog-list";
 export default function Post() {
     const theme = useTheme();
 
-    const slug = "endfield-update";
+    const slug = "nte-update";
     const post = blogList.find((post) => slug === post.slug);
 
     const imgStyle = {
@@ -31,21 +31,30 @@ export default function Post() {
             <Stack spacing={3}>
                 <Stack spacing={1}>
                     <Description>
-                        Endmins! The Arknights: Endfield website is now live!
-                    </Description>
-                    <Description>
-                        The site is still pretty barebones for now, and
-                        currently only features pages for the Operators and
-                        Weapons. I will continue working on adding more familiar
-                        features such as the Banner Archive and Ascension
-                        Planner, but these may come out later than expected
-                        since I will be busy with life stuff soon.
+                        Well, I honestly thought I would never get to this
+                        point. I told myself that I wouldn't have the time to
+                        work on another site, but here we are. IRMINSUL.GG
+                        welcomes its 7th game, Neverness to Everness!
                     </Description>
                     <Description>
                         Please let me know in the Discord if anything is broken!
                     </Description>
+                    <Description>
+                        As a side note, this will be the first time that I am
+                        adding a game to Irminsul.GG that I've never played
+                        before. Prior to adding a game to the site, I would
+                        usually prefer to have played the game for at least a
+                        week or two; this allows me to get a feel for what a
+                        player of the game would want to find on a website like
+                        this. I do think that after having played a total of six
+                        gacha games, I have a pretty good idea of what players
+                        would want out of this site, as most of the gacha games
+                        are similar. However, if any NTE players have feedback
+                        or a suggestion for the site, please let me know in the
+                        Discord!
+                    </Description>
                     <ButtonBase
-                        href="/endfield"
+                        href="/nte"
                         sx={{
                             width: "max-content",
                             height: "32px",
@@ -60,16 +69,16 @@ export default function Post() {
                     >
                         <TextLabel
                             icon={
-                                "https://assets.irminsul.gg/v2/endfield/_common/Icon.png"
+                                "https://assets.irminsul.gg/v2/nte/_common/Icon.png"
                             }
-                            title="Irminsul.GG: Endfield"
+                            title="Irminsul.GG: NTE"
                             titleProps={{ variant: "body2" }}
                             spacing={2}
                         />
                     </ButtonBase>
                 </Stack>
                 <Image
-                    src="https://assets.irminsul.gg/v2/endfield/_common/wallpapers/Endfield_1.0.png"
+                    src="https://assets.irminsul.gg/v2/nte/_common/wallpapers/NTE_1.0.png"
                     style={imgStyle}
                 />
             </Stack>

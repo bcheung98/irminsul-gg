@@ -1,5 +1,12 @@
 export const blogList = [
     {
+        slug: "nte-update",
+        title: "Neverness to Everness is here!",
+        description: "Check out the new NTE site for Irminsul.GG.",
+        date: "2026-05-31 20:00:00",
+        image: "nte/_common/wallpapers/NTE_1.0",
+    },
+    {
         slug: "endfield-update",
         title: "Arknights: Endfield is here!",
         description: "Check out the new Endfield site for Irminsul.GG.",
