@@ -8,6 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_nte/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import CharacterConsole from "@/components/_nte/CharacterConsole";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
@@ -78,6 +79,8 @@ export default function CharacterPage({
         />
     );
 
+    const Console = <CharacterConsole charConsole={character.console} />;
+
     const header = <BetaTag version={character.release.version} />;
 
     const leftColumn = [];
@@ -88,7 +91,7 @@ export default function CharacterPage({
     if (matches_up_md) rightColumn.push(InfoMain);
     if (matches_up_md && !matches_up_lg) rightColumn.push(InfoMisc);
 
-    const children = [Skills, Passives, Upgrades];
+    const children = [Skills, Passives, Upgrades, Console];
     if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (

@@ -14,6 +14,7 @@ export interface NTECharacter extends BaseData {
     skills: NTECharacterSkills;
     passives: NTECharacterPassive[];
     upgrades: Skill[];
+    console: NTECharacterConsole;
     keywords?: SkillKeyword[];
     stats: NTECharacterStats;
     combatRoles: string[];
@@ -43,3 +44,10 @@ export interface NTECharacterPassive extends Skill {
 }
 
 export interface NTECharacterStats extends CharacterStats {}
+
+export interface NTECharacterConsole {
+    name: string;
+    tag: string;
+    description: string;
+    slots: number[][];
+}
