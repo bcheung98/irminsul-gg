@@ -6,6 +6,8 @@ import {
     GenshinWeaponInfoAvatar,
     HSRCharacterInfoAvatar,
     HSRWeaponInfoAvatar,
+    NTECharacterInfoAvatar,
+    NTEWeaponInfoAvatar,
     UmaCharacterInfoAvatar,
     UmaSupportInfoAvatar,
     WuWaCharacterInfoAvatar,
@@ -20,6 +22,7 @@ import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter } from "@/types/uma/character";
 import { UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import { NTECharacter, NTEWeapon } from "@/types/nte";
 
 type Data<T> = Record<"characters" | "weapons", T>;
 
@@ -150,6 +153,26 @@ export function renderInfoAvatar({
             weapons: (
                 <EndfieldWeaponInfoAvatar
                     weapon={item as EndfieldWeapon}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+        },
+        nte: {
+            characters: (
+                <NTECharacterInfoAvatar
+                    character={item as NTECharacter}
+                    props={{
+                        componentID: `${item.id}${id}`,
+                        background: background,
+                    }}
+                />
+            ),
+            weapons: (
+                <NTEWeaponInfoAvatar
+                    weapon={item as NTEWeapon}
                     props={{
                         componentID: `${item.id}${id}`,
                         background: background,

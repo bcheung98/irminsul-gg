@@ -10,6 +10,7 @@ import InfoAvatarSupport, {
     InfoAvatarSupportProps,
 } from "../_uma/InfoAvatarSupport";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import { NTECharacter, NTEWeapon } from "@/types/nte";
 
 export function GenshinCharacterInfoAvatar({
     character,
@@ -271,6 +272,47 @@ export function EndfieldWeaponInfoAvatar({
     return (
         <InfoAvatar
             tag="endfield/weapons"
+            id={Number(weapon.id)}
+            key={weapon.id}
+            name={weapon.displayName}
+            rarity={weapon.rarity}
+            href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function NTECharacterInfoAvatar({
+    character,
+    props,
+}: {
+    character: NTECharacter;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="nte/espers"
+            id={Number(character.id)}
+            key={character.id}
+            name={character.displayName}
+            rarity={character.rarity}
+            href={character.url}
+            background="transparent"
+            {...props}
+        />
+    );
+}
+
+export function NTEWeaponInfoAvatar({
+    weapon,
+    props,
+}: {
+    weapon: NTEWeapon;
+    props?: Partial<InfoAvatarProps>;
+}) {
+    return (
+        <InfoAvatar
+            tag="nte/arcs"
             id={Number(weapon.id)}
             key={weapon.id}
             name={weapon.displayName}
