@@ -141,7 +141,11 @@ export default function SettingsList() {
                 />
             ),
         };
-        if (["genshin", "hsr", "wuwa", "zzz", "endfield"].includes(gameTag)) {
+        if (
+            ["genshin", "hsr", "wuwa", "zzz", "endfield", "nte"].includes(
+                gameTag,
+            )
+        ) {
             group1.push(statDisplaySettings);
         }
         group1.push(serverSettings);
