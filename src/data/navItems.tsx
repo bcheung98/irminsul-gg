@@ -235,5 +235,10 @@ export const navItems: GameData<NavItem[]> = {
         //     title: "Cartridges",
         //     href: "cartridges",
         // },
+        {
+            icon: "icons/Dice",
+            title: "Banner Archive",
+            href: "banners",
+        },
     ],
 };
