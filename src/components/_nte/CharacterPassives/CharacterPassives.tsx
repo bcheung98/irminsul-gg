@@ -116,17 +116,13 @@ export default function CharacterPassives({
                                         <Stack spacing={1}>
                                             <TextLabel
                                                 icon={
-                                                    passive.type !== "life" && (
-                                                        <SkillIcon
-                                                            icon={getIconURL(
-                                                                passive.type,
-                                                                index,
-                                                            )}
-                                                            attributes={
-                                                                attributes
-                                                            }
-                                                        />
-                                                    )
+                                                    <SkillIcon
+                                                        icon={getIconURL(
+                                                            passive.type,
+                                                            index,
+                                                        )}
+                                                        attributes={attributes}
+                                                    />
                                                 }
                                                 title={passive.name}
                                                 titleProps={{ variant: "h6" }}
