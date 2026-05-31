@@ -40,6 +40,7 @@ import {
     getCharacterSkillCost as getNTECharacterSkillCost,
     getCharacterPassiveCost as getNTECharacterPassiveCost,
     getCharacterLifeSkillCost as getNTECharacterLifeSkillCost,
+    getWeaponLevelCost as getNTEWeaponLevelCost,
 } from "./nte/getLevelUpCosts";
 
 interface Costs {
@@ -88,6 +89,7 @@ export const costs: GameData<Costs> = {
         characterSkill: getNTECharacterSkillCost,
         characterPassive: getNTECharacterPassiveCost,
         characterLifeSkill: getNTECharacterLifeSkillCost,
+        weaponLevel: getNTEWeaponLevelCost,
     },
 };
 

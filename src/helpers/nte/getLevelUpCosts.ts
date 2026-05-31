@@ -168,3 +168,72 @@ export function getCharacterLifeSkillCost({
         },
     };
 }
+
+export function getWeaponLevelCost({
+    start,
+    stop,
+    selected,
+    rarity,
+    withXP,
+    materials,
+}: Required<
+    Pick<
+        GetLevelUpCostsProps,
+        "start" | "stop" | "selected" | "rarity" | "withXP" | "materials"
+    >
+>) {
+    const costs = { ...weaponLevel(rarity) };
+    if (!withXP) {
+        objectKeys(costs).forEach((material) => {
+            costs[material] = costs[material]
+                .map((value, index) => (index % 2 === 0 ? value : -1))
+                .filter((i) => (i! -= -1));
+        });
+    }
+    let [
+        credits,
+        weaponXP1,
+        weaponXP2,
+        weaponXP3,
+        weapon1,
+        weapon2,
+        weapon3,
+        common1,
+        common2,
+        common3,
+    ] = range(0, objectKeys(costs).length, 0);
+    if (selected) {
+        [
+            credits,
+            weaponXP1,
+            weaponXP2,
+            weaponXP3,
+            weapon1,
+            weapon2,
+            weapon3,
+            common1,
+            common2,
+            common3,
+        ] = calculateCosts(costs, start, stop);
+    }
+    return {
+        credits: {
+            Gold: credits,
+        },
+        weaponXP: {
+            WeaponUpMaterial_lv1: weaponXP1,
+            WeaponUpMaterial_lv2: weaponXP2,
+            WeaponUpMaterial_lv3: weaponXP3,
+        },
+        weapon: {
+            [mats(`${materials.weapon}1`).id]: weapon1,
+            [mats(`${materials.weapon}2`).id]: weapon2,
+            [mats(`${materials.weapon}3`).id]: weapon3,
+        },
+        common: {
+            [mats(`${materials.common}1`).id]: common1,
+            [mats(`${materials.common}2`).id]: common2,
+            [mats(`${materials.common}3`).id]: common3,
+        },
+    };
+}
