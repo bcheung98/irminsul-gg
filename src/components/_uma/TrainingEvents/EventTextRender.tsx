@@ -47,9 +47,11 @@ export function TextHighlight({
 export function SkillHint({
     event,
     isHint,
+    heal,
 }: {
     event: EventRewards;
     isHint: boolean;
+    heal?: boolean;
 }) {
     const theme = useTheme();
 
@@ -63,10 +65,14 @@ export function SkillHint({
     const { value, data } = event;
     const skill = skills.find((skill) => skill.id === data);
     let hint = <></>;
+
+    let text = "";
+    if (heal) text = "Heal ";
+    else if (!isHint) text = "Obtain ";
     if (skill) {
         hint = (
             <>
-                {!isHint && `Obtain `}
+                {text}
                 <span
                     onClick={handleClickOpen}
                     style={{
@@ -111,7 +117,7 @@ export function SkillText({
 
     const { value, data } = event;
     const skill = skills.find(
-        (skill) => skill.id === value || skill.id === data
+        (skill) => skill.id === value || skill.id === data,
     );
     const [s1, s2] = text.split("<>");
     let res = <></>;
@@ -148,7 +154,7 @@ export function SkillText({
 export function SkillTextRandom({ eventHints }: { eventHints?: EventSubHint }) {
     if (eventHints) {
         const hints = eventHints.map((hint) =>
-            SkillHint({ event: hint, isHint: true })
+            SkillHint({ event: hint, isHint: true }),
         );
         return (
             <>
@@ -179,7 +185,7 @@ export function StatusEffect({
     const theme = useTheme();
 
     const effect = statusEffects.find(
-        (effect) => effect.id === Number(effectID)
+        (effect) => effect.id === Number(effectID),
     );
     let name = "?";
     let description = "";

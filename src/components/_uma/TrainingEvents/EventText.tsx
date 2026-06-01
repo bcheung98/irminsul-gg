@@ -17,6 +17,7 @@ import { useTheme } from "@mui/material/styles";
 import { useCharIDContext, useUmaContext } from "@/context";
 import { getOrdinal } from "@/utils";
 import { getEventText, getStrategy } from "@/helpers/uma/getEventText";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { EventRewards } from "@/types/uma/event";
@@ -36,7 +37,7 @@ export default function EventText({
     const { tag, value, data, count, props, random } = outcome;
 
     const character = profiles.find(
-        (character) => character.id === Number(data)
+        (character) => character.id === Number(data),
     );
     let charName = "";
     if (character) {
@@ -50,6 +51,8 @@ export default function EventText({
         : theme.font.weight.primary;
 
     if (random) prefix = "(Random) ";
+
+    const server = useStore(useServerStore, (state) => state["uma"]);
 
     function renderEventText(tag: string) {
         switch (tag) {
@@ -73,6 +76,8 @@ export default function EventText({
                 } else {
                     return "Heal a negative status effect";
                 }
+            case "heal_debuff":
+                return SkillHint({ event: outcome, isHint: false, heal: true });
             case "cond":
                 return StatusEffect({
                     effectID: props?.statusEffect,
@@ -135,7 +140,7 @@ export default function EventText({
                 return Race({
                     race: value?.toString(),
                     text: `Win the <> with any style other than ${getStrategy(
-                        props?.strategy
+                        props?.strategy,
                     )}`,
                 });
             case "race_w2":
@@ -147,7 +152,7 @@ export default function EventText({
                 return Race({
                     race: value?.toString(),
                     text: `Place ${getOrdinal(
-                        props?.position
+                        props?.position,
                     )} or better in the`,
                 });
             case "participate":
@@ -211,6 +216,7 @@ export default function EventText({
                             event: outcome,
                             profiles,
                             charID,
+                            server,
                         })}
                     </span>
                 );
