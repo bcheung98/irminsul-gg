@@ -25,6 +25,13 @@ import {
     baseATKScaling as endfieldBaseATKScaling,
     EndfieldWeaponBaseATK,
 } from "@/data/endfield/weaponStats";
+import {
+    baseATKScaling as nteBaseATKScaling,
+    subStats as nteSubstats,
+    weaponSubStats as nteSubstatNames,
+    NTEWeaponBaseATK,
+    NTEWeaponSubStat,
+} from "@/data/nte/weaponStats";
 import { ZZZRarity } from "@/types/zzz";
 
 type Props = Omit<StatsDisplayProps, "game">;
@@ -49,6 +56,8 @@ export function getStats({
             return getZZZStats({ stats, attributes });
         case "endfield":
             return getEndfieldStats({ stats, attributes });
+        case "nte":
+            return getNTEStats({ stats, attributes });
         case "uma":
         default:
             return { levels: [], data: [] };
@@ -495,6 +504,62 @@ function getEndfieldStats({ stats }: Props): StatsData {
                 ),
             ],
         ];
+    }
+
+    return { levels, data };
+}
+
+function getNTEStats({ stats, attributes }: Props): StatsData {
+    let levels = levelData["nte"]("level-asc", attributes.rarity);
+    let data: (string | number)[][] = [];
+    if ("hp" in stats) {
+        data = [
+            ["Level", ...levels],
+            [
+                "Base HP|nte/icons/stat-icons/HP",
+                ...levels.map((_, index) =>
+                    (stats.hp[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Base ATK|nte/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (stats.atk[index] || 0).toLocaleString(),
+                ),
+            ],
+            [
+                "Base DEF|nte/icons/stat-icons/DEF",
+                ...levels.map((_, index) =>
+                    (stats.def[index] || 0).toLocaleString(),
+                ),
+            ],
+        ];
+    } else {
+        levels = ["1", "20", "30", "40", "50", "60", "70", "80"];
+        data = [
+            ["Level", ...levels],
+            [
+                "Base ATK|nte/icons/stat-icons/ATK",
+                ...levels.map((_, index) =>
+                    (
+                        nteBaseATKScaling[stats.atk as NTEWeaponBaseATK][
+                            index
+                        ] || 0
+                    ).toLocaleString(),
+                ),
+            ],
+        ];
+        if (stats.subStat) {
+            let subStatScaling = nteSubstats[stats.atk as NTEWeaponBaseATK][
+                stats.subStat as NTEWeaponSubStat
+            ] as string[];
+            data.push([
+                `${nteSubstatNames[stats.subStat as NTEWeaponSubStat].title}|nte/icons/stat-icons/${splitJoin(
+                    stats.subStat,
+                )}`,
+                ...levels.map((_, index) => subStatScaling[index] || 0),
+            ]);
+        }
     }
 
     return { levels, data };

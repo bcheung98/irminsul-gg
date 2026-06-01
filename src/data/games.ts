@@ -7,6 +7,7 @@ export const gameNames = [
     "zzz",
     "uma",
     "endfield",
+    "nte",
 ] as const;
 
 export const games: Record<Game, GameInfo> = {
@@ -57,5 +58,13 @@ export const games: Record<Game, GameInfo> = {
         enabled: true,
         color: "rgb(255, 241, 0)",
         dev: "Gryphline",
+    },
+    nte: {
+        tag: "nte",
+        name: "Neverness to Everness",
+        shortName: "NTE",
+        enabled: true,
+        color: "rgb(0, 146, 136)",
+        dev: "Hotta Studio",
     },
 } as const;

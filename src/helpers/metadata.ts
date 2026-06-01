@@ -108,6 +108,7 @@ function getSitename({
         case "genshin":
         case "hsr":
         case "wuwa":
+        case "nte":
             if (attributes.weaponType) {
                 if (attributes.element) {
                     res = `${attributes.displayName || attributes.name} (${

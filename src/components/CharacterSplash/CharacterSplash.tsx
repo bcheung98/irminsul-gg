@@ -90,6 +90,9 @@ export default function CharacterSplash({
             case "endfield":
                 url = `${game}/operators/${id}_splash`;
                 break;
+            case "nte":
+                url = `${game}/espers/${id}_splash`;
+                break;
         }
         return `${url}${tabValue !== 0 ? tabValue : ""}`;
     }
@@ -110,6 +113,8 @@ export default function CharacterSplash({
                 return `${game}/operators/${id}${
                     index !== 0 ? `${index}` : ""
                 }`;
+            case "nte":
+                return `${game}/espers/${id}${index !== 0 ? `_${index}` : ""}`;
             case "hsr":
             case "uma":
             default:

@@ -7,7 +7,7 @@ export function filterItems<T extends Record<string, any>>(
     items: T[],
     filters: Filters,
     searchValue = "",
-    sort: Omit<GallerySettings, "view">
+    sort: Omit<GallerySettings, "view">,
 ) {
     let res = [...items];
     if ("element" in filters && filters.element.length > 0) {
@@ -15,7 +15,7 @@ export function filterItems<T extends Record<string, any>>(
     }
     if ("weaponType" in filters && filters.weaponType.length > 0) {
         res = res.filter((item) =>
-            filters.weaponType.includes(item.weaponType)
+            filters.weaponType.includes(item.weaponType),
         );
     }
     if ("rarity" in filters && filters.rarity.length > 0) {
@@ -23,47 +23,57 @@ export function filterItems<T extends Record<string, any>>(
     }
     if ("ascStat" in filters && filters.ascStat.length > 0) {
         res = res.filter((item) =>
-            filters.ascStat.includes(item.stats.ascensionStat)
+            filters.ascStat.includes(item.stats.ascensionStat),
         );
     }
     if ("subStat" in filters && filters.subStat.length > 0) {
         res = res.filter((item) =>
-            filters.subStat.includes(item.stats.subStat)
+            filters.subStat.includes(item.stats.subStat),
         );
     }
     if ("talentBook" in filters && filters.talentBook.length > 0) {
         res = res.filter((item) =>
-            filters.talentBook.includes(`${item.materials.talent}3`)
+            filters.talentBook.includes(`${item.materials.talent}3`),
         );
     }
     if ("calyxMat" in filters && filters.calyxMat.length > 0) {
         res = res.filter((item) =>
-            filters.calyxMat.includes(item.materials.calyx)
+            filters.calyxMat.includes(item.materials.calyx),
         );
     }
     if ("forgeryMat" in filters && filters.forgeryMat.length > 0) {
         res = res.filter((item) =>
-            filters.forgeryMat.includes(item.materials.forgery)
+            filters.forgeryMat.includes(item.materials.forgery),
+        );
+    }
+    if ("skillMat" in filters && filters.skillMat.length > 0) {
+        res = res.filter((item) =>
+            filters.skillMat.includes(item.materials.skill),
+        );
+    }
+    if ("weaponMat" in filters && filters.weaponMat.length > 0) {
+        res = res.filter((item) =>
+            filters.weaponMat.includes(item.materials.weapon),
         );
     }
     if ("commonMat" in filters && filters.commonMat.length > 0) {
         res = res.filter((item) =>
-            filters.commonMat.includes(item.materials.common)
+            filters.commonMat.includes(item.materials.common),
         );
     }
     if ("bossMat" in filters && filters.bossMat.length > 0) {
         res = res.filter((item) =>
-            filters.bossMat.includes(item.materials.boss)
+            filters.bossMat.includes(item.materials.boss),
         );
     }
     if ("weeklyBossMat" in filters && filters.weeklyBossMat.length > 0) {
         res = res.filter((item) =>
-            filters.weeklyBossMat.includes(item.materials.weekly)
+            filters.weeklyBossMat.includes(item.materials.weekly),
         );
     }
     if ("localMat" in filters && filters.localMat.length > 0) {
         res = res.filter((item) =>
-            filters.localMat.includes(item.materials.local)
+            filters.localMat.includes(item.materials.local),
         );
     }
     if (
@@ -71,31 +81,31 @@ export function filterItems<T extends Record<string, any>>(
         filters.weaponAscensionMat.length > 0
     ) {
         res = res.filter((item) =>
-            filters.weaponAscensionMat.includes(item.materials.weapon)
+            filters.weaponAscensionMat.includes(item.materials.weapon),
         );
     }
     if ("eliteMat" in filters && filters.eliteMat.length > 0) {
         res = res.filter((item) =>
-            filters.eliteMat.includes(item.materials.elite)
+            filters.eliteMat.includes(item.materials.elite),
         );
     }
     if ("nation" in filters && filters.nation.length > 0) {
         res = res.filter((item) =>
-            filters.nation.includes(item.world || item.nation || item.faction)
+            filters.nation.includes(item.world || item.nation || item.faction),
         );
     }
     if ("combatRoles" in filters && filters.combatRoles.length > 0) {
         if (filters._combatRoles.includes("true")) {
             res = res.filter((item) =>
                 filters.combatRoles.every((role) =>
-                    item.combatRoles.includes(role)
-                )
+                    item.combatRoles.includes(role),
+                ),
             );
         } else {
             res = res.filter((item) =>
                 filters.combatRoles.some((role) =>
-                    item.combatRoles.includes(role)
-                )
+                    item.combatRoles.includes(role),
+                ),
             );
         }
     }
@@ -105,19 +115,19 @@ export function filterItems<T extends Record<string, any>>(
     if ("sonata" in filters && filters.sonata.length > 0) {
         if (filters._sonata.includes("true")) {
             res = res.filter((item) =>
-                filters.sonata.every((sonata) => item.sonata.includes(sonata))
+                filters.sonata.every((sonata) => item.sonata.includes(sonata)),
             );
         } else {
             res = res.filter((item) =>
-                filters.sonata.some((sonata) => item.sonata.includes(sonata))
+                filters.sonata.some((sonata) => item.sonata.includes(sonata)),
             );
         }
     }
     if ("attackType" in filters && filters.attackType.length > 0) {
         res = res.filter((item) =>
             filters.attackType.some((filter) =>
-                item.attackType.includes(filter)
-            )
+                item.attackType.includes(filter),
+            ),
         );
     }
     if ("aptitude" in filters && filters.aptitude.length > 0) {
@@ -125,11 +135,11 @@ export function filterItems<T extends Record<string, any>>(
             const aptitudes: string[] = [];
             Object.values(character.aptitude).forEach((values: any) =>
                 Object.entries(values).forEach(
-                    ([key, value]) => value === "A" && aptitudes.push(key)
-                )
+                    ([key, value]) => value === "A" && aptitudes.push(key),
+                ),
             );
             return filters.aptitude.every((f) =>
-                aptitudes.includes(`${f}`.toLocaleLowerCase())
+                aptitudes.includes(`${f}`.toLocaleLowerCase()),
             );
         });
     }
@@ -138,7 +148,7 @@ export function filterItems<T extends Record<string, any>>(
     }
     if ("conditions" in filters && filters.conditions.length > 0) {
         res = res.filter((item) =>
-            filters.conditions.every((skill) => item.tags.includes(skill))
+            filters.conditions.every((skill) => item.tags.includes(skill)),
         );
     }
     if ("skillRarity" in filters && filters.skillRarity.length > 0) {
@@ -146,22 +156,22 @@ export function filterItems<T extends Record<string, any>>(
     }
     if ("tcg-element" in filters && filters["tcg-element"].length > 0) {
         res = res.filter((item) =>
-            filters["tcg-element"].some((tag) => item.tags.includes(tag))
+            filters["tcg-element"].some((tag) => item.tags.includes(tag)),
         );
     }
     if ("tcg-weaponType" in filters && filters["tcg-weaponType"].length > 0) {
         res = res.filter((item) =>
-            filters["tcg-weaponType"].some((tag) => item.tags.includes(tag))
+            filters["tcg-weaponType"].some((tag) => item.tags.includes(tag)),
         );
     }
     if ("tcg-faction" in filters && filters["tcg-faction"].length > 0) {
         res = res.filter((item) =>
-            filters["tcg-faction"].some((tag) => item.tags.includes(tag))
+            filters["tcg-faction"].some((tag) => item.tags.includes(tag)),
         );
     }
     if ("tcg-group" in filters && filters["tcg-group"].length > 0) {
         res = res.filter((item) =>
-            filters["tcg-group"].some((tag) => item.tags.includes(tag))
+            filters["tcg-group"].some((tag) => item.tags.includes(tag)),
         );
     }
     if (searchValue) {

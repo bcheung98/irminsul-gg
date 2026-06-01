@@ -51,7 +51,7 @@ const BannerItems = memo(function BannerItems({
                         name: `${item}`,
                         characters,
                         weapons,
-                    })
+                    }),
                 )
                 .sort((a, b) => sortBy(a.rarity, b.rarity));
             setBannerData(data);
@@ -74,7 +74,7 @@ const BannerItems = memo(function BannerItems({
 
     const textColor = getContrastText(
         theme.text.primary,
-        backgroundColor || theme.contentBox.backgroundColor.main
+        backgroundColor || theme.contentBox.backgroundColor.main,
     );
 
     return (
@@ -88,7 +88,7 @@ const BannerItems = memo(function BannerItems({
                                   <InfoAvatar
                                       id={0}
                                       componentID={`-${banner.version}-${index}`}
-                                      tag="_common/images"
+                                      tag="genshin"
                                       name="TBA"
                                       url="Unknown"
                                       rarity={1}

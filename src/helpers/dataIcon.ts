@@ -7,6 +7,10 @@ import {
     ZZZWeaponSubStat,
     weaponSubStats as zzzWeaponSubStats,
 } from "@/data/zzz/weaponStats";
+import {
+    NTEWeaponSubStat,
+    weaponSubStats as nteWeaponSubStats,
+} from "@/data/nte/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
 import { AttributeDataKey, Game } from "@/types";
 import { CharacterColors } from "@/types/character";
@@ -108,6 +112,20 @@ export function getDataIconURL({ game, key, value }: Props) {
         if (key === "specialty" && value) {
             src = `endfield/classes/${value}`;
             tooltip = `${value}`;
+        }
+    }
+    if (game === "nte") {
+        if (key === "element" && value) {
+            src = `nte/icons/elements/${value}`;
+            tooltip = `${value}`;
+        }
+        if (key === "weaponType" && value) {
+            src = `nte/icons/arcs/${splitJoin(`${value}`)}`;
+            tooltip = `${value}`;
+        }
+        if (key === "subStat" && value) {
+            src = `nte/icons/stat-icons/${value}`;
+            tooltip = `${nteWeaponSubStats[value as NTEWeaponSubStat].title}`;
         }
     }
     return { src, tooltip };

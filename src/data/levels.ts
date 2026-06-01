@@ -4,6 +4,7 @@ import { hsrLevels } from "./hsr/levels";
 import { wuwaLevels } from "./wuwa/levels";
 import { zzzLevels } from "./zzz/levels";
 import { endfieldLevels } from "./endfield/levels";
+import { nteLevels } from "./nte/levels";
 
 const levels: GameData<(key: string, rarity?: number) => (string | number)[]> =
     {
@@ -15,6 +16,7 @@ const levels: GameData<(key: string, rarity?: number) => (string | number)[]> =
             throw new Error("Function not implemented.");
         },
         endfield: endfieldLevels,
+        nte: nteLevels,
     };
 
 export default levels;

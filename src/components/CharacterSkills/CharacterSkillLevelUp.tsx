@@ -64,6 +64,16 @@ export default function CharacterSkillLevelUp({
     if (game === "endfield") {
         levelKey = skillKey;
     }
+    if (game === "nte") {
+        if (skillKey.startsWith("passive")) {
+            levelKey = skillKey.slice(-1);
+            costKey = "characterPassive";
+        }
+        if (skillKey === "life") {
+            levelKey = "life";
+            costKey = "characterLifeSkill";
+        }
+    }
 
     const Root = (
         <Stack spacing={2}>

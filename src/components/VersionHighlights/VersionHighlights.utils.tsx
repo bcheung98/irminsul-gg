@@ -8,6 +8,9 @@ import {
     HSRCharacterInfoCard,
     HSRRelicInfoCard,
     HSRWeaponInfoCard,
+    NTECartridgeInfoCard,
+    NTECharacterInfoCard,
+    NTEWeaponInfoCard,
     WuWaCharacterInfoCard,
     WuWaEchoInfoCard,
     WuWaWeaponInfoCard,
@@ -36,6 +39,7 @@ import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
 
@@ -73,6 +77,11 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
             weapons: "endfield/icons/Weapons",
             equipment: "",
         },
+        nte: {
+            characters: "nte/icons/Esper",
+            weapons: "nte/icons/Arc",
+            equipment: "nte/icons/Equipment",
+        },
     };
     return items[game][tag];
 }
@@ -85,7 +94,7 @@ export function renderInfoCard(
     game: Game,
     tag: keyof VersionHighlightsProps,
     item: VersionItemData,
-    backround = ""
+    backround = "",
 ) {
     const items: GameData<Data<React.ReactNode>> = {
         genshin: {
@@ -231,6 +240,29 @@ export function renderInfoCard(
                 />
             ),
             equipment: undefined,
+        },
+        nte: {
+            characters: (
+                <NTECharacterInfoCard
+                    key={item.id}
+                    character={item as NTECharacter}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            weapons: (
+                <NTEWeaponInfoCard
+                    key={item.id}
+                    weapon={item as unknown as NTEWeapon}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
+            equipment: (
+                <NTECartridgeInfoCard
+                    key={item.id}
+                    cartridge={item as NTECartridge}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
     };
     return items[game][tag];

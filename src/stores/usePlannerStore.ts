@@ -15,6 +15,7 @@ import {
     createEndfieldSlice,
     EndfieldPlannerSlice,
 } from "./planner/useEndfieldStore";
+import { createNTESlice, NTEPlannerSlice } from "./planner/useNTEStore";
 
 export interface PlannerSlice {
     totalCost: Record<number, Record<string, CostValue>>;
@@ -34,7 +35,8 @@ export type CombinedPlannerSlice = GenshinPlannerSlice &
     HSRPlannerSlice &
     WuWaPlannerSlice &
     ZZZPlannerSlice &
-    EndfieldPlannerSlice;
+    EndfieldPlannerSlice &
+    NTEPlannerSlice;
 
 export const usePlannerStore = create(
     persist<CombinedPlannerSlice>(
@@ -44,9 +46,10 @@ export const usePlannerStore = create(
             ...createWuWaSlice(...args),
             ...createZZZSlice(...args),
             ...createEndfieldSlice(...args),
+            ...createNTESlice(...args),
         }),
         {
             name: "v2/planner",
-        }
-    )
+        },
+    ),
 );

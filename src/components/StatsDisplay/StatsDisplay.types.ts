@@ -5,6 +5,8 @@ import { GenshinCharacterStats } from "@/types/genshin/character";
 import { GenshinWeaponStats } from "@/types/genshin/weapon";
 import { HSRCharacterStats } from "@/types/hsr/character";
 import { HSRWeaponStats } from "@/types/hsr/weapon";
+import { NTECharacterStats } from "@/types/nte/character";
+import { NTEWeaponStats } from "@/types/nte/weapon";
 import { WuWaCharacterStats } from "@/types/wuwa/character";
 import { WuWaWeaponStats } from "@/types/wuwa/weapon";
 import { ZZZBangbooStats } from "@/types/zzz/bangboo";
@@ -17,13 +19,15 @@ export type TCharacterStats =
     | WuWaCharacterStats
     | ZZZCharacterStats
     | ZZZBangbooStats
-    | EndfieldCharacterStats;
+    | EndfieldCharacterStats
+    | NTECharacterStats;
 export type TWeaponStats =
     | GenshinWeaponStats
     | HSRWeaponStats
     | WuWaWeaponStats
     | ZZZWeaponStats
-    | EndfieldWeaponStats;
+    | EndfieldWeaponStats
+    | NTEWeaponStats;
 
 export interface StatsDisplayProps {
     game?: Game;

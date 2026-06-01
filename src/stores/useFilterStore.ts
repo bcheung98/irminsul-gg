@@ -14,6 +14,8 @@ import { UmaSkillFilterState } from "@/components/_uma/Filters/SkillFilters";
 import { GenshinTCGFilterState } from "@/components/_genshin/Filters/TCGFilters";
 import { EndfieldCharacterFilterState } from "@/components/_endfield/Filters/CharacterFilters";
 import { EndfieldWeaponFilterState } from "@/components/_endfield/Filters/WeaponFilters";
+import { NTECharacterFilterState } from "@/components/_nte/Filters/CharacterFilters";
+import { NTEWeaponFilterState } from "@/components/_nte/Filters/WeaponFilters";
 
 export interface FilterState {
     "genshin/characters": GenshinCharacterFilterState;
@@ -31,6 +33,8 @@ export interface FilterState {
     "uma/skills": UmaSkillFilterState;
     "endfield/characters": EndfieldCharacterFilterState;
     "endfield/weapons": EndfieldWeaponFilterState;
+    "nte/characters": NTECharacterFilterState;
+    "nte/weapons": NTEWeaponFilterState;
 }
 
 export type SetFilterState = (
@@ -168,6 +172,25 @@ export const endfieldWeaponFilters: EndfieldWeaponFilterState = {
     rarity: [],
 };
 
+export const nteCharacterFilters: NTECharacterFilterState = {
+    element: [],
+    weaponType: [],
+    rarity: [],
+    combatRoles: [],
+    _combatRoles: ["true"],
+    skillMat: [],
+    commonMat: [],
+    bossMat: [],
+    weeklyBossMat: [],
+};
+
+export const nteWeaponFilters: NTEWeaponFilterState = {
+    weaponType: [],
+    rarity: [],
+    subStat: [],
+    weaponMat: [],
+};
+
 export const initialState: FilterState = {
     "genshin/characters": genshinCharacterFilters,
     "genshin/weapons": genshinWeaponFilters,
@@ -184,6 +207,8 @@ export const initialState: FilterState = {
     "uma/skills": umaSkillFilters,
     "endfield/characters": endfieldCharacterFilters,
     "endfield/weapons": endfieldWeaponFilters,
+    "nte/characters": nteCharacterFilters,
+    "nte/weapons": nteWeaponFilters,
 };
 
 export const useFilterStore = create<FilterStore>((set) => ({

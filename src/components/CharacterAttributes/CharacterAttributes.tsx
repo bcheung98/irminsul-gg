@@ -6,7 +6,8 @@ import InfoChip from "@/components/InfoChip";
 import RarityStars from "@/components/RarityStars";
 import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
-import CharacterCombatRoles from "@/components/_wuwa/CharacterCombatRoles";
+import WuWaCharacterCombatRoles from "@/components/_wuwa/CharacterCombatRoles";
+import NTECharacterCombatRoles from "@/components/_nte/CharacterCombatRoles";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -95,7 +96,8 @@ export default function CharacterAttributes(props: AttributeData) {
                     )}
                 </FlexBox>
             </Stack>
-            {game === "wuwa" && <CharacterCombatRoles {...attributes} />}
+            {game === "wuwa" && <WuWaCharacterCombatRoles {...attributes} />}
+            {game === "nte" && <NTECharacterCombatRoles {...attributes} />}
             {game === "endfield" && (
                 <FlexBox spacing={1} wrap>
                     {attributes.combatRoles?.map((role, index) => (
@@ -125,4 +127,5 @@ const gameAttributes: GameData<AttributeDataKey[]> = {
     zzz: ["rarity", "element", "weaponType", "attackType"],
     uma: [],
     endfield: ["rarity", "element", "specialty", "weaponType"],
+    nte: ["rarity", "element", "weaponType"],
 };

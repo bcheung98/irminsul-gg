@@ -128,5 +128,17 @@ function getRows(
                 value: attributes.voiceActors?.jp,
             },
         ],
+        nte: [
+            { key: "Faction", value: attributes.faction },
+            { key: "Release", value: `${releaseDate} (${releaseVersion})` },
+            {
+                key: "Voice Actor (EN)",
+                value: attributes.voiceActors?.en,
+            },
+            {
+                key: "Voice Actor (JP)",
+                value: attributes.voiceActors?.jp,
+            },
+        ],
     };
 }

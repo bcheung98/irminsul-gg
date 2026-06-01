@@ -109,7 +109,11 @@ export default function NavDrawerMenuItem({
                     <Box sx={rootStyle}>
                         <Box sx={indicatorStyle} />
                         <TextLabel
-                            icon={`${game}/${item.icon}`}
+                            icon={
+                                typeof item.icon === "string"
+                                    ? `${game}/${item.icon}`
+                                    : item.icon
+                            }
                             iconProps={{
                                 size: 28,
                                 styles: {

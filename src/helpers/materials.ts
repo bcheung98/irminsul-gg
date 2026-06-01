@@ -11,9 +11,10 @@ import {
     getEndfieldMaterial,
     getEndfieldMaterialCategory,
 } from "./endfield/getMaterials";
+import { getNTEMaterial, getNTEMaterialCategory } from "./nte/getMaterials";
 
 export function useMaterials(
-    hideUnreleasedContent = false
+    hideUnreleasedContent = false,
 ): GameData<(material: string | number) => Material> {
     return {
         genshin: getGenshinMaterial(hideUnreleasedContent),
@@ -24,11 +25,12 @@ export function useMaterials(
             throw new Error("Function not implemented.");
         },
         endfield: getEndfieldMaterial(hideUnreleasedContent),
+        nte: getNTEMaterial(hideUnreleasedContent),
     };
 }
 
 export function useMaterialsCategory(
-    hideUnreleasedContent = false
+    hideUnreleasedContent = false,
 ): GameData<(category: string) => Material[]> {
     return {
         genshin: getGenshinMaterialCategory(hideUnreleasedContent),
@@ -39,5 +41,6 @@ export function useMaterialsCategory(
             throw new Error("Function not implemented.");
         },
         endfield: getEndfieldMaterialCategory(hideUnreleasedContent),
+        nte: getNTEMaterialCategory(hideUnreleasedContent),
     };
 }

@@ -5,9 +5,10 @@ import { hsrFilters } from "./hsr/filters";
 import { umaFilters } from "./uma/filters";
 import { wuwaFilters } from "./wuwa/filters";
 import { zzzFilters } from "./zzz/filters";
+import { nteFilters } from "./nte/filters";
 
 export function filterGroups<T extends Filters>(
-    props: FilterGroupsProps<T>
+    props: FilterGroupsProps<T>,
 ): GameData<FilterGroups> {
     return {
         genshin: genshinFilters(props),
@@ -16,5 +17,6 @@ export function filterGroups<T extends Filters>(
         zzz: zzzFilters(props),
         uma: umaFilters(props),
         endfield: endfieldFilters(props),
+        nte: nteFilters(props),
     };
 }

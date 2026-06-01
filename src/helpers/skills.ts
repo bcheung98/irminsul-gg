@@ -5,6 +5,7 @@ import getHSRSkillKeyword from "./hsr/getSkillKeyword";
 import getWuWaSkillKeyword from "./wuwa/getSkillKeyword";
 import getZZZSkillKeyword from "./zzz/getSkillKeyword";
 import getEndfieldSkillKeyword from "./endfield/getSkillKeyword";
+import getNTESkillKeyword from "./nte/getSkillKeyword";
 
 export function formatSkillIconURL(
     url: string,
@@ -48,6 +49,7 @@ export function useSkillKeyword(): GameData<UseSkillKeywordFn> {
             throw new Error("Function not implemented.");
         },
         endfield: getEndfieldSkillKeyword,
+        nte: getNTESkillKeyword,
     };
 }
 

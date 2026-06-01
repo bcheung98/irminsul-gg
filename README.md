@@ -4,19 +4,24 @@
 
 **Irminsul.GG** branches:
 
--   [**Genshin Impact**](https://irminsul.gg/genshin)
+- [**Genshin Impact**](https://irminsul.gg/genshin)
 
--   [**Honkai: Star Rail**](https://irminsul.gg/hsr)
+- [**Honkai: Star Rail**](https://irminsul.gg/hsr)
 
--   [**Wuthering Waves**](https://irminsul.gg/wuwa)
+- [**Wuthering Waves**](https://irminsul.gg/wuwa)
 
--   [**Zenless Zone Zero**](https://irminsul.gg/zzz)
+- [**Zenless Zone Zero**](https://irminsul.gg/zzz)
 
--   [**Umamusume: Pretty Derby**](https://irminsul.gg/uma)
+- [**Umamusume: Pretty Derby**](https://irminsul.gg/uma)
 
--   [**Arknights: Endfield**](https://irminsul.gg/endfield)
+- [**Arknights: Endfield**](https://irminsul.gg/endfield)
+
+- [**Neverness to Everness**](https://irminsul.gg/nte)
 
 ## **Previews**
+
+**Gacha Calendar**:
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/calendar-v2-img1.png)
 
 **Genshin Impact**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/genshin/preview.png)
@@ -35,6 +40,9 @@
 
 **Arknights: Endfield**:
 ![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/endfield/preview.png)
+
+**Neverness to Everness**:
+![preview](https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/nte/preview.png)
 
 ---
 
