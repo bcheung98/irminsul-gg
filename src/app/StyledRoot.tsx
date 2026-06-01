@@ -47,7 +47,7 @@ export default function StyledRoot({
 
     function getCurrentData() {
         const { data, error, isLoading } = useSWR(urls[url], (url: string) =>
-            fetch(url).then((r) => r.json())
+            fetch(url).then((r) => r.json()),
         );
 
         let currentData: any[] = [];
@@ -86,6 +86,12 @@ export default function StyledRoot({
             window.scroll(0, 0);
         }
     }, [pathname]);
+
+    useEffect(() => {
+        console.log(
+            `MKCLXYKCM\nOZBLLCZAN\nBFIKCLELC\nCDMNXLQZZ\nGILFCQOGI\nWXTDQWLBL\nSZIBIWIVC\nFWLLGCWAL`,
+        );
+    }, []);
 
     if (theme) {
         return (

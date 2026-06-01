@@ -63,14 +63,6 @@ export const urls = {
     "nte/banner-weapons": "https://api.irminsul.gg/v2/nte/banner-weapons.json",
 };
 
-// function shouldRevalidate(url: string) {
-//     if (url.includes("localhost")) {
-//         return undefined;
-//     } else {
-//         return 120;
-//     }
-// }
-
 export async function getDataSet<T>(url: keyof typeof urls): Promise<T[]> {
     const res = await fetch(urls[url], { cache: "no-store" });
     return res.json();
@@ -97,32 +89,3 @@ export async function getUmaEvents(
     const res = await fetch(url, { cache: "no-store" });
     return res.json();
 }
-
-// export const getDataSet = cache(async function <T>(
-//     url: keyof typeof urls
-// ): Promise<T[]> {
-//     const res = await fetch(urls[url]);
-//     return res.json();
-// });
-
-// export const getData = cache(async function <T>(
-//     url: keyof typeof urls,
-//     params: (value: T) => unknown
-// ): Promise<T> {
-//     const res = await fetch(urls[url]);
-//     const data = await res.json();
-//     return data.find(params);
-// });
-
-// export const getUmaEvents = cache(async function (
-//     type: EventTypes,
-//     port?: number
-// ): Promise<Events[]> {
-//     let url: string = `https://api.irminsul.gg/v2/uma/events-${type}.json`;
-//     if (port) {
-//         // URL for localhost development
-//         url = `http://localhost:${port}/events-${type}`;
-//     }
-//     const res = await fetch(url);
-//     return res.json();
-// });
