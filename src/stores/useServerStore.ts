@@ -18,6 +18,7 @@ export const initialState: ServerState = {
     zzz: "NA",
     uma: "NA",
     endfield: "NA",
+    nte: "NA",
 };
 
 export const useServerStore = create(
