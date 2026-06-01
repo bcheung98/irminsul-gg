@@ -8,6 +8,7 @@ import {
     HSRCharacterInfoCard,
     HSRRelicInfoCard,
     HSRWeaponInfoCard,
+    NTECartridgeInfoCard,
     NTECharacterInfoCard,
     NTEWeaponInfoCard,
     WuWaCharacterInfoCard,
@@ -38,7 +39,7 @@ import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
-import { NTECharacter, NTEWeapon } from "@/types/nte";
+import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
 
@@ -255,7 +256,13 @@ export function renderInfoCard(
                     props={{ componentID: `${item.id}-versionHighlights` }}
                 />
             ),
-            equipment: <></>,
+            equipment: (
+                <NTECartridgeInfoCard
+                    key={item.id}
+                    cartridge={item as NTECartridge}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
     };
     return items[game][tag];

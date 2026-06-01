@@ -70,6 +70,33 @@ export default function InfoCard({
         imgURL = `${tag}/${url}`;
     }
 
+    const ImageRoot = (
+        <>
+            <Box sx={styles.imageContainer()}>
+                <Image
+                    src={imgURL}
+                    id={componentID}
+                    size={[size, type === "bangboos" ? size : 0]}
+                    responsive
+                    responsiveSize={0.25}
+                />
+            </Box>
+            <Box sx={styles.textContainer()}>
+                {title && (
+                    <Text variant="body3" sx={styles.text()}>
+                        {title}
+                    </Text>
+                )}
+                <Text
+                    variant={name.length > 13 ? "body3" : "body2"}
+                    sx={styles.text()}
+                >
+                    {name}
+                </Text>
+            </Box>
+        </>
+    );
+
     return (
         <Card sx={styles.root()} elevation={2}>
             <Card
@@ -78,33 +105,16 @@ export default function InfoCard({
                 onMouseEnter={() => handleHover("enter")}
                 onMouseLeave={() => handleHover("leave")}
             >
-                <ButtonBase
-                    href={`/${tag}/${formatHref(href)}`}
-                    LinkComponent={NavLink}
-                >
-                    <Box sx={styles.imageContainer()}>
-                        <Image
-                            src={imgURL}
-                            id={componentID}
-                            size={[size, type === "bangboos" ? size : 0]}
-                            responsive
-                            responsiveSize={0.25}
-                        />
-                    </Box>
-                    <Box sx={styles.textContainer()}>
-                        {title && (
-                            <Text variant="body3" sx={styles.text()}>
-                                {title}
-                            </Text>
-                        )}
-                        <Text
-                            variant={name.length > 13 ? "body3" : "body2"}
-                            sx={styles.text()}
-                        >
-                            {name}
-                        </Text>
-                    </Box>
-                </ButtonBase>
+                {href ? (
+                    <ButtonBase
+                        href={`/${tag}/${formatHref(href)}`}
+                        LinkComponent={NavLink}
+                    >
+                        {ImageRoot}
+                    </ButtonBase>
+                ) : (
+                    ImageRoot
+                )}
             </Card>
             {badgeLeft && (
                 <InfoBadge

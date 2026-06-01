@@ -12,7 +12,7 @@ import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
-import { NTECharacter, NTEWeapon } from "@/types/nte";
+import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 export function GenshinCharacterInfoCard({
     character,
@@ -607,6 +607,26 @@ export function NTEWeaponInfoCard({
             }}
             url=""
             href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function NTECartridgeInfoCard({
+    cartridge,
+    props,
+}: {
+    cartridge: NTECartridge;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="nte/cartridges"
+            id={cartridge.id}
+            key={cartridge.id}
+            name={cartridge.displayName}
+            rarity={cartridge.rarity}
+            url={`${cartridge.id}`}
             {...props}
         />
     );

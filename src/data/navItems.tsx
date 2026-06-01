@@ -230,11 +230,11 @@ export const navItems: GameData<NavItem[]> = {
             title: "Arcs",
             href: "arcs",
         },
-        // {
-        //     icon: "icons/Equipment",
-        //     title: "Cartridges",
-        //     href: "cartridges",
-        // },
+        {
+            icon: "icons/Equipment",
+            title: "Console",
+            href: "console",
+        },
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
