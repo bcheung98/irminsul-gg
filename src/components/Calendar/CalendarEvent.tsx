@@ -57,9 +57,6 @@ export default function CalendarEvent({
                     opacity: isCurrent || !isPast ? 1 : 0.5,
                     cursor: "pointer",
                     "&:hover, &:focus": {
-                        // outline: !isFuture
-                        //     ? `1px solid rgb(200, 200, 200)`
-                        //     : "none",
                         backgroundColor: isFuture
                             ? alpha(color, 0.5)
                             : alpha(color, 0.75),
@@ -72,10 +69,12 @@ export default function CalendarEvent({
                     title={`${title}${isFuture ? " *" : ""}`}
                     titleProps={{
                         variant: "body2",
-                        color: getContrastText(
-                            theme.text.primary,
-                            games[game].color,
-                        ),
+                        color: isFuture
+                            ? theme.text.primary
+                            : getContrastText(
+                                  theme.text.primary,
+                                  games[game].color,
+                              ),
                     }}
                 />
             </Card>
