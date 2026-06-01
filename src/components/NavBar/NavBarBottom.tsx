@@ -49,10 +49,6 @@ export default function NavBarBottom() {
         height: { xs: "22px", sm: "24px" },
     };
 
-    console.log(
-        `MKCLXYKCM\nOZBLLCZAN\nBFIKCLELC\nCDMNXLQZZ\nGILFCQOGI\nWXTDQWLBL\nSZIBIWIVC\nFWLLGCWAL`
-    );
-
     return (
         <AppBar
             position="relative"
@@ -67,7 +63,7 @@ export default function NavBarBottom() {
                     flexWrap: "wrap",
                     gap: "8px",
                     py: "8px",
-                    width: pathname !== "/" ? "95%" : "75%",
+                    width: pathname !== "/" ? { xs: "95%", md: "100%" } : "75%",
                     mx: "auto",
                 }}
             >

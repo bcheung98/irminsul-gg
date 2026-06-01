@@ -13,15 +13,32 @@ import { racetracks } from "@/data/uma/racetracks";
 import { scenarios } from "@/data/uma/scenarios";
 import { UmaCharacterProfile } from "@/types/uma/character";
 import { EventRewards } from "@/types/uma/event";
+import { Server } from "@/types";
+
+const eventNames: Record<Server, Record<string, string>> = {
+    NA: {
+        "501023520": "Battle With a Raging Dragon",
+        "501037525": "The Outcome of Flash's Plan",
+        "501043524": "いたずら大計画、始動なのだ！",
+    },
+    Asia: {
+        "501023520": "暴れ龍との攻防",
+        "501037525": "結果：フラッシュプラン",
+        "501043524": "いたずら大計画、始動なのだ！",
+    },
+    EU: {},
+};
 
 export function getEventText({
     event,
     profiles,
     charID,
+    server = "NA",
 }: {
     event: EventRewards;
     profiles: UmaCharacterProfile[];
     charID: number | string;
+    server?: Server;
 }) {
     const { tag, value, count, data, props = {} } = event;
 
@@ -30,7 +47,7 @@ export function getEventText({
             return id;
         }
         const char = profiles.find(
-            (character) => character.id === Number(id || 0)
+            (character) => character.id === Number(id || 0),
         );
         return char ? char.name : "";
     };
@@ -100,7 +117,7 @@ export function getEventText({
         this_card_bond: `This card bond ${value}`,
         bond_lowest: `Bond of the support with the lowest bond (apart from this card) ${value}`,
         bond_random: `Bond of ${getCharacter(
-            data
+            data,
         )} random support cards ${value}`,
         energy: `Energy ${value}`,
         max_energy: `Maximum Energy ${value}`,
@@ -145,7 +162,7 @@ export function getEventText({
             showCount: true,
         })}`,
         event_count: `${value}`,
-        event_trigger: `Event 「${value}」 will occur next turn`,
+        event_trigger: `Event 「${eventNames[server][value as string]}」 will occur next turn`,
         track_hint: `Relevant track skill hint ${value}`,
         stat_not_disabled: `Stat that didn't have its facility disabled ${value}`,
         expensive_races: "Racing consumes more energy",
@@ -154,13 +171,13 @@ export function getEventText({
         brian_tryhard:
             "Increased difficulty and rewards of future training goals",
         branch_future: `※ Will affect the outcome of the ${getOrdinal(
-            eventNumber
+            eventNumber,
         )} event`,
         branch_previous: `※ Can only happen if you chose the ${getOrdinal(
-            eventOption
+            eventOption,
         )} option during the ${getOrdinal(eventNumber)} event`,
         branch_previous2: `※ If you chose the ${getOrdinal(
-            eventOption
+            eventOption,
         )} option during both previous two chain events`,
         other_cases: "※ In other cases",
         result_good: "※ Good result",
@@ -175,7 +192,7 @@ export function getEventText({
         mood_exact: `※ Mood ${getMood(mood)}`,
         mood_or: `※ Mood ${mood1} or ${mood2}`,
         scenario_link: `※ Scenario link: This event will grant higher rewards in the ${getScenario(
-            Number(data)
+            Number(data),
         )} scenario.`,
         scenario_linked: `※ If ${getCharacter(data)} is scenario-linked:`,
         not_scenario_linked: "※ If not scenario-linked:",
@@ -194,7 +211,7 @@ export function getEventText({
         wl_exact: `※ Wisdom Level ${value}`,
         wl_less: `※ Wisdom Level ${value} or less`,
         wl_min_name: `※ ${getCharacter(
-            data
+            data,
         )}'s Wisdom Level is at least ${value}`,
         wl_combined: `※ Combined Wisdom Level of all Goddesses ${value} or more`,
         ttl_gauge: `${getCharacter(data)}'s Instruction gauge ${value}`,
@@ -238,14 +255,14 @@ export function getEventText({
             multi: `$X times`,
         })}`,
         win_g1_year: `Win at least one G1 race during ${getYear(
-            year
+            year,
         )} ${countText({ count, single: "", multi: `$X times` })}`,
         win_streak_graded: `Get a win streak of ${value}+ graded races (G3, G2, G1)`,
         win_all_g1_rival: `Win all G1 races in which ${getCharacter(
-            data
+            data,
         )} is also participating`,
         win_g1_cnt_class_distance: `In the ${getYear(
-            year
+            year,
         )}, win at least ${count} ${distanceList
             .map((d) => getDistance(d))
             .join("/")} G1 ${countText({
@@ -253,15 +270,15 @@ export function getEventText({
             single: "race",
         })}`,
         do_not_race: `Don't race in ${getYear(year)}, ${getHalf(
-            half
+            half,
         )} ${getMonth(month)}`,
         date: `Triggers in ${getYear(year)}, ${getHalf(half)} ${getMonth(
-            month
+            month,
         )}`,
         date_before_finals: "Triggers before the Finals start",
         fans_before_finals: `Have at least ${value?.toLocaleString()} fans before the finals`,
         dist_wins_branch: `The rewards will depend on the amount of ${getDistance(
-            Number(value)
+            Number(value),
         )} wins`,
         racetrack_wins_branch: `The rewards will depend on the amount of ${
             racetracks[Number(value)]
@@ -300,7 +317,7 @@ export function getEventText({
             multi: `$X times`,
         })}`,
         rec_pal: `Go on a recreation event with any Pal or Group support ${countText(
-            { count, single: "", multi: `$X times` }
+            { count, single: "", multi: `$X times` },
         )}`,
         rec_summer: `Go on a recreation event during summer camp ${countText({
             count,
@@ -324,14 +341,14 @@ export function getEventText({
             single: "race",
         })} in ${getYear(year)}`,
         gn_race_pn: `Place ${getOrdinal(position)} or better in any ${getGrade(
-            grade
+            grade,
         )} race ${countText({
             count,
             single: "",
             multi: `$X times`,
         })}`,
         any_race_pn: `Place ${getOrdinal(
-            position
+            position,
         )} or better in any race ${countText({
             count,
             single: "",
@@ -339,45 +356,45 @@ export function getEventText({
         })}`,
         dt_gn_race_w: `Win any ${getGrade(grade)} ${distOrTerrain(
             distance,
-            terrain
+            terrain,
         )} race ${countText({ count, single: "", multi: `$X times` })}`,
         gn_race_w: `Win any ${distOrTerrain(
             distance,
-            terrain
+            terrain,
         )} race ${countText({ count, single: "", multi: `$X times` })}`,
         gn_race_no_w: `Win any non-objective ${getGrade(grade)} ${distOrTerrain(
             distance,
-            terrain
+            terrain,
         )} race ${countText({ count, single: "", multi: `$X times` })}`,
         y_dt_gn_race_no_w: `Win any non-objective ${getGrade(
-            grade
+            grade,
         )} ${distOrTerrain(distance, terrain)} race ${countText({
             count,
             single: "",
             multi: `$X times`,
         })} in year ${year}`,
         dt_gn_race_no_w: `Win any non-objective ${getGrade(
-            grade
+            grade,
         )} ${distOrTerrain(distance, terrain)} race ${countText({
             count,
             single: "",
             multi: `$X times`,
         })}`,
         s_gn2_race_w: `Win any ${getGrade(gradeList[0])} or ${getGrade(
-            gradeList[1]
+            gradeList[1],
         )} race as ${getStrategy(strategy)} ${countText({
             count,
             single: "",
             multi: `$X times`,
         })}`,
         s_gn_race_w: `Win any ${getGrade(grade)} race as ${getStrategy(
-            strategy
+            strategy,
         )} ${countText({ count, single: "", multi: `$X times` })}`,
         s_gn_race_wn_c: `Get a win streak of ${count}+ ${getGrade(
-            grade
+            grade,
         )} ${countText({ count, single: "race" })} as ${getStrategy(strategy)}`,
         s_fn_gn_race_w: `Win any ${getGrade(grade)} race as ${getStrategy(
-            strategy
+            strategy,
         )} being the #${pop} favorite ${countText({
             count,
             single: "",
@@ -385,7 +402,7 @@ export function getEventText({
         })}`,
         s_dt_gn_race_w: `Win any ${getGrade(grade)} ${distOrTerrain(
             distance,
-            terrain
+            terrain,
         )} race as ${getStrategy(strategy)} ${countText({
             count,
             single: "",
@@ -393,9 +410,9 @@ export function getEventText({
         })}`,
         s_fn_dt_gn_race_w: `Win any ${getGrade(grade)} ${distOrTerrain(
             distance,
-            terrain
+            terrain,
         )} race as ${getStrategy(
-            strategy
+            strategy,
         )} being the #${pop} favorite ${countText({
             count,
             single: "",
@@ -411,7 +428,7 @@ export function getEventText({
             single: `a ${getGrade(grade)} race`,
             multi: `$X ${getGrade(grade)} races`,
         })} in one of these track conditions: ${getTrackConditions(
-            trackConds
+            trackConds,
         )}`,
         rt_race_w: `Win any race on the ${
             racetracks[Number(trackName)]
@@ -437,7 +454,7 @@ export function getEventText({
             multi: `${getGrade(grade)} races at least ${count} times`,
         })}`,
         rn_gn_race_w: `Win against any of the following characters in ${getGrade(
-            grade
+            grade,
         )} races ${countText({
             count,
             single: "once",
@@ -468,12 +485,12 @@ export function getEventText({
         ev_ac_on: `In the 「${eventName || value}」 training event, get the ${
             eventOutcomes[eventOutcome]
         } outcome after selecting one of the following choices: ${getOptionList(
-            eventOptions
+            eventOptions,
         )}`,
         ev_ac_on_nooutcome: `In the 「${
             eventName || value
         }」 training event, select one of the following choices: ${getOptionList(
-            eventOptions
+            eventOptions,
         )}`,
         ev_cn_on: `In the 「${eventName || value}」 training event, get the ${
             eventOutcomes[eventOutcome]
@@ -579,7 +596,7 @@ function getTrackConditions(c = [1]) {
         .map((x, i) =>
             i < c.length - 1
                 ? `${raceConditions[x]}, `
-                : `or ${raceConditions[x]}`
+                : `or ${raceConditions[x]}`,
         )
         .join("");
 }

@@ -40,6 +40,9 @@ export default function EventRewards(props: {
 }
 
 function getRewards(rewards: EventRewards[]) {
+    if (!rewards) {
+        return [[{ tag: "nothing" }]];
+    }
     const res: EventRewards[][] = [];
     const tags = rewards.map((reward) => reward.tag);
     const indexes: number[] = [];

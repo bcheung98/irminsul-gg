@@ -87,8 +87,7 @@ export function createVersionInfo({
     const versions: CalendarVersionInfo[] = [...banners];
 
     // Create future version info
-    // TODO: Remove Endfield from exclusion list once consistent banner schedule is known
-    if (!["uma", "endfield"].includes(game)) {
+    if (!["uma"].includes(game)) {
         const lastVersion = versions.slice(-1)[0];
         let { id, version } = lastVersion;
         let start = new DateObject(lastVersion.end).date;
@@ -110,6 +109,12 @@ export function createVersionInfo({
                     } else {
                         end.setDate(end.getDate() + 20);
                     }
+                } else if (game === "nte") {
+                    if (i % 2 === 0) {
+                        end.setDate(end.getDate() + 20);
+                    } else {
+                        end.setDate(end.getDate() + 15);
+                    }
                 } else {
                     end.setDate(end.getDate() + 21);
                 }
@@ -130,6 +135,13 @@ export function createVersionInfo({
                         endTime = "09:59:59";
                         break;
                     case "zzz":
+                        endTime = "11:59:59";
+                        break;
+                    case "endfield":
+                        startTime = "12:00:00";
+                        endTime = "11:59:59";
+                        break;
+                    case "nte":
                         endTime = "11:59:59";
                         break;
                     default:
@@ -154,6 +166,14 @@ export function createVersionInfo({
                         endTime = "11:59:59";
                         break;
                     case "zzz":
+                        startTime = "12:00:00";
+                        endTime = "14:59:59";
+                        break;
+                    case "endfield":
+                        startTime = "12:00:00";
+                        endTime = "17:00:00";
+                        break;
+                    case "nte":
                         startTime = "12:00:00";
                         endTime = "14:59:59";
                         break;
