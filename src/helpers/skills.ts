@@ -66,6 +66,7 @@ export function getKeywordPopupTitle(
             return "Glossary";
         case "zzz":
         case "uma":
+        case "nte":
         default:
             return "Keywords";
     }

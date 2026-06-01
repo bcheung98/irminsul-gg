@@ -73,6 +73,7 @@ export function textLabelIcon(game: Game, equipment: Equipment) {
         zzz: `zzz/drive-discs/${equipment.id}`,
         uma: "",
         endfield: "",
+        nte: "",
     };
     return items[game];
 }
