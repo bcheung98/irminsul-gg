@@ -14,6 +14,12 @@ import { TCGCharacterCard } from "@/types/genshin/tcg";
 export const metadata: Metadata = {
     title: "TCG",
     description: "A list of all Genshin Impact Genius Invocation TCG cards.",
+    robots: {
+        index: false,
+        googleBot: {
+            index: false,
+        },
+    },
 };
 
 export default async function Page() {
