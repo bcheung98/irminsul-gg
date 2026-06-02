@@ -20,9 +20,9 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { card } = await params;
-    const cardData = await getData<TCGCharacterCard>(
+    const cardData = await getData<TCGCharacterCard | TCGActionCard>(
         "genshin/tcg",
-        (c) => formatHref(c.url) === formatHref(card)
+        (c) => formatHref(c.url) === formatHref(card),
     );
 
     return getMetadata({
@@ -38,9 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
     const { card } = await params;
-    const cardData = await getData<TCGCharacterCard>(
+    const cardData = await getData<TCGCharacterCard | TCGActionCard>(
         "genshin/tcg",
-        (c) => formatHref(c.url) === formatHref(card)
+        (c) => formatHref(c.url) === formatHref(card),
     );
     const keywordData = await getDataSet<SkillKeyword>("genshin/tcg-keywords");
 

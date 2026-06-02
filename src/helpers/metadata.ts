@@ -92,6 +92,15 @@ export function getMetadata({
             title: overrides?.title || title,
             images,
         },
+        robots:
+            tag === "tcg"
+                ? {
+                      index: false,
+                      googleBot: {
+                          index: false,
+                      },
+                  }
+                : undefined,
     };
 }
 

@@ -7,36 +7,46 @@ export default function manifest(): MetadataRoute.Manifest {
         description:
             "Irminsul.GG - A database and companion website for various gacha games.",
         start_url: "/",
-        display: "minimal-ui",
+        display: "standalone",
         background_color: "rgb(40, 40, 40)",
         theme_color: "rgb(8, 8, 8)",
         icons: [
             {
-                src: "icon-72.png",
+                src: "/favicon.ico",
+                sizes: "any",
+                type: "image/x-icon",
+            },
+            {
+                src: "/apple-icon.png",
+                sizes: "any",
+                type: "image/x-icon",
+            },
+            {
+                src: "/icon-72.png",
                 sizes: "72x72",
                 type: "image/png",
                 purpose: "maskable",
             },
             {
-                src: "icon-128.png",
+                src: "/icon-128.png",
                 sizes: "128x128",
                 type: "image/png",
                 purpose: "maskable",
             },
             {
-                src: "icon-144.png",
+                src: "/icon-144.png",
                 sizes: "144x144",
                 type: "image/png",
                 purpose: "maskable",
             },
             {
-                src: "icon-192.png",
+                src: "/icon-192.png",
                 sizes: "192x192",
                 type: "image/png",
                 purpose: "maskable",
             },
             {
-                src: "icon-512.png",
+                src: "/icon-512.png",
                 sizes: "512x512",
                 type: "image/png",
                 purpose: "maskable",
@@ -103,6 +113,30 @@ export default function manifest(): MetadataRoute.Manifest {
                 icons: [
                     {
                         src: "https://assets.irminsul.gg/v2/uma/_common/Icon.png",
+                        sizes: "any",
+                        type: "image/png",
+                    },
+                ],
+            },
+            {
+                name: "Arknights: Endfield",
+                short_name: "Endfield",
+                url: "/endfield",
+                icons: [
+                    {
+                        src: "https://assets.irminsul.gg/v2/endfield/_common/Icon.png",
+                        sizes: "any",
+                        type: "image/png",
+                    },
+                ],
+            },
+            {
+                name: "Neverness to Everness",
+                short_name: "NTE",
+                url: "/nte",
+                icons: [
+                    {
+                        src: "https://assets.irminsul.gg/v2/nte/_common/Icon.png",
                         sizes: "any",
                         type: "image/png",
                     },
