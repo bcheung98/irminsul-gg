@@ -3,6 +3,7 @@ import { Suspense } from "react";
 // Component imports
 import WeaponPage from "./WeaponPage";
 import Loader from "@/components/Loader";
+import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
@@ -21,29 +22,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { "w-engine": weapon } = await params;
     const weaponData = await getData<ZZZWeapon>(
         "zzz/w-engines",
-        (wep) => formatHref(wep.url) === formatHref(weapon)
+        (wep) => formatHref(wep.url) === formatHref(weapon),
     );
 
-    return getMetadata({
-        game: "zzz",
-        tag: "weapons",
-        attributes: {
-            id: weaponData.id,
-            name: weaponData.name,
-            displayName: weaponData.displayName,
-            rarity: weaponData.rarity,
-            weaponType: weaponData.weaponType,
-            description: weaponData.description,
-        },
-    });
+    return weaponData
+        ? getMetadata({
+              game: "zzz",
+              tag: "weapons",
+              attributes: {
+                  id: weaponData.id,
+                  name: weaponData.name,
+                  displayName: weaponData.displayName,
+                  rarity: weaponData.rarity,
+                  weaponType: weaponData.weaponType,
+                  description: weaponData.description,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
     const { "w-engine": weapon } = await params;
     const weaponData = await getData<ZZZWeapon>(
         "zzz/w-engines",
-        (wep) => formatHref(wep.url) === formatHref(weapon)
+        (wep) => formatHref(wep.url) === formatHref(weapon),
     );
+
+    if (!weaponData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>

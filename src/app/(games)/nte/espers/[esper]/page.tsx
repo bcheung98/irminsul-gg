@@ -3,6 +3,7 @@ import { Suspense } from "react";
 // Component imports
 import CharacterPage from "./CharacterPage";
 import Loader from "@/components/Loader";
+import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
@@ -24,19 +25,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (char) => formatHref(char.url) === formatHref(esper),
     );
 
-    return getMetadata({
-        game: "nte",
-        tag: "characters",
-        attributes: {
-            id: charData.id,
-            name: charData.name,
-            displayName: charData.displayName,
-            rarity: charData.rarity,
-            element: charData.element,
-            weaponType: charData.weaponType,
-            description: charData.description,
-        },
-    });
+    return charData
+        ? getMetadata({
+              game: "nte",
+              tag: "characters",
+              attributes: {
+                  id: charData.id,
+                  name: charData.name,
+                  displayName: charData.displayName,
+                  rarity: charData.rarity,
+                  element: charData.element,
+                  weaponType: charData.weaponType,
+                  description: charData.description,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
@@ -45,6 +48,10 @@ export default async function Page({ params }: Props) {
         "nte/espers",
         (char) => formatHref(char.url) === formatHref(esper),
     );
+
+    if (!charData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>
