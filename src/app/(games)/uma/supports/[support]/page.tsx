@@ -3,6 +3,7 @@ import { Suspense } from "react";
 // Component imports
 import SupportPage from "./SupportPage";
 import Loader from "@/components/Loader";
+import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData, getDataSet, getUmaEvents } from "@/lib/fetchData";
@@ -24,32 +25,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { support } = await params;
     const suppData = await getData<UmaSupport>(
         "uma/supports",
-        (supp) => formatHref(supp.url) === formatHref(support)
+        (supp) => formatHref(supp.url) === formatHref(support),
     );
 
-    return getMetadata({
-        game: "uma",
-        tag: "supports",
-        attributes: {
-            id: suppData.id,
-            name: suppData.name,
-            displayName: suppData.displayName,
-            title: suppData.title,
-            rarity: suppData.rarity,
-            specialty: suppData.specialty,
-        },
-    });
+    return suppData
+        ? getMetadata({
+              game: "uma",
+              tag: "supports",
+              attributes: {
+                  id: suppData.id,
+                  name: suppData.name,
+                  displayName: suppData.displayName,
+                  title: suppData.title,
+                  rarity: suppData.rarity,
+                  specialty: suppData.specialty,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
     const { support } = await params;
     const suppData = await getData<UmaSupport>(
         "uma/supports",
-        (supp) => formatHref(supp.url) === formatHref(support)
+        (supp) => formatHref(supp.url) === formatHref(support),
     );
     const profileData = await getData<UmaCharacterProfile>(
         "uma/character-profiles",
-        (char) => suppData.charID === char.id
+        (char) => suppData.charID === char.id,
     );
     const skillData = await getDataSet<UmaSkill>("uma/skills");
     const commonEventData = await getUmaEvents("support-common");
@@ -85,6 +88,10 @@ export default async function Page({ params }: Props) {
         "support-pal": palEvent,
         "support-group": groupEvent,
     };
+
+    if (!suppData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>

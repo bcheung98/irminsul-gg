@@ -3,6 +3,7 @@ import { Suspense } from "react";
 // Component imports
 import TCGPage from "./TCGPage";
 import Loader from "@/components/Loader";
+import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData, getDataSet } from "@/lib/fetchData";
@@ -25,15 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         (c) => formatHref(c.url) === formatHref(card),
     );
 
-    return getMetadata({
-        game: "genshin",
-        tag: "tcg",
-        attributes: {
-            id: cardData?.id,
-            name: `${cardData?.name} (TCG)`,
-            displayName: `${cardData?.displayName} (TCG)`,
-        },
-    });
+    return cardData
+        ? getMetadata({
+              game: "genshin",
+              tag: "tcg",
+              attributes: {
+                  id: cardData?.id,
+                  name: `${cardData?.name} (TCG)`,
+                  displayName: `${cardData?.displayName} (TCG)`,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
@@ -43,6 +46,10 @@ export default async function Page({ params }: Props) {
         (c) => formatHref(c.url) === formatHref(card),
     );
     const keywordData = await getDataSet<SkillKeyword>("genshin/tcg-keywords");
+
+    if (!cardData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>

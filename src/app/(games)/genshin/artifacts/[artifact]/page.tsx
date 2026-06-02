@@ -3,6 +3,7 @@ import { Suspense } from "react";
 // Component imports
 import EquipmentPage from "./EquipmentPage";
 import Loader from "@/components/Loader";
+import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/lib/fetchData";
@@ -21,28 +22,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { artifact } = await params;
     const artifactData = await getData<GenshinArtifact>(
         "genshin/artifacts",
-        (a) => formatHref(a.url) === formatHref(artifact)
+        (a) => formatHref(a.url) === formatHref(artifact),
     );
 
-    return getMetadata({
-        game: "genshin",
-        tag: "equipment",
-        attributes: {
-            id: artifactData.id,
-            name: artifactData.name,
-            displayName: artifactData.displayName,
-            rarity: artifactData.rarity,
-            description: artifactData.description,
-        },
-    });
+    return artifactData
+        ? getMetadata({
+              game: "genshin",
+              tag: "equipment",
+              attributes: {
+                  id: artifactData.id,
+                  name: artifactData.name,
+                  displayName: artifactData.displayName,
+                  rarity: artifactData.rarity,
+                  description: artifactData.description,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
     const { artifact } = await params;
     const artifactData = await getData<GenshinArtifact>(
         "genshin/artifacts",
-        (a) => formatHref(a.url) === formatHref(artifact)
+        (a) => formatHref(a.url) === formatHref(artifact),
     );
+
+    if (!artifactData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>

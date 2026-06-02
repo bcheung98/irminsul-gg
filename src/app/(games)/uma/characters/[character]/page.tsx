@@ -14,6 +14,7 @@ import type { Metadata } from "next";
 import { UmaCharacter, UmaCharacterProfile } from "@/types/uma/character";
 import { UmaSkill } from "@/types/uma/skill";
 import { EventList } from "@/types/uma/event";
+import Page404 from "@/components/Page404";
 
 interface Props {
     params: Promise<{ character: string }>;
@@ -23,31 +24,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { character } = await params;
     const charData = await getData<UmaCharacter>(
         "uma/characters",
-        (char) => formatHref(char.url) === formatHref(character)
+        (char) => formatHref(char.url) === formatHref(character),
     );
 
-    return getMetadata({
-        game: "uma",
-        tag: "characters",
-        attributes: {
-            id: charData.id,
-            name: charData.name,
-            title: charData.title,
-            rarity: charData.rarity,
-            outfit: charData.outfit,
-        },
-    });
+    return charData
+        ? getMetadata({
+              game: "uma",
+              tag: "characters",
+              attributes: {
+                  id: charData.id,
+                  name: charData.name,
+                  title: charData.title,
+                  rarity: charData.rarity,
+                  outfit: charData.outfit,
+              },
+          })
+        : {};
 }
 
 export default async function Page({ params }: Props) {
     const { character } = await params;
     const charData = await getData<UmaCharacter>(
         "uma/characters",
-        (char) => formatHref(char.url) === formatHref(character)
+        (char) => formatHref(char.url) === formatHref(character),
     );
     const profileData = await getData<UmaCharacterProfile>(
         "uma/character-profiles",
-        (char) => charData.charID === char.id
+        (char) => charData.charID === char.id,
     );
     const skillData = await getDataSet<UmaSkill>("uma/skills");
     const charEventData = await getUmaEvents("character");
@@ -66,6 +69,10 @@ export default async function Page({ params }: Props) {
         character: charEvent,
         "character-outfit": charOutfitEvent,
     };
+
+    if (!charData) {
+        return <Page404 />;
+    }
 
     return (
         <Suspense fallback={<Loader />}>
