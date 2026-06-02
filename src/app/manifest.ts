@@ -1,3 +1,4 @@
+import { icons, shortcuts } from "@/helpers/manifest";
 import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -6,141 +7,18 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: "Irminsul.GG",
         description:
             "Irminsul.GG - A database and companion website for various gacha games.",
-        start_url: "./",
+        start_url: "/",
         display: "standalone",
         background_color: "rgb(40, 40, 40)",
         theme_color: "rgb(8, 8, 8)",
-        icons: [
+        icons,
+        shortcuts,
+        screenshots: [
             {
-                src: "/favicon.ico",
-                sizes: "any",
-                type: "image/x-icon",
-            },
-            {
-                src: "/apple-icon.png",
-                sizes: "180x180",
-                type: "image/x-icon",
-            },
-            {
-                src: "/icon-48.png",
-                sizes: "48x48",
+                src: "https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/preview.png",
+                sizes: "1920x1080",
                 type: "image/png",
-            },
-            {
-                src: "/icon-72.png",
-                sizes: "72x72",
-                type: "image/png",
-            },
-            {
-                src: "/icon-128.png",
-                sizes: "128x128",
-                type: "image/png",
-            },
-            {
-                src: "/icon-144.png",
-                sizes: "144x144",
-                type: "image/png",
-            },
-            {
-                src: "/icon-192.png",
-                sizes: "192x192",
-                type: "image/png",
-            },
-            {
-                src: "/icon-512.png",
-                sizes: "512x512",
-                type: "image/png",
-            },
-        ],
-        shortcuts: [
-            {
-                name: "Gacha Calendar",
-                short_name: "Calendar",
-                url: "/calendar",
-            },
-            {
-                name: "Genshin Impact",
-                short_name: "Genshin",
-                url: "/genshin",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/genshin/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Honkai: Star Rail",
-                short_name: "HSR",
-                url: "/hsr",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/hsr/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Wuthering Waves",
-                short_name: "WuWa",
-                url: "/wuwa",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/wuwa/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Zenless Zone Zero",
-                short_name: "ZZZ",
-                url: "/zzz",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/zzz/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Umamusume",
-                short_name: "Uma",
-                url: "/uma",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/uma/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Arknights: Endfield",
-                short_name: "Endfield",
-                url: "/endfield",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/endfield/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
-            },
-            {
-                name: "Neverness to Everness",
-                short_name: "NTE",
-                url: "/nte",
-                icons: [
-                    {
-                        src: "https://assets.irminsul.gg/v2/nte/_common/Icon.png",
-                        sizes: "any",
-                        type: "image/png",
-                    },
-                ],
+                form_factor: "wide",
             },
         ],
     };
