@@ -2,11 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: "Irminsul.GG",
+        name: "IRMINSUL.GG",
         short_name: "Irminsul.GG",
         description:
             "Irminsul.GG - A database and companion website for various gacha games.",
-        start_url: "/",
+        start_url: "./",
         display: "standalone",
         background_color: "rgb(40, 40, 40)",
         theme_color: "rgb(8, 8, 8)",
@@ -25,37 +25,31 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: "/icon-48.png",
                 sizes: "48x48",
                 type: "image/png",
-                purpose: "maskable",
             },
             {
                 src: "/icon-72.png",
                 sizes: "72x72",
                 type: "image/png",
-                purpose: "maskable",
             },
             {
                 src: "/icon-128.png",
                 sizes: "128x128",
                 type: "image/png",
-                purpose: "maskable",
             },
             {
                 src: "/icon-144.png",
                 sizes: "144x144",
                 type: "image/png",
-                purpose: "maskable",
             },
             {
                 src: "/icon-192.png",
                 sizes: "192x192",
                 type: "image/png",
-                purpose: "maskable",
             },
             {
                 src: "/icon-512.png",
                 sizes: "512x512",
                 type: "image/png",
-                purpose: "maskable",
             },
         ],
         shortcuts: [
