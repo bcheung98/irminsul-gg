@@ -32,7 +32,7 @@ const PlannerSlider = memo(function PlannerSlider({
     icon,
     levels,
     values,
-    materials,
+    title,
     color,
 }: PlannerSliderProps) {
     const theme = useTheme();
@@ -42,7 +42,7 @@ const PlannerSlider = memo(function PlannerSlider({
 
     const setItemValues = usePlannerStore()[`${game}/setItemValues`];
 
-    const title = skillKeys[game][skillKey] || "Level";
+    title = title || skillKeys[game][skillKey] || "Level";
 
     const [selected, setSelected] = useState(values.selected);
     const handleSelect = () => {
@@ -61,7 +61,7 @@ const PlannerSlider = memo(function PlannerSlider({
                 if (activeThumb === 0) {
                     const clamped = Math.min(
                         newValue[0],
-                        maxValue - minDistance
+                        maxValue - minDistance,
                     );
                     setSliderValue(() => [clamped, clamped + minDistance]);
                 } else {
@@ -72,7 +72,7 @@ const PlannerSlider = memo(function PlannerSlider({
                 setSliderValue(() => newValue);
             }
         },
-        []
+        [],
     );
 
     const marks = levels.map((level, index) => ({

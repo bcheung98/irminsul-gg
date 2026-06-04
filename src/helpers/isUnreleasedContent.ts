@@ -3,6 +3,9 @@ import { BaseDataWithRelease, Game, GameNoUma } from "@/types";
 import { UmaVersion } from "@/types/version";
 import DateObject from "./dates";
 
+// Change to `true` do override user setting for showing unrleased content
+const DISABLE_LEAKS_OVERRIDE = true;
+
 export function isUnreleasedContent(version: string, game: GameNoUma) {
     return versions[game].map((v) => v.version).includes(version);
 }
@@ -16,17 +19,23 @@ export function isUnreleasedContentUma(release: UmaVersion) {
 export function filterUnreleasedContent<T extends BaseDataWithRelease>(
     hideUnreleasedContent = false,
     items: T[],
-    game: Game
+    game: Game,
+    pathname?: string,
 ) {
-    if (hideUnreleasedContent) {
+    if (pathname !== "calendar") {
         if (game === "uma") {
-            items = items.filter(
-                (item) => !isUnreleasedContentUma(item.release as UmaVersion)
-            );
+            if (hideUnreleasedContent) {
+                items = items.filter(
+                    (item) =>
+                        !isUnreleasedContentUma(item.release as UmaVersion),
+                );
+            }
         } else {
-            items = items.filter((item) =>
-                isUnreleasedContent(item.release.version, game)
-            );
+            if (DISABLE_LEAKS_OVERRIDE || hideUnreleasedContent) {
+                items = items.filter((item) =>
+                    isUnreleasedContent(item.release.version, game),
+                );
+            }
         }
     }
     return items;

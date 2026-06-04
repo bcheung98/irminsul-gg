@@ -26,7 +26,7 @@ export default async function CalendarPage() {
         ),
         "nte/characters": await getDataSet<Banner>("nte/banner-characters"),
     };
-    const data = await getItems(false, undefined, false);
+    const data = await getItems(false, undefined, false, "calendar");
 
     return (
         <Suspense fallback={<Loader />}>

@@ -29,14 +29,14 @@ export default function CalendarEventPopup(props: {
         .map((item) => ({
             ...item,
             category: "characters",
-            url: `${item.id}`,
+            url: item.url ? `${item.id}` : "",
         })) as BannerOption[];
     const weapons = props.weapons
         .filter((item) => item.category.startsWith(game))
         .map((item) => ({
             ...item,
             category: "weapons",
-            url: `${item.id}`,
+            url: item.url ? `${item.id}` : "",
         })) as BannerOption[];
     const server = useServerStore()[game];
     const isFuture = isFutureBanner(props.eventProps, server, game);

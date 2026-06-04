@@ -38,9 +38,15 @@ export const characterPassive = [
     },
 ];
 
-export const characterLifeSkill = {
-    fons: [0, 500, 1500, 3600, 6400, 10000],
-    city: [0, 2, 4, 10, 16, 24],
+export const characterLifeSkill = (len: number) => {
+    const fons = [0, 500, 1500, 3600, 6400, 10000].slice(6 - len);
+    const city = [0, 2, 4, 10, 16, 24].slice(6 - len);
+    fons.unshift(0);
+    city.unshift(0);
+    return {
+        fons,
+        city,
+    };
 };
 
 export const weaponLevel = (rarity: number) => {

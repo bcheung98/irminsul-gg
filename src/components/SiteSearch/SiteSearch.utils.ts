@@ -22,102 +22,122 @@ export async function getItems(
     hideUnreleasedContent = true,
     game?: Game,
     hideUmaJPContent = true,
+    pathname?: string,
 ): Promise<SearchResult[]> {
     let data = Object.entries({
         "genshin/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinCharacter>("genshin/characters"),
             "genshin",
+            pathname,
         ),
         "genshin/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinWeapon>("genshin/weapons"),
             "genshin",
+            pathname,
         ),
         "genshin/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<GenshinArtifact>("genshin/artifacts"),
             "genshin",
+            pathname,
         ),
         "hsr/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRCharacter>("hsr/characters"),
             "hsr",
+            pathname,
         ),
         "hsr/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRWeapon>("hsr/lightcones"),
             "hsr",
+            pathname,
         ),
         "hsr/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<HSRRelic>("hsr/relics"),
             "hsr",
+            pathname,
         ),
         "wuwa/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaCharacter>("wuwa/resonators"),
             "wuwa",
+            pathname,
         ),
         "wuwa/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaWeapon>("wuwa/weapons"),
             "wuwa",
+            pathname,
         ),
         "wuwa/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<WuWaEcho>("wuwa/echoes"),
             "wuwa",
+            pathname,
         ),
         "zzz/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZCharacter>("zzz/agents"),
             "zzz",
+            pathname,
         ),
         "zzz/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZWeapon>("zzz/w-engines"),
             "zzz",
+            pathname,
         ),
         "zzz/equipment": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZDriveDisc>("zzz/drive-discs"),
             "zzz",
+            pathname,
         ),
         "zzz/bangboos": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<ZZZBangboo>("zzz/bangboos"),
             "zzz",
+            pathname,
         ),
         "uma/characters": filterUnreleasedContent(
             hideUmaJPContent,
             await getDataSet<UmaCharacter>("uma/characters"),
             "uma",
+            pathname,
         ),
         "uma/supports": filterUnreleasedContent(
             hideUmaJPContent,
             await getDataSet<UmaSupport>("uma/supports"),
             "uma",
+            pathname,
         ),
         "endfield/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<EndfieldCharacter>("endfield/operators"),
             "endfield",
+            pathname,
         ),
         "endfield/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<EndfieldWeapon>("endfield/weapons"),
             "endfield",
+            pathname,
         ),
         "nte/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<NTECharacter>("nte/espers"),
             "nte",
+            pathname,
         ),
         "nte/weapons": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<NTEWeapon>("nte/arcs"),
             "nte",
+            pathname,
         ),
     })
         .map(([category, data]) =>
@@ -131,7 +151,9 @@ export async function getItems(
                 aptitude: "aptitude" in item ? "" : undefined, // "Fake" key to format Uma title
                 category: category,
                 release: item.release,
-                url: `/${categoryURLs[category]}/${formatHref(item.url)}`,
+                url: item.url
+                    ? `/${categoryURLs[category]}/${formatHref(item.url)}`
+                    : "",
             })),
         )
         .flat();

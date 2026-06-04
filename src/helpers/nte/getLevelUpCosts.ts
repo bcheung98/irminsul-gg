@@ -20,6 +20,7 @@ export interface GetLevelUpCostsProps {
     rarity?: number;
     materials: NTEMaterials;
     skillKey?: string;
+    length?: number;
 }
 
 export function getCharacterLevelCost({
@@ -152,9 +153,11 @@ export function getCharacterLifeSkillCost({
     start,
     stop,
     selected,
-}: Required<Pick<GetLevelUpCostsProps, "start" | "stop" | "selected">>) {
-    const costs = { ...characterLifeSkill };
-
+    length,
+}: Required<
+    Pick<GetLevelUpCostsProps, "start" | "stop" | "selected" | "length">
+>) {
+    const costs = { ...characterLifeSkill(length) };
     let [credits, city] = range(0, objectKeys(costs).length, 0);
     if (selected) {
         [credits, city] = calculateCosts(costs, start, stop);

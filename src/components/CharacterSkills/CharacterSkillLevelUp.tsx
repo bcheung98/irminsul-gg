@@ -22,6 +22,7 @@ export default function CharacterSkillLevelUp({
     attributes,
     title = "Level Up Cost",
     unlock,
+    length,
 }: {
     materials: Materials;
     color?: string;
@@ -29,6 +30,7 @@ export default function CharacterSkillLevelUp({
     attributes: AttributeData;
     title?: string;
     unlock?: string;
+    length?: number;
 }) {
     const theme = useTheme();
 
@@ -82,6 +84,7 @@ export default function CharacterSkillLevelUp({
                 costKey={costKey}
                 materials={materials}
                 color={color}
+                length={length}
                 {...attributes}
             />
             {unlock && (
