@@ -31,6 +31,7 @@ interface LevelUpCostsProps {
     element?: string;
     weaponType?: string;
     rarity?: number;
+    length?: number;
 }
 
 export default function LevelUpCosts({
@@ -45,6 +46,7 @@ export default function LevelUpCosts({
     element,
     weaponType,
     rarity = 3,
+    length = 5,
 }: LevelUpCostsProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("sm"));
@@ -55,6 +57,9 @@ export default function LevelUpCosts({
         materials = { ...materials, gemstone: element };
     }
 
+    if (game === "nte") {
+        rarity = length;
+    }
     const levels = levelData[game](levelKey, rarity);
     const minDistance = 1;
     const maxValue = levels.length;
@@ -62,7 +67,7 @@ export default function LevelUpCosts({
     const handleSliderChange = (
         _: Event,
         newValue: number | number[],
-        activeThumb: number
+        activeThumb: number,
     ) => {
         if (!Array.isArray(newValue)) {
             return;
@@ -123,6 +128,7 @@ export default function LevelUpCosts({
         element,
         weaponType,
         rarity,
+        length,
     });
 
     return (

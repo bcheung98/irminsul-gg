@@ -25,7 +25,7 @@ import {
 // Type imports
 import { CostSliderValues, PlannerType } from "@/types/planner";
 
-export default function WuWaPlannerCard() {
+export default function NTEPlannerCard() {
     const theme = useTheme();
 
     let item = usePlannerCardData();
@@ -39,7 +39,6 @@ export default function WuWaPlannerCard() {
 
     const itemLevel = levels("level-asc");
     const skillLevel = levels("skill");
-    const lifeSkillLevel = levels("life");
 
     const defaultLevelValues: CostSliderValues = {
         start: 1,
@@ -50,12 +49,6 @@ export default function WuWaPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
-        selected: true,
-    };
-
-    const defaultLifeSkillValues: CostSliderValues = {
-        start: 1,
-        stop: lifeSkillLevel.length,
         selected: true,
     };
 
@@ -95,13 +88,31 @@ export default function WuWaPlannerCard() {
             values: item.values.support || defaultSkillValues,
             icon: `nte/skills/${item.id}_support`,
         },
-        {
-            skillKey: "life",
-            levels: lifeSkillLevel,
-            values: item.values.life || defaultLifeSkillValues,
-            icon: `nte/skills/${item.id}_life`,
-        },
     ];
+
+    // Remove old life skill values
+    delete item.values.life;
+    if (!item.lifeSkills) {
+        item.lifeSkills = [1004].includes(item.id) ? [5, 2] : [5];
+    }
+
+    const lifeSkills: SliderList = [];
+    item.lifeSkills.forEach((x, i) =>
+        lifeSkills.push({
+            skillKey: `life${i + 1}`,
+            levels: range(0, x),
+            values: item.values[`life${i + 1}`] || {
+                start: 1,
+                stop: x + 1,
+                selected: true,
+            },
+            title:
+                item.lifeSkills!.length > 1
+                    ? `Life Skills ${i + 1}`
+                    : "Life Skils",
+            icon: `nte/skills/${item.id}_life${i ? i : ""}`,
+        }),
+    );
 
     const nodes = Object.fromEntries(
         range(1, 2).map((index) => [
@@ -116,29 +127,46 @@ export default function WuWaPlannerCard() {
             ? textColor("nte", item.element)
             : theme.text.selected;
 
-    const [Level, Attack, Skill, Ultimate, Support, Life] = sliders.map(
-        (slider) => (
-            <PlannerSlider
-                key={slider.skillKey}
-                mode={mode}
-                type={type}
-                color={color}
-                {...item}
-                {...slider}
-            />
-        ),
-    );
+    const [Level, Attack, Skill, Ultimate, Support] = sliders.map((slider) => (
+        <PlannerSlider
+            key={slider.skillKey}
+            mode={mode}
+            type={type}
+            color={color}
+            {...item}
+            {...slider}
+        />
+    ));
+
+    const Life = lifeSkills.map((slider) => (
+        <PlannerSlider
+            key={slider.skillKey}
+            mode={mode}
+            type={type}
+            color={color}
+            {...item}
+            {...slider}
+        />
+    ));
 
     return (
         <Stack spacing={2} divider={<Divider />}>
             <MainContainer mode={mode}>
                 <LevelSliderContainer mode={mode}>{Level}</LevelSliderContainer>
-                {type === "characters" &&
-                    [Attack, Skill, Ultimate, Support, Life].map((slider) => (
-                        <SkillSliderContainer key={slider.key} mode={mode}>
-                            {slider}
-                        </SkillSliderContainer>
-                    ))}
+                {type === "characters" && (
+                    <>
+                        {[Attack, Skill, Ultimate, Support, Life]
+                            .flat()
+                            .map((slider) => (
+                                <SkillSliderContainer
+                                    key={slider.key}
+                                    mode={mode}
+                                >
+                                    {slider}
+                                </SkillSliderContainer>
+                            ))}
+                    </>
+                )}
             </MainContainer>
             {type === "characters" && (
                 <FlexBox spacing={2}>

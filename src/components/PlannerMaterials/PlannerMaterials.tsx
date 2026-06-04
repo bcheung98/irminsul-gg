@@ -37,6 +37,7 @@ export default function PlannerMaterials() {
     const costSourceMap = Object.entries(item.values).map(([key, value]) => {
         let costKey;
         let skillKey = key;
+        let length = 0;
         if (key.startsWith("trace")) {
             costKey =
                 value.type === "main"
@@ -59,6 +60,10 @@ export default function PlannerMaterials() {
             costKey = "characterTalent";
         } else if (game === "nte" && key.startsWith("passive")) {
             costKey = "characterPassive";
+        } else if (game === "nte" && key.startsWith("life")) {
+            costKey = "characterLifeSkill";
+            if (item.lifeSkills)
+                length = item.lifeSkills[Number(skillKey.slice(-1)) - 1];
         } else {
             switch (key) {
                 case "level":
@@ -73,9 +78,6 @@ export default function PlannerMaterials() {
                     break;
                 case "core":
                     costKey = "characterCoreSkill";
-                    break;
-                case "life":
-                    costKey = "characterLifeSkill";
                     break;
                 case "attack":
                 case "skill":
@@ -92,6 +94,7 @@ export default function PlannerMaterials() {
             ...item,
             withXP: true,
             skillKey,
+            length,
         });
     });
 

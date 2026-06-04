@@ -9,13 +9,13 @@ export interface PlannerSliderProps {
     icon?: string;
     levels: (string | number)[];
     values: CostSliderValues;
-    materials: Materials;
     rarity: number;
     weaponType: string;
+    title?: string;
     color?: string;
 }
 
 export type SliderList = Pick<
     PlannerSliderProps,
-    "skillKey" | "icon" | "levels" | "values"
+    "skillKey" | "icon" | "levels" | "values" | "title"
 >[];

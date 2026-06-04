@@ -57,6 +57,7 @@ function sortItems(items: string[], pathname: string) {
     const sortOrder = pathname.endsWith("planner")
         ? [
               "credits",
+              "city",
               "characterXP",
               "weaponXP",
               "boss",

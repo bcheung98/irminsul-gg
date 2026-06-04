@@ -1,6 +1,6 @@
 import { range } from "@/utils";
 
-export function nteLevels(key: string) {
+export function nteLevels(key: string, length = 5) {
     switch (key) {
         case "level":
             return ["20", "30", "40", "50", "60", "70", "80"];
@@ -26,7 +26,7 @@ export function nteLevels(key: string) {
         case "ultimate":
             return range(1, 10);
         case "life":
-            return range(1, 5);
+            return range(0, length);
         case "passive1":
         case "passive2":
         default:

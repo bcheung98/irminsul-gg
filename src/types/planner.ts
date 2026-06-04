@@ -25,6 +25,7 @@ export interface PlannerItemData extends BaseDataWithRelease {
     bonusStats?: WuWaCharacterBonusStats;
     mainAttribute?: EndfieldStatAttribute;
     baseSkills?: EndfieldCharacterPassive[];
+    lifeSkills?: number[];
     talents?: EndfieldCharacterPassive[];
     values: Record<string, CostSliderValues>;
 }

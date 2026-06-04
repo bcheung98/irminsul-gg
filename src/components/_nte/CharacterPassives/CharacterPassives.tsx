@@ -26,14 +26,8 @@ import { useTextColor } from "@/helpers/styles";
 
 // Type imports
 import { NTECharacterPassive } from "@/types/nte/character";
-import { AttributeData } from "@/types";
 import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 import { SkillProps } from "@/components/CharacterSkills/CharacterSkills.types";
-
-interface CharacterPassivesProps {
-    keywords?: SkillKeyword[];
-    attributes: AttributeData;
-}
 
 export default function CharacterPassives({
     keywords,
@@ -166,7 +160,7 @@ export default function CharacterPassives({
                                     </Stack>
                                     {passive.type !== "peculiarity" && (
                                         <CharacterSkillLevelUp
-                                            title="Unlock Cost"
+                                            title={`${passive.type === "life" ? "Level Up" : "Unlock"} Cost`}
                                             materials={materials}
                                             color={textColor(
                                                 "nte",
@@ -177,9 +171,11 @@ export default function CharacterPassives({
                                                 passive.type,
                                                 index + 1,
                                             )}
-                                            unlock={`Requires Esper Level ${
-                                                index ? "60" : "40"
-                                            }`}
+                                            length={
+                                                passive.description.split(
+                                                    '<span class="text-highlight">Level ',
+                                                ).length - 1
+                                            }
                                         />
                                     )}
                                 </Stack>
