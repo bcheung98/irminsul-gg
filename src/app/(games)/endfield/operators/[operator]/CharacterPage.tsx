@@ -101,6 +101,7 @@ export default function CharacterPage({
         <CharacterUpgrades
             title="Potential"
             keywords={character.keywords}
+            snapshots={character.snapshots}
             attributes={attributes}
         />
     );
