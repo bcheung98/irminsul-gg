@@ -29,7 +29,7 @@ export function nteFilters<T extends Filters>({
 
     return {
         element: {
-            name: "Element",
+            name: "Esper Type",
             value: filters.element,
             buttons: createFilterButtons({
                 items: elements,
