@@ -12,6 +12,7 @@ import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
 import FlexBox from "@/components/FlexBox";
 import MindscapeCinemaPopup from "@/components/_zzz/MindscapeCinemaPopup";
+import SnapshotPopup from "@/components/_endfield/SnapshotPopup";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -27,17 +28,20 @@ import { getKeywordPopupTitle, useSkillKeyword } from "@/helpers/skills";
 // Type imports
 import { AttributeData } from "@/types";
 import { CharacterSkillsList, Skill, SkillKeyword } from "@/types/skill";
+import { EndfieldCharacterSnapshot } from "@/types/endfield/character";
 
 interface CharacterUpgradesProps {
     title?: string;
     keywords?: SkillKeyword[];
     attributes: AttributeData;
+    snapshots?: EndfieldCharacterSnapshot[];
 }
 
 export default function CharacterUpgrades({
     title,
     keywords,
     attributes,
+    snapshots = [],
 }: CharacterUpgradesProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("md"));
@@ -143,7 +147,7 @@ export default function CharacterUpgrades({
                     header={title}
                     actions={
                         <FlexBox spacing={2}>
-                            {game === "zzz" && (
+                            {["zzz", "endfield"].includes(game) && (
                                 <Button
                                     variant="outlined"
                                     onClick={handleClickOpenMCArt}
@@ -228,10 +232,17 @@ export default function CharacterUpgrades({
                     onClose={handleCloseMCArt}
                     maxWidth={false}
                     fullScreen={!matches}
-                    header="Mindscape"
+                    header={game === "zzz" ? "Mindscape" : "Snapshot"}
                     contentProps={{ padding: 0 }}
                 >
-                    <MindscapeCinemaPopup attributes={attributes} />
+                    {game === "zzz" ? (
+                        <MindscapeCinemaPopup attributes={attributes} />
+                    ) : (
+                        <SnapshotPopup
+                            snapshots={snapshots}
+                            attributes={attributes}
+                        />
+                    )}
                 </ContentDialog>
             </>
         );

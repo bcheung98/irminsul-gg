@@ -30,6 +30,7 @@ export interface EndfieldCharacter extends BaseData {
     gender: "Male" | "Female" | "Adaptive";
     faction: string;
     outfits: CharacterOutfit[];
+    snapshots: EndfieldCharacterSnapshot[];
     voiceActors: VoiceActorData;
     release: VersionWithDate;
 }
@@ -58,4 +59,10 @@ export interface EndfieldCharacterStats extends CharacterStats {
     agi: number[];
     int: number[];
     wil: number[];
+}
+
+export interface EndfieldCharacterSnapshot {
+    name: string;
+    illustrator: string;
+    description: string;
 }
