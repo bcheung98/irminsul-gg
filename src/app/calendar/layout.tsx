@@ -8,7 +8,7 @@ export const metadata = getMetadata({
             template: "%s - Gacha Calendar",
         },
         description:
-            "A calendar to view the release schedule of each game's banners",
+            "A calendar to view the content release schedule of various gacha games",
     },
 });
 
