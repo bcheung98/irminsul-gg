@@ -356,4 +356,15 @@ export const sonataEffects: SonataEffect[] = [
             version: "3.3",
         },
     },
+    {
+        id: 32,
+        name: "Shadow of Shattered Dreams",
+        displayName: "Shadow of Shattered Dreams",
+        setEffect: {
+            "1": 'Inflicting <span class="text-highlight">Hack - Shifting</span> on the target grants 35% Basic Attack DMG Bonus and Heavy Attack DMG Bonus for 15s.',
+        },
+        release: {
+            version: "3.4",
+        },
+    },
 ];

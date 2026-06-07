@@ -237,6 +237,12 @@ export const combatRoles = [
         color: "#ff7777",
         icon: "wuwa/icons/tags/I4",
     },
+    {
+        name: "Hack Response",
+        description: "Deals Hack DMG to targets",
+        color: "#ff7777",
+        icon: "wuwa/icons/tags/I7",
+    },
 ];
 
 export const combatRoleNames = combatRoles.map((tag) => tag.name);
