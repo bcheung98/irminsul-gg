@@ -187,4 +187,13 @@ export const bossMaterials = [
         source: "Nameless Explorer",
         release: { version: "3.1" },
     },
+    {
+        id: 41400314,
+        category: "boss",
+        name: "Nightmare Flashdrive",
+        tag: "Nightmare Flashdrive",
+        rarity: 4,
+        source: "Nightmare: Adam Smasher",
+        release: { version: "3.4" },
+    },
 ];

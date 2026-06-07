@@ -10,7 +10,7 @@ export interface WuWaEcho extends BaseDataWithRelease {
     skill: EchoSkill;
     sonata: number[];
     description: string;
-    hasPhantom: boolean;
+    phantom: number;
 }
 
 export type EchoCost = 4 | 3 | 1;

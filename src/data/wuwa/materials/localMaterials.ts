@@ -239,4 +239,12 @@ export const localMaterials = [
         rarity: 1,
         release: { version: "3.3" },
     },
+    {
+        id: 42601510,
+        category: "local",
+        name: "Past Reveries",
+        tag: "Past Reveries",
+        rarity: 1,
+        release: { version: "3.4" },
+    },
 ];
