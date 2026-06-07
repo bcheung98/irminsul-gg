@@ -60,7 +60,7 @@ export default function EchoSkill({ echo }: { echo: WuWaEcho }) {
                     size: 40,
                     styles: {
                         border: `2px solid ${theme.border.color.primary}`,
-                        borderRadius: "64px",
+                        borderRadius: "4px",
                         padding: "2px",
                         backgroundColor: theme.iconBackground.primary,
                     },
@@ -71,7 +71,10 @@ export default function EchoSkill({ echo }: { echo: WuWaEcho }) {
             />
             <SkillCard size={12}>
                 <Stack spacing={2}>
-                    <Text variant="subtitle1">
+                    <Text
+                        variant="subtitle1"
+                        sx={{ color: theme.text.description }}
+                    >
                         <SkillDescription
                             game="wuwa"
                             description={echo.skill.description}
@@ -79,7 +82,10 @@ export default function EchoSkill({ echo }: { echo: WuWaEcho }) {
                             newClassName="echo-skill-value"
                         />
                     </Text>
-                    <Text sx={{ color: theme.text.description }}>
+                    <Text
+                        variant="subtitle1"
+                        sx={{ color: theme.text.description }}
+                    >
                         {"Cooldown: "}
                         <span
                             style={{

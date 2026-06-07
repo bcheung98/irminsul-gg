@@ -1,6 +1,6 @@
 "use server";
 
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 import { formatHref } from "@/utils";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { categoryURLs } from "@/data/categories";

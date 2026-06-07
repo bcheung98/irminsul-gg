@@ -5,7 +5,7 @@ import SkillsGallery from "./SkillsGallery";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 import { getMetadata } from "@/helpers/metadata";
 
 // Type imports

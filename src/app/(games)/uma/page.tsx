@@ -5,7 +5,7 @@ import UmaHome from "./Home";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 
 // Type imports
 import { UmaCharacter, UmaSupport } from "@/types/uma";

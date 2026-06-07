@@ -3,6 +3,7 @@ import ContentBox from "@/components/ContentBox";
 import EchoAttributes from "../EchoAttributes";
 import EchoSkill from "../EchoSkill";
 import EchoSonata from "../EchoSonata";
+import EchoPhantoms from "../EchoPhantoms";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -29,6 +30,12 @@ export default function EchoInfo(props: EchoInfoProps) {
             <Stack spacing={2} divider={<Divider />}>
                 <EchoSkill echo={props.echo} />
                 <EchoSonata sonataIDs={props.echo.sonata} />
+                {props.echo.phantom && (
+                    <EchoPhantoms
+                        id={props.echo.id}
+                        count={props.echo.phantom}
+                    />
+                )}
             </Stack>
         </ContentBox>
     );

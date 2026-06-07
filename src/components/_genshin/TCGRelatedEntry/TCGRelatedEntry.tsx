@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
-import { urls } from "@/lib/fetchData";
+import { urls } from "@/api";
 
 // Type imports
 import { TCGActionCard } from "@/types/genshin/tcg";

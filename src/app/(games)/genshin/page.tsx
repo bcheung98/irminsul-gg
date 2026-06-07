@@ -5,7 +5,7 @@ import GenshinHome from "./Home";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 
 // Type imports
 import {
@@ -13,7 +13,6 @@ import {
     GenshinWeapon,
     GenshinArtifact,
 } from "@/types/genshin";
-import { TCGActionCard, TCGCharacterCard } from "@/types/genshin/tcg";
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
@@ -22,7 +21,6 @@ export default async function Page() {
     const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
     const equipmentData =
         await getDataSet<GenshinArtifact>("genshin/artifacts");
-    const cardData = await getDataSet<TCGCharacterCard>("genshin/tcg");
     const characterBannerData = await getDataSet<Banner>(
         "genshin/banner-characters",
     );
@@ -35,7 +33,6 @@ export default async function Page() {
         characters,
         weapons,
         equipment,
-        cards,
         characterBanners,
         weaponBanners,
         chronicledBanners,
@@ -43,7 +40,6 @@ export default async function Page() {
         characterData,
         weaponData,
         equipmentData,
-        cardData,
         characterBannerData,
         weaponBannerData,
         chronicledBannerData,
@@ -55,7 +51,7 @@ export default async function Page() {
                 characters={characters}
                 weapons={weapons}
                 equipment={equipment}
-                cards={cards}
+                cards={[]}
                 banners={{
                     character: characterBanners,
                     weapon: weaponBanners,

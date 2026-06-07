@@ -21,7 +21,7 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { UmaContext } from "@/context";
 import { useStore, useServerStore } from "@/stores";
-import { urls } from "@/lib/fetchData";
+import { urls } from "@/api";
 
 // Type imports
 import { AttributeData } from "@/types";

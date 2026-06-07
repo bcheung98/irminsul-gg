@@ -5,7 +5,7 @@ import Calendar from "@/components/Calendar";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 import { getItems } from "@/components/SiteSearch/SiteSearch.utils";
 
 // Type imports

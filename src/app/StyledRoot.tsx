@@ -20,7 +20,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // Helper imports
 import { GameListContext, DataContext, GameContext } from "@/context";
 import getTheme from "@/themes/theme";
-import { urls } from "@/lib/fetchData";
+import { urls } from "@/api";
 import { games } from "@/data/games";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 

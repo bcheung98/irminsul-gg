@@ -5,7 +5,7 @@ import CharacterPage from "./CharacterPage";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getData, getDataSet, getUmaEvents } from "@/lib/fetchData";
+import { getData, getDataSet, getUmaEvents } from "@/api";
 import { formatHref } from "@/utils";
 import { getMetadata } from "@/helpers/metadata";
 

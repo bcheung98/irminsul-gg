@@ -5,7 +5,7 @@ import EndfieldHome from "./Home";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 
 // Type imports
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
