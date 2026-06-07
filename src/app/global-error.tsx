@@ -11,7 +11,7 @@ export default function GlobalError({
                 <title>Irminsul.GG</title>
                 <meta
                     name="description"
-                    content="A database and companion website for various gacha games."
+                    content="A gacha game database and companion site."
                 />
             </head>
             <body>

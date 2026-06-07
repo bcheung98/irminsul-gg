@@ -19,7 +19,7 @@ export default function LandingText() {
                 <span style={{ fontWeight: theme.font.weight.home }}>
                     IRMINSUL.GG
                 </span>{" "}
-                is a database and companion website for various gacha games.
+                is a gacha game database and companion site.
                 <br />
                 Select a branch of Irminsul to get started:
             </Text>

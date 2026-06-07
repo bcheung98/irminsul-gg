@@ -21,11 +21,11 @@ export function getMetadata({
     };
 }): Metadata {
     let title = {
-        default: "Irminsul.GG",
+        default: "Irminsul.GG - The Gacha Game Database",
         template: "%s - Irminsul.GG",
     };
     let description =
-        "A database and companion website for various gacha games.";
+        "A comprehensive database and companion website for various gacha games.";
 
     let siteName = `Irminsul.GG`;
     let icon = "https://assets.irminsul.gg/v2/_common/logo/logo_red.png";
@@ -36,7 +36,7 @@ export function getMetadata({
             default: gameData.name,
             template: `%s - ${gameData.name} - Irminsul.GG`,
         };
-        description = `The ${gameData.name} branch of Irminsul.GG - a database and companion website for various gacha games.`;
+        description = `Irminsul.GG - ${gameData.name} database and companion site.`;
         siteName = `${gameData.name} - Irminsul.GG`;
         if (tag) {
             title.default = categories[`${game}/${tag}`];
@@ -55,7 +55,8 @@ export function getMetadata({
                         umaRarityMap[attributes.rarity || 3]
                     } ${attributes.specialty})`;
                 }
-                description = attributes.description || "";
+                description =
+                    attributes.description?.replace("<br />", "\n") || "";
                 if (`${game}/${tag}` in categoryImgURLs) {
                     icon = `https://assets.irminsul.gg/v2/${categoryImgURLs[
                         `${game}/${tag}`
