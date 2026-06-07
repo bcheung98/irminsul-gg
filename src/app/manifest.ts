@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "IRMINSUL.GG",
         short_name: "Irminsul.GG",
         description:
-            "Irminsul.GG - A database and companion website for various gacha games.",
+            "Irminsul.GG - A gacha game database and companion site.",
         start_url: "/",
         display: "standalone",
         background_color: "rgb(40, 40, 40)",
