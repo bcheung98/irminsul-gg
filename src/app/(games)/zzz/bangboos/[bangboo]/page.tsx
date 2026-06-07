@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 import Page404 from "@/components/Page404";
 
 // Helper imports
-import { getData } from "@/lib/fetchData";
+import { getData } from "@/api";
 import { formatHref } from "@/utils";
 import { getMetadata } from "@/helpers/metadata";
 

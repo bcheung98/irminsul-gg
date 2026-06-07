@@ -5,7 +5,7 @@ import Planner from "@/components/Planner";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 import { parseData } from "@/helpers/planner";
 import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 

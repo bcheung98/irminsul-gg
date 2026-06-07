@@ -5,7 +5,7 @@ import TEHelper from "@/components/_uma/TEHelper";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet, getUmaEvents } from "@/lib/fetchData";
+import { getDataSet, getUmaEvents } from "@/api";
 import { getMetadata } from "@/helpers/metadata";
 
 // Type imports

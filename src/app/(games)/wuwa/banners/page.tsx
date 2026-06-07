@@ -5,7 +5,7 @@ import BannerArchive from "@/components/BannerArchive";
 import Loader from "@/components/Loader";
 
 // Helper imports
-import { getDataSet } from "@/lib/fetchData";
+import { getDataSet } from "@/api";
 import { bannerArchiveMetaData, getMetadata } from "@/helpers/metadata";
 
 // Type imports

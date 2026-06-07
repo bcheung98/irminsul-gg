@@ -11,7 +11,7 @@ import TCGKeywordPopup from "../TCGKeywordPopup";
 // Helper imports
 import { useTCGKeywordContext } from "@/context";
 import getTCGSkillKeyword from "@/helpers/genshin/getTCGSkillKeyword";
-import { urls } from "@/lib/fetchData";
+import { urls } from "@/api";
 
 // Type imports
 import { AttributeData } from "@/types";

@@ -19,7 +19,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
 import { useStore, useServerStore } from "@/stores";
-import { urls } from "@/lib/fetchData";
+import { urls } from "@/api";
 import { formatHref, sortBy } from "@/utils";
 import { rarityMap } from "@/data/uma/common";
 import { scenarios } from "@/data/uma/scenarios";
