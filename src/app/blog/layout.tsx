@@ -5,9 +5,9 @@ export const metadata = getMetadata({
     overrides: {
         title: {
             default: "Blog",
-            template: "%s - Irminsul.GG",
+            template: "%s - IRMINSUL.GG",
         },
-        description: "Keep up with the latest news and content of Irminsul.GG",
+        description: "Keep up with the latest news and content of IRMINSUL.GG",
     },
 });
 

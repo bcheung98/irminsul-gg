@@ -8,10 +8,10 @@ export default function GlobalError({
     return (
         <html>
             <head>
-                <title>Irminsul.GG</title>
+                <title>Irminsul.GG - Gacha Game Database and Tools</title>
                 <meta
                     name="description"
-                    content="A gacha game database and companion site."
+                    content="A comprehensive database and collection of tools for gacha games."
                 />
             </head>
             <body>
