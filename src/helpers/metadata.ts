@@ -4,6 +4,18 @@ import { rarityMap as zzzRarityMap } from "@/data/zzz/common";
 import { rarityMap as umaRarityMap } from "@/data/uma/common";
 import { AttributeData, Game } from "@/types";
 import { Metadata } from "next";
+import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
+
+interface MetadataOverrides {
+    title?: Metadata["title"];
+    description?: string;
+    siteName?: string;
+    twitter?: TwitterOverrides;
+}
+
+type TwitterOverrides = Twitter & {
+    card?: "summary" | "summary_large_image" | "player" | "app" | undefined;
+};
 
 export function getMetadata({
     game,
@@ -14,33 +26,29 @@ export function getMetadata({
     game?: Game;
     tag?: string;
     attributes?: AttributeData;
-    overrides?: {
-        title?: Metadata["title"];
-        description?: string;
-        siteName?: string;
-    };
+    overrides?: MetadataOverrides;
 }): Metadata {
     let title = {
-        default: "Irminsul.GG - The Gacha Game Database",
-        template: "%s - Irminsul.GG",
+        default: "IRMINSUL.GG - Gacha Game Database and Tools",
+        template: "%s - IRMINSUL.GG",
     };
     let description =
-        "A comprehensive database and companion website for various gacha games.";
+        "A comprehensive database and collection of tools for gacha games.";
 
-    let siteName = `Irminsul.GG`;
+    let siteName = `IRMINSUL.GG`;
     let icon = "https://assets.irminsul.gg/v2/_common/logo/logo_red.png";
 
     if (game) {
         const gameData = games[game];
         title = {
             default: gameData.name,
-            template: `%s - ${gameData.name} - Irminsul.GG`,
+            template: `%s - ${gameData.name} - IRMINSUL.GG`,
         };
-        description = `Irminsul.GG - ${gameData.name} database and companion site.`;
-        siteName = `${gameData.name} - Irminsul.GG`;
+        description = `${gameData.name} Database and Tools`;
+        siteName = `${gameData.name} - IRMINSUL.GG`;
         if (tag) {
             title.default = categories[`${game}/${tag}`];
-            description = `A list of all ${gameData.name} ${
+            description = `A detailed list of all ${gameData.name} ${
                 categories[`${game}/${tag}`]
             }`;
             if (attributes) {
@@ -56,7 +64,8 @@ export function getMetadata({
                     } ${attributes.specialty})`;
                 }
                 description =
-                    attributes.description?.replace("<br />", "\n") || "";
+                    attributes.description?.replace("<br />", "\n") ||
+                    `${gameData.name} Database and Tools`;
                 if (`${game}/${tag}` in categoryImgURLs) {
                     icon = `https://assets.irminsul.gg/v2/${categoryImgURLs[
                         `${game}/${tag}`
@@ -73,8 +82,8 @@ export function getMetadata({
     const images = [
         {
             url: icon,
-            width: 96,
-            height: 96,
+            width: 128,
+            height: 128,
             alt: title.default,
         },
     ];
@@ -90,8 +99,14 @@ export function getMetadata({
             type: "website",
         },
         twitter: {
-            title: overrides?.title || title,
-            images,
+            card: overrides?.twitter?.card || "summary",
+            title: overrides?.twitter?.title || overrides?.title || title,
+            description:
+                overrides?.twitter?.description ||
+                overrides?.description ||
+                description,
+            images:
+                overrides?.twitter?.images || images.map((image) => image.url),
         },
         robots:
             tag === "tcg"
@@ -101,7 +116,7 @@ export function getMetadata({
                           index: false,
                       },
                   }
-                : undefined,
+                : "index, follow",
     };
 }
 
@@ -161,7 +176,7 @@ function getSitename({
             }
             break;
     }
-    return res || "Irminsul.GG";
+    return res || "IRMINSUL.GG";
 }
 
 export const plannerMetaData = {

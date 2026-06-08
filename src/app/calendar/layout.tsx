@@ -8,7 +8,13 @@ export const metadata = getMetadata({
             template: "%s - Gacha Calendar",
         },
         description:
-            "A calendar to view the content release schedule of various gacha games",
+            "Calendar to view the content release schedule of various gacha games",
+        twitter: {
+            card: "summary_large_image",
+            images: [
+                "https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/calendar-v2-img1.png",
+            ],
+        },
     },
 });
 
