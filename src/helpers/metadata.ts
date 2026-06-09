@@ -105,7 +105,7 @@ export function getMetadata({
             title: overrides?.title || ogTitle,
             description,
             siteName: overrides?.siteName || siteName,
-            images,
+            images: overrides?.twitter?.images || images,
             type: "website",
         },
         twitter: {
