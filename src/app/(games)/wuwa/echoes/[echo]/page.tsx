@@ -20,21 +20,21 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { echo } = await params;
-    const echoData = await getData<WuWaEcho>(
+    const equipmentData = await getData<WuWaEcho>(
         "wuwa/echoes",
         (e) => formatHref(e.url) === formatHref(echo),
     );
 
-    return echoData
+    return equipmentData
         ? getMetadata({
               game: "wuwa",
               tag: "equipment",
               attributes: {
-                  id: echoData.id,
-                  name: echoData.name,
-                  displayName: echoData.displayName,
-                  rarity: echoData.rarity,
-                  description: echoData.description,
+                  id: equipmentData.id,
+                  name: equipmentData.name,
+                  displayName: equipmentData.displayName,
+                  rarity: equipmentData.rarity,
+                  description: equipmentData.description,
               },
           })
         : {};
@@ -42,18 +42,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
     const { echo } = await params;
-    const echoData = await getData<WuWaEcho>(
+    const equipmentData = await getData<WuWaEcho>(
         "wuwa/echoes",
         (e) => formatHref(e.url) === formatHref(echo),
     );
 
-    if (!echoData) {
+    if (!equipmentData) {
         return <Page404 />;
     }
 
     return (
         <Suspense fallback={<Loader />}>
-            <EchoPage echo={echoData} />
+            <EchoPage echo={equipmentData} />
         </Suspense>
     );
 }

@@ -7,7 +7,7 @@ import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/api";
-import { formatHref } from "@/utils";
+import { countText, formatHref } from "@/utils";
 import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
@@ -20,21 +20,32 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { relic } = await params;
-    const relicData = await getData<HSRRelic>(
+    const equipmentData = await getData<HSRRelic>(
         "hsr/relics",
         (a) => formatHref(a.url) === formatHref(relic),
     );
 
-    return relicData
+    return equipmentData
         ? getMetadata({
               game: "hsr",
               tag: "equipment",
               attributes: {
-                  id: relicData.id,
-                  name: relicData.name,
-                  displayName: relicData.displayName,
-                  rarity: relicData.rarity,
-                  description: relicData.description,
+                  id: equipmentData.id,
+                  name: equipmentData.name,
+                  displayName: equipmentData.displayName,
+                  rarity: equipmentData.rarity,
+                  description: equipmentData.description,
+              },
+              overrides: {
+                  description: Object.entries(equipmentData.setEffect)
+                      .map(
+                          ([key, effect]) =>
+                              `${key}-${countText({
+                                  count: Number(key),
+                                  single: "Piece",
+                              })}: ${effect}`,
+                      )
+                      .join("\n"),
               },
           })
         : {};
@@ -42,18 +53,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
     const { relic } = await params;
-    const relicData = await getData<HSRRelic>(
+    const equipmentData = await getData<HSRRelic>(
         "hsr/relics",
         (a) => formatHref(a.url) === formatHref(relic),
     );
 
-    if (!relicData) {
+    if (!equipmentData) {
         return <Page404 />;
     }
 
     return (
         <Suspense fallback={<Loader />}>
-            <EquipmentPage equipment={relicData} />
+            <EquipmentPage equipment={equipmentData} />
         </Suspense>
     );
 }
