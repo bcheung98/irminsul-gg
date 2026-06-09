@@ -7,7 +7,7 @@ import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/api";
-import { formatHref } from "@/utils";
+import { countText, formatHref } from "@/utils";
 import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
@@ -35,6 +35,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                   displayName: equipmentData.displayName,
                   rarity: equipmentData.rarity,
                   description: equipmentData.description,
+              },
+              overrides: {
+                  description: Object.entries(equipmentData.setEffect)
+                      .map(
+                          ([key, effect]) =>
+                              `${key}-${countText({
+                                  count: Number(key),
+                                  single: "Piece",
+                              })}: ${effect}`,
+                      )
+                      .join("\n"),
               },
           })
         : {};

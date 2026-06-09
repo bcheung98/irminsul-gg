@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                   id: bangbooData.id,
                   name: bangbooData.name,
                   displayName: bangbooData.displayName,
+                  description: bangbooData.description,
               },
           })
         : {};
