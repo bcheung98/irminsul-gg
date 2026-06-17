@@ -125,4 +125,13 @@ export const bossMaterials = [
         source: "Sacrifice - Covenant Guardian",
         release: { version: "2.6" },
     },
+    {
+        id: 110515,
+        category: "boss",
+        name: "Deep Erosion Circuit",
+        tag: "Deep Erosion Circuit",
+        rarity: 4,
+        source: "Airspace Sentinel",
+        release: { version: "3.0" },
+    },
 ];

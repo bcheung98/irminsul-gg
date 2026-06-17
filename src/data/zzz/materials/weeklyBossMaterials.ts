@@ -80,4 +80,13 @@ export const weeklyBossMaterials = [
         source: "Sanguine Sweeper",
         release: { version: "2.7" },
     },
+    {
+        id: 110010,
+        category: "weekly",
+        name: "Timeworn Husk",
+        tag: "Timeworn Husk",
+        rarity: 5,
+        source: "Girtablullu",
+        release: { version: "3.0" },
+    },
 ];

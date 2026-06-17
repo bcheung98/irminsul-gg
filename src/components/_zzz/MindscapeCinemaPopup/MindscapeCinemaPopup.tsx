@@ -4,6 +4,7 @@ import { useState } from "react";
 import Slider from "@/components/Slider";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
+import ToggleButtons from "@/components/ToggleButtons";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -34,6 +35,8 @@ export default function MindscapeCinemaPopup({
         setSliderValue(newValue as number);
     };
 
+    const [gender, setGender] = useState<"M" | "F">("M");
+
     const marks = range(1, 3).map((level) => ({
         value: level,
         label: (
@@ -49,6 +52,11 @@ export default function MindscapeCinemaPopup({
             </Text>
         ),
     }));
+
+    let imgURL = `zzz/mindscapes/${attributes.id}_${sliderValue}`;
+    if (attributes.id === 1551) {
+        imgURL += gender;
+    }
 
     return (
         <>
@@ -69,8 +77,28 @@ export default function MindscapeCinemaPopup({
                     }}
                 />
             </Box>
+            <Box sx={{ p: 2 }}>
+                {attributes.id === 1551 && (
+                    <ToggleButtons
+                        value={gender}
+                        onChange={(_, v) => v && setGender(v)}
+                        exclusive
+                        padding={4}
+                        buttons={[
+                            {
+                                label: <Text>Male</Text>,
+                                value: "M",
+                            },
+                            {
+                                label: <Text>Female</Text>,
+                                value: "F",
+                            },
+                        ]}
+                    />
+                )}
+            </Box>
             <Image
-                src={`zzz/mindscapes/${attributes.id}_${sliderValue}`}
+                src={imgURL}
                 style={{
                     objectFit: "contain",
                     width: "100%",

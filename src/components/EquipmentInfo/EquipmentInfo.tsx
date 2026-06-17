@@ -1,4 +1,5 @@
 import { useState } from "react";
+import parse from "html-react-parser";
 
 // Component imports
 import EquipmentSetEffect from "@/components/EquipmentSetEffect";
@@ -38,7 +39,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
     function getImgURL(type: string) {
         return `${game}/${equipmentTags[game]}/${id}_${
             objectKeys(equipmentPieceType[game]).findIndex(
-                (piece) => piece === type
+                (piece) => piece === type,
             ) + 1
         }`;
     }
@@ -110,7 +111,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                             </SkillCard>
                         </Grid>
                     </Stack>
-                    <Text variant="body2">{piece.description}</Text>
+                    <Text variant="body2">{parse(piece.description)}</Text>
                 </Stack>
             </Tabs.Panel>
         );
@@ -141,7 +142,9 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                         </SkillCard>
                     </Grid>
                 </Stack>
-                <Text variant="body2">{equipment.description}</Text>
+                <Text variant="body2">
+                    {parse(equipment.description || "")}
+                </Text>
             </Stack>
         );
     }
