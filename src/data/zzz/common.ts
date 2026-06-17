@@ -43,4 +43,6 @@ export const factions = [
     "Krampus Compliance Authority",
     "Angels of Delusion",
     "Metropolitan Order Division",
+    "External Strategy Department",
+    "Phaethon",
 ] as const;

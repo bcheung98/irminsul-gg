@@ -48,13 +48,13 @@ export default function CharacterSkillDescription({
     const getSkillKeyword = useSkillKeyword()[game];
 
     const color =
-        game === "zzz"
-            ? attributes.colors?.accent
+        game === "zzz" && attributes.colors?.accent
+            ? attributes.colors.accent
             : textColor(game, attributes.element);
 
     const skillIconURL = formatSkillIconURL(
         skillIconURLs[game][skillKey],
-        attributes
+        attributes,
     );
 
     const skillsContext = useSkillContext();
@@ -64,7 +64,7 @@ export default function CharacterSkillDescription({
     }
 
     const [currentKeyword, setCurrentKeyword] = useState<SkillKeyword | null>(
-        null
+        null,
     );
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = (event: React.BaseSyntheticEvent) => {
