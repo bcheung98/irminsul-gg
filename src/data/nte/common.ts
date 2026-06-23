@@ -12,7 +12,7 @@ export const weapons = [
     "Liquid",
     "Gas",
     "Plasma",
-    "Synthesis",
+    "Condensate",
 ] as const;
 
 export const rarities = [5, 4, 3, 2, 1] as const;

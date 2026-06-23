@@ -118,7 +118,7 @@ export enum NTEWeaponMap {
     "Liquid",
     "Gas",
     "Plasma",
-    "Synthesis",
+    "Condensate",
 }
 
 function getNames(a: any, b: any) {
