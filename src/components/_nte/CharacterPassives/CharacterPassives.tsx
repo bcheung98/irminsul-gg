@@ -42,10 +42,18 @@ export default function CharacterPassives({
 
     const getSkillKeyword = useSkillKeyword().nte;
 
-    function getIconURL(key: string, index: number) {
-        return key !== "passive"
-            ? `nte/skills/${attributes.id}_${key}`
-            : `nte/skills/${attributes.id}_passive${index + 1}`;
+    let passiveIndex = 0;
+    let lifeIndex = -1;
+    function getIconURL(key: string) {
+        if (key === "passive") {
+            passiveIndex += 1;
+            return `nte/skills/${attributes.id}_passive${passiveIndex}`;
+        } else if (key === "life") {
+            lifeIndex += 1;
+            return `nte/skills/${attributes.id}_life${lifeIndex || ""}`;
+        } else {
+            return `nte/skills/${attributes.id}_${key}`;
+        }
     }
 
     const skillsContext = useSkillContext();
@@ -113,7 +121,6 @@ export default function CharacterPassives({
                                                     <SkillIcon
                                                         icon={getIconURL(
                                                             passive.type,
-                                                            index,
                                                         )}
                                                         attributes={attributes}
                                                     />

@@ -53,4 +53,13 @@ export const weeklyBossMaterials = [
         source: "Arachne",
         release: { version: "1.0" },
     },
+    {
+        id: "weeklycloneboss_a03_01",
+        category: "weekly",
+        name: "Eternal Memory",
+        tag: "Eternal Memory",
+        rarity: 5,
+        source: "Debt Collector",
+        release: { version: "1.1" },
+    },
 ];
