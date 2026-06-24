@@ -24,25 +24,13 @@ export default function SiteSearchRoot({
                     onClick={handleSearchOpen}
                     variant="contained"
                     disableRipple
-                    startIcon={
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <SearchIcon
-                                sx={{
-                                    color: theme.text.primary,
-                                    width: "18px",
-                                    height: "18px",
-                                }}
-                            />
-                            <Text variant="body2">Search...</Text>
-                        </Stack>
-                    }
                     endIcon={
                         <Stack direction="row" alignItems="center" spacing={1}>
                             <Text
                                 variant="subtitle2"
                                 sx={{
                                     fontSize: `${theme.typography.pxToRem(
-                                        10.5
+                                        10.5,
                                     )} !important`,
                                     backgroundColor:
                                         theme.drawer.backgroundColor.main,
@@ -66,7 +54,18 @@ export default function SiteSearchRoot({
                         },
                         display: { xs: "none", md: "flex" },
                     }}
-                />
+                >
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                        <SearchIcon
+                            sx={{
+                                color: theme.text.primary,
+                                width: "18px",
+                                height: "18px",
+                            }}
+                        />
+                        <Text variant="body2">Search...</Text>
+                    </Stack>
+                </Button>
             ) : (
                 <NavButton
                     onClick={handleSearchOpen}
