@@ -102,6 +102,7 @@ export function getMetadata({
     );
 
     return {
+        metadataBase: new URL("https://irminsul.gg/"),
         title: overrides?.title || title,
         description,
         referrer: "origin-when-cross-origin",
