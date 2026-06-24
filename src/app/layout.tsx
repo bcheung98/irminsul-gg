@@ -5,7 +5,9 @@ import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import StyledRoot from "./StyledRoot";
 import { getMetadata } from "@/helpers/metadata";
 
-export const metadata = getMetadata({});
+export const metadata = getMetadata({
+    overrides: { twitter: { card: "summary_large_image" } },
+});
 
 export default function RootLayout({
     children,
