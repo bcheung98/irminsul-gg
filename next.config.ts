@@ -26,6 +26,7 @@ const nextConfig: NextConfig = {
         },
         webpackMemoryOptimizations: true,
     },
+    serverExternalPackages: ["@takumi-rs/core"],
 };
 
 export default nextConfig;
