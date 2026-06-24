@@ -89,8 +89,12 @@ export function getMetadata({
         },
     ];
     const ogTitle: Metadata["title"] = {
-        default: title.default.replace(" - IRMINSUL.GG", ""),
-        template: title.template.replace(" - IRMINSUL.GG", ""),
+        default: title.default
+            .replace(" - IRMINSUL.GG", "")
+            .replace(" - Gacha Game Database and Tools", ""),
+        template: title.template
+            .replace(" - IRMINSUL.GG", "")
+            .replace(" - Gacha Game Database and Tools", ""),
     };
     description = (overrides?.description || description).replaceAll(
         "<br />",
