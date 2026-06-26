@@ -30,7 +30,7 @@ export function isFutureBanner(banner: Banner, server: Server, game?: Game) {
 export function getBannerLabel(
     banner: Banner,
     server?: Server,
-    info?: "version" | "date" | undefined
+    info?: "version" | "date" | undefined,
 ) {
     let game: Game | undefined;
     let version, phase;
@@ -43,7 +43,11 @@ export function getBannerLabel(
             version = b.slice(0, 2).join(".");
             phase = b[2];
         }
-        versionLabel = `${version} Phase ${phase}`;
+        if (banner.title) {
+            versionLabel = `${version} - ${banner.title}`;
+        } else {
+            versionLabel = `${version} - Phase ${phase}`;
+        }
     } else if ("startJP" in banner) {
         game = "uma";
         if (banner.id % 2) versionLabel = "Support Card Scout";
@@ -53,7 +57,7 @@ export function getBannerLabel(
     const { versionStart, versionEnd } = getVersionDates(
         banner,
         server || "NA",
-        game
+        game,
     );
     const start = new DateObject(versionStart, server, game).string;
     const end = new DateObject(versionEnd, server).string;
@@ -69,7 +73,7 @@ export function filterOptions(options: BannerOption[], searchValue: string) {
         (a, b) =>
             (a.category || "").localeCompare(b.category || "") ||
             sortBy(a.rarity, b.rarity) ||
-            a.displayName.localeCompare(b.displayName)
+            a.displayName.localeCompare(b.displayName),
     );
     if (searchValue === "") return options;
     return matchSorter(options, searchValue, {
