@@ -3,6 +3,7 @@ import { BaseData } from ".";
 export interface Banner {
     id: number;
     version: string;
+    title?: string;
     start: string;
     end: string;
     startJP?: string;
