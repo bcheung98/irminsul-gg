@@ -8,6 +8,12 @@ export const skillKeywords: SkillKeyword[] = [
             'Final Strike is the last sequence of basic attack. When the controlled Operator\'s Final Strike hits the enemy, it also deals <span class="text-header">Stagger</span> and restores some Skill Points (SP).',
     },
     {
+        tag: "absorb",
+        name: "Absorb",
+        description:
+            'A way to end a Physical or Arts debuff early. <span class="text-highlight">Absorb</span> is not the same as <u>consume</u>.',
+    },
+    {
         tag: "debuff consume",
         name: "Debuff Consumption",
         description:
