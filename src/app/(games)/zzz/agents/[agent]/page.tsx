@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                   element: charData.element,
                   subElement: charData.subElement,
                   weaponType: charData.weaponType,
+                  description: charData.description,
               },
           })
         : {};

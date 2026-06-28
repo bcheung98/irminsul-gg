@@ -7,16 +7,18 @@ import { AttributeData, Game, GameData } from "@/types";
 import { Metadata } from "next";
 import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 
+type TwitterCard = "summary" | "summary_large_image" | "player" | "app";
+type TwitterOverrides = Twitter & {
+    card?: TwitterCard;
+};
+type TwitterImage = Twitter["images"];
+
 interface MetadataOverrides {
     title?: Metadata["title"];
     description?: string;
     siteName?: string;
     twitter?: TwitterOverrides;
 }
-
-type TwitterOverrides = Twitter & {
-    card?: "summary" | "summary_large_image" | "player" | "app" | undefined;
-};
 
 export function getMetadata({
     game,
@@ -37,15 +39,18 @@ export function getMetadata({
         "A comprehensive database and collection of tools for gacha games.";
 
     let siteName = `IRMINSUL.GG - Gacha Game Database and Tools`;
-    let icon = "https://assets.irminsul.gg/v2/_common/logo/logo_red.png";
+    let icon = "https://assets.irminsul.gg/docs/card.png";
+    let width = 1200;
+    let height = 630;
+    let twitterImgType: TwitterCard = "summary_large_image";
 
     if (game) {
         const gameData = games[game];
         title = {
-            default: gameData.name,
+            default: `${gameData.name} Database and Tools`,
             template: `%s - ${gameData.name} - IRMINSUL.GG`,
         };
-        description = `${gameData.name} Database and Tools`;
+        description = `A comprehensive database and collection of tools for ${gameData.name}. View characters, track banner history, plan builds, and more.`;
         if (tag) {
             title.default = categories[`${game}/${tag}`];
             description = `A detailed list of all ${gameData.name} ${
@@ -64,30 +69,14 @@ export function getMetadata({
                     } ${attributes.specialty})`;
                 }
                 if (`${game}/${tag}` in categoryImgURLs) {
-                    icon = `https://assets.irminsul.gg/v2/${categoryImgURLs[
-                        `${game}/${tag}`
-                    ](attributes.id, attributes.name)}.png`;
-                    description = getDescription({
-                        game,
-                        tag,
-                        attributes,
-                    });
-                    if (attributes.description) {
-                        description += `${attributes.description}`;
+                    if (game !== "uma" && attributes.description) {
+                        description = `${attributes.description}`;
                     }
                 }
             }
         }
     }
 
-    const images = [
-        {
-            url: icon,
-            width: 256,
-            height: 256,
-            alt: title.default,
-        },
-    ];
     const ogTitle: Metadata["title"] = {
         default: title.default
             .replace(" - IRMINSUL.GG", "")
@@ -96,36 +85,64 @@ export function getMetadata({
             .replace(" - IRMINSUL.GG", "")
             .replace(" - Gacha Game Database and Tools", ""),
     };
-    description = (overrides?.description || description).replaceAll(
+
+    description = (overrides?.description ?? description).replaceAll(
         "<br />",
         "\n",
     );
 
-    return {
+    let images: TwitterImage = overrides?.twitter?.images ?? [
+        {
+            url: icon,
+            width,
+            height,
+            alt: title.default,
+        },
+    ];
+
+    if (tag && ["equipment", "bangboos"].includes(tag) && attributes) {
+        twitterImgType = "summary";
+        images = [
+            {
+                url: `https://assets.irminsul.gg/v2/${categoryImgURLs[
+                    `${game}/${tag}`
+                ](attributes.id, attributes.name)}.png`,
+                width: 256,
+                height: 256,
+                alt: attributes.displayName,
+            },
+        ];
+    }
+
+    const metadata: Metadata = {
         metadataBase: new URL("https://irminsul.gg/"),
-        title: overrides?.title || title,
+        title: overrides?.title ?? title,
         description,
         referrer: "origin-when-cross-origin",
         openGraph: {
-            title: overrides?.title || ogTitle,
+            title: overrides?.title ?? ogTitle,
             description,
-            siteName: overrides?.siteName || siteName,
-            images: overrides?.twitter?.images || images,
+            siteName: overrides?.siteName ?? siteName,
             type: "website",
         },
         twitter: {
-            card: overrides?.twitter?.card || "summary",
-            title: overrides?.twitter?.title || overrides?.title || ogTitle,
+            card: overrides?.twitter?.card ?? twitterImgType,
+            title: overrides?.twitter?.title ?? overrides?.title ?? ogTitle,
             description: (
-                overrides?.twitter?.description ||
-                overrides?.description ||
+                overrides?.twitter?.description ??
+                overrides?.description ??
                 description
             ).replaceAll("<br />", "\n"),
-            images:
-                overrides?.twitter?.images || images.map((image) => image.url),
         },
         robots: "index, follow",
     };
+
+    if (!attributes || ["equipment", "bangboos"].includes(tag || "")) {
+        metadata.openGraph!.images = images;
+        metadata.twitter!.images = images;
+    }
+
+    return metadata;
 }
 
 function getDescription({

@@ -38,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                   rarity: charData.rarity,
                   outfit: charData.outfit,
               },
+              overrides: {
+                  description: `View details about [${charData.title}] ${charData.name}`,
+              },
           })
         : {};
 }
