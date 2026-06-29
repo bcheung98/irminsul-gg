@@ -21,11 +21,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const date = blogData ? new DateObject(blogData?.date).string : "";
 
+    const getImage = (image: string | undefined) => {
+        if (!image) {
+            return "https://assets.irminsul.gg/docs/card.png";
+        } else if (image.startsWith("https")) {
+            return image;
+        } else {
+            return `https://assets.irminsul.gg/v2/${image}.png`;
+        }
+    };
+
     return getMetadata({
         overrides: {
             title: blogData?.title,
             description: blogData?.description,
             siteName: date,
+            twitter: {
+                images: [
+                    {
+                        url: `${getImage(blogData?.image)}`,
+                        width: 1920,
+                        height: 1080,
+                        alt: blogData?.title,
+                    },
+                ],
+            },
         },
     });
 }
