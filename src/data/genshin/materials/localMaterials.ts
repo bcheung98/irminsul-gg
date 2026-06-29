@@ -512,4 +512,13 @@ export const localMaterials = [
         source: "Mondstadt",
         release: { version: "Luna VI" },
     },
+    {
+        id: 101270,
+        category: "local",
+        name: "Teardrop of the Moon",
+        tag: "Teardrop of the Moon",
+        rarity: 1,
+        source: "Nod-Krai",
+        release: { version: "Luna VIII" },
+    },
 ];

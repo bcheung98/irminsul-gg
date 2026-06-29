@@ -1,7 +1,8 @@
+import { skillKeywords } from "@/data/genshin/skillKeywords";
+import { formatSkillIconURL, GetSkillKeywordProps } from "../skills";
+import { skillIconURLs } from "@/data/skills";
 import { Skill, SkillKeyword } from "@/types/skill";
 import { GenshinCharacterPassive } from "@/types/genshin/character";
-import { skillIconURLs } from "@/data/skills";
-import { formatSkillIconURL, GetSkillKeywordProps } from "../skills";
 
 export default function getSkillKeyword({
     tag,
@@ -24,7 +25,7 @@ export default function getSkillKeyword({
                     passives.find(
                         (passive) =>
                             passive.version?.value === skillVersion &&
-                            passive.type === skillKey
+                            passive.type === skillKey,
                     ) || passives.find((passive) => passive.type === skillKey);
             } else {
                 skill = passives.find((passive) => passive.type === skillKey);
@@ -37,7 +38,7 @@ export default function getSkillKeyword({
                     upgrades.find(
                         (upgrade) =>
                             upgrade.version?.value === skillVersion &&
-                            upgrade.index === index
+                            upgrade.index === index,
                     ) || upgrades.find((upgrade) => upgrade.index === index);
             } else {
                 skill = upgrades.find((upgrade) => upgrade.index === index)!;
@@ -46,7 +47,7 @@ export default function getSkillKeyword({
             iconURL = skillIconURLs.genshin[skillKey];
             if (skillVersion !== "v1") {
                 skill = skills[skillKey]!.filter(
-                    (skill) => skill.version?.value === skillVersion
+                    (skill) => skill.version?.value === skillVersion,
                 )[0];
             } else {
                 skill = skills[skillKey]![0];
@@ -62,7 +63,9 @@ export default function getSkillKeyword({
             };
         }
     } else {
-        keyword = keywords.find((key) => key.tag === tag);
+        keyword = [...keywords, ...skillKeywords].find(
+            (key) => key.tag === tag,
+        );
     }
     return keyword;
 }
