@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const genshinVersions: VersionInfo[] = [
+    { version: "Luna VIII", name: "Sunny Summer Fontinalia" },
     { version: "Luna VII", name: "Truth Amongst the Pages of Purana" },
     { version: "Luna VI", name: "Augured Homecoming" },
     { version: "Luna V", name: "Homeward, He Who Caught the Wind" },
