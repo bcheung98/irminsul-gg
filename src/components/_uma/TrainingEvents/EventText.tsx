@@ -81,7 +81,7 @@ export default function EventText({
             case "cond":
                 return StatusEffect({
                     effectID: props?.statusEffect,
-                    text: "Get the",
+                    text: "Get the <> status effect",
                 });
             case "cond_e":
                 return StatusEffect({
@@ -108,6 +108,11 @@ export default function EventText({
                 return StatusEffect({
                     effectID: data,
                     text: "※ <> was not healed",
+                });
+            case "se_has":
+                return StatusEffect({
+                    effectID: data,
+                    text: "※ has <>",
                 });
             case "win":
                 return Race({ race: props?.raceName });
