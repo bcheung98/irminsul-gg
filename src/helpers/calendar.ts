@@ -110,11 +110,7 @@ export function createVersionInfo({
                         end.setDate(end.getDate() + 20);
                     }
                 } else if (game === "nte") {
-                    if (i % 2 === 0) {
-                        end.setDate(end.getDate() + 20);
-                    } else {
-                        end.setDate(end.getDate() + 15);
-                    }
+                    end.setDate(end.getDate() + 22);
                 } else {
                     end.setDate(end.getDate() + 21);
                 }
@@ -142,7 +138,7 @@ export function createVersionInfo({
                         endTime = "11:59:59";
                         break;
                     case "nte":
-                        endTime = "11:59:59";
+                        endTime = "05:59:59 UTC+8";
                         break;
                     default:
                         endTime = "17:59:59";
@@ -174,8 +170,8 @@ export function createVersionInfo({
                         endTime = "17:00:00";
                         break;
                     case "nte":
-                        startTime = "12:00:00";
-                        endTime = "14:59:59";
+                        startTime = "11:00:00 UTC+8";
+                        endTime = "05:59:59 UTC+8";
                         break;
                     default:
                         startTime = "18:00:00";
