@@ -155,8 +155,8 @@ export function getEventText({
         yellow_fragment: "Gain a yellow fragment",
         all_disc: `All discipline levels ${value}`,
         veggies: `All vegetables ${value}`,
-        races_locked: `Cannot race for ${countText({
-            count,
+        race_disabled: `Cannot race for ${countText({
+            count: Number(value),
             single: "turn",
             multi: null,
             showCount: true,
