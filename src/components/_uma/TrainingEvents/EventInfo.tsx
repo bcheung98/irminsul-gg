@@ -12,7 +12,7 @@ import Popover from "@mui/material/Popover";
 import { useCardIDContext } from "@/context";
 import { range } from "@/utils";
 import { useStore, useServerStore } from "@/stores";
-import { history } from "@/helpers/uma/history";
+import { history } from "@/data/uma/history";
 
 // Type imports
 import { Event } from "@/types/uma/event";
