@@ -80,4 +80,13 @@ export const weeklyBossMaterials = [
         source: "Denia",
         release: { version: "3.3" },
     },
+    {
+        id: 41400324,
+        category: "weekly",
+        name: "Skyward Glazed Heart",
+        tag: "Skyward Glazed Heart",
+        rarity: 4,
+        source: "Thousand-Puppet Pavilion",
+        release: { version: "3.5" },
+    },
 ];

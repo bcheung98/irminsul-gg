@@ -247,4 +247,28 @@ export const localMaterials = [
         rarity: 1,
         release: { version: "3.4" },
     },
+    {
+        id: 42601600,
+        category: "local",
+        name: "Cloudperch Seed",
+        tag: "Cloudperch Seed",
+        rarity: 1,
+        release: { version: "3.5" },
+    },
+    {
+        id: 42601610,
+        category: "local",
+        name: "Flowborne Dream",
+        tag: "Flowborne Dream",
+        rarity: 1,
+        release: { version: "3.5" },
+    },
+    {
+        id: 42601620,
+        category: "local",
+        name: "Blade Blossom",
+        tag: "Blade Blossom",
+        rarity: 1,
+        release: { version: "3.5" },
+    },
 ];

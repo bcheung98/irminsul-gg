@@ -196,4 +196,13 @@ export const bossMaterials = [
         source: "Nightmare: Adam Smasher",
         release: { version: "3.4" },
     },
+    {
+        id: 41400334,
+        category: "boss",
+        name: "Solidarity's Loneflame",
+        tag: "Solidarity's Loneflame",
+        rarity: 4,
+        source: "Myriad Snare: Rustfire Chassis",
+        release: { version: "3.5" },
+    },
 ];
