@@ -367,4 +367,40 @@ export const sonataEffects: SonataEffect[] = [
             version: "3.4",
         },
     },
+    {
+        id: 33,
+        name: "Song of Feathered Trace",
+        displayName: "Song of Feathered Trace",
+        setEffect: {
+            "2": "Energy Regen +10%",
+            "5": "Upon inflicting <span class=\"text-havoc\">Havoc Bane</span>, gain Xuanling's Feather, which grants a 20% increase in Crit. Rate and 35% increase in Heavy Attack DMG Bonus to the Resonator, lasting 15s.<br />Upon inflicting <span class=\"text-glacio\">Glacio Chafe</span>, gain Chongming's Feather, which grants a 0.1% increase in ATK to Resonators in the team for every 1% of the Resonator's Energy Regen, up to 25%, lasting 10s.",
+        },
+        release: {
+            version: "3.5",
+        },
+    },
+    {
+        id: 34,
+        name: "Heart of Evil's Purge",
+        displayName: "Heart of Evil's Purge",
+        setEffect: {
+            "2": "Aero DMG +10%",
+            "5": 'Inflicting <span class="text-highlight">Tune Rupture - Shifting</span> increases Crit. DMG by 20% and Aero DMG Bonus 30% for 15s.',
+        },
+        release: {
+            version: "3.5",
+        },
+    },
+    {
+        id: 35,
+        name: "Lamp of Nether Road",
+        displayName: "Lamp of Nether Road",
+        setEffect: {
+            "2": "HP +10%",
+            "5": 'Upon gaining a Shield, gain 5% increase in Crit. Rate for 5s, max 4 stacks. This effect can be triggered every 0.5s. At max stacks, gain 15% <span class="text-fusion">Fusion DMG Bonus</span>.',
+        },
+        release: {
+            version: "3.5",
+        },
+    },
 ];
