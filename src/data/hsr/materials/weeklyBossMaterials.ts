@@ -71,4 +71,13 @@ export const weeklyBossMaterials = [
         source: "Irontomb",
         release: { version: "3.7" },
     },
+    {
+        id: 110509,
+        category: "weekly",
+        name: "High Hopes of the Falsely Enlightened",
+        tag: "High Hopes of the Falsely Enlightened",
+        rarity: 4,
+        source: "Asat Pramad",
+        release: { version: "4.4" },
+    },
 ];
