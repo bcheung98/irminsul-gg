@@ -75,10 +75,15 @@ export default function SkillDescription({
                             data-index={domNode.attribs["data-index"]}
                             style={{
                                 color:
-                                    textColor(
-                                        game,
-                                        domNode.attribs["data-color"],
-                                    ) ||
+                                    (domNode.attribs["data-color"] &&
+                                    domNode.attribs["data-color"].startsWith(
+                                        "#",
+                                    )
+                                        ? domNode.attribs["data-color"]
+                                        : textColor(
+                                              game,
+                                              domNode.attribs["data-color"],
+                                          )) ||
                                     textColor(game, tag.split(" ")[1]) ||
                                     textColor(game, tag) ||
                                     theme.text.primary,
