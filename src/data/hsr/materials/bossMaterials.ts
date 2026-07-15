@@ -260,4 +260,13 @@ export const bossMaterials = [
         source: "",
         release: { version: "3.1" },
     },
+    {
+        id: 110443,
+        category: "boss",
+        name: "Sneering Harlequin",
+        tag: "Sneering Harlequin",
+        rarity: 4,
+        source: "",
+        release: { version: "4.3" },
+    },
 ];
