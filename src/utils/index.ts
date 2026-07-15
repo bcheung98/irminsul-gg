@@ -60,8 +60,8 @@ export function toTitleCase(str: string) {
                 /\w\S*/g,
                 (text) =>
                     text.charAt(0).toUpperCase() +
-                    text.substring(1).toLowerCase()
-            )
+                    text.substring(1).toLowerCase(),
+            ),
         )
         .join("_");
 }
@@ -121,7 +121,7 @@ export function zoomImageOnHover({
 
 export function combineStyles(
     style1: React.CSSProperties,
-    style2: React.CSSProperties | undefined
+    style2: React.CSSProperties | undefined,
 ) {
     return style2 ? { ...style1, ...style2 } : style1;
 }
@@ -135,5 +135,25 @@ export function splitJoin(string = "", split = " ", join = "_") {
 }
 
 export function getOrdinal(n = 1) {
-    return ["0", "1st", "2nd", "3rd", "4th", "5th"][n];
+    return [
+        "worse",
+        "1st",
+        "2nd",
+        "3rd",
+        "4th",
+        "5th",
+        "6th",
+        "7th",
+        "8th",
+        "9th",
+        "10th",
+        "11th",
+        "12th",
+        "13th",
+        "14th",
+        "15th",
+        "16th",
+        "17th",
+        "18th",
+    ][n];
 }

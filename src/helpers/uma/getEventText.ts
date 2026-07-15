@@ -224,6 +224,14 @@ export function getEventText({
             "※ Depending on your choice, a different 'Trust ＜From X＞' event will trigger later.",
         match_by_name:
             "※ The order of choices in this event is inconsistent, so you must match by name.",
+        pl:
+            value && Array.isArray(value)
+                ? value.length > 1
+                    ? value[1] === null
+                        ? `※ ${getOrdinal(Number(value[0]))} or worse`
+                        : `※ ${getOrdinal(Number(value[0]))}-${getOrdinal(Number(value[1]))}`
+                    : `※ ${getOrdinal(Number(value[0]))}`
+                : "",
 
         // Secret conditions
         nc: "※ These conditions are unconfirmed, and require additional testing",
@@ -287,6 +295,8 @@ export function getEventText({
         mile_route: "Select the Mile route",
         win_connect_live: "Finish your Fan Promise from the previous event",
         brian_five: "Or win at least 5 G1 races before the third year",
+        gold_city_race:
+            "※ From Senior Year Early May, the rewards for non-objective races change",
         third_any_non_objective: "Place 3rd in any non-objective race",
         larc_trust:
             "Pick the respective character's choice in the 'With' event",
