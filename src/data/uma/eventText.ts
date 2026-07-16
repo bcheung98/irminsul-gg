@@ -11,4 +11,5 @@ export const trainingEventContents: { [key: string]: string } = {
     after_finals_bond_maxed: "※ After Finals (bond maxed)",
     after_finals_bond_not_maxed: "※ After Finals (bond not maxed)",
     training_failed: "※ Training together failed",
+    race_rewards: "※ G1 / G2-G3 / (Pre-)OP",
 };
