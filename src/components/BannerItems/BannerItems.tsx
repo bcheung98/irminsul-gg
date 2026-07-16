@@ -110,7 +110,9 @@ const BannerItems = memo(function BannerItems({
                     date={upcoming ? versionStart : versionEnd}
                     server={server}
                     startText={upcoming ? "Starts in" : ""}
-                    endText="Banner has ended"
+                    endText={
+                        upcoming ? "Banner has started!" : "Banner has ended!"
+                    }
                     textColor={textColor}
                 />
             )}

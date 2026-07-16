@@ -63,7 +63,11 @@ export default function StatNode({
             const talentLevels = talents
                 .map((skill) => skill.levels.filter((i) => i != 0))
                 .flat();
-            return `${talents[Number(index) < 3 ? 0 : 1].name} (E${talentLevels[Number(index) - 1]})`;
+            let threshold = 3;
+            if (JSON.stringify(talentLevels) === JSON.stringify([2, 1, 3])) {
+                threshold = 2;
+            }
+            return `${talents[Number(index) < threshold ? 0 : 1].name} (E${talentLevels[Number(index) - 1]})`;
         } else if (id.startsWith("base")) {
             const baseSkillLevels = baseSkills
                 .map((skill) => skill.levels)

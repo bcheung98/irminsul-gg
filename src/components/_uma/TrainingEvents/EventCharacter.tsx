@@ -13,6 +13,7 @@ import {
     eventMisc,
     eventsCommon,
     eventSlowMetabolism,
+    eventsRace,
 } from "@/data/uma/events";
 
 // Type imports
@@ -39,26 +40,26 @@ export default function EventCharacter({
     if (!events["character-outfit"]) return null;
 
     characterEvents = events.character.find(
-        (event) => event.id === character.charID
+        (event) => event.id === character.charID,
     );
 
     outfitEvents = events["character-outfit"].find(
-        (char) => char.id === character.id
+        (char) => char.id === character.id,
     )?.events.outfit;
 
     if (!characterEvents) return <Loader />;
 
     let commonEvents = eventsCommon({ props: characterEvents.props });
     eventsWithChoices = characterEvents.events.character?.filter(
-        (event) => event.options.length > 1 || event.forceHasChoices
+        (event) => event.options.length > 1 || event.forceHasChoices,
     );
     eventsWithChoices?.push(
-        eventSlowMetabolism({ props: characterEvents.props })
+        eventSlowMetabolism({ props: characterEvents.props }),
     );
     recEvents = characterEvents.events.recreation;
     secretEvents = characterEvents.events.secret;
     eventMisc({ props: characterEvents.props }).forEach((event) =>
-        otherEvents.push(event)
+        otherEvents.push(event),
     );
     characterEvents.events.character
         ?.filter((event) => {
@@ -75,6 +76,7 @@ export default function EventCharacter({
         "Recreation Events": recEvents,
         "Secret Events": secretEvents,
         "Special Events": commonEvents,
+        "After a Race": eventsRace,
         "Other Events": otherEvents,
     };
 
@@ -101,7 +103,7 @@ export default function EventCharacter({
                                     ))}
                                 </FlexBox>
                             </Stack>
-                        )
+                        ),
                 )}
             </Stack>
         </CharIDContext>

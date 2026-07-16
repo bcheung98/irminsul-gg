@@ -42,10 +42,10 @@ export default function Countdown(props: {
 
     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
     const hours = Math.floor(
-        (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
     );
     const minutes = Math.floor(
-        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+        (timeRemaining % (1000 * 60 * 60)) / (1000 * 60),
     );
     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
@@ -79,7 +79,9 @@ export default function Countdown(props: {
                     </Tooltip>
                 </>
             ) : (
-                <>{endText}</>
+                <Text component="span" variant="body2" weight="highlight">
+                    {endText}
+                </Text>
             )}
         </Text>
     );

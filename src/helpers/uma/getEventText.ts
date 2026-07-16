@@ -227,7 +227,7 @@ export function getEventText({
         pl:
             value && Array.isArray(value)
                 ? value.length > 1
-                    ? value[1] === null
+                    ? !value[1]
                         ? `※ ${getOrdinal(Number(value[0]))} or worse`
                         : `※ ${getOrdinal(Number(value[0]))}-${getOrdinal(Number(value[1]))}`
                     : `※ ${getOrdinal(Number(value[0]))}`

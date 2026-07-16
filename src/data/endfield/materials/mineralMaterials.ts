@@ -39,4 +39,12 @@ export const mineralMaterials = [
         rarity: 5,
         release: { version: "1.0" },
     },
+    {
+        id: "item_plant_spcstone_2_3",
+        category: "mineral",
+        name: "Protocolith",
+        tag: "Protocolith",
+        rarity: 5,
+        release: { version: "1.4" },
+    },
 ];

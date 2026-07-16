@@ -39,4 +39,12 @@ export const fungiMaterials = [
         rarity: 5,
         release: { version: "1.0" },
     },
+    {
+        id: "item_plant_mushroom_2_3",
+        category: "fungi",
+        name: "Talos Cap",
+        tag: "Talos Cap",
+        rarity: 5,
+        release: { version: "1.4" },
+    },
 ];

@@ -170,6 +170,16 @@ export default function EventText({
                     race: props?.raceName,
                     text: "Do not run in the",
                 });
+            case "pick_and_win":
+                return Race({
+                    race: value?.toString(),
+                    text: "Pick the <> as an objective and win",
+                });
+            case "dont_pick_and_win":
+                return Race({
+                    race: value?.toString(),
+                    text: "Enter the <> as an optional race and win",
+                });
             case "beat_rival":
                 return Race({
                     race: value?.toString(),

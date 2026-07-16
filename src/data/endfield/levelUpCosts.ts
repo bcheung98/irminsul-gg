@@ -49,6 +49,12 @@ export const characterPassives = (levels: number[]) => {
             prism1: [12, 0, 48, 0],
             prism2: [0, 18, 0, 18],
         };
+    } else if (JSON.stringify(levels) === JSON.stringify([2, 1, 3])) {
+        return {
+            credits: [10800, 2400, 32000],
+            prism1: [48, 12, 0],
+            prism2: [0, 0, 36],
+        };
     } else {
         return {
             credits: [2400, 8600, 10000, 24000],

@@ -596,3 +596,328 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
         },
     ];
 };
+
+export const eventsRace: Event[] = [
+    {
+        name: "Victory!",
+        nameJP: "レース勝利！",
+        options: [
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-15",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+10 / +8 / +5",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-5",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+10 / +8 / +5",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                    { tag: "di" },
+                    {
+                        tag: "energy",
+                        value: "-20",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+10 / +8 / +5",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+        ],
+        headers: ["race_rewards"],
+    },
+    {
+        name: "Solid Showing",
+        nameJP: "レース入着",
+        options: [
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-20",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+8 / +5 / +3",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-10",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+8 / +5 / +3",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                    { tag: "di" },
+                    {
+                        tag: "energy",
+                        value: "-30",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+8 / +5 / +3",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+        ],
+        headers: ["race_rewards"],
+    },
+    {
+        name: "Defeat",
+        nameJP: "レース敗北",
+        options: [
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-25",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-15",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                    { tag: "di" },
+                    {
+                        tag: "energy",
+                        value: "-35",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                ],
+            },
+        ],
+        headers: ["race_rewards"],
+    },
+    {
+        name: "Etsuko's Elated Coverage",
+        nameJP: "乙名史記者の悦楽取材",
+        options: [
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-15",
+                    },
+                    {
+                        tag: "mood",
+                        value: "+1",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+10 / +8 / +5",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+45 / +35 / +30",
+                    },
+                    {
+                        tag: "fans",
+                        value: "+500",
+                    },
+                    {
+                        tag: "race_related_hint",
+                        random: true,
+                    },
+                    {
+                        tag: "bond",
+                        value: "+15",
+                        data: 9003,
+                    },
+                ],
+            },
+        ],
+        headers: ["race_rewards"],
+    },
+    {
+        name: "Etsuko's Exhaustive Coverage",
+        nameJP: "乙名史記者の徹底取材",
+        options: [
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-25",
+                    },
+                    {
+                        tag: "mood",
+                        value: "-1",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "bond",
+                        value: "-10",
+                        data: 9003,
+                    },
+                    {
+                        tag: "di",
+                    },
+                    {
+                        tag: "energy",
+                        value: "-15",
+                    },
+                    {
+                        tag: "mood",
+                        value: "+1",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "bond",
+                        value: "+15",
+                        data: 9003,
+                    },
+                ],
+            },
+            {
+                rewards: [
+                    {
+                        tag: "energy",
+                        value: "-20",
+                    },
+                    {
+                        tag: "random_stats",
+                        value: "+4 / +3 / +0",
+                        data: 1,
+                    },
+                    {
+                        tag: "skill_points",
+                        value: "+25 / +20 / +10",
+                    },
+                    {
+                        tag: "bond",
+                        value: "+10",
+                        data: 9003,
+                    },
+                ],
+            },
+        ],
+        headers: ["race_rewards"],
+    },
+];
