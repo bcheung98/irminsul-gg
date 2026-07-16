@@ -6,6 +6,7 @@ import CharacterAttributes from "@/components/CharacterAttributes";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
@@ -22,10 +23,12 @@ interface CharacterInfoProps {
     stats: TCharacterStats;
     materials: Materials;
     attributes: AttributeData;
+    image: React.ReactNode;
 }
 
 export default function CharacterInfo(props: CharacterInfoProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const game = useGameTag();
 
@@ -36,8 +39,13 @@ export default function CharacterInfo(props: CharacterInfoProps) {
 
     return (
         <ContentBox
-            header={<CharacterAttributes {...props.attributes} />}
-            headerProps={{ padding: "16px 24px" }}
+            header={
+                <CharacterAttributes
+                    attributes={props.attributes}
+                    image={props.image}
+                />
+            }
+            headerProps={{ padding: matches ? "16px 24px" : "16px" }}
             contentProps={{ padding: "16px 24px" }}
         >
             <Stack spacing={2} divider={<Divider />}>

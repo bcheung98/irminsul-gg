@@ -8,6 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_nte/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import Image from "@/components/Image";
 import CharacterConsole from "@/components/_nte/CharacterConsole";
 import BetaTag from "@/components/BetaTag";
 
@@ -43,6 +44,19 @@ export default function CharacterPage({
         />
     );
 
+    const SplashMini = (
+        <Image
+            src={`nte/espers/${character.id}`}
+            style={{
+                width: "128px",
+                height: "auto",
+                backgroundColor: theme.background(1),
+                borderRadius: theme.contentBox.border.radius * 4,
+                outline: `1px solid ${theme.border.color.primary}`,
+            }}
+        />
+    );
+
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 
     const InfoMain = (
@@ -50,6 +64,7 @@ export default function CharacterPage({
             stats={character.stats}
             materials={character.materials}
             attributes={attributes}
+            image={SplashMini}
         />
     );
 

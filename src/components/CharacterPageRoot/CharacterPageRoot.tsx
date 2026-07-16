@@ -12,7 +12,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { SkillContext, SkillVersionContext } from "@/context";
 
 // Type imports
-import { CharacterSkillsList } from "@/types/skill";
+import { CharacterSkillsList, SkillVersion } from "@/types/skill";
 
 interface CharacterPageRootProps extends InfoPageRootProps {
     skills: CharacterSkillsList;
@@ -22,8 +22,8 @@ export default function CharacterPageRoot({
     skills,
     ...other
 }: CharacterPageRootProps) {
-    const indexes = ["v1"];
-    const versions = [{ value: "v1", label: "Original" }];
+    const indexes: string[] = [];
+    const versions: SkillVersion[] = [];
     Object.values(skills).forEach((skillList) => {
         skillList?.forEach((skill) => {
             if (skill.version && !indexes.includes(skill.version.value)) {
@@ -32,6 +32,13 @@ export default function CharacterPageRoot({
             }
         });
     });
+
+    if (versions.length <= 1) {
+        versions.push({
+            value: "v1",
+            label: "Original",
+        });
+    }
 
     const [value, setValue] = useState(versions[0].value);
     const handleVersionChange = (event: SelectChangeEvent) => {

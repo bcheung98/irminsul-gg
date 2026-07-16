@@ -23,12 +23,16 @@ import { rarityMap } from "@/data/zzz/common";
 // Type imports
 import { AttributeData, AttributeDataKey, GameData } from "@/types";
 
-export default function CharacterAttributes(props: AttributeData) {
+export default function CharacterAttributes({
+    attributes,
+    image,
+}: {
+    attributes: AttributeData;
+    image: React.ReactNode;
+}) {
     const game = useGameTag();
 
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
-
-    const { ...attributes } = props;
 
     function Rarity() {
         if (game === "zzz") {
@@ -67,35 +71,38 @@ export default function CharacterAttributes(props: AttributeData) {
 
     return (
         <Stack spacing={2} divider={<Divider />} sx={{ width: "100%" }}>
-            <Stack spacing={1}>
-                <TextLabel
-                    icon={
-                        game === "zzz" &&
-                        `zzz/ranks/agent/${rarityMap[attributes.rarity || 3]}`
-                    }
-                    iconProps={{ size: [48, 0] }}
-                    title={attributes.displayName}
-                    subtitle={
-                        <Text weight="highlight">
-                            <i>{attributes.title}</i>
-                        </Text>
-                    }
-                    titleProps={{ variant: matches ? "h4" : "h6" }}
-                    textSpacing={0.5}
-                    spacing={2}
-                />
-                <FlexBox spacing={1} wrap>
-                    {gameAttributes[game].map(
-                        (key) =>
-                            attributes[key] &&
-                            (key === "rarity" ? (
-                                <Rarity key={key} />
-                            ) : (
-                                <Chip key={key} attrKey={key} />
-                            )),
-                    )}
-                </FlexBox>
-            </Stack>
+            <FlexBox spacing={2} sx={{ alignItems: "flex-start" }}>
+                <Box sx={{ display: { xs: "block", md: "none" } }}>{image}</Box>
+                <Stack spacing={1}>
+                    <TextLabel
+                        icon={
+                            game === "zzz" &&
+                            `zzz/ranks/agent/${rarityMap[attributes.rarity || 3]}`
+                        }
+                        iconProps={{ size: [48, 0] }}
+                        title={attributes.displayName}
+                        subtitle={
+                            <Text weight="highlight">
+                                <i>{attributes.title}</i>
+                            </Text>
+                        }
+                        titleProps={{ variant: matches ? "h4" : "h6" }}
+                        textSpacing={0.5}
+                        spacing={2}
+                    />
+                    <FlexBox spacing={1} wrap>
+                        {gameAttributes[game].map(
+                            (key) =>
+                                attributes[key] &&
+                                (key === "rarity" ? (
+                                    <Rarity key={key} />
+                                ) : (
+                                    <Chip key={key} attrKey={key} />
+                                )),
+                        )}
+                    </FlexBox>
+                </Stack>
+            </FlexBox>
             {game === "wuwa" && <WuWaCharacterCombatRoles {...attributes} />}
             {game === "nte" && <NTECharacterCombatRoles {...attributes} />}
             {game === "endfield" && (
