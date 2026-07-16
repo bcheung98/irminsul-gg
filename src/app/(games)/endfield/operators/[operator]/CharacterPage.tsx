@@ -31,16 +31,22 @@ export default function CharacterPage({
     const attributes: AttributeData = { ...character };
     const attributesMisc: AttributeDataMisc = { ...character };
 
+    let attrBoost = {
+        name: attributeTitleMap[character.stats.attributes[0]],
+        description: `Operator ${attributeMap[character.stats.attributes[0]]} $A.`,
+        scaling: [["+10", "+15", "+15", "+20"]],
+        levels: [1, 2, 3, 4],
+        icon: `endfield/icons/stat-icons/${character.stats.attributes[0].toUpperCase()}`,
+    };
+    if (character.stats.attributes.length > 2) {
+        attrBoost.name = `${attributeTitleMap[character.stats.attributes[0]]}/${attributeTitleMap[character.stats.attributes[1]]}`;
+        attrBoost.description = `Operator ${attributeMap[character.stats.attributes[0]]} and ${attributeMap[character.stats.attributes[1]]} $A.`;
+    }
+
     const skills: CharacterSkillsList = { ...character.skills };
     skills.passives = [
         ...character.passives,
-        {
-            name: attributeTitleMap[character.stats.attributes[0]],
-            description: `Operator ${attributeMap[character.stats.attributes[0]]} $A.`,
-            scaling: [["+10", "+15", "+15", "+20"]],
-            levels: [1, 2, 3, 4],
-            icon: `endfield/icons/stat-icons/${character.stats.attributes[0].toUpperCase()}`,
-        },
+        attrBoost,
         {
             name: "Outfitting",
             description: `Activate this to let the operator equip $A quality gear`,

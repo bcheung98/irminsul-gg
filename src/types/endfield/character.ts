@@ -48,10 +48,7 @@ export interface EndfieldCharacterPassive extends Skill {
     levels: number[];
 }
 
-export type EndfieldCharacterStatAttributes = [
-    EndfieldStatAttribute,
-    EndfieldStatAttribute,
-];
+export type EndfieldCharacterStatAttributes = EndfieldStatAttribute[];
 
 export interface EndfieldCharacterStats extends CharacterStats {
     attributes: EndfieldCharacterStatAttributes;

@@ -39,4 +39,12 @@ export const plantMaterials = [
         rarity: 5,
         release: { version: "1.0" },
     },
+    {
+        id: "item_plant_crylplant_2_3",
+        category: "plant",
+        name: "Crimson Spearleaf",
+        tag: "Crimson Spearleaf",
+        rarity: 5,
+        release: { version: "1.4" },
+    },
 ];
