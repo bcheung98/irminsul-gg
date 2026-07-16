@@ -8,6 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_genshin/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import Image from "@/components/Image";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
@@ -42,6 +43,19 @@ export default function CharacterPage({
         />
     );
 
+    const SplashMini = (
+        <Image
+            src={`genshin/characters/${character.id}`}
+            style={{
+                width: "128px",
+                height: "auto",
+                backgroundColor: theme.background(2),
+                borderRadius: theme.contentBox.border.radius * 4,
+                outline: `1px solid ${theme.border.color.primary}`,
+            }}
+        />
+    );
+
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 
     const InfoMain = (
@@ -49,6 +63,7 @@ export default function CharacterPage({
             stats={character.stats}
             materials={character.materials}
             attributes={attributes}
+            image={SplashMini}
         />
     );
 

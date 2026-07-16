@@ -7,6 +7,7 @@ import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import Image from "@/components/Image";
 import CharacterPotential from "@/components/_zzz/CharacterPotential";
 import BetaTag from "@/components/BetaTag";
 
@@ -51,10 +52,10 @@ export default function CharacterPage({
                             "HP",
                         ].includes(stat)
                             ? `${Number(value) / 100}%`
-                            : `${value}`
+                            : `${value}`,
                     );
                     return [stat, values].flat() as string[];
-                }
+                },
             ),
         },
     ];
@@ -66,6 +67,19 @@ export default function CharacterPage({
         />
     );
 
+    const SplashMini = (
+        <Image
+            src={`zzz/agents/${character.id}`}
+            style={{
+                width: "128px",
+                height: "auto",
+                backgroundColor: theme.background(1),
+                borderRadius: theme.contentBox.border.radius * 4,
+                outline: `1px solid ${theme.border.color.primary}`,
+            }}
+        />
+    );
+
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 
     const InfoMain = (
@@ -73,6 +87,7 @@ export default function CharacterPage({
             stats={character.stats}
             materials={character.materials}
             attributes={attributes}
+            image={SplashMini}
         />
     );
 
