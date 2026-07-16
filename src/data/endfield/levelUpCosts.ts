@@ -37,7 +37,6 @@ export const characterAttribute = {
 };
 
 export const characterPassives = (levels: number[]) => {
-    console.log(levels);
     if (JSON.stringify(levels) === JSON.stringify([1, 2, 3])) {
         return {
             credits: [2400, 10800, 32000],
