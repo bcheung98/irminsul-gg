@@ -51,6 +51,11 @@ export default async function Page({ params }: Props) {
         "uma/characters",
         (char) => formatHref(char.url) === formatHref(character),
     );
+
+    if (!charData) {
+        return <Page404 />;
+    }
+
     const profileData = await getData<UmaCharacterProfile>(
         "uma/character-profiles",
         (char) => charData.charID === char.id,
@@ -72,10 +77,6 @@ export default async function Page({ params }: Props) {
         character: charEvent,
         "character-outfit": charOutfitEvent,
     };
-
-    if (!charData) {
-        return <Page404 />;
-    }
 
     return (
         <Suspense fallback={<Loader />}>

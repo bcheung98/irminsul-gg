@@ -53,6 +53,11 @@ export default async function Page({ params }: Props) {
         "uma/supports",
         (supp) => formatHref(supp.url) === formatHref(support),
     );
+
+    if (!suppData) {
+        return <Page404 />;
+    }
+
     const profileData = await getData<UmaCharacterProfile>(
         "uma/character-profiles",
         (char) => suppData.charID === char.id,
@@ -91,10 +96,6 @@ export default async function Page({ params }: Props) {
         "support-pal": palEvent,
         "support-group": groupEvent,
     };
-
-    if (!suppData) {
-        return <Page404 />;
-    }
 
     return (
         <Suspense fallback={<Loader />}>
