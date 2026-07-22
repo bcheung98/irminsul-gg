@@ -51,6 +51,7 @@ export interface UmaCharacterSkills {
     unique: number[];
     innate: number[];
     awakening: number[];
+    awakeningJP?: number[];
     event: number[];
     eventJP?: number[];
     evo: UmaCharacterEvoSkill[];
