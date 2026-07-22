@@ -44,7 +44,7 @@ export default function CharacterPage({
 }) {
     const profiles: UmaCharacterProfile[] = useSWR(
         urls["uma/character-profiles"],
-        (url: string) => fetch(url).then((r) => r.json())
+        (url: string) => fetch(url).then((r) => r.json()),
     ).data;
 
     const theme = useTheme();
@@ -63,13 +63,18 @@ export default function CharacterPage({
         },
     };
 
+    let awakeningSkills = character.skills.awakening;
+    if (server === "Asia" && character.skills.awakeningJP)
+        awakeningSkills = character.skills.awakeningJP;
     let eventSkills = character.skills.event;
     if (server === "Asia" && character.skills.eventJP)
         eventSkills = character.skills.eventJP;
     const charSkills: UmaCharacterSkills = {
         ...character.skills,
+        awakening: awakeningSkills,
         event: eventSkills,
     };
+    delete charSkills.awakeningJP;
     delete charSkills.eventJP;
 
     const Splash = (

@@ -154,7 +154,7 @@ export const navItems: GameData<NavItem[]> = {
             href: "",
         },
         {
-            icon: "icons/Horse",
+            icon: "icons/Character",
             title: "Characters",
             href: "characters",
         },

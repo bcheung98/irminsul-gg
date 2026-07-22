@@ -56,7 +56,7 @@ export default function SiteSearchPopup({
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
-        (state) => state.hideUnreleasedContent
+        (state) => state.hideUnreleasedContent,
     );
 
     // Uma specific
@@ -86,13 +86,13 @@ export default function SiteSearchPopup({
             const items = await getItems(
                 hideUnreleasedContent,
                 currentGame,
-                hideUmaJPContent
+                hideUmaJPContent,
             );
             startDataTransition(() => {
                 setData(items);
             });
         });
-    }, [game, gameFilter, hideUnreleasedContent]);
+    }, [game, gameFilter, hideUnreleasedContent, hideUmaJPContent]);
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
@@ -138,11 +138,11 @@ export default function SiteSearchPopup({
             }
             setFocus(index);
             const element = document.getElementById(
-                values[index].url
+                values[index].url,
             ) as HTMLMenuElement;
             element?.scrollIntoView({ behavior: "instant", block: "nearest" });
         },
-        [focus, searchValue, pinnedSearches, recentSearches, searchResults]
+        [focus, searchValue, pinnedSearches, recentSearches, searchResults],
     );
 
     const Loader = (

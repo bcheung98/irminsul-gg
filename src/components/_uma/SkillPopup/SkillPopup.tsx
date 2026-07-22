@@ -40,10 +40,10 @@ export default function SkillPopup({
 }) {
     const characters: UmaCharacter[] = useSWR(
         urls["uma/characters"],
-        (url: string) => fetch(url).then((r) => r.json())
+        (url: string) => fetch(url).then((r) => r.json()),
     ).data;
     const supports: UmaSupport[] = useSWR(urls["uma/supports"], (url: string) =>
-        fetch(url).then((r) => r.json())
+        fetch(url).then((r) => r.json()),
     ).data;
 
     const theme = useTheme();
@@ -114,11 +114,14 @@ export default function SkillPopup({
     const characterSources = characters
         .filter((char) =>
             [
-                ...char.skills.awakening.map((skill) => Number(skill)),
-                ...char.skills.innate.map((skill) => Number(skill)),
-                ...char.skills.unique.map((skill) => Number(skill)),
-                ...char.skills.evo.map((skill) => Number(skill.new)),
-            ].includes(id)
+                char.skills.awakening.map((skill) => Number(skill)),
+                char.skills.innate.map((skill) => Number(skill)),
+                char.skills.unique.map((skill) => Number(skill)),
+                server === "Asia" &&
+                    char.skills.evo.map((skill) => Number(skill.new)),
+            ]
+                .flat()
+                .includes(id),
         )
         .filter(filterSources);
 
@@ -266,7 +269,7 @@ export default function SkillPopup({
                                         ))}
                                     </Grid>
                                 </Stack>
-                            )
+                            ),
                     )}
                     {scenarioSources.length > 0 && (
                         <Stack spacing={0.5}>
