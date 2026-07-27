@@ -25,7 +25,7 @@ import { skillKeys } from "@/data/skills";
 
 // Type imports
 import { CharacterSkillProps } from "./CharacterSkills.types";
-import { CharacterSkillsList } from "@/types/skill";
+import { Skill, CharacterSkillsList } from "@/types/skill";
 import { SkillDisplay } from "@/types";
 
 export default function CharacterSkillTab({
@@ -61,9 +61,19 @@ export default function CharacterSkillTab({
     if (skills && skills[skillKey]) {
         let skill = skills[skillKey];
         if (skillVersion && skillVersion.value !== "v1" && skill.length > 1) {
-            skill = skill.filter(
-                (skill) => skill.version?.value === skillVersion.value,
-            );
+            skill = [
+                ...skill
+                    .reduce((map, item) => {
+                        const current = map.get(item.name);
+                        if (item.version?.value === skillVersion.value) {
+                            map.set(item.name, item);
+                        } else if (!current && item.version == undefined) {
+                            map.set(item.name, item);
+                        }
+                        return map;
+                    }, new Map<string, Skill>())
+                    .values(),
+            ];
         } else {
             skill = skill.filter((skill) => !skill.version);
         }
