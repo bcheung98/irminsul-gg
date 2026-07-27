@@ -19,20 +19,23 @@ export default function SupportSplash({ support }: { support: UmaSupport }) {
     const { id, name, title, splash } = support;
 
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
+    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
+    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    const maxHeight = "720px";
+
     return (
         <>
             <SupportCardImage
                 support={support}
                 style={{
-                    width: matches ? "100%" : "96px",
-                    height: matches ? "300px" : "auto",
+                    width: matches_up_sm ? "100%" : "96px",
+                    height: matches_up_sm ? "300px" : "auto",
                     cursor: "pointer",
                 }}
                 handleClickOpen={handleClickOpen}
@@ -41,25 +44,33 @@ export default function SupportSplash({ support }: { support: UmaSupport }) {
                 open={open}
                 setOpen={setOpen}
                 contentProps={{ padding: 0 }}
-                maxWidth="xl"
-                fullScreen={!matches}
+                maxWidth={matches_up_md ? "xl" : "sm"}
+                fullScreen={!matches_up_sm}
                 header={`[${title}] ${name}`}
             >
-                <Grid container spacing={2} sx={{ maxHeight: { md: "600px" } }}>
-                    <Grid size={{ xs: 12, sm: 5, md: "auto" }}>
+                <Grid
+                    container
+                    spacing={2}
+                    sx={{ maxHeight: { md: maxHeight } }}
+                >
+                    <Grid size={{ xs: 12, md: "auto" }}>
                         <Image
-                            src={`uma/supports/${id}`}
-                            style={{ width: "100%", height: "auto" }}
+                            src={`uma/supports/${id}_large`}
+                            style={
+                                matches_up_sm
+                                    ? { width: "auto", height: maxHeight }
+                                    : { width: "100%", height: "auto" }
+                            }
                         />
                     </Grid>
                     <Grid
-                        size={{ xs: 12, sm: 7, md: "grow" }}
+                        size={{ xs: 12, md: "grow" }}
                         sx={{
                             px: 2,
-                            pt: { xs: 0, sm: 2 },
+                            pt: { xs: 0, md: 2 },
                             pb: 2,
                             overflowY: "auto",
-                            maxHeight: { md: "600px" },
+                            maxHeight: { md: maxHeight },
                             scrollbarWidth: "thin",
                         }}
                     >
