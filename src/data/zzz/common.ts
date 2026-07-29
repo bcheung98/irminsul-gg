@@ -5,6 +5,7 @@ export const elements = [
     "Electric",
     "Ether",
     "Wind",
+    "Lumiflux",
 ] as const;
 
 export const weapons = [
@@ -45,4 +46,6 @@ export const factions = [
     "Metropolitan Order Division",
     "External Strategy Department",
     "Phaethon",
+    "Covenant of Dayat",
+    "Airspace Patrol Department",
 ] as const;

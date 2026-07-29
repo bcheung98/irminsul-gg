@@ -201,6 +201,7 @@ export const nextThemeData = {
             electric: "#2eb6ff",
             ether: "#fe437e",
             wind: "#a6c5fd",
+            lumiflux: "#ffa9dd",
         },
         uma: {
             highlight: "#f7ca2f",
