@@ -6,6 +6,7 @@ import MuiTooltip, {
 
 interface TooltipProps extends MuiTooltipProps {
     fontSize?: number;
+    width?: string;
 }
 
 const Tooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -15,7 +16,7 @@ const Tooltip = styled(({ className, ...props }: TooltipProps) => (
         disableInteractive
         classes={{ popper: className }}
     />
-))(({ theme, fontSize }) => ({
+))(({ theme, fontSize, width = "none" }) => ({
     [`& .${tooltipClasses.arrow}`]: {
         color: `black`,
     },
@@ -23,11 +24,11 @@ const Tooltip = styled(({ className, ...props }: TooltipProps) => (
         backgroundColor: `black`,
         outline: `1px solid rgb(44, 44, 44)`,
         fontSize: theme.typography.pxToRem(
-            fontSize || theme.font.sizes.body3.sm
+            fontSize || theme.font.sizes.body3.sm,
         ),
         fontFamily: theme.typography.fontFamily,
         fontWeight: theme.font.weight.highlight,
-        maxWidth: "none",
+        maxWidth: width,
     },
 }));
 
