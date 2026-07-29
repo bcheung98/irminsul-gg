@@ -117,7 +117,7 @@ export const statusEffects: StatusEffect[] = [
         id: 14,
         name: "Fan Promise (Hokkaido)",
         description:
-            "Win a race at Sapporo or Hakodate to fulfill her promise and get a boost from her fans.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Sapporo or Hakodate racetrack to gain 10 Speed and Guts, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・北海道",
         descriptionJP:
             "札幌・函館でのレースに勝利するとファンと再会して力をもらえる",
@@ -126,7 +126,7 @@ export const statusEffects: StatusEffect[] = [
         id: 15,
         name: "Fan Promise (Hokuto)",
         description:
-            "Win a race at Fukushima or Niigata to fulfill her promise and get a boost from her fans.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Fukushima, Niigata, or Morioka racetracks to gain 10 Speed and Stamina, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・北東",
         descriptionJP:
             "福島・新潟・盛岡でのレースに勝利するとファンと再会して力をもらえる",
@@ -135,7 +135,7 @@ export const statusEffects: StatusEffect[] = [
         id: 16,
         name: "Fan Promise (Nakayama)",
         description:
-            "Wins a race at Nakayama to fulfill her promise and get a boost from her fans.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Nakayama or Funabashi racetracks to gain 10 Power and Guts, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・千葉",
         descriptionJP:
             "中山・船橋でのレースに勝利するとファンと再会して力をもらえる",
@@ -144,7 +144,7 @@ export const statusEffects: StatusEffect[] = [
         id: 17,
         name: "Fan Promise (Kansai)",
         description:
-            "Win a race at Kyoto or Hanshin to fulfill her promise and get a boost from her fans.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Kyoto or Hanshin racetrack to gain 10 Stamina and Wisdom, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・関西",
         descriptionJP:
             "京都・阪神でのレースに勝利するとファンと再会して力をもらえる",
@@ -153,7 +153,7 @@ export const statusEffects: StatusEffect[] = [
         id: 18,
         name: "Fan Promise (Kokura)",
         description:
-            "Win a race at Kokura to fulfill her promise and get a boost from her fans.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Kokura racetrack to gain 10 Stamina and Guts, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・小倉",
         descriptionJP: "小倉でのレースに勝利するとファンと再会して力をもらえる",
     },
@@ -161,33 +161,33 @@ export const statusEffects: StatusEffect[] = [
         id: 19,
         name: "Not Ready",
         description:
-            "She's just not quite race-ready... Competing in races may lead to fatigue.",
+            "She's just not quite race ready... Competing in races may lead to fatigue.",
         nameJP: "まだまだ準備中",
         descriptionJP:
             "身体がまだ本格化の時期に入っていない… …レースに出走すると疲れてしまうことがある",
     },
     {
         id: 20,
-        name: "Glass Legs",
+        name: "Legs of Glass",
         description:
-            "Can shine in objective races as long as not afflicted by the Bad Practice condition, but will build up fatigue in her legs if racing continuously.\nParticipating in a race two turns in a row will cause the loss of 10 energy and trigger the Bad Practice condition. Doesn't apply if the second race is an objective race.",
+            "Has stellar growth during goal races as long as she's not afflicted with Practice Poor, but her fragile legs tire easily after consecutive races.",
         nameJP: "ガラスの脚",
         descriptionJP:
             "練習ベタで出走しない限り目標レースで輝きを放ち成長しやすいただし繊細な脚はレースが続くと疲れてしまう",
     },
     {
         id: 21,
-        name: "Eerie Signals",
+        name: "Ominous Portent",
         description:
-            "Disturbed qi flow makes it easier for bad things to happen.\nWinning races becomes difficult.",
+            "Bad things are more likely to occur due to unbalanced qi.",
         nameJP: "怪しい雲行き",
         descriptionJP: "乱れた氣脈によって悪いことが起きやすくなってしまう",
     },
     {
         id: 22,
-        name: "Promises・Kawasaki",
+        name: "Fan Promise (Kawasaki)",
         description:
-            "Gain strength by reuniting with your fans.\nWin a race held at the Kawasaki racetrack to gain 10 Power and Wisdom, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
+            "Gain strength by reuniting with your fans.<br />Win a race held at the Kawasaki racetrack to gain 10 Power and Wisdom, 1 Mood level, 10 Skill Points, and a level 5 hint for the respective racetrack green skill.",
         nameJP: "ファンとの約束・川崎",
         descriptionJP: "川崎でのレースに勝利するとファンと再会して力をもらえる",
     },
@@ -195,16 +195,16 @@ export const statusEffects: StatusEffect[] = [
         id: 23,
         name: "Hero's Brilliance",
         description:
-            "Head into the race for the final crown exuding the unmistakable determination of a true hero\nTemporarily raises all stats by ~350 for the duration of the Senior year Arima Kinen only.",
+            "In the race for the final crown, her willpower surges forth in a brilliant display of strength unmistakably fit for a hero.",
         nameJP: "英雄の光輝",
         descriptionJP:
             "最後の一冠を賭けたレースで眩い意志の輝きを放ち紛うことなき英雄の力を発揮する",
     },
     {
         id: 24,
-        name: "Flower Bud Awaiting Spring",
+        name: "Bud Longing for Spring",
         description:
-            "Your legs cannot yet withstand the strain of racing, so participating in races may lead to exhaustion\nEnergy has a chance to decrease by 5 after each race.",
+            "Her fragile legs still have some growing to do before attaining greater stability. Competing in races may lead to fatigue.",
         nameJP: "春待つ蕾",
         descriptionJP:
             "成長中の脚は、強い負荷に弱くまだ不安定レースに出走すると疲れてしまうことがある",
@@ -213,7 +213,7 @@ export const statusEffects: StatusEffect[] = [
         id: 25,
         name: "Positive Thinking",
         description:
-            "Stay motivated through mental fortitude!\nPrevents Mood from lowering once, and will disappear once this effect is exhausted.",
+            "Stay motivated through mental fortitude!<br />Prevents Mood from lowering once, and will disappear once this effect is exhausted.",
         nameJP: "ポジティブ思考",
         descriptionJP:
             "強靭なメンタルでやる気をキープ！やる気ダウンを一度防ぎ、このコンディションが消える",
@@ -222,7 +222,7 @@ export const statusEffects: StatusEffect[] = [
         id: 26,
         name: "Lucky Constitution",
         description:
-            "I'm kinda in the groove today!\nPrevents you from getting a bad condition once, and will disappear once this effect is exhausted.",
+            "I'm kinda in the groove today!<br />Prevents you from getting a bad condition once, and will disappear once this effect is exhausted.",
         nameJP: "幸運体質",
         descriptionJP:
             "今日はなんだかツイてるかも！　悪いコンディションから一度だけ身を守り、このコンディションが消える",
@@ -276,7 +276,7 @@ export const statusEffects: StatusEffect[] = [
         id: 32,
         name: "Snack Time",
         description:
-            "I'm feeling refreshed and ready to do my best today!\nRecover 5 Energy at the start of each turn.",
+            "I'm feeling refreshed and ready to do my best today!<br />Recover 5 Energy at the start of each turn.",
         nameJP: "リフレッシュの心得",
         descriptionJP:
             "リフレッシュはバッチリ、今日も一日頑張るぞ！気分転換して、ターン開始時に体力がすこし回復する",
@@ -294,7 +294,7 @@ export const statusEffects: StatusEffect[] = [
         id: 35,
         name: "Pride of Funabashi",
         description:
-            "With love for Funabashi in your heart, display unwavering strength in the decisive battle set in your revived hometown, forging a path ahead.\nYour stats are greatly increased in the JBC Classic.",
+            "With love for Funabashi in your heart, display unwavering strength in the decisive battle set in your revived hometown, forging a path ahead.<br />Your stats are greatly increased in the JBC Classic.",
         nameJP: "船橋の誇り",
         descriptionJP:
             "蘇った故郷が舞台の決戦で皆の未来を切り開くべく船橋への愛を胸に揺るぎない力を発揮する",
@@ -303,7 +303,7 @@ export const statusEffects: StatusEffect[] = [
         id: 36,
         name: "Frozen Wings",
         description:
-            "You feel unwell, and the days of being unable to properly display your strength in races continue.\nAll your stats are reduced by 50.",
+            "You feel unwell, and the days of being unable to properly display your strength in races continue.<br />All your stats are reduced by 50.",
         nameJP: "凍りついた翼",
         descriptionJP:
             "不調と向き合う日々が続くレースに出走しても全力を発揮できない",
@@ -321,34 +321,52 @@ export const statusEffects: StatusEffect[] = [
         id: 38,
         name: "Trials of Love",
         description:
-            "'Goals always come with their own challenges. I want to overcome these trials and prove my love!'\nPain prevents you from showing your full potential.",
+            "'Goals always come with their own challenges. I want to overcome these trials and prove my love!'<br />Pain prevents you from showing your full potential.",
         nameJP: "ラヴの試練",
         descriptionJP:
             "目標には困難がつきもの、試練を乗り越え愛を証明したい！痛みによってレースで全力を発揮できない",
     },
     {
-        id: 100,
-        name: "Passion Zone: Team Sirius",
+        id: 39,
+        name: "A Sign of the Thaw",
         description:
-            "Can carry out Friendship Training with Team Sirius and is immune to Insomnia as well as Lazy Habit.",
+            "Her resolve fixed on this race, she gives everything she has and impulsively unleashes a late-race spurt that leaves everyone in the dust.",
+        nameJP: "雪解けの予感",
+        descriptionJP:
+            "全員をひれ伏させる末脚を衝動のままに解き放つこの一戦への決意を胸に持てる力の全てを発揮する",
+    },
+    {
+        id: 44,
+        name: "Jittery Legs",
+        description:
+            "Mile races are over in a flash! I can't settle into the pace. This is impossible! I just want to go home... Her nerves tie her legs in knots, preventing her from performing at her best in Mile races.",
+        nameJP: "足に伝う焦燥",
+        descriptionJP:
+            "マイルは短期決戦！ペースが掴めず無理ゲー！もう帰りたい……動揺から足がもつれ、マイルのレースで全力を発揮できない",
+    },
+    {
+        id: 100,
+        name: "Pure Passion: Team Sirius",
+        description:
+            "Able to do Friendship Training with Team Sirius, and immune to Night Owl and Slacker.",
         nameJP: "情熱ゾーン：チーム＜シリウス＞",
         descriptionJP:
             "チーム＜シリウス＞と友情トレーニングが可能になり「夜ふかし気味」と「なまけ癖」にならなくなる",
     },
     {
         id: 101,
-        name: "Passion Zone: The Throne's Assemblage",
+        name: "Pure Passion: Heirs to the Throne",
         description:
-            "Can carry out Friendship Training with The Throne's Assemblage and is immune to Insomnia and Lazy Habit.",
+            "Able to do Friendship Training with Heirs to the Throne, and immune to Night Owl and Slacker.",
         nameJP: "情熱ゾーン：玉座に集いし者たち",
         descriptionJP:
             "玉座に集いし者たちと友情トレーニングが可能になり「夜ふかし気味」と「なまけ癖」にならなくなる",
     },
     {
         id: 102,
-        name: "Passion Zone: Ancestors & Guides",
+        name: "Pure Passion: Progenitors and Guides",
         description:
-            "Can carry out Friendship Training with Ancestors & Guides and is immune to Insomnia and Lazy Habit.",
+            "Able to do Friendship Training with Progenitors and Guides, and immune to Night Owl and Slacker.",
         nameJP: "情熱ゾーン：祖にして導く者",
         descriptionJP:
             "祖にして導く者と友情トレーニングが可能になり「夜ふかし気味」と「なまけ癖」にならなくなる",
