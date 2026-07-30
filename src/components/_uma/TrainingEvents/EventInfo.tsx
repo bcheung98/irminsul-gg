@@ -12,7 +12,7 @@ import Popover from "@mui/material/Popover";
 import { useCardIDContext } from "@/context";
 import { range } from "@/utils";
 import { useStore, useServerStore } from "@/stores";
-import { history } from "@/data/uma/history";
+import { didNotExist } from "@/data/uma/history";
 
 // Type imports
 import { Event } from "@/types/uma/event";
@@ -30,7 +30,7 @@ export default function EventInfo({
 }) {
     const cardID = useCardIDContext();
 
-    const server = useStore(useServerStore, (state) => state.uma);
+    const server = useStore(useServerStore, (state) => state.uma) || "NA";
 
     let name: string;
     if (server === "Asia") {
@@ -63,21 +63,13 @@ export default function EventInfo({
         let e = event;
         if (event.altOptions) {
             e = event.altOptions.find((e) => e.cardID === cardID) || event;
-        } else if (event.otherVersions && server === "NA") {
+        } else if (event.otherVersions) {
             e =
-                event.otherVersions.find((e) => !history.includes(e.version))
+                event.otherVersions.find((e) => !didNotExist(server, e.version))
                     ?.data || event;
         }
         return <EventPopup name={name} event={e} />;
     };
-
-    if (
-        event.didNotExist &&
-        server === "NA" &&
-        !history.includes(event.didNotExist)
-    ) {
-        return null;
-    }
 
     return expand ? (
         <Card>{renderEventPopup()}</Card>

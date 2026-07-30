@@ -1,4 +1,5 @@
 import { useState } from "react";
+import parse from "html-react-parser";
 
 // Component imports
 import ContentDialog from "@/components/ContentDialog";
@@ -197,7 +198,7 @@ export function StatusEffect({
     return (
         <>
             {s1 && `${s1} `}
-            <Tooltip title={description} placement="top">
+            <Tooltip title={parse(description)} placement="top" width="300px">
                 <span
                     style={{
                         color: theme.text.uma.value,

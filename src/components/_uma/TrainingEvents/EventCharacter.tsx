@@ -9,12 +9,14 @@ import Stack from "@mui/material/Stack";
 
 // Helper imports
 import { CharIDContext, useUmaContext } from "@/context";
+import { useStore, useServerStore } from "@/stores";
 import {
     eventMisc,
     eventsCommon,
     eventSlowMetabolism,
     eventsRace,
 } from "@/data/uma/events";
+import { didNotExist } from "@/data/uma/history";
 
 // Type imports
 import { UmaCharacter } from "@/types/uma";
@@ -28,6 +30,8 @@ export default function EventCharacter({
     expand?: boolean;
 }) {
     const { events } = useUmaContext();
+
+    const server = useStore(useServerStore, (state) => state.uma) || "NA";
 
     let characterEvents: CharacterEvents | undefined;
     let outfitEvents: Event[] | undefined = [];
@@ -57,7 +61,9 @@ export default function EventCharacter({
         eventSlowMetabolism({ props: characterEvents.props }),
     );
     recEvents = characterEvents.events.recreation;
-    secretEvents = characterEvents.events.secret;
+    secretEvents = characterEvents.events.secret?.filter((event) =>
+        didNotExist(server, event.didNotExist),
+    );
     eventMisc({ props: characterEvents.props }).forEach((event) =>
         otherEvents.push(event),
     );
