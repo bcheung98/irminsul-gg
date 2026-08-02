@@ -66,7 +66,8 @@ export default function SkillListRow({
                 header="Skill Details"
                 sx={{
                     ".MuiDialog-paper": {
-                        maxWidth: "600px",
+                        maxWidth: "900px",
+                        maxHeight: { md: "600px" },
                     },
                 }}
             >

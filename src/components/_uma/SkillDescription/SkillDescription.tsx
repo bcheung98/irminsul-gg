@@ -15,21 +15,6 @@ export default function UmaSkillDescription({
     color?: string;
     weight?: TextWeight;
 }) {
-    function convert(desc: string) {
-        return desc
-            .replace("Opening Leg", "early-race")
-            .replace("Middle Leg", "mid-race")
-            .replace("Final Leg", "late-race")
-            .replace("Last Spurt", "last spurt")
-            .replace("Final Corner", "final corner")
-            .replace("Final Straight", "final straight")
-            .replace("Straight", "straight")
-            .replace("Speed", "velocity")
-            .replace("speed", "velocity")
-            .replace("Stamina", "endurance")
-            .replace("stamina", "endurance");
-    }
-
     function parseSkillDescription(desc: string) {
         const str = desc.split("・");
         const tags = str
@@ -38,11 +23,11 @@ export default function UmaSkillDescription({
                 s
                     .split("/")
                     .map((i) => formatAptitude(i))
-                    .join(", ")
+                    .join(", "),
             )
             .join(", ");
         const text = str.splice(-1)[0];
-        return parse(`${convert(text)} ${tags.length > 0 ? `(${tags})` : ""}`);
+        return parse(`${text} ${tags.length > 0 ? `(${tags})` : ""}`);
     }
 
     return (

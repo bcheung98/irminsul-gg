@@ -8,6 +8,7 @@ import InfoGallery from "@/components/InfoGallery";
 import SkillList from "@/components/_uma/SkillList";
 
 // Helper imports
+import { UmaContext } from "@/context";
 import { useView } from "@/hooks";
 import {
     useStore,
@@ -32,7 +33,7 @@ export default function SkillsGallery(props: { skills: UmaSkill[] }) {
 
     let skills = props.skills;
     if (hideUnreleasedContent) {
-        skills = skills.filter((skill) => skill.name.global !== undefined);
+        skills = skills.filter((skill) => skill.global);
     }
 
     const [loading, startTransition] = useTransition();
@@ -42,7 +43,7 @@ export default function SkillsGallery(props: { skills: UmaSkill[] }) {
     useEffect(() => {
         startTransition(() => {
             setCurrentSkills(
-                filterItems(game, skills, filters, searchValue, sortParams)
+                filterItems(game, skills, filters, searchValue, sortParams),
             );
         });
     }, [filters, searchValue, hideUnreleasedContent, sortParams]);
@@ -57,8 +58,10 @@ export default function SkillsGallery(props: { skills: UmaSkill[] }) {
     };
 
     return (
-        <InfoGallery title="Skills" buttonKeys={[]} {...params}>
-            <SkillList skills={currentSkills} loading={loading} />
-        </InfoGallery>
+        <UmaContext value={{ skills, events: {}, profiles: [] }}>
+            <InfoGallery title="Skills" buttonKeys={[]} {...params}>
+                <SkillList skills={currentSkills} loading={loading} />
+            </InfoGallery>
+        </UmaContext>
     );
 }
