@@ -30,12 +30,16 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const dataContext = useDataContext();
 
     function getCurrentData(item: string) {
-        const data = dataContext.find((d) => formatHref(d.url) === item);
+        const data = dataContext.find(
+            (d) => formatHref(d.url || `${d.id}`) === item,
+        );
         if (data) {
             let res = data.displayName || data.name;
             if (game === "uma") {
                 if ("specialty" in data) {
                     res += ` (${rarityMap[data.rarity]} ${data.specialty})`;
+                } else if ("conditions" in data) {
+                    res = data.name.global || data.name.jp;
                 } else {
                     res += ` (${data.outfit || "Original"})`;
                 }

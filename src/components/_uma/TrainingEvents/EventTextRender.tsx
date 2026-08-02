@@ -1,9 +1,10 @@
 import { useState } from "react";
+import parse from "html-react-parser";
 
 // Component imports
 import ContentDialog from "@/components/ContentDialog";
 import Tooltip from "@/components/Tooltip";
-import SkillPopup from "../SkillPopup";
+import SkillPopup from "@/components/_uma/SkillPopup";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -20,7 +21,8 @@ import { EventRewards, EventSubHint } from "@/types/uma/event";
 
 const dialogStyle = {
     ".MuiDialog-paper": {
-        maxWidth: "600px",
+        maxWidth: "900px",
+        maxHeight: { md: "600px" },
     },
 };
 
@@ -197,7 +199,7 @@ export function StatusEffect({
     return (
         <>
             {s1 && `${s1} `}
-            <Tooltip title={description} placement="top">
+            <Tooltip title={parse(description)} placement="top" width="300px">
                 <span
                     style={{
                         color: theme.text.uma.value,

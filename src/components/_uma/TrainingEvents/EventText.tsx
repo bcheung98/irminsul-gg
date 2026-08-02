@@ -221,8 +221,8 @@ export default function EventText({
             case "skill_random":
                 return SkillTextRandom({ eventHints: props?.eventHints });
             case "conditions":
-                return props?.conditions?.map((con) => (
-                    <EventText outcome={con} prefix="※" />
+                return props?.conditions?.map((con, i) => (
+                    <EventText key={i} outcome={con} prefix="※" />
                 ));
             default:
                 return (
@@ -239,7 +239,7 @@ export default function EventText({
     }
 
     return (
-        <Text variant="body2">
+        <Text variant="body2" component="span">
             {`${prefix} `}
             {renderEventText(tag)}
         </Text>

@@ -362,7 +362,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                         },
                         {
                             tag: "obtain_status",
-                            data: 1,
+                            data: 6,
                             random: true,
                         },
                     ],
