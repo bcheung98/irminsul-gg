@@ -11,6 +11,7 @@ import LockIcon from "@mui/icons-material/Lock";
 
 // Helper imports
 import { supportEffects } from "@/data/uma/supportEffects";
+import { formatSupportEffectValue } from "./SupportEffects.utils";
 
 // Type imports
 import { SupportEffect } from "@/types/uma/support";
@@ -27,32 +28,12 @@ export default function SupportEffectRow(props: {
 
     const getEffect = (tag: string | number) =>
         supportEffects.find(
-            (effect) => effect.id === tag || effect.name === tag
+            (effect) => effect.id === tag || effect.name === tag,
         );
 
     const getEffectValue = (effect: SupportEffect) => {
         const value = effect.values[sliderValue];
-        let valueText = value.toString();
-        if (
-            [
-                "Friendship Bonus",
-                "Mood Effect",
-                "Training Effectiveness",
-                "Race Bonus",
-                "Fan Bonus",
-                "Hint Frequency",
-                "Event Recovery",
-                "Event Effectiveness",
-                "Failure Protection",
-                "Energy Cost Reduction",
-                "All Stats Bonus",
-            ].includes(effect.effect)
-        ) {
-            valueText += "%";
-        }
-        if (effect.effect === "Hint Levels") {
-            valueText = `Lvl ${value}`;
-        }
+        let valueText = formatSupportEffectValue(effect.effect, value);
         return value === -1 ? (
             <FlexBox spacing={1}>
                 <LockIcon
