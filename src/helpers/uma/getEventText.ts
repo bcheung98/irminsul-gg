@@ -232,6 +232,8 @@ export function getEventText({
                         : `※ ${getOrdinal(Number(value[0]))}-${getOrdinal(Number(value[1]))}`
                     : `※ ${getOrdinal(Number(value[0]))}`
                 : "",
+        scen_gl_hype: `Hype Level ${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value}`,
+        scen_gl_songs: `${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value} songs learned (excluding GIRLS' LEGEND U)`,
 
         // Secret conditions
         nc: "※ These conditions are unconfirmed, and require additional testing",
