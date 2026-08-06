@@ -118,6 +118,8 @@ export default function EventText({
                 return Race({ race: props?.raceName });
             case "lose":
                 return Race({ race: props?.raceName, text: "Lose the" });
+            case "do_not_win":
+                return Race({ race: props?.raceName, text: "Do not win the " });
             case "win_all":
                 return RaceMulti({ races: props?.raceList });
             case "win_any":
