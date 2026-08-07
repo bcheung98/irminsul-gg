@@ -65,7 +65,7 @@ export default function getTheme(id: number) {
                                 },
                                 color: getContrastText(
                                     theme.text.primary,
-                                    theme.palette.info.main
+                                    theme.palette.info.main,
                                 ),
                                 "& .MuiChip-deleteIcon": {
                                     fontSize: {
@@ -74,12 +74,12 @@ export default function getTheme(id: number) {
                                     },
                                     color: getContrastText(
                                         theme.text.primary,
-                                        theme.palette.info.main
+                                        theme.palette.info.main,
                                     ),
                                     "&:hover": {
                                         color: getContrastText(
                                             theme.text.description,
-                                            theme.palette.info.main
+                                            theme.palette.info.main,
                                         ),
                                     },
                                 },
@@ -181,6 +181,30 @@ export default function getTheme(id: number) {
                 fontWeight: "400 !important",
                 color: "rgb(255, 255, 255) !important",
             },
+            h1: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h1.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h1.sm),
+                },
+            },
+            h2: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h2.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h2.sm),
+                },
+            },
+            h3: {
+                [theme.breakpoints.up("xs")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h3.xs),
+                },
+                [theme.breakpoints.up("sm")]: {
+                    fontSize: theme.typography.pxToRem(theme.font.sizes.h3.sm),
+                },
+            },
             h4: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(theme.font.sizes.h4.xs),
@@ -208,12 +232,12 @@ export default function getTheme(id: number) {
             body1: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body1.xs
+                        theme.font.sizes.body1.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body1.sm
+                        theme.font.sizes.body1.sm,
                     ),
                 },
             },
@@ -221,24 +245,24 @@ export default function getTheme(id: number) {
                 lineHeight: theme.font.lineHeight.subtitle1,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle1.xs
+                        theme.font.sizes.subtitle1.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle1.sm
+                        theme.font.sizes.subtitle1.sm,
                     ),
                 },
             },
             body2: {
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body2.xs
+                        theme.font.sizes.body2.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body2.sm
+                        theme.font.sizes.body2.sm,
                     ),
                 },
             },
@@ -246,12 +270,12 @@ export default function getTheme(id: number) {
                 lineHeight: theme.font.lineHeight.subtitle2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle2.xs
+                        theme.font.sizes.subtitle2.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle2.sm
+                        theme.font.sizes.subtitle2.sm,
                     ),
                 },
             },
@@ -259,12 +283,12 @@ export default function getTheme(id: number) {
                 ...theme.typography.body2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body3.xs
+                        theme.font.sizes.body3.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.body3.sm
+                        theme.font.sizes.body3.sm,
                     ),
                 },
             },
@@ -272,12 +296,12 @@ export default function getTheme(id: number) {
                 ...theme.typography.subtitle2,
                 [theme.breakpoints.up("xs")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle3.xs
+                        theme.font.sizes.subtitle3.xs,
                     ),
                 },
                 [theme.breakpoints.up("sm")]: {
                     fontSize: theme.typography.pxToRem(
-                        theme.font.sizes.subtitle3.sm
+                        theme.font.sizes.subtitle3.sm,
                     ),
                 },
             },

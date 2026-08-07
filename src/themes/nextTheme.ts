@@ -96,6 +96,14 @@ export const nextThemeData = {
             home: 800,
         },
         sizes: {
+            h1: {
+                xs: 40,
+                sm: 48,
+            },
+            h2: {
+                xs: 32,
+                sm: 36,
+            },
             h3: {
                 xs: 26,
                 sm: 28,
