@@ -1,6 +1,7 @@
 import { rarityMap } from "@/data/uma/common";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { UmaScenario } from "@/types/uma/scenario";
+import { toTitleCase } from "@/utils";
 
 export function formatTitle(item?: UmaCharacter | UmaSupport | UmaScenario) {
     if (!item) return "";
@@ -21,4 +22,19 @@ export function formatCharacterTitle(item?: UmaCharacter) {
 export function formatSupportTitle(item?: UmaSupport) {
     if (!item) return "";
     return `${item.name} (${rarityMap[item.rarity]} ${item.specialty})`;
+}
+
+export function formatAptitude(apt: string) {
+    switch (apt) {
+        case "short":
+            return "Sprint";
+        case "surface":
+            return "Track";
+        case "distance":
+            return "Distance";
+        case "strategy":
+            return "Style";
+        default:
+            return toTitleCase(apt);
+    }
 }

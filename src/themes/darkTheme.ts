@@ -95,6 +95,14 @@ export const darkThemeData = {
             home: 400,
         },
         sizes: {
+            h1: {
+                xs: 42,
+                sm: 50,
+            },
+            h2: {
+                xs: 34,
+                sm: 38,
+            },
             h3: {
                 xs: 28,
                 sm: 30,

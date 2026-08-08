@@ -30,17 +30,17 @@ export interface UmaCharacterAptitude {
     strategy: UmaCharacterAptitudeStrategy;
 }
 
-export interface UmaCharacterAptitudeSurface {
+export interface UmaCharacterAptitudeSurface extends Record<string, string> {
     turf: UmaRank;
     dirt: UmaRank;
 }
-export interface UmaCharacterAptitudeDistance {
+export interface UmaCharacterAptitudeDistance extends Record<string, string> {
     sprint: UmaRank;
     mile: UmaRank;
     medium: UmaRank;
     long: UmaRank;
 }
-export interface UmaCharacterAptitudeStrategy {
+export interface UmaCharacterAptitudeStrategy extends Record<string, string> {
     front: UmaRank;
     pace: UmaRank;
     late: UmaRank;

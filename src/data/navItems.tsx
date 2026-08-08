@@ -1,6 +1,6 @@
 import { GameData } from "@/types";
 import HomeIcon from "@mui/icons-material/Home";
-// import CasinoIcon from "@mui/icons-material/Casino";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
 export interface NavItem {
     icon: string | React.ReactNode;
@@ -30,11 +30,6 @@ export const navItems: GameData<NavItem[]> = {
             title: "Artifacts",
             href: "artifacts",
         },
-        // {
-        //     icon: "icons/TCG",
-        //     title: "TCG",
-        //     href: "tcg",
-        // },
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
@@ -167,6 +162,19 @@ export const navItems: GameData<NavItem[]> = {
             icon: "icons/Skill",
             title: "Skills",
             href: "skills",
+        },
+        {
+            icon: (
+                <WorkspacePremiumIcon
+                    sx={(theme) => ({
+                        color: theme.drawer.color.primary,
+                        width: "28px",
+                        height: "28px",
+                    })}
+                />
+            ),
+            title: "Rating Calculator",
+            href: "rating-calculator",
         },
         {
             icon: "icons/Training",
