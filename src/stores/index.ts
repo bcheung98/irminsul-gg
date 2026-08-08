@@ -9,6 +9,7 @@ import { useServerStore } from "./useServerStore";
 import { useSettingsStore } from "./useSettingsStore";
 import { useSiteSearchStore } from "./useSiteSearchStore";
 import { useTEHelperStore } from "./useTEHelperStore";
+import { useRatingCalculatorStore } from "./useRatingCalculatorStore";
 
 export {
     useStore,
@@ -22,5 +23,6 @@ export {
     useSettingsStore,
     useSiteSearchStore,
     useTEHelperStore,
+    useRatingCalculatorStore,
 };
 export default useStore;

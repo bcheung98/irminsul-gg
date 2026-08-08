@@ -1,12 +1,12 @@
 import { skillEffects, skillTargets } from "@/data/uma/skills";
-import { UmaRarity, UmaSkillRarity } from ".";
+import { UmaNames, UmaRarity, UmaSkillRarity } from ".";
 import { UmaVersion } from "../version";
 import { EventRewards } from "./event";
 
 export interface UmaSkill {
     id: number;
     icon: number;
-    name: UmaVersion;
+    name: UmaNames;
     description: UmaVersion;
     rarity: UmaSkillRarity;
     unlock?: UmaRarity;
@@ -20,6 +20,7 @@ export interface UmaSkill {
     versions?: number[];
     geneVersion: UmaSkillInherited;
     global: boolean;
+    values?: string[];
 }
 
 export interface UmaSkillInherited extends Omit<

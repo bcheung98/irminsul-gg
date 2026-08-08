@@ -8,6 +8,11 @@ import {
 } from "@/data/uma/common";
 import { UmaCharacter } from "./character";
 import { UmaSupport } from "./support";
+import { UmaVersion } from "../version";
+
+export interface UmaNames extends UmaVersion {
+    jpNative: string;
+}
 
 export type UmaRarity = (typeof rarities)[number];
 export type UmaSkillRarity = (typeof skillRarities)[number];

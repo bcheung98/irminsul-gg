@@ -7,7 +7,7 @@ export const rarityMap: Record<number, string> = {
     3: "R",
 };
 
-export const ranks = ["A", "B", "C", "D", "E", "F", "G"] as const;
+export const ranks = ["S", "A", "B", "C", "D", "E", "F", "G"] as const;
 export const stats = ["Speed", "Stamina", "Power", "Guts", "Wit"] as const;
 export const specialties = [
     "Speed",
