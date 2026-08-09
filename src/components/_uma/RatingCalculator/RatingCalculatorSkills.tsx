@@ -17,17 +17,7 @@ import { useStore, useServerStore, useRatingCalculatorStore } from "@/stores";
 
 // Type imports
 import { UmaSkill } from "@/types/uma/skill";
-import { UmaSkillRarity } from "@/types/uma";
-
-export interface UmaSkillOption {
-    id: number;
-    name: string;
-    nameJP: string;
-    nameJPNative: string;
-    icon: number;
-    rarity: UmaSkillRarity;
-    values: string[];
-}
+import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkills() {
     const { skills } = useUmaContext();

@@ -234,6 +234,7 @@ export function getEventText({
                 : "",
         scen_gl_hype: `Hype Level ${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value}`,
         scen_gl_songs: `${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value} songs learned (excluding GIRLS' LEGEND U)`,
+        season: `${value}`,
 
         // Secret conditions
         nc: "※ These conditions are unconfirmed, and require additional testing",

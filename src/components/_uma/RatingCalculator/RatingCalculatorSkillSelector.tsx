@@ -24,7 +24,7 @@ import { sortBy } from "@/utils";
 import { matchSorter } from "match-sorter";
 
 // Type imports
-import { UmaSkillOption } from "./RatingCalculatorSkills";
+import { UmaSkillOption } from "@/types/uma/calculator";
 
 const LISTBOX_PADDING = 8; // px
 
