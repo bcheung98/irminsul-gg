@@ -76,7 +76,7 @@ export default function RatingCalculatorScoreBreakdown({
                 <Stack spacing={0.5} divider={<Divider />}>
                     <FlexBox sx={{ justifyContent: "space-between" }}>
                         <Text variant="subtitle1" weight="highlight">
-                            {`Stats: (${stats
+                            {`Stats (${stats
                                 .slice(0, 5)
                                 .reduce(sum)
                                 .toLocaleString("en-US")})`}
@@ -91,7 +91,7 @@ export default function RatingCalculatorScoreBreakdown({
                             sx={{ justifyContent: "space-between", pl: 2 }}
                         >
                             <TextLabel
-                                title={`${stat} (${stats[index].toLocaleString("en-US")}):`}
+                                title={`${stat} (${stats[index].toLocaleString("en-US")})`}
                                 titleProps={{ variant: "subtitle1" }}
                                 icon={`uma/icons/specialties/${stat}`}
                                 iconProps={{ size: 20 }}
@@ -103,7 +103,7 @@ export default function RatingCalculatorScoreBreakdown({
                     ))}
                     <FlexBox sx={{ justifyContent: "space-between" }}>
                         <Text variant="subtitle1" weight="highlight">
-                            {`Lv ${stats[6]} Unique Skill (${stats[5]}★):`}
+                            {`Lv ${stats[6]} Unique Skill (${stats[5]}★)`}
                         </Text>
                         <Text variant="subtitle1" weight="highlight">
                             {`${uniqueScore.toLocaleString("en-US")}`}
@@ -111,7 +111,7 @@ export default function RatingCalculatorScoreBreakdown({
                     </FlexBox>
                     <FlexBox sx={{ justifyContent: "space-between" }}>
                         <Text variant="subtitle1" weight="highlight">
-                            {`Skills (${skills.length - hiddenSkills.length}):`}
+                            {`Skills (${skills.length - hiddenSkills.length})`}
                         </Text>
                         <Text variant="subtitle1" weight="highlight">
                             {`${skillsScore.toLocaleString("en-US")}`}

@@ -1,12 +1,12 @@
-import { UmaSkillOption } from "@/components/_uma/RatingCalculator/RatingCalculatorSkills";
 import { UmaRank } from "@/types/uma";
 import { UmaCharacterAptitude } from "@/types/uma/character";
+import { DataArray, UmaSkillOption } from "@/types/uma/calculator";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export interface RatingCalculatorState {
     character: number | null;
-    stats: [number, number, number, number, number, number, number];
+    stats: DataArray;
     aptitude: UmaCharacterAptitude;
     skills: UmaSkillOption[];
     hiddenSkills: number[];

@@ -25,7 +25,7 @@ import { calculateSkillScore } from "@/helpers/uma/calculator";
 import { getUmaSkillRarityColor } from "@/helpers/uma/rarityColors";
 
 // Type imports
-import { UmaSkillOption } from "./RatingCalculatorSkills";
+import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkill({
     skill,
@@ -80,7 +80,10 @@ export default function RatingCalculatorSkill({
         },
     };
 
+    const opacity = hidden ? 0.35 : 1;
+
     const skillName = skill.name || skill.nameJP || skill.nameJPNative;
+    const score = calculateSkillScore(aptitude, skill);
 
     return (
         <>
@@ -100,12 +103,7 @@ export default function RatingCalculatorSkill({
                     spacing={1.5}
                     direction="row"
                     alignItems="center"
-                    sx={{
-                        opacity: hidden ? 0.35 : 1,
-                        cursor: "pointer",
-                        width: "100%",
-                    }}
-                    onClick={handleClickOpen}
+                    sx={{ opacity }}
                 >
                     <Image
                         src={`uma/skills/${skill?.icon}`}
@@ -120,7 +118,12 @@ export default function RatingCalculatorSkill({
                                 !hidden && skill.rarity >= 2
                                     ? "rgb(121, 64, 22)"
                                     : theme.text.primary,
+                            cursor: "pointer",
+                            "&:hover": {
+                                textDecoration: "dotted underline",
+                            },
                         }}
+                        onClick={handleClickOpen}
                     >
                         {skillName}
                     </Text>
@@ -140,11 +143,12 @@ export default function RatingCalculatorSkill({
                         <Text
                             variant="subtitle2"
                             weight="highlight"
-                            sx={{ textAlign: "center" }}
+                            sx={{
+                                textAlign: "center",
+                                opacity,
+                            }}
                         >
-                            {hidden
-                                ? `+0`
-                                : `+${calculateSkillScore(aptitude, skill)}`}
+                            {`${score >= 0 ? "+" : ""}${score}`}
                         </Text>
                     </Box>
                     <Tooltip title="Toggle" placement="top">
