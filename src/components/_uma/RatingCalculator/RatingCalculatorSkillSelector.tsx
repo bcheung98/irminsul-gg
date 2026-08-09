@@ -1,15 +1,15 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef } from "react";
+
+// Component imports
+import TextLabel from "@/components/TextLabel";
+import SearchBar from "@/components/SearchBar";
+import MenuItem from "@/components/MenuItem";
 import {
     List,
     RowComponentProps,
     useListRef,
     ListImperativeAPI,
 } from "react-window";
-
-// Component imports
-import TextLabel from "@/components/TextLabel";
-import SearchBar from "@/components/SearchBar";
-import MenuItem from "@/components/MenuItem";
 
 // MUI imports
 import { useTheme, styled } from "@mui/material/styles";
@@ -21,6 +21,7 @@ import Popper from "@mui/material/Popper";
 
 // Helper imports
 import { sortBy } from "@/utils";
+import { useUmaContext } from "@/context";
 import { matchSorter } from "match-sorter";
 
 // Type imports
@@ -114,11 +115,11 @@ const ListboxComponent = forwardRef<
     }, [onItemsBuilt, optionIndexMap]);
 
     const theme = useTheme();
-    const smUp = useMediaQuery(theme.breakpoints.up("sm"), {
+    const matches = useMediaQuery(theme.breakpoints.up("sm"), {
         noSsr: true,
     });
     const itemCount = itemData.length;
-    const itemSize = smUp ? 36 : 48;
+    const itemSize = matches ? 36 : 48;
 
     const getChildSize = (child: ItemData[number]) => {
         if (child.hasOwnProperty("group")) {
@@ -151,7 +152,7 @@ const ListboxComponent = forwardRef<
                     height: getHeight() + 2 * LISTBOX_PADDING,
                     width: "100%",
                 }}
-                overscanCount={5}
+                overscanCount={15}
                 tagName="ul"
             />
         </div>
@@ -169,15 +170,21 @@ const StyledPopper = styled(Popper)({
 });
 
 export default function RatingCalculatorSkillSelector({
+    character,
     options,
     values,
     handleChange,
+    placeholder = "Add Skill",
 }: {
+    character: number | null;
     options: UmaSkillOption[];
     values: UmaSkillOption[];
+    placeholder?: string;
     handleChange: (newValue: UmaSkillOption[] | null) => void;
 }) {
     const theme = useTheme();
+
+    const { skills } = useUmaContext();
 
     // Use react-window v2's useListRef hook for imperative API access
     const internalListRef = useListRef(null);
@@ -215,10 +222,16 @@ export default function RatingCalculatorSkillSelector({
             sx={styles}
             multiple
             autoComplete
-            filterSelectedOptions
             disableListWrap
             disableClearable
-            options={options}
+            filterSelectedOptions
+            options={[
+                // Show selected items first (if selected options are not hidden)
+                ...values,
+                ...options.sort(
+                    (a, b) => sortBy(b.icon, a.icon) || sortBy(b.id, a.id),
+                ),
+            ]}
             getOptionLabel={(option) =>
                 option.name || option.nameJP || option.nameJPNative
             }
@@ -232,7 +245,7 @@ export default function RatingCalculatorSkillSelector({
                 <SearchBar
                     params={params}
                     inputIcon={<></>}
-                    placeholder="Add Skill"
+                    placeholder={placeholder}
                     backgroundColor={theme.background(0)}
                 />
             )}
@@ -246,6 +259,7 @@ export default function RatingCalculatorSkillSelector({
             }
             onHighlightChange={handleHighlightChange}
             onChange={(event, newValue, reason) => {
+                // Prevent clearing input when pressing Backspace/Delete
                 if (
                     event.type === "keydown" &&
                     ((event as React.KeyboardEvent).key === "Backspace" ||
@@ -253,6 +267,19 @@ export default function RatingCalculatorSkillSelector({
                     reason === "removeOption"
                 ) {
                     return;
+                }
+                // If another version of an already added skill is selected,
+                // replace that skill with the newer version
+                const option = newValue.slice(-1)[0];
+                const skill = skills.find((skill) => skill.id === option.id);
+                if (skill && skill.versions) {
+                    skill.versions.forEach((id) => {
+                        let index = values.findIndex((item) => item.id === id);
+                        if (index !== -1) {
+                            newValue.splice(index, 1, option);
+                            newValue.splice(-1, 1);
+                        }
+                    });
                 }
                 handleChange(newValue);
             }}
@@ -266,18 +293,15 @@ export default function RatingCalculatorSkillSelector({
                     onItemsBuilt: handleItemsBuilt,
                 } as any,
             }}
-            renderValue={() => <></>}
+            renderValue={() => null}
         />
     );
 }
 
 function filterOptions(options: UmaSkillOption[], searchValue: string) {
-    options = options.sort(
-        (a, b) => sortBy(b.icon, a.icon) || sortBy(b.id, a.id),
-    );
     if (searchValue === "") return options;
     return matchSorter(options, searchValue, {
         keys: ["name", "nameJP", "nameJPNative"],
         threshold: matchSorter.rankings.WORD_STARTS_WITH,
-    });
+    }).sort((a, b) => sortBy(b.icon, a.icon) || sortBy(b.id, a.id));
 }

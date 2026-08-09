@@ -37,6 +37,18 @@ export default function RatingCalculator() {
                 <Card
                     sx={{
                         p: 2,
+                        backgroundColor: theme.palette.error.dark,
+                    }}
+                >
+                    <Text weight="highlight">
+                        This feature is currently in beta, so there might be
+                        things that are broken. Please let me know in the
+                        Discord if there's anything wrong!
+                    </Text>
+                </Card>
+                <Card
+                    sx={{
+                        p: 2,
                         borderRadius: theme.contentBox.border.radius,
                         overflow: "unset", // Required for sticky element
                     }}

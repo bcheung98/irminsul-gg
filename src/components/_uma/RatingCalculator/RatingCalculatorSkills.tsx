@@ -29,7 +29,7 @@ export default function RatingCalculatorSkills() {
         useRatingCalculatorStore,
         (state) => state.skills,
     );
-    const { hiddenSkills, setSkills, setHiddenSkills } =
+    const { character, hiddenSkills, setSkills, setHiddenSkills } =
         useRatingCalculatorStore();
 
     const [skillData, setSkillData] = useState<UmaSkill[]>([]);
@@ -47,6 +47,10 @@ export default function RatingCalculatorSkills() {
         if (newValue) {
             setValues(() => newValue as UmaSkillOption[]);
             setSkills(newValue);
+            const newHidden = hiddenSkills.filter(
+                (skill) => !newValue.map((item) => item.id).includes(skill),
+            );
+            newHidden.forEach((skill) => setHiddenSkills(skill));
         }
     };
     const clearInput = () => {
@@ -98,6 +102,7 @@ export default function RatingCalculatorSkills() {
                 </Grid>
             )}
             <RatingCalculatorSkillSelector
+                character={character}
                 options={options}
                 values={values}
                 handleChange={handleChange}
