@@ -20,6 +20,7 @@ export default function RatingCalculatorStatInput({
     const [currentValue, setCurrentValue] = useState<number>(value);
     const handleInputChange = (newValue: number | null) => {
         if (newValue === null) return;
+        newValue = Math.round(newValue);
         if (newValue < MIN_STAT_VALUE) {
             newValue = MIN_STAT_VALUE;
         }
@@ -32,7 +33,7 @@ export default function RatingCalculatorStatInput({
 
     useEffect(() => {
         if (stats) {
-            const newValue = stats[index];
+            const newValue = Math.round(stats[index]);
             setCurrentValue(newValue);
             setStat(index, newValue);
         }
@@ -43,6 +44,8 @@ export default function RatingCalculatorStatInput({
             min={MIN_STAT_VALUE}
             max={MAX_STAT_VALUE}
             value={currentValue}
+            smallStep={10}
+            largeStep={50}
             size="small"
             onValueChange={handleInputChange}
         />
