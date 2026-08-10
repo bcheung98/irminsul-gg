@@ -247,7 +247,6 @@ export default function RatingCalculatorSkillSelector({
             autoComplete
             disableListWrap
             disableClearable
-            disableCloseOnSelect={searchValue !== ""}
             filterSelectedOptions
             onClose={() => setSearchValue("")}
             options={[...options.sort((a, b) => sortBy(b.id, a.id))]}
