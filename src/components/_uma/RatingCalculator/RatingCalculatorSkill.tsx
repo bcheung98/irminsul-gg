@@ -130,15 +130,15 @@ export default function RatingCalculatorSkill({
                     backgroundImage: hidden
                         ? "transparent"
                         : getUmaSkillRarityColor(skill.rarity),
+                    height: "40px",
                 }}
-                spacing={[1, 0]}
-                wrap
+                spacing={[1, 0.75]}
             >
                 <Stack
                     spacing={1.5}
                     direction="row"
                     alignItems="center"
-                    sx={{ opacity }}
+                    sx={{ opacity, textWrap: "pretty" }}
                 >
                     <Image
                         src={`uma/skills/${skill?.icon}`}
@@ -148,7 +148,7 @@ export default function RatingCalculatorSkill({
                         onClick={handleSkillPopupClickOpen}
                     />
                     <Text
-                        variant={skillName.length > 25 ? "body3" : "body2"}
+                        variant="body2"
                         weight="highlight"
                         sx={{
                             color:
@@ -241,7 +241,9 @@ export default function RatingCalculatorSkill({
                     },
                 }}
             >
-                {currentSkillData && <SkillPopup skill={currentSkillData} />}
+                {currentSkillData && (
+                    <SkillPopup skill={currentSkillData} showSources />
+                )}
             </ContentDialog>
             {/* <Popover
                 open={open}

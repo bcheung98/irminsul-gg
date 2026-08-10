@@ -33,7 +33,7 @@ export default function RatingCalculatorSkills() {
         (state) => state.skills,
     );
     const {
-        character: charID,
+        character,
         stats,
         skills,
         hiddenSkills,
@@ -78,7 +78,9 @@ export default function RatingCalculatorSkills() {
 
     // When the selected character is changed, remove their Unique Skill from the list of selected skills
     useEffect(() => {
-        const uniqueSkills = skillList.filter((item) => item.unique === charID);
+        const uniqueSkills = skillList.filter(
+            (item) => item.unique === character,
+        );
         uniqueSkills.forEach((skill) => {
             if (skill) {
                 const index = skills.findIndex((item) => item.id === skill.id);
@@ -92,27 +94,17 @@ export default function RatingCalculatorSkills() {
                 }
             }
         });
-    }, [charID]);
-
-    const options = useMemo(() => {
-        return createSkillOptions(skillData, true);
-    }, [skillData]);
+    }, [character]);
 
     function getUniqueSkill() {
-        const character = characters.find((char) => char.id === charID);
-        if (character) {
-            let skill: UmaSkill[] | undefined;
-            skill = skillList.filter((skill) => skill.unique === charID);
-            if (character.rarity < 3 && stats[5] < 3) {
-                skill = skill.filter((skill) => skill.rarity === 3);
-            } else if (character.rarity < 3 && stats[5] > 3) {
-                skill = skill.filter((skill) => skill.rarity === 4);
-            }
-            if (skill) {
-                return createSkillOptions(skill)[0];
-            }
+        let skill = skillList.filter((skill) => skill.unique === character);
+        const char = characters.find((char) => char.id === character);
+        if ((char?.rarity || 3) < 3) {
+            skill = skill.filter(
+                (skill) => skill.rarity === (stats[5] < 3 ? 3 : 4),
+            );
         }
-        return null;
+        return createSkillOptions(skill)[0];
     }
 
     const [uniqueSkill, setUniqueSkill] = useState<UmaSkillOption | null>(null);
@@ -121,7 +113,11 @@ export default function RatingCalculatorSkills() {
         if (skill) {
             setUniqueSkill(() => skill);
         }
-    }, [charID, JSON.stringify(stats[5])]);
+    }, [character, stats[5]]);
+
+    const options = useMemo(() => {
+        return createSkillOptions(skillData, true);
+    }, [skillData]);
 
     return (
         <Stack spacing={2} sx={{ px: 1 }}>
@@ -167,7 +163,7 @@ export default function RatingCalculatorSkills() {
                         ))}
             </Grid>
             <RatingCalculatorSkillSelector
-                character={charID}
+                character={character}
                 options={options}
                 values={values}
                 handleChange={handleChange}
