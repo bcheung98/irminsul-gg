@@ -9,24 +9,18 @@ import { MIN_STAT_VALUE, MAX_STAT_VALUE } from "@/data/uma/ranks";
 
 export default function RatingCalculatorStatInput({
     index,
-    value,
 }: {
     index: number;
-    value: number;
 }) {
     const stats = useStore(useRatingCalculatorStore, (state) => state.stats);
     const { setStat } = useRatingCalculatorStore();
 
-    const [currentValue, setCurrentValue] = useState<number>(value);
+    const [currentValue, setCurrentValue] = useState<number>(0);
     const handleInputChange = (newValue: number | null) => {
         if (newValue === null) return;
         newValue = Math.round(newValue);
-        if (newValue < MIN_STAT_VALUE) {
-            newValue = MIN_STAT_VALUE;
-        }
-        if (newValue > MAX_STAT_VALUE) {
-            newValue = MAX_STAT_VALUE;
-        }
+        newValue = Math.min(newValue, MAX_STAT_VALUE);
+        newValue = Math.max(newValue, MIN_STAT_VALUE);
         setCurrentValue(() => newValue);
         setStat(index, newValue);
     };
@@ -37,7 +31,7 @@ export default function RatingCalculatorStatInput({
             setCurrentValue(newValue);
             setStat(index, newValue);
         }
-    }, [stats]);
+    }, [JSON.stringify(stats)]);
 
     return (
         <NumberField
