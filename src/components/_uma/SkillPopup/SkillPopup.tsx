@@ -24,9 +24,11 @@ import { UmaSkill } from "@/types/uma/skill";
 export default function SkillPopup({
     skill,
     showSources = false,
+    defaultInherited = false,
 }: {
     skill: UmaSkill;
     showSources?: boolean;
+    defaultInherited?: boolean;
 }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("md"));
@@ -36,9 +38,24 @@ export default function SkillPopup({
         setCurrentSkill(e);
     };
 
-    const { name, rarity, cost, icon } = currentSkill;
+    const [showInherited, setShowInherited] = useState(defaultInherited);
+    const handleSwitchChange = () => {
+        setShowInherited(!showInherited);
+    };
+
+    const { name, icon } = currentSkill;
 
     const skillName = name.global || name.jp;
+    let rarity = currentSkill.rarity;
+    let description =
+        currentSkill.description.global || currentSkill.description.jp;
+    let cost = skill.cost;
+
+    if (showInherited) {
+        rarity = 1;
+        description = currentSkill.geneVersion.description.global || "";
+        cost = currentSkill.geneVersion.cost;
+    }
 
     const textColor = rarity >= 2 ? "rgb(121, 64, 22)" : theme.text.primary;
     const textStyle = {
@@ -47,9 +64,7 @@ export default function SkillPopup({
 
     const skillDesc = (
         <SkillDescription
-            description={
-                currentSkill.description.global || currentSkill.description.jp
-            }
+            description={description}
             color={textColor}
             weight="highlight"
         />
@@ -119,7 +134,9 @@ export default function SkillPopup({
             <SkillAttributes
                 skill={currentSkill}
                 showSources={showSources}
+                inherited={showInherited}
                 handleClick={handleClick}
+                handleSwitchChange={handleSwitchChange}
             />
         </Stack>
     );

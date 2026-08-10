@@ -182,11 +182,7 @@ function createSkillOptions(
         nameJP: skill.name.jp,
         nameJPNative: skill.name.jpNative,
         icon: skill.icon,
-        rarity: downgrade
-            ? [3, 4, 5].includes(skill.rarity)
-                ? 1
-                : skill.rarity
-            : skill.rarity,
+        rarity: skill.rarity,
         values: skill.values || [],
     }));
 }
