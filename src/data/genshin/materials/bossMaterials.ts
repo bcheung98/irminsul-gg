@@ -404,4 +404,22 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "Luna VI" },
     },
+    {
+        id: 113090,
+        category: "boss",
+        tag: "Unscorched Blossom Branch",
+        name: "Unscorched Blossom Branch",
+        source: "Immortal Constructs",
+        rarity: 4,
+        release: { version: "7.0" },
+    },
+    {
+        id: 113091,
+        category: "boss",
+        tag: "Severed Tail of the Sky-Roamer",
+        name: "Severed Tail of the Sky-Roamer",
+        source: "Chimeric Winged Lions",
+        rarity: 4,
+        release: { version: "7.0" },
+    },
 ];

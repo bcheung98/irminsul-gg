@@ -952,4 +952,78 @@ export const eliteMaterials = [
         rarity: 4,
         release: { version: "Luna VIII" },
     },
+    {
+        id: 31,
+        category: "elite",
+        name: "Volkodlak Accretion",
+        tag: "Volkodlak",
+        release: { version: "7.0" },
+    },
+    {
+        id: 112152,
+        category: "elite",
+        name: "Accreted Fragment",
+        tag: "Volkodlak1",
+        rarity: 2,
+        release: {
+            version: "7.0",
+        },
+    },
+    {
+        id: 112153,
+        category: "elite",
+        name: "Accreted Mass",
+        tag: "Volkodlak2",
+        rarity: 3,
+        release: {
+            version: "7.0",
+        },
+    },
+    {
+        id: 112154,
+        category: "elite",
+        name: "Accreted Growth",
+        tag: "Volkodlak3",
+        rarity: 4,
+        release: {
+            version: "7.0",
+        },
+    },
+    {
+        id: 32,
+        category: "elite",
+        name: "Wildwood Branch",
+        tag: "Wildwood",
+        release: { version: "7.0" },
+    },
+    {
+        id: 112155,
+        category: "elite",
+        name: "Hollow Root of Life",
+        tag: "Wildwood1",
+        rarity: 2,
+        release: {
+            version: "7.0",
+        },
+    },
+    {
+        id: 112156,
+        category: "elite",
+        name: "Sprout Node of Life",
+        tag: "Wildwood2",
+        rarity: 3,
+        release: {
+            version: "7.0",
+        },
+    },
+    {
+        id: 112157,
+        category: "elite",
+        name: "Coiled Core of Life",
+        tag: "Wildwood3",
+        rarity: 4,
+        release: {
+            version: "7.0",
+        },
+    },
 ];
