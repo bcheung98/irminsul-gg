@@ -118,6 +118,12 @@ export default function RatingCalculatorSkill({
         ? calculateUniqueLevelScore(stats[5], stats[6])
         : calculateSkillScore(aptitude, skill);
 
+    let rarity = skill.rarity;
+    const isInheritedUnique = !unique && [3, 4, 5].includes(skill.rarity);
+    if (isInheritedUnique) {
+        rarity = 1;
+    }
+
     return (
         <>
             <FlexBox
@@ -129,7 +135,7 @@ export default function RatingCalculatorSkill({
                     backgroundColor: theme.background(0),
                     backgroundImage: hidden
                         ? "transparent"
-                        : getUmaSkillRarityColor(skill.rarity),
+                        : getUmaSkillRarityColor(rarity),
                     height: "40px",
                 }}
                 spacing={[1, 0.75]}
@@ -152,7 +158,7 @@ export default function RatingCalculatorSkill({
                         weight="highlight"
                         sx={{
                             color:
-                                !hidden && skill.rarity >= 2
+                                !hidden && rarity >= 2
                                     ? "rgb(121, 64, 22)"
                                     : theme.text.primary,
                             cursor: "pointer",
@@ -242,7 +248,11 @@ export default function RatingCalculatorSkill({
                 }}
             >
                 {currentSkillData && (
-                    <SkillPopup skill={currentSkillData} showSources />
+                    <SkillPopup
+                        skill={currentSkillData}
+                        showSources
+                        defaultInherited={isInheritedUnique}
+                    />
                 )}
             </ContentDialog>
             {/* <Popover

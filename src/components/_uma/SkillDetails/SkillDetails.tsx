@@ -19,6 +19,7 @@ import Popover from "@mui/material/Popover";
 // Helper imports
 import { urls } from "@/api";
 import { skillEffects, skillTargets } from "@/data/uma/skills";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { UmaCharacterProfile } from "@/types/uma/character";
@@ -30,8 +31,12 @@ import {
 
 export default function SkillDetails({
     skill,
+    inherited = false,
+    handleSwitchChange,
 }: {
     skill: UmaSkill | UmaSkillInherited;
+    inherited?: boolean;
+    handleSwitchChange: () => void;
 }) {
     const profiles: UmaCharacterProfile[] = useSWR(
         urls["uma/character-profiles"],
@@ -40,13 +45,10 @@ export default function SkillDetails({
 
     const theme = useTheme();
 
-    const [showInherited, setShowInherited] = useState(false);
-    const handleSwitchChange = () => {
-        setShowInherited(!showInherited);
-    };
+    const server = useStore(useServerStore, (state) => state.uma);
 
     const currentSkill =
-        "geneVersion" in skill && showInherited ? skill.geneVersion : skill;
+        "geneVersion" in skill && inherited ? skill.geneVersion : skill;
 
     const [effectIndex, setEffectIndex] = useState<number | null>(null);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -103,6 +105,10 @@ export default function SkillDetails({
         );
     }
 
+    let conditions = currentSkill.conditions;
+    if (server === "NA" && currentSkill.conditionsEN)
+        conditions = currentSkill.conditionsEN;
+
     return (
         <>
             <Card sx={{ backgroundColor: theme.background(0), p: 1 }}>
@@ -110,7 +116,7 @@ export default function SkillDetails({
                     {"geneVersion" in skill && (
                         <FlexBox spacing={2}>
                             <Switch
-                                checked={showInherited}
+                                checked={inherited}
                                 onChange={handleSwitchChange}
                                 size="small"
                             />
@@ -132,7 +138,7 @@ export default function SkillDetails({
                                 </Text>
                             </FlexBox>
                         </Stack>
-                        {currentSkill.conditions.map((condition, index) => (
+                        {conditions.map((condition, index) => (
                             <Stack key={index} spacing={2}>
                                 {condition.precondition && (
                                     <Stack>

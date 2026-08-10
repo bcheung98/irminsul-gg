@@ -14,6 +14,7 @@ export interface UmaSkill {
     activation: 0 | 1;
     cost: number;
     conditions: UmaSkillCondition[];
+    conditionsEN?: UmaSkillCondition[];
     evolutions?: UmaSkillEvolution[];
     evo?: UmaSkillEvo;
     tags: string[];

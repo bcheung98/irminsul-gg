@@ -19,11 +19,15 @@ import { UmaSkill } from "@/types/uma/skill";
 export default function SkillAttributes({
     skill,
     showSources = false,
+    inherited = false,
     handleClick,
+    handleSwitchChange,
 }: {
     skill: UmaSkill;
     showSources?: boolean;
+    inherited?: boolean;
     handleClick: (arg: any) => void;
+    handleSwitchChange: () => void;
 }) {
     const theme = useTheme();
 
@@ -43,7 +47,11 @@ export default function SkillAttributes({
             <Grid container rowSpacing={1} columnSpacing={2}>
                 <Grid size={{ xs: 12, lg: "grow" }}>
                     <Stack spacing={2}>
-                        <SkillDetails skill={skill} />
+                        <SkillDetails
+                            skill={skill}
+                            inherited={inherited}
+                            handleSwitchChange={handleSwitchChange}
+                        />
                         {showSources && (
                             <SkillSources
                                 skill={skill}
