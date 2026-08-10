@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 // Helper imports
+import { sortBy } from "@/utils";
 import { useUmaContext } from "@/context";
 import { useStore, useServerStore, useRatingCalculatorStore } from "@/stores";
 
@@ -20,7 +21,7 @@ import { UmaSkill } from "@/types/uma/skill";
 import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkills() {
-    const { skills } = useUmaContext();
+    const { skills: skillList } = useUmaContext();
 
     const server = useStore(useServerStore, (state) => state.uma);
     const hideUnreleasedContent = server === "NA";
@@ -29,18 +30,24 @@ export default function RatingCalculatorSkills() {
         useRatingCalculatorStore,
         (state) => state.skills,
     );
-    const { character, hiddenSkills, setSkills, setHiddenSkills } =
-        useRatingCalculatorStore();
+    const {
+        character: charID,
+        skills,
+        hiddenSkills,
+        setSkills,
+        setHiddenSkills,
+    } = useRatingCalculatorStore();
 
     const [skillData, setSkillData] = useState<UmaSkill[]>([]);
 
     useEffect(() => {
-        let items = [...skills];
+        let items = [...skillList];
+        items = items.filter((item) => item.rarity !== 3);
         if (hideUnreleasedContent) {
             items = items.filter((item) => item.global);
         }
         setSkillData(items);
-    }, [skills, server]);
+    }, [skillList, server]);
 
     const [values, setValues] = useState<UmaSkillOption[]>([]);
     const handleChange = (newValue: UmaSkillOption[] | null) => {
@@ -53,15 +60,12 @@ export default function RatingCalculatorSkills() {
             newHidden.forEach((skill) => setHiddenSkills(skill));
         }
     };
+
     const clearInput = () => {
         setValues(() => []);
         setSkills([]);
         hiddenSkills.forEach((skill) => setHiddenSkills(skill));
     };
-
-    const options = useMemo(() => {
-        return createSkillOptions(skillData);
-    }, [skillData]);
 
     useEffect(() => {
         if (selectedSkills) {
@@ -69,18 +73,27 @@ export default function RatingCalculatorSkills() {
         }
     }, [selectedSkills]);
 
-    function ResetSkills() {
-        return (
-            <Button
-                color="info"
-                variant="contained"
-                size="small"
-                onClick={clearInput}
-            >
-                Clear All Skills
-            </Button>
-        );
-    }
+    // When the selected character is changed, remove their Unique Skill from the list of selected skills
+    useEffect(() => {
+        const uniqueSkills = skillList.filter((item) => item.unique === charID);
+        uniqueSkills.forEach((skill) => {
+            if (skill) {
+                const index = skills.findIndex((item) => item.id === skill.id);
+                if (index !== -1) {
+                    const newValues = skills.toSpliced(index, 1);
+                    setValues(() => newValues);
+                    setSkills(newValues);
+                }
+                if (hiddenSkills.includes(skill.id)) {
+                    setHiddenSkills(skill.id);
+                }
+            }
+        });
+    }, [charID]);
+
+    const options = useMemo(() => {
+        return createSkillOptions(skillData);
+    }, [skillData]);
 
     return (
         <Stack spacing={2} sx={{ px: 1 }}>
@@ -89,20 +102,35 @@ export default function RatingCalculatorSkills() {
                     <Text variant="h6" weight="highlight">
                         Skills
                     </Text>
-                    <ResetSkills />
+                    <Button
+                        color="info"
+                        variant="contained"
+                        size="small"
+                        onClick={clearInput}
+                    >
+                        Clear All Skills
+                    </Button>
                 </FlexBox>
             </Stack>
             {values.length > 0 && (
                 <Grid container spacing={2}>
-                    {values.map((skill) => (
-                        <Grid key={skill.id} size={{ xs: 12, md: 6 }}>
-                            <RatingCalculatorSkill skill={skill} />
-                        </Grid>
-                    ))}
+                    {[...values]
+                        .sort((a, b) => sortBy(b.id, a.id))
+                        .map((skill) => (
+                            <Grid key={skill.id} size={{ xs: 12, md: 6 }}>
+                                <RatingCalculatorSkill
+                                    skill={skill}
+                                    character={charID}
+                                    options={options}
+                                    values={values}
+                                    handleChange={handleChange}
+                                />
+                            </Grid>
+                        ))}
                 </Grid>
             )}
             <RatingCalculatorSkillSelector
-                character={character}
+                character={charID}
                 options={options}
                 values={values}
                 handleChange={handleChange}
@@ -118,7 +146,7 @@ function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
         nameJP: skill.name.jp,
         nameJPNative: skill.name.jpNative,
         icon: skill.icon,
-        rarity: skill.rarity === 5 ? 1 : skill.rarity,
+        rarity: [3, 4, 5].includes(skill.rarity) ? 1 : skill.rarity,
         values: skill.values || [],
     }));
 }

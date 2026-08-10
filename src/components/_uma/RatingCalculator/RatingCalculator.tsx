@@ -55,11 +55,11 @@ export default function RatingCalculator() {
                 >
                     <Stack spacing={2} divider={<Divider />}>
                         <Grid container spacing={2}>
-                            <Grid size="grow">
+                            <Grid size={{ xs: 12, xl: 5.5 }}>
                                 <Stack
                                     spacing={2}
                                     divider={<Divider />}
-                                    sx={{ display: "unset" }}
+                                    sx={{ display: "unset" }} // Required for sticky element
                                 >
                                     <Grid
                                         container
@@ -77,26 +77,32 @@ export default function RatingCalculator() {
                                     <RatingCalculatorLevel />
                                     <RatingCalculatorStats />
                                     <RatingCalculatorAptitude />
-                                    <Grow in={trigger}>
-                                        <Box
-                                            sx={{
-                                                display: {
-                                                    xs: "none",
-                                                    xl: "flex",
-                                                },
-                                                position: "sticky",
-                                                top: "96px",
-                                            }}
-                                        >
-                                            <Box sx={{ width: "100%" }}></Box>
-                                            <Box sx={{ width: "75%" }}>
-                                                <RatingCalculatorScore mini />
+                                    {matches && (
+                                        <Grow in={trigger}>
+                                            <Box
+                                                sx={{
+                                                    display: {
+                                                        xs: "none",
+                                                        xl: "flex",
+                                                    },
+                                                    position: "sticky",
+                                                    top: "96px",
+                                                }}
+                                            >
+                                                <Box
+                                                    sx={{ width: "100%" }}
+                                                ></Box>
+                                                <Box sx={{ width: "100%" }}>
+                                                    <RatingCalculatorScore
+                                                        mini
+                                                    />
+                                                </Box>
                                             </Box>
-                                        </Box>
-                                    </Grow>
+                                        </Grow>
+                                    )}
                                 </Stack>
                             </Grid>
-                            <Grid size={{ xs: 12, xl: "auto" }}>
+                            <Grid size={{ xs: 12, xl: 0.1 }}>
                                 <Divider
                                     orientation={
                                         matches ? "vertical" : "horizontal"

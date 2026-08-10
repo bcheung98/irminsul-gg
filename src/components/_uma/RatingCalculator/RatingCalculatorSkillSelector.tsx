@@ -1,4 +1,11 @@
-import { forwardRef, useCallback, useEffect, useMemo, useRef } from "react";
+import {
+    forwardRef,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 
 // Component imports
 import TextLabel from "@/components/TextLabel";
@@ -26,6 +33,7 @@ import { matchSorter } from "match-sorter";
 
 // Type imports
 import { UmaSkillOption } from "@/types/uma/calculator";
+import Box from "@mui/material/Box";
 
 const LISTBOX_PADDING = 8; // px
 
@@ -35,64 +43,19 @@ type ItemData = Array<
           group: string;
           children: React.ReactNode;
       }
-    | [React.ReactElement, string, number]
+    | [React.ReactElement, UmaSkillOption, boolean]
 >;
-
-function RowComponent({
-    index,
-    itemData,
-    style,
-}: RowComponentProps & {
-    itemData: ItemData;
-}) {
-    const theme = useTheme();
-
-    const dataSet = itemData[index];
-
-    if ("group" in dataSet) {
-        return (
-            <ListSubheader key={dataSet.key} component="div" style={style}>
-                {dataSet.group}
-            </ListSubheader>
-        );
-    }
-
-    const { key, ...optionProps } = dataSet[0];
-
-    return (
-        <MenuItem
-            key={key}
-            {...optionProps}
-            sx={{
-                ...style,
-                "&:hover": {
-                    backgroundColor: theme.background(1, "light"),
-                },
-                "&:not(:last-child)": {
-                    borderBottom: `1px solid ${theme.border.color.primary}`,
-                },
-            }}
-        >
-            <TextLabel
-                title={dataSet[1]}
-                icon={`uma/skills/${dataSet[2]}`}
-                titleProps={{ variant: "subtitle1", weight: "highlight" }}
-                iconProps={{ size: 24 }}
-            />
-        </MenuItem>
-    );
-}
 
 const ListboxComponent = forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLElement> & {
         internalListRef: React.Ref<ListImperativeAPI>;
-        onItemsBuilt: (optionIndexMap: Map<string, number>) => void;
+        onItemsBuilt: (optionIndexMap: Map<UmaSkillOption, number>) => void;
     }
 >(function ListboxComponent(props, ref) {
     const { children, internalListRef, onItemsBuilt, ...other } = props;
     const itemData: ItemData = [];
-    const optionIndexMap = useMemo(() => new Map<string, number>(), []);
+    const optionIndexMap = useMemo(() => new Map<UmaSkillOption, number>(), []);
 
     (children as ItemData).forEach((item) => {
         itemData.push(item);
@@ -159,6 +122,51 @@ const ListboxComponent = forwardRef<
     );
 });
 
+function RowComponent({
+    index,
+    itemData,
+    style,
+}: RowComponentProps & {
+    itemData: ItemData;
+}) {
+    const theme = useTheme();
+
+    const dataSet = itemData[index];
+
+    if ("group" in dataSet) {
+        return (
+            <ListSubheader key={dataSet.key} component="div" style={style}>
+                {dataSet.group}
+            </ListSubheader>
+        );
+    }
+
+    const [{ key, ...optionProps }, option, disabled] = dataSet;
+
+    return (
+        <MenuItem
+            key={key}
+            {...optionProps}
+            disabled={disabled}
+            sx={{
+                ...style,
+                top: ((style.top as number) ?? 0) + LISTBOX_PADDING,
+                borderBottom:
+                    index + 1 < itemData.length
+                        ? `1px solid ${theme.border.color.primary}`
+                        : 0,
+            }}
+        >
+            <TextLabel
+                title={option.name}
+                icon={`uma/skills/${option.icon}`}
+                titleProps={{ variant: "subtitle1", weight: "highlight" }}
+                iconProps={{ size: 24 }}
+            />
+        </MenuItem>
+    );
+}
+
 const StyledPopper = styled(Popper)({
     [`& .${autocompleteClasses.listbox}`]: {
         boxSizing: "border-box",
@@ -173,13 +181,15 @@ export default function RatingCalculatorSkillSelector({
     character,
     options,
     values,
-    handleChange,
     placeholder = "Add Skill",
+    activeSkill,
+    handleChange,
 }: {
     character: number | null;
     options: UmaSkillOption[];
     values: UmaSkillOption[];
     placeholder?: string;
+    activeSkill?: UmaSkillOption;
     handleChange: (newValue: UmaSkillOption[] | null) => void;
 }) {
     const theme = useTheme();
@@ -217,21 +227,30 @@ export default function RatingCalculatorSkillSelector({
         },
     });
 
+    const getOptionDisabled = (option: UmaSkillOption) => {
+        const skill = skills.find((skill) => skill.id === option.id);
+        // Disable picking current selected character's Unique Skill
+        if (character && skill && skill.unique) {
+            if (skill.unique === character) return true;
+        }
+        if (skill && activeSkill && activeSkill.id === skill.id) return false;
+        return values.includes(option);
+    };
+
+    const [searchValue, setSearchValue] = useState(activeSkill?.name || "");
+
     return (
         <Autocomplete
             sx={styles}
+            fullWidth
             multiple
             autoComplete
             disableListWrap
             disableClearable
+            disableCloseOnSelect={searchValue !== ""}
             filterSelectedOptions
-            options={[
-                // Show selected items first (if selected options are not hidden)
-                ...values,
-                ...options.sort(
-                    (a, b) => sortBy(b.icon, a.icon) || sortBy(b.id, a.id),
-                ),
-            ]}
+            onClose={() => setSearchValue("")}
+            options={[...options.sort((a, b) => sortBy(b.id, a.id))]}
             getOptionLabel={(option) =>
                 option.name || option.nameJP || option.nameJPNative
             }
@@ -240,25 +259,25 @@ export default function RatingCalculatorSkillSelector({
             }
             value={values}
             isOptionEqualToValue={(option, value) => option.id === value.id}
+            getOptionDisabled={getOptionDisabled}
             noOptionsText="No skills"
             renderInput={(params) => (
                 <SearchBar
+                    autoFocus={activeSkill !== undefined}
                     params={params}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                     inputIcon={<></>}
                     placeholder={placeholder}
                     backgroundColor={theme.background(0)}
                 />
             )}
-            renderOption={(props, option, state) =>
-                [
-                    props,
-                    option.name || option.nameJP || option.nameJPNative,
-                    option.icon,
-                    state,
-                ] as React.ReactNode
+            inputValue={searchValue}
+            renderOption={(props, option) =>
+                [props, option, getOptionDisabled(option)] as React.ReactNode
             }
             onHighlightChange={handleHighlightChange}
-            onChange={(event, newValue, reason) => {
+            onChange={(event, newValues, reason) => {
                 // Prevent clearing input when pressing Backspace/Delete
                 if (
                     event.type === "keydown" &&
@@ -268,20 +287,18 @@ export default function RatingCalculatorSkillSelector({
                 ) {
                     return;
                 }
-                // If another version of an already added skill is selected,
-                // replace that skill with the newer version
-                const option = newValue.slice(-1)[0];
+                // If another version of an already added skill is selected, replace that skill with the newer version instead
+                const option = newValues.slice(-1)[0];
                 const skill = skills.find((skill) => skill.id === option.id);
                 if (skill && skill.versions) {
                     skill.versions.forEach((id) => {
-                        let index = values.findIndex((item) => item.id === id);
-                        if (index !== -1) {
-                            newValue.splice(index, 1, option);
-                            newValue.splice(-1, 1);
-                        }
+                        const index = values.findIndex(
+                            (item) => item.id === id,
+                        );
+                        if (index !== -1) newValues.splice(index, 1, option);
                     });
                 }
-                handleChange(newValue);
+                handleChange(Array.from(new Set(newValues)));
             }}
             slots={{
                 popper: StyledPopper,
@@ -301,7 +318,7 @@ export default function RatingCalculatorSkillSelector({
 function filterOptions(options: UmaSkillOption[], searchValue: string) {
     if (searchValue === "") return options;
     return matchSorter(options, searchValue, {
-        keys: ["name", "nameJP", "nameJPNative"],
+        keys: ["name"],
         threshold: matchSorter.rankings.WORD_STARTS_WITH,
-    }).sort((a, b) => sortBy(b.icon, a.icon) || sortBy(b.id, a.id));
+    }).sort((a, b) => sortBy(b.icon, a.icon) || sortBy(b.name, a.name));
 }
