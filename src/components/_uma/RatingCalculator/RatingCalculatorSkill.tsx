@@ -25,7 +25,10 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 // Helper imports
 import { useUmaContext } from "@/context";
 import { useRatingCalculatorStore } from "@/stores";
-import { calculateSkillScore } from "@/helpers/uma/calculator";
+import {
+    calculateSkillScore,
+    calculateUniqueLevelScore,
+} from "@/helpers/uma/calculator";
 import { getUmaSkillRarityColor } from "@/helpers/uma/rarityColors";
 
 // Type imports
@@ -33,21 +36,31 @@ import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkill({
     skill,
-    character,
     options,
     values,
+    unique,
     handleChange,
 }: {
     skill: UmaSkillOption;
-    character: number | null;
     options: UmaSkillOption[];
     values: UmaSkillOption[];
+    unique?: boolean;
     handleChange: (newValue: UmaSkillOption[] | null) => void;
 }) {
     const theme = useTheme();
 
     const { skills: skillData } = useUmaContext();
     const currentSkillData = skillData.find((s) => s.id === skill.id);
+
+    const {
+        character,
+        stats,
+        aptitude,
+        skills,
+        hiddenSkills,
+        setSkills,
+        setHiddenSkills,
+    } = useRatingCalculatorStore();
 
     const [skillPopupOpen, setSkillPopupOpen] = useState(false);
     const handleSkillPopupClickOpen = () => {
@@ -56,15 +69,12 @@ export default function RatingCalculatorSkill({
 
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const handleClickOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+        !unique && setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
-        setAnchorEl(null);
+        !unique && setAnchorEl(null);
     };
     const open = Boolean(anchorEl);
-
-    const { aptitude, skills, hiddenSkills, setSkills, setHiddenSkills } =
-        useRatingCalculatorStore();
 
     const [hidden, setHidden] = useState(hiddenSkills.includes(skill.id));
     const handleHiddenChange = () => {
@@ -104,7 +114,9 @@ export default function RatingCalculatorSkill({
     const opacity = hidden ? 0.35 : 1;
 
     const skillName = skill.name || skill.nameJP || skill.nameJPNative;
-    const score = calculateSkillScore(aptitude, skill);
+    const score = unique
+        ? calculateUniqueLevelScore(stats[5], stats[6])
+        : calculateSkillScore(aptitude, skill);
 
     return (
         <>
@@ -153,7 +165,39 @@ export default function RatingCalculatorSkill({
                         {skillName}
                     </Text>
                 </Stack>
-                <FlexBox spacing={1}>
+                <FlexBox spacing={unique ? 2 : 1}>
+                    {unique ? (
+                        <Text
+                            variant="subtitle1"
+                            weight="highlight"
+                            sx={{ color: "rgb(121, 64, 22)" }}
+                        >
+                            {`(Lvl ${stats[6]})`}
+                        </Text>
+                    ) : (
+                        <>
+                            <Tooltip title="Toggle" placement="top">
+                                <IconButton
+                                    onClick={handleHiddenChange}
+                                    {...iconButtonProps}
+                                >
+                                    {hidden ? (
+                                        <VisibilityIcon {...iconProps} />
+                                    ) : (
+                                        <VisibilityOffIcon {...iconProps} />
+                                    )}
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Remove" placement="top">
+                                <IconButton
+                                    onClick={handleDelete}
+                                    {...iconButtonProps}
+                                >
+                                    <DeleteIcon {...iconProps} />
+                                </IconButton>
+                            </Tooltip>
+                        </>
+                    )}
                     <Box
                         sx={{
                             py: 0.5,
@@ -184,23 +228,6 @@ export default function RatingCalculatorSkill({
                             <EditIcon {...iconProps} />
                         </IconButton>
                     </Tooltip> */}
-                    <Tooltip title="Toggle" placement="top">
-                        <IconButton
-                            onClick={handleHiddenChange}
-                            {...iconButtonProps}
-                        >
-                            {hidden ? (
-                                <VisibilityIcon {...iconProps} />
-                            ) : (
-                                <VisibilityOffIcon {...iconProps} />
-                            )}
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Remove" placement="top">
-                        <IconButton onClick={handleDelete} {...iconButtonProps}>
-                            <DeleteIcon {...iconProps} />
-                        </IconButton>
-                    </Tooltip>
                 </FlexBox>
             </FlexBox>
             <ContentDialog

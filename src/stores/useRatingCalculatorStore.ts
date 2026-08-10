@@ -29,24 +29,24 @@ export type RatingCalculatorStore = RatingCalculatorState &
     RatingCalculatorActions;
 
 const initialState: RatingCalculatorState = {
-    character: null,
-    stats: [0, 0, 0, 0, 0, 3, 3],
+    character: 100101,
+    stats: [0, 0, 0, 0, 0, 3, 4],
     aptitude: {
         surface: {
             turf: "A",
-            dirt: "B",
+            dirt: "G",
         },
         distance: {
-            sprint: "E",
-            mile: "A",
+            sprint: "F",
+            mile: "C",
             medium: "A",
-            long: "B",
+            long: "A",
         },
         strategy: {
-            front: "F",
+            front: "G",
             pace: "A",
             late: "A",
-            end: "D",
+            end: "C",
         },
     },
     skills: [],

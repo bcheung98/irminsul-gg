@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 // Helper imports
 import { sortBy } from "@/utils";
 import { useUmaContext } from "@/context";
+import { useTEHelperData } from "../TEHelper/TEHelper.utils";
 import { useStore, useServerStore, useRatingCalculatorStore } from "@/stores";
 
 // Type imports
@@ -21,6 +22,7 @@ import { UmaSkill } from "@/types/uma/skill";
 import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkills() {
+    const { characters } = useTEHelperData();
     const { skills: skillList } = useUmaContext();
 
     const server = useStore(useServerStore, (state) => state.uma);
@@ -32,6 +34,7 @@ export default function RatingCalculatorSkills() {
     );
     const {
         character: charID,
+        stats,
         skills,
         hiddenSkills,
         setSkills,
@@ -92,8 +95,33 @@ export default function RatingCalculatorSkills() {
     }, [charID]);
 
     const options = useMemo(() => {
-        return createSkillOptions(skillData);
+        return createSkillOptions(skillData, true);
     }, [skillData]);
+
+    function getUniqueSkill() {
+        const character = characters.find((char) => char.id === charID);
+        if (character) {
+            let skill: UmaSkill[] | undefined;
+            skill = skillList.filter((skill) => skill.unique === charID);
+            if (character.rarity < 3 && stats[5] < 3) {
+                skill = skill.filter((skill) => skill.rarity === 3);
+            } else if (character.rarity < 3 && stats[5] > 3) {
+                skill = skill.filter((skill) => skill.rarity === 4);
+            }
+            if (skill) {
+                return createSkillOptions(skill)[0];
+            }
+        }
+        return null;
+    }
+
+    const [uniqueSkill, setUniqueSkill] = useState<UmaSkillOption | null>(null);
+    useEffect(() => {
+        const skill = getUniqueSkill();
+        if (skill) {
+            setUniqueSkill(() => skill);
+        }
+    }, [charID, JSON.stringify(stats[5])]);
 
     return (
         <Stack spacing={2} sx={{ px: 1 }}>
@@ -112,23 +140,32 @@ export default function RatingCalculatorSkills() {
                     </Button>
                 </FlexBox>
             </Stack>
-            {values.length > 0 && (
-                <Grid container spacing={2}>
-                    {[...values]
+            <Grid container spacing={2}>
+                {uniqueSkill && (
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <RatingCalculatorSkill
+                            unique
+                            skill={uniqueSkill}
+                            options={options}
+                            values={values}
+                            handleChange={handleChange}
+                        />
+                    </Grid>
+                )}
+                {values.length > 0 &&
+                    [...values]
                         .sort((a, b) => sortBy(b.id, a.id))
                         .map((skill) => (
                             <Grid key={skill.id} size={{ xs: 12, md: 6 }}>
                                 <RatingCalculatorSkill
                                     skill={skill}
-                                    character={charID}
                                     options={options}
                                     values={values}
                                     handleChange={handleChange}
                                 />
                             </Grid>
                         ))}
-                </Grid>
-            )}
+            </Grid>
             <RatingCalculatorSkillSelector
                 character={charID}
                 options={options}
@@ -139,14 +176,21 @@ export default function RatingCalculatorSkills() {
     );
 }
 
-function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
+function createSkillOptions(
+    skills: UmaSkill[],
+    downgrade = false,
+): UmaSkillOption[] {
     return skills.map((skill) => ({
         id: skill.id,
         name: skill.name.global,
         nameJP: skill.name.jp,
         nameJPNative: skill.name.jpNative,
         icon: skill.icon,
-        rarity: [3, 4, 5].includes(skill.rarity) ? 1 : skill.rarity,
+        rarity: downgrade
+            ? [3, 4, 5].includes(skill.rarity)
+                ? 1
+                : skill.rarity
+            : skill.rarity,
         values: skill.values || [],
     }));
 }

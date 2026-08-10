@@ -145,7 +145,7 @@ export default function RatingCalculatorScoreBreakdown({
                             },
                         }}
                     />
-                    <FlexBox spacing={4}>
+                    <FlexBox spacing={[1, 4]} wrap>
                         {categories.map((category) => (
                             <FlexBox key={category.label} spacing={1}>
                                 <div
