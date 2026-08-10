@@ -10,7 +10,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 // Helper imports
 import { range } from "@/utils";
-import useStore, { useRatingCalculatorStore } from "@/stores";
+import { useRatingCalculatorStore } from "@/stores";
 
 export default function RatingCalculatorLevelSelect({
     levels,
@@ -21,10 +21,9 @@ export default function RatingCalculatorLevelSelect({
 }) {
     const [start, stop] = levels;
 
-    const stats = useStore(useRatingCalculatorStore, (state) => state.stats);
-    const { setStat } = useRatingCalculatorStore();
+    const { character, stats, setStat } = useRatingCalculatorStore();
 
-    const [currentValue, setCurrentValue] = useState<number>(1);
+    const [currentValue, setCurrentValue] = useState<number>(3);
     const handleChange = (event: SelectChangeEvent) => {
         const newValue = Number(event.target.value);
         setCurrentValue(() => newValue);
@@ -33,11 +32,17 @@ export default function RatingCalculatorLevelSelect({
 
     useEffect(() => {
         if (stats) {
-            const newValue = stats[index];
+            let newValue = stats[index];
+            if (index === 5) {
+                newValue = Math.max(start, newValue);
+            }
+            if (index === 6) {
+                newValue = Math.min(stop, newValue);
+            }
             setCurrentValue(newValue);
             setStat(index, newValue);
         }
-    }, [stats]);
+    }, [character, JSON.stringify(stats)]);
 
     return (
         <Select
