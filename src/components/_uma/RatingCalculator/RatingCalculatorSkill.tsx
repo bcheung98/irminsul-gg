@@ -7,15 +7,19 @@ import Image from "@/components/Image";
 import Tooltip from "@/components/Tooltip";
 import ContentDialog from "@/components/ContentDialog";
 import SkillPopup from "../SkillPopup";
+import RatingCalculatorSkillSelector from "./RatingCalculatorSkillSelector";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import Popover from "@mui/material/Popover";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import EditIcon from "@mui/icons-material/Edit";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
 // Helper imports
@@ -29,18 +33,35 @@ import { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkill({
     skill,
+    character,
+    options,
+    values,
+    handleChange,
 }: {
     skill: UmaSkillOption;
+    character: number | null;
+    options: UmaSkillOption[];
+    values: UmaSkillOption[];
+    handleChange: (newValue: UmaSkillOption[] | null) => void;
 }) {
     const theme = useTheme();
 
     const { skills: skillData } = useUmaContext();
     const currentSkillData = skillData.find((s) => s.id === skill.id);
 
-    const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        currentSkillData && setOpen(true);
+    const [skillPopupOpen, setSkillPopupOpen] = useState(false);
+    const handleSkillPopupClickOpen = () => {
+        currentSkillData && setSkillPopupOpen(true);
     };
+
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+    const handleClickOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const open = Boolean(anchorEl);
 
     const { aptitude, skills, hiddenSkills, setSkills, setHiddenSkills } =
         useRatingCalculatorStore();
@@ -98,6 +119,8 @@ export default function RatingCalculatorSkill({
                         ? "transparent"
                         : getUmaSkillRarityColor(skill.rarity),
                 }}
+                spacing={[1, 0]}
+                wrap
             >
                 <Stack
                     spacing={1.5}
@@ -109,6 +132,8 @@ export default function RatingCalculatorSkill({
                         src={`uma/skills/${skill?.icon}`}
                         alt={skill.id.toString()}
                         size={28}
+                        style={{ cursor: "pointer" }}
+                        onClick={handleSkillPopupClickOpen}
                     />
                     <Text
                         variant={skillName.length > 25 ? "body3" : "body2"}
@@ -123,7 +148,7 @@ export default function RatingCalculatorSkill({
                                 textDecoration: "dotted underline",
                             },
                         }}
-                        onClick={handleClickOpen}
+                        onClick={handleSkillPopupClickOpen}
                     >
                         {skillName}
                     </Text>
@@ -151,6 +176,14 @@ export default function RatingCalculatorSkill({
                             {`${score >= 0 ? "+" : ""}${score}`}
                         </Text>
                     </Box>
+                    {/* <Tooltip title="Edit" placement="top">
+                        <IconButton
+                            onClick={handleClickOpen}
+                            {...iconButtonProps}
+                        >
+                            <EditIcon {...iconProps} />
+                        </IconButton>
+                    </Tooltip> */}
                     <Tooltip title="Toggle" placement="top">
                         <IconButton
                             onClick={handleHiddenChange}
@@ -171,8 +204,8 @@ export default function RatingCalculatorSkill({
                 </FlexBox>
             </FlexBox>
             <ContentDialog
-                open={open}
-                setOpen={setOpen}
+                open={skillPopupOpen}
+                setOpen={setSkillPopupOpen}
                 header="Skill Details"
                 sx={{
                     ".MuiDialog-paper": {
@@ -183,6 +216,38 @@ export default function RatingCalculatorSkill({
             >
                 {currentSkillData && <SkillPopup skill={currentSkillData} />}
             </ContentDialog>
+            {/* <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: -80,
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+            >
+                <Card
+                    sx={{
+                        backgroundColor: theme.background(2),
+                        border: `1px solid ${theme.border.color.primary}`,
+                        borderRadius: "8px",
+                        p: 1,
+                        width: { xs: "90vw", md: "50vw", xl: "25vw" },
+                    }}
+                >
+                    <RatingCalculatorSkillSelector
+                        character={character}
+                        options={options}
+                        values={values}
+                        activeSkill={skill}
+                        placeholder="Edit Skill"
+                        handleChange={handleChange}
+                    />
+                </Card>
+            </Popover> */}
         </>
     );
 }

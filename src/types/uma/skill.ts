@@ -10,6 +10,7 @@ export interface UmaSkill {
     description: UmaVersion;
     rarity: UmaSkillRarity;
     unlock?: UmaRarity;
+    unique?: number;
     activation: 0 | 1;
     cost: number;
     conditions: UmaSkillCondition[];
