@@ -25,7 +25,7 @@ import {
 // Type imports
 import { CostSliderValues, PlannerType } from "@/types/planner";
 
-export default function WuWaPlannerCard() {
+export default function EndfieldPlannerCard() {
     const theme = useTheme();
 
     let item = usePlannerCardData();
@@ -164,18 +164,20 @@ export default function WuWaPlannerCard() {
                             />
                         ))}
                     </FlexBox>
-                    <FlexBox spacing={2}>
-                        {Object.keys(baseSkills).map((key) => (
-                            <StatNode
-                                key={key}
-                                id={key}
-                                mode={mode}
-                                values={baseSkills}
-                                baseSkills={item.baseSkills}
-                                attributes={{ ...item }}
-                            />
-                        ))}
-                    </FlexBox>
+                    {item.id !== 1003 && (
+                        <FlexBox spacing={2}>
+                            {Object.keys(baseSkills).map((key) => (
+                                <StatNode
+                                    key={key}
+                                    id={key}
+                                    mode={mode}
+                                    values={baseSkills}
+                                    baseSkills={item.baseSkills}
+                                    attributes={{ ...item }}
+                                />
+                            ))}
+                        </FlexBox>
+                    )}
                     <FlexBox spacing={2}>
                         {range(1, 4).map((i) => (
                             <StatNode
