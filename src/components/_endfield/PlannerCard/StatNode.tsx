@@ -50,7 +50,10 @@ export default function StatNode({
         if (id.startsWith("talent"))
             return `endfield/skills/${attributes.id}_talent${Number(index) < 3 ? 1 : 2}`;
         else if (id.startsWith("base")) {
-            return `endfield/icons/base-skills/${baseSkills[Number(index) < 3 ? 0 : 1].icon}`;
+            const baseSkill = baseSkills[Number(index) < 3 ? 0 : 1];
+            return baseSkill
+                ? `endfield/icons/base-skills/${baseSkills[Number(index) < 3 ? 0 : 1].icon}`
+                : "";
         } else if (id.startsWith("outfitting")) {
             return `endfield/icons/Gear`;
         } else {
@@ -69,10 +72,13 @@ export default function StatNode({
             }
             return `${talents[Number(index) < threshold ? 0 : 1].name} (E${talentLevels[Number(index) - 1]})`;
         } else if (id.startsWith("base")) {
+            const baseSkill = baseSkills[Number(index) < 3 ? 0 : 1];
             const baseSkillLevels = baseSkills
                 .map((skill) => skill.levels)
                 .flat();
-            return `${baseSkills[Number(index) < 3 ? 0 : 1].name} (E${baseSkillLevels[Number(index) - 1]})`;
+            return baseSkill
+                ? `${baseSkill} (E${baseSkillLevels[Number(index) - 1]})`
+                : "";
         } else if (id.startsWith("outfitting")) {
             return `Outfitting ${numerals[Number(index) - 1]} (E${index})`;
         } else {
