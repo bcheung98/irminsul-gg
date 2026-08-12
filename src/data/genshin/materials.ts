@@ -33,6 +33,16 @@ const otherMaterials: Material[] = [
             version: "1.0",
         },
     },
+    {
+        id: 113063,
+        category: "weekly",
+        name: "The Cornerstone of Stars and Flames",
+        tag: "The Cornerstone of Stars and Flames",
+        rarity: 5,
+        release: {
+            version: "5.0",
+        },
+    },
 ];
 
 export const genshinMaterials: Material[] = [

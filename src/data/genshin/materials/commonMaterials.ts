@@ -565,7 +565,7 @@ export const commonMaterials = [
         release: { version: "7.0" },
     },
     {
-        id: 112146,
+        id: 112149,
         category: "common",
         name: "Chimeric Core",
         tag: "Chimera1",
@@ -573,7 +573,7 @@ export const commonMaterials = [
         release: { version: "7.0" },
     },
     {
-        id: 112147,
+        id: 112150,
         category: "common",
         name: "Symbiotic Chimeric Nucleus",
         tag: "Chimera2",
@@ -581,7 +581,7 @@ export const commonMaterials = [
         release: { version: "7.0" },
     },
     {
-        id: 112148,
+        id: 112151,
         category: "common",
         name: "Prime Chimeric Nexus",
         tag: "Chimera3",
