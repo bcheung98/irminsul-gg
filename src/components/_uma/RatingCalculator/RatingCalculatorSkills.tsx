@@ -5,6 +5,7 @@ import RatingCalculatorSkillSelector from "./RatingCalculatorSkillSelector";
 import RatingCalculatorSkill from "./RatingCalculatorSkill";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
+import Switch from "@/components/Switch";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -116,8 +117,18 @@ export default function RatingCalculatorSkills() {
     }, [character, stats[5]]);
 
     const options = useMemo(() => {
-        return createSkillOptions(skillData, true);
+        return createSkillOptions(skillData);
     }, [skillData]);
+
+    const [orderByID, setOrderByID] = useState(false);
+    const handleSwitchChange = () => {
+        setOrderByID(!orderByID);
+    };
+
+    let currentSkills = [...values];
+    if (!orderByID) {
+        currentSkills = sortSkills(currentSkills);
+    }
 
     return (
         <Stack spacing={2} sx={{ px: 1 }}>
@@ -149,18 +160,16 @@ export default function RatingCalculatorSkills() {
                     </Grid>
                 )}
                 {values.length > 0 &&
-                    [...values]
-                        .sort((a, b) => sortBy(b.id, a.id))
-                        .map((skill) => (
-                            <Grid key={skill.id} size={{ xs: 12, md: 6 }}>
-                                <RatingCalculatorSkill
-                                    skill={skill}
-                                    options={options}
-                                    values={values}
-                                    handleChange={handleChange}
-                                />
-                            </Grid>
-                        ))}
+                    currentSkills.map((skill) => (
+                        <Grid key={skill.id} size={{ xs: 12, md: 6 }}>
+                            <RatingCalculatorSkill
+                                skill={skill}
+                                options={options}
+                                values={values}
+                                handleChange={handleChange}
+                            />
+                        </Grid>
+                    ))}
             </Grid>
             <RatingCalculatorSkillSelector
                 character={character}
@@ -168,14 +177,21 @@ export default function RatingCalculatorSkills() {
                 values={values}
                 handleChange={handleChange}
             />
+            <FlexBox spacing={2}>
+                <Switch
+                    checked={orderByID}
+                    onChange={handleSwitchChange}
+                    size="small"
+                />
+                <Text variant="body2" weight="highlight">
+                    Show Skills in Input Order
+                </Text>
+            </FlexBox>
         </Stack>
     );
 }
 
-function createSkillOptions(
-    skills: UmaSkill[],
-    downgrade = false,
-): UmaSkillOption[] {
+function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
     return skills.map((skill) => ({
         id: skill.id,
         name: skill.name.global,
@@ -185,4 +201,40 @@ function createSkillOptions(
         rarity: skill.rarity,
         values: skill.values || [],
     }));
+}
+
+// Custom sort to emulate in-game sorting order
+function sortSkills(skills: UmaSkillOption[]) {
+    const skillTypes: Record<string, UmaSkillOption[]> = {
+        special: [],
+        passives: [],
+        greens: [],
+        other: [],
+    };
+
+    skills.forEach((skill) => {
+        // Unique skills
+        if ([3, 4, 5].includes(skill.rarity)) {
+            skillTypes.passives.push(skill);
+        } // Special case for Runaway
+        else if (skill.icon === 40012) {
+            skillTypes.special.push(skill);
+        }
+        // Green skills with no aptitude requirement (excluding Lone Wolf, Sympathy, Lucky Seven, and Restraint)
+        else if (
+            ![201631, 201632, 201641, 202161].includes(skill.id) &&
+            skill.icon < 10061 &&
+            skill.values[5] === ""
+        ) {
+            skillTypes.greens.push(skill);
+        }
+        // Everything else
+        else {
+            skillTypes.other.push(skill);
+        }
+    });
+
+    return Object.values(skillTypes)
+        .map((item) => item.sort((a, b) => sortBy(b.id, a.id)))
+        .flat();
 }
