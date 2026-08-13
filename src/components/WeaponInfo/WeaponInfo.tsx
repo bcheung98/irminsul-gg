@@ -4,12 +4,16 @@ import StatsDisplay from "@/components/StatsDisplay";
 import LevelUpCosts from "@/components/LevelUpCosts";
 import WeaponAttributes from "@/components/WeaponAttributes";
 import WeaponPassive from "@/components/WeaponPassive";
+import SpecialWeaponInfo from "../_genshin/SpecialWeaponInfo";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+
+// Helper imports
+import { useGameTag } from "@/context";
 
 // Type imports
 import { AttributeData } from "@/types";
@@ -26,6 +30,8 @@ interface WeaponInfoProps {
 export default function WeaponInfo(props: WeaponInfoProps) {
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
+    const game = useGameTag();
+
     return (
         <ContentBox
             header={
@@ -37,27 +43,32 @@ export default function WeaponInfo(props: WeaponInfoProps) {
             headerProps={{ padding: matches ? "16px 24px" : "16px" }}
             contentProps={{ padding: "16px 24px" }}
         >
-            <Stack spacing={2} divider={<Divider />}>
-                <Stack spacing={2}>
-                    <Box sx={{ width: { xs: "100%", md: "75%" } }}>
-                        <StatsDisplay
-                            stats={props.stats}
-                            attributes={props.attributes}
-                            title=""
-                        />
-                    </Box>
-                    {"passive" in props.stats && (
-                        <WeaponPassive stats={props.stats} />
-                    )}
+            {game === "genshin" && props.attributes.id === 11521 ? (
+                // Special case for Exaiphanes Blade
+                <SpecialWeaponInfo id={props.attributes.id} />
+            ) : (
+                <Stack spacing={2} divider={<Divider />}>
+                    <Stack spacing={2}>
+                        <Box sx={{ width: { xs: "100%", md: "75%" } }}>
+                            <StatsDisplay
+                                stats={props.stats}
+                                attributes={props.attributes}
+                                title=""
+                            />
+                        </Box>
+                        {"passive" in props.stats && (
+                            <WeaponPassive stats={props.stats} />
+                        )}
+                    </Stack>
+                    <LevelUpCosts
+                        label="Ascension"
+                        levelKey="level"
+                        costKey="weaponLevel"
+                        materials={props.materials}
+                        {...props.attributes}
+                    />
                 </Stack>
-                <LevelUpCosts
-                    label="Ascension"
-                    levelKey="level"
-                    costKey="weaponLevel"
-                    materials={props.materials}
-                    {...props.attributes}
-                />
-            </Stack>
+            )}
         </ContentBox>
     );
 }

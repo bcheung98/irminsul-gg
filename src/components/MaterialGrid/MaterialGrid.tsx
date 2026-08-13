@@ -2,6 +2,7 @@ import { usePathname } from "next/navigation";
 
 // Component imports
 import MaterialCard from "@/components/MaterialCard";
+import Text from "@/components/Text";
 
 // MUI imports
 import Grid, { GridProps } from "@mui/material/Grid";
@@ -45,10 +46,14 @@ export default function MaterialGrid({
         ),
     );
 
-    return (
+    return materialArray.length > 0 ? (
         <Grid container spacing={spacing}>
             {materialArray.map((card) => card)}
         </Grid>
+    ) : (
+        <Text variant="subtitle1" sx={{ fontStyle: "italic", px: 2 }}>
+            No materials required for ascension
+        </Text>
     );
 }
 

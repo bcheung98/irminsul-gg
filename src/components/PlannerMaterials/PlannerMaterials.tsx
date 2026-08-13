@@ -109,26 +109,35 @@ export default function PlannerMaterials() {
     });
 
     // Calculate costs for all materials
-    const materialCosts: Record<string, CostValue> = {};
-    costSourceMap.forEach((item) => {
-        Object.entries(item).forEach(([key, value]) => {
-            if (materialCosts[key] === undefined) {
-                materialCosts[key] = Object.fromEntries(
-                    Object.entries(value).map(([material, cost]) => [
-                        material,
-                        cost,
-                    ]),
-                );
-            } else {
-                Object.entries(value).forEach(([material, cost]) => {
-                    if (!materialCosts[key][material]) {
-                        materialCosts[key][material] = 0;
+    function getMaterialCosts() {
+        const costs: Record<string, CostValue> = {};
+        // Special case for Exaiphanes Blade
+        if (game === "genshin" && type === "weapons" && item!.id === 11521) {
+            return {};
+        } else {
+            costSourceMap.forEach((item) => {
+                Object.entries(item).forEach(([key, value]) => {
+                    if (costs[key] === undefined) {
+                        costs[key] = Object.fromEntries(
+                            Object.entries(value).map(([material, cost]) => [
+                                material,
+                                cost,
+                            ]),
+                        );
+                    } else {
+                        Object.entries(value).forEach(([material, cost]) => {
+                            if (!costs[key][material]) {
+                                costs[key][material] = 0;
+                            }
+                            costs[key][material] += cost;
+                        });
                     }
-                    materialCosts[key][material] += cost;
                 });
-            }
-        });
-    });
+            });
+            return costs;
+        }
+    }
+    const materialCosts = getMaterialCosts();
 
     useEffect(() => {
         updateTotalCosts(item.id, materialCosts);
