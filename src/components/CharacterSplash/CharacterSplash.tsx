@@ -109,7 +109,7 @@ export default function CharacterSplash({
             case "genshin":
                 return `${
                     id.toString().startsWith("10000005")
-                        ? `${game}/characters/MC_${gender.slice(0, 1)}`
+                        ? `${game}/characters/MC_${gender.slice(0, 1)}_icon`
                         : `${game}/characters/${id}_icon`
                 }${index !== 0 ? `${index}` : ""}`;
             case "wuwa":
