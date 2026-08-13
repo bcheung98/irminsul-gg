@@ -28,6 +28,11 @@ export const serverButtonsEndfield: ToggleButtonProps[] = [
     { value: "Asia", label: "Asia" },
 ];
 
+export const genderButtons: ToggleButtonProps[] = [
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
+];
+
 export const forbiddenKnowledge: ToggleButtonProps[] = [
     // The boolean determines if unreleased content should be hidden,
     // but the label determines if unreleased content should be shown,

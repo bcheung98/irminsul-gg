@@ -31,6 +31,32 @@ export const characterSkill = {
     common3: [0, 0, 0, 0, 0, 0, 4, 6, 9, 12],
 };
 
+export const characterSkillTraveler = (region: string) => {
+    return {
+        credits: [
+            0, 12500, 17500, 25000, 30000, 37500, 120000, 260000, 450000,
+            700000,
+        ],
+        weekly:
+            region === "Natlan"
+                ? [0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+                : [0, 0, 0, 0, 0, 0, 1, 1, 2, 2],
+        crown: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        talentA1: [0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+        talentB1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        talentC1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        talentA2: [0, 0, 0, 0, 6, 0, 0, 0, 0, 0],
+        talentB2: [0, 0, 2, 0, 0, 9, 0, 0, 0, 0],
+        talentC2: [0, 0, 0, 4, 0, 0, 0, 0, 0, 0],
+        talentA3: [0, 0, 0, 0, 0, 0, 0, 6, 0, 0],
+        talentB3: [0, 0, 0, 0, 0, 0, 0, 0, 12, 0],
+        talentC3: [0, 0, 0, 0, 0, 0, 4, 0, 0, 16],
+        common1: [0, 6, 0, 0, 0, 0, 0, 0, 0, 0],
+        common2: [0, 0, 3, 4, 6, 9, 0, 0, 0, 0],
+        common3: [0, 0, 0, 0, 0, 0, 4, 6, 9, 12],
+    };
+};
+
 export const weaponLevel = (rarity: number) => {
     const index = rarity - 1;
     return {

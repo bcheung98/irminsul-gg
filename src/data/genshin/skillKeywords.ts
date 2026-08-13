@@ -2,6 +2,12 @@ import { SkillKeyword } from "@/types/skill";
 
 export const skillKeywords: SkillKeyword[] = [
     {
+        tag: "traveler buffs",
+        name: "Additional Buff Effects",
+        description:
+            'The Traveler gains an attribute bonus for every element they have resonated with:<br />Icon_Anemo <span class="text-anemo">Anemo</span>: CRIT Rate is increased by 10%,<br />Icon_Geo <span class="text-geo">Geo</span>: DEF is increased by 20%,<br />Icon_Electro <span class="text-electro">Electro</span>: Energy Recharge is increased by 20%,<br />Icon_Dendro <span class="text-dendro">Dendro</span>: Elemental Mastery is increased by 60,<br />Icon_Hydro <span class="text-hydro">Hydro</span>: HP is increased by 20%,<br />Icon_Pyro <span class="text-pyro">Pyro</span>: ATK is increased by 20%,<br />Icon_Cryo <span class="text-cryo">Cryo</span>: CRIT DMG is increased by 20%.',
+    },
+    {
         tag: "elevation",
         name: "Elevation",
         description:

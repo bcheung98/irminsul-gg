@@ -54,7 +54,11 @@ export default function LevelUpCosts({
     const game = useGameTag();
 
     if (game === "genshin" && element) {
-        materials = { ...materials, gemstone: element };
+        if (name?.includes("Traveler")) {
+            materials = { ...materials, gemstone: "Diamond" };
+        } else {
+            materials = { ...materials, gemstone: element };
+        }
     }
 
     if (game === "nte") {

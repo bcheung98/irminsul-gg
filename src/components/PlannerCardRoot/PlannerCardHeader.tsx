@@ -9,6 +9,7 @@ import { useTheme } from "@mui/material/styles";
 // Helper imports
 import { useGameTag } from "@/context";
 import { formatHref, splitJoin } from "@/utils";
+import { useSettingsStore } from "@/stores";
 import { categories, categoryImgURLs } from "@/data/categories";
 import { useRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
@@ -35,6 +36,8 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     const game = useGameTag() as GameNoUma;
 
+    const { gender } = useSettingsStore();
+
     const rarity =
         game === "hsr" &&
         type === "characters" &&
@@ -50,6 +53,13 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             " ",
             "",
         ).toLowerCase()}/${formatHref(href)}`;
+    }
+
+    function getImgURL() {
+        if (game === "genshin" && item?.name.includes("Traveler")) {
+            return `genshin/characters/MC_${gender.slice(0, 1)}`;
+        }
+        return categoryImgURLs[`${game}/${type}`](item!.id);
     }
 
     const { src: elementSrc, tooltip: elementTooltip } = getDataIconURL({
@@ -79,7 +89,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     return (
         <TextLabel
-            icon={categoryImgURLs[`${game}/${type}`](item.id)}
+            icon={getImgURL()}
             iconProps={{
                 size: 48,
                 styles: {

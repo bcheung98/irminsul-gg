@@ -38,6 +38,11 @@ export default function CharacterSkillLevelUp({
 
     let levelKey = "skill";
     let costKey = "characterSkill";
+    if (game === "genshin") {
+        if (skillKey === "attack") {
+            levelKey = "attack";
+        }
+    }
     if (game === "hsr") {
         if (skillKey === "attack") {
             levelKey = "attack";
