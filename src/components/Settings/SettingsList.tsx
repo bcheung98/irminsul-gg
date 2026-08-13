@@ -12,13 +12,14 @@ import { useGame } from "@/context";
 import { useSettingsStore, useServerStore } from "@/stores";
 import {
     forbiddenKnowledge,
+    genderButtons,
     getServerButtons,
     statDisplayButtons,
     themeButtons,
 } from "@/data/settings";
 
 // Type imports
-import { Game, Server, SkillDisplay } from "@/types";
+import { Game, Gender, Server, SkillDisplay } from "@/types";
 
 export default function SettingsList() {
     const game = useGame();
@@ -26,9 +27,11 @@ export default function SettingsList() {
     const {
         theme: themeIndex,
         statDisplay,
+        gender,
         hideUnreleasedContent,
         setTheme,
         setStatDisplay,
+        setGender,
         setUnreleasedContent,
     } = useSettingsStore();
 
@@ -122,6 +125,26 @@ export default function SettingsList() {
             ),
         };
 
+        const genderSettings: SettingsItemProps = {
+            label: "Main Character Gender",
+            input: (
+                <ToggleButtons
+                    buttons={genderButtons}
+                    value={gender}
+                    exclusive
+                    onChange={(
+                        _: React.BaseSyntheticEvent,
+                        newValue: Gender,
+                    ) => {
+                        if (newValue !== null) {
+                            setGender(newValue);
+                        }
+                    }}
+                    {...toggleButtonsParams}
+                />
+            ),
+        };
+
         const serverSettings: SettingsItemProps = {
             label: `Server (${game.name})`,
             input: (
@@ -147,6 +170,9 @@ export default function SettingsList() {
             )
         ) {
             group1.push(statDisplaySettings);
+        }
+        if (["genshin"].includes(gameTag)) {
+            group1.push(genderSettings);
         }
         group1.push(serverSettings);
 

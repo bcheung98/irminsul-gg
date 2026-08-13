@@ -19,6 +19,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useSettingsStore } from "@/stores";
 
 // Type imports
 import { CharacterOutfit } from "@/types/character";
@@ -33,6 +34,8 @@ export default function CharacterSplash({
     const theme = useTheme();
 
     const game = useGameTag();
+
+    const { gender } = useSettingsStore();
 
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = () => {
@@ -72,6 +75,10 @@ export default function CharacterSplash({
         let url = "";
         switch (game) {
             case "genshin":
+                url = id.toString().startsWith("10000005")
+                    ? `${game}/characters/MC_${gender.slice(0, 1)}_splash`
+                    : `${game}/characters/${id}_splash`;
+                break;
             case "hsr":
             default:
                 url = `${game}/characters/${id}_splash`;
@@ -100,9 +107,11 @@ export default function CharacterSplash({
     function getIconImg(index: number) {
         switch (game) {
             case "genshin":
-                return `${game}/characters/${id}_icon${
-                    index !== 0 ? `${index}` : ""
-                }`;
+                return `${
+                    id.toString().startsWith("10000005")
+                        ? `${game}/characters/MC_${gender.slice(0, 1)}`
+                        : `${game}/characters/${id}_icon`
+                }${index !== 0 ? `${index}` : ""}`;
             case "wuwa":
                 return `${game}/resonators/${id}${
                     index !== 0 ? `_${index}` : ""

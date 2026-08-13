@@ -23,7 +23,17 @@ export default function PlannerMaterials() {
 
     const type = "element" in item ? "characters" : "weapons";
     if (game === "genshin" && type === "characters") {
-        item.materials = { ...item.materials, gemstone: item.element || "" };
+        if (item.name.includes("Traveler")) {
+            item.materials = {
+                ...item.materials,
+                gemstone: "Diamond",
+            };
+        } else {
+            item.materials = {
+                ...item.materials,
+                gemstone: item.element || "",
+            };
+        }
     }
     if (
         game === "hsr" &&

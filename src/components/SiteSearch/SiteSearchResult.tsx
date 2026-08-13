@@ -18,7 +18,7 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 // Helper imports
 import { categories, categoryImgURLs } from "@/data/categories";
 import { games } from "@/data/games";
-import { useSiteSearchStore } from "@/stores";
+import { useSettingsStore, useSiteSearchStore } from "@/stores";
 import { formatTitle } from "@/helpers/uma/formatTitle";
 
 // Type imports
@@ -53,6 +53,18 @@ export default function SiteSearchResult({
         useSiteSearchStore();
 
     const game = games[item.category.split("/")[0] as Game];
+
+    const { gender } = useSettingsStore();
+
+    function getImgURL() {
+        if (
+            game.tag === "genshin" &&
+            item.id.toString().startsWith("10000005")
+        ) {
+            return `genshin/characters/MC_${gender.slice(0, 1)}`;
+        }
+        return categoryImgURLs[item.category](item.id, item.name);
+    }
 
     return (
         <MenuItem
@@ -97,10 +109,7 @@ export default function SiteSearchResult({
                 >
                     <NavLink href={item.url}>
                         <TextLabel
-                            icon={categoryImgURLs[item.category](
-                                item.id,
-                                item.name
-                            )}
+                            icon={getImgURL()}
                             iconProps={{
                                 size: 48,
                                 styles: {
@@ -113,7 +122,7 @@ export default function SiteSearchResult({
                                     ? formatTitle(
                                           item as unknown as
                                               | UmaCharacter
-                                              | UmaSupport
+                                              | UmaSupport,
                                       )
                                     : item.displayName
                             }

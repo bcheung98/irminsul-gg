@@ -1,4 +1,4 @@
-import { BaseData, VoiceActorData } from "@/types";
+import { BaseData, Gender, VoiceActorData } from "@/types";
 import {
     GenshinRarity,
     GenshinElement,
@@ -28,7 +28,7 @@ export interface GenshinCharacter extends BaseData {
     description: string;
     constellation: string;
     birthday: string;
-    gender: "Male" | "Female";
+    gender: Gender;
     nation: GenshinNation;
     outfits: CharacterOutfit[];
     voiceActors: VoiceActorData;
