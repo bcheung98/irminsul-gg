@@ -205,4 +205,13 @@ export const bossMaterials = [
         source: "Myriad Snare: Rustfire Chassis",
         release: { version: "3.5" },
     },
+    {
+        id: 41400344,
+        category: "boss",
+        name: "Forged Empyrean's Sigh",
+        tag: "Forged Empyrean's Sigh",
+        rarity: 4,
+        source: "Calamity Effigy",
+        release: { version: "3.6" },
+    },
 ];
