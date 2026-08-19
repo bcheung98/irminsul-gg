@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const wuwaVersions: VersionInfo[] = [
+    { version: "3.6", name: "Lamplight in Mirage, Sword's Resolve in Heart" },
     { version: "3.5", name: "Blade of Past Resounds, Lingering Dream Hymns" },
     { version: "3.4", name: "The Dream Not Dreamed" },
     { version: "3.3", name: "Reverbs From the End of Galaxies" },

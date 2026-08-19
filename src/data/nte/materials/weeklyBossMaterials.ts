@@ -29,7 +29,7 @@ export const weeklyBossMaterials = [
     {
         id: "weeklycloneboss_a02_01",
         category: "weekly",
-        name: "Dress Sleeves of Vanity",
+        name: "Dress Hem of Vanity",
         tag: "Dress Sleeves of Vanity",
         rarity: 5,
         source: "Arachne",
