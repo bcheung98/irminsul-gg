@@ -1,15 +1,15 @@
 // Component imports
-import Image from "@/components/Image";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ButtonBase from "@mui/material/ButtonBase";
+import Avatar from "@mui/material/Avatar";
 
 export default function KofiButton() {
     const matches_up_lg = useMediaQuery((theme) => theme.breakpoints.up("lg"));
     const matches_dn_md = useMediaQuery((theme) =>
-        theme.breakpoints.down("md")
+        theme.breakpoints.down("md"),
     );
     const matches = matches_up_lg || matches_dn_md;
 
@@ -31,10 +31,10 @@ export default function KofiButton() {
         >
             <TextLabel
                 icon={
-                    <Image
-                        src="https://storage.ko-fi.com/cdn/brandasset/v2/kofi_symbol.png"
-                        alt="Ko-Fi"
-                        size={[0, 20]}
+                    <Avatar
+                        variant="square"
+                        src="/kofi_symbol.png"
+                        sx={{ width: "auto", height: "20px" }}
                     />
                 }
                 title={matches && "Ko-Fi"}
