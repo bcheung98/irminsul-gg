@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
@@ -23,6 +24,14 @@ export default function RootLayout({
                         <StyledRoot>{children}</StyledRoot>
                     </main>
                 </AppRouterCacheProvider>
+                {/* Cloudflare Web Analytics */}
+                {process.env.NODE_ENV === "production" && (
+                    <Script
+                        defer
+                        src="https://static.cloudflareinsights.com/beacon.min.js"
+                        data-cf-beacon='{"token": "209a87cfdab648b8974689a97c88dfb5"}'
+                    />
+                )}
             </body>
         </html>
     );
