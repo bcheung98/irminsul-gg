@@ -7,10 +7,14 @@ import { usePathname } from "next/navigation";
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
+import NavLink from "@/components/NavLink";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -20,6 +24,9 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { useGame } from "@/context";
 
 export default function NavBarBottom() {
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
     const game = useGame();
     const pathname = usePathname();
 
@@ -49,6 +56,22 @@ export default function NavBarBottom() {
         height: { xs: "22px", sm: "24px" },
     };
 
+    const PrivacyPolicy = (
+        <Text
+            variant="body2"
+            weight="highlight"
+            sx={{
+                "&:hover": {
+                    color: theme.text.selected,
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                },
+            }}
+        >
+            <NavLink href="/privacy-policy">Privacy Policy</NavLink>
+        </Text>
+    );
+
     return (
         <AppBar
             position="relative"
@@ -74,8 +97,18 @@ export default function NavBarBottom() {
                 >
                     {navText}
                 </Text>
-                <div>
+                <Stack spacing={1} divider={<Divider />}>
                     <FlexBox spacing={2}>
+                        {matches && (
+                            <>
+                                {PrivacyPolicy}
+                                <Divider
+                                    orientation="vertical"
+                                    flexItem
+                                    sx={{ my: "4px" }}
+                                />
+                            </>
+                        )}
                         <FlexBox spacing={[1, 0.5]} wrap>
                             <Text
                                 variant="body2"
@@ -159,7 +192,8 @@ export default function NavBarBottom() {
                             </div>
                         </FlexBox>
                     </FlexBox>
-                </div>
+                    {!matches && PrivacyPolicy}
+                </Stack>
             </Toolbar>
         </AppBar>
     );
