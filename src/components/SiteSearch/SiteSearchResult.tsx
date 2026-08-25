@@ -63,6 +63,9 @@ export default function SiteSearchResult({
         ) {
             return `genshin/characters/MC_${gender.slice(0, 1)}`;
         }
+        if (item.category === "uma/skills") {
+            return `uma/skills/${item.icon}`;
+        }
         return categoryImgURLs[item.category](item.id, item.name);
     }
 
@@ -113,7 +116,12 @@ export default function SiteSearchResult({
                             iconProps={{
                                 size: 48,
                                 styles: {
-                                    border: `2px solid ${theme.border.color.primary}`,
+                                    border: ![
+                                        "uma/supports",
+                                        "uma/skills",
+                                    ].includes(item.category)
+                                        ? `2px solid ${theme.border.color.primary}`
+                                        : 0,
                                     backgroundColor: theme.background(2),
                                 },
                             }}

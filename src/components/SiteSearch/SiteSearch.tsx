@@ -18,6 +18,7 @@ export interface SearchResult extends BaseDataWithRelease {
     specialty?: string;
     outfit?: string;
     url: string;
+    icon?: string | number;
 }
 
 export default function SiteSearch() {
