@@ -24,7 +24,7 @@ export default function SkillEvo({
     handleClick,
 }: {
     evolutions?: UmaSkillEvolution[];
-    handleClick: (arg: any) => void;
+    handleClick?: (arg: any) => void;
 }) {
     const characters: UmaCharacter[] = useSWR(
         urls["uma/characters"],
@@ -58,6 +58,7 @@ export default function SkillEvo({
                             key={skill}
                             skillID={skill}
                             handleClick={handleClick}
+                            disablePopup={!Boolean(handleClick)}
                         />
                     ))}
                 </Stack>

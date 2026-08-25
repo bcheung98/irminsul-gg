@@ -7,6 +7,7 @@ import Image from "@/components/Image";
 import ContentDialog from "@/components/ContentDialog";
 import UmaSkillDescription from "@/components/_uma/SkillDescription";
 import SkillPopup from "@/components/_uma/SkillPopup";
+import NavLink from "@/components/NavLink";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -50,13 +51,11 @@ export default function SkillInfo({
               !disablePopup && setOpen(true);
           };
 
-    const cursor = !disablePopup ? "pointer" : "auto";
-
     const textColor =
         skill.rarity >= 2 ? "rgb(121, 64, 22)" : theme.text.primary;
     const textStyle = {
         color: textColor,
-        cursor,
+        cursor: "pointer",
     };
 
     const skillUnlock = skill.rarity === 4 && <Text>(3★)</Text>;
@@ -73,7 +72,7 @@ export default function SkillInfo({
         borderRadius: "4px",
         backgroundImage: getUmaSkillRarityColor(skill.rarity),
         backgroundColor: theme.background(0),
-        cursor,
+        cursor: "pointer",
         "&:hover": {
             outline: `2px solid ${
                 skill.rarity >= 2
@@ -97,7 +96,7 @@ export default function SkillInfo({
                     py: 1,
                     backgroundColor: backgroundColor || theme.background(0),
                     borderRadius: theme.contentBox.border.radius,
-                    cursor,
+                    cursor: "pointer",
                     "&:hover": !disablePopup
                         ? {
                               outline: `2px solid ${theme.border.color.primary}`,
@@ -141,6 +140,16 @@ export default function SkillInfo({
         );
     }
 
+    function SkillInfoSmall() {
+        return disablePopup ? (
+            <NavLink href={`/uma/skills/${skillID}`}>
+                <SkillInfoRoot />
+            </NavLink>
+        ) : (
+            <SkillInfoRoot />
+        );
+    }
+
     function SkillInfoRoot() {
         return (
             <Stack
@@ -160,7 +169,7 @@ export default function SkillInfo({
 
     return (
         <>
-            {expand ? <SkillInfoExpanded /> : <SkillInfoRoot />}
+            {expand ? <SkillInfoExpanded /> : <SkillInfoSmall />}
             <ContentDialog
                 open={open}
                 setOpen={setOpen}
