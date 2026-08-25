@@ -12,7 +12,7 @@ export default function SkillVersions({
 }: {
     skills?: number[];
     evo?: boolean;
-    handleClick: (arg: any) => void;
+    handleClick?: (arg: any) => void;
 }) {
     if (!skills) return <></>;
 
@@ -27,6 +27,7 @@ export default function SkillVersions({
                         key={skill}
                         skillID={skill}
                         handleClick={handleClick}
+                        disablePopup={!Boolean(handleClick)}
                     />
                 ))}
             </Stack>

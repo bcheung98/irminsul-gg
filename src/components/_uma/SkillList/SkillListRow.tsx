@@ -3,8 +3,7 @@ import { useState } from "react";
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
-import ContentDialog from "@/components/ContentDialog";
-import SkillPopup from "../SkillPopup";
+import NavLink from "@/components/NavLink";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
@@ -19,13 +18,8 @@ export default function SkillListRow({
     skill: UmaSkill;
     index: number;
 }) {
-    const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
     return (
-        <>
+        <NavLink href={`/uma/skills/${skill.id}`}>
             <Grid
                 container
                 spacing={{ xs: 1, md: 2 }}
@@ -43,7 +37,6 @@ export default function SkillListRow({
                         outlineOffset: "-2px",
                     },
                 })}
-                onClick={handleClickOpen}
             >
                 <Grid size={{ xs: 12, md: 4 }}>
                     <TextLabel
@@ -60,19 +53,6 @@ export default function SkillListRow({
                     </Text>
                 </Grid>
             </Grid>
-            <ContentDialog
-                open={open}
-                setOpen={setOpen}
-                header="Skill Details"
-                sx={{
-                    ".MuiDialog-paper": {
-                        maxWidth: "900px",
-                        maxHeight: { md: "600px" },
-                    },
-                }}
-            >
-                <SkillPopup skill={skill} showSources />
-            </ContentDialog>
-        </>
+        </NavLink>
     );
 }

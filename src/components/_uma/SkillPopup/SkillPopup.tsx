@@ -24,10 +24,12 @@ import { UmaSkill } from "@/types/uma/skill";
 export default function SkillPopup({
     skill,
     showSources = false,
+    page = false,
     defaultInherited = false,
 }: {
     skill: UmaSkill;
     showSources?: boolean;
+    page?: boolean;
     defaultInherited?: boolean;
 }) {
     const theme = useTheme();
@@ -73,7 +75,18 @@ export default function SkillPopup({
     const skillUnlock = rarity === 4 && <Text sx={textStyle}>(3★)</Text>;
 
     return (
-        <Stack spacing={2}>
+        <Stack
+            spacing={2}
+            sx={
+                page
+                    ? {
+                          backgroundColor: theme.background(1),
+                          p: 2,
+                          borderRadius: theme.contentBox.border.radius,
+                      }
+                    : {}
+            }
+        >
             <Card
                 sx={{
                     p: 1,
@@ -94,7 +107,7 @@ export default function SkillPopup({
                         />
                         {skillUnlock}
                     </Stack>
-                    <Stack spacing={0.5} sx={{ width: "90%" }}>
+                    <Stack spacing={0.5} sx={{ width: "100%", pr: 1 }}>
                         <FlexBox
                             spacing={[0.5, 1]}
                             wrap
@@ -135,7 +148,7 @@ export default function SkillPopup({
                 skill={currentSkill}
                 showSources={showSources}
                 inherited={showInherited}
-                handleClick={handleClick}
+                handleClick={!page ? handleClick : undefined}
                 handleSwitchChange={handleSwitchChange}
             />
         </Stack>

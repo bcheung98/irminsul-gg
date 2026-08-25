@@ -3,11 +3,14 @@ import SkillDetails from "@/components/_uma/SkillDetails";
 import SkillSources from "@/components/_uma/SkillSources";
 import SkillVersions from "@/components/_uma/SkillVersions";
 import SkillEvo from "@/components/_uma/SkillEvo";
+import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import ButtonBase from "@mui/material/ButtonBase";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 // Helper imports
 import { useUmaContext } from "@/context";
@@ -26,7 +29,7 @@ export default function SkillAttributes({
     skill: UmaSkill;
     showSources?: boolean;
     inherited?: boolean;
-    handleClick: (arg: any) => void;
+    handleClick?: (arg: any) => void;
     handleSwitchChange: () => void;
 }) {
     const theme = useTheme();
@@ -41,6 +44,8 @@ export default function SkillAttributes({
         );
     }
     if (skill.evo) skillVersions = [skill.evo.old];
+
+    const page = !Boolean(handleClick);
 
     return (
         <Stack spacing={2}>
@@ -57,6 +62,39 @@ export default function SkillAttributes({
                                 skill={skill}
                                 backgroundColor={theme.background(0)}
                             />
+                        )}
+                        {!page && (
+                            <ButtonBase
+                                href={`/uma/skills/${skill.id}`}
+                                target="_blank"
+                                sx={{
+                                    width: "max-content",
+                                    height: "32px",
+                                    px: 2,
+                                    borderRadius: "4px",
+                                    backgroundColor: theme.palette.info.main,
+                                    "&:hover": {
+                                        backgroundColor:
+                                            theme.palette.info.dark,
+                                    },
+                                    transition: "background-color 0.15s",
+                                }}
+                            >
+                                <TextLabel
+                                    icon={
+                                        <OpenInNewIcon
+                                            sx={{
+                                                color: theme.text.primary,
+                                                fontSize: "18px",
+                                            }}
+                                        />
+                                    }
+                                    title="Open skill details page"
+                                    titleProps={{ variant: "body2" }}
+                                    spacing={0.5}
+                                    reverse
+                                />
+                            </ButtonBase>
                         )}
                     </Stack>
                 </Grid>

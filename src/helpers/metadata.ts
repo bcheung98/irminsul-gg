@@ -20,6 +20,8 @@ interface MetadataOverrides {
     twitter?: TwitterOverrides;
 }
 
+const squareIconTags = ["equipment", "bangboos", "skills"];
+
 export function getMetadata({
     game,
     tag,
@@ -100,15 +102,17 @@ export function getMetadata({
         },
     ];
 
-    if (tag && ["equipment", "bangboos"].includes(tag) && attributes) {
+    const imgSize = tag === "skills" ? 64 : 256;
+
+    if (tag && squareIconTags.includes(tag) && attributes) {
         twitterImgType = "summary";
         images = [
             {
                 url: `https://assets.irminsul.gg/v2/${categoryImgURLs[
                     `${game}/${tag}`
                 ](attributes.id, attributes.name)}.png`,
-                width: 256,
-                height: 256,
+                width: imgSize,
+                height: imgSize,
                 alt: attributes.displayName,
             },
         ];
@@ -137,64 +141,12 @@ export function getMetadata({
         robots: "index, follow",
     };
 
-    if (!attributes || ["equipment", "bangboos"].includes(tag || "")) {
+    if (!attributes || squareIconTags.includes(tag || "")) {
         metadata.openGraph!.images = images;
         metadata.twitter!.images = images;
     }
 
     return metadata;
-}
-
-function getDescription({
-    game,
-    attributes,
-}: {
-    game: Game;
-    tag: string;
-    attributes: AttributeData;
-}) {
-    let res = "";
-    switch (game) {
-        case "genshin":
-        case "hsr":
-        case "wuwa":
-        case "nte":
-            if (attributes.weaponType) {
-                if (attributes.element) {
-                    res = `Rarity: ${rarity(attributes.rarity)}\n${attributeNames[game].element}: ${attributes.element}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-                } else {
-                    res = `Rarity: ${rarity(attributes.rarity)}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-                }
-            }
-            break;
-        case "zzz":
-            if (attributes.weaponType) {
-                if (attributes.element) {
-                    let element = attributes.element;
-                    if (attributes.subElement) element = attributes.subElement;
-                    res = `Rank: ${zzzRarityMap[attributes.rarity || 4]}\n${attributeNames[game].element}: ${element}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-                } else {
-                    res = `Rank: ${zzzRarityMap[attributes.rarity || 3]}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-                }
-            } else {
-                res = `Rank: ${zzzRarityMap[attributes.rarity || 4]}\n\n`;
-            }
-            break;
-        case "uma":
-            res = `[${attributes.title}] ${attributes.name}`;
-            break;
-        case "endfield":
-            if (attributes.specialty) {
-                res = `Rarity: ${rarity(attributes.rarity)}\n${attributeNames[game].element}: ${attributes.element}\nSpecialty: ${attributes.specialty}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-            } else {
-                res = `Rarity: ${rarity(attributes.rarity)}\n${attributeNames[game].weaponType}: ${attributes.weaponType}\n\n`;
-            }
-            break;
-        default:
-            res =
-                "A comprehensive database and collection of tools for gacha games.";
-    }
-    return res;
 }
 
 export const plannerMetaData = {
@@ -207,18 +159,3 @@ export const bannerArchiveMetaData = (game: Game) => ({
     title: "Banner Archive",
     description: `A list of all ${games[game].name} Banners`,
 });
-
-const rarity = (r = 0) =>
-    range(r || 0)
-        .map((_) => "★")
-        .join("");
-
-const attributeNames: GameData<Record<string, string>> = {
-    genshin: { element: "Element", weaponType: "Weapon Type" },
-    hsr: { element: "Combat Type", weaponType: "Path" },
-    wuwa: { element: "Attribute", weaponType: "Weapon Type" },
-    zzz: { element: "Attribute", weaponType: "Specialty" },
-    uma: { element: "", weaponType: "" },
-    endfield: { element: "Element", weaponType: "Weapon Type" },
-    nte: { element: "Esper Type", weaponType: "Arc Type" },
-};

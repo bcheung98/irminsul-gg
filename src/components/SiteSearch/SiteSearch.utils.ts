@@ -17,6 +17,7 @@ import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 import { NTECharacter, NTEWeapon } from "@/types/nte";
+import { UmaSkill } from "@/types/uma/skill";
 
 export async function getItems(
     hideUnreleasedContent = true,
@@ -115,6 +116,11 @@ export async function getItems(
             "uma",
             pathname,
         ),
+        "uma/skills": filterUmaSkills(
+            hideUmaJPContent,
+            await getDataSet<UmaSkill>("uma/skills"),
+            pathname,
+        ),
         "endfield/characters": filterUnreleasedContent(
             hideUnreleasedContent,
             await getDataSet<EndfieldCharacter>("endfield/operators"),
@@ -143,17 +149,36 @@ export async function getItems(
         .map(([category, data]) =>
             data.map((item) => ({
                 id: item.id,
-                name: item.name,
-                displayName: item.displayName || item.name,
+                name:
+                    typeof item.name === "string"
+                        ? item.name
+                        : item.name.global ||
+                          item.name.jp ||
+                          item.name.jpNative,
+                displayName:
+                    "displayName" in item
+                        ? item.displayName || item.name
+                        : item.name.global ||
+                          item.name.jp ||
+                          item.name.jpNative,
                 rarity: item.rarity,
                 outfit: "outfit" in item ? item.outfit : undefined,
                 specialty: "specialty" in item ? item.specialty : undefined,
                 aptitude: "aptitude" in item ? "" : undefined, // "Fake" key to format Uma title
                 category: category,
-                release: item.release,
-                url: item.url
-                    ? `/${categoryURLs[category]}/${formatHref(item.url)}`
-                    : "",
+                release:
+                    "release" in item
+                        ? item.release
+                        : {
+                              version: "",
+                          },
+                url:
+                    "url" in item
+                        ? item.url
+                            ? `/${categoryURLs[category]}/${formatHref(item.url)}`
+                            : ""
+                        : `/${categoryURLs[category]}/${item.id.toString()}`,
+                icon: "icon" in item ? item.icon : undefined,
             })),
         )
         .flat();
@@ -161,4 +186,17 @@ export async function getItems(
         data = data.filter((item) => item.category.startsWith(game));
     }
     return data;
+}
+
+function filterUmaSkills(
+    hideUnreleasedContent = false,
+    items: UmaSkill[],
+    pathname?: string,
+) {
+    if (pathname !== "calendar") {
+        if (hideUnreleasedContent) {
+            items = items.filter((item) => item.global);
+        }
+    }
+    return items;
 }
