@@ -1,6 +1,7 @@
 import { VersionInfo } from "@/types/version";
 
 export const hsrVersions: VersionInfo[] = [
+    { version: "4.5", name: "To Roll the Stars in Astropolis" },
     { version: "4.4", name: "In Ravages Does the Whistle Sound" },
     { version: "4.3", name: "The Lethe Below the Living" },
     { version: "4.2", name: "So Laughed the Masses" },
