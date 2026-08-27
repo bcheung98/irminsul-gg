@@ -16,3 +16,5 @@ export const weapons = [
 ] as const;
 
 export const rarities = [5, 4, 3, 2, 1] as const;
+
+export const nteMainCharIDs = [1051];

@@ -20,6 +20,9 @@ import { categories, categoryImgURLs } from "@/data/categories";
 import { games } from "@/data/games";
 import { useSettingsStore, useSiteSearchStore } from "@/stores";
 import { formatTitle } from "@/helpers/uma/formatTitle";
+import { wuwaMainCharIDs } from "@/data/wuwa/common";
+import { endfieldMainCharIDs } from "@/data/endfield/common";
+import { nteMainCharIDs } from "@/data/nte/common";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";
@@ -56,12 +59,24 @@ export default function SiteSearchResult({
 
     const { gender } = useSettingsStore();
 
-    function getImgURL() {
+    function getImageURL() {
         if (
             game.tag === "genshin" &&
             item.id.toString().startsWith("10000005")
         ) {
             return `genshin/characters/MC_${gender.slice(0, 1)}`;
+        }
+        if (game.tag === "hsr" && item.id.toString().startsWith("800")) {
+            return `hsr/characters/${item.id}_${gender.slice(0, 1)}`;
+        }
+        if (game.tag === "wuwa" && wuwaMainCharIDs.includes(item.id)) {
+            return `wuwa/resonators/MC_${gender.slice(0, 1)}`;
+        }
+        if (game.tag === "endfield" && endfieldMainCharIDs.includes(item.id)) {
+            return `endfield/operators/${item.id}_${gender.slice(0, 1)}`;
+        }
+        if (game.tag === "nte" && nteMainCharIDs.includes(item.id)) {
+            return `nte/espers/${item.id}_${gender.slice(0, 1)}`;
         }
         if (item.category === "uma/skills") {
             return `uma/skills/${item.icon}`;
@@ -112,7 +127,7 @@ export default function SiteSearchResult({
                 >
                     <NavLink href={item.url}>
                         <TextLabel
-                            icon={getImgURL()}
+                            icon={getImageURL()}
                             iconProps={{
                                 size: 48,
                                 styles: {

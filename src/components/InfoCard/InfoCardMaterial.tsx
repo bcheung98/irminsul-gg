@@ -14,6 +14,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { infoCardStyles } from "./InfoCard.styles";
+import { getImageURL } from "./InfoCard.utils";
 import { formatHref } from "@/utils";
 import { useMaterials } from "@/helpers/materials";
 import { useSettingsStore } from "@/stores";
@@ -50,12 +51,7 @@ export default function InfoCardMaterial({
         imgSize = imgSize - imgSize * 0.3;
     }
 
-    let imgURL = `${tag}/${id}`;
-    if (game === "genshin" && id.toString().startsWith("10000005")) {
-        imgURL = `${tag}/MC_${gender.slice(0, 1)}`;
-    } else if (url) {
-        imgURL = `${tag}/${url}`;
-    }
+    const imgURL = getImageURL({ game, tag, id, gender, url });
 
     const styles = infoCardStyles({
         game,

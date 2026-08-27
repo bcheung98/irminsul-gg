@@ -14,6 +14,9 @@ import { categories, categoryImgURLs } from "@/data/categories";
 import { useRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
 import { usePlannerData } from "../Planner/Planner.utils";
+import { wuwaMainCharIDs } from "@/data/wuwa/common";
+import { endfieldMainCharIDs } from "@/data/endfield/common";
+import { nteMainCharIDs } from "@/data/nte/common";
 
 // Type imports
 import { GameNoUma } from "@/types";
@@ -55,9 +58,21 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         ).toLowerCase()}/${formatHref(href)}`;
     }
 
-    function getImgURL() {
+    function getImageURL() {
         if (game === "genshin" && item?.name.includes("Traveler")) {
             return `genshin/characters/MC_${gender.slice(0, 1)}`;
+        }
+        if (game === "hsr" && item?.name.includes("Trailblazer")) {
+            return `hsr/characters/${item.id}_${gender.slice(0, 1)}`;
+        }
+        if (game === "wuwa" && wuwaMainCharIDs.includes(item!.id)) {
+            return `wuwa/resonators/MC_${gender.slice(0, 1)}`;
+        }
+        if (game === "endfield" && endfieldMainCharIDs.includes(item!.id)) {
+            return `endfield/operators/${item!.id}_${gender.slice(0, 1)}`;
+        }
+        if (game === "nte" && nteMainCharIDs.includes(item!.id)) {
+            return `nte/espers/${item!.id}_${gender.slice(0, 1)}`;
         }
         return categoryImgURLs[`${game}/${type}`](item!.id);
     }
@@ -89,7 +104,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     return (
         <TextLabel
-            icon={getImgURL()}
+            icon={getImageURL()}
             iconProps={{
                 size: 48,
                 styles: {

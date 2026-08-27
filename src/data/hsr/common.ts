@@ -32,4 +32,5 @@ export const worlds = [
     "Interastral Peace Corporation",
     "Cosmic",
     "Amphoreus",
+    "Planarcadia",
 ] as const;

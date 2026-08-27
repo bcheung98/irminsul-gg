@@ -1,4 +1,4 @@
-import { BaseData, VoiceActorData } from "..";
+import { BaseData, Gender, VoiceActorData } from "..";
 import { WuWaElement, WuWaRarity, WuWaWeaponType } from ".";
 import { VersionWithDate } from "../version";
 import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
@@ -22,7 +22,7 @@ export interface WuWaCharacter extends BaseData {
     materials: WuWaCharacterMaterials;
     description: string;
     birthday: string;
-    gender: "Male" | "Female" | "Adaptive";
+    gender: Gender
     nation: string;
     outfits: CharacterOutfit[];
     voiceActors: VoiceActorData;
