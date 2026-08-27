@@ -1,4 +1,4 @@
-import { BaseData, VoiceActorData } from "@/types";
+import { BaseData, Gender, VoiceActorData } from "@/types";
 import { HSRElement, HSRRarity, HSRWeaponType, HSRWorld } from ".";
 import { VersionWithDate } from "../version";
 import { CharacterOutfit, CharacterStats } from "@/types/character";
@@ -24,7 +24,7 @@ export interface HSRCharacter extends BaseData {
     stats: HSRCharacterStats;
     materials: HSRCharacterMaterials;
     description: string;
-    gender: "Male" | "Female" | "Adaptive";
+    gender: Gender
     faction: string;
     world: HSRWorld;
     outfits: CharacterOutfit[];

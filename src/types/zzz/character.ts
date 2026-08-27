@@ -5,7 +5,7 @@ import {
     ZZZRarity,
     ZZZWeaponType,
 } from ".";
-import { BaseData, VoiceActorData } from "..";
+import { BaseData, Gender, VoiceActorData } from "..";
 import { CharacterColors, CharacterOutfit, CharacterStats } from "../character";
 import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
 import { VersionWithDate } from "../version";
@@ -27,7 +27,7 @@ export interface ZZZCharacter extends BaseData {
     materials: ZZZCharacterMaterials;
     description: string;
     birthday: string;
-    gender: "Male" | "Female";
+    gender: Gender;
     faction: ZZZFaction;
     colors: CharacterColors;
     outfits: CharacterOutfit[];

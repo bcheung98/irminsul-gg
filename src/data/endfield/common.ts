@@ -26,3 +26,5 @@ export const opClasses = [
 export const rarities = [6, 5, 4, 3, 2, 1] as const;
 
 export const statAttributes = ["str", "agi", "int", "wil"] as const;
+
+export const endfieldMainCharIDs = [1003];

@@ -6,7 +6,7 @@ import RarityStars from "@/components/RarityStars";
 import DateObject from "@/helpers/dates";
 import { formatHref } from "@/utils";
 import { useGameTag } from "@/context";
-import { useStore, useServerStore } from "@/stores";
+import { useStore, useServerStore, useSettingsStore } from "@/stores";
 
 // Type imports
 import { HSRCharacter } from "@/types/hsr/character";
@@ -21,6 +21,7 @@ export default function CharacterList({
 }) {
     const game = useGameTag();
     const server = useStore(useServerStore, (state) => state[game]);
+    const { gender } = useSettingsStore();
 
     const columns = {
         name: "Name",
@@ -37,7 +38,9 @@ export default function CharacterList({
                 label: {
                     title: character.displayName,
                     titleProps: { variant: "body1" },
-                    icon: `hsr/characters/${character.id}`,
+                    icon: character.id.toString().startsWith("800")
+                        ? `hsr/characters/${character.id}_${gender.slice(0, 1)}`
+                        : `hsr/characters/${character.id}`,
                     iconProps: {
                         size: 48,
                         borderRadius: "4px",

@@ -20,6 +20,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // Helper imports
 import { useGameTag } from "@/context";
 import { useSettingsStore } from "@/stores";
+import { wuwaMainCharIDs } from "@/data/wuwa/common";
+import { endfieldMainCharIDs } from "@/data/endfield/common";
+import { nteMainCharIDs } from "@/data/nte/common";
 
 // Type imports
 import { CharacterOutfit } from "@/types/character";
@@ -80,13 +83,15 @@ export default function CharacterSplash({
                     : `${game}/characters/${id}_splash`;
                 break;
             case "hsr":
-            default:
-                url = `${game}/characters/${id}_splash`;
+                url = id.toString().startsWith("800")
+                    ? `${game}/characters/${id}_${gender.slice(0, 1)}_splash`
+                    : `${game}/characters/${id}_splash`;
                 break;
             case "wuwa":
-                popup
-                    ? (url = `${game}/resonators/${id}_splash`)
-                    : (url = `${game}/resonators/${id}_card`);
+                let type = popup ? "splash" : "card";
+                url = wuwaMainCharIDs.includes(id)
+                    ? `${game}/resonators/MC_${gender.slice(0, 1)}_${type}`
+                    : `${game}/resonators/${id}_${type}`;
                 break;
             case "zzz":
                 url = `${game}/agents/${id}_splash`;
@@ -95,10 +100,17 @@ export default function CharacterSplash({
                 url = `${game}/characters/${id}_card`;
                 break;
             case "endfield":
-                url = `${game}/operators/${id}_splash`;
+                url = endfieldMainCharIDs.includes(id)
+                    ? `${game}/operators/${id}_${gender.slice(0, 1)}_splash`
+                    : `${game}/operators/${id}_splash`;
                 break;
             case "nte":
-                url = `${game}/espers/${id}_splash`;
+                url = nteMainCharIDs.includes(id)
+                    ? `${game}/espers/${id}_${gender.slice(0, 1)}_splash`
+                    : `${game}/espers/${id}_splash`;
+                break;
+            default:
+                url = `${game}/characters/${id}_splash`;
                 break;
         }
         return `${url}${tabValue !== 0 ? tabValue : ""}`;
@@ -112,19 +124,32 @@ export default function CharacterSplash({
                         ? `${game}/characters/MC_${gender.slice(0, 1)}_icon`
                         : `${game}/characters/${id}_icon`
                 }${index !== 0 ? `${index}` : ""}`;
+            case "hsr":
+                return `${
+                    id.toString().startsWith("800")
+                        ? `${game}/characters/${id}_${gender.slice(0, 1)}`
+                        : `${game}/characters/${id}`
+                }${index !== 0 ? `_${index}` : ""}`;
             case "wuwa":
-                return `${game}/resonators/${id}${
-                    index !== 0 ? `_${index}` : ""
-                }`;
+                return `${
+                    wuwaMainCharIDs.includes(id)
+                        ? `${game}/resonators/MC_${gender.slice(0, 1)}`
+                        : `${game}/resonators/${id}`
+                }${index !== 0 ? `_${index}` : ""}`;
             case "zzz":
                 return `${game}/agents/${id}${index !== 0 ? `_${index}` : ""}`;
             case "endfield":
-                return `${game}/operators/${id}${
-                    index !== 0 ? `${index}` : ""
-                }`;
+                return `${
+                    endfieldMainCharIDs.includes(id)
+                        ? `${game}/operators/${id}_${gender.slice(0, 1)}`
+                        : `${game}/operators/${id}`
+                }${index !== 0 ? `_${index}` : ""}`;
             case "nte":
-                return `${game}/espers/${id}${index !== 0 ? `_${index}` : ""}`;
-            case "hsr":
+                return `${
+                    nteMainCharIDs.includes(id)
+                        ? `${game}/espers/${id}_${gender.slice(0, 1)}`
+                        : `${game}/espers/${id}`
+                }${index !== 0 ? `_${index}` : ""}`;
             case "uma":
             default:
                 return `${game}/characters/${id}${

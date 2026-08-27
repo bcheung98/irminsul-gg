@@ -171,7 +171,7 @@ export default function SettingsList() {
         ) {
             group1.push(statDisplaySettings);
         }
-        if (["genshin"].includes(gameTag)) {
+        if (["genshin", "hsr", "wuwa", "endfield", "nte"].includes(gameTag)) {
             group1.push(genderSettings);
         }
         group1.push(serverSettings);

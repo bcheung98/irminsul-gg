@@ -24,3 +24,5 @@ export const echoClass = {
     "2": "Common",
     "1": "",
 };
+
+export const wuwaMainCharIDs = [1501, 1604, 1406, 1310];

@@ -1,5 +1,5 @@
 import { NTEElement, NTERarity, NTEWeaponType } from ".";
-import { BaseData, VoiceActorData } from "..";
+import { BaseData, Gender, VoiceActorData } from "..";
 import { CharacterOutfit, CharacterStats } from "../character";
 import { CharacterSkillsList, Skill, SkillKeyword } from "../skill";
 import { VersionWithDate } from "../version";
@@ -21,7 +21,7 @@ export interface NTECharacter extends BaseData {
     materials: NTECharacterMaterials;
     description: string;
     birthday: string;
-    gender: "Male" | "Female" | "Adaptive";
+    gender: Gender
     faction: string;
     outfits: CharacterOutfit[];
     voiceActors: VoiceActorData;

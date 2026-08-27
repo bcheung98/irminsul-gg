@@ -1,4 +1,4 @@
-import { BaseData, VoiceActorData } from "@/types";
+import { BaseData, Gender, VoiceActorData } from "@/types";
 import {
     EndfieldClass,
     EndfieldElement,
@@ -27,7 +27,7 @@ export interface EndfieldCharacter extends BaseData {
     materials: EndfieldCharacterMaterials;
     description: string;
     birthday: string;
-    gender: "Male" | "Female" | "Adaptive";
+    gender: Gender
     faction: string;
     outfits: CharacterOutfit[];
     snapshots: EndfieldCharacterSnapshot[];
