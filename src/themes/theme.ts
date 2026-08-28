@@ -1,17 +1,17 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
-import { darkTheme } from "./darkTheme";
-import { nextTheme } from "./nextTheme";
 import { getContrastText } from "@/utils/getContrastText";
+import { nextThemeData } from "./nextTheme";
+import { darkThemeData } from "./darkTheme";
 
-export const themeList = [nextTheme, darkTheme] as const;
-
-export const themeNames = themeList.map((t) => t.name);
+// Make sure to add any new themes to /src/types/mui.d.ts
+export const themeDataList = [nextThemeData, darkThemeData] as const;
 
 export default function getTheme(id: number) {
-    let theme =
-        themeList[themeList.findIndex((theme) => theme.id === id)] || nextTheme;
+    const theme = createTheme(
+        themeDataList.find((theme) => theme.id === id) ?? nextThemeData,
+    );
 
     const baseThemeData = {
         breakpoints: {

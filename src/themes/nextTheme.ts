@@ -1,7 +1,6 @@
 "use client";
 
 import { Geist } from "next/font/google";
-import { createTheme } from "@mui/material";
 import { getThemeBackgroundColors } from "@/helpers/styles";
 import { Shade } from "@/types/theme";
 
@@ -362,5 +361,3 @@ export const nextThemeData = {
         },
     },
 };
-
-export const nextTheme = createTheme(nextThemeData);
