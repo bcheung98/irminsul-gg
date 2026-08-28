@@ -10,7 +10,7 @@ type ModernTheme = typeof nextThemeData;
 type ThemeData = DarkTheme & ModernTheme;
 
 export type CustomTheme = {
-    [Key in keyof ThemeData]: ThemeData[Key];
+    [Key in Exclude<keyof ThemeData, "palette" | "typography">]: ThemeData[Key];
 };
 
 declare module "@mui/material/styles" {
