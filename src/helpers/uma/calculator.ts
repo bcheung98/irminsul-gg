@@ -15,7 +15,7 @@ export function calculateStatsScore(stats: DataArray) {
     return stats.slice(0, 5).map((i) => statScores[i], 0) as StatArray;
 }
 
-function getMultipler(grade: UmaRank) {
+function getAptitudeMultipler(grade: UmaRank) {
     switch (grade) {
         case "S":
         case "A":
@@ -30,6 +30,20 @@ function getMultipler(grade: UmaRank) {
         default:
             return 0.7;
     }
+}
+
+function getScoreMultiplier(aptitudes: UmaAptitude[], multipliers: number[]) {
+    let res = 1.0;
+    if (
+        aptitudes.every((apt) => terrain.includes(apt)) ||
+        aptitudes.every((apt) => distances.includes(apt)) ||
+        aptitudes.every((apt) => strategies.includes(apt))
+    ) {
+        res = Math.max(...multipliers);
+    } else {
+        res = multipliers.reduce((a, c) => a * c);
+    }
+    return res;
 }
 
 const valueOverrides: Record<number, number> = {
@@ -73,7 +87,7 @@ export function calculateSkillScore(
     let score = getBaseSkillRatingValue(skill);
     if (checkType) {
         const aptitudeMatch = checkType.split("/") as UmaAptitude[];
-        let multiplier = 1.0;
+        const multipliers: number[] = [];
         aptitudeMatch.forEach((apt) => {
             let aptRank = "";
             if (terrain.includes(apt)) {
@@ -83,9 +97,9 @@ export function calculateSkillScore(
             } else if (strategies.includes(apt)) {
                 aptRank = aptitude.strategy[apt.toLowerCase()];
             }
-            multiplier *= getMultipler(aptRank as UmaRank);
+            multipliers.push(getAptitudeMultipler(aptRank as UmaRank));
         });
-        score *= multiplier;
+        score *= getScoreMultiplier(aptitudeMatch, multipliers);
     }
     return Math.round(score);
 }
