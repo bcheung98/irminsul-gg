@@ -8,6 +8,7 @@ export interface SettingsState {
     statDisplay: SkillDisplay;
     gender: Gender;
     hideUnreleasedContent: boolean;
+    _hasHydrated: boolean;
 }
 
 export interface SettingsActions {
@@ -25,6 +26,7 @@ export const initialState: SettingsState = {
     statDisplay: "slider",
     gender: "Male",
     hideUnreleasedContent: true,
+    _hasHydrated: false,
 };
 
 export const useSettingsStore = create(
@@ -47,6 +49,16 @@ export const useSettingsStore = create(
                 return set(() => ({ hideUnreleasedContent: payload }));
             },
         }),
-        { name: "v2/settings" },
+        {
+            name: "v2/settings",
+            skipHydration: true,
+            onRehydrateStorage: () => {
+                return () => {
+                    useSettingsStore.setState({
+                        _hasHydrated: true,
+                    });
+                };
+            },
+        },
     ),
 );

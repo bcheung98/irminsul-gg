@@ -1,4 +1,5 @@
 import { usePathname } from "next/navigation";
+import useSWR from "swr";
 
 // Component imports
 import TextLabel from "@/components/TextLabel";
@@ -10,7 +11,7 @@ import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // Helper imports
-import { useDataContext } from "@/context";
+import { urls } from "@/api";
 import { formatHref } from "@/utils";
 import { navItems } from "@/data/navItems";
 import { rarityMap } from "@/data/uma/common";
@@ -22,16 +23,23 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
-    const pathname = usePathname().split("/");
-    const game = pathname[1] as Game;
+    const pathname = usePathname();
+    const pathSplit = pathname.split("/");
+
+    const game = pathSplit[1] as Game;
+    const url = pathSplit.slice(1, 3).join("/") as keyof typeof urls;
+
+    const { data, error, isLoading } = useSWR(urls[url], (url: string) =>
+        fetch(url).then((r) => r.json()),
+    );
+
+    const pageData = !isLoading && !error ? data : [];
 
     const items = navItems[game];
 
-    const dataContext = useDataContext();
-
     function getCurrentData(item: string) {
-        const data = dataContext.find(
-            (d) => formatHref(d.url || `${d.id}`) === item,
+        const data = pageData.find(
+            (d: BreadcrumbData) => formatHref(d.url || `${d.id}`) === item,
         );
         if (data) {
             let res = data.displayName || data.name;
@@ -56,20 +64,20 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                 titleProps={{
                     variant: matches ? "body2" : "subtitle2",
                     color:
-                        pathname.length > 2
+                        pathSplit.length > 2
                             ? theme.appbar.color.primary
                             : theme.text.selected,
                     sx: {
                         userSelect: "none",
                         textShadow:
-                            pathname.length > 2
+                            pathSplit.length > 2
                                 ? "none"
                                 : `${theme.text.selected} 1px 1px 16px`,
                     },
                 }}
-                href={pathname.length > 2 ? `/${game}` : ""}
+                href={pathSplit.length > 2 ? `/${game}` : ""}
             />
-            {pathname.slice(2).map((item, index) => (
+            {pathSplit.slice(2).map((item, index) => (
                 <TextLabel
                     title={
                         items.find((i) => item === i.href)?.title ||
@@ -78,20 +86,20 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
                     titleProps={{
                         variant: matches ? "body2" : "subtitle2",
                         color:
-                            index + 2 !== pathname.length - 1
+                            index + 2 !== pathSplit.length - 1
                                 ? theme.appbar.color.primary
                                 : theme.text.selected,
                         sx: {
                             userSelect: "none",
                             textShadow:
-                                index + 2 !== pathname.length - 1
+                                index + 2 !== pathSplit.length - 1
                                     ? "none"
                                     : `${theme.text.selected} 1px 1px 16px`,
                         },
                     }}
                     href={
-                        index + 2 !== pathname.length - 1
-                            ? `/${game}/${pathname
+                        index + 2 !== pathSplit.length - 1
+                            ? `/${game}/${pathSplit
                                   .slice(2, index + 3)
                                   .join("/")}`
                             : ""
@@ -100,4 +108,20 @@ export default function Breadcrumbs({ website }: { website: GameInfo }) {
             ))}
         </MuiBreadcrumbs>
     );
+}
+
+interface BreadcrumbData {
+    id: string | number;
+    url?: string;
+    displayName?: string;
+    name:
+        | string
+        | {
+              global?: string;
+              jp?: string;
+          };
+    rarity?: keyof typeof rarityMap;
+    specialty?: string;
+    conditions?: unknown;
+    outfit?: string;
 }
