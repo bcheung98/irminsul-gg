@@ -29,7 +29,7 @@
         "@takumi-rs/core-linux-x64-gnu": "1.8.7",
         "html-react-parser": "^5.1.18",
         "match-sorter": "^8.0.0",
-        "next": "16.1.0",
+        "next": "^16.3.3",
         "react": "^19.2.5",
         "react-dom": "19.2.3",
         "react-window": "^2.3.0",
