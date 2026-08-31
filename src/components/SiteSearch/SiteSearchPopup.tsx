@@ -2,6 +2,7 @@ import {
     useCallback,
     useEffect,
     useMemo,
+    useRef,
     useState,
     useTransition,
 } from "react";
@@ -78,21 +79,35 @@ export default function SiteSearchPopup({
     const [dataLoading, startDataTransition] = useTransition();
     const [hitsLoading, startHitsTransition] = useTransition();
 
+    const loadedKey = useRef<string | null>(null);
+
     const [data, setData] = useState<SearchResult[]>([]);
     useEffect(() => {
+        if (!open) return;
+
+        let currentGame: Game | undefined = game;
+        if (!gameFilter) currentGame = undefined;
+
+        const key = [
+            currentGame ?? "",
+            hideUnreleasedContent,
+            hideUmaJPContent,
+        ].join("|");
+
+        if (loadedKey.current === key) return;
+        loadedKey.current = key;
+
         startDataTransition(async () => {
-            let currentGame: Game | undefined = game;
-            if (!gameFilter) currentGame = undefined;
-            const items = await getItems(
+            const items = await getItems({
                 hideUnreleasedContent,
-                currentGame,
+                game: currentGame,
+                gameFilter,
                 hideUmaJPContent,
-            );
-            startDataTransition(() => {
-                setData(items);
             });
+
+            setData(items);
         });
-    }, [game, gameFilter, hideUnreleasedContent, hideUmaJPContent]);
+    }, [open, game, gameFilter, hideUnreleasedContent, hideUmaJPContent]);
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
