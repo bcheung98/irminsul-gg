@@ -1,8 +1,8 @@
 import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
-import { themeList } from "@/themes/theme";
+import { themeDataList } from "@/themes/theme";
 import { Game } from "@/types";
 
-export const themeButtons: ToggleButtonProps[] = themeList.map((theme) => ({
+export const themeButtons: ToggleButtonProps[] = themeDataList.map((theme) => ({
     value: theme.id,
     label: theme.name,
 }));

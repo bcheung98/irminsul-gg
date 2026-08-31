@@ -1,28 +1,18 @@
-import {
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-    useTransition,
-} from "react";
-import { matchSorter } from "match-sorter";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
 // Component imports
-import SiteSearchResult from "./SiteSearchResult";
 import SearchDialog from "@/components/SearchDialog";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
-import Image from "@/components/Image";
 import Switch from "@/components/Switch";
+import {
+    Loader,
+    SearchHistory,
+    SearchResults,
+} from "./SiteSearchPopup.components";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import PushPinIcon from "@mui/icons-material/PushPin";
-import HistoryIcon from "@mui/icons-material/History";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
 import { useGame, useGameTag } from "@/context";
@@ -33,6 +23,7 @@ import {
     useServerStore,
 } from "@/stores";
 import { getItems } from "./SiteSearch.utils";
+import { useSiteSearchPopup } from "./SiteSearchPopup.hooks";
 
 // Type imports
 import { Game } from "@/types";
@@ -49,10 +40,8 @@ export default function SiteSearchPopup({
     setOpen,
     handleSelect,
 }: SiteSearchPopupProps) {
-    const theme = useTheme();
-
-    const game = useGameTag();
-    const gameTitle = useGame();
+    const game = useGame();
+    const gameTag = useGameTag();
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
@@ -61,12 +50,12 @@ export default function SiteSearchPopup({
 
     // Uma specific
     const server = useServerStore().uma;
-    const hideUmaJPContent = game === "uma" && server === "NA";
+    const hideUmaJPContent = gameTag === "uma" && server === "NA";
 
-    const [gameFilter, setGameFilter] = useState(game !== undefined);
-    const handleSwitchChange = () => {
-        setGameFilter(!gameFilter);
-    };
+    const [gameFilter, setGameFilter] = useState(gameTag !== undefined);
+    const handleSwitchChange = useCallback(() => {
+        setGameFilter((previous) => !previous);
+    }, []);
 
     const pinnedSearches =
         useStore(useSiteSearchStore, (state) => state.pinned) || [];
@@ -76,244 +65,90 @@ export default function SiteSearchPopup({
     const { removeRecentSearch } = useSiteSearchStore();
 
     const [dataLoading, startDataTransition] = useTransition();
-    const [hitsLoading, startHitsTransition] = useTransition();
+
+    const loadedKey = useRef<string | null>(null);
 
     const [data, setData] = useState<SearchResult[]>([]);
     useEffect(() => {
+        if (!open) return;
+
+        let currentGame: Game | undefined = gameTag;
+        if (!gameFilter) currentGame = undefined;
+
+        const key = [
+            currentGame ?? "",
+            hideUnreleasedContent,
+            hideUmaJPContent,
+        ].join("|");
+
+        if (loadedKey.current === key) return;
+        loadedKey.current = key;
+
         startDataTransition(async () => {
-            let currentGame: Game | undefined = game;
-            if (!gameFilter) currentGame = undefined;
-            const items = await getItems(
+            const items = await getItems({
                 hideUnreleasedContent,
-                currentGame,
+                game: currentGame,
+                gameFilter,
                 hideUmaJPContent,
-            );
-            startDataTransition(() => {
-                setData(items);
             });
+            setData(items);
         });
-    }, [game, gameFilter, hideUnreleasedContent, hideUmaJPContent]);
+    }, [open, gameTag, gameFilter, hideUnreleasedContent, hideUmaJPContent]);
 
-    const [searchValue, setSearchValue] = useState("");
-    const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
-        setFocus(-1);
-        setSearchValue(() => event.target.value);
-    }, []);
+    const {
+        searchValue,
+        searchResults,
+        visibleSearchResults,
+        highlightedIndex,
+        keyboardNavigation,
+        handleInputChange,
+        handleKeyDown,
+        handleMouseEnter,
+        handleContentScroll,
+    } = useSiteSearchPopup({
+        open,
+        data,
+        pinnedSearches,
+        recentSearches,
+        handleSelect,
+    });
 
-    const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-    useEffect(() => {
-        startHitsTransition(() => {
-            setSearchResults(() => filterSearchResults(data, searchValue));
-        });
-    }, [data, searchValue]);
-    const hits = useMemo(() => [...searchResults], [data, searchResults]);
-
-    useEffect(() => {
-        setFocus(-1);
-        setSearchValue("");
-        setGameFilter(game !== undefined);
-    }, [open]);
-
-    const [focus, setFocus] = useState(-1);
-    const handleFocusChange = useCallback((index: number) => {
-        setFocus(index);
-    }, []);
-    const handleFocusChangeKey = useCallback(
-        (direction: "ArrowUp" | "ArrowDown") => {
-            const values =
-                searchValue === ""
-                    ? [...pinnedSearches, ...recentSearches]
-                    : searchResults;
-            let index;
-            if (direction === "ArrowUp") {
-                index = focus - 1;
-                if (index < 0) {
-                    index = values.length - 1;
-                }
-            } else {
-                index = focus + 1;
-                if (index > values.length - 1) {
-                    index = 0;
-                }
-            }
-            setFocus(index);
-            const element = document.getElementById(
-                values[index].url,
-            ) as HTMLMenuElement;
-            element?.scrollIntoView({ behavior: "instant", block: "nearest" });
-        },
-        [focus, searchValue, pinnedSearches, recentSearches, searchResults],
-    );
-
-    const Loader = (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
-    );
-
-    const PinnedSearches =
-        pinnedSearches.length > 0 ? (
-            <Stack spacing={2}>
-                <FlexBox spacing={1}>
-                    <PushPinIcon
-                        fontSize="small"
-                        sx={{
-                            color: theme.text.primary,
-                            transform: "rotate(45deg)",
-                        }}
-                    />
-                    <Text weight="highlight">Pinned</Text>
-                </FlexBox>
-                <Stack spacing={1}>
-                    {pinnedSearches.map((item, index) => (
-                        <SiteSearchResult
-                            key={item.url}
-                            index={index}
-                            focus={focus}
-                            item={item}
-                            handleSelect={handleSelect}
-                            handleFocusChange={handleFocusChange}
-                            buttons={{ removePin: true }}
-                        />
-                    ))}
-                </Stack>
-            </Stack>
-        ) : null;
-
-    const RecentSearches =
-        recentSearches.length > 0 ? (
-            <Stack spacing={2}>
-                <FlexBox sx={{ justifyContent: "space-between" }}>
-                    <FlexBox spacing={1}>
-                        <HistoryIcon
-                            fontSize="small"
-                            sx={{ color: theme.text.primary }}
-                        />
-                        <Text weight="highlight">Recent</Text>
-                    </FlexBox>
-                    <Button
-                        variant="contained"
-                        onClick={() => removeRecentSearch()}
-                        endIcon={<DeleteIcon fontSize="small" />}
-                    >
-                        <Text variant="subtitle2" weight="highlight">
-                            Clear All
-                        </Text>
-                    </Button>
-                </FlexBox>
-                <Stack spacing={1}>
-                    {recentSearches.map((item, index) => (
-                        <SiteSearchResult
-                            key={item.url}
-                            index={index + pinnedSearches.length}
-                            focus={focus}
-                            item={item}
-                            handleSelect={handleSelect}
-                            handleFocusChange={handleFocusChange}
-                            buttons={{ addPin: true, removeRecent: true }}
-                        />
-                    ))}
-                </Stack>
-            </Stack>
-        ) : null;
-
-    const SearchHistory = !hitsLoading ? (
-        [...pinnedSearches, ...recentSearches].length > 0 ? (
-            <Stack spacing={2}>
-                {PinnedSearches}
-                {RecentSearches}
-            </Stack>
+    const searchContent =
+        searchValue !== "" ? (
+            <SearchResults
+                searchResults={searchResults}
+                visibleSearchResults={visibleSearchResults}
+                highlightedIndex={highlightedIndex}
+                keyboardNavigation={keyboardNavigation}
+                searchValue={searchValue}
+                handleMouseEnter={handleMouseEnter}
+                handleSelect={handleSelect}
+            />
         ) : (
-            <FlexBox sx={{ justifyContent: "center" }}>
-                <Stack spacing={2}>
-                    <Text
-                        variant="h6"
-                        weight="highlight"
-                        sx={{ textAlign: "center" }}
-                    >
-                        Looking for something?
-                    </Text>
-                    <Image
-                        src="genshin/emotes/error10"
-                        style={{
-                            width: "100%",
-                            maxWidth: "192px",
-                            height: "auto",
-                            margin: "16px auto",
-                        }}
-                    />
-                </Stack>
-            </FlexBox>
-        )
-    ) : (
-        Loader
-    );
-
-    const NoHits =
-        searchValue !== "" && !hitsLoading ? (
-            <Text sx={{ textAlign: "center", pt: 2 }}>
-                {`No results for "`}
-                <span style={{ fontWeight: theme.font.weight.highlight }}>
-                    {searchValue}
-                </span>
-                {`"`}
-            </Text>
-        ) : null;
-
-    const SearchResults =
-        hits.length > 0 ? (
-            <Stack spacing={1}>
-                {hits.map((item, index) => (
-                    <SiteSearchResult
-                        key={item.url}
-                        index={index}
-                        focus={focus}
-                        item={item}
-                        handleFocusChange={handleFocusChange}
-                        handleSelect={handleSelect}
-                    />
-                ))}
-            </Stack>
-        ) : (
-            NoHits
+            <SearchHistory
+                pinnedSearches={pinnedSearches}
+                recentSearches={recentSearches}
+                highlightedIndex={highlightedIndex}
+                keyboardNavigation={keyboardNavigation}
+                handleMouseEnter={handleMouseEnter}
+                handleSelect={handleSelect}
+                removeRecentSearch={removeRecentSearch}
+            />
         );
 
-    const SearchContent = searchValue !== "" ? SearchResults : SearchHistory;
-
-    const GameFilter =
-        game && searchValue !== "" ? (
+    const gameFilterSwitch =
+        gameTag && searchValue !== "" ? (
             <FlexBox spacing={2}>
                 <Switch
                     checked={gameFilter}
                     onChange={handleSwitchChange}
                     size="small"
                 />
-                <Text
-                    variant="subtitle1"
-                    weight="highlight"
-                >{`Limit search results to ${gameTitle?.name}`}</Text>
+                <Text variant="subtitle1" weight="highlight">
+                    {`Limit search results to ${game?.name}`}
+                </Text>
             </FlexBox>
         ) : null;
-
-    function keydownHandler(event: React.KeyboardEvent<HTMLDivElement>) {
-        const values =
-            searchValue === ""
-                ? [...pinnedSearches, ...recentSearches]
-                : searchResults;
-        if (event.key === "Tab") {
-            event.preventDefault();
-        }
-        if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-            event.preventDefault();
-            handleFocusChangeKey(event.key);
-        }
-        if (event.key === "Enter") {
-            if (focus !== -1) {
-                event.preventDefault();
-                handleSelect(values[focus], true);
-            }
-        }
-    }
 
     return (
         <SearchDialog
@@ -323,23 +158,13 @@ export default function SiteSearchPopup({
             handleInputChange={handleInputChange}
             placeholder="Search Irminsul..."
             backgroundBlur="4px"
-            onKeyDown={(event) => keydownHandler(event)}
+            onKeyDown={handleKeyDown}
+            onContentScroll={handleContentScroll}
         >
             <Stack spacing={2}>
-                {GameFilter}
-                {!dataLoading ? SearchContent : Loader}
+                {gameFilterSwitch}
+                {!dataLoading ? searchContent : <Loader />}
             </Stack>
         </SearchDialog>
     );
-}
-
-function filterSearchResults(items: SearchResult[], searchValue: string) {
-    if (searchValue !== "") {
-        return matchSorter(items, searchValue, {
-            keys: ["displayName", "name"],
-            threshold: matchSorter.rankings.WORD_STARTS_WITH,
-        });
-    } else {
-        return [];
-    }
 }

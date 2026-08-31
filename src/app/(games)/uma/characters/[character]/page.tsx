@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 // Component imports
 import CharacterPage from "./CharacterPage";
@@ -14,7 +15,6 @@ import type { Metadata } from "next";
 import { UmaCharacter, UmaCharacterProfile } from "@/types/uma/character";
 import { UmaSkill } from "@/types/uma/skill";
 import { EventList } from "@/types/uma/event";
-import Page404 from "@/components/Page404";
 
 interface Props {
     params: Promise<{ character: string }>;
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
     );
 
     if (!charData) {
-        return <Page404 />;
+        notFound();
     }
 
     const profileData = await getData<UmaCharacterProfile>(

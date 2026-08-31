@@ -12,21 +12,42 @@ import { getItems } from "@/components/SiteSearch/SiteSearch.utils";
 import { Banner } from "@/types/banner";
 
 export default async function CalendarPage() {
+    const [
+        genshinCharacters,
+        hsrCharacters,
+        wuwaCharacters,
+        zzzCharacters,
+        umaCharacters,
+        umaWeapons,
+        endfieldCharacters,
+        nteCharacters,
+    ] = await Promise.all([
+        getDataSet<Banner>("genshin/banner-characters"),
+        getDataSet<Banner>("hsr/banner-characters"),
+        getDataSet<Banner>("wuwa/banner-characters"),
+        getDataSet<Banner>("zzz/banner-characters"),
+        getDataSet<Banner>("uma/banner-characters"),
+        getDataSet<Banner>("uma/banner-supports"),
+        getDataSet<Banner>("endfield/banner-characters"),
+        getDataSet<Banner>("nte/banner-characters"),
+    ]);
+
     const banners = {
-        "genshin/characters": await getDataSet<Banner>(
-            "genshin/banner-characters",
-        ),
-        "hsr/characters": await getDataSet<Banner>("hsr/banner-characters"),
-        "wuwa/characters": await getDataSet<Banner>("wuwa/banner-characters"),
-        "zzz/characters": await getDataSet<Banner>("zzz/banner-characters"),
-        "uma/characters": await getDataSet<Banner>("uma/banner-characters"),
-        "uma/weapons": await getDataSet<Banner>("uma/banner-supports"),
-        "endfield/characters": await getDataSet<Banner>(
-            "endfield/banner-characters",
-        ),
-        "nte/characters": await getDataSet<Banner>("nte/banner-characters"),
+        "genshin/characters": genshinCharacters,
+        "hsr/characters": hsrCharacters,
+        "wuwa/characters": wuwaCharacters,
+        "zzz/characters": zzzCharacters,
+        "uma/characters": umaCharacters,
+        "uma/weapons": umaWeapons,
+        "endfield/characters": endfieldCharacters,
+        "nte/characters": nteCharacters,
     };
-    const data = await getItems(false, undefined, false, "calendar");
+    const data = await getItems({
+        hideUnreleasedContent: false,
+        game: undefined,
+        hideUmaJPContent: false,
+        pathname: "calendar",
+    });
 
     return (
         <Suspense fallback={<Loader />}>

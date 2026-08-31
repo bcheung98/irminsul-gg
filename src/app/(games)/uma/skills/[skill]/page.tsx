@@ -1,9 +1,9 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 // Component imports
 import SkillPage from "./SkillPage";
 import Loader from "@/components/Loader";
-import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData, getDataSet } from "@/api";
@@ -52,7 +52,7 @@ export default async function Page({ params }: Props) {
     );
 
     if (!skillData || !skillList) {
-        return <Page404 />;
+        notFound();
     }
 
     return (

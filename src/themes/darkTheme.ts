@@ -361,5 +361,3 @@ export const darkThemeData = {
         },
     },
 };
-
-export const darkTheme = createTheme(darkThemeData);
