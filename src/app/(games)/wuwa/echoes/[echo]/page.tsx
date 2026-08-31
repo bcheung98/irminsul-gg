@@ -1,9 +1,9 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 // Component imports
 import EchoPage from "./EchoPage";
 import Loader from "@/components/Loader";
-import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData } from "@/api";
@@ -48,7 +48,7 @@ export default async function Page({ params }: Props) {
     );
 
     if (!equipmentData) {
-        return <Page404 />;
+        notFound();
     }
 
     return (

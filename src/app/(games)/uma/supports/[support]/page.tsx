@@ -1,9 +1,9 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 // Component imports
 import SupportPage from "./SupportPage";
 import Loader from "@/components/Loader";
-import Page404 from "@/components/Page404";
 
 // Helper imports
 import { getData, getDataSet, getUmaEvents } from "@/api";
@@ -55,7 +55,7 @@ export default async function Page({ params }: Props) {
     );
 
     if (!suppData) {
-        return <Page404 />;
+        notFound();
     }
 
     const profileData = await getData<UmaCharacterProfile>(
