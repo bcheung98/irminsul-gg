@@ -16,6 +16,7 @@ export interface SearchDialogProps extends ContentDialogProps {
     handleInputChange: (event: React.BaseSyntheticEvent) => void;
     placeholder?: string;
     backgroundBlur?: string;
+    onContentScroll?: React.UIEventHandler<HTMLDivElement>;
 }
 
 export default function SearchDialog({
@@ -26,6 +27,7 @@ export default function SearchDialog({
     handleInputChange,
     placeholder,
     backgroundBlur,
+    onContentScroll,
     ...other
 }: SearchDialogProps) {
     const theme = useTheme();
@@ -98,6 +100,7 @@ export default function SearchDialog({
             contentProps={{ padding: 0 }}
         >
             <Box
+                onScroll={onContentScroll}
                 sx={{
                     p: { xs: "8px", sm: "16px 24px 24px" },
                     height: { xs: "90vh", sm: "640px" },

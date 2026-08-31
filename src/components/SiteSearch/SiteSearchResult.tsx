@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 // Component imports
 import MenuItem from "@/components/MenuItem";
 import TextLabel from "@/components/TextLabel";
@@ -35,19 +37,20 @@ interface SearchResultButtons {
     removeRecent?: boolean;
 }
 
-export default function SiteSearchResult({
+const SiteSearchResult = memo(function SiteSearchResult({
     item,
     index,
-    focus,
+    highlighted,
     buttons,
     handleSelect,
+    handleMouseEnter,
 }: {
     item: SearchResult;
     index: number;
-    focus: number;
+    highlighted?: boolean;
     buttons?: SearchResultButtons;
     handleSelect: (option: SearchResult, keyPress?: boolean) => void;
-    handleFocusChange: (index: number) => void;
+    handleMouseEnter: (index: number) => void;
 }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -88,8 +91,8 @@ export default function SiteSearchResult({
         <MenuItem
             key={item.url}
             id={item.url}
-            autoFocus={focus === index}
-            // onMouseMove={() => handleFocusChange(index)}
+            selected={highlighted}
+            onMouseEnter={() => handleMouseEnter(index)}
             sx={{
                 borderRadius: "4px",
                 px: { xs: 1, sm: 2 },
@@ -220,4 +223,6 @@ export default function SiteSearchResult({
             </FlexBox>
         </MenuItem>
     );
-}
+});
+
+export default SiteSearchResult;
