@@ -4,17 +4,6 @@ import { UmaAptitude, UmaRank } from "@/types/uma";
 import { DataArray, StatArray, UmaSkillOption } from "@/types/uma/calculator";
 import { UmaCharacterAptitude } from "@/types/uma/character";
 
-export function calculateUniqueLevelScore(
-    starLevel: number,
-    uniqueLevel: number,
-) {
-    return uniqueLevel * (starLevel < 3 ? 120 : 170);
-}
-
-export function calculateStatsScore(stats: DataArray) {
-    return stats.slice(0, 5).map((i) => statScores[i], 0) as StatArray;
-}
-
 function getAptitudeMultipler(grade: UmaRank) {
     switch (grade) {
         case "S":
@@ -73,6 +62,17 @@ function getBaseSkillRatingValue(skill: UmaSkillOption) {
     return value;
 }
 
+export function calculateUniqueLevelScore(
+    starLevel: number,
+    uniqueLevel: number,
+) {
+    return uniqueLevel * (starLevel < 3 ? 120 : 170);
+}
+
+export function calculateStatsScore(stats: DataArray) {
+    return stats.slice(0, 5).map((i) => statScores[i], 0) as StatArray;
+}
+
 export function calculateSkillScore(
     aptitude: UmaCharacterAptitude,
     skill: UmaSkillOption,
@@ -129,6 +129,26 @@ export function calculateRank(score: number) {
         min = threshold;
     }
     return { rank, min, nextRank: "G+", threshold: 300 };
+}
+
+export function getScore({
+    aptitude,
+    stats,
+    skills,
+    hiddenSkills,
+}: {
+    aptitude: UmaCharacterAptitude;
+    stats: DataArray;
+    skills: UmaSkillOption[];
+    hiddenSkills: number[];
+}) {
+    let statsScore = [],
+        uniqueScore = 0,
+        skillScore = 0;
+    statsScore = calculateStatsScore(stats);
+    uniqueScore = calculateUniqueLevelScore(stats[5], stats[6]);
+    skillScore = calculateTotalSkillScore(aptitude, skills, hiddenSkills);
+    return { statsScore, uniqueScore, skillScore };
 }
 
 // NOTE: The following code block was adapated from daftuyda.moe's rating calculator
