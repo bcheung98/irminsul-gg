@@ -150,6 +150,11 @@ export default function EventText({
                         props?.strategy,
                     )}`,
                 });
+            case "win_n_of":
+                return RaceMulti({
+                    races: props?.raceList,
+                    text: `Win at least ${count} of the following races:`,
+                });
             case "race_w2":
                 return Race({
                     race: value?.toString(),
