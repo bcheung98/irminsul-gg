@@ -13,10 +13,14 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 // Helper imports
-import { sortBy } from "@/utils";
 import { useUmaContext } from "@/context";
 import { useTEHelperData } from "../TEHelper/TEHelper.utils";
 import { useStore, useServerStore, useRatingCalculatorStore } from "@/stores";
+import {
+    createSkillOptions,
+    getUniqueSkill,
+    sortSkills,
+} from "@/helpers/uma/calculator";
 
 // Type imports
 import { UmaSkill } from "@/types/uma/skill";
@@ -97,20 +101,9 @@ export default function RatingCalculatorSkills() {
         });
     }, [character]);
 
-    function getUniqueSkill() {
-        let skill = skillList.filter((skill) => skill.unique === character);
-        const char = characters.find((char) => char.id === character);
-        if ((char?.rarity || 3) < 3) {
-            skill = skill.filter(
-                (skill) => skill.rarity === (stats[5] < 3 ? 3 : 4),
-            );
-        }
-        return createSkillOptions(skill)[0];
-    }
-
     const [uniqueSkill, setUniqueSkill] = useState<UmaSkillOption | null>(null);
     useEffect(() => {
-        const skill = getUniqueSkill();
+        const skill = getUniqueSkill(characters, character, skillList, stats);
         if (skill) {
             setUniqueSkill(() => skill);
         }
@@ -189,52 +182,4 @@ export default function RatingCalculatorSkills() {
             </FlexBox>
         </Stack>
     );
-}
-
-function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
-    return skills.map((skill) => ({
-        id: skill.id,
-        name: skill.name.global,
-        nameJP: skill.name.jp,
-        nameJPNative: skill.name.jpNative,
-        icon: skill.icon,
-        rarity: skill.rarity,
-        values: skill.values || [],
-    }));
-}
-
-// Custom sort to emulate in-game sorting order
-function sortSkills(skills: UmaSkillOption[]) {
-    const skillTypes: Record<string, UmaSkillOption[]> = {
-        special: [],
-        passives: [],
-        greens: [],
-        other: [],
-    };
-
-    skills.forEach((skill) => {
-        // Unique skills
-        if ([3, 4, 5].includes(skill.rarity)) {
-            skillTypes.passives.push(skill);
-        } // Special case for Runaway
-        else if (skill.icon === 40012) {
-            skillTypes.special.push(skill);
-        }
-        // Green skills with no aptitude requirement (excluding Lone Wolf, Sympathy, Lucky Seven, and Restraint)
-        else if (
-            ![201631, 201632, 201641, 202161].includes(skill.id) &&
-            skill.icon < 10061 &&
-            skill.values[5] === ""
-        ) {
-            skillTypes.greens.push(skill);
-        }
-        // Everything else
-        else {
-            skillTypes.other.push(skill);
-        }
-    });
-
-    return Object.values(skillTypes)
-        .map((item) => item.sort((a, b) => sortBy(b.id, a.id)))
-        .flat();
 }
