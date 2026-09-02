@@ -15,12 +15,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
 import { useRatingCalculatorStore } from "@/stores";
-import {
-    calculateRank,
-    calculateTotalSkillScore,
-    calculateStatsScore,
-    calculateUniqueLevelScore,
-} from "@/helpers/uma/calculator";
+import { calculateRank, getScore } from "@/helpers/uma/calculator";
 
 // Type imports
 import { ValueArray } from "@/types/uma/calculator";
@@ -40,12 +35,12 @@ export default function RatingCalculatorScore({
     const [values, setValues] = useState<ValueArray>([[0, 0, 0, 0, 0], 0, 0]);
 
     useEffect(() => {
-        let statsScore = [],
-            uniqueScore = 0,
-            skillScore = 0;
-        statsScore = calculateStatsScore(stats);
-        uniqueScore = calculateUniqueLevelScore(stats[5], stats[6]);
-        skillScore = calculateTotalSkillScore(aptitude, skills, hiddenSkills);
+        const { statsScore, uniqueScore, skillScore } = getScore({
+            aptitude,
+            stats,
+            skills,
+            hiddenSkills,
+        });
         setValues([statsScore, uniqueScore, skillScore]);
     }, [
         JSON.stringify(aptitude),

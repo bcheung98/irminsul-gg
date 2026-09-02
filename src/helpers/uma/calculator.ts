@@ -1,19 +1,10 @@
+import { sortBy } from "@/utils";
 import { distances, strategies, terrain } from "@/data/uma/common";
 import { badgeSpriteMap, ranks, sheetSize, statScores } from "@/data/uma/ranks";
 import { UmaAptitude, UmaRank } from "@/types/uma";
 import { DataArray, StatArray, UmaSkillOption } from "@/types/uma/calculator";
-import { UmaCharacterAptitude } from "@/types/uma/character";
-
-export function calculateUniqueLevelScore(
-    starLevel: number,
-    uniqueLevel: number,
-) {
-    return uniqueLevel * (starLevel < 3 ? 120 : 170);
-}
-
-export function calculateStatsScore(stats: DataArray) {
-    return stats.slice(0, 5).map((i) => statScores[i], 0) as StatArray;
-}
+import { UmaCharacter, UmaCharacterAptitude } from "@/types/uma/character";
+import { UmaSkill } from "@/types/uma/skill";
 
 function getAptitudeMultipler(grade: UmaRank) {
     switch (grade) {
@@ -71,6 +62,17 @@ function getBaseSkillRatingValue(skill: UmaSkillOption) {
         return -129;
     }
     return value;
+}
+
+export function calculateUniqueLevelScore(
+    starLevel: number,
+    uniqueLevel: number,
+) {
+    return uniqueLevel * (starLevel < 3 ? 120 : 170);
+}
+
+export function calculateStatsScore(stats: DataArray) {
+    return stats.slice(0, 5).map((i) => statScores[i], 0) as StatArray;
 }
 
 export function calculateSkillScore(
@@ -131,6 +133,26 @@ export function calculateRank(score: number) {
     return { rank, min, nextRank: "G+", threshold: 300 };
 }
 
+export function getScore({
+    aptitude,
+    stats,
+    skills,
+    hiddenSkills,
+}: {
+    aptitude: UmaCharacterAptitude;
+    stats: DataArray;
+    skills: UmaSkillOption[];
+    hiddenSkills: number[];
+}) {
+    let statsScore = [],
+        uniqueScore = 0,
+        skillScore = 0;
+    statsScore = calculateStatsScore(stats);
+    uniqueScore = calculateUniqueLevelScore(stats[5], stats[6]);
+    skillScore = calculateTotalSkillScore(aptitude, skills, hiddenSkills);
+    return { statsScore, uniqueScore, skillScore };
+}
+
 // NOTE: The following code block was adapated from daftuyda.moe's rating calculator
 export function getRankBadge(rank: keyof typeof ranks, size = 88) {
     const badge = badgeSpriteMap[rank];
@@ -153,4 +175,68 @@ export function getRankBadge(rank: keyof typeof ranks, size = 88) {
         backgroundSize: `${scaledSpriteWidth}px ${scaledSpriteHeight}px`,
         backgroundPosition: `${offsetX}px ${offsetY}px`,
     };
+}
+
+export function getUniqueSkill(
+    characters: UmaCharacter[],
+    charID: number | null,
+    skills: UmaSkill[],
+    stats: DataArray,
+) {
+    let skill = skills.filter((skill) => skill.unique === charID);
+    const char = characters.find((char) => char.id === charID);
+    if ((char?.rarity || 3) < 3) {
+        skill = skill.filter(
+            (skill) => skill.rarity === (stats[5] < 3 ? 3 : 4),
+        );
+    }
+    return createSkillOptions(skill)[0];
+}
+
+export function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
+    return skills.map((skill) => ({
+        id: skill.id,
+        name: skill.name.global,
+        nameJP: skill.name.jp,
+        nameJPNative: skill.name.jpNative,
+        icon: skill.icon,
+        rarity: skill.rarity,
+        values: skill.values || [],
+    }));
+}
+
+// Custom sort to emulate in-game sorting order
+export function sortSkills(skills: UmaSkillOption[]) {
+    const skillTypes: Record<string, UmaSkillOption[]> = {
+        special: [],
+        passives: [],
+        greens: [],
+        other: [],
+    };
+
+    skills.forEach((skill) => {
+        // Unique skills
+        if ([3, 4, 5].includes(skill.rarity)) {
+            skillTypes.passives.push(skill);
+        } // Special case for Runaway
+        else if (skill.icon === 40012) {
+            skillTypes.special.push(skill);
+        }
+        // Green skills with no aptitude requirement (excluding Lone Wolf, Sympathy, Lucky Seven, and Restraint)
+        else if (
+            ![201631, 201632, 201641, 202161].includes(skill.id) &&
+            skill.icon < 10061 &&
+            skill.values[5] === ""
+        ) {
+            skillTypes.greens.push(skill);
+        }
+        // Everything else
+        else {
+            skillTypes.other.push(skill);
+        }
+    });
+
+    return Object.values(skillTypes)
+        .map((item) => item.sort((a, b) => sortBy(b.id, a.id)))
+        .flat();
 }
