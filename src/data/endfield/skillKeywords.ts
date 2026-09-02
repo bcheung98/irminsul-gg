@@ -270,4 +270,10 @@ export const skillKeywords: SkillKeyword[] = [
         description:
             "The Endministrator's Combo Skill attaches Originium Crystals to enemies and immobilizes them.",
     },
+    {
+        tag: "nature burst",
+        name: "Nature Burst",
+        description:
+            '<span class="text-nature">Nature Burst</span> = Icon_NatureInfliction <span class="tooltip-nature" data-tag="nature infliction">Nature Infliction</span> + Icon_NatureInfliction <span class="tooltip-nature" data-tag="nature infliction">Nature Infliction</span>.<br />Applies 1 stack of Icon_NatureInfliction <span class="tooltip-nature" data-tag="nature infliction">Nature Infliction</span> and deals <span class="text-nature">Nature DMG</span>.',
+    },
 ];
