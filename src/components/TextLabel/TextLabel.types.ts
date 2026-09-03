@@ -38,4 +38,6 @@ export interface TextLabelProps {
     justifyContent?: "left" | "center" | "right";
     reverse?: boolean;
     invertText?: boolean;
+    responsive?: boolean;
+    responsiveSize?: number;
 }
