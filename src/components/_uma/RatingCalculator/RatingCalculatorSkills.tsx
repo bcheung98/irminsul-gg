@@ -11,6 +11,7 @@ import Switch from "@/components/Switch";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
 import { useUmaContext } from "@/context";
@@ -42,8 +43,10 @@ export default function RatingCalculatorSkills() {
         stats,
         skills,
         hiddenSkills,
+        orderByInput,
         setSkills,
         setHiddenSkills,
+        setOrderByInput,
     } = useRatingCalculatorStore();
 
     const [skillData, setSkillData] = useState<UmaSkill[]>([]);
@@ -81,7 +84,10 @@ export default function RatingCalculatorSkills() {
         }
     }, [selectedSkills]);
 
-    // When the selected character is changed, remove their Unique Skill from the list of selected skills
+    /**
+     * When the selected character is changed,
+     * remove their Unique Skill from the list of selected skills
+     */
     useEffect(() => {
         const uniqueSkills = skillList.filter(
             (item) => item.unique === character,
@@ -113,13 +119,12 @@ export default function RatingCalculatorSkills() {
         return createSkillOptions(skillData);
     }, [skillData]);
 
-    const [orderByID, setOrderByID] = useState(false);
     const handleSwitchChange = () => {
-        setOrderByID(!orderByID);
+        setOrderByInput(!orderByInput);
     };
 
     let currentSkills = [...values];
-    if (!orderByID) {
+    if (!orderByInput) {
         currentSkills = sortSkills(currentSkills);
     }
 
@@ -135,6 +140,7 @@ export default function RatingCalculatorSkills() {
                         variant="contained"
                         size="small"
                         onClick={clearInput}
+                        startIcon={<DeleteIcon />}
                     >
                         Clear All Skills
                     </Button>
@@ -172,7 +178,7 @@ export default function RatingCalculatorSkills() {
             />
             <FlexBox spacing={2}>
                 <Switch
-                    checked={orderByID}
+                    checked={orderByInput}
                     onChange={handleSwitchChange}
                     size="small"
                 />
