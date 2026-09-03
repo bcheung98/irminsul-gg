@@ -28,6 +28,7 @@ export interface HeadProps {
     align?: "left" | "center" | "right";
     textVariant?: TypographyVariant;
     iconSize?: ImageSize;
+    backgroundColor?: string;
 }
 
 export interface CellProps {
@@ -46,6 +47,7 @@ export function Head({
     align = "center",
     textVariant = "subtitle1",
     iconSize,
+    backgroundColor,
 }: HeadProps) {
     const theme = useTheme();
 
@@ -53,7 +55,8 @@ export function Head({
         <TableHead>
             <Row
                 sx={{
-                    backgroundColor: theme.table.backgroundColor.header,
+                    backgroundColor:
+                        backgroundColor || theme.table.backgroundColor.header,
                     borderBottom: `1px solid ${theme.border.color.primary}`,
                 }}
             >
@@ -114,18 +117,18 @@ export function Cell({
 export const Row = styled(TableRow)<RowProps>(
     ({ theme, color = "primary" }) => ({
         backgroundColor: theme.background(
-            variantMap[color as keyof typeof variantMap]
+            variantMap[color as keyof typeof variantMap],
         ),
         [`&.${tableRowClasses.hover}`]: {
             "&:hover": {
                 backgroundColor: theme.background(
                     variantMap[color as keyof typeof variantMap],
-                    "dark"
+                    "dark",
                 ),
             },
         },
         "&:last-child td, &:last-child th": {
             border: 0,
         },
-    })
+    }),
 );
