@@ -87,12 +87,13 @@ export default function RatingCalculator() {
                                     </Button>
                                     <Grid
                                         container
-                                        spacing={2}
+                                        spacing={4}
                                         sx={{
                                             justifyContent: {
                                                 xs: "space-between",
                                                 md: "left",
                                             },
+                                            pl: 2,
                                         }}
                                     >
                                         <RatingCalculatorCharacterSelect />
