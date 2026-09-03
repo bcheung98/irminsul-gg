@@ -8,6 +8,7 @@ import RatingCalculatorStatInput from "./RatingCalculatorStatInput";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 // Helper imports
 import { range } from "@/utils";
@@ -32,6 +33,7 @@ export default function RatingCalculatorStats() {
                     variant="contained"
                     size="small"
                     onClick={resetStats}
+                    startIcon={<ReplayIcon />}
                 >
                     Reset Stats
                 </Button>
