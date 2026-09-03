@@ -12,6 +12,7 @@ import { getMetadata } from "@/helpers/metadata";
 // Type imports
 import { UmaCharacter } from "@/types/uma";
 import { UmaSkill } from "@/types/uma/skill";
+import { UmaCharacterProfile } from "@/types/uma/character";
 
 export const metadata = getMetadata({
     overrides: {
@@ -24,8 +25,15 @@ export const metadata = getMetadata({
 export default async function Page() {
     const characterData = await getDataSet<UmaCharacter>("uma/characters");
     const skillData = await getDataSet<UmaSkill>("uma/skills");
+    const profileData = await getDataSet<UmaCharacterProfile>(
+        "uma/character-profiles",
+    );
 
-    const [characters, skills] = await Promise.all([characterData, skillData]);
+    const [characters, skills, profiles] = await Promise.all([
+        characterData,
+        skillData,
+        profileData,
+    ]);
 
     try {
         const response = await fetch(
@@ -52,7 +60,7 @@ export default async function Page() {
 
     return (
         <Suspense fallback={<Loader />}>
-            <RatingCalculatorRoot {...{ characters, skills }} />
+            <RatingCalculatorRoot {...{ characters, skills, profiles }} />
         </Suspense>
     );
 }
