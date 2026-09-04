@@ -16,9 +16,9 @@ import { UmaCharacterProfile } from "@/types/uma/character";
 
 export const metadata = getMetadata({
     overrides: {
-        title: "Rating Calculator",
+        title: "Rating Calculator & Showcase Card Generator",
         description:
-            "Tool for calculating ratings in Umamusume using stats, aptitudes, unique level, and selected skills.",
+            "Calculate your Umamusume character rating and generate a shareable showcase card from your stats, aptitudes, and skills.",
     },
 });
 
