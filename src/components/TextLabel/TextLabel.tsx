@@ -25,6 +25,8 @@ export default function TextLabel({
     justifyContent = "left",
     reverse = false,
     invertText = false,
+    responsive = true,
+    responsiveSize = 0.2,
 }: TextLabelProps) {
     const theme = useTheme();
 
@@ -44,8 +46,8 @@ export default function TextLabel({
                     ...iconProps?.styles,
                 }}
                 tooltip={iconProps?.tooltip}
-                responsive
-                responsiveSize={0.2}
+                responsive={responsive}
+                responsiveSize={responsiveSize}
                 supressLoadImageWarning={iconProps?.supressLoadImageWarning}
                 fallbackSrc={iconProps?.fallbackSrc}
                 format={iconProps?.format || "png"}

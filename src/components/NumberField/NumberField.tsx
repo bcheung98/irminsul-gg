@@ -15,6 +15,7 @@ export default function NumberField({
     label,
     error,
     size = "medium",
+    format = { useGrouping: false },
     ...other
 }: BaseNumberField.Root.Props & {
     label?: React.ReactNode;
@@ -29,7 +30,7 @@ export default function NumberField({
     }
 
     return (
-        <BaseNumberField.Root {...other}>
+        <BaseNumberField.Root format={format} {...other}>
             <InputLabel htmlFor={id}>{label}</InputLabel>
             <BaseNumberField.Input
                 id={id}
@@ -44,7 +45,16 @@ export default function NumberField({
                         onChange={props.onChange}
                         onKeyUp={props.onKeyUp}
                         onKeyDown={props.onKeyDown}
-                        onFocus={props.onFocus}
+                        onFocus={(event) => {
+                            const input = event.target;
+                            if (!(input instanceof HTMLInputElement)) return;
+                            props.onFocus?.(
+                                event as React.FocusEvent<HTMLInputElement>,
+                            );
+                            requestAnimationFrame(() => {
+                                input.select();
+                            });
+                        }}
                         slotProps={{
                             input: {
                                 ...props,
@@ -107,8 +117,17 @@ export default function NumberField({
                         }
                         sx={{
                             pr: 0,
-                            outline: `1px solid ${theme.border.color.primary}`,
                             backgroundColor: theme.background(0),
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                borderColor: theme.border.color.primary,
+                            },
+                            "&:hover .MuiOutlinedInput-notchedOutline": {
+                                borderColor: theme.border.color.primary,
+                            },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                borderColor: theme.palette.info.main,
+                                borderWidth: "1px",
+                            },
                         }}
                     />
                 )}

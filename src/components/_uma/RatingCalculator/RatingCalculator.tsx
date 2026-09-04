@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 // Component imports
 import Text from "@/components/Text";
+import ContentDialog from "@/components/ContentDialog";
 import RatingCalculatorCharacterSelect from "./RatingCalculatorCharacterSelect";
 import RatingCalculatorStats from "./RatingCalculatorStats";
 import RatingCalculatorAptitude from "./RatingCalculatorAptitude";
@@ -7,26 +10,38 @@ import RatingCalculatorLevel from "./RatingCalculatorLevel";
 import RatingCalculatorScore from "./RatingCalculatorScore";
 import RatingCalculatorScoreFab from "./RatingCalculatorScoreFab";
 import RatingCalculatorSkills from "./RatingCalculatorSkills";
+import UmaShowcase from "../UmaShowcase";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 import Grow from "@mui/material/Grow";
+import IosShareIcon from "@mui/icons-material/IosShare";
 
 export default function RatingCalculator() {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("xl"));
+    const matches_up_xl = useMediaQuery(theme.breakpoints.up("xl"));
+    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 200,
     });
+
+    const [open, setOpen] = useState(false);
+    const handleDialogOpen = () => {
+        setOpen(true);
+    };
+    const handleDialogClose = () => {
+        setOpen(false);
+    };
 
     return (
         <>
@@ -40,7 +55,7 @@ export default function RatingCalculator() {
                         backgroundColor: theme.palette.error.dark,
                     }}
                 >
-                    <Text weight="highlight">
+                    <Text variant="subtitle1" weight="highlight">
                         This feature is currently in beta, so there might be
                         things that are broken. Please let me know in the
                         Discord if there's anything wrong!
@@ -61,14 +76,24 @@ export default function RatingCalculator() {
                                     divider={<Divider />}
                                     sx={{ display: "unset" }} // Required for sticky element
                                 >
+                                    <Button
+                                        color="info"
+                                        variant="contained"
+                                        size="small"
+                                        startIcon={<IosShareIcon />}
+                                        onClick={handleDialogOpen}
+                                    >
+                                        Generate Showcase Card
+                                    </Button>
                                     <Grid
                                         container
-                                        spacing={2}
+                                        spacing={4}
                                         sx={{
                                             justifyContent: {
                                                 xs: "space-between",
                                                 md: "left",
                                             },
+                                            pl: 2,
                                         }}
                                     >
                                         <RatingCalculatorCharacterSelect />
@@ -77,7 +102,7 @@ export default function RatingCalculator() {
                                     <RatingCalculatorLevel />
                                     <RatingCalculatorStats />
                                     <RatingCalculatorAptitude />
-                                    {matches && (
+                                    {matches_up_xl && (
                                         <Grow in={trigger}>
                                             <Box
                                                 sx={{
@@ -105,7 +130,9 @@ export default function RatingCalculator() {
                             <Grid size={{ xs: 12, xl: 0.1 }}>
                                 <Divider
                                     orientation={
-                                        matches ? "vertical" : "horizontal"
+                                        matches_up_xl
+                                            ? "vertical"
+                                            : "horizontal"
                                     }
                                 />
                             </Grid>
@@ -117,6 +144,17 @@ export default function RatingCalculator() {
                 </Card>
             </Stack>
             <RatingCalculatorScoreFab />
+            <ContentDialog
+                open={open}
+                setOpen={setOpen}
+                onClose={handleDialogClose}
+                header="Save Showcase Card"
+                fullScreen={!matches_up_sm}
+                maxWidth="md"
+                scroll="paper"
+            >
+                <UmaShowcase />
+            </ContentDialog>
         </>
     );
 }

@@ -111,6 +111,28 @@ export const statScores = (() => {
     return scores;
 })();
 
+export const statRanks = (() => {
+    const ranks = new Array<number>(MAX_STAT_VALUE + 1);
+
+    for (let value = 0; value <= MAX_STAT_VALUE; value++) {
+        if (value < 400) {
+            ranks[value] = Math.floor(value / 50);
+        } else if (value < 1000) {
+            ranks[value] = 8 + Math.floor((value - 400) / 100);
+        } else if (value < 1150) {
+            ranks[value] = 14 + Math.floor((value - 1000) / 50);
+        } else if (value <= 1200) {
+            ranks[value] = 17;
+        } else if (value < 2000) {
+            ranks[value] = 18 + Math.floor((value - 1200) / 10);
+        } else {
+            ranks[value] = 98 + Math.max(0, Math.floor((value - 2001) / 5));
+        }
+    }
+
+    return ranks;
+})();
+
 export const ranks = {
     G: 0,
     "G+": 300,

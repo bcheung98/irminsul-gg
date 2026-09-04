@@ -10,6 +10,7 @@ export interface RatingCalculatorState {
     aptitude: UmaCharacterAptitude;
     skills: UmaSkillOption[];
     hiddenSkills: number[];
+    orderByInput: boolean;
 }
 
 export interface RatingCalculatorActions {
@@ -23,6 +24,7 @@ export interface RatingCalculatorActions {
     setStat: (index: number, value: number) => void;
     setSkills: (skills: UmaSkillOption[]) => void;
     setHiddenSkills: (id: number) => void;
+    setOrderByInput: (value: boolean) => void;
 }
 
 export type RatingCalculatorStore = RatingCalculatorState &
@@ -51,6 +53,7 @@ const initialState: RatingCalculatorState = {
     },
     skills: [],
     hiddenSkills: [],
+    orderByInput: false,
 };
 
 export const useRatingCalculatorStore = create(
@@ -97,6 +100,9 @@ export const useRatingCalculatorStore = create(
                     ? hidden.push(id)
                     : hidden.splice(hidden.indexOf(id), 1);
                 return set((state) => ({ ...state, hiddenSkills: hidden }));
+            },
+            setOrderByInput: function (value) {
+                return set(() => ({ orderByInput: value }));
             },
         }),
         {

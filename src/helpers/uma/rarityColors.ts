@@ -46,6 +46,22 @@ export function getUmaSkillRarityColor(rarity: number) {
     }
 }
 
+export function getUmaSkillBorderColor(rarity: number) {
+    switch (rarity) {
+        case 6:
+            return "linear-gradient(to right, rgb(240, 196, 199), rgb(224, 117, 178))";
+        case 5:
+        case 4:
+        case 3:
+            return "linear-gradient(to right, rgb(196, 253, 192) 0%, rgb(155, 174, 255) 50%, rgb(254, 138, 219) 100%)";
+        case 2:
+            return "linear-gradient(to right, rgb(255, 222, 114), rgb(255, 165, 19) 50%)";
+        case 1:
+        default:
+            return "linear-gradient(to right, rgb(218, 207, 229), rgb(152, 149, 188))";
+    }
+}
+
 export function getSupportCardRarityColor(rarity: number) {
     switch (rarity) {
         case 5:
