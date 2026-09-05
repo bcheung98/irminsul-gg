@@ -4,9 +4,6 @@ import useSWR from "swr";
 import ContentBox from "@/components/ContentBox";
 import PopularPagesList from "./PopularPagesList";
 
-// MUI imports
-import Container from "@mui/material/Container";
-
 // Helper imports
 import { getPopularPages } from "@/api";
 
@@ -24,14 +21,12 @@ export default function PopularPages() {
     const pages = data?.pages ?? [];
 
     return (
-        <Container maxWidth="sm" disableGutters sx={{ px: 6 }}>
-            <ContentBox header="Popular Pages">
-                <PopularPagesList
-                    pages={pages}
-                    error={error}
-                    isLoading={isLoading}
-                />
-            </ContentBox>
-        </Container>
+        <ContentBox header="Popular Pages">
+            <PopularPagesList
+                pages={pages}
+                error={error}
+                isLoading={isLoading}
+            />
+        </ContentBox>
     );
 }
