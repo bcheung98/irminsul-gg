@@ -7,7 +7,6 @@ import Text from "@/components/Text";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
-import { useBannerData } from "@/components/BannerArchive/BannerArchive.utils";
 import { categories } from "@/data/categories";
 
 // Type imports
@@ -25,14 +24,6 @@ export default function CurrentBannersContent({
     weapon,
     chronicled,
 }: Props) {
-    const { characters, weapons } = useBannerData();
-
-    const bannerItemsParams = {
-        characters,
-        weapons,
-        showCountdown: true,
-    };
-
     return (
         <FlexBox wrap spacing={[2, 8]} sx={{ alignItems: "flex-start" }}>
             {character.length > 0 && (
@@ -44,8 +35,9 @@ export default function CurrentBannersContent({
                         {character.map((banner) => (
                             <BannerItems
                                 key={banner.id}
+                                game={game}
                                 banner={banner}
-                                {...bannerItemsParams}
+                                showCountdown
                             />
                         ))}
                     </Stack>
@@ -63,8 +55,9 @@ export default function CurrentBannersContent({
                         {weapon.map((banner) => (
                             <BannerItems
                                 key={banner.id}
+                                game={game}
                                 banner={banner}
-                                {...bannerItemsParams}
+                                showCountdown
                             />
                         ))}
                     </Stack>
@@ -77,8 +70,9 @@ export default function CurrentBannersContent({
                         {chronicled.map((banner) => (
                             <BannerItems
                                 key={banner.id}
+                                game={game}
                                 banner={banner}
-                                {...bannerItemsParams}
+                                showCountdown
                             />
                         ))}
                     </Stack>
