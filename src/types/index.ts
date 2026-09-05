@@ -115,3 +115,14 @@ export interface GroupFilterButtons {
     label?: string;
     dropdown?: boolean;
 }
+
+// Popular Pages
+export interface PopularPagesResponse {
+    updatedAt: string;
+    periodDays: number;
+    pages: PopularPageData[];
+}
+export interface PopularPageData {
+    path: string;
+    views: number;
+}
