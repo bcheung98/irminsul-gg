@@ -11,7 +11,11 @@ import { getMetadata } from "@/helpers/metadata";
 // Type imports
 import { NTECartridge } from "@/types/nte";
 
-export const metadata = getMetadata({ game: "nte", tag: "equipment" });
+export const metadata = getMetadata({
+    game: "nte",
+    tag: "equipment",
+    overrides: { canonical: "/nte/console" },
+});
 
 export default async function Page() {
     const equipment = await getDataSet<NTECartridge>("nte/cartridges");

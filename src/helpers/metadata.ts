@@ -1,9 +1,7 @@
-import { range } from "@/utils";
 import { games } from "@/data/games";
-import { categories, categoryImgURLs } from "@/data/categories";
-import { rarityMap as zzzRarityMap } from "@/data/zzz/common";
+import { categories, categoryImgURLs, categoryURLs } from "@/data/categories";
 import { rarityMap as umaRarityMap } from "@/data/uma/common";
-import { AttributeData, Game, GameData } from "@/types";
+import { AttributeData, Game } from "@/types";
 import { Metadata } from "next";
 import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 
@@ -17,6 +15,7 @@ interface MetadataOverrides {
     title?: Metadata["title"];
     description?: string;
     siteName?: string;
+    canonical?: string;
     twitter?: TwitterOverrides;
 }
 
@@ -122,6 +121,15 @@ export function getMetadata({
         metadataBase: new URL("https://irminsul.gg/"),
         title: overrides?.title ?? title,
         description,
+        alternates: {
+            canonical:
+                overrides?.canonical ??
+                getCanonicalURL({
+                    game,
+                    tag,
+                    attributes,
+                }),
+        },
         referrer: "origin-when-cross-origin",
         openGraph: {
             title: overrides?.title ?? ogTitle,
@@ -159,3 +167,33 @@ export const bannerArchiveMetaData = (game: Game) => ({
     title: "Banner Archive",
     description: `A list of all ${games[game].name} Banners`,
 });
+
+function getCanonicalURL({
+    game,
+    tag,
+    attributes,
+}: {
+    game?: Game;
+    tag?: string;
+    attributes?: AttributeData;
+}) {
+    if (!game) {
+        return "/";
+    }
+
+    if (!tag) {
+        return `/${game}`;
+    }
+
+    const route = categoryURLs[`${game}/${tag}`];
+
+    if (!route) {
+        return `/${game}/${tag}`;
+    }
+
+    if (!attributes) {
+        return `/${route}`;
+    }
+
+    return `/${route}/${attributes.id}`;
+}
