@@ -18,7 +18,7 @@ export const metadata = getMetadata({
     overrides: {
         title: "Rating Calculator & Showcase Card Generator",
         description:
-            "Calculate your Umamusume character rating and generate a shareable showcase card from your stats, aptitudes, and skills.",
+            "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills.",
     },
 });
 
