@@ -4,12 +4,10 @@ import { useEffect, useState, useTransition } from "react";
 
 // Component imports
 import ContentBox from "@/components/ContentBox";
-import FlexBox from "@/components/FlexBox";
 import HomePageGameBanners from "./HomePageGameBanners";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
 import { useGameList } from "@/context";
@@ -24,7 +22,7 @@ export default function HomePageBanners({
 }: {
     banners: Record<string, Banner[]>;
 }) {
-    const [dataLoading, startDataTransition] = useTransition();
+    const [, startDataTransition] = useTransition();
     const [data, setData] = useState<{
         characters: SearchResult[];
         weapons: SearchResult[];
@@ -56,24 +54,18 @@ export default function HomePageBanners({
 
     return (
         <ContentBox header="Active Banners">
-            {!dataLoading && Object.values(data).flat().length > 0 ? (
-                <Grid container spacing={2}>
-                    {games.map((game) => (
-                        <Grid key={game.tag} size={{ xs: 12, lg: 6 }}>
-                            <HomePageGameBanners
-                                game={game}
-                                banners={banners}
-                                characters={data.characters}
-                                weapons={data.weapons}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-            ) : (
-                <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-                    <CircularProgress color="info" />
-                </FlexBox>
-            )}
+            <Grid container spacing={2}>
+                {games.map((game) => (
+                    <Grid key={game.tag} size={{ xs: 12, lg: 6 }}>
+                        <HomePageGameBanners
+                            game={game}
+                            banners={banners}
+                            characters={data.characters}
+                            weapons={data.weapons}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
         </ContentBox>
     );
 }
