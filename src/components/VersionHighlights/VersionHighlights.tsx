@@ -8,6 +8,7 @@ import SelectWithArrows from "@/components/SelectWithArrows";
 import MenuItem from "@/components/MenuItem";
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
+import VersionReleaseDate from "./VersionReleaseDate";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -24,6 +25,10 @@ import {
     textLabelIcon,
     textLabelTitle,
 } from "./VersionHighlights.utils";
+import {
+    useVersionContent,
+    useVersionReleaseDate,
+} from "./VersionHighlights.hooks";
 
 // Type imports
 import { VersionHighlightsProps } from "./VersionHighlights.types";
@@ -51,38 +56,11 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
     };
 
     const { version, name } = updates[index];
-
-    const characters = props.characters
-        .filter((character) => character.release.version === version)
-        .sort(
-            (a, b) =>
-                b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName),
-        );
-    const weapons = props.weapons
-        .filter((weapon) => weapon.release.version === version)
-        .sort(
-            (a, b) =>
-                b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName),
-        );
-    const equipment = props.equipment
-        .filter((equipment) => equipment.release.version === version)
-        .sort(
-            (a, b) =>
-                b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName),
-        );
-    const bangboo = props.bangboos
-        ?.filter((bangboo) => bangboo.release.version === version)
-        .sort(
-            (a, b) =>
-                b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName),
-        );
-    const cards = props.cards
-        ?.filter((card) => card.release.version === version)
-        .sort((a, b) => a.id - b.id);
+    const releaseDate = useVersionReleaseDate(game, version);
+    const { characters, weapons, equipment, bangboos } = useVersionContent(
+        props,
+        version,
+    );
 
     const selectProps = {
         index,
@@ -125,9 +103,12 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                 contentProps={{ padding: "16px 24px", overflowX: "clip" }}
             >
                 <Stack spacing={3}>
-                    <Text variant="h6" weight="highlight">
-                        {version} - <i>{name}</i>
-                    </Text>
+                    <Stack spacing={1}>
+                        <Text variant="h6" weight="highlight">
+                            {version} - <i>{name}</i>
+                        </Text>
+                        <VersionReleaseDate releaseDate={releaseDate} />
+                    </Stack>
                     <Grid
                         container
                         columnSpacing={{ xs: 6, md: 10 }}
@@ -183,7 +164,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                 </Grid>
                             </Grid>
                         )}
-                        {bangboo && bangboo.length > 0 && (
+                        {bangboos && bangboos.length > 0 && (
                             <Grid sx={gridContainerStyle} size="auto">
                                 <TextLabel
                                     icon={textLabelIcon(game, "bangboos")}
@@ -192,7 +173,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
                                     titleProps={{ variant: "h6" }}
                                 />
                                 <Grid container spacing={3} sx={gridStyle}>
-                                    {bangboo.map((item) =>
+                                    {bangboos.map((item) =>
                                         renderInfoCard(game, "bangboos", item),
                                     )}
                                 </Grid>

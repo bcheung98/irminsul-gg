@@ -5,28 +5,39 @@ import { useEffect, useState } from "react";
 // Component imports
 import LandingText from "@/components/LandingText";
 import Websites from "@/components/Websites";
+import PopularPages from "@/components/PopularPages";
+import CurrentVersions from "@/components/CurrentVersions";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 
 // Helper imports
 import { useGameList } from "@/context";
 
-export default function HomePage() {
+export default function HomePage({
+    children,
+}: Readonly<{
+    children?: React.ReactNode;
+}>) {
     const theme = useTheme();
 
     function playVideo(e: HTMLVideoElement) {
         e.play();
         e.classList.remove("inactive");
-        setTimeout(() => {
-            e.classList.add("inactive");
-        }, (e.duration / e.playbackRate - 1) * 1000);
+        setTimeout(
+            () => {
+                e.classList.add("inactive");
+            },
+            (e.duration / e.playbackRate - 1) * 1000,
+        );
     }
 
     useEffect(() => {
         const video = document.getElementsByClassName(
-            "background-image background-video"
+            "background-image background-video",
         )[0] as HTMLVideoElement;
         playVideo(video);
     }, []);
@@ -51,18 +62,18 @@ export default function HomePage() {
 
     useEffect(() => {
         const video = document.getElementsByClassName(
-            "background-image background-video"
+            "background-image background-video",
         )[0] as HTMLVideoElement;
         if (current !== -1) {
             video.classList.add("inactive");
             video.pause();
             const prevImage = document.getElementById(
-                `background-image-${prev}`
+                `background-image-${prev}`,
             );
             prevImage?.classList.remove("active");
             prevImage?.classList.add("inactive");
             const newImage = document.getElementById(
-                `background-image-${current}`
+                `background-image-${current}`,
             );
             newImage?.classList.remove("inactive");
             newImage?.classList.add("active");
@@ -96,14 +107,27 @@ export default function HomePage() {
                 spacing={6}
                 sx={{
                     position: "relative",
-                    mt: 12,
+                    my: 12,
                     textAlign: "center",
                     alignItems: "center",
                     userSelect: "none",
                 }}
             >
                 <LandingText />
-                <Websites action={handleIndexChange} />
+                <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
+                    <Stack spacing={16}>
+                        <Websites action={handleIndexChange} />
+                        <Grid container rowSpacing={2} columnSpacing={3}>
+                            <Grid size="grow">{children}</Grid>
+                            <Grid size={{ xs: 12, md: 4 }}>
+                                <Stack spacing={2}>
+                                    <CurrentVersions />
+                                    <PopularPages />
+                                </Stack>
+                            </Grid>
+                        </Grid>
+                    </Stack>
+                </Container>
             </Stack>
         </>
     );

@@ -1,4 +1,5 @@
 import { memo, useEffect, useState, useTransition } from "react";
+import { usePathname } from "next/navigation";
 
 // Component imports
 import Countdown from "@/components/Countdown";
@@ -38,6 +39,7 @@ const BannerItems = memo(function BannerItems({
         game = useGameTag();
     }
 
+    const pathname = usePathname();
     const { characters, weapons, server } = useBannerData();
 
     const [loading, startTransition] = useTransition();
@@ -64,7 +66,9 @@ const BannerItems = memo(function BannerItems({
             variant="rounded"
             width={64}
             height={64}
-            sx={(theme) => ({ backgroundColor: theme.background(0) })}
+            sx={(theme) => ({
+                backgroundColor: theme.background(Number(pathname === "/")),
+            })}
         />
     ));
 
