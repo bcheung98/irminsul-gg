@@ -15,6 +15,7 @@ export const metadata = getMetadata({
                 "https://raw.githubusercontent.com/bcheung98/irminsul-gg/refs/heads/main/.docs/calendar-v2-img1.png",
             ],
         },
+        canonical: "/calendar",
     },
 });
 

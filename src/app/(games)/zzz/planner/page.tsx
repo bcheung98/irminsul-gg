@@ -13,7 +13,7 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { ZZZCharacter, ZZZWeapon } from "@/types/zzz";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("zzz"),
 });
 
 export default async function Page() {

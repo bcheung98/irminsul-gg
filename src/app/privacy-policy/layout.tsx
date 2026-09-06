@@ -8,6 +8,7 @@ export const metadata = getMetadata({
             template: "%s - IRMINSUL.GG",
         },
         description: "Read the privacy policy of Irminsul.GG",
+        canonical: "/privacy-policy",
     },
 });
 

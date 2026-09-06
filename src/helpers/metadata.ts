@@ -157,16 +157,22 @@ export function getMetadata({
     return metadata;
 }
 
-export const plannerMetaData = {
-    title: "Ascension Planner",
-    description:
-        "Tool for calculating level-up costs of characters and weapons",
-};
+export function plannerMetaData(game: Game) {
+    return {
+        title: "Ascension Planner",
+        description:
+            "Tool for calculating level-up costs of characters and weapons",
+        canonical: `/${game}/planner`,
+    };
+}
 
-export const bannerArchiveMetaData = (game: Game) => ({
-    title: "Banner Archive",
-    description: `A list of all ${games[game].name} Banners`,
-});
+export function bannerArchiveMetaData(game: Game) {
+    return {
+        title: "Banner Archive",
+        description: `A list of all ${games[game].name} Banners`,
+        canonical: `/${game}/banners`,
+    };
+}
 
 function getCanonicalURL({
     game,

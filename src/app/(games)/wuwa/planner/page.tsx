@@ -13,7 +13,7 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { WuWaCharacter, WuWaWeapon } from "@/types/wuwa";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("wuwa"),
 });
 
 export default async function Page() {

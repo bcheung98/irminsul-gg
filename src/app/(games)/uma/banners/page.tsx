@@ -13,14 +13,14 @@ import { UmaCharacter, UmaSupport } from "@/types/uma";
 import { Banner } from "@/types/banner";
 
 export const metadata = getMetadata({
-    overrides: bannerArchiveMetaData("hsr"),
+    overrides: bannerArchiveMetaData("uma"),
 });
 
 export default async function Page() {
     const characterData = await getDataSet<UmaCharacter>("uma/characters");
     const weaponData = await getDataSet<UmaSupport>("uma/supports");
     const characterBannerData = await getDataSet<Banner>(
-        "uma/banner-characters"
+        "uma/banner-characters",
     );
     const weaponBannerData = await getDataSet<Banner>("uma/banner-supports");
 

@@ -13,7 +13,7 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { NTECharacter, NTEWeapon } from "@/types/nte";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("nte"),
 });
 
 export default async function Page() {

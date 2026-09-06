@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: blogData?.title,
             description: blogData?.description,
             siteName: date,
+            canonical: `/blog/${slug}`,
             twitter: {
                 images: [
                     {

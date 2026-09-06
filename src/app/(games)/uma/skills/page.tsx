@@ -15,6 +15,7 @@ export const metadata = getMetadata({
     overrides: {
         title: "Skills",
         description: "A list of all Umamusume Skills",
+        canonical: "/uma/skills",
     },
 });
 
