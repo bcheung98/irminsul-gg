@@ -18,6 +18,7 @@ export const metadata = getMetadata({
     overrides: {
         title: "Training Event Helper",
         description: "Tool for viewing Training Events in Umamusume.",
+        canonical: "/uma/training-event-helper",
     },
 });
 
@@ -25,7 +26,7 @@ export default async function Page() {
     const characterData = await getDataSet<UmaCharacter>("uma/characters");
     const supportData = await getDataSet<UmaSupport>("uma/supports");
     const profileData = await getDataSet<UmaCharacterProfile>(
-        "uma/character-profiles"
+        "uma/character-profiles",
     );
     const skillData = await getDataSet<UmaSkill>("uma/skills");
     const charEventData = await getUmaEvents("character");

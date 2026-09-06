@@ -13,7 +13,7 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { HSRCharacter, HSRWeapon } from "@/types/hsr";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("hsr"),
 });
 
 export default async function Page() {

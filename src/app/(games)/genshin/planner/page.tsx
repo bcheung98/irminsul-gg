@@ -13,13 +13,12 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("genshin"),
 });
 
 export default async function Page() {
-    const characterData = await getDataSet<GenshinCharacter>(
-        "genshin/characters"
-    );
+    const characterData =
+        await getDataSet<GenshinCharacter>("genshin/characters");
     const weaponData = await getDataSet<GenshinWeapon>("genshin/weapons");
 
     const [characters, weapons] = await Promise.all([

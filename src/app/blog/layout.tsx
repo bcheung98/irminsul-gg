@@ -8,6 +8,7 @@ export const metadata = getMetadata({
             template: "%s - IRMINSUL.GG",
         },
         description: "Keep up with the latest news and content of IRMINSUL.GG",
+        canonical: "/blog",
     },
 });
 

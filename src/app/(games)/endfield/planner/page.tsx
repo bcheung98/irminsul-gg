@@ -13,7 +13,7 @@ import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
 
 export const metadata = getMetadata({
-    overrides: plannerMetaData,
+    overrides: plannerMetaData("endfield"),
 });
 
 export default async function Page() {

@@ -19,6 +19,7 @@ export const metadata = getMetadata({
         title: "Rating Calculator & Showcase Card Generator",
         description:
             "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills.",
+        canonical: "/uma/rating-calculator",
     },
 });
 

@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
               overrides: {
                   description:
                       skillData.description.global || skillData.description.jp,
+                  canonical: `/uma/skills/${skillData.id}`,
               },
           })
         : {};
