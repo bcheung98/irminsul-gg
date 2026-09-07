@@ -11,7 +11,6 @@ import NavLink from "@/components/NavLink";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Stack from "@mui/material/Stack";
@@ -23,9 +22,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 // Helper imports
 import { useGame } from "@/context";
 
+const EXCLUDED_PATHS = new Set(["/", "/site-map"]);
+
 export default function NavBarBottom() {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const game = useGame();
     const pathname = usePathname();
@@ -56,22 +56,6 @@ export default function NavBarBottom() {
         height: { xs: "22px", sm: "24px" },
     };
 
-    const PrivacyPolicy = (
-        <Text
-            variant="body2"
-            weight="highlight"
-            sx={{
-                "&:hover": {
-                    color: theme.text.selected,
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                },
-            }}
-        >
-            <NavLink href="/privacy-policy">Privacy Policy</NavLink>
-        </Text>
-    );
-
     return (
         <AppBar
             position="relative"
@@ -82,119 +66,163 @@ export default function NavBarBottom() {
                 variant="dense"
                 disableGutters
                 sx={{
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                    gap: "8px",
-                    py: "8px",
-                    width: pathname !== "/" ? { xs: "95%", md: "100%" } : "75%",
+                    pt: 1,
+                    pb: pathname === "/calendar" ? 6 : 3,
+                    width: EXCLUDED_PATHS.has(pathname)
+                        ? "75%"
+                        : { xs: "95%", md: "100%" },
                     mx: "auto",
                 }}
             >
-                <Text
-                    variant="body2"
-                    weight="highlight"
-                    sx={{ userSelect: "none" }}
-                >
-                    {navText}
-                </Text>
-                <Stack spacing={1} divider={<Divider />}>
-                    <FlexBox spacing={2}>
-                        {matches && (
-                            <>
-                                {PrivacyPolicy}
+                <Stack spacing={1} divider={<Divider />} sx={{ width: "100%" }}>
+                    <FlexBox
+                        wrap
+                        sx={{
+                            justifyContent: "space-between",
+                            gap: 1,
+                        }}
+                    >
+                        <Text
+                            variant="body2"
+                            weight="highlight"
+                            sx={{
+                                userSelect: "none",
+                                borderBottom: {
+                                    xs: `1px solid ${theme.border.color.primary}`,
+                                    md: 0,
+                                },
+                                pb: { xs: 2, md: 0 },
+                            }}
+                        >
+                            {navText}
+                        </Text>
+                        <Stack spacing={1} divider={<Divider />}>
+                            <FlexBox spacing={2}>
+                                <FlexBox spacing={[1, 0.5]} wrap>
+                                    <Text
+                                        variant="body2"
+                                        weight="highlight"
+                                        sx={{ userSelect: "none" }}
+                                    >
+                                        GitHub:
+                                    </Text>
+                                    <IconButton
+                                        disableRipple
+                                        href={`https://github.com/bcheung98/irminsul-gg`}
+                                        target="_blank"
+                                        rel="noopener"
+                                        color="inherit"
+                                        sx={{ color: "white" }}
+                                        className="logo github"
+                                    >
+                                        <GitHubIcon sx={svgStyle} />
+                                    </IconButton>
+                                </FlexBox>
                                 <Divider
                                     orientation="vertical"
                                     flexItem
                                     sx={{ my: "4px" }}
                                 />
-                            </>
-                        )}
-                        <FlexBox spacing={[1, 0.5]} wrap>
-                            <Text
-                                variant="body2"
-                                weight="highlight"
-                                sx={{ userSelect: "none" }}
-                            >
-                                GitHub:
-                            </Text>
-                            <IconButton
-                                disableRipple
-                                href={`https://github.com/bcheung98/irminsul-gg`}
-                                target="_blank"
-                                rel="noopener"
-                                color="inherit"
-                                sx={{ color: "white" }}
-                                className="logo github"
-                            >
-                                <GitHubIcon sx={svgStyle} />
-                            </IconButton>
-                        </FlexBox>
-                        <Divider
-                            orientation="vertical"
-                            flexItem
-                            sx={{ my: "4px" }}
-                        />
-                        <FlexBox spacing={[1, 0.5]} wrap>
-                            <Text
-                                variant="body2"
-                                weight="highlight"
-                                sx={{ userSelect: "none" }}
-                            >
-                                Made with:
-                            </Text>
-                            <div>
-                                <IconButton
-                                    disableRipple
-                                    href="https://nextjs.org/"
-                                    target="_blank"
-                                    rel="noopener"
-                                    color="inherit"
-                                    sx={iconButtonStyle}
-                                    className="logo next"
-                                >
-                                    <Avatar
-                                        variant="square"
-                                        src="/nextjs.svg"
-                                        sx={svgStyle}
-                                    />
-                                </IconButton>
-                                <IconButton
-                                    disableRipple
-                                    href="https://react.dev"
-                                    target="_blank"
-                                    rel="noopener"
-                                    color="inherit"
-                                    sx={iconButtonStyle}
-                                    className="logo react"
-                                >
-                                    <Avatar
-                                        variant="square"
-                                        src="/react.svg"
-                                        sx={svgStyle}
-                                    />
-                                </IconButton>
-                                <IconButton
-                                    disableRipple
-                                    href="https://mui.com"
-                                    target="_blank"
-                                    rel="noopener"
-                                    color="inherit"
-                                    sx={iconButtonStyle}
-                                    className="logo mui"
-                                >
-                                    <Avatar
-                                        variant="square"
-                                        src="/mui.svg"
-                                        alt="MUI Logo"
-                                        sx={svgStyle}
-                                    />
-                                </IconButton>
-                            </div>
-                        </FlexBox>
+                                <FlexBox spacing={[1, 0.5]} wrap>
+                                    <Text
+                                        variant="body2"
+                                        weight="highlight"
+                                        sx={{ userSelect: "none" }}
+                                    >
+                                        Made with:
+                                    </Text>
+                                    <div>
+                                        <IconButton
+                                            disableRipple
+                                            href="https://nextjs.org/"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="inherit"
+                                            sx={iconButtonStyle}
+                                            className="logo next"
+                                        >
+                                            <Avatar
+                                                variant="square"
+                                                src="/nextjs.svg"
+                                                sx={svgStyle}
+                                            />
+                                        </IconButton>
+                                        <IconButton
+                                            disableRipple
+                                            href="https://react.dev"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="inherit"
+                                            sx={iconButtonStyle}
+                                            className="logo react"
+                                        >
+                                            <Avatar
+                                                variant="square"
+                                                src="/react.svg"
+                                                sx={svgStyle}
+                                            />
+                                        </IconButton>
+                                        <IconButton
+                                            disableRipple
+                                            href="https://mui.com"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="inherit"
+                                            sx={iconButtonStyle}
+                                            className="logo mui"
+                                        >
+                                            <Avatar
+                                                variant="square"
+                                                src="/mui.svg"
+                                                alt="MUI Logo"
+                                                sx={svgStyle}
+                                            />
+                                        </IconButton>
+                                    </div>
+                                </FlexBox>
+                            </FlexBox>
+                        </Stack>
                     </FlexBox>
-                    {!matches && PrivacyPolicy}
+                    <FlexBox
+                        wrap
+                        sx={{
+                            justifyContent: { xs: "left", md: "right" },
+                            gap: { xs: 4, md: 6 },
+                            pt: { xs: 1, md: 0.5 },
+                            pr: 0.5,
+                        }}
+                    >
+                        <TextLink href="/privacy-policy">
+                            Privacy Policy
+                        </TextLink>
+                        <TextLink href="/site-map">Sitemap</TextLink>
+                    </FlexBox>
                 </Stack>
             </Toolbar>
         </AppBar>
+    );
+}
+
+function TextLink({
+    children,
+    href,
+}: {
+    children: React.ReactNode;
+    href: string;
+}) {
+    return (
+        <Text
+            variant="body2"
+            weight="highlight"
+            sx={(theme) => ({
+                "&:hover": {
+                    color: theme.text.selected,
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                },
+            })}
+        >
+            <NavLink href={href}>{children}</NavLink>
+        </Text>
     );
 }

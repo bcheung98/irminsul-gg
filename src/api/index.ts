@@ -43,9 +43,17 @@ export async function getPopularPages(): Promise<PopularPagesResponse> {
         "https://api.irminsul.gg/v2/_analytics/popular-pages.json",
     );
     if (!res.ok) {
-        throw new Error("Failed to fetch");
+        throw new Error("Failed to fetch popular page data");
     }
     return res.json();
+}
+
+export async function getSitemapXML(): Promise<string> {
+    const response = await fetch("https://irminsul.gg/sitemap.xml");
+    if (!response.ok) {
+        throw new Error("Failed to fetch sitemap XML data");
+    }
+    return response.text();
 }
 
 export { urls };
