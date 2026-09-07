@@ -1,10 +1,13 @@
-import { GameData } from "@/types";
 import HomeIcon from "@mui/icons-material/Home";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import { bannerArchiveMetaData, plannerMetaData } from "@/helpers/metadata";
+import { games } from "./games";
+import { Game, GameData } from "@/types";
 
 export interface NavItem {
     icon: string | React.ReactNode;
     title: string;
+    description?: string;
     href: string;
 }
 
@@ -13,6 +16,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Home",
             title: "Home",
+            description: getGamePageDescription("genshin"),
             href: "",
         },
         {
@@ -33,11 +37,13 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
+            description: plannerMetaData("genshin").description,
             href: "planner",
         },
         {
             icon: "icons/Wish",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("genshin").description,
             href: "banners",
         },
     ],
@@ -45,6 +51,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Home",
             title: "Home",
+            description: getGamePageDescription("hsr"),
             href: "",
         },
         {
@@ -65,11 +72,13 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
+            description: plannerMetaData("hsr").description,
             href: "planner",
         },
         {
             icon: "icons/Warp",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("hsr").description,
             href: "banners",
         },
     ],
@@ -77,6 +86,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Home",
             title: "Home",
+            description: getGamePageDescription("wuwa"),
             href: "",
         },
         {
@@ -97,11 +107,13 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
+            description: plannerMetaData("wuwa").description,
             href: "planner",
         },
         {
             icon: "icons/Convene",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("wuwa").description,
             href: "banners",
         },
     ],
@@ -109,6 +121,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Home",
             title: "Home",
+            description: getGamePageDescription("zzz"),
             href: "",
         },
         {
@@ -134,11 +147,13 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Check",
             title: "Ascension Planner",
+            description: plannerMetaData("zzz").description,
             href: "planner",
         },
         {
             icon: "icons/Signal_Search",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("zzz").description,
             href: "banners",
         },
     ],
@@ -146,6 +161,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Home",
             title: "Home",
+            description: getGamePageDescription("uma"),
             href: "",
         },
         {
@@ -174,16 +190,20 @@ export const navItems: GameData<NavItem[]> = {
                 />
             ),
             title: "Rating Calculator",
+            description:
+                "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills",
             href: "rating-calculator",
         },
         {
             icon: "icons/Training",
             title: "Training Event Helper",
+            description: "Tool for viewing Training Events in Umamusume",
             href: "training-event-helper",
         },
         {
             icon: "icons/Ticket",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("uma").description,
             href: "banners",
         },
     ],
@@ -191,6 +211,7 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/World",
             title: "Home",
+            description: getGamePageDescription("endfield"),
             href: "",
         },
         {
@@ -206,11 +227,13 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Upgrade",
             title: "Ascension Planner",
+            description: plannerMetaData("endfield").description,
             href: "planner",
         },
         {
             icon: "icons/Headhunt",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("endfield").description,
             href: "banners",
         },
     ],
@@ -226,6 +249,7 @@ export const navItems: GameData<NavItem[]> = {
                 />
             ),
             title: "Home",
+            description: getGamePageDescription("nte"),
             href: "",
         },
         {
@@ -246,12 +270,18 @@ export const navItems: GameData<NavItem[]> = {
         {
             icon: "icons/Ascension",
             title: "Ascension Planner",
+            description: plannerMetaData("nte").description,
             href: "planner",
         },
         {
             icon: "icons/Dice",
             title: "Banner Archive",
+            description: bannerArchiveMetaData("nte").description,
             href: "banners",
         },
     ],
 };
+
+function getGamePageDescription(game: Game) {
+    return `The ${games[game].name} branch of Irminsul.GG`;
+}
