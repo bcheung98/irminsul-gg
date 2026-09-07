@@ -8,10 +8,17 @@ import Text from "@/components/Text";
 
 // MUI imports
 import { createSvgIcon } from "@mui/material/utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 export default function DiscordButton() {
+    const matches_up_lg = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+    const matches_dn_md = useMediaQuery((theme) =>
+        theme.breakpoints.down("md"),
+    );
+    const matches = matches_up_lg || matches_dn_md;
+
     const [dialogOpen, setDialogOpen] = useState(false);
     const handleDialogOpen = () => {
         setDialogOpen(true);
@@ -36,17 +43,8 @@ export default function DiscordButton() {
             >
                 <TextLabel
                     icon={<DiscordIcon fontSize="small" />}
-                    title="Discord"
-                    titleProps={{
-                        variant: "subtitle2",
-                        sx: {
-                            display: {
-                                xs: "inline",
-                                md: "none",
-                                lg: "inline",
-                            },
-                        },
-                    }}
+                    title={matches && "Discord"}
+                    titleProps={{ variant: "subtitle2" }}
                 />
             </NavButton>
             <ContentDialog
