@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import NavLink from "@/components/NavLink";
+import AppStatus from "@/components/AppStatus";
+import DataStatus from "@/components/DataStatus";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -67,7 +69,7 @@ export default function NavBarBottom() {
                 disableGutters
                 sx={{
                     pt: 1,
-                    pb: pathname === "/calendar" ? 6 : 3,
+                    pb: 3,
                     width: EXCLUDED_PATHS.has(pathname)
                         ? "75%"
                         : { xs: "95%", md: "100%" },
@@ -186,16 +188,32 @@ export default function NavBarBottom() {
                     <FlexBox
                         wrap
                         sx={{
-                            justifyContent: { xs: "left", md: "right" },
-                            gap: { xs: 4, md: 6 },
+                            justifyContent: "space-between",
                             pt: { xs: 1, md: 0.5 },
                             pr: 0.5,
+                            gap: [2, 1],
                         }}
                     >
-                        <TextLink href="/privacy-policy">
-                            Privacy Policy
-                        </TextLink>
-                        <TextLink href="/site-map">Sitemap</TextLink>
+                        <FlexBox
+                            sx={{
+                                justifyContent: { xs: "left", md: "right" },
+                                gap: 2,
+                            }}
+                        >
+                            <AppStatus />
+                            <DataStatus />
+                        </FlexBox>
+                        <FlexBox
+                            sx={{
+                                justifyContent: { xs: "left", md: "right" },
+                                gap: { xs: 4, md: 6 },
+                            }}
+                        >
+                            <TextLink href="/privacy-policy">
+                                Privacy Policy
+                            </TextLink>
+                            <TextLink href="/site-map">Sitemap</TextLink>
+                        </FlexBox>
                     </FlexBox>
                 </Stack>
             </Toolbar>
@@ -212,7 +230,7 @@ function TextLink({
 }) {
     return (
         <Text
-            variant="body2"
+            variant="subtitle2"
             weight="highlight"
             sx={(theme) => ({
                 "&:hover": {
