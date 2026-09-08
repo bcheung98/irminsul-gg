@@ -49,11 +49,29 @@ export async function getPopularPages(): Promise<PopularPagesResponse> {
 }
 
 export async function getSitemapXML(): Promise<string> {
-    const response = await fetch("https://irminsul.gg/sitemap.xml");
-    if (!response.ok) {
+    const res = await fetch("https://irminsul.gg/sitemap.xml");
+    if (!res.ok) {
         throw new Error("Failed to fetch sitemap XML data");
     }
-    return response.text();
+    return res.text();
+}
+
+export async function getAppDetails(url: string): Promise<any> {
+    let res: Response;
+    try {
+        res = await fetch(url, {
+            cache: "no-store",
+        });
+    } catch {
+        throw new Error("Unable to connect to the data server");
+    }
+    if (!res.ok) {
+        const message = url.includes("/app-details")
+            ? "Build: Failed to fetch app details"
+            : "Data: Failed to fetch JSON manifest";
+        throw new Error(`${message} (${res.status})`);
+    }
+    return res.json();
 }
 
 export { urls };
