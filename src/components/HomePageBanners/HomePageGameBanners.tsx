@@ -1,5 +1,6 @@
 // Component imports
 import TextLabel from "@/components/TextLabel";
+import Image from "@/components/Image";
 import CurrentBannersContent from "@/components/CurrentBanners/CurrentBannersContent";
 
 // MUI imports
@@ -46,8 +47,6 @@ export default function HomePageGameBanners(props: {
         activeBanners,
     } = getBannerGroups(game.tag, server, banners);
 
-    if (!activeBanners) return null;
-
     const characters = props.characters
         .filter((item) => item.category.startsWith(game.tag))
         .map((item) => ({
@@ -89,12 +88,25 @@ export default function HomePageGameBanners(props: {
                             spacing={2}
                         />
                         <Stack spacing={2}>
-                            <CurrentBannersContent
-                                game={game.tag}
-                                character={currentCharacterBanners}
-                                weapon={currentWeaponBanners}
-                                chronicled={currentChronicledBanners}
-                            />
+                            <div style={{ minHeight: "128px" }}>
+                                {activeBanners ? (
+                                    <CurrentBannersContent
+                                        game={game.tag}
+                                        character={currentCharacterBanners}
+                                        weapon={currentWeaponBanners}
+                                        chronicled={currentChronicledBanners}
+                                    />
+                                ) : (
+                                    <Stack>
+                                        <TextLabel title="No active banners" />
+                                        <Image
+                                            src={`${game.tag}/emotes/error1`}
+                                            alt="No banners"
+                                            size={96}
+                                        />
+                                    </Stack>
+                                )}
+                            </div>
                             <ButtonBase
                                 href={`/${game.tag}/banners`}
                                 sx={{
@@ -136,7 +148,7 @@ export default function HomePageGameBanners(props: {
             ) : (
                 <Skeleton
                     variant="rounded"
-                    height={246}
+                    height="253px"
                     sx={{ backgroundColor: theme.background(1, "light") }}
                 />
             )}
