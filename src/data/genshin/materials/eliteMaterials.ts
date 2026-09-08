@@ -162,6 +162,14 @@ export const eliteMaterials = [
         release: { version: "1.0" },
     },
     {
+        id: 112029,
+        category: "elite",
+        name: "Hunter's Sacrificial Knife",
+        tag: "Sacrificial Knife1",
+        rarity: 2,
+        release: { version: "1.0" },
+    },
+    {
         id: 112030,
         category: "elite",
         name: "Agent's Sacrificial Knife",
