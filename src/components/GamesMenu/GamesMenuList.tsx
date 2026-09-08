@@ -3,6 +3,7 @@ import GamesMenuItem from "./GamesMenuItem";
 import Text from "@/components/Text";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
+import RandomButton from "@/components/RandomButton";
 import CloseButton from "@/components/CloseButton";
 
 // MUI imports
@@ -49,7 +50,7 @@ export default function GamesMenuList({
                         justifyContent: "space-between",
                     }}
                 >
-                    <Text>Games</Text>
+                    <Text weight="highlight">Games</Text>
                     <CloseButton
                         onClick={handleClose}
                         hoverColor={theme.drawer.backgroundColor.hover}
@@ -65,6 +66,7 @@ export default function GamesMenuList({
                     />
                 ))}
             </Stack>
+            {!matches && <RandomButton />}
             {!matches && (
                 <Stack spacing={1} sx={{ p: "4px 16px" }}>
                     <DiscordButton />
