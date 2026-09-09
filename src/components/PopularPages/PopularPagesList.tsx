@@ -12,16 +12,18 @@ import { range } from "@/utils";
 // Type imports
 import { PopularPageData } from "@/types";
 
+const MAX_PAGE_LIMIT = 10;
+
 export default function PopularPagesList({
     pages,
     error,
     isLoading,
 }: {
-    pages: PopularPageData[];
+    pages?: PopularPageData[];
     error: any;
     isLoading: boolean;
 }) {
-    if (error)
+    if (error || !pages)
         return (
             <Text variant="h6" weight="highlight">
                 Error fetching popular pages
@@ -31,7 +33,7 @@ export default function PopularPagesList({
     if (isLoading) {
         return (
             <Stack spacing={2}>
-                {range(10).map((i) => (
+                {range(MAX_PAGE_LIMIT).map((i) => (
                     <Skeleton
                         key={i}
                         variant="rounded"
@@ -47,7 +49,7 @@ export default function PopularPagesList({
 
     return (
         <Stack spacing={2}>
-            {pages.map((page) => (
+            {pages.slice(0, MAX_PAGE_LIMIT).map((page) => (
                 <PopularPagesLabel key={page.path} page={page} />
             ))}
         </Stack>

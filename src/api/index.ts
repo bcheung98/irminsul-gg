@@ -38,22 +38,22 @@ export async function getUmaEvents(
     return res.json();
 }
 
-export async function getPopularPages(): Promise<PopularPagesResponse> {
-    const res = await fetch(
-        "https://api.irminsul.gg/v2/_analytics/popular-pages.json",
-    );
+export async function getPopularPages(
+    url: string,
+): Promise<PopularPagesResponse> {
+    let res: Response;
+    try {
+        res = await fetch(url, {
+            cache: "no-store",
+        });
+    } catch {
+        throw new Error("Unable to connect to the data server");
+    }
     if (!res.ok) {
-        throw new Error("Failed to fetch popular page data");
+        const message = `Failed to fetch popular page data (${res.status})`;
+        throw new Error(message);
     }
     return res.json();
-}
-
-export async function getSitemapXML(): Promise<string> {
-    const res = await fetch("https://irminsul.gg/sitemap.xml");
-    if (!res.ok) {
-        throw new Error("Failed to fetch sitemap XML data");
-    }
-    return res.text();
 }
 
 export async function getAppDetails(url: string): Promise<any> {
@@ -72,6 +72,14 @@ export async function getAppDetails(url: string): Promise<any> {
         throw new Error(`${message} (${res.status})`);
     }
     return res.json();
+}
+
+export async function getSitemapXML(): Promise<string> {
+    const res = await fetch("https://irminsul.gg/sitemap.xml");
+    if (!res.ok) {
+        throw new Error("Failed to fetch sitemap XML data");
+    }
+    return res.text();
 }
 
 export { urls };
