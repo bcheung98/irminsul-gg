@@ -84,6 +84,7 @@ export type GameData<T> = Record<Game, T>;
 export type SkillDisplay = "slider" | "table";
 export type Server = keyof typeof servers;
 export type Gender = "Adaptive" | "Male" | "Female";
+export type MenuSide = "left" | "right";
 
 // Filters
 export type Filters = Record<string, (string | number)[]>;

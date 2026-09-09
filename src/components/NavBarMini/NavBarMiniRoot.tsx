@@ -20,8 +20,7 @@ export default function NavBarMiniRoot({
                 zIndex: theme.zIndex.drawer + 1,
                 alignItems: "center",
                 minHeight: "36px",
-                flexDirection: { xs: "row-reverse", md: "row" },
-                justifyContent: { xs: "space-between", md: "left" },
+                justifyContent: { xs: "space-between", sm: "left" },
             })}
             onKeyDown={onKeyDown}
             disableGutters={disableGutters}

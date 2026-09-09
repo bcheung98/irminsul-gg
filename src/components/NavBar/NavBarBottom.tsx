@@ -87,6 +87,8 @@ export default function NavBarBottom() {
                                     md: 0,
                                 },
                                 pb: { xs: 2, md: 0 },
+                                pr: { xs: 0, sm: 4, md: 0 },
+                                width: { xs: "100%", md: "auto" },
                             }}
                         >
                             {navText}
@@ -202,6 +204,16 @@ export default function NavBarBottom() {
                                 gap: { xs: 4, md: 6 },
                             }}
                         >
+                            <Text
+                                variant="body3"
+                                weight="highlight"
+                                sx={{
+                                    color: theme.text.description,
+                                    userSelect: "none",
+                                }}
+                            >
+                                {`© ${new Date().getFullYear()}`}
+                            </Text>
                             <TextLink href="/privacy-policy">
                                 Privacy Policy
                             </TextLink>
