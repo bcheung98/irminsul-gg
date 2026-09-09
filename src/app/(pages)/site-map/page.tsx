@@ -2,6 +2,8 @@ import Sitemap from "@/components/Sitemap";
 import { getSitemapXML } from "@/api";
 import { getMetadata } from "@/helpers/metadata";
 
+export const revalidate = 3600;
+
 export const metadata = getMetadata({
     overrides: {
         title: {
