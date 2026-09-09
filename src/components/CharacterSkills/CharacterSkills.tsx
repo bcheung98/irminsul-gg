@@ -42,7 +42,10 @@ export default function CharacterSkills({
     };
 
     const skillIcon = (key: string) => {
-        if (key === "special" && attributes.weaponType === "Rupture")
+        if (
+            key === "special" &&
+            ["Rupture", "Armorer"].includes(attributes?.weaponType || "")
+        )
             return "zzz/skills/SpecialEX2";
         return formatSkillIconURL(skillIconURLs[game][key], attributes);
     };

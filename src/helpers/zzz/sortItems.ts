@@ -33,7 +33,7 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(
                         ZZZElementMap[b.element],
                         ZZZElementMap[a.element],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
                     sortBy(bi, ai)
@@ -47,7 +47,7 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(
                         ZZZWeaponMap[b.weaponType],
                         ZZZWeaponMap[a.weaponType],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
                     sortBy(bi, ai)
@@ -69,12 +69,12 @@ export default function sortItems<T extends Record<string, any>>({
                 const ai = getSubStatLabel(
                     a as unknown as ZZZWeapon,
                     a.rarity,
-                    reverse
+                    reverse,
                 );
                 const bi = getSubStatLabel(
                     b as unknown as ZZZWeapon,
                     b.rarity,
-                    reverse
+                    reverse,
                 );
                 return (
                     sortBy(bi, ai, reverse) ||
@@ -88,8 +88,8 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(
                         a.stats.mainStat.value,
                         b.stats.mainStat.value,
-                        reverse
-                    ) || sortBy(b.displayName, a.displayName)
+                        reverse,
+                    ) || sortBy(b.displayName, a.displayName),
             );
             break;
         case "nation":
@@ -140,6 +140,7 @@ export enum ZZZWeaponMap {
     "Defense",
     "Support",
     "Rupture",
+    "Armorer",
 }
 
 function getNames(a: any, b: any) {
@@ -151,7 +152,7 @@ function getNames(a: any, b: any) {
 function getSubStatLabel(
     weapon: ZZZWeapon,
     rarity: Exclude<ZZZRarity, 2 | 1>,
-    reverse: boolean
+    reverse: boolean,
 ) {
     const subStat = weapon.stats.subStat;
     const token = reverse ? "" : "z";
