@@ -8,6 +8,7 @@ export interface SettingsState {
     statDisplay: SkillDisplay;
     gender: Gender;
     hideUnreleasedContent: boolean;
+    navDrawerOpen: boolean;
     mobileMenuSide: MenuSide;
     _hasHydrated: boolean;
 }
@@ -18,6 +19,7 @@ export interface SettingsActions {
     setStatDisplay: (payload: SkillDisplay) => void;
     setGender: (payload: Gender) => void;
     setUnreleasedContent: (payload: boolean) => void;
+    setNavDrawer: (payload: boolean) => void;
     setMobileMenuSide: (payload: MenuSide) => void;
 }
 
@@ -28,6 +30,7 @@ export const initialState: SettingsState = {
     statDisplay: "slider",
     gender: "Male",
     hideUnreleasedContent: true,
+    navDrawerOpen: true,
     mobileMenuSide: "right",
     _hasHydrated: false,
 };
@@ -50,6 +53,9 @@ export const useSettingsStore = create(
             },
             setUnreleasedContent: function (payload) {
                 return set(() => ({ hideUnreleasedContent: payload }));
+            },
+            setNavDrawer: function (payload) {
+                return set(() => ({ navDrawerOpen: payload }));
             },
             setMobileMenuSide: function (payload) {
                 return set(() => ({ mobileMenuSide: payload }));
