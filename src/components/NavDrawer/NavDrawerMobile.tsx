@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
@@ -8,6 +8,8 @@ import GamesMenu from "@/components/GamesMenu";
 import GamesMenuList from "@/components/GamesMenu/GamesMenuList";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
+import Text from "@/components/Text";
+import ToggleButtons from "@/components/ToggleButtons";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -20,7 +22,11 @@ import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useGame } from "@/context";
+import { useSettingsStore } from "@/stores";
 import { staticNavItems } from "@/data/navItems";
+
+// Type imports
+import { MenuSide } from "@/types";
 
 export default function NavDrawerMobile({
     open,
@@ -32,11 +38,21 @@ export default function NavDrawerMobile({
     handleDrawerClose: () => void;
 }) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("md"));
+    const matches_up_md = useMediaQuery(theme.breakpoints.up("md"));
+    const matches_up_sm = useMediaQuery(theme.breakpoints.up("sm"));
 
     const game = useGame();
 
     const pathname = usePathname();
+
+    const { mobileMenuSide, setMobileMenuSide } = useSettingsStore();
+
+    const [menuSide, setMenuSide] = useState<MenuSide>(mobileMenuSide);
+
+    const handleMenuSide = (value: MenuSide) => {
+        setMenuSide(value);
+        setMobileMenuSide(value);
+    };
 
     useEffect(() => {
         toggleDrawer(false);
@@ -46,7 +62,7 @@ export default function NavDrawerMobile({
         <Drawer
             open={open}
             onClose={handleDrawerClose}
-            anchor={matches ? "left" : "right"}
+            anchor={matches_up_sm ? "left" : mobileMenuSide}
             sx={{
                 zIndex: theme.zIndex.drawer,
                 boxSizing: "content-box",
@@ -54,12 +70,18 @@ export default function NavDrawerMobile({
                     maxWidth: { xs: "400px", md: "300px" },
                     py: 5,
                     borderLeft: {
-                        xs: `1px solid ${theme.border.color.primary}`,
-                        md: 0,
+                        xs:
+                            mobileMenuSide === "right"
+                                ? `1px solid ${theme.border.color.primary}`
+                                : 0,
+                        sm: 0,
                     },
                     borderRight: {
-                        xs: 0,
-                        md: `1px solid ${theme.border.color.primary}`,
+                        xs:
+                            mobileMenuSide === "left"
+                                ? `1px solid ${theme.border.color.primary}`
+                                : 0,
+                        sm: `1px solid ${theme.border.color.primary}`,
                     },
                     backgroundColor: theme.drawer.backgroundColor.main,
                 },
@@ -83,7 +105,7 @@ export default function NavDrawerMobile({
                         <NavDrawer open={open} onClose={handleDrawerClose} />
                     )}
                 </Box>
-                {!matches && (
+                {!matches_up_md && (
                     <>
                         <FlexBox sx={{ display: { xs: "flex", sm: "none" } }}>
                             <NavDrawer
@@ -102,6 +124,38 @@ export default function NavDrawerMobile({
                         >
                             <DiscordButton />
                             <KofiButton />
+                        </FlexBox>
+                        <FlexBox
+                            sx={{
+                                display: { xs: "flex", sm: "none" },
+                                px: 2,
+                                pt: 2,
+                            }}
+                        >
+                            <Stack spacing={1.5}>
+                                <Text variant="body2" weight="highlight">
+                                    Menu Side
+                                </Text>
+                                <ToggleButtons
+                                    buttons={[
+                                        { value: "left", label: "Left" },
+                                        { value: "right", label: "Right" },
+                                    ]}
+                                    value={menuSide}
+                                    exclusive
+                                    onChange={(
+                                        _: React.BaseSyntheticEvent,
+                                        newValue: MenuSide,
+                                    ) => {
+                                        if (newValue !== null) {
+                                            handleMenuSide(newValue);
+                                        }
+                                    }}
+                                    spacing={0}
+                                    padding="6px 16px"
+                                    highlightOnHover={false}
+                                />
+                            </Stack>
                         </FlexBox>
                     </>
                 )}

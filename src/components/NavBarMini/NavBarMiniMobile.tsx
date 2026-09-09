@@ -8,7 +8,6 @@ import NavBarMiniRoot from "./NavBarMiniRoot";
 import NavDrawerMobile from "@/components/NavDrawer/NavDrawerMobile";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Tooltip from "@/components/Tooltip";
-import MenuCloseIcon from "@/components/MenuCloseIcon";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
 import BlogButton from "@/components/Blog/BlogButton";
@@ -19,14 +18,16 @@ import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 // Helper imports
 import { useGame } from "@/context";
+import { useSettingsStore } from "@/stores";
+import { staticNavItems } from "@/data/navItems";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 // Type imports
 import { GameInfo } from "@/types";
-import { staticNavItems } from "@/data/navItems";
 
 export default function NavBarMiniMobile() {
     const game = useGame();
@@ -108,25 +109,33 @@ function SmallBreadcrumbBar({
 
     const path = pathname.split("/")[1];
 
+    const { mobileMenuSide } = useSettingsStore();
+
+    const Button = <MenuButton open={open} toggleDrawer={toggleDrawer} />;
+
     return (
         <FlexBox
-            spacing={1}
+            spacing={mobileMenuSide === "left" ? 2 : 1}
             sx={{
                 display: { xs: "flex", sm: "none" },
                 width: "100%",
                 px: 2,
-                justifyContent: "space-between",
+                justifyContent:
+                    mobileMenuSide === "left" ? "left" : "space-between",
             }}
         >
+            {mobileMenuSide === "left" && Button}
             {game ? (
                 <Breadcrumbs website={game} />
             ) : (
                 <Text variant="subtitle1" weight="highlight" sx={{ pl: 1 }}>
-                    {staticNavItems.find((item) => item.href === path)?.title ||
-                        "Home"}
+                    {path !== "random" &&
+                        (staticNavItems.find((item) => item.href === path)
+                            ?.title ||
+                            "Home")}
                 </Text>
             )}
-            <MenuButton open={open} toggleDrawer={toggleDrawer} />
+            {mobileMenuSide === "right" && Button}
         </FlexBox>
     );
 }
@@ -179,7 +188,14 @@ function MenuButton({
                     },
                 })}
             >
-                <MenuCloseIcon open={open} targetClass="lock-scroll" />
+                <MenuOpenIcon
+                    sx={{
+                        width: "22.5px",
+                        height: "22.5px",
+                        transform: open ? "rotateY(180deg)" : "rotateY(0deg)",
+                        transition: "transform 0.25s",
+                    }}
+                />
             </IconButton>
         </Tooltip>
     );

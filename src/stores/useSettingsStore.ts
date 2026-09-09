@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Gender, SkillDisplay } from "@/types";
+import { Gender, MenuSide, SkillDisplay } from "@/types";
 
 export interface SettingsState {
     theme: number;
     statDisplay: SkillDisplay;
     gender: Gender;
     hideUnreleasedContent: boolean;
+    mobileMenuSide: MenuSide;
     _hasHydrated: boolean;
 }
 
@@ -17,6 +18,7 @@ export interface SettingsActions {
     setStatDisplay: (payload: SkillDisplay) => void;
     setGender: (payload: Gender) => void;
     setUnreleasedContent: (payload: boolean) => void;
+    setMobileMenuSide: (payload: MenuSide) => void;
 }
 
 export type SettingsStore = SettingsState & SettingsActions;
@@ -26,6 +28,7 @@ export const initialState: SettingsState = {
     statDisplay: "slider",
     gender: "Male",
     hideUnreleasedContent: true,
+    mobileMenuSide: "right",
     _hasHydrated: false,
 };
 
@@ -47,6 +50,9 @@ export const useSettingsStore = create(
             },
             setUnreleasedContent: function (payload) {
                 return set(() => ({ hideUnreleasedContent: payload }));
+            },
+            setMobileMenuSide: function (payload) {
+                return set(() => ({ mobileMenuSide: payload }));
             },
         }),
         {
