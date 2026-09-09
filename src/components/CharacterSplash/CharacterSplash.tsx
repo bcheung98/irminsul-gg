@@ -20,9 +20,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // Helper imports
 import { useGameTag } from "@/context";
 import { useSettingsStore } from "@/stores";
-import { wuwaMainCharIDs } from "@/data/wuwa/common";
-import { endfieldMainCharIDs } from "@/data/endfield/common";
-import { nteMainCharIDs } from "@/data/nte/common";
+import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
 import { CharacterOutfit } from "@/types/character";
@@ -74,88 +72,24 @@ export default function CharacterSplash({
         },
     };
 
-    function getSplashImg(popup?: boolean) {
-        let url = "";
-        switch (game) {
-            case "genshin":
-                url = id.toString().startsWith("10000005")
-                    ? `${game}/characters/MC_${gender.slice(0, 1)}_splash`
-                    : `${game}/characters/${id}_splash`;
-                break;
-            case "hsr":
-                url = id.toString().startsWith("800")
-                    ? `${game}/characters/${id}_${gender.slice(0, 1)}_splash`
-                    : `${game}/characters/${id}_splash`;
-                break;
-            case "wuwa":
-                let type = popup ? "splash" : "card";
-                url = wuwaMainCharIDs.includes(id)
-                    ? `${game}/resonators/MC_${gender.slice(0, 1)}_${type}`
-                    : `${game}/resonators/${id}_${type}`;
-                break;
-            case "zzz":
-                url = `${game}/agents/${id}_splash`;
-                break;
-            case "uma":
-                url = `${game}/characters/${id}_card`;
-                break;
-            case "endfield":
-                url = endfieldMainCharIDs.includes(id)
-                    ? `${game}/operators/${id}_${gender.slice(0, 1)}_splash`
-                    : `${game}/operators/${id}_splash`;
-                break;
-            case "nte":
-                url = nteMainCharIDs.includes(id)
-                    ? `${game}/espers/${id}_${gender.slice(0, 1)}_splash`
-                    : `${game}/espers/${id}_splash`;
-                break;
-            default:
-                url = `${game}/characters/${id}_splash`;
-                break;
-        }
-        return `${url}${tabValue !== 0 ? tabValue : ""}`;
+    function getIconImg(index: number) {
+        return getCharacterImageURLs({
+            game,
+            id,
+            gender,
+            index,
+            variant: game === "genshin" ? "icon" : undefined,
+        }).icon;
     }
 
-    function getIconImg(index: number) {
-        switch (game) {
-            case "genshin":
-                return `${
-                    id.toString().startsWith("10000005")
-                        ? `${game}/characters/MC_${gender.slice(0, 1)}_icon`
-                        : `${game}/characters/${id}_icon`
-                }${index !== 0 ? `${index}` : ""}`;
-            case "hsr":
-                return `${
-                    id.toString().startsWith("800")
-                        ? `${game}/characters/${id}_${gender.slice(0, 1)}`
-                        : `${game}/characters/${id}`
-                }${index !== 0 ? `_${index}` : ""}`;
-            case "wuwa":
-                return `${
-                    wuwaMainCharIDs.includes(id)
-                        ? `${game}/resonators/MC_${gender.slice(0, 1)}`
-                        : `${game}/resonators/${id}`
-                }${index !== 0 ? `_${index}` : ""}`;
-            case "zzz":
-                return `${game}/agents/${id}${index !== 0 ? `_${index}` : ""}`;
-            case "endfield":
-                return `${
-                    endfieldMainCharIDs.includes(id)
-                        ? `${game}/operators/${id}_${gender.slice(0, 1)}`
-                        : `${game}/operators/${id}`
-                }${index !== 0 ? `_${index}` : ""}`;
-            case "nte":
-                return `${
-                    nteMainCharIDs.includes(id)
-                        ? `${game}/espers/${id}_${gender.slice(0, 1)}`
-                        : `${game}/espers/${id}`
-                }${index !== 0 ? `_${index}` : ""}`;
-            case "uma":
-            default:
-                return `${game}/characters/${id}${
-                    index !== 0 ? `_${index}` : ""
-                }`;
-        }
+    function getSplashImg(popup?: boolean) {
+        return getCharacterImageURLs({
+            game,
+            id,
+            gender,
+            index: tabValue,
+            variant: game === "wuwa" ? (popup ? "splash" : "card") : undefined,
+        }).splash;
     }
 
     return (

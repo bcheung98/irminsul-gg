@@ -14,9 +14,7 @@ import { categories, categoryImgURLs } from "@/data/categories";
 import { useRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
 import { usePlannerData } from "../Planner/Planner.utils";
-import { wuwaMainCharIDs } from "@/data/wuwa/common";
-import { endfieldMainCharIDs } from "@/data/endfield/common";
-import { nteMainCharIDs } from "@/data/nte/common";
+import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
 import { GameNoUma } from "@/types";
@@ -58,25 +56,6 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         ).toLowerCase()}/${formatHref(href)}`;
     }
 
-    function getImageURL() {
-        if (game === "genshin" && item?.name.includes("Traveler")) {
-            return `genshin/characters/MC_${gender.slice(0, 1)}`;
-        }
-        if (game === "hsr" && item?.name.includes("Trailblazer")) {
-            return `hsr/characters/${item.id}_${gender.slice(0, 1)}`;
-        }
-        if (game === "wuwa" && wuwaMainCharIDs.includes(item!.id)) {
-            return `wuwa/resonators/MC_${gender.slice(0, 1)}`;
-        }
-        if (game === "endfield" && endfieldMainCharIDs.includes(item!.id)) {
-            return `endfield/operators/${item!.id}_${gender.slice(0, 1)}`;
-        }
-        if (game === "nte" && nteMainCharIDs.includes(item!.id)) {
-            return `nte/espers/${item!.id}_${gender.slice(0, 1)}`;
-        }
-        return categoryImgURLs[`${game}/${type}`](item!.id);
-    }
-
     const { src: elementSrc, tooltip: elementTooltip } = getDataIconURL({
         game,
         key: "element",
@@ -92,6 +71,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         key: "specialty",
         value: item.specialty,
     });
+
     const chipParams: InfoChipProps = {
         chipProps: {
             background: chipColor || theme.background(1),
@@ -102,9 +82,11 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         titleProps: { variant: "body3", sx: { userSelect: "none" } },
     };
 
+    const { icon } = getCharacterImageURLs({ game, id: item.id, gender });
+
     return (
         <TextLabel
-            icon={getImageURL()}
+            icon={icon}
             iconProps={{
                 size: 48,
                 styles: {
