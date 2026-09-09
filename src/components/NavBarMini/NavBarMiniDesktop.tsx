@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Component imports
 import NavBarMiniRoot from "./NavBarMiniRoot";
 import NavDrawer from "@/components/NavDrawer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FlexBox from "@/components/FlexBox";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -15,35 +15,37 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 // Helper imports
 import { useGame } from "@/context";
+import { useSettingsStore } from "@/stores";
 import { navBarMiniStyles } from "./NavBarMini.styles";
 
 export default function NavBarMiniDesktop() {
-    const matches = useMediaQuery((theme) => theme.breakpoints.up("lg"));
-
     const game = useGame();
 
-    const [drawerOpen, setDrawerOpen] = useState(matches);
+    const { navDrawerOpen, setNavDrawer } = useSettingsStore();
+
+    const [drawerOpen, setDrawerOpen] = useState(navDrawerOpen);
     const toggleDrawerState = () => {
         setDrawerOpen(!drawerOpen);
+        setNavDrawer(!drawerOpen);
     };
 
     const styles = navBarMiniStyles(drawerOpen);
-
-    useEffect(() => {
-        setDrawerOpen(matches);
-    }, [matches]);
 
     return (
         <Box sx={{ display: { xs: "none", lg: "block" } }}>
             <AppBar sx={styles.root()}>
                 <NavBarMiniRoot>
                     <FlexBox spacing={4}>
-                        <IconButton
-                            onClick={toggleDrawerState}
-                            sx={styles.menuButton()}
+                        <Tooltip
+                            title={!drawerOpen ? "Expand menu" : "Close menu"}
                         >
-                            <MenuOpenIcon sx={styles.menuIcon()} />
-                        </IconButton>
+                            <IconButton
+                                onClick={toggleDrawerState}
+                                sx={styles.menuButton()}
+                            >
+                                <MenuOpenIcon sx={styles.menuIcon()} />
+                            </IconButton>
+                        </Tooltip>
                         {game && <Breadcrumbs website={game} />}
                     </FlexBox>
                 </NavBarMiniRoot>

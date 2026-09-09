@@ -45,7 +45,7 @@ export default function NavBarMiniMobile() {
     const styles = navBarMiniStyles();
 
     useEffect(() => {
-        toggleDrawer(false);
+        handleDrawerClose();
     }, [pathname]);
 
     return (
@@ -119,7 +119,8 @@ function SmallBreadcrumbBar({
             sx={{
                 display: { xs: "flex", sm: "none" },
                 width: "100%",
-                px: 2,
+                pl: 2,
+                pr: 1.5,
                 justifyContent:
                     mobileMenuSide === "left" ? "left" : "space-between",
             }}
@@ -172,12 +173,7 @@ function MenuButton({
     toggleDrawer: (newOpen: boolean) => () => void;
 }) {
     return (
-        <Tooltip
-            title={!open ? "Open menu" : "Close menu"}
-            sx={{
-                display: { xs: "flex", sm: "none" },
-            }}
-        >
+        <Tooltip title={!open ? "Open menu" : "Close menu"}>
             <IconButton
                 onClick={toggleDrawer(!open)}
                 sx={(theme) => ({
