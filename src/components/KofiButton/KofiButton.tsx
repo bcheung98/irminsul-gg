@@ -8,10 +8,10 @@ import Avatar from "@mui/material/Avatar";
 
 export default function KofiButton() {
     const matches_up_lg = useMediaQuery((theme) => theme.breakpoints.up("lg"));
-    const matches_dn_md = useMediaQuery((theme) =>
-        theme.breakpoints.down("md"),
+    const matches_dn_sm = useMediaQuery((theme) =>
+        theme.breakpoints.down("sm"),
     );
-    const matches = matches_up_lg || matches_dn_md;
+    const matches = matches_up_lg || matches_dn_sm;
 
     return (
         <ButtonBase
@@ -20,7 +20,7 @@ export default function KofiButton() {
             rel="noopener"
             sx={{
                 height: "28px",
-                px: { xs: 1, md: 2 },
+                px: 2,
                 py: 0.5,
                 borderRadius: "4px",
                 backgroundColor: "#ce3833",
