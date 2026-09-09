@@ -1,20 +1,23 @@
+import { useRef, useState } from "react";
+
 // Component imports
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
-import Tooltip from "@/components/Tooltip";
-import StatusAlert from "./StatusAlert";
+import FlexBox from "@/components/FlexBox";
+import {
+    StatusAlert,
+    AppDetails,
+    DataDetails,
+} from "@/components/StatusIndicator";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Popover from "@mui/material/Popover";
 
 // Helper imports
 import DateObject from "@/helpers/dates";
-
-// Type imports
-import { AppDetails } from "@/components/AppStatus/AppStatus.hooks";
-import { DataDetails } from "@/components/DataStatus/DataStatus.hooks";
+import { statusIndicatorStyles } from "./StatusIndicator.styles";
 
 export default function StatusIndicator({
     data,
@@ -27,35 +30,39 @@ export default function StatusIndicator({
     currentBuildId?: string;
     updateAvailable?: boolean;
 }) {
-    const theme = useTheme();
+    const initialUpdateTime = useRef<string | null>(null);
+
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+    const handleClickOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const open = Boolean(anchorEl);
 
     let type: "app" | "data";
 
+    const styles = statusIndicatorStyles(
+        !data || error ? "error" : updateAvailable ? "warning" : "success",
+    );
+
+    const StatusDot = (
+        <FlexBox sx={styles.dotRoot()}>
+            <Box sx={styles.dotInner()} />
+            <Box sx={styles.dotOuter()} />
+        </FlexBox>
+    );
+
     if (!data || error) {
         return (
-            <Card
-                sx={{
-                    px: 2,
-                    py: 0.5,
-                    outline: `1px solid ${theme.palette.error.main}`,
-                    userSelect: "none",
-                }}
-            >
+            <Card sx={styles.indicatorRoot()}>
                 <TextLabel
                     title={
-                        error?.message || `Could not get latest build details`
+                        error?.message || `Could not get latest data details`
                     }
                     titleProps={{ variant: "subtitle2" }}
-                    icon={
-                        <Box
-                            sx={{
-                                backgroundColor: theme.palette.error.main,
-                                width: "8px",
-                                height: "8px",
-                                borderRadius: "64px",
-                            }}
-                        />
-                    }
+                    icon={StatusDot}
                     alignItems="baseline"
                     spacing={1}
                 />
@@ -68,69 +75,59 @@ export default function StatusIndicator({
             .timeString;
 
     let lastUpdateTime = "";
-    let tooltip = <></>;
     if ("jobId" in data) {
         type = "app";
         lastUpdateTime = formatDate(data.lastDeployTime);
-        const build =
-            process.env.NEXT_PUBLIC_BUILD_ID ||
-            process.env.NODE_ENV === "production"
-                ? "Prod"
-                : "Dev";
-        tooltip = (
-            <Text variant="subtitle2" weight="highlight">
-                {`Last build update: ${lastUpdateTime}`}
-                <br />
-                {`${build} Build #${currentBuildId}`}
-            </Text>
-        );
     } else {
         type = "data";
         lastUpdateTime = formatDate(data.revision);
-        tooltip = (
-            <Text variant="subtitle2" weight="highlight">
-                {`Last data update: ${lastUpdateTime}`}
-            </Text>
-        );
     }
-
-    const typeString = type === "app" ? "Build" : "Data";
+    if (initialUpdateTime.current === null) {
+        initialUpdateTime.current = lastUpdateTime;
+    }
 
     return (
         <>
-            <Tooltip title={tooltip} arrow placement="top">
-                <Card
-                    sx={{
-                        px: 2,
-                        py: 0.5,
-                        outline: `1px solid ${
-                            updateAvailable
-                                ? theme.palette.warning.light
-                                : theme.palette.success.dark
-                        }`,
-                        userSelect: "none",
-                    }}
-                >
+            <Box onClick={handleClickOpen}>
+                <Card sx={styles.indicatorRoot()}>
                     <TextLabel
-                        title={`${typeString}: ${updateAvailable ? "Update available" : "Up to date"}`}
+                        title={`${type === "app" ? "Build" : "Data"}: ${updateAvailable ? "Update available" : "Up to date"}`}
                         titleProps={{ variant: "subtitle2" }}
-                        icon={
-                            <Box
-                                sx={{
-                                    backgroundColor: updateAvailable
-                                        ? theme.palette.warning.light
-                                        : theme.palette.success.light,
-                                    width: "8px",
-                                    height: "8px",
-                                    borderRadius: "64px",
-                                }}
-                            />
-                        }
+                        icon={StatusDot}
                         alignItems="baseline"
                         spacing={1}
                     />
                 </Card>
-            </Tooltip>
+            </Box>
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                }}
+                transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                }}
+            >
+                <Card sx={{ p: 2 }}>
+                    {type === "app" && (
+                        <Text variant="subtitle2" weight="highlight">
+                            {`${
+                                process.env.NEXT_PUBLIC_BUILD_ID ||
+                                process.env.NODE_ENV === "production"
+                                    ? "Prod"
+                                    : "Dev"
+                            } Build #${process.env.NEXT_PUBLIC_BUILD_ID || "dev"}`}
+                        </Text>
+                    )}
+                    <Text variant="subtitle2" weight="highlight">
+                        {`Last updated: ${initialUpdateTime.current}`}
+                    </Text>
+                </Card>
+            </Popover>
             <StatusAlert open={updateAvailable} />
         </>
     );
