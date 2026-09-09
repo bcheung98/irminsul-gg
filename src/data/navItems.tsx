@@ -1,4 +1,8 @@
+import { SxProps, Theme } from "@mui/material/styles";
 import HomeIcon from "@mui/icons-material/Home";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import ArticleIcon from "@mui/icons-material/Article";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import { bannerArchiveMetaData, plannerMetaData } from "@/helpers/metadata";
 import { games } from "./games";
@@ -10,6 +14,30 @@ export interface NavItem {
     description?: string;
     href: string;
 }
+
+const iconSx: SxProps<Theme> = (theme) => ({
+    color: theme.drawer.color.primary,
+    width: { xs: "22.39px", md: "28px" },
+    height: { xs: "22.39px", md: "28px" },
+});
+
+export const staticNavItems: NavItem[] = [
+    {
+        icon: <CalendarMonthIcon sx={iconSx} />,
+        title: "Gacha Calendar",
+        href: "calendar",
+    },
+    {
+        icon: <ArticleIcon sx={iconSx} />,
+        title: "Blog",
+        href: "blog",
+    },
+    {
+        icon: <QuestionMarkIcon sx={iconSx} />,
+        title: "Random Page",
+        href: "random",
+    },
+];
 
 export const navItems: GameData<NavItem[]> = {
     genshin: [
@@ -180,15 +208,7 @@ export const navItems: GameData<NavItem[]> = {
             href: "skills",
         },
         {
-            icon: (
-                <WorkspacePremiumIcon
-                    sx={(theme) => ({
-                        color: theme.drawer.color.primary,
-                        width: "28px",
-                        height: "28px",
-                    })}
-                />
-            ),
+            icon: <WorkspacePremiumIcon sx={iconSx} />,
             title: "Rating Calculator",
             description:
                 "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills",
@@ -239,15 +259,7 @@ export const navItems: GameData<NavItem[]> = {
     ],
     nte: [
         {
-            icon: (
-                <HomeIcon
-                    sx={(theme) => ({
-                        color: theme.drawer.color.primary,
-                        width: "28px",
-                        height: "28px",
-                    })}
-                />
-            ),
+            icon: <HomeIcon sx={iconSx} />,
             title: "Home",
             description: getGamePageDescription("nte"),
             href: "",

@@ -26,8 +26,8 @@ export default function BlogPage({
     return (
         <Container
             sx={{
-                mt: { xs: 4, md: 12 },
-                p: { xs: 2, md: 0 },
+                mt: { xs: 0, md: 12 },
+                p: 2,
                 backdropFilter: "blur(4px)",
             }}
         >

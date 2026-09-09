@@ -1,16 +1,11 @@
 // Component imports
 import GamesMenuItem from "./GamesMenuItem";
 import Text from "@/components/Text";
-import DiscordButton from "@/components/DiscordButton";
-import KofiButton from "@/components/KofiButton";
-import RandomButton from "@/components/RandomButton";
-import CloseButton from "@/components/CloseButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
 
 // Helper imports
 import { useGameList, useGameTag } from "@/context";
@@ -21,7 +16,6 @@ export default function GamesMenuList({
     handleClose: () => void;
 }) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const gameTag = useGameTag();
     const games = useGameList()
@@ -34,29 +28,25 @@ export default function GamesMenuList({
     }
 
     return (
-        <Stack
-            spacing={1}
-            divider={
-                <Divider sx={{ borderColor: theme.border.color.secondary }} />
-            }
+        <Card
+            sx={{
+                border: {
+                    xs: gameTag ? `1px solid ${theme.border.color.primary}` : 0,
+                    sm: 0,
+                },
+                borderRadius: "4px",
+            }}
         >
-            {!matches && (
-                <Stack
-                    direction="row"
-                    sx={{
-                        display: { md: "none" },
-                        p: "0px 8px 0px 16px",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Text weight="highlight">Games</Text>
-                    <CloseButton
-                        onClick={handleClose}
-                        hoverColor={theme.drawer.backgroundColor.hover}
-                    />
-                </Stack>
-            )}
+            <Text
+                weight="highlight"
+                sx={{
+                    display: { xs: !gameTag ? "block" : "none", sm: "none" },
+                    px: 1,
+                    pb: 1,
+                }}
+            >
+                Games
+            </Text>
             <Stack spacing={0.5}>
                 {games.map((game, index) => (
                     <GamesMenuItem
@@ -66,13 +56,6 @@ export default function GamesMenuList({
                     />
                 ))}
             </Stack>
-            {!matches && <RandomButton />}
-            {!matches && (
-                <Stack spacing={1} sx={{ p: "4px 16px" }}>
-                    <DiscordButton />
-                    <KofiButton />
-                </Stack>
-            )}
-        </Stack>
+        </Card>
     );
 }

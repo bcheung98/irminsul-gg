@@ -1,14 +1,12 @@
 import { usePathname } from "next/navigation";
 
 // Component imports
-import NavButton from "@/components/NavButton";
 import NavLink from "@/components/NavLink";
 import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import ArticleIcon from "@mui/icons-material/Article";
 
 export default function BlogButton() {
     const theme = useTheme();
@@ -23,7 +21,6 @@ export default function BlogButton() {
                 <Button
                     variant="text"
                     sx={{
-                        display: { xs: "none", md: "flex" },
                         transition: "color 0.25s",
                         color: linkActive
                             ? theme.text.selected
@@ -48,13 +45,6 @@ export default function BlogButton() {
                     </Text>
                 </Button>
             </NavLink>
-            <NavButton
-                title="Blog"
-                href={href}
-                sx={{ display: { xs: "flex", md: "none" } }}
-            >
-                <ArticleIcon />
-            </NavButton>
         </>
     );
 }

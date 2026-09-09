@@ -1,4 +1,5 @@
-import StyledRoot from "./StyledRoot";
+import Sitemap from "@/components/Sitemap";
+import { getSitemapXML } from "@/api";
 import { getMetadata } from "@/helpers/metadata";
 
 export const metadata = getMetadata({
@@ -13,6 +14,8 @@ export const metadata = getMetadata({
     },
 });
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    return <StyledRoot>{children}</StyledRoot>;
+export default async function SitemapPage() {
+    const data = await getSitemapXML();
+
+    return <Sitemap data={data} />;
 }

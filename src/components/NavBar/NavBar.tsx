@@ -48,7 +48,7 @@ export default function NavBar() {
                     <Divider
                         orientation="vertical"
                         flexItem
-                        sx={{ display: { xs: "none", sm: "block" }, my: "4px" }}
+                        sx={{ display: { xs: "none", lg: "block" }, my: "4px" }}
                     />
                 </FlexBox>
                 <FlexBox
@@ -59,17 +59,20 @@ export default function NavBar() {
                     }}
                 >
                     <FlexBox spacing={1}>
-                        <GamesMenu />
-                        <CalendarButton />
-                        <BlogButton />
-                        <FlexBox sx={{ display: { xs: "none", md: "flex" } }}>
+                        <FlexBox
+                            spacing={1}
+                            sx={{ display: { xs: "none", lg: "flex" } }}
+                        >
+                            <GamesMenu />
+                            <CalendarButton />
+                            <BlogButton />
                             <RandomButton />
                         </FlexBox>
                     </FlexBox>
-                    <FlexBox spacing={{ xs: 1, md: 3 }}>
+                    <FlexBox spacing={{ xs: 2, md: 3 }}>
                         <FlexBox
                             spacing={2}
-                            sx={{ display: { xs: "none", md: "flex" } }}
+                            sx={{ display: { xs: "none", sm: "flex" } }}
                         >
                             <DiscordButton />
                             <KofiButton />

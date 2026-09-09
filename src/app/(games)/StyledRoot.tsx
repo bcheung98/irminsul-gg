@@ -20,7 +20,7 @@ export default function StyledRoot({
             <Box
                 sx={{
                     px: { xs: 1, md: 2 },
-                    pt: 5,
+                    pt: { xs: 5, sm: 9, lg: 5 },
                     pb: 1,
                     minWidth: "0vw",
                     width: "100vw",
