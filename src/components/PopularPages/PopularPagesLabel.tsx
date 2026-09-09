@@ -10,7 +10,7 @@ import { getDataSet, urls } from "@/api";
 import { formatHref } from "@/utils";
 import { useSettingsStore } from "@/stores";
 import { games } from "@/data/games";
-import { categoryImgURLs } from "@/data/categories";
+import { categories, categoryImgURLs } from "@/data/categories";
 import { blogList } from "@/data/blog-list";
 import { navItems } from "@/data/navItems";
 import { rarityMap } from "@/data/uma/common";
@@ -47,30 +47,35 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
         if (page.path === "/")
             return {
                 title: "Home",
-                description: "The main page of Irminsul.GG",
+                description: isSitemap ? "The main page of Irminsul.GG" : "",
             };
         if (page.path === "/blog")
             return {
                 title: "Blog",
-                description:
-                    "Keep up with the latest news and content of Irminsul.GG",
+                description: isSitemap
+                    ? "Keep up with the latest news and content of Irminsul.GG"
+                    : "",
             };
         if (page.path === "/calendar")
             return {
                 title: "Gacha Calendar",
-                description:
-                    "Calendar to view the content release schedule of various gacha games",
+                description: isSitemap
+                    ? "Calendar to view the content release schedule of various gacha games"
+                    : "",
             };
         if (page.path === "/privacy-policy")
             return {
                 title: "Privacy Policy",
-                description: "Read the privacy policy of Irminsul.GG",
+                description: isSitemap
+                    ? "Read the privacy policy of Irminsul.GG"
+                    : "",
             };
         if (page.path === "/site-map")
             return {
                 title: "Sitemap",
-                description:
-                    "A complete directory of every page on IRMINSUL.GG, organized by category",
+                description: isSitemap
+                    ? "A complete directory of every page on IRMINSUL.GG, organized by category"
+                    : "",
             };
 
         if (!tag || !(tag in games)) {
@@ -98,7 +103,7 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
         let { title, description } = navItem;
 
         if (title === "Home" && isSitemap) title = gameName;
-        if (!isSitemap) title += ` - ${gameName}`;
+        if (!isSitemap) description = gameName;
 
         return { title, description };
     }
@@ -131,7 +136,7 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
     return title ? (
         <Label
             title={title}
-            description={isSitemap ? description : ""}
+            description={description}
             icon={icon}
             href={page.path}
             isSitemap={isSitemap}
@@ -187,9 +192,15 @@ function DynamicPageLabel({
     const item = getItem();
     if (!item) return null;
 
+    let title = getDynamicPathLabel(game, item);
+    let description = "";
+    if (!isSitemap)
+        description = `${categories[`${game}/${formatTag(path)}`]} - ${games[game].name}`;
+
     return (
         <Label
-            title={getDynamicPathLabel(game, item, isSitemap)}
+            title={title}
+            description={description}
             icon={getDynamicIcon(`${game}/${path}`, item, gender)}
             href={formatHref(`/${game}/${path}/${id}`)}
             isSitemap={isSitemap}
@@ -210,7 +221,10 @@ function Label(props: {
             subtitle={
                 <Text
                     variant="subtitle2"
-                    sx={(theme) => ({ color: theme.text.description })}
+                    sx={(theme) => ({
+                        color: theme.text.description,
+                        textAlign: "left",
+                    })}
                 >
                     {props.description}
                 </Text>
@@ -222,7 +236,7 @@ function Label(props: {
     );
 }
 
-function getDynamicPathLabel(game: Game, item: any, isSitemap = false) {
+function getDynamicPathLabel(game: Game, item: any) {
     if (!item) return "";
     let title = item.displayName || item.name;
     if (game === "uma") {
@@ -234,24 +248,14 @@ function getDynamicPathLabel(game: Game, item: any, isSitemap = false) {
             title += ` (${item.outfit || "Original"})`;
         }
     }
-    let res = title;
-    if (!isSitemap) res += ` - ${games[game].name}`;
-    return res;
+    return title;
 }
 
-function getDynamicIcon(path: string, item: any, gender: Gender) {
+function getDynamicIcon(pathname: string, item: any, gender: Gender) {
     if (!item) return "";
-    let [game, tag] = path.split("/");
+    let [game, path] = pathname.split("/");
 
-    if (["agents", "espers", "resonators"].includes(tag)) {
-        tag = "characters";
-    }
-    if (["lightcones", "w-engines", "arcs"].includes(tag)) {
-        tag = "weapons";
-    }
-    if (["artifacts", "relics", "drive-discs", "echoes"].includes(tag)) {
-        tag = "equipment";
-    }
+    const tag = formatTag(path);
 
     if (game === "blog") {
         return "_common/logo/logo_red";
@@ -291,8 +295,21 @@ function getDynamicIcon(path: string, item: any, gender: Gender) {
     ) {
         return `nte/espers/${item!.id}_${gender.slice(0, 1)}`;
     }
-    if (path === "uma/skills") {
+    if (pathname === "uma/skills") {
         return `uma/skills/${item.icon}`;
     }
     return categoryImgURLs[`${game}/${tag}`](item.id, item.name);
+}
+
+function formatTag(tag: string) {
+    if (["agents", "espers", "resonators"].includes(tag)) {
+        tag = "characters";
+    }
+    if (["lightcones", "w-engines", "arcs"].includes(tag)) {
+        tag = "weapons";
+    }
+    if (["artifacts", "relics", "drive-discs", "echoes"].includes(tag)) {
+        tag = "equipment";
+    }
+    return tag;
 }
