@@ -2,8 +2,6 @@
 
 import "./NavBar.css";
 
-import { usePathname } from "next/navigation";
-
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
@@ -24,13 +22,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 // Helper imports
 import { useGame } from "@/context";
 
-const EXCLUDED_PATHS = new Set(["/", "/site-map"]);
-
 export default function NavBarBottom() {
     const theme = useTheme();
 
     const game = useGame();
-    const pathname = usePathname();
 
     let text1 = "";
     let text2 = "";
@@ -70,9 +65,7 @@ export default function NavBarBottom() {
                 sx={{
                     pt: 1,
                     pb: 3,
-                    width: EXCLUDED_PATHS.has(pathname)
-                        ? "75%"
-                        : { xs: "95%", md: "100%" },
+                    width: { xs: "95%", md: "100%" },
                     mx: "auto",
                 }}
             >

@@ -6,9 +6,11 @@ import { usePathname } from "next/navigation";
 // Component imports
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
+import NavBarMini from "@/components/NavBarMini";
 
 // MUI imports
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 // Helper imports
 import { GameContext } from "@/context";
@@ -44,6 +46,9 @@ export default function RouteShell({
         <GameContext value={games[gameTag]}>
             <NavBar />
             <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: { xs: "flex", lg: "none" } }}>
+                    <NavBarMini />
+                </Box>
                 <Box
                     sx={{
                         position: "relative",
@@ -60,7 +65,11 @@ export default function RouteShell({
                     >
                         {children}
                     </Box>
-                    {pathname === "/" && <NavBarBottom />}
+                    {pathname === "/" && (
+                        <Container maxWidth="xl">
+                            <NavBarBottom />
+                        </Container>
+                    )}
                 </Box>
             </Box>
         </GameContext>

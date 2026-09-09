@@ -89,4 +89,13 @@ export const weeklyBossMaterials = [
         source: "Girtablullu",
         release: { version: "3.0" },
     },
+    {
+        id: 110011,
+        category: "weekly",
+        name: "Counterfeit Nucleus",
+        tag: "Counterfeit Nucleus",
+        rarity: 5,
+        source: "Kusarikku",
+        release: { version: "3.2" },
+    },
 ];

@@ -20,7 +20,7 @@ export default function Blog() {
             spacing={6}
             sx={{
                 position: "relative",
-                mt: { xs: 4, md: 12 },
+                mt: { xs: 0, md: 12 },
                 alignItems: "center",
                 userSelect: "none",
             }}

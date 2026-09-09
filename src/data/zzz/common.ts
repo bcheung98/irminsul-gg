@@ -15,6 +15,7 @@ export const weapons = [
     "Defense",
     "Support",
     "Rupture",
+    "Armorer",
 ] as const;
 
 export const attackTypes = ["Strike", "Slash", "Pierce"] as const;
@@ -48,4 +49,5 @@ export const factions = [
     "Phaethon",
     "Covenant of Dayat",
     "Airspace Patrol Department",
+    "Flint Workshop",
 ] as const;

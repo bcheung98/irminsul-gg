@@ -3,6 +3,7 @@ import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
 import BlogButton from "@/components/Blog/BlogButton";
+import RandomButton from "@/components/RandomButton";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
 import SiteSearch from "@/components/SiteSearch";
@@ -47,7 +48,7 @@ export default function NavBar() {
                     <Divider
                         orientation="vertical"
                         flexItem
-                        sx={{ display: { xs: "none", sm: "block" }, my: "4px" }}
+                        sx={{ display: { xs: "none", lg: "block" }, my: "4px" }}
                     />
                 </FlexBox>
                 <FlexBox
@@ -58,14 +59,20 @@ export default function NavBar() {
                     }}
                 >
                     <FlexBox spacing={1}>
-                        <GamesMenu />
-                        <CalendarButton />
-                        <BlogButton />
+                        <FlexBox
+                            spacing={1}
+                            sx={{ display: { xs: "none", lg: "flex" } }}
+                        >
+                            <GamesMenu />
+                            <CalendarButton />
+                            <BlogButton />
+                            <RandomButton />
+                        </FlexBox>
                     </FlexBox>
-                    <FlexBox spacing={{ xs: 1, md: 3 }}>
+                    <FlexBox spacing={{ xs: 2, md: 3 }}>
                         <FlexBox
                             spacing={2}
-                            sx={{ display: { xs: "none", md: "flex" } }}
+                            sx={{ display: { xs: "none", sm: "flex" } }}
                         >
                             <DiscordButton />
                             <KofiButton />

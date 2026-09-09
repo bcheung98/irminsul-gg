@@ -4,9 +4,11 @@ import Toolbar from "@mui/material/Toolbar";
 export default function NavBarMiniRoot({
     children,
     onKeyDown,
+    disableGutters,
 }: {
     children: React.ReactNode;
     onKeyDown?: (event: React.KeyboardEvent) => void;
+    disableGutters?: boolean;
 }) {
     return (
         <Toolbar
@@ -22,6 +24,7 @@ export default function NavBarMiniRoot({
                 justifyContent: { xs: "space-between", md: "left" },
             })}
             onKeyDown={onKeyDown}
+            disableGutters={disableGutters}
         >
             {children}
         </Toolbar>

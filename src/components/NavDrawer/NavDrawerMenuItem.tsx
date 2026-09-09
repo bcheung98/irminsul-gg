@@ -17,13 +17,15 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { useGameTag } from "@/context";
 
 // Type imports
-import { NavItem } from "@/data/navItems";
+import { NavItem, staticNavItems } from "@/data/navItems";
 
 export default function NavDrawerMenuItem({
     open,
+    onClose,
     item,
 }: {
     open?: boolean;
+    onClose?: () => void;
     item: NavItem;
 }) {
     const theme = useTheme();
@@ -32,9 +34,13 @@ export default function NavDrawerMenuItem({
     const pathname = usePathname();
     const game = useGameTag();
 
+    const linkRoot = staticNavItems.map((item) => item.href).includes(item.href)
+        ? ""
+        : `/${game}`;
+
     const isLinkActive = !item.href
-        ? pathname === `/${game}`
-        : pathname.includes(`/${game}/${item.href}`);
+        ? pathname === `${linkRoot}`
+        : pathname.includes(`${linkRoot}/${item.href}`);
 
     const [hover, setHover] = useState(false);
 
@@ -42,15 +48,13 @@ export default function NavDrawerMenuItem({
         position: "relative",
         p: {
             xs: "4px 16px",
-            lg: "4px 24px",
+            md: "4px 24px",
         },
-        borderRadius: {
-            xs: "4px",
-            lg: 0,
+        backgroundColor: {
+            md: isLinkActive
+                ? theme.drawer.backgroundColor.hover
+                : "transparent",
         },
-        backgroundColor: isLinkActive
-            ? theme.drawer.backgroundColor.hover
-            : "transparent",
         transition: "background-color 0.25s",
         "&:hover": {
             backgroundColor: theme.drawer.backgroundColor.hover,
@@ -59,6 +63,7 @@ export default function NavDrawerMenuItem({
 
     const indicatorStyle = [
         {
+            display: { xs: "none", md: "block" },
             position: "absolute",
             top: 8,
             left: 0,
@@ -96,11 +101,26 @@ export default function NavDrawerMenuItem({
 
     return (
         <Grid
-            size={{ xs: 12, sm: 3, lg: 12 }}
+            size={{ xs: 6, sm: 12 }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            onClick={onClose}
+            sx={{
+                alignContent: "center",
+                border: {
+                    xs: `1px solid ${isLinkActive ? theme.text.selected : theme.border.color.primary}`,
+                    md: 0,
+                },
+                borderRadius: {
+                    xs: "4px",
+                    md: 0,
+                },
+            }}
         >
-            <ButtonBase href={`/${game}/${item.href}`} LinkComponent={NavLink}>
+            <ButtonBase
+                href={`${linkRoot}/${item.href}`}
+                LinkComponent={NavLink}
+            >
                 <Tooltip
                     title={!open ? item.title : ""}
                     arrow

@@ -8,25 +8,27 @@ import NavDrawerMenu from "./NavDrawerMenu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Toolbar from "@mui/material/Toolbar";
-import { DrawerProps } from "@mui/material/Drawer";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { navItems } from "@/data/navItems";
+import { NavItem, navItems } from "@/data/navItems";
 
-interface NavDrawerProps {
+export interface NavDrawerProps {
     open?: boolean;
-    onClose?: DrawerProps["onClose"];
+    onClose?: () => void;
+    items?: NavItem[];
 }
 
-export default function NavDrawer({ open }: NavDrawerProps) {
+export default function NavDrawer({ open, onClose, items }: NavDrawerProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
     const game = useGameTag();
-    const items = navItems[game] || [];
+    const navList = items ?? navItems[game] ?? [];
 
-    const DrawerMenu = <NavDrawerMenu open={open} items={items} />;
+    const DrawerMenu = (
+        <NavDrawerMenu open={open} onClose={onClose} items={navList} />
+    );
 
     return matches ? (
         <NavDrawerRoot

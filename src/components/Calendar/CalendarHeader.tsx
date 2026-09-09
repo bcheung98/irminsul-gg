@@ -87,7 +87,7 @@ export default function CalendarHeader({
     const keyboardEventHandler = (event: KeyboardEvent) => {
         // Disable keyboard controls if a dialog is open
         const isDialogOpen = Object.values(document.body.style).includes(
-            "padding-right"
+            "padding-right",
         );
         if (!isDialogOpen) {
             if (event.ctrlKey && event.key === "ArrowLeft") {
@@ -233,10 +233,10 @@ export default function CalendarHeader({
     return (
         <AppBar
             sx={{
-                top: 48,
+                top: { xs: 84, lg: 48 },
                 backgroundColor: alpha(
                     theme.appbar.backgroundColor.main,
-                    matches ? 0.95 : 1
+                    matches ? 0.95 : 1,
                 ),
                 borderColor: theme.border.color.secondary,
             }}

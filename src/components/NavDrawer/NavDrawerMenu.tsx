@@ -5,24 +5,28 @@ import NavDrawerMenuItem from "./NavDrawerMenuItem";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { NavItem } from "@/data/navItems";
+import { NavDrawerProps } from "./NavDrawer";
 
 export default function NavDrawerMenu({
     open,
+    onClose,
     items,
-}: {
-    open?: boolean;
-    items: NavItem[];
-}) {
+}: NavDrawerProps) {
     return (
         <Grid
             container
             className="nav-mobile"
-            spacing={1}
-            sx={{ px: { xs: 0, sm: 1, lg: 0 }, py: { xs: 1, lg: 0 } }}
+            rowSpacing={1}
+            columnSpacing={{ xs: 2, md: 1 }}
+            sx={{ px: { xs: 2, md: 0 }, py: { xs: 1, md: 0 } }}
         >
-            {items.map((item) => (
-                <NavDrawerMenuItem key={item.title} open={open} item={item} />
+            {(items ?? []).map((item) => (
+                <NavDrawerMenuItem
+                    key={item.title}
+                    open={open}
+                    onClose={onClose}
+                    item={item}
+                />
             ))}
         </Grid>
     );

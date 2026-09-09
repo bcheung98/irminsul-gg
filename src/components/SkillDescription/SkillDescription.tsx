@@ -247,7 +247,9 @@ export default function SkillDescription({
             .replaceAll(
                 `Icon_EXSpecial`,
                 `<span class="icon ex-${
-                    attributes?.weaponType === "Rupture"
+                    ["Rupture", "Armorer"].includes(
+                        attributes?.weaponType || "",
+                    )
                         ? "special2"
                         : "special"
                 }"></span>`,

@@ -134,4 +134,13 @@ export const bossMaterials = [
         source: "Airspace Sentinel",
         release: { version: "3.0" },
     },
+    {
+        id: 110516,
+        category: "boss",
+        name: "Imitation Core",
+        tag: "Imitation Core",
+        rarity: 4,
+        source: "Conqueror",
+        release: { version: "3.2" },
+    },
 ];

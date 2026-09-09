@@ -83,7 +83,9 @@ export default function ZZZPlannerCard() {
             levels: skillLevel,
             values: item.values.special || defaultSkillValues,
             icon: `zzz/skills/${
-                item.weaponType === "Rupture" ? "SpecialEX2" : "SpecialEX"
+                ["Rupture", "Armorer"].includes(item.weaponType)
+                    ? "SpecialEX2"
+                    : "SpecialEX"
             }`,
         },
         {
@@ -116,7 +118,7 @@ export default function ZZZPlannerCard() {
                 {...item}
                 {...slider}
             />
-        )
+        ),
     );
 
     return (

@@ -34,7 +34,7 @@ export default function KofiButton() {
                     <Avatar
                         variant="square"
                         src="/kofi_symbol.png"
-                        sx={{ width: "auto", height: "20px" }}
+                        sx={{ width: "24.88px", height: "20px" }}
                     />
                 }
                 title={matches && "Ko-Fi"}

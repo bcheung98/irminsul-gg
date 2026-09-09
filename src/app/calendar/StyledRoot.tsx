@@ -13,7 +13,11 @@ export default function StyledRoot({
 }>) {
     return (
         <Box>
-            <Box sx={{ width: "100%", minHeight: "95vh" }}>{children}</Box>
+            <Box
+                sx={{ width: "100%", minHeight: "95vh", pt: { xs: 4, lg: 0 } }}
+            >
+                {children}
+            </Box>
             <Box sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
                 <NavBarBottom />
             </Box>

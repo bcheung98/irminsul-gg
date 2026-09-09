@@ -2,18 +2,24 @@ import { useState } from "react";
 
 // Component imports
 import GamesMenuList from "./GamesMenuList";
-import NavButton from "@/components/NavButton";
-import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Menu from "@mui/material/Menu";
 import AppsIcon from "@mui/icons-material/Apps";
 import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+// Helper imports
+import { useGame } from "@/context";
+
 export default function GamesMenu() {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+    const game = useGame();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -42,7 +48,6 @@ export default function GamesMenu() {
                 }
                 sx={[
                     {
-                        display: { xs: "none", md: "flex" },
                         transition: "color 0.25s",
                         "&:hover": {
                             color: theme.text.selected,
@@ -55,28 +60,23 @@ export default function GamesMenu() {
                     },
                 ]}
             >
-                <Text
-                    variant="body2"
-                    sx={{
-                        fontWeight: theme.font.weight.highlight,
-                        color: "inherit",
+                <TextLabel
+                    title={!matches && game ? game.name : "Games"}
+                    titleProps={{
+                        variant: "body2",
+                        sx: {
+                            fontWeight: theme.font.weight.highlight,
+                            color: "inherit",
+                        },
                     }}
-                >
-                    Games
-                </Text>
+                    icon={
+                        !matches &&
+                        (game ? `${game.tag}/_common/Icon` : <AppsIcon />)
+                    }
+                    iconProps={{ size: 28 }}
+                    spacing={2}
+                />
             </Button>
-            <NavButton
-                onClick={handleMenuOpen}
-                title="Games"
-                sx={{
-                    display: { xs: "flex", md: "none" },
-                    backgroundColor: open
-                        ? theme.appbar.backgroundColor.selectedHover
-                        : "transparent",
-                }}
-            >
-                <AppsIcon />
-            </NavButton>
             <Menu
                 anchorEl={anchorEl}
                 open={open}

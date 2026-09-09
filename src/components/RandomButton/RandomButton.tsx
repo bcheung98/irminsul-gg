@@ -1,33 +1,29 @@
-import { usePathname } from "next/navigation";
-
 // Component imports
 import NavLink from "@/components/NavLink";
 import Text from "@/components/Text";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
-export default function BlogButton() {
+// Helper imports
+import { useRandomPageShortcut } from "./RandomButton.hooks";
+
+export default function RandomButton() {
     const theme = useTheme();
 
-    const href = "/blog";
-    const pathname = usePathname();
-    const linkActive = pathname.includes("blog");
+    useRandomPageShortcut();
+
+    const href = "/random";
 
     return (
-        <>
+        <Tooltip title="Load a random page [alt-x]" arrow>
             <NavLink href={href}>
                 <Button
                     variant="text"
                     sx={{
                         transition: "color 0.25s",
-                        color: linkActive
-                            ? theme.text.selected
-                            : theme.text.primary,
-                        textShadow: linkActive
-                            ? `${theme.text.selected} 1px 1px 8px`
-                            : "none",
                         "&:hover": {
                             color: theme.text.selected,
                             textShadow: `${theme.text.selected} 1px 1px 8px`,
@@ -41,10 +37,10 @@ export default function BlogButton() {
                             color: "inherit",
                         }}
                     >
-                        Blog
+                        Random
                     </Text>
                 </Button>
             </NavLink>
-        </>
+        </Tooltip>
     );
 }
