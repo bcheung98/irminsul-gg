@@ -7,7 +7,7 @@ import { countText } from "@/utils";
 import DateObject from "@/helpers/dates";
 
 export default function VersionReleaseDate({
-    releaseDate,
+    releaseDate = "1970-01-01 00:00:00 UTC+0",
     weight = "highlight",
     variant = "release",
 }: {
@@ -21,16 +21,20 @@ export default function VersionReleaseDate({
     const dateObj = new DateObject(releaseDate);
     const timeRemaining = dateObj.date.getTime() - Date.now();
     const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+
     const isFuture = days > 0;
     const count = Math.abs(days).toLocaleString("en-us");
     const dayCount = countText({ count: days, single: "day" });
-    const dayText = isFuture
-        ? `In ${count} ${dayCount}`
-        : `${count} ${dayCount} ago`;
+    const dayText =
+        days === 0
+            ? "Today"
+            : isFuture
+              ? `In ${count} ${dayCount}`
+              : `${count} ${dayCount} ago`;
 
     return variant === "release" ? (
         <Text variant="subtitle1" weight={weight}>
-            {isFuture ? "Releasing in: " : "Released on: "}
+            {"Release Date: "}
             <Tooltip title={dayText} arrow placement="right">
                 <span
                     style={{
