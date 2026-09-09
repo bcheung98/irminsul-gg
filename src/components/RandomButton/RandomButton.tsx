@@ -19,28 +19,30 @@ export default function RandomButton() {
 
     return (
         <Tooltip title="Load a random page [alt-x]" arrow>
-            <NavLink href={href}>
-                <Button
-                    variant="text"
-                    sx={{
-                        transition: "color 0.25s",
-                        "&:hover": {
-                            color: theme.text.selected,
-                            textShadow: `${theme.text.selected} 1px 1px 8px`,
-                        },
-                    }}
-                >
-                    <Text
-                        variant="body2"
-                        weight="highlight"
+            <div>
+                <NavLink href={href}>
+                    <Button
+                        variant="text"
                         sx={{
-                            color: "inherit",
+                            transition: "color 0.25s",
+                            "&:hover": {
+                                color: theme.text.selected,
+                                textShadow: `${theme.text.selected} 1px 1px 8px`,
+                            },
                         }}
                     >
-                        Random
-                    </Text>
-                </Button>
-            </NavLink>
+                        <Text
+                            variant="body2"
+                            weight="highlight"
+                            sx={{
+                                color: "inherit",
+                            }}
+                        >
+                            Random
+                        </Text>
+                    </Button>
+                </NavLink>
+            </div>
         </Tooltip>
     );
 }
