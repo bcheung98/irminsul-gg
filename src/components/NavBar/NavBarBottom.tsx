@@ -6,8 +6,7 @@ import "./NavBar.css";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import NavLink from "@/components/NavLink";
-import AppStatus from "@/components/AppStatus";
-import DataStatus from "@/components/DataStatus";
+import { AppStatus, DataStatus } from "@/components/StatusIndicator";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";

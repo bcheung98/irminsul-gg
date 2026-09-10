@@ -14,9 +14,7 @@ import { categories, categoryImgURLs } from "@/data/categories";
 import { blogList } from "@/data/blog-list";
 import { navItems } from "@/data/navItems";
 import { rarityMap } from "@/data/uma/common";
-import { wuwaMainCharIDs } from "@/data/wuwa/common";
-import { endfieldMainCharIDs } from "@/data/endfield/common";
-import { nteMainCharIDs } from "@/data/nte/common";
+import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
 import { Game, Gender, PopularPageData } from "@/types";
@@ -195,7 +193,7 @@ function DynamicPageLabel({
     let title = getDynamicPathLabel(game, item);
     let description = "";
     if (!isSitemap)
-        description = `${categories[`${game}/${formatTag(path)}`]} - ${games[game].name}`;
+        description = `${categories[`${game}/${getTag(path)}`]} - ${games[game].name}`;
 
     return (
         <Label
@@ -255,53 +253,25 @@ function getDynamicIcon(pathname: string, item: any, gender: Gender) {
     if (!item) return "";
     let [game, path] = pathname.split("/");
 
-    const tag = formatTag(path);
+    const tag = getTag(path);
 
     if (game === "blog") {
         return "_common/logo/logo_red";
     }
-    if (
-        game === "genshin" &&
-        tag === "characters" &&
-        item?.name.includes("Traveler")
-    ) {
-        return `genshin/characters/MC_${gender.slice(0, 1)}`;
-    }
-    if (
-        game === "hsr" &&
-        tag === "characters" &&
-        item?.name.includes("Trailblazer")
-    ) {
-        return `hsr/characters/${item.id}_${gender.slice(0, 1)}`;
-    }
-    if (
-        game === "wuwa" &&
-        tag === "characters" &&
-        wuwaMainCharIDs.includes(item!.id)
-    ) {
-        return `wuwa/resonators/MC_${gender.slice(0, 1)}`;
-    }
-    if (
-        game === "endfield" &&
-        tag === "characters" &&
-        endfieldMainCharIDs.includes(item!.id)
-    ) {
-        return `endfield/operators/${item!.id}_${gender.slice(0, 1)}`;
-    }
-    if (
-        game === "nte" &&
-        tag === "characters" &&
-        nteMainCharIDs.includes(item!.id)
-    ) {
-        return `nte/espers/${item!.id}_${gender.slice(0, 1)}`;
-    }
     if (pathname === "uma/skills") {
         return `uma/skills/${item.icon}`;
+    }
+    if (tag === "characters") {
+        return getCharacterImageURLs({
+            game: game as Game,
+            id: item.id,
+            gender,
+        }).icon;
     }
     return categoryImgURLs[`${game}/${tag}`](item.id, item.name);
 }
 
-function formatTag(tag: string) {
+function getTag(tag: string) {
     if (["agents", "espers", "resonators"].includes(tag)) {
         tag = "characters";
     }

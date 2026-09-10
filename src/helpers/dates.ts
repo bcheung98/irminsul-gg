@@ -46,16 +46,16 @@ function formatDate(date: string, offset: string) {
 export default class DateObject {
     value: string;
     server: Server;
-    game: Game | undefined;
+    game: Game;
 
     /**
      * @param value - A string representing a date.
-     * The string must be formatted in the following way: `YYYY-MM-DD HH:MM:SS UTC+Z`.
+     * Input dates must be formatted in the following way: `YYYY-MM-DD HH:MM:SS UTC+Z`.
      * @param server - The current server (NA / EU / Asia).
      * @param game - The current game.
      */
-    constructor(value: string, server?: Server, game?: Game) {
-        this.value = value;
+    constructor(value?: string | null, server?: Server, game?: Game) {
+        this.value = value || "1970-01-01 00:00:00 UTC+0";
         this.server = server || "NA";
         this.game = game || "genshin";
     }
@@ -66,10 +66,16 @@ export default class DateObject {
      */
     private createDateObject() {
         let dateObject;
-        if (this.value) {
-            if (this.value.includes("UTC")) {
+        if (this.value.toLowerCase() === "now") {
+            dateObject = new Date();
+        } else {
+            if (this.value.includes("UTC+")) {
                 dateObject = new Date(
-                    formatDate(this.value, `+${this.value.split("+")[1]}`)
+                    formatDate(this.value, `+${this.value.split("+")[1]}`),
+                );
+            } else if (this.value.includes("UTC-")) {
+                dateObject = new Date(
+                    formatDate(this.value, `-${this.value.split("-")[1]}`),
                 );
             } else {
                 let offset = servers[this.server];
@@ -78,8 +84,6 @@ export default class DateObject {
                 }
                 dateObject = new Date(formatDate(this.value, offset));
             }
-        } else {
-            dateObject = new Date();
         }
         return dateObject;
     }

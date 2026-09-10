@@ -11,6 +11,7 @@ export const navBarMiniStyles = (open?: boolean) => {
                 lg: alpha(theme.appbar.backgroundColor.main, 0.95),
             },
             borderTop: `1px solid ${theme.border.color.primary}`,
+            pr: "0 !important",
         }),
         menuButton: (): SxProps<Theme> => (theme) => ({
             borderRadius: "4px",
