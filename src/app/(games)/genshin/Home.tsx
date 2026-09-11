@@ -2,9 +2,7 @@
 import CurrentBanners from "@/components/CurrentBanners";
 import VersionHighlights from "@/components/VersionHighlights";
 import FarmingSchedule from "@/components/_genshin/FarmingSchedule";
-
-// MUI imports
-import Grid from "@mui/material/Grid";
+import { GamePageRoot } from "@/components/PageRoot";
 
 // Type imports
 import {
@@ -29,25 +27,25 @@ export default function GenshinHome({
     banners: BannerProps;
 }) {
     return (
-        <Grid container spacing={3} sx={{ pt: 2 }}>
-            <Grid size={12}>
+        <GamePageRoot
+            header={
                 <CurrentBanners
                     characters={characters}
                     weapons={weapons}
                     banners={banners}
                 />
-            </Grid>
-            <Grid size={{ xs: 12, lg: 6 }}>
+            }
+            leftColumn={
                 <VersionHighlights
                     characters={characters}
                     weapons={weapons}
                     equipment={equipment}
                     cards={cards}
                 />
-            </Grid>
-            <Grid size={{ xs: 12, lg: 6 }}>
+            }
+            rightColumn={
                 <FarmingSchedule characters={characters} weapons={weapons} />
-            </Grid>
-        </Grid>
+            }
+        />
     );
 }

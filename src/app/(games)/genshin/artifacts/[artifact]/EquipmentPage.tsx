@@ -2,7 +2,7 @@
 
 // Component imports
 import EquipmentInfo from "@/components/EquipmentInfo";
-import InfoPageRoot from "@/components/InfoPageRoot";
+import { InfoPageRoot } from "@/components/PageRoot";
 import BetaTag from "@/components/BetaTag";
 
 // Type imports
