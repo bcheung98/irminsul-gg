@@ -3,9 +3,13 @@ import { useState } from "react";
 // Component imports
 import TEHDeckCharacterCard from "../TEHelper/TEHDeckCharacterCard";
 import RatingCalculatorSelectorPopup from "./RatingCalculatorSelectorPopup";
+import Text from "@/components/Text";
 
 // MUI imports
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import LoopIcon from "@mui/icons-material/Loop";
 
 // Helper imports
 import { useRatingCalculatorStore } from "@/stores";
@@ -37,9 +41,27 @@ export default function RatingCalculatorCharacterSelect() {
 
     return (
         <>
-            <Box onClick={() => handleSearchOpen()}>
-                <TEHDeckCharacterCard data={currentCharacter || null} />
-            </Box>
+            <Stack spacing={2}>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box
+                        onClick={() => handleSearchOpen()}
+                        sx={{ cursor: "pointer" }}
+                    >
+                        <TEHDeckCharacterCard data={currentCharacter || null} />
+                    </Box>
+                </Box>
+                <Button
+                    variant="contained"
+                    color="info"
+                    size="small"
+                    onClick={handleSearchOpen}
+                    startIcon={<LoopIcon />}
+                >
+                    <Text variant="subtitle2" weight="highlight">
+                        Change Uma
+                    </Text>
+                </Button>
+            </Stack>
             <RatingCalculatorSelectorPopup
                 open={searchOpen}
                 setOpen={setSearchOpen}
