@@ -82,7 +82,10 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
         titleProps: { variant: "body3", sx: { userSelect: "none" } },
     };
 
-    const { icon } = getCharacterImageURLs({ game, id: item.id, gender });
+    const icon =
+        type === "characters"
+            ? getCharacterImageURLs({ game, id: item.id, gender }).icon
+            : categoryImgURLs[`${game}/${type}`](item!.id);
 
     return (
         <TextLabel
