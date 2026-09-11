@@ -7,6 +7,7 @@ import VersionReleaseDate from "@/components/VersionHighlights/VersionReleaseDat
 import Stack from "@mui/material/Stack";
 
 // Helper imports
+import DateObject from "@/helpers/dates";
 import versions from "@/data/versions";
 import { games as gamesList } from "@/data/games";
 import { useVersionReleaseDates } from "@/components/VersionHighlights/VersionHighlights.hooks";
@@ -32,7 +33,10 @@ export default function CurrentVersions() {
         if (!aDate) return 1;
         if (!bDate) return -1;
 
-        return new Date(bDate).getTime() - new Date(aDate).getTime();
+        const aTime = new DateObject(aDate).date.getTime();
+        const bTime = new DateObject(bDate).date.getTime();
+
+        return bTime - aTime;
     });
 
     return (
