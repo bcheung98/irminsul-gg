@@ -84,7 +84,7 @@ export default function MainLayout({
                     right: { xs: 18, md: undefined },
                 }}
                 action={scrollToTop}
-                color="info"
+                color={theme.palette.info.main}
                 icon={<KeyboardArrowUpIcon />}
                 tooltip="Scroll to top"
                 tooltipArrow="right"
