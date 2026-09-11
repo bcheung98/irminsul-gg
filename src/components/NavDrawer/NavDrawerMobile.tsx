@@ -67,22 +67,7 @@ export default function NavDrawerMobile({
                 zIndex: theme.zIndex.drawer,
                 boxSizing: "content-box",
                 "& .MuiDrawer-paper": {
-                    maxWidth: { xs: "400px", md: "300px" },
                     py: 5,
-                    borderLeft: {
-                        xs:
-                            mobileMenuSide === "right"
-                                ? `1px solid ${theme.border.color.primary}`
-                                : 0,
-                        sm: 0,
-                    },
-                    borderRight: {
-                        xs:
-                            mobileMenuSide === "left"
-                                ? `1px solid ${theme.border.color.primary}`
-                                : 0,
-                        sm: `1px solid ${theme.border.color.primary}`,
-                    },
                     backgroundColor: theme.drawer.backgroundColor.main,
                 },
             }}

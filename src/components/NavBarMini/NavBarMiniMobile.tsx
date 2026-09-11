@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
@@ -32,8 +32,6 @@ import { GameInfo } from "@/types";
 export default function NavBarMiniMobile() {
     const game = useGame();
 
-    const pathname = usePathname();
-
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -43,10 +41,6 @@ export default function NavBarMiniMobile() {
     };
 
     const styles = navBarMiniStyles();
-
-    useEffect(() => {
-        handleDrawerClose();
-    }, [pathname]);
 
     return (
         <Box sx={{ display: { xs: "block", lg: "none" } }}>
