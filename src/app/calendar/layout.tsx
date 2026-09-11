@@ -1,4 +1,4 @@
-import StyledRoot from "./StyledRoot";
+import CalendarLayout from "@/layouts/CalendarLayout";
 import { getMetadata } from "@/helpers/metadata";
 
 export const metadata = getMetadata({
@@ -19,10 +19,6 @@ export const metadata = getMetadata({
     },
 });
 
-export default function GamesLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return <StyledRoot>{children}</StyledRoot>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+    return <CalendarLayout>{children}</CalendarLayout>;
 }

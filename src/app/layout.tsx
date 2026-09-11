@@ -3,14 +3,14 @@ import Script from "next/script";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
-import StyledRoot from "./StyledRoot";
+import MainLayout from "@/layouts/MainLayout";
 import { getMetadata } from "@/helpers/metadata";
 
 export const metadata = getMetadata({
     overrides: { twitter: { card: "summary_large_image" } },
 });
 
-export default function RootLayout({
+export default function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -21,7 +21,7 @@ export default function RootLayout({
                 <InitColorSchemeScript attribute="class" defaultMode="dark" />
                 <AppRouterCacheProvider>
                     <main>
-                        <StyledRoot>{children}</StyledRoot>
+                        <MainLayout>{children}</MainLayout>
                     </main>
                 </AppRouterCacheProvider>
                 {/* Cloudflare Web Analytics */}

@@ -9,7 +9,7 @@ import FilterDrawer from "@/components/FilterDrawer";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
-export default function StyledRoot({
+export default function GamesLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

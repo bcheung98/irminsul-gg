@@ -3,7 +3,7 @@
 import { useEffect, Suspense } from "react";
 
 // Component imports
-import RouteShell from "./RouteShell";
+import RouteShell from "./MainShell";
 import ActionFab from "@/components/ActionFab";
 import Loader from "@/components/Loader";
 
@@ -22,7 +22,7 @@ import { useSettingsStore } from "@/stores/useSettingsStore";
 // Type imports
 import { GameInfo } from "@/types";
 
-export default function StyledRoot({
+export default function MainLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -84,6 +84,7 @@ export default function StyledRoot({
                     right: { xs: 18, md: undefined },
                 }}
                 action={scrollToTop}
+                color="info"
                 icon={<KeyboardArrowUpIcon />}
                 tooltip="Scroll to top"
                 tooltipArrow="right"
