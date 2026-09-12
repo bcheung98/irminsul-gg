@@ -10,7 +10,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Tooltip from "@/components/Tooltip";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
-import BlogButton from "@/components/Blog/BlogButton";
 import RandomButton from "@/components/RandomButton";
 
 // MUI imports
@@ -83,9 +82,10 @@ function MainButtonGroup() {
             }}
         >
             <GamesMenu />
-            <CalendarButton />
-            <BlogButton />
-            <RandomButton />
+            <FlexBox spacing={2}>
+                <CalendarButton />
+                <RandomButton />
+            </FlexBox>
         </FlexBox>
     );
 }

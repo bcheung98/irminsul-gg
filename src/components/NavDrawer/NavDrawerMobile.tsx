@@ -67,7 +67,12 @@ export default function NavDrawerMobile({
                 zIndex: theme.zIndex.drawer,
                 boxSizing: "content-box",
                 "& .MuiDrawer-paper": {
+                    maxWidth: { sm: "300px" },
                     py: 5,
+                    borderRight: {
+                        xs: 0,
+                        sm: `1px solid ${theme.border.color.primary}`,
+                    },
                     backgroundColor: theme.drawer.backgroundColor.main,
                 },
             }}
