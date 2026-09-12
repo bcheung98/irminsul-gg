@@ -1,8 +1,6 @@
 // Component imports
 import CurrentBanners from "@/components/CurrentBanners";
-
-// MUI imports
-import Grid from "@mui/material/Grid";
+import { GamePageRoot } from "@/components/PageRoot";
 
 // Type imports
 import { UmaCharacter, UmaSupport } from "@/types/uma";
@@ -18,14 +16,14 @@ export default function UmaHome({
     banners: BannerProps;
 }) {
     return (
-        <Grid container spacing={3} sx={{ pt: 2 }}>
-            <Grid size={12}>
+        <GamePageRoot
+            header={
                 <CurrentBanners
                     characters={characters}
                     weapons={weapons}
                     banners={banners}
                 />
-            </Grid>
-        </Grid>
+            }
+        />
     );
 }

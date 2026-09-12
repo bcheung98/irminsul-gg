@@ -2,7 +2,6 @@
 import IrminsulLogo from "@/components/IrminsulLogo";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
-import BlogButton from "@/components/Blog/BlogButton";
 import RandomButton from "@/components/RandomButton";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
@@ -64,9 +63,10 @@ export default function NavBar() {
                             sx={{ display: { xs: "none", lg: "flex" } }}
                         >
                             <GamesMenu />
-                            <CalendarButton />
-                            <BlogButton />
-                            <RandomButton />
+                            <FlexBox spacing={2}>
+                                <CalendarButton />
+                                <RandomButton />
+                            </FlexBox>
                         </FlexBox>
                     </FlexBox>
                     <FlexBox spacing={{ xs: 2, md: 3 }}>

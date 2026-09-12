@@ -4,10 +4,14 @@ import { useEffect, useState, useTransition } from "react";
 
 // Component imports
 import ContentBox from "@/components/ContentBox";
+import TextLabel from "@/components/TextLabel";
 import HomePageGameBanners from "./HomePageGameBanners";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import ButtonBase from "@mui/material/ButtonBase";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // Helper imports
 import { useGameList } from "@/context";
@@ -22,6 +26,8 @@ export default function HomePageBanners({
 }: {
     banners: Record<string, Banner[]>;
 }) {
+    const theme = useTheme();
+
     const [, startDataTransition] = useTransition();
     const [data, setData] = useState<{
         characters: SearchResult[];
@@ -53,7 +59,39 @@ export default function HomePageBanners({
         .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
-        <ContentBox header="Active Banners">
+        <ContentBox
+            header="Active Banners"
+            actions={
+                <ButtonBase
+                    href={`/calendar`}
+                    sx={{
+                        height: "28px",
+                        px: 2,
+                        borderRadius: "4px",
+                        backgroundColor: theme.palette.info.main,
+                        "&:hover": {
+                            backgroundColor: theme.palette.info.dark,
+                        },
+                        transition: "background-color 0.15s",
+                    }}
+                >
+                    <TextLabel
+                        icon={
+                            <ChevronRightIcon
+                                sx={{
+                                    color: theme.text.primary,
+                                    fontSize: "18px",
+                                }}
+                            />
+                        }
+                        title={`View Gacha Calendar`}
+                        titleProps={{ variant: "body2" }}
+                        spacing={0.5}
+                        reverse
+                    />
+                </ButtonBase>
+            }
+        >
             <Grid container spacing={2}>
                 {games.map((game) => (
                     <Grid key={game.tag} size={{ xs: 12, lg: 6 }}>

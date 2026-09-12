@@ -199,8 +199,9 @@ export default function NavBarBottom() {
                         </FlexBox>
                         <FlexBox
                             sx={{
+                                alignItems: "baseline",
                                 justifyContent: { xs: "left", md: "right" },
-                                gap: { xs: 4, md: 6 },
+                                gap: 4,
                             }}
                         >
                             <Text
@@ -213,6 +214,7 @@ export default function NavBarBottom() {
                             >
                                 {`© ${new Date().getFullYear()}`}
                             </Text>
+                            <TextLink href="/blog">Blog</TextLink>
                             <TextLink href="/privacy-policy">
                                 Privacy Policy
                             </TextLink>

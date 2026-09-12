@@ -3,12 +3,16 @@ import Text from "@/components/Text";
 import Tooltip from "@/components/Tooltip";
 
 // MUI imports
+import { rgbToHex } from "@mui/material/styles";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box, { BoxProps } from "@mui/material/Box";
-import Fab, { FabProps } from "@mui/material/Fab";
+import Fab from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { TooltipProps } from "@mui/material/Tooltip";
+
+// Helper imports
+import { adjustColor } from "@/utils/colors";
 
 interface ActionFabProps {
     action?: (args: any) => void;
@@ -18,7 +22,7 @@ interface ActionFabProps {
     label?: React.ReactNode;
     tooltip?: string;
     tooltipArrow?: TooltipProps["placement"];
-    color?: FabProps["color"];
+    color?: string;
     position?: {
         top?: BoxProps["padding"];
         right?: BoxProps["padding"];
@@ -36,6 +40,7 @@ function ActionFab({
     label,
     tooltip = "",
     tooltipArrow = "top",
+    color,
     position = {
         top: 100,
         right: 20,
@@ -66,9 +71,12 @@ function ActionFab({
                             p: 1,
                             borderRadius: "8px",
                             color: theme.text.primary,
-                            backgroundColor: theme.background(2, "dark"),
+                            backgroundColor:
+                                color || theme.background(2, "dark"),
                             "&:hover": {
-                                backgroundColor: theme.background(2),
+                                backgroundColor: color
+                                    ? adjustColor(rgbToHex(color), 0.15)
+                                    : theme.background(2),
                             },
                         })}
                     >

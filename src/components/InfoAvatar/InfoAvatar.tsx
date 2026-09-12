@@ -5,6 +5,7 @@ import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
@@ -29,6 +30,11 @@ export default function InfoAvatar({
     href,
 }: InfoAvatarProps) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+    if (matches) {
+        size = size - size * 0.125;
+    }
 
     const game = tag.split("/")[0] as Game;
 
@@ -42,9 +48,10 @@ export default function InfoAvatar({
     const ImageRoot = (
         <Image
             src={imgURL}
-            size={size - theme.infoAvatar.border.width * 2}
+            style={{ width: "100%", height: "100%" }}
             id={`${componentID || href}-infoAvatar`}
             zoomOnHover={!disableZoomOnHover}
+            responsive
         />
     );
 

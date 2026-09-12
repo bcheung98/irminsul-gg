@@ -1,9 +1,7 @@
 // Component imports
 import CurrentBanners from "@/components/CurrentBanners";
 import VersionHighlights from "@/components/VersionHighlights";
-
-// MUI imports
-import Grid from "@mui/material/Grid";
+import { GamePageRoot } from "@/components/PageRoot";
 
 // Type imports
 import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
@@ -21,21 +19,20 @@ export default function HSRHome({
     banners: BannerProps;
 }) {
     return (
-        <Grid container spacing={3} sx={{ pt: 2 }}>
-            <Grid size={12}>
+        <GamePageRoot
+            header={
                 <CurrentBanners
                     characters={characters}
                     weapons={weapons}
                     banners={banners}
                 />
-            </Grid>
-            <Grid size={{ xs: 12, lg: 12 }}>
-                <VersionHighlights
-                    characters={characters}
-                    weapons={weapons}
-                    equipment={equipment}
-                />
-            </Grid>
-        </Grid>
+            }
+        >
+            <VersionHighlights
+                characters={characters}
+                weapons={weapons}
+                equipment={equipment}
+            />
+        </GamePageRoot>
     );
 }

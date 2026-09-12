@@ -1,9 +1,5 @@
-import StyledRoot from "./StyledRoot";
+import GamesLayout from "@/layouts/GamesLayout";
 
-export default function GamesLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return <StyledRoot>{children}</StyledRoot>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+    return <GamesLayout>{children}</GamesLayout>;
 }

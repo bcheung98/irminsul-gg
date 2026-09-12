@@ -6,7 +6,7 @@ import NavBarBottom from "@/components/NavBar/NavBarBottom";
 // MUI imports
 import Box from "@mui/material/Box";
 
-export default function StyledRoot({
+export default function CalendarLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

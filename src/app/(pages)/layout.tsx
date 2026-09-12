@@ -1,9 +1,5 @@
-import StyledRoot from "./StyledRoot";
+import PagesLayout from "@/layouts/PagesLayout";
 
-export default function PagesLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return <StyledRoot>{children}</StyledRoot>;
+export default function Layout({ children }: { children: React.ReactNode }) {
+    return <PagesLayout>{children}</PagesLayout>;
 }

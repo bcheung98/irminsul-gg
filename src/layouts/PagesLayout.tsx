@@ -8,7 +8,7 @@ import NavBarMini from "@/components/NavBarMini";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-export default function StyledRoot({
+export default function PagesLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

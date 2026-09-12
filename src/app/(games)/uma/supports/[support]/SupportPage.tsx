@@ -3,7 +3,7 @@
 import useSWR from "swr";
 
 // Component imports
-import InfoPageRoot from "@/components/InfoPageRoot";
+import { InfoPageRoot } from "@/components/PageRoot";
 import SupportSplash from "@/components/_uma/SupportSplash";
 import SupportInfo from "@/components/_uma/SupportInfo";
 import SupportEffects from "@/components/_uma/SupportEffects";

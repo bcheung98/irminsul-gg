@@ -2,7 +2,7 @@
 
 // Component imports
 import WeaponInfo from "@/components/WeaponInfo";
-import InfoPageRoot from "@/components/InfoPageRoot";
+import { InfoPageRoot } from "@/components/PageRoot";
 import Image from "@/components/Image";
 import BetaTag from "@/components/BetaTag";
 

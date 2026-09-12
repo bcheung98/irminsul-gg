@@ -3,7 +3,7 @@
 import useSWR from "swr";
 
 // Component imports
-import InfoPageRoot from "@/components/InfoPageRoot";
+import { InfoPageRoot } from "@/components/PageRoot";
 import CharacterInfo from "@/components/_uma/CharacterInfo";
 import CharacterSkills from "@/components/_uma/CharacterSkills";
 import CharacterEvents from "@/components/_uma/CharacterEvents";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Component imports
@@ -10,7 +10,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Tooltip from "@/components/Tooltip";
 import GamesMenu from "@/components/GamesMenu";
 import CalendarButton from "@/components/CalendarButton";
-import BlogButton from "@/components/Blog/BlogButton";
 import RandomButton from "@/components/RandomButton";
 
 // MUI imports
@@ -32,8 +31,6 @@ import { GameInfo } from "@/types";
 export default function NavBarMiniMobile() {
     const game = useGame();
 
-    const pathname = usePathname();
-
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -43,10 +40,6 @@ export default function NavBarMiniMobile() {
     };
 
     const styles = navBarMiniStyles();
-
-    useEffect(() => {
-        handleDrawerClose();
-    }, [pathname]);
 
     return (
         <Box sx={{ display: { xs: "block", lg: "none" } }}>
@@ -89,9 +82,10 @@ function MainButtonGroup() {
             }}
         >
             <GamesMenu />
-            <CalendarButton />
-            <BlogButton />
-            <RandomButton />
+            <FlexBox spacing={2}>
+                <CalendarButton />
+                <RandomButton />
+            </FlexBox>
         </FlexBox>
     );
 }

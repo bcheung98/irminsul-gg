@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 // Component imports
-import InfoPageRoot, {
-    InfoPageRootProps,
-} from "@/components/InfoPageRoot/InfoPageRoot";
+import { InfoPageRoot, PageRootProps } from "@/components/PageRoot";
 
 // MUI imports
 import { SelectChangeEvent } from "@mui/material/Select";
@@ -14,7 +12,7 @@ import { SkillContext, SkillVersionContext } from "@/context";
 // Type imports
 import { CharacterSkillsList, SkillVersion } from "@/types/skill";
 
-interface CharacterPageRootProps extends InfoPageRootProps {
+interface CharacterPageRootProps extends PageRootProps {
     skills: CharacterSkillsList;
 }
 

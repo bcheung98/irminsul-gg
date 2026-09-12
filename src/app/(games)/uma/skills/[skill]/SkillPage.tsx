@@ -1,7 +1,7 @@
 "use client";
 
 // Component imports
-import InfoPageRoot from "@/components/InfoPageRoot";
+import { InfoPageRoot } from "@/components/PageRoot";
 import SkillPopup from "@/components/_uma/SkillPopup";
 
 // Helper imports
