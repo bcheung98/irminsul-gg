@@ -34,11 +34,10 @@ export default function BannerArchiveSelector({
 
     const handleChange = (
         _: React.BaseSyntheticEvent,
-        newValue: BannerOption[] | null
+        newValue: BannerOption[] | null,
     ) => setValues(() => newValue as BannerOption[]);
 
     const styles: SxProps<Theme> = (theme) => ({
-        width: { xs: "100%", md: "75%", lg: "50%" },
         "& .MuiAutocomplete-inputRoot": {
             backgroundColor: theme.background(2),
             borderRadius: theme.contentBox.border.radius,

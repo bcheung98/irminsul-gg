@@ -1,7 +1,7 @@
 import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
 import { GameData } from "@/types";
 
-export const banners: GameData<ToggleButtonProps[]> = {
+export const bannerLabels: GameData<ToggleButtonProps[]> = {
     genshin: [
         {
             value: "character",
@@ -69,7 +69,7 @@ export const banners: GameData<ToggleButtonProps[]> = {
     nte: [
         {
             value: "character",
-            label: "Character",
+            label: "Esper",
         },
         {
             value: "weapon",

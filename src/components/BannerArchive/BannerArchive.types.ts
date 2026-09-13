@@ -31,6 +31,15 @@ export interface BannerItemsProps extends BannerListRowProps {
     game?: Game;
 }
 
+export interface BannerArchiveFilterProps extends BannerArchiveSelectorProps {
+    matchAll: boolean;
+    handleMatchAllChange: () => void;
+    filterCharacter: boolean;
+    handleCharacterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    filterWeapon: boolean;
+    handleWeaponChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface BannerArchiveSelectorProps {
     options: BannerOption[];
     values: BannerOption[];

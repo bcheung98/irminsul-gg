@@ -22,11 +22,10 @@ export default function BannerArchiveYearSelector({
     return (
         <Card
             sx={(theme) => ({
-                px: 2,
+                px: 1.5,
                 py: 1,
                 borderRadius: theme.contentBox.border.radius,
                 backgroundColor: theme.background(0),
-                maxWidth: "400px",
                 overflowX: "auto",
                 scrollbarWidth: "thin",
             })}

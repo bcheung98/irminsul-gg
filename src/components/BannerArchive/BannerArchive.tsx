@@ -4,14 +4,10 @@ import { useMemo, useState, useTransition } from "react";
 
 // Component imports
 import BannerArchiveHeader from "./BannerArchiveHeader";
-import BannerArchiveSelector from "./BannerArchiveSelector";
+import BannerArchiveFilters from "./BannerArchiveFilters";
 import BannerArchiveYearSelector from "./BannerArchiveYearSelector";
 import BannerList from "@/components/BannerList";
-import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
-import Tooltip from "@/components/Tooltip";
-import Switch from "@/components/Switch";
-import Checkbox from "@/components/Checkbox";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -23,7 +19,6 @@ import LinearProgress from "@mui/material/LinearProgress";
 // Helper imports
 import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";
-import { banners as bannerLabels } from "@/data/banners";
 import { BannerDataContext } from "./BannerArchive.utils";
 import { getBannerData, getBannerYears } from "@/helpers/banners";
 import { createBannerLookup, createBannerOptions } from "@/helpers/banners";
@@ -186,85 +181,28 @@ export default function BannerArchive<
                     handleViewChange={handleBannerTypeChange}
                     handleDirectionChange={handleDirectionChange}
                 />
-                <Stack spacing={1}>
-                    <FlexBox spacing={1}>
-                        <Switch
-                            checked={matchAll}
-                            onChange={handleMatchAllChange}
-                            size="small"
-                            sx={{ mt: 1 }}
+                <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <BannerArchiveFilters
+                            options={bannerOptions}
+                            values={values}
+                            setValues={setValues}
+                            matchAll={matchAll}
+                            handleMatchAllChange={handleMatchAllChange}
+                            filterCharacter={filterCharacter}
+                            handleCharacterChange={handleCharacterChange}
+                            filterWeapon={filterWeapon}
+                            handleWeaponChange={handleWeaponChange}
                         />
-                        <Tooltip
-                            title="If toggled, will filter banners that only contain all selected items."
-                            placement="top"
-                        >
-                            <Text
-                                variant="body2"
-                                weight="highlight"
-                                sx={{
-                                    mt: 0.5,
-                                    cursor: "help",
-                                    textDecoration: "dotted underline",
-                                }}
-                            >
-                                Toggle "AND" Filter
-                            </Text>
-                        </Tooltip>
-                    </FlexBox>
-                    <Stack spacing={2}>
-                        <FlexBox spacing={1}>
-                            <Text variant="body2" weight="highlight">
-                                Limit Search:
-                            </Text>
-                            <FlexBox spacing={2}>
-                                <FlexBox spacing={1}>
-                                    <Text variant="body2">
-                                        {`${
-                                            bannerLabels[game].find(
-                                                (item) =>
-                                                    item.value === "character",
-                                            )?.label
-                                        }s`}
-                                    </Text>
-                                    <Checkbox
-                                        checked={filterCharacter}
-                                        onChange={handleCharacterChange}
-                                    />
-                                </FlexBox>
-                                <FlexBox spacing={1}>
-                                    <Text variant="body2">
-                                        {`${
-                                            bannerLabels[game].find(
-                                                (item) =>
-                                                    item.value === "weapon",
-                                            )?.label
-                                        }s`}
-                                    </Text>
-                                    <Checkbox
-                                        checked={filterWeapon}
-                                        onChange={handleWeaponChange}
-                                    />
-                                </FlexBox>
-                            </FlexBox>
-                        </FlexBox>
-                        <Grid container spacing={2}>
-                            <Grid size={6}>
-                                <BannerArchiveSelector
-                                    options={bannerOptions}
-                                    values={values}
-                                    setValues={setValues}
-                                />
-                            </Grid>
-                            <Grid size={6}>
-                                <BannerArchiveYearSelector
-                                    years={years}
-                                    selectedYears={selectedYears}
-                                    setYears={setSelectedYears}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Stack>
-                </Stack>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <BannerArchiveYearSelector
+                            years={years}
+                            selectedYears={selectedYears}
+                            setYears={setSelectedYears}
+                        />
+                    </Grid>
+                </Grid>
             </Stack>
         </Card>
     );

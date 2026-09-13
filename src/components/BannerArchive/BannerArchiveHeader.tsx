@@ -8,7 +8,7 @@ import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { banners } from "@/data/banners";
+import { bannerLabels } from "@/data/banners";
 
 // Type imports
 import { BannerArchiveHeaderProps } from "./BannerArchive.types";
@@ -48,7 +48,7 @@ export default function BannerArchiveHeader({
                 />
             </IconButton>
             <ToggleButtons
-                buttons={banners[game]}
+                buttons={bannerLabels[game]}
                 value={bannerType}
                 padding="6px 16px"
                 onChange={handleViewChange}
