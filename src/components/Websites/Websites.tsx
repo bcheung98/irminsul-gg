@@ -2,6 +2,7 @@
 
 // Component imports
 import WebsiteCard from "@/components/WebsiteCard";
+import WebsiteCardMobile from "@/components/WebsiteCard/WebsiteCardMobile";
 
 // MUI imports
 import Grid from "@mui/material/Grid";
@@ -17,12 +18,17 @@ export default function Websites({
     const games = useGameList().sort((a, b) => a.name.localeCompare(b.name));
 
     return (
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, sm: 4 }}>
             {games.map(
                 (game, index) =>
                     game.enabled && (
-                        <Grid key={game.tag} size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Grid key={game.tag} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                             <WebsiteCard
+                                game={game}
+                                index={index}
+                                handleIndexChange={action}
+                            />
+                            <WebsiteCardMobile
                                 game={game}
                                 index={index}
                                 handleIndexChange={action}

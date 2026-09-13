@@ -59,16 +59,17 @@ export default function WebsiteCard({
     };
 
     const rootStyle: SxProps = {
+        display: { xs: "none", md: "block" },
         position: "relative",
         overflow: "visible",
         height: "auto",
-        borderRadius: borderRadius,
+        borderRadius,
         background: `linear-gradient(to bottom, transparent, ${theme.infoCard.backgroundColor.main} 50%)`,
         zIndex: 1,
     };
 
     const cardStyle: SxProps = {
-        borderRadius: borderRadius,
+        borderRadius,
         backgroundColor: "transparent",
     };
 
@@ -115,9 +116,9 @@ export default function WebsiteCard({
                         <Box sx={{ mx: "auto" }}>
                             <Text
                                 variant={matches ? "subtitle1" : "subtitle2"}
+                                weight="highlight"
                                 sx={{
                                     color: theme.infoCard.color.primary,
-                                    fontWeight: theme.font.weight.highlight,
                                     textAlign: "center",
                                     cursor: enabled ? "pointer" : "auto",
                                 }}
