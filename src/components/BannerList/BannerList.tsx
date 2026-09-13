@@ -6,14 +6,16 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
-// Type imports
-import { ActiveBanners, Banner, BannerProps, BannerType } from "@/types/banner";
+// Helper imports
 import { sortBanners } from "@/helpers/filterBanners";
 import { useGameTag } from "@/context";
 import { useServerStore } from "@/stores";
 
+// Type imports
+import { BannerProps, BannerType } from "@/types/banner";
+
 export interface BannerListProps {
-    activeBanners: ActiveBanners;
+    activeBanners: BannerType[];
     banners: BannerProps;
     reverse?: boolean;
 }
@@ -28,61 +30,35 @@ export default function BannerList(props: BannerListProps) {
 }
 
 function BannerListDesktop({ activeBanners, banners }: BannerListProps) {
-    const { character, weapon, chronicled = [] } = banners;
+    const chronicledActive = activeBanners.includes("chronicled");
 
-    const gridSize = { xs: 12, lg: !activeBanners.chronicled ? 6 : 12 };
+    const bannerOrder: BannerType[] = ["character", "weapon", "chronicled"];
 
     return (
-        <Grid
-            container
-            spacing={2}
-            sx={{ display: { xs: "none", lg: "flex" } }}
-        >
-            <Grid
-                size={gridSize}
-                sx={{
-                    display:
-                        activeBanners.character && character.length > 0
-                            ? "block"
-                            : "none",
-                }}
-            >
-                <Stack spacing={1}>
-                    {character.map((banner) => (
-                        <BannerListRow key={banner.id} banner={banner} />
-                    ))}
-                </Stack>
-            </Grid>
-            <Grid
-                size={gridSize}
-                sx={{
-                    display:
-                        activeBanners.weapon && weapon.length > 0
-                            ? "block"
-                            : "none",
-                }}
-            >
-                <Stack spacing={1}>
-                    {weapon.map((banner) => (
-                        <BannerListRow key={banner.id} banner={banner} />
-                    ))}
-                </Stack>
-            </Grid>
-            <Grid
-                size={12}
-                sx={{
-                    display:
-                        activeBanners.chronicled && chronicled.length > 0
-                            ? "block"
-                            : "none",
-                }}
-            >
-                <Stack spacing={1}>
-                    {chronicled.map((banner) => (
-                        <BannerListRow key={banner.id} banner={banner} />
-                    ))}
-                </Stack>
-            </Grid>
+        <Grid container spacing={2}>
+            {bannerOrder.map((type) => {
+                if (!activeBanners.includes(type)) return null;
+                const bannerList = banners[type] ?? [];
+                if (!bannerList.length) return null;
+                return (
+                    <Grid
+                        key={type}
+                        size={{
+                            xs: 12,
+                            lg: chronicledActive ? 12 : 6,
+                        }}
+                    >
+                        <Stack spacing={1}>
+                            {bannerList.map((banner) => (
+                                <BannerListRow
+                                    key={banner.id}
+                                    banner={banner}
+                                />
+                            ))}
+                        </Stack>
+                    </Grid>
+                );
+            })}
         </Grid>
     );
 }
@@ -95,15 +71,15 @@ function BannerListMobile({
     const game = useGameTag();
     const server = useServerStore()[game];
 
-    let bannerList: Banner[] = [];
-    Object.entries(banners).forEach(
-        ([key, value]) =>
-            activeBanners[key as BannerType] && bannerList.push(value)
+    const bannerList = sortBanners(
+        activeBanners.flatMap((type) => banners[type] ?? []),
+        game,
+        server,
+        reverse,
     );
-    bannerList = sortBanners(bannerList.flat(), game, server, reverse);
 
     return (
-        <Stack spacing={1} sx={{ display: { xs: "flex", lg: "none" } }}>
+        <Stack spacing={1}>
             {bannerList.map((banner) => (
                 <BannerListRow key={banner.id} banner={banner} />
             ))}

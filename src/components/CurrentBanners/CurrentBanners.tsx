@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 // Component imports
 import ContentBox from "@/components/ContentBox";
 import Dropdown from "@/components/Dropdown";
@@ -15,6 +17,7 @@ import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";
 import { BannerDataContext } from "@/components/BannerArchive/BannerArchive.utils";
 import { getBannerGroups } from "@/helpers/filterBanners";
+import { createBannerLookup } from "@/helpers/banners";
 
 // Type imports
 import { GameData } from "@/types";
@@ -39,8 +42,13 @@ export default function CurrentBanners<
         futureBanners,
     } = getBannerGroups(game, server, banners);
 
+    const lookup = useMemo(
+        () => createBannerLookup(characters, weapons),
+        [characters, weapons],
+    );
+
     return (
-        <BannerDataContext value={{ characters, weapons, server }}>
+        <BannerDataContext value={{ lookup, server }}>
             <ContentBox header={bannerTitle[game]}>
                 <Stack spacing={2} divider={<Divider />}>
                     {activeBanners && (

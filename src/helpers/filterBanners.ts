@@ -8,25 +8,30 @@ import {
 import { Game, Server, SortOrder } from "@/types";
 import { Banner, BannerOption, BannerProps } from "@/types/banner";
 
-export function filterBanners(
-    banners: Banner[],
-    values: BannerOption[],
-    unique: boolean,
-    sortDirection: SortOrder,
-    game: Game,
-    server: Server,
-) {
-    let items = [...banners];
+export function filterBanners({
+    banners,
+    values,
+    matchAll,
+    sortDirection,
+    game,
+    server,
+}: {
+    banners: Banner[];
+    values: BannerOption[];
+    matchAll: boolean;
+    sortDirection: SortOrder;
+    game: Game;
+    server: Server;
+}) {
     if (values.length > 0) {
-        items = items.filter((banner) => {
-            function filterFn(item: BannerOption) {
-                const rateUps = banner.rateUps.map((item) => item);
-                return rateUps.includes(item.name) || rateUps.includes(item.id);
-            }
-            return unique ? values.every(filterFn) : values.some(filterFn);
+        banners = banners.filter((banner) => {
+            const matches = (item: BannerOption) =>
+                banner.rateUps.includes(item.name) ||
+                banner.rateUps.includes(item.id);
+            return matchAll ? values.every(matches) : values.some(matches);
         });
     }
-    return sortBanners(items, game, server, sortDirection === "desc");
+    return sortBanners(banners, game, server, sortDirection === "desc");
 }
 
 export function sortBanners(
@@ -35,7 +40,7 @@ export function sortBanners(
     server: Server,
     reverse = false,
 ) {
-    return banners.sort((a, b) => {
+    return banners.toSorted((a, b) => {
         const ai = getVersionDates(a, server, game).versionStart;
         const bi = getVersionDates(b, server, game).versionStart;
         return (

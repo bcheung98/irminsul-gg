@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 // Component imports
 import BannerItems from "@/components/BannerItems";
 import Text from "@/components/Text";
@@ -12,6 +14,7 @@ import {
     getBannerLabel,
     isFutureBanner,
 } from "../BannerArchive/BannerArchive.utils";
+import { createBannerLookup } from "@/helpers/banners";
 
 // Type imports
 import { EventObjectExtendedProps } from "@/types/calendar";
@@ -46,8 +49,13 @@ export default function CalendarEventPopup(props: {
         title += " (Tentative)";
     }
 
+    const lookup = useMemo(
+        () => createBannerLookup(characters, weapons),
+        [characters, weapons],
+    );
+
     return (
-        <BannerDataContext value={{ characters, weapons, server }}>
+        <BannerDataContext value={{ lookup, server }}>
             <Stack spacing={1}>
                 <Text weight="highlight">{title}</Text>
                 <BannerItems
