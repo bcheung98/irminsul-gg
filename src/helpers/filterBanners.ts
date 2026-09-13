@@ -11,6 +11,7 @@ import { Banner, BannerOption, BannerProps } from "@/types/banner";
 export function filterBanners({
     banners,
     values,
+    years,
     matchAll,
     sortDirection,
     game,
@@ -18,6 +19,7 @@ export function filterBanners({
 }: {
     banners: Banner[];
     values: BannerOption[];
+    years: number[];
     matchAll: boolean;
     sortDirection: SortOrder;
     game: Game;
@@ -31,6 +33,15 @@ export function filterBanners({
             return matchAll ? values.every(matches) : values.some(matches);
         });
     }
+
+    if (years.length > 0) {
+        banners = banners.filter((banner) => {
+            const { versionStart } = getVersionDates(banner, server, game);
+            const year = new DateObject(versionStart).date.getFullYear();
+            return years.includes(year);
+        });
+    }
+
     return sortBanners(banners, game, server, sortDirection === "desc");
 }
 

@@ -5,6 +5,7 @@ import { useMemo, useState, useTransition } from "react";
 // Component imports
 import BannerArchiveHeader from "./BannerArchiveHeader";
 import BannerArchiveSelector from "./BannerArchiveSelector";
+import BannerArchiveYearSelector from "./BannerArchiveYearSelector";
 import BannerList from "@/components/BannerList";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
@@ -24,7 +25,7 @@ import { useGameTag } from "@/context";
 import { useStore, useServerStore } from "@/stores";
 import { banners as bannerLabels } from "@/data/banners";
 import { BannerDataContext } from "./BannerArchive.utils";
-import { getBannerData } from "@/helpers/banners";
+import { getBannerData, getBannerYears } from "@/helpers/banners";
 import { createBannerLookup, createBannerOptions } from "@/helpers/banners";
 import { filterBanners } from "@/helpers/filterBanners";
 
@@ -122,8 +123,13 @@ export default function BannerArchive<
             return items.filter((item) => item.category === "weapons");
         return items;
     }, [bannerData, bannerLookup, filterCharacter, filterWeapon]);
-
     const [values, setValues] = useState<BannerOption[]>([]);
+
+    const years = useMemo(
+        () => getBannerYears(bannerData, game, server),
+        [bannerData, game, server],
+    );
+    const [selectedYears, setSelectedYears] = useState<number[]>([]);
 
     const filteredBanners = useMemo(
         () => ({
@@ -131,6 +137,7 @@ export default function BannerArchive<
                 banners: bannerData.character,
                 values,
                 matchAll,
+                years: selectedYears,
                 sortDirection,
                 game,
                 server,
@@ -139,6 +146,7 @@ export default function BannerArchive<
                 banners: bannerData.weapon,
                 values,
                 matchAll,
+                years: selectedYears,
                 sortDirection,
                 game,
                 server,
@@ -147,12 +155,21 @@ export default function BannerArchive<
                 banners: bannerData.chronicled ?? [],
                 values,
                 matchAll,
+                years: selectedYears,
                 sortDirection,
                 game,
                 server,
             }),
         }),
-        [bannerData, values, matchAll, sortDirection, game, server],
+        [
+            bannerData,
+            values,
+            matchAll,
+            selectedYears,
+            sortDirection,
+            game,
+            server,
+        ],
     );
 
     const headerRoot = (
@@ -230,11 +247,22 @@ export default function BannerArchive<
                                 </FlexBox>
                             </FlexBox>
                         </FlexBox>
-                        <BannerArchiveSelector
-                            options={bannerOptions}
-                            values={values}
-                            setValues={setValues}
-                        />
+                        <Grid container spacing={2}>
+                            <Grid size={6}>
+                                <BannerArchiveSelector
+                                    options={bannerOptions}
+                                    values={values}
+                                    setValues={setValues}
+                                />
+                            </Grid>
+                            <Grid size={6}>
+                                <BannerArchiveYearSelector
+                                    years={years}
+                                    selectedYears={selectedYears}
+                                    setYears={setSelectedYears}
+                                />
+                            </Grid>
+                        </Grid>
                     </Stack>
                 </Stack>
             </Stack>

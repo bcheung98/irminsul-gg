@@ -1,3 +1,5 @@
+import DateObject from "./dates";
+import { getVersionDates } from "@/components/BannerArchive/BannerArchive.utils";
 import {
     Banner,
     BannerLookup,
@@ -96,7 +98,6 @@ export function createBannerOptions(
     lookup: BannerLookup,
 ) {
     const options = new Map<string, BannerOption>();
-
     for (const bannerList of Object.values(banners)) {
         for (const banner of bannerList) {
             for (const item of banner.rateUps) {
@@ -111,6 +112,22 @@ export function createBannerOptions(
         }
     }
     return [...options.values()];
+}
+
+export function getBannerYears(
+    banners: BannerProps,
+    game: Game,
+    server: Server,
+) {
+    const years = new Set<number>();
+    for (const bannerList of Object.values(banners)) {
+        for (const banner of bannerList) {
+            const { versionStart } = getVersionDates(banner, server, game);
+            const year = new DateObject(versionStart).date.getFullYear();
+            years.add(year);
+        }
+    }
+    return [...years].toSorted((a, b) => b - a);
 }
 
 function createFallbackBannerData(name: string): BannerOption {

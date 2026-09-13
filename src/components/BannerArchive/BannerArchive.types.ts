@@ -4,7 +4,7 @@ import { Banner, BannerOption, BannerProps, BannerType } from "@/types/banner";
 
 export interface BannerArchiveProps<
     T extends BannerOption,
-    U extends BannerOption
+    U extends BannerOption,
 > {
     characters: T[];
     weapons: U[];
@@ -16,7 +16,7 @@ export interface BannerArchiveHeaderProps {
     sortDirection: SortOrder;
     handleViewChange: (
         _: React.BaseSyntheticEvent,
-        newValue: BannerType[]
+        newValue: BannerType[],
     ) => void;
     handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
 }
@@ -35,4 +35,10 @@ export interface BannerArchiveSelectorProps {
     options: BannerOption[];
     values: BannerOption[];
     setValues: Dispatch<SetStateAction<BannerOption[]>>;
+}
+
+export interface BannerArchiveYearSelectorProps {
+    years: number[];
+    selectedYears: number[];
+    setYears: Dispatch<SetStateAction<number[]>>;
 }
