@@ -1,235 +1,85 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
-
 // Component imports
-import BannerArchiveHeader from "./BannerArchiveHeader";
-import BannerArchiveFilters from "./BannerArchiveFilters";
-import BannerArchiveYearSelector from "./BannerArchiveYearSelector";
 import BannerList from "@/components/BannerList";
 import Text from "@/components/Text";
+import BannerArchiveSettings from "./BannerArchiveSettings";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
-import Collapse from "@mui/material/Collapse";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useServerStore } from "@/stores";
 import { BannerDataContext } from "./BannerArchive.utils";
-import { getBannerData, getBannerYears } from "@/helpers/banners";
-import { createBannerLookup, createBannerOptions } from "@/helpers/banners";
-import { filterBanners } from "@/helpers/filterBanners";
+import { useBannerArchive } from "./BannerArchive.hooks";
 
 // Type imports
-import { SortOrder } from "@/types";
-import { BannerOption, BannerType } from "@/types/banner";
+import { BannerOption } from "@/types/banner";
 import { BannerArchiveProps } from "./BannerArchive.types";
 
 export default function BannerArchive<
     T extends BannerOption,
     U extends BannerOption,
->({ characters, weapons, banners }: BannerArchiveProps<T, U>) {
-    const theme = useTheme();
+>(props: BannerArchiveProps<T, U>) {
+    const {
+        loading,
+        sortDirection,
+        handleDirectionChange,
+        filterCharacter,
+        handleCharacterChange,
+        filterWeapon,
+        handleWeaponChange,
+        bannerTypes,
+        handleBannerTypeChange,
+        matchAll,
+        handleMatchAllChange,
+        bannerContext,
+        bannerOptions,
+        values,
+        setValues,
+        years,
+        selectedYears,
+        setSelectedYears,
+        filteredBanners,
+        dropdownOpen,
+        toggleDropdown,
+    } = useBannerArchive(props);
 
-    const game = useGameTag();
-    const server = useStore(useServerStore, (state) => state[game]) || "NA";
-
-    const [loading, startTransition] = useTransition();
-
-    const [filterCharacter, setFilterCharacter] = useState(true);
-    const handleCharacterChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setFilterCharacter(event.target.checked);
+    const settingsParams = {
+        matchAll,
+        handleMatchAllChange,
+        filterCharacter,
+        handleCharacterChange,
+        filterWeapon,
+        handleWeaponChange,
+        options: bannerOptions,
+        values,
+        setValues,
+        years,
+        selectedYears,
+        setYears: setSelectedYears,
+        bannerType: bannerTypes,
+        sortDirection,
+        handleViewChange: handleBannerTypeChange,
+        handleDirectionChange,
+        dropdownOpen,
+        toggleDropdown,
     };
-
-    const [filterWeapon, setFilterWeapon] = useState(true);
-    const handleWeaponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFilterWeapon(event.target.checked);
-    };
-
-    const [bannerTypes, setBannerTypes] = useState<BannerType[]>([
-        "character",
-        "weapon",
-    ]);
-
-    const handleBannerTypeChange = (
-        _: React.BaseSyntheticEvent,
-        value: BannerType[],
-    ) => {
-        let nextValue = value;
-        if (banners.chronicled && value.length === 3) {
-            nextValue = ["chronicled"];
-        } else if (value.length === 0) {
-            nextValue = ["character", "weapon"];
-        } else {
-            nextValue = value.filter((type) => type !== "chronicled");
-        }
-        const chronicledSelected = nextValue.includes("chronicled");
-        startTransition(() => {
-            setFilterCharacter(
-                chronicledSelected || nextValue.includes("character"),
-            );
-            setFilterWeapon(chronicledSelected || nextValue.includes("weapon"));
-            setBannerTypes(nextValue);
-        });
-    };
-
-    const [sortDirection, setSortDirection] = useState<SortOrder>("asc");
-    const handleDirectionChange = () => {
-        startTransition(() => {
-            setSortDirection((current) => (current === "asc" ? "desc" : "asc"));
-        });
-    };
-
-    const [matchAll, setMatchAll] = useState(true);
-    const handleMatchAllChange = () => {
-        startTransition(() => setMatchAll((current) => !current));
-    };
-
-    const bannerLookup = useMemo(
-        () => createBannerLookup(characters, weapons),
-        [characters, weapons],
-    );
-
-    const bannerData = useMemo(
-        () => getBannerData(banners, game, server),
-        [banners, game, server],
-    );
-
-    const bannerContext = useMemo(
-        () => ({
-            lookup: bannerLookup,
-            server,
-        }),
-        [bannerLookup, server],
-    );
-
-    const bannerOptions = useMemo(() => {
-        const items = createBannerOptions(bannerData, bannerLookup);
-        if (filterCharacter && filterWeapon) return items;
-        if (filterCharacter)
-            return items.filter((item) => item.category === "characters");
-        if (filterWeapon)
-            return items.filter((item) => item.category === "weapons");
-        return items;
-    }, [bannerData, bannerLookup, filterCharacter, filterWeapon]);
-    const [values, setValues] = useState<BannerOption[]>([]);
-
-    const years = useMemo(
-        () => getBannerYears(bannerData, game, server),
-        [bannerData, game, server],
-    );
-    const [selectedYears, setSelectedYears] = useState<number[]>([]);
-
-    const filteredBanners = useMemo(
-        () => ({
-            character: filterBanners({
-                banners: bannerData.character,
-                values,
-                matchAll,
-                years: selectedYears,
-                sortDirection,
-                game,
-                server,
-            }),
-            weapon: filterBanners({
-                banners: bannerData.weapon,
-                values,
-                matchAll,
-                years: selectedYears,
-                sortDirection,
-                game,
-                server,
-            }),
-            chronicled: filterBanners({
-                banners: bannerData.chronicled ?? [],
-                values,
-                matchAll,
-                years: selectedYears,
-                sortDirection,
-                game,
-                server,
-            }),
-        }),
-        [
-            bannerData,
-            values,
-            matchAll,
-            selectedYears,
-            sortDirection,
-            game,
-            server,
-        ],
-    );
-
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const toggleDropdown = () => {
-        setDropdownOpen((current) => !current);
-    };
-
-    const headerRoot = (
-        <Card
-            sx={{
-                p: 2,
-                borderRadius: theme.contentBox.border.radius,
-            }}
-        >
-            <Stack spacing={1}>
-                <BannerArchiveHeader
-                    bannerType={bannerTypes}
-                    sortDirection={sortDirection}
-                    handleViewChange={handleBannerTypeChange}
-                    handleDirectionChange={handleDirectionChange}
-                    dropdownOpen={dropdownOpen}
-                    toggleDropdown={toggleDropdown}
-                />
-                <Collapse in={dropdownOpen} timeout="auto">
-                    <Grid container spacing={2} sx={{ pt: 1 }}>
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <BannerArchiveFilters
-                                options={bannerOptions}
-                                values={values}
-                                setValues={setValues}
-                                matchAll={matchAll}
-                                handleMatchAllChange={handleMatchAllChange}
-                                filterCharacter={filterCharacter}
-                                handleCharacterChange={handleCharacterChange}
-                                filterWeapon={filterWeapon}
-                                handleWeaponChange={handleWeaponChange}
-                            />
-                        </Grid>
-                        <Grid size={{ xs: 12, md: 6 }}>
-                            <BannerArchiveYearSelector
-                                years={years}
-                                selectedYears={selectedYears}
-                                setYears={setSelectedYears}
-                            />
-                        </Grid>
-                    </Grid>
-                </Collapse>
-            </Stack>
-        </Card>
-    );
 
     return (
         <BannerDataContext value={bannerContext}>
             <Stack
                 spacing={2}
-                sx={{ p: 1, maxWidth: theme.breakpoints.values.xl }}
+                sx={(theme) => ({
+                    p: 1,
+                    maxWidth: theme.breakpoints.values.xl,
+                })}
             >
                 <Stack spacing={2}>
                     <Text variant="h5" weight="highlight">
                         Banner Archive
                     </Text>
-                    <Grid container spacing={2}>
-                        <Grid size={{ xs: 12, xl: 6 }}>{headerRoot}</Grid>
-                    </Grid>
+                    <BannerArchiveSettings {...settingsParams} />
                 </Stack>
                 {!loading ? (
                     <BannerList

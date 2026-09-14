@@ -53,3 +53,8 @@ export interface BannerArchiveYearSelectorProps {
     selectedYears: number[];
     setYears: Dispatch<SetStateAction<number[]>>;
 }
+
+export type BannerArchiveSettingsProps = BannerArchiveHeaderProps &
+    BannerArchiveFilterProps &
+    BannerArchiveSelectorProps &
+    BannerArchiveYearSelectorProps;
