@@ -21,11 +21,11 @@ import {
 } from "@/components/BannerArchive/BannerArchive.utils";
 import { range, sortBy } from "@/utils";
 import { getContrastText } from "@/utils/getContrastText";
-import { createBannerData } from "@/helpers/createBannerData";
+import { createBannerData } from "@/helpers/banners";
 
 // Type imports
-import { BannerOption } from "@/types/banner";
 import { BannerItemsProps } from "@/components/BannerArchive";
+import { BannerOption } from "@/types/banner";
 
 const BannerItems = memo(function BannerItems({
     banner,
@@ -35,32 +35,46 @@ const BannerItems = memo(function BannerItems({
 }: BannerItemsProps) {
     const theme = useTheme();
 
-    if (!game) {
-        game = useGameTag();
-    }
-
     const pathname = usePathname();
-    const { characters, weapons, server } = useBannerData();
 
-    const [loading, startTransition] = useTransition();
+    const currentGame = useGameTag();
+    const gameTag = game ?? currentGame;
+
+    const { lookup, server } = useBannerData();
+
+    const [isPending, startTransition] = useTransition();
     const [bannerData, setBannerData] = useState<BannerOption[]>([]);
+
     useEffect(() => {
         startTransition(() => {
-            const data = banner.rateUps
-                .map((item) =>
-                    createBannerData({
-                        id: typeof item === "number" ? item : undefined,
-                        name: `${item}`,
-                        characters,
-                        weapons,
-                    }),
-                )
-                .sort((a, b) => sortBy(a.rarity, b.rarity));
-            setBannerData(data);
+            setBannerData(
+                banner.rateUps
+                    .map((item) =>
+                        createBannerData({
+                            id: typeof item === "number" ? item : undefined,
+                            name: `${item}`,
+                            lookup,
+                        }),
+                    )
+                    .sort((a, b) => sortBy(a.rarity, b.rarity)),
+            );
         });
-    }, []);
+    }, [banner.rateUps, lookup]);
 
-    const Loader = range(banner.rateUps.length).map((i) => (
+    const upcoming = isFutureBanner(banner, server, gameTag);
+
+    const { versionStart, versionEnd } = getVersionDates(
+        banner,
+        server,
+        gameTag,
+    );
+
+    const textColor = getContrastText(
+        theme.text.primary,
+        backgroundColor || theme.contentBox.backgroundColor.main,
+    );
+
+    const loader = range(banner.rateUps.length).map((i) => (
         <Skeleton
             key={i}
             variant="rounded"
@@ -72,20 +86,11 @@ const BannerItems = memo(function BannerItems({
         />
     ));
 
-    const upcoming = isFutureBanner(banner, server, game);
-
-    const { versionStart, versionEnd } = getVersionDates(banner, server, game);
-
-    const textColor = getContrastText(
-        theme.text.primary,
-        backgroundColor || theme.contentBox.backgroundColor.main,
-    );
-
     return (
         <Stack spacing={1}>
             <Grid container spacing={1}>
-                {loading
-                    ? Loader
+                {isPending
+                    ? loader
                     : bannerData.map((item, index) => (
                           <Box key={index}>
                               {item.name === "TBA" ? (
@@ -100,7 +105,7 @@ const BannerItems = memo(function BannerItems({
                                   />
                               ) : (
                                   renderInfoAvatar({
-                                      game,
+                                      game: gameTag,
                                       tag: item.category || "characters",
                                       item,
                                       id: `-${banner.version}-${index}`,

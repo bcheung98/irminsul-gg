@@ -114,10 +114,17 @@ export default function HomePage({
                 }}
             >
                 <LandingText />
-                <Container maxWidth="xl" disableGutters sx={{ px: 6 }}>
+                <Container maxWidth="xl" disableGutters>
                     <Stack spacing={16}>
-                        <Websites action={handleIndexChange} />
-                        <Grid container rowSpacing={2} columnSpacing={3}>
+                        <Stack sx={{ px: 6 }}>
+                            <Websites action={handleIndexChange} />
+                        </Stack>
+                        <Grid
+                            container
+                            rowSpacing={2}
+                            columnSpacing={3}
+                            sx={{ px: { xs: 2, sm: 4, md: 6 } }}
+                        >
                             <Grid size="grow">{children}</Grid>
                             <Grid size={{ xs: 12, md: 4 }}>
                                 <Stack spacing={2}>

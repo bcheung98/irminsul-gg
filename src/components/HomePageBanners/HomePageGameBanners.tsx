@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import Image from "@/components/Image";
@@ -17,6 +19,7 @@ import { useServerStore } from "@/stores";
 import { getContrastText } from "@/utils/getContrastText";
 import { BannerDataContext } from "@/components/BannerArchive/BannerArchive.utils";
 import { getBannerGroups } from "@/helpers/filterBanners";
+import { createBannerLookup } from "@/helpers/banners";
 
 // Type imports
 import { Banner, BannerOption } from "@/types/banner";
@@ -66,6 +69,11 @@ export default function HomePageGameBanners(props: {
 
     const textColor = getContrastText(theme.text.primary, game.color);
 
+    const lookup = useMemo(
+        () => createBannerLookup(characters, weapons),
+        [characters, weapons],
+    );
+
     return (
         <Card
             sx={{
@@ -75,7 +83,7 @@ export default function HomePageGameBanners(props: {
             }}
         >
             {loaded ? (
-                <BannerDataContext value={{ characters, weapons, server }}>
+                <BannerDataContext value={{ lookup, server }}>
                     <Stack
                         spacing={1}
                         divider={<Divider />}

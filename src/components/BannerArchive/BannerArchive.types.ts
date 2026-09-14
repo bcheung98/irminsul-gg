@@ -4,7 +4,7 @@ import { Banner, BannerOption, BannerProps, BannerType } from "@/types/banner";
 
 export interface BannerArchiveProps<
     T extends BannerOption,
-    U extends BannerOption
+    U extends BannerOption,
 > {
     characters: T[];
     weapons: U[];
@@ -16,9 +16,11 @@ export interface BannerArchiveHeaderProps {
     sortDirection: SortOrder;
     handleViewChange: (
         _: React.BaseSyntheticEvent,
-        newValue: BannerType[]
+        newValue: BannerType[],
     ) => void;
     handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
+    dropdownOpen: boolean;
+    toggleDropdown: () => void;
 }
 
 export interface BannerListRowProps {
@@ -31,8 +33,28 @@ export interface BannerItemsProps extends BannerListRowProps {
     game?: Game;
 }
 
+export interface BannerArchiveFilterProps extends BannerArchiveSelectorProps {
+    matchAll: boolean;
+    handleMatchAllChange: () => void;
+    filterCharacter: boolean;
+    handleCharacterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    filterWeapon: boolean;
+    handleWeaponChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface BannerArchiveSelectorProps {
     options: BannerOption[];
     values: BannerOption[];
     setValues: Dispatch<SetStateAction<BannerOption[]>>;
 }
+
+export interface BannerArchiveYearSelectorProps {
+    years: number[];
+    selectedYears: number[];
+    setYears: Dispatch<SetStateAction<number[]>>;
+}
+
+export type BannerArchiveSettingsProps = BannerArchiveHeaderProps &
+    BannerArchiveFilterProps &
+    BannerArchiveSelectorProps &
+    BannerArchiveYearSelectorProps;

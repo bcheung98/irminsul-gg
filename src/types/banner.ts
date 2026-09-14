@@ -33,3 +33,10 @@ export type BannerType = keyof BannerProps;
 export type ActiveBanners = {
     [Property in keyof BannerProps]: boolean;
 };
+
+export interface BannerLookup {
+    charactersById: Map<number, BannerOption>;
+    charactersByName: Map<string, BannerOption>;
+    weaponsById: Map<number, BannerOption>;
+    weaponsByName: Map<string, BannerOption>;
+}

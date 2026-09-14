@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { matchSorter } from "match-sorter";
 import DateObject from "@/helpers/dates";
 import { sortBy } from "@/utils";
-import { Banner, BannerOption } from "@/types/banner";
+import { Banner, BannerLookup, BannerOption } from "@/types/banner";
 import { Game, Server } from "@/types";
 
 export function getVersionDates(banner: Banner, server: Server, game?: Game) {
@@ -83,11 +83,14 @@ export function filterOptions(options: BannerOption[], searchValue: string) {
 }
 
 export const BannerDataContext = createContext<{
-    characters: BannerOption[];
-    weapons: BannerOption[];
+    lookup: BannerLookup;
     server: Server;
-}>({ characters: [], weapons: [], server: "NA" });
+} | null>(null);
 
 export function useBannerData() {
-    return useContext(BannerDataContext);
+    const context = useContext(BannerDataContext);
+    if (!context) {
+        throw new Error("useBannerData must be used within BannerDataContext");
+    }
+    return context;
 }

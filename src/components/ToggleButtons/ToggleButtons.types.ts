@@ -15,4 +15,5 @@ export interface ToggleButtonsProps extends ToggleButtonGroupProps {
     spacing?: number;
     padding?: number | string;
     highlightOnHover?: boolean;
+    noWrap?: boolean;
 }
