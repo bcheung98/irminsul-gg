@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
+import Collapse from "@mui/material/Collapse";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -167,6 +168,11 @@ export default function BannerArchive<
         ],
     );
 
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggleDropdown = () => {
+        setDropdownOpen((current) => !current);
+    };
+
     const headerRoot = (
         <Card
             sx={{
@@ -180,29 +186,33 @@ export default function BannerArchive<
                     sortDirection={sortDirection}
                     handleViewChange={handleBannerTypeChange}
                     handleDirectionChange={handleDirectionChange}
+                    dropdownOpen={dropdownOpen}
+                    toggleDropdown={toggleDropdown}
                 />
-                <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <BannerArchiveFilters
-                            options={bannerOptions}
-                            values={values}
-                            setValues={setValues}
-                            matchAll={matchAll}
-                            handleMatchAllChange={handleMatchAllChange}
-                            filterCharacter={filterCharacter}
-                            handleCharacterChange={handleCharacterChange}
-                            filterWeapon={filterWeapon}
-                            handleWeaponChange={handleWeaponChange}
-                        />
+                <Collapse in={dropdownOpen} timeout="auto">
+                    <Grid container spacing={2} sx={{ pt: 1 }}>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                            <BannerArchiveFilters
+                                options={bannerOptions}
+                                values={values}
+                                setValues={setValues}
+                                matchAll={matchAll}
+                                handleMatchAllChange={handleMatchAllChange}
+                                filterCharacter={filterCharacter}
+                                handleCharacterChange={handleCharacterChange}
+                                filterWeapon={filterWeapon}
+                                handleWeaponChange={handleWeaponChange}
+                            />
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 6 }}>
+                            <BannerArchiveYearSelector
+                                years={years}
+                                selectedYears={selectedYears}
+                                setYears={setSelectedYears}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <BannerArchiveYearSelector
-                            years={years}
-                            selectedYears={selectedYears}
-                            setYears={setSelectedYears}
-                        />
-                    </Grid>
-                </Grid>
+                </Collapse>
             </Stack>
         </Card>
     );

@@ -19,6 +19,8 @@ export interface BannerArchiveHeaderProps {
         newValue: BannerType[],
     ) => void;
     handleDirectionChange: (_: React.BaseSyntheticEvent) => void;
+    dropdownOpen: boolean;
+    toggleDropdown: () => void;
 }
 
 export interface BannerListRowProps {

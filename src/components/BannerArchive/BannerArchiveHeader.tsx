@@ -1,10 +1,12 @@
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import ToggleButtons from "@/components/ToggleButtons";
+import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import IconButton from "@mui/material/IconButton";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -18,11 +20,13 @@ export default function BannerArchiveHeader({
     sortDirection,
     handleViewChange,
     handleDirectionChange,
+    dropdownOpen,
+    toggleDropdown,
 }: BannerArchiveHeaderProps) {
     const game = useGameTag();
 
     return (
-        <FlexBox spacing={[1, 2]} wrap>
+        <FlexBox spacing={[1, 2]} wrap sx={{ position: "relative" }}>
             <IconButton
                 onClick={handleDirectionChange}
                 sx={(theme) => ({
@@ -54,6 +58,26 @@ export default function BannerArchiveHeader({
                 onChange={handleViewChange}
                 highlightOnHover={false}
             />
+            <Tooltip
+                title={`${dropdownOpen ? "Hide" : "Expand"} filters`}
+                arrow
+                placement="right"
+            >
+                <IconButton
+                    onClick={toggleDropdown}
+                    sx={{
+                        position: "absolute",
+                        top: -4,
+                        right: 0,
+                        transform: dropdownOpen
+                            ? `rotateZ(-180deg)`
+                            : `rotateZ(0deg)`,
+                        transition: "transform 0.25s",
+                    }}
+                >
+                    <ExpandMoreIcon />
+                </IconButton>
+            </Tooltip>
         </FlexBox>
     );
 }
