@@ -1,12 +1,15 @@
-import { HTMLAttributes } from "react";
-
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import SearchBar from "@/components/SearchBar";
 import MenuItem from "@/components/MenuItem";
+import {
+    createVirtualizedListbox,
+    useVirtualizedAutocomplete,
+    VirtualizedAutocompletePopper,
+    VirtualizedRowProps,
+} from "@/components/VirtualizedAutocomplete";
 
 // MUI imports
-import { SxProps, Theme } from "@mui/material/styles";
 import Autocomplete from "@mui/material/Autocomplete";
 
 // Helper imports
@@ -37,17 +40,15 @@ export default function BannerArchiveSelector({
         newValue: BannerOption[] | null,
     ) => setValues(() => newValue as BannerOption[]);
 
-    const styles: SxProps<Theme> = (theme) => ({
-        "& .MuiAutocomplete-inputRoot": {
-            backgroundColor: theme.background(2),
-            borderRadius: theme.contentBox.border.radius,
-            p: 0,
-        },
+    const BannerListbox = createVirtualizedListbox<BannerOption>({
+        renderRow: BannerRow,
     });
+
+    const { listRef, handleItemsBuilt, handleHighlightChange } =
+        useVirtualizedAutocomplete<BannerOption>();
 
     return (
         <Autocomplete
-            sx={styles}
             multiple
             autoComplete
             filterSelectedOptions
@@ -58,28 +59,44 @@ export default function BannerArchiveSelector({
             }
             value={values}
             isOptionEqualToValue={(option, value) => option.id === value.id}
-            onChange={handleChange}
             renderInput={(params) => (
                 <SearchBar params={params} inputIcon={<></>} />
             )}
-            renderOption={(params, option) => (
-                <RenderOption key={option.id} params={params} option={option} />
-            )}
+            renderOption={(props, option) => [props, option] as React.ReactNode}
+            onHighlightChange={handleHighlightChange}
+            onChange={handleChange}
+            slots={{
+                popper: VirtualizedAutocompletePopper,
+            }}
+            slotProps={{
+                listbox: {
+                    component: BannerListbox,
+                    internalListRef: listRef,
+                    onItemsBuilt: handleItemsBuilt,
+                } as any,
+            }}
+            sx={(theme) => ({
+                "& .MuiAutocomplete-inputRoot": {
+                    backgroundColor: theme.background(2),
+                    borderRadius: theme.contentBox.border.radius,
+                    p: 0,
+                },
+            })}
         />
     );
 }
 
-function RenderOption({
-    params,
+function BannerRow({
     option,
-}: {
-    params: HTMLAttributes<HTMLLIElement>;
-    option: BannerOption;
-}) {
+    optionProps,
+    disabled,
+    style,
+}: VirtualizedRowProps<BannerOption>) {
     const game = useGameTag();
     const rarityColors = useRarityColors()[game];
 
-    let title = getOptionLabel(option, game);
+    const title = getOptionLabel(option, game);
+
     let rarity = option.rarity;
     let border = "2px";
 
@@ -91,18 +108,7 @@ function RenderOption({
     }
 
     return (
-        <MenuItem
-            {...params}
-            key={option.id}
-            sx={(theme) => ({
-                "&:hover": {
-                    backgroundColor: theme.background(1, "light"),
-                },
-                "&:not(:last-child)": {
-                    borderBottom: `1px solid ${theme.border.color.primary}`,
-                },
-            })}
-        >
+        <MenuItem {...optionProps} disabled={disabled} sx={style}>
             <TextLabel
                 icon={categoryImgURLs[`${game}/${option.category}`](option.id)}
                 iconProps={{
