@@ -15,15 +15,15 @@ import { useTextColor } from "@/helpers/styles";
 import { useStore, useSettingsStore } from "@/stores";
 
 // Type imports
-import { StatsDisplayProps } from "./StatsDisplay.types";
+import { StatsDisplayProps, TStats } from "./StatsDisplay.types";
 import { SkillDisplay } from "@/types";
 
-export default function StatsDisplay({
+export default function StatsDisplay<T extends TStats>({
     title = "Stats",
     stats,
     attributes,
     initialValue,
-}: StatsDisplayProps) {
+}: StatsDisplayProps<T>) {
     const theme = useTheme();
 
     const game = useGameTag();

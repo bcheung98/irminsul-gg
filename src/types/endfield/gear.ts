@@ -1,22 +1,36 @@
 import { GearStat } from "@/data/endfield/gearStats";
 import { EndfieldRarity } from ".";
 import { BaseDataWithRelease } from "..";
+import { SetEffect } from "../equipment";
 
 export type EndfieldGearType = "armor" | "gloves" | "kit";
 
 export interface EndfieldGear extends BaseDataWithRelease {
+    displayName: string;
+    stringId: string;
     rarity: EndfieldRarity;
     level: number;
     type: EndfieldGearType;
-    stats: EndfieldGearStats[];
-    set: string;
+    stats: EndfieldGearAttributes[];
+    set: number;
     region: string;
     description: string;
     url: string;
 }
 
-export interface EndfieldGearStats {
+export interface EndfieldGearAttributes {
     stat: GearStat;
-    values: number[];
-    format?: string;
+    values: string[];
+}
+
+export type EndfieldGearStats = Record<"DEF", string[]> &
+    Record<Exclude<GearStat, "DEF">, string[]>;
+
+export interface EndfieldGearSet {
+    id: number;
+    stringId: string;
+    name: string;
+    displayName: string;
+    setEffect: SetEffect;
+    levels: number[];
 }
