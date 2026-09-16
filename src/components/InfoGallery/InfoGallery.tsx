@@ -31,7 +31,7 @@ export default function InfoGallery(props: InfoGalleryProps) {
 
     return (
         <>
-            <Stack spacing={2} sx={{ p: 1 }}>
+            <Stack spacing={2} sx={{ px: 1, py: { xs: 1, sm: 2, lg: 1 } }}>
                 <InfoGalleryHeader {...props} />
                 {props.children}
             </Stack>
@@ -41,6 +41,10 @@ export default function InfoGallery(props: InfoGalleryProps) {
                     icon={<TuneIcon fontSize="small" />}
                     tooltip="Open filters"
                     tooltipArrow="left"
+                    position={{
+                        top: { xs: 100, sm: 140, lg: 100 },
+                        right: 20,
+                    }}
                 />
             )}
         </>
