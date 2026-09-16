@@ -168,7 +168,7 @@ function UniqueModeHelper({ text }: { text?: string }) {
     return (
         <>
             <Text variant="body2" weight="highlight">
-                Unique Mode
+                Match All
             </Text>
             <Tooltip title={text} arrow placement="top">
                 <HelpIcon
