@@ -226,7 +226,5 @@ export function filterItems<T extends Record<string, any>>(
     const value = sort.sortBy;
     const reverse = sort.sortDirection === "desc";
 
-    items = useSort()[game]({ items, value, reverse });
-
-    return items;
+    return useSort(game)({ items, value, reverse });
 }

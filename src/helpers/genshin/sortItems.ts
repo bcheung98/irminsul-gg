@@ -10,34 +10,33 @@ export default function sortItems<T extends Record<string, any>>({
     value,
     reverse,
 }: SortProps<T>) {
-    let res = [...items];
     switch (value) {
         case "id":
-            res = res.sort((a, b) => sortBy(a.id, b.id, !reverse));
+            items = items.sort((a, b) => sortBy(a.id, b.id, !reverse));
             break;
         case "name":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return ai.localeCompare(bi);
             });
             if (reverse) {
-                res = res.reverse();
+                items = items.reverse();
             }
             break;
         case "rarity":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(a.rarity, b.rarity, reverse) || sortBy(bi, ai);
             });
             break;
         case "element":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
                         GenshinElementMap[b.element],
                         GenshinElementMap[a.element],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
                     sortBy(bi, ai)
@@ -45,13 +44,13 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "weaponType":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
                         GenshinWeaponMap[b.weaponType],
                         GenshinWeaponMap[a.weaponType],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
                     sortBy(bi, ai)
@@ -60,33 +59,33 @@ export default function sortItems<T extends Record<string, any>>({
             break;
         case "ascensionStat":
             const ascStatKeys = objectKeys(characterAscensionStats);
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
                         ascStatKeys.indexOf(b.stats.ascensionStat),
                         ascStatKeys.indexOf(a.stats.ascensionStat),
-                        reverse
+                        reverse,
                     ) || sortBy(bi, ai)
                 );
             });
             break;
         case "baseATK":
-            res = res.sort(
+            items = items.sort(
                 (a, b) =>
                     sortBy(a.stats.atk, b.stats.atk, reverse) ||
-                    sortBy(b.displayName, a.displayName)
+                    sortBy(b.displayName, a.displayName),
             );
             break;
         case "subStat":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const ai = getSubStatLabel(
                     a as unknown as GenshinWeapon,
-                    reverse
+                    reverse,
                 );
                 const bi = getSubStatLabel(
                     b as unknown as GenshinWeapon,
-                    reverse
+                    reverse,
                 );
                 return (
                     sortBy(bi, ai, reverse) ||
@@ -95,13 +94,13 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "nation":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(b.nation, a.nation, reverse) || sortBy(bi, ai);
             });
             break;
         case "release":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const d1 = new DateObject(a.release.date).date.getTime();
                 const d2 = new DateObject(b.release.date).date.getTime();
                 const { ai, bi } = getNames(a, b);
@@ -113,13 +112,13 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "version":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
                         parseVersionNumber(a.release.version),
                         parseVersionNumber(b.release.version),
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(b.rarity, a.rarity, !reverse) ||
                     sortBy(bi, ai, !reverse)
@@ -127,25 +126,25 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "tcg-version":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 return (
                     sortBy(
                         parseVersionNumber(a.release.version),
                         parseVersionNumber(b.release.version),
-                        reverse
+                        reverse,
                     ) || sortBy(a.id, b.id, reverse)
                 );
             });
             break;
         case "tcg-hp":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 return (
                     sortBy(a.hp, b.hp, reverse) || sortBy(a.id, b.id, reverse)
                 );
             });
             break;
         case "tcg-energy":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 return (
                     sortBy(a.cost, b.cost, reverse) ||
                     sortBy(a.id, b.id, reverse)
@@ -154,7 +153,7 @@ export default function sortItems<T extends Record<string, any>>({
             break;
     }
 
-    return res;
+    return items;
 }
 
 export enum GenshinElementMap {

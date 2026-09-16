@@ -12,25 +12,24 @@ export default function sortItems<T extends Record<string, any>>({
     value,
     reverse,
 }: SortProps<T>) {
-    let res = [...items];
     switch (value) {
         case "name":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return ai.localeCompare(bi);
             });
             if (reverse) {
-                res = res.reverse();
+                items = items.reverse();
             }
             break;
         case "rarity":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(a.rarity, b.rarity, reverse) || sortBy(bi, ai);
             });
             break;
         case "element":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
@@ -44,7 +43,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "weaponType":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
@@ -58,7 +57,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "specialty":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
@@ -72,13 +71,13 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "nation":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(b.faction, a.faction, reverse) || sortBy(bi, ai);
             });
             break;
         case "baseATK":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const atkA =
                     baseATKScaling[a.stats.atk as EndfieldWeaponBaseATK].slice(
                         -1,
@@ -94,7 +93,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "release":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const d1 = new DateObject(a.release.date).date.getTime();
                 const d2 = new DateObject(b.release.date).date.getTime();
                 const { ai, bi } = getNames(a, b);
@@ -106,7 +105,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "version":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(a.release.version, b.release.version, reverse) ||
@@ -116,7 +115,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "set":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const ai =
                     gearSets.find((set) => set.id === a.set)?.displayName ||
                     "zzzz";
@@ -132,7 +131,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "type":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(b.type, a.type, reverse) ||
@@ -143,7 +142,7 @@ export default function sortItems<T extends Record<string, any>>({
             break;
     }
 
-    return res;
+    return items;
 }
 
 export enum EndfieldElementMap {

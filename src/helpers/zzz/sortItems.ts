@@ -9,25 +9,24 @@ export default function sortItems<T extends Record<string, any>>({
     value,
     reverse,
 }: SortProps<T>) {
-    let res = [...items];
     switch (value) {
         case "name":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return ai.localeCompare(bi);
             });
             if (reverse) {
-                res = res.reverse();
+                items = items.reverse();
             }
             break;
         case "rarity":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(a.rarity, b.rarity, reverse) || sortBy(bi, ai);
             });
             break;
         case "element":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
@@ -41,7 +40,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "weaponType":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(
@@ -55,7 +54,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "attackType":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(b.attackType[0], a.attackType[0], reverse) ||
@@ -65,7 +64,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "subStat":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const ai = getSubStatLabel(
                     a as unknown as ZZZWeapon,
                     a.rarity,
@@ -83,7 +82,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "baseATK":
-            res = res.sort(
+            items = items.sort(
                 (a, b) =>
                     sortBy(
                         a.stats.mainStat.value,
@@ -93,13 +92,13 @@ export default function sortItems<T extends Record<string, any>>({
             );
             break;
         case "nation":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return sortBy(b.faction, a.faction, reverse) || sortBy(bi, ai);
             });
             break;
         case "release":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const d1 = new DateObject(a.release.date).date.getTime();
                 const d2 = new DateObject(b.release.date).date.getTime();
                 const { ai, bi } = getNames(a, b);
@@ -111,7 +110,7 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "version":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     sortBy(a.release.version, b.release.version, reverse) ||
@@ -122,7 +121,7 @@ export default function sortItems<T extends Record<string, any>>({
             break;
     }
 
-    return res;
+    return items;
 }
 
 export enum ZZZElementMap {

@@ -7,50 +7,49 @@ export default function sortItems<T extends Record<string, any>>({
     value,
     reverse,
 }: SortProps<T>) {
-    let res = [...items];
     switch (value) {
         case "id":
-            res = res.sort((a, b) => sortBy(a.id, b.id, !reverse));
+            items = items.sort((a, b) => sortBy(a.id, b.id, !reverse));
             break;
         case "name":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const { ai, bi } = getNames(a, b);
                 return (
                     ai.localeCompare(bi) ||
                     sortBy(
                         SpecialtyMap[b.specialty],
                         SpecialtyMap[a.specialty],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(b.id, a.id, "specialty" in a)
                 );
             });
             if (reverse) {
-                res = res.reverse();
+                items = items.reverse();
             }
             break;
         case "rarity":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 return (
                     sortBy(a.rarity, b.rarity, reverse) ||
                     sortBy(
                         SpecialtyMap[b.specialty],
-                        SpecialtyMap[a.specialty]
+                        SpecialtyMap[a.specialty],
                     ) ||
                     sortBy(a.id, b.id, true)
                 );
             });
             break;
         case "specialty":
-            res = res.sort(
+            items = items.sort(
                 (a, b) =>
                     sortBy(
                         SpecialtyMap[b.specialty],
                         SpecialtyMap[a.specialty],
-                        reverse
+                        reverse,
                     ) ||
                     sortBy(a.rarity, b.rarity) ||
-                    sortBy(b.id, a.id)
+                    sortBy(b.id, a.id),
             );
             break;
         case "turf":
@@ -63,7 +62,7 @@ export default function sortItems<T extends Record<string, any>>({
         case "pace":
         case "late":
         case "end":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 let key = "";
                 switch (value) {
                     case "turf":
@@ -95,28 +94,28 @@ export default function sortItems<T extends Record<string, any>>({
             });
             break;
         case "skillName":
-            res = res.sort((a, b) =>
+            items = items.sort((a, b) =>
                 (a.name.global || a.name.jp).localeCompare(
-                    b.name.global || b.name.jp
-                )
+                    b.name.global || b.name.jp,
+                ),
             );
             if (reverse) {
-                res = res.reverse();
+                items = items.reverse();
             }
             break;
         case "skillRarity":
-            res = res.sort(
+            items = items.sort(
                 (a, b) =>
-                    sortBy(a.rarity, b.rarity, reverse) || sortBy(b.id, a.id)
+                    sortBy(a.rarity, b.rarity, reverse) || sortBy(b.id, a.id),
             );
             break;
         case "skillType":
-            res = res.sort(
-                (a, b) => sortBy(b.icon, a.icon, reverse) || sortBy(b.id, a.id)
+            items = items.sort(
+                (a, b) => sortBy(b.icon, a.icon, reverse) || sortBy(b.id, a.id),
             );
             break;
         case "release":
-            res = res.sort((a, b) => {
+            items = items.sort((a, b) => {
                 const d1 = new DateObject(a.release.jp).date.getTime();
                 const d2 = new DateObject(b.release.jp).date.getTime();
                 return (
@@ -124,14 +123,14 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(a.rarity, b.rarity) ||
                     sortBy(
                         SpecialtyMap[b.specialty],
-                        SpecialtyMap[a.specialty]
+                        SpecialtyMap[a.specialty],
                     ) ||
                     sortBy(a.id, b.id, true)
                 );
             });
             break;
     }
-    return res;
+    return items;
 }
 
 export enum SpecialtyMap {
