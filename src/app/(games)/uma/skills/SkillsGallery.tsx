@@ -31,7 +31,11 @@ export default function SkillsGallery(props: { skills: UmaSkill[] }) {
 
     return (
         <UmaContext value={{ skills: props.skills, events: {}, profiles: [] }}>
-            <InfoGallery title={categories["uma/skills"]} {...params}>
+            <InfoGallery
+                title={categories["uma/skills"]}
+                buttonKeys={[]}
+                {...params}
+            >
                 {gallery}
             </InfoGallery>
         </UmaContext>

@@ -23,7 +23,8 @@ export interface InfoGalleryProps extends InfoGalleryConfig {
      * Define which buttons to display in the gallery controls.
      * The values in the array should correspond to the `value` key
      * from `InfoGalleryButtonProps`.
-     * If the array is `undefined` or empty, no buttons will be shown.
+     * 
+     * To hide the buttons, pass an empty array.
      * @default ["icon", "card", "list"]
      */
     buttonKeys?: string[];
