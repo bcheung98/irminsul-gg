@@ -1,4 +1,4 @@
-import { useSort } from "@/helpers/sort";
+import { sortGameItems } from "@/helpers/sort";
 import { GallerySettings } from "@/stores/useGalleryStore";
 import { Filters, Game } from "@/types";
 import { EndfieldGearAttributes } from "@/types/endfield/gear";
@@ -226,5 +226,5 @@ export function filterItems<T extends Record<string, any>>(
     const value = sort.sortBy;
     const reverse = sort.sortDirection === "desc";
 
-    return useSort(game)({ items, value, reverse });
+    return sortGameItems(game)({ items, value, reverse });
 }

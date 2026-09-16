@@ -15,7 +15,7 @@ export interface SortProps<T extends Record<string, any>> {
 
 type SortFunction = <T extends Record<string, any>>(props: SortProps<T>) => T[];
 
-export function useSort(game: Game): SortFunction {
+export function sortGameItems(game: Game): SortFunction {
     switch (game) {
         case "genshin":
             return sortGenshinItems;

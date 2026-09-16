@@ -13,7 +13,7 @@ import Skeleton from "@mui/material/Skeleton";
 // Helper imports
 import { countText, objectKeys, range } from "@/utils";
 import { useGameTag } from "@/context";
-import { useSort } from "@/helpers/sort";
+import { sortGameItems } from "@/helpers/sort";
 
 // Type imports
 import { BaseData, SortOrder } from "@/types";
@@ -43,7 +43,7 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
         setSortBy(key);
     };
 
-    const rows = useSort(game)({
+    const rows = sortGameItems(game)({
         items,
         value: sortBy.toString(),
         reverse: sortOrder === "desc",
