@@ -168,7 +168,7 @@ export function plannerMetaData(game: Game) {
 export function bannerArchiveMetaData(game: Game) {
     return {
         title: "Banner Archive",
-        description: `Browse the complete banner history for ${games[game].name}. View banner dates with featured characters or ${game === "uma" ? "support cards" : "weapons"}, and filter the archive by item or year.`,
+        description: `Browse the complete banner history for ${games[game].name}. View banner dates with featured characters or ${game === "hsr" ? "light cones" : game === "uma" ? "support cards" : "weapons"}, and filter the archive by item or year.`,
         canonical: `/${game}/banners`,
     };
 }
