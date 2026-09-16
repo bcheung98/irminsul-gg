@@ -2,8 +2,9 @@ import { GearStat } from "@/data/endfield/gearStats";
 import { EndfieldRarity } from ".";
 import { BaseDataWithRelease } from "..";
 import { SetEffect } from "../equipment";
+import { gearTypes } from "@/data/endfield/common";
 
-export type EndfieldGearType = "armor" | "gloves" | "kit";
+export type EndfieldGearType = Lowercase<(typeof gearTypes)[number]>;
 
 export interface EndfieldGear extends BaseDataWithRelease {
     displayName: string;

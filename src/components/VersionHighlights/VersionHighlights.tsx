@@ -58,6 +58,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
     const { version, name } = updates[index];
     const releaseDate = useVersionReleaseDate(game, version);
     const { characters, weapons, equipment, bangboos } = useVersionContent(
+        game,
         props,
         version,
     );

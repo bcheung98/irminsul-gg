@@ -5,6 +5,7 @@ import {
     baseATKScaling,
     EndfieldWeaponBaseATK,
 } from "@/data/endfield/weaponStats";
+import { gearSets } from "@/data/endfield/gearSets";
 
 export default function sortItems<T extends Record<string, any>>({
     items,
@@ -111,6 +112,32 @@ export default function sortItems<T extends Record<string, any>>({
                     sortBy(a.release.version, b.release.version, reverse) ||
                     sortBy(b.rarity, a.rarity, !reverse) ||
                     sortBy(bi, ai, !reverse)
+                );
+            });
+            break;
+        case "set":
+            res = res.sort((a, b) => {
+                const ai =
+                    gearSets.find((set) => set.id === a.set)?.displayName ||
+                    "zzzz";
+                const bi =
+                    gearSets.find((set) => set.id === b.set)?.displayName ||
+                    "zzzz";
+                return (
+                    sortBy(b.rarity, a.rarity, !reverse) ||
+                    sortBy(ai, bi, !reverse) ||
+                    sortBy(a.type, b.type, !reverse) ||
+                    sortBy(a.id, b.id)
+                );
+            });
+            break;
+        case "type":
+            res = res.sort((a, b) => {
+                const { ai, bi } = getNames(a, b);
+                return (
+                    sortBy(b.type, a.type, reverse) ||
+                    sortBy(b.rarity, a.rarity, !reverse) ||
+                    sortBy(bi, ai, reverse)
                 );
             });
             break;

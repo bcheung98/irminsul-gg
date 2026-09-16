@@ -11,7 +11,11 @@ import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZCharacter, ZZZWeapon, ZZZDriveDisc, ZZZBangboo } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
-import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import {
+    EndfieldCharacter,
+    EndfieldWeapon,
+    EndfieldGear,
+} from "@/types/endfield";
 import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 export function GenshinCharacterInfoCard({
@@ -533,6 +537,28 @@ export function EndfieldWeaponInfoCard({
             }}
             url=""
             href={weapon.url}
+            {...props}
+        />
+    );
+}
+
+export function EndfieldGearInfoCard({
+    gear,
+    props,
+}: {
+    gear: EndfieldGear;
+    props?: Partial<InfoCardProps>;
+}) {
+    return (
+        <InfoCard
+            tag="endfield/gear"
+            id={Number(gear.id)}
+            stringId={gear.stringId}
+            key={gear.id}
+            name={gear.name}
+            rarity={gear.rarity}
+            url={`${gear.stringId}`}
+            href={gear.url}
             {...props}
         />
     );

@@ -6,7 +6,7 @@ export const equipmentTags: GameData<string> = {
     wuwa: "echoes",
     zzz: "drive-discs",
     uma: "",
-    endfield: "",
+    endfield: "gear",
     nte: "cartridges",
 };
 

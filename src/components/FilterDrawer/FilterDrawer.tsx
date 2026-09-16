@@ -17,17 +17,24 @@ import {
     WuWaEchoFilters,
     WuWaWeaponFilters,
 } from "@/components/_wuwa/Filters";
-import { ZZZCharacterFilters, ZZZWeaponFilters } from "../_zzz/Filters";
+import {
+    ZZZCharacterFilters,
+    ZZZWeaponFilters,
+} from "@/components/_zzz/Filters";
 import {
     UmaCharacterFilters,
     UmaSkillFilters,
     UmaSupportFilters,
-} from "../_uma/Filters";
+} from "@/components/_uma/Filters";
 import {
     EndfieldCharacterFilters,
+    EndfieldGearFilters,
     EndfieldWeaponFilters,
-} from "../_endfield/Filters";
-import { NTECharacterFilters, NTEWeaponFilters } from "../_nte/Filters";
+} from "@/components/_endfield/Filters";
+import {
+    NTECharacterFilters,
+    NTEWeaponFilters,
+} from "@/components/_nte/Filters";
 
 // MUI imports
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -80,6 +87,7 @@ const components: Record<string, React.ReactNode> = {
     "/uma/skills": <UmaSkillFilters />,
     "/endfield/operators": <EndfieldCharacterFilters />,
     "/endfield/weapons": <EndfieldWeaponFilters />,
+    "/endfield/gear": <EndfieldGearFilters />,
     "/nte/espers": <NTECharacterFilters />,
     "/nte/arcs": <NTEWeaponFilters />,
 };

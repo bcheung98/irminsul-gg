@@ -1,70 +1,77 @@
+// Helper imports
 import { splitJoin } from "@/utils";
 import levelData from "@/data/levels";
-import { StatsDisplayProps } from "./StatsDisplay.types";
 import {
     baseATKScaling as genshinBaseATKScaling,
-    GenshinWeaponBaseATK,
-    GenshinWeaponSubStat,
     subStats as genshinSubstats,
 } from "@/data/genshin/weaponStats";
 import { characterAscensionStatScalings } from "@/data/genshin/characterAscensionStats";
 import { weaponStats as hsrWeaponStats } from "@/data/hsr/weaponStats";
-import { HSRWeaponStats } from "@/types/hsr/weapon";
 import {
     baseATKScaling as wuwaBaseATKScaling,
-    WuWaWeaponBaseATK,
-    WuWaWeaponSubStat,
     subStats as wuwaSubstats,
 } from "@/data/wuwa/weaponStats";
 import {
     weaponMainStats as zzzMainStatScaling,
     weaponSubStats as zzzSubstats,
-    ZZZWeaponSubStat,
 } from "@/data/zzz/weaponStats";
-import {
-    baseATKScaling as endfieldBaseATKScaling,
-    EndfieldWeaponBaseATK,
-} from "@/data/endfield/weaponStats";
+import { baseATKScaling as endfieldBaseATKScaling } from "@/data/endfield/weaponStats";
+import { GearStat, gearStats } from "@/data/endfield/gearStats";
 import {
     baseATKScaling as nteBaseATKScaling,
     subStats as nteSubstats,
     weaponSubStats as nteSubstatNames,
-    NTEWeaponBaseATK,
-    NTEWeaponSubStat,
 } from "@/data/nte/weaponStats";
-import { ZZZRarity } from "@/types/zzz";
 
-type Props = Omit<StatsDisplayProps, "game">;
+// Type imports
+import { StatsDisplayProps, TStats } from "./StatsDisplay.types";
+import { GenshinStats } from "@/types/genshin";
+import { HSRStats } from "@/types/hsr";
+import { ZZZRarity, ZZZStats } from "@/types/zzz";
+import { WuWaStats } from "@/types/wuwa";
+import { EndfieldStats } from "@/types/endfield";
+import { NTEStats } from "@/types/nte";
+
+type GetStatsProps<T> = Omit<StatsDisplayProps<T>, "game">;
 type StatsData = {
     levels: (string | number)[];
     data: (string | number)[][];
 };
 
-export function getStats({
+export function getStats<TStats>({
     game,
     stats,
     attributes,
-}: StatsDisplayProps): StatsData {
+}: StatsDisplayProps<TStats>): StatsData {
     switch (game) {
         case "genshin":
-            return getGenshinStats({ stats, attributes });
+            return getGenshinStats({
+                stats: stats as GenshinStats,
+                attributes,
+            });
         case "hsr":
-            return getHSRStats({ stats, attributes });
+            return getHSRStats({ stats: stats as HSRStats, attributes });
         case "wuwa":
-            return getWuWaStats({ stats, attributes });
+            return getWuWaStats({ stats: stats as WuWaStats, attributes });
         case "zzz":
-            return getZZZStats({ stats, attributes });
+            return getZZZStats({ stats: stats as ZZZStats, attributes });
         case "endfield":
-            return getEndfieldStats({ stats, attributes });
+            return getEndfieldStats({
+                stats: stats as EndfieldStats,
+                attributes,
+            });
         case "nte":
-            return getNTEStats({ stats, attributes });
+            return getNTEStats({ stats: stats as NTEStats, attributes });
         case "uma":
         default:
             return { levels: [], data: [] };
     }
 }
 
-function getGenshinStats({ stats, attributes }: Props): StatsData {
+function getGenshinStats({
+    stats,
+    attributes,
+}: GetStatsProps<GenshinStats>): StatsData {
     let levels: (string | number)[] = [];
     let data: (string | number)[][] = [];
     if ("ascensionStat" in stats) {
@@ -182,17 +189,15 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
                 "Base ATK|genshin/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (
-                        genshinBaseATKScaling[
-                            stats.atk as GenshinWeaponBaseATK
-                        ][index] || 0
+                        genshinBaseATKScaling[stats.atk][index] || 0
                     ).toLocaleString(),
                 ),
             ],
         ];
         if (stats.subStat) {
-            let subStatScaling = genshinSubstats[
-                stats.atk as GenshinWeaponBaseATK
-            ][stats.subStat as GenshinWeaponSubStat] as string[];
+            let subStatScaling = genshinSubstats[stats.atk][
+                stats.subStat
+            ] as string[];
             data.push([
                 `${stats.subStat}|genshin/icons/stat-icons/${splitJoin(
                     stats.subStat,
@@ -205,7 +210,7 @@ function getGenshinStats({ stats, attributes }: Props): StatsData {
     return { levels, data };
 }
 
-function getHSRStats({ stats }: Props): StatsData {
+function getHSRStats({ stats }: GetStatsProps<HSRStats>): StatsData {
     const levels = levelData["hsr"]("level-asc");
     let data: (string | number)[][] = [];
     if ("speed" in stats) {
@@ -241,22 +246,19 @@ function getHSRStats({ stats }: Props): StatsData {
             ],
         ];
     } else {
-        const weaponStats = stats as HSRWeaponStats;
         data = [
             ["Level", ...levels],
             [
                 `HP|hsr/icons/stat-icons/HP`,
                 ...levels.map((_, index) =>
-                    (
-                        hsrWeaponStats.hp[weaponStats.hp][index] || 0
-                    ).toLocaleString(),
+                    (hsrWeaponStats.hp[stats.hp][index] || 0).toLocaleString(),
                 ),
             ],
             [
                 `ATK|hsr/icons/stat-icons/ATK`,
                 ...levels.map((_, index) =>
                     (
-                        hsrWeaponStats.atk[weaponStats.atk][index] || 0
+                        hsrWeaponStats.atk[stats.atk][index] || 0
                     ).toLocaleString(),
                 ),
             ],
@@ -264,7 +266,7 @@ function getHSRStats({ stats }: Props): StatsData {
                 `DEF|hsr/icons/stat-icons/DEF`,
                 ...levels.map((_, index) =>
                     (
-                        hsrWeaponStats.def[weaponStats.def][index] || 0
+                        hsrWeaponStats.def[stats.def][index] || 0
                     ).toLocaleString(),
                 ),
             ],
@@ -274,7 +276,10 @@ function getHSRStats({ stats }: Props): StatsData {
     return { levels, data };
 }
 
-function getWuWaStats({ stats, attributes }: Props): StatsData {
+function getWuWaStats({
+    stats,
+    attributes,
+}: GetStatsProps<WuWaStats>): StatsData {
     const levels = levelData["wuwa"]("level-asc", attributes.rarity);
     let data: (string | number)[][] = [];
     if ("hp" in stats) {
@@ -306,16 +311,14 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
                 "Base ATK|wuwa/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (
-                        wuwaBaseATKScaling[stats.atk as WuWaWeaponBaseATK][
-                            index
-                        ] || 0
+                        wuwaBaseATKScaling[stats.atk][index] || 0
                     ).toLocaleString(),
                 ),
             ],
         ];
         if (stats.subStat) {
-            let subStatScaling = wuwaSubstats[stats.atk as WuWaWeaponBaseATK][
-                stats.subStat as WuWaWeaponSubStat
+            let subStatScaling = wuwaSubstats[stats.atk][
+                stats.subStat
             ] as string[];
             data.push([
                 `${stats.subStat}|wuwa/icons/stat-icons/${splitJoin(
@@ -329,7 +332,10 @@ function getWuWaStats({ stats, attributes }: Props): StatsData {
     return { levels, data };
 }
 
-function getZZZStats({ stats, attributes }: Props): StatsData {
+function getZZZStats({
+    stats,
+    attributes,
+}: GetStatsProps<ZZZStats>): StatsData {
     const levels = levelData["zzz"]("level-asc");
     let data: (string | number)[][] = [];
     if ("ascension" in stats) {
@@ -387,8 +393,7 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
             ],
         ];
         if (stats.subStat) {
-            let subStatScaling = zzzSubstats[stats.subStat as ZZZWeaponSubStat]
-                .scaling[
+            let subStatScaling = zzzSubstats[stats.subStat].scaling[
                 attributes.rarity as Exclude<ZZZRarity, 2 | 1>
             ] as string[];
             data.push([
@@ -445,10 +450,32 @@ function getZZZStats({ stats, attributes }: Props): StatsData {
     return { levels, data };
 }
 
-function getEndfieldStats({ stats }: Props): StatsData {
+function getEndfieldStats({
+    stats,
+    attributes,
+}: GetStatsProps<EndfieldStats>): StatsData {
     let levels;
     let data: (string | number)[][] = [];
-    if ("str" in stats) {
+    if ("DEF" in stats) {
+        const formatTitle = (stat: GearStat) => {
+            const { title, icon } = gearStats[stat];
+            return `${title}|endfield/icons/stat-icons/${icon}`;
+        };
+
+        levels = attributes.rarity === 5 ? ["0", "1", "2", "3"] : ["0"];
+        data = [
+            [
+                "Level",
+                ...levels.map(
+                    (level) => `|endfield/icons/skills/Artifice${level}`,
+                ),
+            ],
+            ...Object.entries(stats).map(([stat, values]) => [
+                formatTitle(stat as GearStat),
+                ...values.map((value) => `+${value}`),
+            ]),
+        ];
+    } else if ("str" in stats) {
         levels = ["1", "20", "40", "60", "80", "90"];
         data = [
             ["Level", ...levels],
@@ -497,9 +524,7 @@ function getEndfieldStats({ stats }: Props): StatsData {
                 "Base ATK|endfield/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
                     (
-                        endfieldBaseATKScaling[
-                            stats.atk as EndfieldWeaponBaseATK
-                        ][index] || 0
+                        endfieldBaseATKScaling[stats.atk][index] || 0
                     ).toLocaleString(),
                 ),
             ],
@@ -509,7 +534,10 @@ function getEndfieldStats({ stats }: Props): StatsData {
     return { levels, data };
 }
 
-function getNTEStats({ stats, attributes }: Props): StatsData {
+function getNTEStats({
+    stats,
+    attributes,
+}: GetStatsProps<NTEStats>): StatsData {
     let levels = levelData["nte"]("level-asc", attributes.rarity);
     let data: (string | number)[][] = [];
     if ("hp" in stats) {
@@ -541,20 +569,16 @@ function getNTEStats({ stats, attributes }: Props): StatsData {
             [
                 "Base ATK|nte/icons/stat-icons/ATK",
                 ...levels.map((_, index) =>
-                    (
-                        nteBaseATKScaling[stats.atk as NTEWeaponBaseATK][
-                            index
-                        ] || 0
-                    ).toLocaleString(),
+                    (nteBaseATKScaling[stats.atk][index] || 0).toLocaleString(),
                 ),
             ],
         ];
         if (stats.subStat) {
-            let subStatScaling = nteSubstats[stats.atk as NTEWeaponBaseATK][
-                stats.subStat as NTEWeaponSubStat
+            let subStatScaling = nteSubstats[stats.atk][
+                stats.subStat
             ] as string[];
             data.push([
-                `${nteSubstatNames[stats.subStat as NTEWeaponSubStat].title}|nte/icons/stat-icons/${splitJoin(
+                `${nteSubstatNames[stats.subStat].title}|nte/icons/stat-icons/${splitJoin(
                     stats.subStat,
                 )}`,
                 ...levels.map((_, index) => subStatScaling[index] || 0),

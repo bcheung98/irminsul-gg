@@ -8,13 +8,18 @@ import Loader from "@/components/Loader";
 import { getDataSet } from "@/api";
 
 // Type imports
-import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import {
+    EndfieldCharacter,
+    EndfieldGear,
+    EndfieldWeapon,
+} from "@/types/endfield";
 import { Banner } from "@/types/banner";
 
 export default async function Page() {
     const characterData =
         await getDataSet<EndfieldCharacter>("endfield/operators");
     const weaponData = await getDataSet<EndfieldWeapon>("endfield/weapons");
+    const equipmentData = await getDataSet<EndfieldGear>("endfield/gear");
     const characterBannerData = await getDataSet<Banner>(
         "endfield/banner-characters",
     );
@@ -22,10 +27,11 @@ export default async function Page() {
         "endfield/banner-weapons",
     );
 
-    const [characters, weapons, characterBanners, weaponBanners] =
+    const [characters, weapons, equipment, characterBanners, weaponBanners] =
         await Promise.all([
             characterData,
             weaponData,
+            equipmentData,
             characterBannerData,
             weaponBannerData,
         ]);
@@ -35,6 +41,7 @@ export default async function Page() {
             <EndfieldHome
                 characters={characters}
                 weapons={weapons}
+                equipment={equipment}
                 banners={{ character: characterBanners, weapon: weaponBanners }}
             />
         </Suspense>

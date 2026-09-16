@@ -33,6 +33,7 @@ export interface GalleryState {
     "uma/skills": GallerySettings;
     "endfield/operators": GallerySettings;
     "endfield/weapons": GallerySettings;
+    "endfield/gear": GallerySettings;
     "nte/espers": GallerySettings;
     "nte/arcs": GallerySettings;
 }
@@ -101,6 +102,11 @@ export const initialState: GalleryState = {
         sortBy: "version",
         sortDirection: "asc",
         view: "icon",
+    },
+    "endfield/gear": {
+        sortBy: "set",
+        sortDirection: "asc",
+        view: "card",
     },
     "nte/espers": defaultSettings,
     "nte/arcs": {
