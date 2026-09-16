@@ -1,66 +1,38 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import InfoGallery from "@/components/InfoGallery";
+import InfoGallery, { useInfoGallery } from "@/components/InfoGallery";
 import SkillList from "@/components/_uma/SkillList";
 
 // Helper imports
 import { UmaContext } from "@/context";
-import { useView } from "@/hooks";
-import {
-    useStore,
-    useGalleryStore,
-    useFilterStore,
-    useServerStore,
-} from "@/stores";
-import { filterItems } from "@/helpers/filterItems";
+import { categories } from "@/data/categories";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { UmaSkill } from "@/types/uma/skill";
 
 export default function SkillsGallery(props: { skills: UmaSkill[] }) {
-    const game = "uma";
-    const tag = "uma/skills";
-
-    const filters = useFilterStore(useShallow((state) => state[tag]));
-    const sortParams = useGalleryStore(useShallow((state) => state[tag]));
-
-    const server = useStore(useServerStore, (state) => state.uma);
-    const hideUnreleasedContent = server === "NA";
-
-    let skills = props.skills;
-    if (hideUnreleasedContent) {
-        skills = skills.filter((skill) => skill.global);
-    }
-
-    const [loading, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentSkills, setCurrentSkills] = useState<UmaSkill[]>([]);
-
-    useEffect(() => {
-        startTransition(() => {
-            setCurrentSkills(
-                filterItems(game, skills, filters, searchValue, sortParams),
-            );
-        });
-    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
-
-    const params = {
-        view: sortParams.view,
-        handleView: useView(tag),
-        searchValue,
-        handleInputChange: (event: BaseSyntheticEvent) => {
-            setSearchValue(event.target.value);
+    const { params, gallery } = useInfoGallery({
+        game: "uma",
+        galleryKey: "uma/skills", // Pathname
+        filterKey: "uma/skills", // Data tag
+        items: props.skills,
+        views: {
+            list: (skills, isPending) => (
+                <SkillList skills={skills} loading={isPending} />
+            ),
         },
-    };
+        defaultView: "list",
+        hideUnreleased: useStore(useServerStore, (state) => state.uma) === "NA",
+        filterUnreleased: (skills, { hideUnreleased }) =>
+            hideUnreleased ? skills.filter((skill) => skill.global) : skills,
+    });
 
     return (
-        <UmaContext value={{ skills, events: {}, profiles: [] }}>
-            <InfoGallery title="Skills" buttonKeys={[]} {...params}>
-                <SkillList skills={currentSkills} loading={loading} />
+        <UmaContext value={{ skills: props.skills, events: {}, profiles: [] }}>
+            <InfoGallery title={categories["uma/skills"]} {...params}>
+                {gallery}
             </InfoGallery>
         </UmaContext>
     );

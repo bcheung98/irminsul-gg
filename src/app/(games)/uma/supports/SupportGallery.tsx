@@ -7,6 +7,7 @@ import SupportList from "./SupportList";
 
 // Helper imports
 import { categories } from "@/data/categories";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { UmaSupport } from "@/types/uma";
@@ -25,6 +26,7 @@ export default function SupportGallery(props: { supports: UmaSupport[] }) {
                 <SupportList supports={supports} loading={isPending} />
             ),
         },
+        hideUnreleased: useStore(useServerStore, (state) => state.uma) === "NA",
     });
 
     return (

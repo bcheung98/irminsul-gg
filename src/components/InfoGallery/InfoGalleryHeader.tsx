@@ -21,11 +21,13 @@ import { useDrawerStore } from "@/stores";
 
 // Type imports
 import { InfoGalleryButtonProps, InfoGalleryProps } from "./InfoGallery.types";
+import { GalleryView } from "@/types";
+
+const DEFAULT_BUTTONS: GalleryView[] = ["icon", "card", "list"];
 
 export default function InfoGalleryHeader({
     title,
-    buttonKeys: buttons = ["icon", "card", "list"],
-    customButtons,
+    buttonKeys,
     extraButtons,
     view,
     handleView,
@@ -49,9 +51,10 @@ export default function InfoGalleryHeader({
         matches ? toggleRightDrawer() : toggleRightDrawerMobile();
     };
 
+    const buttons = buttonKeys ?? DEFAULT_BUTTONS;
+
     function getButtons() {
-        if (customButtons) return customButtons;
-        return buttonList
+        return defaultButtonList
             .map((button) => buttons.includes(button.value) && button)
             .filter(Boolean) as InfoGalleryButtonProps[];
     }
@@ -118,7 +121,7 @@ export default function InfoGalleryHeader({
     );
 }
 
-export const buttonList: InfoGalleryButtonProps[] = [
+export const defaultButtonList: InfoGalleryButtonProps[] = [
     {
         value: "icon",
         icon: <ViewCompactIcon />,

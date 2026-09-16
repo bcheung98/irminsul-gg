@@ -7,6 +7,7 @@ import CharacterList from "./CharacterList";
 
 // Helper imports
 import { categories } from "@/data/categories";
+import { useStore, useServerStore } from "@/stores";
 
 // Type imports
 import { UmaCharacter } from "@/types/uma/character";
@@ -30,6 +31,7 @@ export default function CharacterGallery(props: {
                 <CharacterList characters={characters} loading={isPending} />
             ),
         },
+        hideUnreleased: useStore(useServerStore, (state) => state.uma) === "NA",
     });
 
     return (

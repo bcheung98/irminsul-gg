@@ -7,18 +7,14 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
 import { useView } from "@/hooks";
-import {
-    useStore,
-    useGalleryStore,
-    useSettingsStore,
-    useFilterStore,
-} from "@/stores";
+import { useGalleryStore, useFilterStore } from "@/stores";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { filterItems } from "@/helpers/filterItems";
 
 // Type imports
 import { BaseDataWithRelease, Filters } from "@/types";
 import {
+    FilterUnreleasedItems,
     InfoGalleryConfig,
     TransformItems,
     UseInfoGalleryProps,
@@ -26,14 +22,17 @@ import {
 
 const EMPTY_FILTERS: Filters = {};
 
-export function useInfoGallery<T extends BaseDataWithRelease>({
+export function useInfoGallery<T extends Record<string, any>>({
     game,
     galleryKey,
     filterKey,
     items,
     views,
+    defaultView,
     transformItems,
     transformDeps = [],
+    hideUnreleased,
+    filterUnreleased,
 }: UseInfoGalleryProps<T>): {
     params: InfoGalleryConfig;
     gallery: React.ReactNode;
@@ -46,28 +45,35 @@ export function useInfoGallery<T extends BaseDataWithRelease>({
         useShallow((state) => state[galleryKey]),
     );
 
-    const { view } = sortParams;
+    const view = defaultView ?? sortParams.view;
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const filteredItems = filterUnreleasedContent(
-        hideUnreleasedContent,
+    const defaultFilterUnreleased: FilterUnreleasedItems<T> = (
         items,
-        game,
-    );
+        { hideUnreleased, game },
+    ) =>
+        filterUnreleasedContent(
+            hideUnreleased,
+            items as unknown as BaseDataWithRelease[],
+            game,
+        ) as unknown as T[];
 
-    const [isPending, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentItems, setCurrentItems] = useState<T[]>([]);
+    const filterUnreleasedItems = filterUnreleased ?? defaultFilterUnreleased;
+
+    const filteredItems = filterUnreleasedItems(items, {
+        hideUnreleased,
+        game,
+    });
 
     const defaultTransform: TransformItems<T> = (
         items,
         { filters, searchValue, sortParams },
     ) => filterItems(game, items, filters, searchValue, sortParams);
+
     const transform = transformItems ?? defaultTransform;
+
+    const [isPending, startTransition] = useTransition();
+    const [searchValue, setSearchValue] = useState("");
+    const [currentItems, setCurrentItems] = useState<T[]>([]);
 
     useEffect(() => {
         startTransition(() => {
@@ -80,9 +86,10 @@ export function useInfoGallery<T extends BaseDataWithRelease>({
             );
         });
     }, [
+        items,
         filters,
         searchValue,
-        hideUnreleasedContent,
+        hideUnreleased,
         sortParams,
         ...transformDeps,
     ]);
