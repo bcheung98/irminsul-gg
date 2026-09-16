@@ -11,7 +11,13 @@ import HelpIcon from "@mui/icons-material/Help";
 // Helper imports
 import { splitJoin, toTitleCase } from "@/utils";
 import { createFilterButtons } from "@/helpers/filters";
-import { elements, gearTypes, opClasses, rarities, weapons } from "./common";
+import {
+    elements,
+    gearTypes,
+    opClasses,
+    rarities as endfieldRarities,
+    weapons,
+} from "./common";
 import { gearSets, nonSetGear } from "./gearSets";
 
 // Type imports
@@ -31,11 +37,18 @@ export function endfieldFilters<T extends Filters>({
     filters,
     setFilters,
 }: FilterGroupsProps<T>): FilterGroups {
-    const rarity: Partial<Record<keyof FilterState, number[]>> = {
-        "endfield/characters": rarities.slice(0, 3),
-        "endfield/weapons": rarities.slice(0, 4),
-        "endfield/gear": rarities.slice(1, 6),
-    };
+    const rarities = ((key: keyof FilterState) => {
+        switch (key) {
+            case "endfield/characters":
+                return endfieldRarities.slice(0, 3);
+            case "endfield/weapons":
+                return endfieldRarities.slice(0, 4);
+            case "endfield/gear":
+                return endfieldRarities.slice(1, 6);
+            default:
+                return endfieldRarities.slice(0, 3);
+        }
+    })(key);
 
     return {
         element: {
@@ -78,7 +91,7 @@ export function endfieldFilters<T extends Filters>({
         rarity: {
             name: "Rarity",
             value: filters.rarity,
-            buttons: rarity[key]!.map((rarity) => ({
+            buttons: rarities.map((rarity) => ({
                 value: rarity,
                 label: (
                     <RarityStars rarity={rarity} useRarityColor variant="h6" />
