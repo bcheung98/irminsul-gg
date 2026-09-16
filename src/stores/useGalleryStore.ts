@@ -28,6 +28,7 @@ export interface GalleryState {
     "zzz/agents": GallerySettings;
     "zzz/w-engines": GallerySettings;
     "zzz/drive-discs": GallerySettings;
+    "zzz/bangboos": GallerySettings;
     "uma/characters": GallerySettings;
     "uma/supports": GallerySettings;
     "uma/skills": GallerySettings;
@@ -36,6 +37,7 @@ export interface GalleryState {
     "endfield/gear": GallerySettings;
     "nte/espers": GallerySettings;
     "nte/arcs": GallerySettings;
+    "nte/console": GallerySettings;
 }
 
 export interface GalleryActions {
@@ -86,6 +88,7 @@ export const initialState: GalleryState = {
         view: "icon",
     },
     "zzz/drive-discs": defaultSettings,
+    "zzz/bangboos": defaultSettings,
     "uma/characters": defaultSettings,
     "uma/supports": {
         sortBy: "specialty",
@@ -114,6 +117,7 @@ export const initialState: GalleryState = {
         sortDirection: "asc",
         view: "icon",
     },
+    "nte/console": defaultSettings,
 };
 
 export const useGalleryStore = create(
