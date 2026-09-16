@@ -58,7 +58,7 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
             return {
                 title: "Gacha Calendar",
                 description: isSitemap
-                    ? "Calendar to view the content release schedule of various gacha games"
+                    ? "Keep track of banner schedules across the gacha games covered in Irminsul.GG, all in one convenient calendar with banner dates, featured items, and countdowns for each banner."
                     : "",
             };
         if (page.path === "/privacy-policy")
@@ -261,6 +261,9 @@ function getDynamicIcon(pathname: string, item: any, gender: Gender) {
     if (pathname === "uma/skills") {
         return `uma/skills/${item.icon}`;
     }
+    if (pathname === "endfield/gear") {
+        return `endfield/gear/${item.stringId}`;
+    }
     if (tag === "characters") {
         return getCharacterImageURLs({
             game: game as Game,
@@ -278,7 +281,9 @@ function getTag(tag: string) {
     if (["lightcones", "w-engines", "arcs"].includes(tag)) {
         tag = "weapons";
     }
-    if (["artifacts", "relics", "drive-discs", "echoes"].includes(tag)) {
+    if (
+        ["artifacts", "relics", "drive-discs", "echoes", "gear"].includes(tag)
+    ) {
         tag = "equipment";
     }
     return tag;
