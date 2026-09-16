@@ -46,7 +46,11 @@ export default function Planner({
         <PlannerDataContext value={{ characters, weapons }}>
             <Stack
                 spacing={2}
-                sx={{ p: 1, maxWidth: theme.breakpoints.values.xl }}
+                sx={{
+                    px: 1,
+                    py: { xs: 1, sm: 2, lg: 1 },
+                    maxWidth: theme.breakpoints.values.xl,
+                }}
             >
                 <Text variant="h5" weight="highlight">
                     Ascension Planner

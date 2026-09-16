@@ -31,7 +31,8 @@ export default function FilterDrawerDesktop({
                               width: 320,
                               borderLeft: `1px solid ${theme.border.color.primary}`,
                               backgroundColor: theme.appbar.backgroundColor,
-                              py: 2.5,
+                              pt: 6.5,
+                              pb: 2.5,
                               scrollbarWidth: "none",
                           },
                       }

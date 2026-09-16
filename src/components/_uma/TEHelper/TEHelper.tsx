@@ -34,7 +34,7 @@ export default function TEHelper({
     return (
         <UmaContext value={{ skills, events, profiles }}>
             <TEHelperDataContext value={{ characters, supports }}>
-                <Stack spacing={2} sx={{ p: 1 }}>
+                <Stack spacing={2} sx={{ px: 1, py: { xs: 1, sm: 2, lg: 1 } }}>
                     <Text variant="h5" weight="highlight">
                         Training Event Helper
                     </Text>

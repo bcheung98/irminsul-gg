@@ -23,6 +23,8 @@ export const opClasses = [
     "Supporter",
 ] as const;
 
+export const gearTypes = ["Armor", "Gloves", "Kit"] as const;
+
 export const rarities = [6, 5, 4, 3, 2, 1] as const;
 
 export const statAttributes = ["str", "agi", "int", "wil"] as const;

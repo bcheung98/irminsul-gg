@@ -321,6 +321,10 @@ export default function SkillDescription({
             .replaceAll(`Icon_Amp`, `<span class="icon amp"></span>`)
             .replaceAll(`Icon_ArtsAmp`, `<span class="icon artsAmp"></span>`)
             .replaceAll(
+                `Icon_Susceptibility`,
+                `<span class="icon susceptibility"></span>`,
+            )
+            .replaceAll(
                 `Icon_PhysicalSusceptibility`,
                 `<span class="icon physicalSusceptibility"></span>`,
             )
@@ -346,7 +350,8 @@ export default function SkillDescription({
             )
             .replaceAll(`Icon_Slow`, `<span class="icon slow"></span>`)
             .replaceAll(`Icon_Weaken`, `<span class="icon weaken"></span>`)
-            .replaceAll(`Icon_Link`, `<span class="icon link"></span>`);
+            .replaceAll(`Icon_Link`, `<span class="icon link"></span>`)
+            .replaceAll(`Icon_Protect`, `<span class="icon protect"></span>`);
     }
 
     return parse(text, options);

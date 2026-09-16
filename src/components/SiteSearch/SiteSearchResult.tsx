@@ -71,6 +71,9 @@ const SiteSearchResult = memo(function SiteSearchResult({
         if (item.category === "uma/skills") {
             return `uma/skills/${item.icon}`;
         }
+        if (item.category === "endfield/equipment") {
+            return `endfield/gear/${item.stringId}`;
+        }
         return categoryImgURLs[item.category](item.id, item.name);
     }
 

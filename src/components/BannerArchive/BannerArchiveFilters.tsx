@@ -57,7 +57,7 @@ export default function BannerArchiveFilters({
                                 checked={matchAll}
                                 onChange={handleMatchAllChange}
                                 size="small"
-                                sx={{ mt: 1 }}
+                                sx={{ mt: 0.5 }}
                             />
                             <Tooltip
                                 title="If toggled, will filter banners that only contain all selected items."
@@ -72,7 +72,7 @@ export default function BannerArchiveFilters({
                                         textDecoration: "dotted underline",
                                     }}
                                 >
-                                    Toggle "AND" Filter
+                                    Match All
                                 </Text>
                             </Tooltip>
                         </FlexBox>

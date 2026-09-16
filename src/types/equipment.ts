@@ -3,6 +3,7 @@ import { BaseDataWithRelease } from ".";
 export interface Equipment extends BaseDataWithRelease {
     displayName: string;
     rarity: number;
+    set?: number;
     setEffect: SetEffect;
     pieces?: SetPieces[];
     description?: string;

@@ -205,6 +205,12 @@ const sortOptions = {
         { value: "rarity", label: "Rarity" },
         { value: "weaponType", label: "Weapon" },
     ],
+    "endfield/gear": [
+        { value: "version", label: "Release Date" },
+        { value: "set", label: "Set" },
+        { value: "type", label: "Type" },
+        { value: "rarity", label: "Rarity" },
+    ],
     "nte/espers": [
         { value: "release", label: "Release Date" },
         { value: "name", label: "Name" },

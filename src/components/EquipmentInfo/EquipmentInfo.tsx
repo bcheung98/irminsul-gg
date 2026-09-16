@@ -106,7 +106,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                             <SkillCard size={{ sm: "grow", lg: 6 }}>
                                 <EquipmentSetEffect
                                     equipment={equipment}
-                                    textVariant="body1"
+                                    textVariant="subtitle1"
                                 />
                             </SkillCard>
                         </Grid>
@@ -137,7 +137,7 @@ export default function EquipmentInfo({ equipment }: { equipment: Equipment }) {
                         <SkillCard size={{ sm: "grow", lg: 6 }}>
                             <EquipmentSetEffect
                                 equipment={equipment}
-                                textVariant="body1"
+                                textVariant="subtitle1"
                             />
                         </SkillCard>
                     </Grid>

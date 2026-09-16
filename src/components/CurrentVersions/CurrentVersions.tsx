@@ -4,6 +4,7 @@ import TextLabel from "@/components/TextLabel";
 import VersionReleaseDate from "@/components/VersionHighlights/VersionReleaseDate";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
@@ -61,6 +62,8 @@ function Label({
     game: GameInfo;
     releaseDate?: string | null;
 }) {
+    const theme = useTheme();
+
     const { version, name } = versions[game.tag][0];
 
     return (
@@ -72,8 +75,10 @@ function Label({
             subtitle={
                 <VersionReleaseDate
                     releaseDate={releaseDate}
+                    color={theme.text.description}
+                    variant="subtitle2"
                     weight="primary"
-                    variant="daysAgo"
+                    mode="daysAgo"
                 />
             }
             spacing={2}

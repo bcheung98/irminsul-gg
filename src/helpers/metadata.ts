@@ -54,9 +54,9 @@ export function getMetadata({
         description = `A comprehensive database and collection of tools for ${gameData.name}. View characters, track banner history, plan builds, and more.`;
         if (tag) {
             title.default = categories[`${game}/${tag}`];
-            description = `A detailed list of all ${gameData.name} ${
+            description = `Browse a detailed list of all ${gameData.name} ${
                 categories[`${game}/${tag}`]
-            }`;
+            }.`;
             if (attributes) {
                 title.default = attributes.displayName || attributes.name || "";
                 if (`${game}/${tag}` === "uma/characters") {
@@ -160,8 +160,7 @@ export function getMetadata({
 export function plannerMetaData(game: Game) {
     return {
         title: "Ascension Planner",
-        description:
-            "Tool for calculating level-up costs of characters and weapons",
+        description: `Calculate the materials needed to ascend and level up characters and weapons in ${games[game].name}.`,
         canonical: `/${game}/planner`,
     };
 }
@@ -169,7 +168,7 @@ export function plannerMetaData(game: Game) {
 export function bannerArchiveMetaData(game: Game) {
     return {
         title: "Banner Archive",
-        description: `A list of all ${games[game].name} Banners`,
+        description: `Browse the complete banner history for ${games[game].name}. View banner dates with featured characters or ${game === "uma" ? "support cards" : "weapons"}, and filter the archive by item or year.`,
         canonical: `/${game}/banners`,
     };
 }

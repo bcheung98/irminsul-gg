@@ -193,6 +193,12 @@ export const skillKeywords: SkillKeyword[] = [
             "Next Battle Skill or Ultimate cast by the team consumes the Link buff and deals more DMG, with Battle Skills getting a higher increase. Effects of the same type can stacks, but with diminishing returns.",
     },
     {
+        tag: "susceptibility",
+        name: "Susceptibility",
+        description:
+            "Susceptible targets temporarily take more DMG of the element it is Susceptible to. The number represents the degree of increase. Effects of the same type can stack.",
+    },
+    {
         tag: "physical susceptibility",
         name: "Physical Susceptibility",
         description:
@@ -269,6 +275,24 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Originium Crystal",
         description:
             "The Endministrator's Combo Skill attaches Originium Crystals to enemies and immobilizes them.",
+    },
+    {
+        tag: "cryo burst",
+        name: "Cryo Burst",
+        description:
+            '<span class="text-cryo">Cryo Burst</span> = Icon_CryoInfliction <span class="tooltip-cryo" data-tag="cryo infliction">Cryo Infliction</span> + Icon_CryoInfliction <span class="tooltip-cryo" data-tag="cryo infliction">Cryo Infliction</span>.<br />Applies 1 stack of Icon_CryoInfliction <span class="tooltip-cryo" data-tag="cryo infliction">Cryo Infliction</span> and deals <span class="text-cryo">Cryo DMG</span>.',
+    },
+    {
+        tag: "electric burst",
+        name: "Electric Burst",
+        description:
+            '<span class="text-electric">Electric Burst</span> = Icon_ElectricInfliction <span class="tooltip-electric" data-tag="electric infliction">Electric Infliction</span> + Icon_ElectricInfliction <span class="tooltip-electric" data-tag="electric infliction">Electric Infliction</span>.<br />Applies 1 stack of Icon_ElectricInfliction <span class="tooltip-electric" data-tag="electric infliction">Electric Infliction</span> and deals <span class="text-electric">Electric DMG</span>.',
+    },
+    {
+        tag: "heat burst",
+        name: "Heat Burst",
+        description:
+            '<span class="text-heat">Heat Burst</span> = Icon_HeatInfliction <span class="tooltip-heat" data-tag="heat infliction">Heat Infliction</span> + Icon_HeatInfliction <span class="tooltip-heat" data-tag="heat infliction">Heat Infliction</span>.<br />Applies 1 stack of Icon_HeatInfliction <span class="tooltip-heat" data-tag="heat infliction">Heat Infliction</span> and deals <span class="text-heat">Heat DMG</span>.',
     },
     {
         tag: "nature burst",

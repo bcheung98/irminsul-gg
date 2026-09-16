@@ -71,7 +71,8 @@ export default function BannerArchive<
             <Stack
                 spacing={2}
                 sx={(theme) => ({
-                    p: 1,
+                    px: 1,
+                    py: { xs: 1, sm: 2, lg: 1 },
                     maxWidth: theme.breakpoints.values.xl,
                 })}
             >

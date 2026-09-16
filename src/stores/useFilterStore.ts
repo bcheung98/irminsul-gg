@@ -1,19 +1,34 @@
 import { create } from "zustand";
+
+// Genshin
 import { GenshinCharacterFilterState } from "@/components/_genshin/Filters/CharacterFilters";
 import { GenshinWeaponFilterState } from "@/components/_genshin/Filters/WeaponFilters";
+import { GenshinTCGFilterState } from "@/components/_genshin/Filters/TCGFilters";
+
+// HSR
 import { HSRCharacterFilterState } from "@/components/_hsr/Filters/CharacterFilters";
 import { HSRWeaponFilterState } from "@/components/_hsr/Filters/WeaponFilters";
+
+// WuWa
 import { WuWaCharacterFilterState } from "@/components/_wuwa/Filters/CharacterFilters";
 import { WuWaWeaponFilterState } from "@/components/_wuwa/Filters/WeaponFilters";
 import { WuWaEchoFilterState } from "@/components/_wuwa/Filters/EchoFilters";
+
+// ZZZ
 import { ZZZCharacterFilterState } from "@/components/_zzz/Filters/CharacterFilters";
 import { ZZZWeaponFilterState } from "@/components/_zzz/Filters/WeaponFilters";
+
+// Uma
 import { UmaCharacterFilterState } from "@/components/_uma/Filters/CharacterFilters";
 import { UmaSupportFilterState } from "@/components/_uma/Filters/SupportFilters";
 import { UmaSkillFilterState } from "@/components/_uma/Filters/SkillFilters";
-import { GenshinTCGFilterState } from "@/components/_genshin/Filters/TCGFilters";
+
+// Endfield
 import { EndfieldCharacterFilterState } from "@/components/_endfield/Filters/CharacterFilters";
 import { EndfieldWeaponFilterState } from "@/components/_endfield/Filters/WeaponFilters";
+import { EndfieldGearFilterState } from "@/components/_endfield/Filters/GearFilters";
+
+// NTE
 import { NTECharacterFilterState } from "@/components/_nte/Filters/CharacterFilters";
 import { NTEWeaponFilterState } from "@/components/_nte/Filters/WeaponFilters";
 
@@ -33,6 +48,7 @@ export interface FilterState {
     "uma/skills": UmaSkillFilterState;
     "endfield/characters": EndfieldCharacterFilterState;
     "endfield/weapons": EndfieldWeaponFilterState;
+    "endfield/gear": EndfieldGearFilterState;
     "nte/characters": NTECharacterFilterState;
     "nte/weapons": NTEWeaponFilterState;
 }
@@ -172,6 +188,14 @@ export const endfieldWeaponFilters: EndfieldWeaponFilterState = {
     rarity: [],
 };
 
+export const endfieldGearFilters: EndfieldGearFilterState = {
+    type: [],
+    set: [],
+    rarity: [],
+    attributes: [],
+    _attributes: ["true"],
+};
+
 export const nteCharacterFilters: NTECharacterFilterState = {
     element: [],
     weaponType: [],
@@ -207,6 +231,7 @@ export const initialState: FilterState = {
     "uma/skills": umaSkillFilters,
     "endfield/characters": endfieldCharacterFilters,
     "endfield/weapons": endfieldWeaponFilters,
+    "endfield/gear": endfieldGearFilters,
     "nte/characters": nteCharacterFilters,
     "nte/weapons": nteWeaponFilters,
 };

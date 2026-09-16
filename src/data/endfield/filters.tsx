@@ -1,10 +1,24 @@
 // Component imports
 import RarityStars from "@/components/RarityStars";
+import Text from "@/components/Text";
+import FlexBox from "@/components/FlexBox";
+import Switch from "@/components/Switch";
+import Tooltip from "@/components/Tooltip";
+
+// MUI imports
+import HelpIcon from "@mui/icons-material/Help";
 
 // Helper imports
-import { splitJoin } from "@/utils";
+import { splitJoin, toTitleCase } from "@/utils";
 import { createFilterButtons } from "@/helpers/filters";
-import { elements, opClasses, rarities, weapons } from "./common";
+import {
+    elements,
+    gearTypes,
+    opClasses,
+    rarities as endfieldRarities,
+    weapons,
+} from "./common";
+import { gearSets, nonSetGear } from "./gearSets";
 
 // Type imports
 import { Filters, FilterGroupsProps, FilterGroups } from "@/types";
@@ -14,12 +28,28 @@ import {
     EndfieldRarity,
     EndfieldWeaponType,
 } from "@/types/endfield";
+import { EndfieldGearType } from "@/types/endfield/gear";
+import { FilterState } from "@/stores/useFilterStore";
+import { GearStat, gearStats } from "./gearStats";
 
 export function endfieldFilters<T extends Filters>({
     key,
     filters,
     setFilters,
 }: FilterGroupsProps<T>): FilterGroups {
+    const rarities = ((key: keyof FilterState) => {
+        switch (key) {
+            case "endfield/characters":
+                return endfieldRarities.slice(0, 3);
+            case "endfield/weapons":
+                return endfieldRarities.slice(0, 4);
+            case "endfield/gear":
+                return endfieldRarities.slice(1, 6);
+            default:
+                return endfieldRarities.slice(0, 3);
+        }
+    })(key);
+
     return {
         element: {
             name: "Element",
@@ -61,23 +91,93 @@ export function endfieldFilters<T extends Filters>({
         rarity: {
             name: "Rarity",
             value: filters.rarity,
-            buttons: rarities
-                .slice(0, key === "endfield/characters" ? 3 : 4)
-                .map((rarity) => ({
-                    value: rarity,
-                    label: (
-                        <RarityStars
-                            rarity={rarity}
-                            useRarityColor
-                            variant="h6"
-                        />
-                    ),
-                })),
+            buttons: rarities.map((rarity) => ({
+                value: rarity,
+                label: (
+                    <RarityStars rarity={rarity} useRarityColor variant="h6" />
+                ),
+            })),
             onChange: (
                 _: React.BaseSyntheticEvent,
                 newValues: EndfieldRarity[],
             ) => setFilters(key, "rarity", newValues),
             padding: "4px 8px",
         },
+        type: {
+            name: "Type",
+            value: filters.type,
+            buttons: createFilterButtons({
+                items: gearTypes.map((type) => type.toLowerCase()),
+                url: "endfield/icons/gear",
+                getURL: (item: string) => item.toLowerCase(),
+                getTooltip: (item: string) => toTitleCase(item),
+            }),
+            onChange: (
+                _: React.BaseSyntheticEvent,
+                newValues: EndfieldGearType[],
+            ) => setFilters(key, "type", newValues),
+        },
+        set: {
+            name: "Set",
+            value: filters.set,
+            buttons: [...gearSets, ...nonSetGear]
+                .sort((a, b) => a.displayName.localeCompare(b.displayName))
+                .map((set) => ({
+                    value: set.id,
+                    label: set.displayName,
+                })),
+            onChange: (_: React.BaseSyntheticEvent, newValues: number[]) =>
+                setFilters(key, "set", newValues),
+            padding: "4px 8px",
+        },
+        attributes: {
+            name: "Attributes",
+            value: filters.attributes,
+            buttons: Object.entries(gearStats)
+                .slice(1)
+                .map(([value, details]) => ({
+                    value,
+                    label: details.title,
+                })),
+            toggle: (
+                <FlexBox spacing={1} wrap>
+                    <Switch
+                        checked={filters._attributes?.includes("true")}
+                        onChange={() => {
+                            setFilters(
+                                key,
+                                "_attributes",
+                                filters._attributes.includes("true")
+                                    ? ["false"]
+                                    : ["true"],
+                            );
+                        }}
+                        size="small"
+                    />
+                    <UniqueModeHelper text="If toggled, will filter gear that only have all selected attributes." />
+                </FlexBox>
+            ),
+            onChange: (_: React.BaseSyntheticEvent, newValues: GearStat[]) =>
+                setFilters(key, "attributes", newValues),
+            padding: "4px 8px",
+        },
     };
+}
+
+function UniqueModeHelper({ text }: { text?: string }) {
+    return (
+        <>
+            <Text variant="body2" weight="highlight">
+                Match All
+            </Text>
+            <Tooltip title={text} arrow placement="top">
+                <HelpIcon
+                    sx={(theme) => ({
+                        fontSize: "18px",
+                        color: theme.drawer.color.primary,
+                    })}
+                />
+            </Tooltip>
+        </>
+    );
 }

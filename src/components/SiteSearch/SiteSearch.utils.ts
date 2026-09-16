@@ -15,7 +15,11 @@ import { HSRCharacter, HSRWeapon, HSRRelic } from "@/types/hsr";
 import { WuWaCharacter, WuWaEcho, WuWaWeapon } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
 import { UmaCharacter, UmaSupport } from "@/types/uma";
-import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import {
+    EndfieldCharacter,
+    EndfieldGear,
+    EndfieldWeapon,
+} from "@/types/endfield";
 import { NTECharacter, NTEWeapon } from "@/types/nte";
 import { UmaSkill } from "@/types/uma/skill";
 
@@ -200,6 +204,15 @@ export async function getItems({
                     pathname,
                 ),
         },
+        "endfield/equipment": {
+            load: async () =>
+                filterUnreleasedContent(
+                    hideUnreleasedContent,
+                    await getDataSet<EndfieldGear>("endfield/gear"),
+                    "endfield",
+                    pathname,
+                ),
+        },
         // NTE
         "nte/characters": {
             load: async () =>
@@ -238,6 +251,7 @@ export async function getItems({
     const data = loadedDatasets.flatMap(({ category, data }) =>
         data.map((item) => ({
             id: item.id,
+            stringId: "stringId" in item ? item.stringId : undefined,
             name:
                 typeof item.name === "string"
                     ? item.name

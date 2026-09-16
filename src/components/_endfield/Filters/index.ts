@@ -1,4 +1,5 @@
 import EndfieldCharacterFilters from "./CharacterFilters";
 import EndfieldWeaponFilters from "./WeaponFilters";
+import EndfieldGearFilters from "./GearFilters";
 
-export { EndfieldCharacterFilters, EndfieldWeaponFilters };
+export { EndfieldCharacterFilters, EndfieldWeaponFilters, EndfieldGearFilters };

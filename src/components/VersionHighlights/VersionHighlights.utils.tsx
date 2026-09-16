@@ -1,6 +1,7 @@
 // Component imports
 import {
     EndfieldCharacterInfoCard,
+    EndfieldGearInfoCard,
     EndfieldWeaponInfoCard,
     GenshinArtifactInfoCard,
     GenshinCharacterInfoCard,
@@ -38,7 +39,11 @@ import {
 import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
 import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
 import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
-import { EndfieldCharacter, EndfieldWeapon } from "@/types/endfield";
+import {
+    EndfieldCharacter,
+    EndfieldGear,
+    EndfieldWeapon,
+} from "@/types/endfield";
 import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
@@ -239,7 +244,13 @@ export function renderInfoCard(
                     props={{ componentID: `${item.id}-versionHighlights` }}
                 />
             ),
-            equipment: undefined,
+            equipment: (
+                <EndfieldGearInfoCard
+                    key={item.id}
+                    gear={item as EndfieldGear}
+                    props={{ componentID: `${item.id}-versionHighlights` }}
+                />
+            ),
         },
         nte: {
             characters: (
