@@ -12,7 +12,8 @@ import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { transformItems as defaultTransform } from "@/helpers/transformItems";
 
 // Type imports
-import type { BaseDataWithRelease, Filters, Item } from "@/types";
+import type { BaseDataWithRelease, Item } from "@/types";
+import type { Filters } from "@/types/filters";
 import type {
     FilterUnreleasedContext,
     InfoGalleryConfig,

@@ -1,19 +1,13 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore, useFilterStore } from "@/stores";
 import { wuwaWeaponFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
-import { WuWaWeaponSubStat } from "@/data/wuwa/weaponStats";
 
 // Type imports
-import { Filters } from "@/types";
-import { WuWaRarity, WuWaWeaponType } from "@/types/wuwa";
+import type { Filters } from "@/types/filters";
+import type { WuWaRarity, WuWaWeaponType } from "@/types/wuwa";
+import type { WuWaWeaponSubStat } from "@/data/wuwa/weaponStats";
 
 export interface WuWaWeaponFilterState extends Filters {
     weaponType: WuWaWeaponType[];
@@ -24,35 +18,18 @@ export interface WuWaWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "wuwa";
     const key = "wuwa/weapons";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        wuwaWeaponFilters,
-        filters,
-        clearFilterState
-    );
-
-    const { weaponType, rarity, subStat, forgeryMat, commonMat } = filterGroups(
-        {
+    const { weaponType, rarity, subStat, forgeryMat, commonMat } =
+        useFilterGroups(game, {
             key,
-            filters,
-            setFilters: setFilterState,
-            hideUnreleasedContent,
-        }
-    )[game];
+        });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={wuwaWeaponFilters}
+            filterKey={key}
             filters={[weaponType, rarity, subStat, forgeryMat, commonMat]}
         />
     );

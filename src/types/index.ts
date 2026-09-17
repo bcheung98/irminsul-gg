@@ -1,8 +1,7 @@
 import { servers } from "@/helpers/dates";
 import { gameNames } from "@/data/games";
-import { UmaVersion, Version, VersionWithDate } from "./version";
-import { FilterState, SetFilterState } from "@/stores/useFilterStore";
-import { CharacterColors } from "./character";
+import type { UmaVersion, Version, VersionWithDate } from "./version";
+import type { CharacterColors } from "./character";
 
 // General
 export type Orientation = "row" | "column";
@@ -88,37 +87,6 @@ export type SkillDisplay = "slider" | "table";
 export type Server = keyof typeof servers;
 export type Gender = "Adaptive" | "Male" | "Female";
 export type MenuSide = "left" | "right";
-
-// Filters
-export type Filters = Record<string, (string | number)[]>;
-export interface FilterGroupsProps<T> {
-    key: keyof FilterState;
-    filters: T;
-    setFilters: SetFilterState;
-    hideUnreleasedContent?: boolean;
-}
-export type FilterGroups = Record<string, FilterGroup>;
-export interface FilterGroup {
-    name: string;
-    value: (string | number)[];
-    buttons: FilterButtons[];
-    onChange: (...args: any) => any;
-    toggle?: React.ReactNode;
-    padding?: string | number;
-    width?: string;
-    groupButtons?: GroupFilterButtons[];
-}
-export interface FilterButtons {
-    value: string | number;
-    icon?: React.ReactNode;
-    label?: React.ReactNode;
-}
-export interface GroupFilterButtons {
-    buttons: FilterButtons[];
-    icon?: string;
-    label?: string;
-    dropdown?: boolean;
-}
 
 // Popular Pages
 export interface PopularPagesResponse {

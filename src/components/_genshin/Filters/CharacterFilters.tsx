@@ -1,27 +1,18 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import {
-    genshinCharacterFilters,
-    useFilterStore,
-} from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { genshinCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import {
+import type { Filters } from "@/types/filters";
+import type {
     GenshinElement,
     GenshinNation,
     GenshinRarity,
     GenshinWeaponType,
 } from "@/types/genshin";
-import { CharacterAscensionStat } from "@/types/genshin/character";
+import type { CharacterAscensionStat } from "@/types/genshin/character";
 
 export interface GenshinCharacterFilterState extends Filters {
     element: GenshinElement[];
@@ -37,22 +28,8 @@ export interface GenshinCharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "genshin";
     const key = "genshin/characters";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        genshinCharacterFilters,
-        filters,
-        clearFilterState
-    );
 
     const {
         element,
@@ -65,16 +42,14 @@ export default function CharacterFilters() {
         weeklyBossMat,
         localMat,
         nation,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={genshinCharacterFilters}
+            filterKey={key}
             filters={[
                 element,
                 weaponType,

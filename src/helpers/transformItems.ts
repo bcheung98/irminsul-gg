@@ -1,6 +1,7 @@
 import { gameSorters } from "@/helpers/sort";
 import type { SortParams } from "./_sort";
-import type { Filters, Game, Item } from "@/types";
+import type { Game, Item } from "@/types";
+import type { Filters } from "@/types/filters";
 import type { EndfieldGearAttributes } from "@/types/endfield/gear";
 
 /**

@@ -1,17 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { umaSupportFilters, useFilterStore } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { umaSupportFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import { UmaRarity, UmaSpecialty } from "@/types/uma";
+import type { Filters } from "@/types/filters";
+import type { UmaRarity, UmaSpecialty } from "@/types/uma";
 
 export interface UmaSupportFilterState extends Filters {
     specialty: UmaSpecialty[];
@@ -19,23 +14,18 @@ export interface UmaSupportFilterState extends Filters {
 }
 
 export default function SupportFilters() {
-    const game = useGameTag();
+    const game = "uma";
     const key = "uma/supports";
 
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { specialty, rarity } = useFilterGroups(game, {
         key,
-        umaSupportFilters,
-        filters,
-        clearFilterState
+    });
+
+    return (
+        <FilterRoot
+            initialState={umaSupportFilters}
+            filterKey={key}
+            filters={[specialty, rarity]}
+        />
     );
-
-    const { specialty, rarity } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-    })[game];
-
-    return <FilterRoot actions={actions} filters={[specialty, rarity]} />;
 }

@@ -1,18 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import { wuwaCharacterFilters, useFilterStore } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { wuwaCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import { WuWaElement, WuWaRarity, WuWaWeaponType } from "@/types/wuwa";
+import type { Filters } from "@/types/filters";
+import type { WuWaElement, WuWaRarity, WuWaWeaponType } from "@/types/wuwa";
 
 export interface WuWaCharacterFilterState extends Filters {
     element: WuWaElement[];
@@ -28,22 +22,8 @@ export interface WuWaCharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "wuwa";
     const key = "wuwa/characters";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        wuwaCharacterFilters,
-        filters,
-        clearFilterState
-    );
 
     const {
         element,
@@ -55,16 +35,14 @@ export default function CharacterFilters() {
         localMat,
         bossMat,
         weeklyBossMat,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={wuwaCharacterFilters}
+            filterKey={key}
             filters={[
                 element,
                 weaponType,

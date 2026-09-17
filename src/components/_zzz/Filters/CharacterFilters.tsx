@@ -1,18 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import { useFilterStore, zzzCharacterFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { zzzCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import {
+import type { Filters } from "@/types/filters";
+import type {
     ZZZAttackType,
     ZZZElement,
     ZZZFaction,
@@ -31,22 +25,8 @@ export interface ZZZCharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "zzz";
     const key = "zzz/characters";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        zzzCharacterFilters,
-        filters,
-        clearFilterState
-    );
 
     const {
         element,
@@ -56,16 +36,14 @@ export default function CharacterFilters() {
         bossMat,
         weeklyBossMat,
         nation,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={zzzCharacterFilters}
+            filterKey={key}
             filters={[
                 element,
                 weaponType,

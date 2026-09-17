@@ -1,19 +1,13 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore, useFilterStore } from "@/stores";
 import { genshinWeaponFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
-import { GenshinWeaponSubStat } from "@/data/genshin/weaponStats";
 
 // Type imports
-import { Filters } from "@/types";
-import { GenshinRarity, GenshinWeaponType } from "@/types/genshin";
+import type { Filters } from "@/types/filters";
+import type { GenshinRarity, GenshinWeaponType } from "@/types/genshin";
+import type { GenshinWeaponSubStat } from "@/data/genshin/weaponStats";
 
 export interface GenshinWeaponFilterState extends Filters {
     weaponType: GenshinWeaponType[];
@@ -25,22 +19,8 @@ export interface GenshinWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "genshin";
     const key = "genshin/weapons";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        genshinWeaponFilters,
-        filters,
-        clearFilterState
-    );
 
     const {
         weaponType,
@@ -49,16 +29,14 @@ export default function WeaponFilters() {
         weaponAscensionMat,
         eliteMat,
         commonMat,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={genshinWeaponFilters}
+            filterKey={key}
             filters={[
                 weaponType,
                 rarity,

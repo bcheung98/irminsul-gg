@@ -1,21 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import {
-    endfieldCharacterFilters,
-    useFilterStore,
-} from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { endfieldCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import {
+import type { Filters } from "@/types/filters";
+import type {
     EndfieldClass,
     EndfieldElement,
     EndfieldRarity,
@@ -30,33 +21,17 @@ export interface EndfieldCharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "endfield";
     const key = "endfield/characters";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { element, specialty, weaponType, rarity } = useFilterGroups(game, {
         key,
-        endfieldCharacterFilters,
-        filters,
-        clearFilterState,
-    );
-
-    const { element, specialty, weaponType, rarity } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={endfieldCharacterFilters}
+            filterKey={key}
             filters={[element, specialty, weaponType, rarity]}
         />
     );

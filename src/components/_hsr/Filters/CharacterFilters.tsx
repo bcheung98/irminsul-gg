@@ -1,18 +1,17 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import { hsrCharacterFilters, useFilterStore } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { hsrCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import { HSRElement, HSRRarity, HSRWeaponType, HSRWorld } from "@/types/hsr";
+import type { Filters } from "@/types/filters";
+import type {
+    HSRElement,
+    HSRRarity,
+    HSRWeaponType,
+    HSRWorld,
+} from "@/types/hsr";
 
 export interface HSRCharacterFilterState extends Filters {
     element: HSRElement[];
@@ -26,22 +25,8 @@ export interface HSRCharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "hsr";
     const key = "hsr/characters";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        hsrCharacterFilters,
-        filters,
-        clearFilterState
-    );
 
     const {
         element,
@@ -52,16 +37,14 @@ export default function CharacterFilters() {
         bossMat,
         weeklyBossMat,
         nation,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={hsrCharacterFilters}
+            filterKey={key}
             filters={[
                 element,
                 weaponType,

@@ -1,18 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore, useFilterStore } from "@/stores";
 import { hsrWeaponFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
 
 // Type imports
-import { Filters } from "@/types";
-import { HSRRarity, HSRWeaponType } from "@/types/hsr";
+import type { Filters } from "@/types/filters";
+import type { HSRRarity, HSRWeaponType } from "@/types/hsr";
 
 export interface HSRWeaponFilterState extends Filters {
     weaponType: HSRWeaponType[];
@@ -22,33 +16,17 @@ export interface HSRWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "hsr";
     const key = "hsr/weapons";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { weaponType, rarity, calyxMat, commonMat } = useFilterGroups(game, {
         key,
-        hsrWeaponFilters,
-        filters,
-        clearFilterState
-    );
-
-    const { weaponType, rarity, calyxMat, commonMat } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={hsrWeaponFilters}
+            filterKey={key}
             filters={[weaponType, rarity, calyxMat, commonMat]}
         />
     );

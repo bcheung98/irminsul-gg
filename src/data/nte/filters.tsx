@@ -1,58 +1,42 @@
 // Component imports
 import RarityStars from "@/components/RarityStars";
-import Text from "@/components/Text";
-import FlexBox from "@/components/FlexBox";
-import Switch from "@/components/Switch";
-import Tooltip from "@/components/Tooltip";
-
-// MUI imports
-import HelpIcon from "@mui/icons-material/Help";
 
 // Helper imports
-import { createFilterButtons } from "@/helpers/filters";
+import { createFilterButtons } from "@/components/Filters";
 import { useMaterialsCategory } from "@/helpers/materials";
 import { elements, rarities, weapons } from "@/data/nte/common";
 import { combatRoleNames, combatRoles } from "./combatRoles";
 import { NTEWeaponSubStat, weaponSubStats } from "./weaponStats";
 
 // Type imports
-import { Filters, FilterGroupsProps, FilterGroups } from "@/types";
-import { NTEElement, NTERarity, NTEWeaponType } from "@/types/nte";
+import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
 
-export function nteFilters<T extends Filters>({
+export function nteFilters({
     key,
-    filters,
-    setFilters,
     hideUnreleasedContent = false,
-}: FilterGroupsProps<T>): FilterGroups {
+}: FilterGroupsProps): FilterGroups {
     const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).nte;
 
     return {
         element: {
             name: "Esper Type",
-            value: filters.element,
+            tag: "element",
             buttons: createFilterButtons({
                 items: elements,
                 url: "nte/icons/elements",
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: NTEElement[]) =>
-                setFilters(key, "element", newValues),
         },
         weaponType: {
             name: "Arc Type",
-            value: filters.weaponType,
+            tag: "weaponType",
             buttons: createFilterButtons({
                 items: weapons,
                 url: "nte/icons/arcs",
             }),
-            onChange: (
-                _: React.BaseSyntheticEvent,
-                newValues: NTEWeaponType[],
-            ) => setFilters(key, "weaponType", newValues),
         },
         rarity: {
             name: "Rarity",
-            value: filters.rarity,
+            tag: "rarity",
             buttons: rarities
                 .slice(0, key === "nte/characters" ? -3 : -2)
                 .map((rarity) => ({
@@ -65,13 +49,11 @@ export function nteFilters<T extends Filters>({
                         />
                     ),
                 })),
-            onChange: (_: React.BaseSyntheticEvent, newValues: NTERarity[]) =>
-                setFilters(key, "rarity", newValues),
             padding: "4px 8px",
         },
         combatRoles: {
             name: "Combat Roles",
-            value: filters.combatRoles,
+            tag: "combatRoles",
             buttons: createFilterButtons({
                 items: combatRoleNames,
                 url: "nte/icons/tags",
@@ -82,44 +64,25 @@ export function nteFilters<T extends Filters>({
                         : "_common/images/Unknown";
                 },
             }),
-            toggle: (
-                <FlexBox spacing={1} wrap>
-                    <Switch
-                        checked={filters._combatRoles?.includes("true")}
-                        onChange={() => {
-                            setFilters(
-                                key,
-                                "_combatRoles",
-                                filters._combatRoles.includes("true")
-                                    ? ["false"]
-                                    : ["true"],
-                            );
-                        }}
-                        size="small"
-                    />
-                    <UniqueModeHelper text="If toggled, will filter espers that only have all selected combat roles." />
-                </FlexBox>
-            ),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "combatRoles", newValues),
+            option: {
+                type: "matchAll",
+                tag: "_combatRoles",
+                text: "If toggled, will filter espers that only have all selected combat roles.",
+            },
         },
         subStat: {
             name: "Substat",
-            value: filters.subStat,
+            tag: "subStat",
             buttons: createFilterButtons({
                 items: Object.keys(weaponSubStats).slice(1),
                 url: "nte/icons/stat-icons",
                 getTooltip: (item: NTEWeaponSubStat) =>
                     weaponSubStats[item].title,
             }),
-            onChange: (
-                _: React.BaseSyntheticEvent,
-                newValues: NTEWeaponSubStat[],
-            ) => setFilters(key, "subStat", newValues),
         },
         skillMat: {
             name: "Skill Material",
-            value: filters.skillMat,
+            tag: "skillMat",
             buttons: createFilterButtons({
                 items: getMaterialCategory("skill")
                     .filter((material) => material.rarity === 1)
@@ -138,12 +101,10 @@ export function nteFilters<T extends Filters>({
                     return mat ? `${mat.name}` : "";
                 },
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "skillMat", newValues),
         },
         weaponMat: {
             name: "Weapon Material",
-            value: filters.weaponMat,
+            tag: "weaponMat",
             buttons: createFilterButtons({
                 items: getMaterialCategory("weapon")
                     .filter((material) => material.rarity === 1)
@@ -162,12 +123,10 @@ export function nteFilters<T extends Filters>({
                     return mat ? `${mat.name}` : "";
                 },
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "weaponMat", newValues),
         },
         commonMat: {
             name: "Common Material",
-            value: filters.commonMat,
+            tag: "commonMat",
             buttons: createFilterButtons({
                 items: getMaterialCategory("common")
                     .filter((material) => !material.rarity)
@@ -186,12 +145,10 @@ export function nteFilters<T extends Filters>({
                     return mat ? `${mat.name}` : "";
                 },
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "commonMat", newValues),
         },
         bossMat: {
             name: "Boss Material",
-            value: filters.bossMat,
+            tag: "bossMat",
             buttons: createFilterButtons({
                 items: getMaterialCategory("boss").map(
                     (material) => material.tag || "",
@@ -212,12 +169,10 @@ export function nteFilters<T extends Filters>({
                         : "";
                 },
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "bossMat", newValues),
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
-            value: filters.weeklyBossMat,
+            tag: "weeklyBossMat",
             buttons: createFilterButtons({
                 items: getMaterialCategory("weekly")
                     .filter((material) => material.id.toString().endsWith("01"))
@@ -236,26 +191,6 @@ export function nteFilters<T extends Filters>({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
-            onChange: (_: React.BaseSyntheticEvent, newValues: string[]) =>
-                setFilters(key, "weeklyBossMat", newValues),
         },
     };
-}
-
-function UniqueModeHelper({ text }: { text?: string }) {
-    return (
-        <>
-            <Text variant="body2" weight="highlight">
-                Match All
-            </Text>
-            <Tooltip title={text} arrow placement="top">
-                <HelpIcon
-                    sx={(theme) => ({
-                        fontSize: "18px",
-                        color: theme.drawer.color.primary,
-                    })}
-                />
-            </Tooltip>
-        </>
-    );
 }

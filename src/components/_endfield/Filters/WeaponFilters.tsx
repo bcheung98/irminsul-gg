@@ -1,18 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import { endfieldWeaponFilters, useFilterStore } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { endfieldWeaponFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import { EndfieldRarity, EndfieldWeaponType } from "@/types/endfield";
+import type { Filters } from "@/types/filters";
+import type { EndfieldRarity, EndfieldWeaponType } from "@/types/endfield";
 
 export interface EndfieldWeaponFilterState extends Filters {
     weaponType: EndfieldWeaponType[];
@@ -20,29 +14,18 @@ export interface EndfieldWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "endfield";
     const key = "endfield/weapons";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { weaponType, rarity } = useFilterGroups(game, {
         key,
-        endfieldWeaponFilters,
-        filters,
-        clearFilterState,
+    });
+
+    return (
+        <FilterRoot
+            initialState={endfieldWeaponFilters}
+            filterKey={key}
+            filters={[weaponType, rarity]}
+        />
     );
-
-    const { weaponType, rarity } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
-
-    return <FilterRoot actions={actions} filters={[weaponType, rarity]} />;
 }

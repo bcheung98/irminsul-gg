@@ -1,6 +1,7 @@
 import type { FilterState } from "@/stores/useFilterStore";
 import type { GalleryState } from "@/stores/useGalleryStore";
-import type { Filters, GalleryView, Game, Item } from "@/types";
+import type { GalleryView, Game, Item } from "@/types";
+import type { Filters } from "@/types/filters";
 import type { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
 import type { SortParams } from "@/helpers/_sort";
 

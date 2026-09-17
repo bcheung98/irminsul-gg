@@ -8,11 +8,11 @@ import {
 
 // Component imports
 import SearchDialog from "@/components/SearchDialog";
-import FilterButtonsRoot from "@/components/Filters/FilterButtonsRoot";
+import FilterButtonsLocal from "@/components/Filters/FilterButtonsLocal";
 import FlexBox from "@/components/FlexBox";
 import Dropdown from "@/components/Dropdown";
 import Text from "@/components/Text";
-import PlannerCardHeader from "../PlannerCardRoot/PlannerCardHeader";
+import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -25,16 +25,16 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { toTitleCase } from "@/utils";
 import { useGameTag } from "@/context";
 import { useStore, useSettingsStore, usePlannerStore } from "@/stores";
-import { usePlannerData } from "../Planner/Planner.utils";
-import { filterGroups } from "@/data/filters";
+import { usePlannerData } from "@/components/Planner/Planner.utils";
+import { useFilterGroups } from "@/components/Filters";
 import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
-import { ContentDialogProps } from "../ContentDialog";
-import { Filters, GameNoUma } from "@/types";
-import { FilterState } from "@/stores/useFilterStore";
-import { PlannerItemData, PlannerType } from "@/types/planner";
+import type { ContentDialogProps } from "@/components/ContentDialog";
+import type { GameNoUma } from "@/types";
+import type { Filters } from "@/types/filters";
+import type { PlannerItemData, PlannerType } from "@/types/planner";
 
 interface PlannerSelectorPopupProps extends ContentDialogProps {
     open: boolean;
@@ -66,7 +66,7 @@ export default function PlannerSelectorPopup({
 
     const hideUnreleasedContent = useStore(
         useSettingsStore,
-        (state) => state.hideUnreleasedContent
+        (state) => state.hideUnreleasedContent,
     );
 
     const store = usePlannerStore();
@@ -82,7 +82,7 @@ export default function PlannerSelectorPopup({
             const items = type === "characters" ? characters : weapons;
             startDataTransition(() => {
                 setData(
-                    filterUnreleasedContent(hideUnreleasedContent, items, game)
+                    filterUnreleasedContent(hideUnreleasedContent, items, game),
                 );
             });
         });
@@ -90,22 +90,10 @@ export default function PlannerSelectorPopup({
 
     const [filters, setFilters] =
         useState<PlannerSelectorFilters>(initialFilters);
-    const setFilterState = (
-        _: keyof FilterState,
-        tag: string,
-        filters: (string | number)[]
-    ) => {
-        setFilters((state) => {
-            return { ...state, [`${tag}`]: filters };
-        });
-    };
 
-    const { element, weaponType, rarity } = filterGroups({
+    const { element, weaponType, rarity } = useFilterGroups(game, {
         key: `${game}/${type}`,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
     const groups = [weaponType, rarity];
     if (type === "characters") groups.unshift(element);
 
@@ -119,19 +107,19 @@ export default function PlannerSelectorPopup({
         startHitsTransition(() => {
             const selectedItems = store[`${game}/items`];
             const items = data.filter(
-                (item) => !selectedItems.map((i) => i.id).includes(item.id)
+                (item) => !selectedItems.map((i) => i.id).includes(item.id),
             );
             setSearchResults(() =>
                 transformItems(game, items, filters, searchValue, {
                     sortBy: "version",
                     sortDirection: "asc",
-                })
+                }),
             );
         });
     }, [open, filters, searchValue]);
     const hits = useMemo(
         () => [...searchResults],
-        [data, filters, searchResults]
+        [data, filters, searchResults],
     );
 
     useEffect(() => {
@@ -207,10 +195,11 @@ export default function PlannerSelectorPopup({
                 <Dropdown title="Filters" textVariant="body1">
                     <Stack>
                         {groups.map((filter) => (
-                            <FilterButtonsRoot
-                                key={filter.name}
+                            <FilterButtonsLocal
+                                key={filter.tag}
                                 filter={filter}
-                                buttons={filter.buttons}
+                                filters={filters}
+                                setFilters={setFilters}
                             />
                         ))}
                     </Stack>

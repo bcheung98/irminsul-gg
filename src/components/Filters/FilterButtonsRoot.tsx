@@ -1,36 +1,23 @@
-import { memo } from "react";
-
 // Component imports
 import ToggleButtons from "@/components/ToggleButtons";
 
-// MUI imports
-import Stack from "@mui/material/Stack";
-
 // Type imports
-import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
-import { FilterButtonsProps } from "./FilterButtons";
+import type { FilterButtonRootProps } from "./Filters.types";
 
-interface Props extends FilterButtonsProps {
-    buttons: ToggleButtonProps[];
-}
-
-const FilterButtonsRoot = memo(function FilterButtonsRoot({
+export default function FilterButtonsRoot({
     filter,
     buttons,
-}: Props) {
+    value,
+    onChange,
+}: FilterButtonRootProps) {
     return (
-        <Stack spacing={1}>
-            {filter.toggle}
-            <ToggleButtons
-                buttons={buttons}
-                value={filter.value}
-                onChange={filter.onChange}
-                spacing={4}
-                padding={filter.padding ?? 0}
-                width={filter.width}
-            />
-        </Stack>
+        <ToggleButtons
+            buttons={buttons}
+            value={value}
+            onChange={onChange}
+            spacing={4}
+            padding={filter.padding ?? 0}
+            width={filter.width}
+        />
     );
-});
-
-export default FilterButtonsRoot;
+}
