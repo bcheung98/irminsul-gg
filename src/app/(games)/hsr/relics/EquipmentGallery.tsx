@@ -57,7 +57,7 @@ export default function EquipmentGallery(props: { equipment: HSRRelic[] }) {
                 searchValue,
                 relicType,
             ),
-        transformDeps: [relicType],
+        dependencies: [relicType],
     });
 
     return (

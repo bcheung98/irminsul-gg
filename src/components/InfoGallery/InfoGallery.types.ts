@@ -1,7 +1,8 @@
-import { FilterState } from "@/stores/useFilterStore";
-import { GallerySettings, GalleryState } from "@/stores/useGalleryStore";
-import { Filters, GalleryView, Game } from "@/types";
-import { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
+import type { FilterState } from "@/stores/useFilterStore";
+import type { GalleryState } from "@/stores/useGalleryStore";
+import type { Filters, GalleryView, Game, Item } from "@/types";
+import type { ToggleButtonProps } from "@/components/ToggleButtons/ToggleButtons.types";
+import type { SortParams } from "@/helpers/_sort";
 
 export interface InfoGalleryConfig {
     /** Current view mode. */
@@ -23,7 +24,7 @@ export interface InfoGalleryProps extends InfoGalleryConfig {
      * Define which buttons to display in the gallery controls.
      * The values in the array should correspond to the `value` key
      * from `InfoGalleryButtonProps`.
-     * 
+     *
      * To hide the buttons, pass an empty array.
      * @default ["icon", "card", "list"]
      */
@@ -53,7 +54,7 @@ interface GalleryViews<T> {
 interface TransformContext {
     filters: Filters;
     searchValue: string;
-    sortParams: GallerySettings;
+    sortParams: SortParams;
 }
 
 export type TransformItems<T> = (items: T[], context: TransformContext) => T[];
@@ -68,7 +69,7 @@ export type FilterUnreleasedItems<T> = (
     context: FilterUnreleasedContext,
 ) => T[];
 
-export interface UseInfoGalleryProps<T extends Record<string, any>> {
+export interface UseInfoGalleryProps<T extends Item> {
     /** Current game tag. */
     game: Game;
     /** Key of the gallery state, equivalent to the pathname. */
@@ -90,7 +91,7 @@ export interface UseInfoGalleryProps<T extends Record<string, any>> {
     /** Optional callback function to override the default filter and sort function. */
     transformItems?: TransformItems<T>;
     /** Extra dependencies for `transformItems`. */
-    transformDeps?: React.DependencyList;
+    dependencies?: React.DependencyList;
     /** If `true`, unreleased items are hidden from the view. */
     hideUnreleased?: boolean;
     /**

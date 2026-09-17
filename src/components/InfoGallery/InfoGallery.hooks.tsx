@@ -12,17 +12,27 @@ import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { transformItems as defaultTransform } from "@/helpers/transformItems";
 
 // Type imports
-import type { BaseDataWithRelease, Filters } from "@/types";
+import type { BaseDataWithRelease, Filters, Item } from "@/types";
 import type {
-    FilterUnreleasedItems,
+    FilterUnreleasedContext,
     InfoGalleryConfig,
-    TransformItems,
     UseInfoGalleryProps,
 } from "./InfoGallery.types";
 
 const EMPTY_FILTERS: Filters = {};
 
-export function useInfoGallery<T extends Record<string, any>>({
+function defaultFilterUnreleased<T extends Item>(
+    items: T[],
+    { hideUnreleased, game }: FilterUnreleasedContext,
+) {
+    return filterUnreleasedContent(
+        hideUnreleased,
+        items as unknown as BaseDataWithRelease[],
+        game,
+    ) as unknown as T[];
+}
+
+export function useInfoGallery<T extends Item>({
     game,
     galleryKey,
     filterKey,
@@ -30,7 +40,7 @@ export function useInfoGallery<T extends Record<string, any>>({
     views,
     defaultView,
     transformItems,
-    transformDeps = [],
+    dependencies = [],
     hideUnreleased,
     filterUnreleased,
 }: UseInfoGalleryProps<T>): {
@@ -47,51 +57,44 @@ export function useInfoGallery<T extends Record<string, any>>({
 
     const view = defaultView ?? sortParams.view;
 
-    const defaultFilterUnreleased: FilterUnreleasedItems<T> = (
-        items,
-        { hideUnreleased, game },
-    ) =>
-        filterUnreleasedContent(
-            hideUnreleased,
-            items as unknown as BaseDataWithRelease[],
-            game,
-        ) as unknown as T[];
-
-    const filterUnreleasedItems = filterUnreleased ?? defaultFilterUnreleased;
-
-    const filteredItems = filterUnreleasedItems(items, {
-        hideUnreleased,
-        game,
-    });
-
-    const defaultTransformItems: TransformItems<T> = (
-        items,
-        { filters, searchValue, sortParams },
-    ) => defaultTransform(game, items, filters, searchValue, sortParams);
-
-    const transform = transformItems ?? defaultTransformItems;
-
     const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState("");
     const [currentItems, setCurrentItems] = useState<T[]>([]);
 
     useEffect(() => {
         startTransition(() => {
+            const filteredItems = (filterUnreleased ?? defaultFilterUnreleased)(
+                items,
+                {
+                    hideUnreleased,
+                    game,
+                },
+            );
+            const context = {
+                filters,
+                searchValue,
+                sortParams,
+            };
             setCurrentItems(
-                transform(filteredItems, {
-                    filters,
-                    searchValue,
-                    sortParams,
-                }),
+                transformItems
+                    ? transformItems(filteredItems, context)
+                    : defaultTransform(
+                          game,
+                          filteredItems,
+                          filters,
+                          searchValue,
+                          sortParams,
+                      ),
             );
         });
     }, [
+        game,
         items,
         filters,
         searchValue,
         hideUnreleased,
         sortParams,
-        ...transformDeps,
+        ...dependencies, // Custom transform dependencies are provided explicitly through dependencies prop.
     ]);
 
     const params = {
