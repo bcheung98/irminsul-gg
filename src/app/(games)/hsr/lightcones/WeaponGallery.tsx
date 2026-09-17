@@ -1,97 +1,39 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import InfoGallery from "@/components/InfoGallery";
+import InfoGallery, { useInfoGallery } from "@/components/InfoGallery";
 import { HSRWeaponInfoCard } from "@/components/InfoCard";
 import WeaponList from "./WeaponList";
 
-// MUI imports
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
-
 // Helper imports
-import { useView } from "@/hooks";
-import {
-    useStore,
-    useGalleryStore,
-    useSettingsStore,
-    useFilterStore,
-} from "@/stores";
-import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { filterItems } from "@/helpers/filterItems";
+import { categories } from "@/data/categories";
 
 // Type imports
 import { HSRWeapon } from "@/types/hsr/weapon";
 
 export default function WeaponGallery(props: { weapons: HSRWeapon[] }) {
-    const game = "hsr";
-    const tag = "hsr/weapons";
-
-    const filters = useFilterStore(useShallow((state) => state[tag]));
-    const sortParams = useGalleryStore(
-        useShallow((state) => state["hsr/lightcones"])
-    );
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const weapons = filterUnreleasedContent(
-        hideUnreleasedContent,
-        props.weapons,
-        game
-    );
-
-    const [loading, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentWeapons, setCurrentWeapons] = useState<HSRWeapon[]>([]);
-
-    useEffect(() => {
-        startTransition(() => {
-            setCurrentWeapons(
-                filterItems(game, weapons, filters, searchValue, sortParams)
-            );
-        });
-    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
-
-    function renderGallery() {
-        switch (sortParams.view) {
-            case "icon":
-            default:
-                if (loading) return <LinearProgress />;
-                return (
-                    <Grid container spacing={3}>
-                        {currentWeapons.map((weapon) => (
-                            <HSRWeaponInfoCard
-                                key={weapon.id}
-                                weapon={weapon}
-                            />
-                        ))}
-                    </Grid>
-                );
-            case "list":
-                return (
-                    <WeaponList weapons={currentWeapons} loading={loading} />
-                );
-        }
-    }
-
-    const params = {
-        view: sortParams.view,
-        handleView: useView("hsr/lightcones"),
-        searchValue,
-        handleInputChange: (event: BaseSyntheticEvent) => {
-            setSearchValue(event.target.value);
+    const { params, gallery } = useInfoGallery({
+        game: "hsr",
+        galleryKey: "hsr/lightcones", // Pathname
+        filterKey: "hsr/weapons", // Data tag
+        items: props.weapons,
+        views: {
+            icon: (weapon) => (
+                <HSRWeaponInfoCard key={weapon.id} weapon={weapon} />
+            ),
+            list: (weapons, isPending) => (
+                <WeaponList weapons={weapons} loading={isPending} />
+            ),
         },
-    };
+    });
 
     return (
-        <InfoGallery title="Weapons" buttonKeys={["icon", "list"]} {...params}>
-            {renderGallery()}
+        <InfoGallery
+            title={categories["hsr/weapons"]}
+            buttonKeys={["icon", "list"]}
+            {...params}
+        >
+            {gallery}
         </InfoGallery>
     );
 }

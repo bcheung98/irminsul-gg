@@ -1,19 +1,13 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore, useFilterStore } from "@/stores";
 import { zzzWeaponFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
-import { ZZZWeaponSubStat } from "@/data/zzz/weaponStats";
 
 // Type imports
-import { Filters } from "@/types";
-import { ZZZRarity, ZZZWeaponType } from "@/types/zzz";
+import type { Filters } from "@/types/filters";
+import type { ZZZRarity, ZZZWeaponType } from "@/types/zzz";
+import type { ZZZWeaponSubStat } from "@/data/zzz/weaponStats";
 
 export interface ZZZWeaponFilterState extends Filters {
     weaponType: ZZZWeaponType[];
@@ -22,31 +16,18 @@ export interface ZZZWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "zzz";
     const key = "zzz/weapons";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { weaponType, rarity, subStat } = useFilterGroups(game, {
         key,
-        zzzWeaponFilters,
-        filters,
-        clearFilterState
-    );
-
-    const { weaponType, rarity, subStat } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
-        <FilterRoot actions={actions} filters={[weaponType, rarity, subStat]} />
+        <FilterRoot
+            initialState={zzzWeaponFilters}
+            filterKey={key}
+            filters={[weaponType, rarity, subStat]}
+        />
     );
 }

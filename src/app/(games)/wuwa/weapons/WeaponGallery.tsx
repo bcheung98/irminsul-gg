@@ -1,95 +1,39 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import InfoGallery from "@/components/InfoGallery";
+import InfoGallery, { useInfoGallery } from "@/components/InfoGallery";
 import { WuWaWeaponInfoCard } from "@/components/InfoCard";
 import WeaponList from "./WeaponList";
 
-// MUI imports
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
-
 // Helper imports
-import { useView } from "@/hooks";
-import {
-    useStore,
-    useGalleryStore,
-    useSettingsStore,
-    useFilterStore,
-} from "@/stores";
-import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { filterItems } from "@/helpers/filterItems";
+import { categories } from "@/data/categories";
 
 // Type imports
-import { WuWaWeapon } from "@/types/wuwa";
+import { WuWaWeapon } from "@/types/wuwa/weapon";
 
 export default function WeaponGallery(props: { weapons: WuWaWeapon[] }) {
-    const game = "wuwa";
-    const tag = "wuwa/weapons";
-
-    const filters = useFilterStore(useShallow((state) => state[tag]));
-    const sortParams = useGalleryStore(useShallow((state) => state[tag]));
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const weapons = filterUnreleasedContent(
-        hideUnreleasedContent,
-        props.weapons,
-        game
-    );
-
-    const [loading, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentWeapons, setCurrentWeapons] = useState<WuWaWeapon[]>([]);
-
-    useEffect(() => {
-        startTransition(() => {
-            setCurrentWeapons(
-                filterItems(game, weapons, filters, searchValue, sortParams)
-            );
-        });
-    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
-
-    function renderGallery() {
-        switch (sortParams.view) {
-            case "icon":
-            default:
-                if (loading) return <LinearProgress />;
-                return (
-                    <Grid container spacing={3}>
-                        {currentWeapons.map((weapon) => (
-                            <WuWaWeaponInfoCard
-                                key={weapon.id}
-                                weapon={weapon}
-                            />
-                        ))}
-                    </Grid>
-                );
-            case "list":
-                return (
-                    <WeaponList weapons={currentWeapons} loading={loading} />
-                );
-        }
-    }
-
-    const params = {
-        view: sortParams.view,
-        handleView: useView(tag),
-        searchValue,
-        handleInputChange: (event: BaseSyntheticEvent) => {
-            setSearchValue(event.target.value);
+    const { params, gallery } = useInfoGallery({
+        game: "wuwa",
+        galleryKey: "wuwa/weapons", // Pathname
+        filterKey: "wuwa/weapons", // Data tag
+        items: props.weapons,
+        views: {
+            icon: (weapon) => (
+                <WuWaWeaponInfoCard key={weapon.id} weapon={weapon} />
+            ),
+            list: (weapons, isPending) => (
+                <WeaponList weapons={weapons} loading={isPending} />
+            ),
         },
-    };
+    });
 
     return (
-        <InfoGallery title="Weapons" buttonKeys={["icon", "list"]} {...params}>
-            {renderGallery()}
+        <InfoGallery
+            title={categories["wuwa/weapons"]}
+            buttonKeys={["icon", "list"]}
+            {...params}
+        >
+            {gallery}
         </InfoGallery>
     );
 }

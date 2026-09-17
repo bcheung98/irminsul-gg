@@ -1,28 +1,21 @@
-import { GameData } from "@/types";
-import sortGenshinItems from "./genshin/sortItems";
-import sortHSRItems from "./hsr/sortItems";
-import sortWuWaItems from "./wuwa/sortItems";
-import sortZZZItems from "./zzz/sortItems";
-import sortUmaItems from "./uma/sortItems";
-import sortEndfieldItems from "./endfield/sortItems";
-import sortNTEItems from "./nte/sortItems";
+import type { GameData, Item } from "@/types";
+import type { SortProps } from "./_sort";
+import sortGenshinItems from "./_sort/genshin";
+import sortHSRItems from "./_sort/hsr";
+import sortWuWaItems from "./_sort/wuwa";
+import sortZZZItems from "./_sort/zzz";
+import sortUmaItems from "./_sort/uma";
+import sortEndfieldItems from "./_sort/endfield";
+import sortNTEItems from "./_sort/nte";
 
-export interface SortProps<T extends Record<string, any>> {
-    items: T[];
-    value: string;
-    reverse: boolean;
-}
+type SortFunction = <T extends Item>(props: SortProps<T>) => T[];
 
-type SortFunction = <T extends Record<string, any>>(props: SortProps<T>) => T[];
-
-export function useSort(): GameData<SortFunction> {
-    return {
-        genshin: sortGenshinItems,
-        hsr: sortHSRItems,
-        wuwa: sortWuWaItems,
-        zzz: sortZZZItems,
-        uma: sortUmaItems,
-        endfield: sortEndfieldItems,
-        nte: sortNTEItems,
-    };
-}
+export const gameSorters = {
+    genshin: sortGenshinItems,
+    hsr: sortHSRItems,
+    wuwa: sortWuWaItems,
+    zzz: sortZZZItems,
+    uma: sortUmaItems,
+    endfield: sortEndfieldItems,
+    nte: sortNTEItems,
+} satisfies GameData<SortFunction>;

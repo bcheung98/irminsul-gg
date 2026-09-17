@@ -1,18 +1,12 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore } from "@/stores";
-import { useFilterStore, nteCharacterFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
+import { nteCharacterFilters } from "@/stores/useFilterStore";
 
 // Type imports
-import { Filters } from "@/types";
-import { NTEElement, NTERarity, NTEWeaponType } from "@/types/nte";
+import type { Filters } from "@/types/filters";
+import type { NTEElement, NTERarity, NTEWeaponType } from "@/types/nte";
 
 export interface NTECharacterFilterState extends Filters {
     element: NTEElement[];
@@ -27,22 +21,8 @@ export interface NTECharacterFilterState extends Filters {
 }
 
 export default function CharacterFilters() {
-    const game = useGameTag();
+    const game = "nte";
     const key = "nte/characters";
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
-        key,
-        nteCharacterFilters,
-        filters,
-        clearFilterState,
-    );
 
     const {
         element,
@@ -53,16 +33,14 @@ export default function CharacterFilters() {
         commonMat,
         bossMat,
         weeklyBossMat,
-    } = filterGroups({
+    } = useFilterGroups(game, {
         key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={nteCharacterFilters}
+            filterKey={key}
             filters={[
                 element,
                 weaponType,

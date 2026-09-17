@@ -1,19 +1,13 @@
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import FilterRoot from "@/components/Filters";
+import FilterRoot, { useFilterGroups } from "@/components/Filters";
 
 // Helper imports
-import { useGameTag } from "@/context";
-import { useStore, useSettingsStore, useFilterStore } from "@/stores";
 import { nteWeaponFilters } from "@/stores/useFilterStore";
-import { filterActions } from "@/helpers/filters";
-import { filterGroups } from "@/data/filters";
 import { NTEWeaponSubStat } from "@/data/nte/weaponStats";
 
 // Type imports
-import { Filters } from "@/types";
-import { NTEWeaponType, NTERarity } from "@/types/nte";
+import type { Filters } from "@/types/filters";
+import type { NTEWeaponType, NTERarity } from "@/types/nte";
 
 export interface NTEWeaponFilterState extends Filters {
     weaponType: NTEWeaponType[];
@@ -23,33 +17,17 @@ export interface NTEWeaponFilterState extends Filters {
 }
 
 export default function WeaponFilters() {
-    const game = useGameTag();
+    const game = "nte";
     const key = "nte/weapons";
 
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const { setFilterState, clearFilterState } = useFilterStore();
-    const filters = useFilterStore(useShallow((state) => state[key]));
-    const actions = filterActions(
+    const { weaponType, rarity, subStat, weaponMat } = useFilterGroups(game, {
         key,
-        nteWeaponFilters,
-        filters,
-        clearFilterState,
-    );
-
-    const { weaponType, rarity, subStat, weaponMat } = filterGroups({
-        key,
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    })[game];
+    });
 
     return (
         <FilterRoot
-            actions={actions}
+            initialState={nteWeaponFilters}
+            filterKey={key}
             filters={[weaponType, rarity, subStat, weaponMat]}
         />
     );

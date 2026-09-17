@@ -1,97 +1,39 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
-import { useShallow } from "zustand/react/shallow";
-
 // Component imports
-import InfoGallery from "@/components/InfoGallery";
+import InfoGallery, { useInfoGallery } from "@/components/InfoGallery";
 import { NTEWeaponInfoCard } from "@/components/InfoCard";
 import WeaponList from "./WeaponList";
 
-// MUI imports
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
-
 // Helper imports
-import { useView } from "@/hooks";
-import {
-    useStore,
-    useGalleryStore,
-    useSettingsStore,
-    useFilterStore,
-} from "@/stores";
-import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { filterItems } from "@/helpers/filterItems";
+import { categories } from "@/data/categories";
 
 // Type imports
-import { NTEWeapon } from "@/types/nte";
+import { NTEWeapon } from "@/types/nte/weapon";
 
 export default function WeaponGallery(props: { weapons: NTEWeapon[] }) {
-    const game = "nte";
-    const tag = "nte/weapons";
-
-    const filters = useFilterStore(useShallow((state) => state[tag]));
-    const sortParams = useGalleryStore(
-        useShallow((state) => state["nte/arcs"]),
-    );
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent,
-    );
-
-    const weapons = filterUnreleasedContent(
-        hideUnreleasedContent,
-        props.weapons,
-        game,
-    );
-
-    const [loading, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentWeapons, setCurrentWeapons] = useState<NTEWeapon[]>([]);
-
-    useEffect(() => {
-        startTransition(() => {
-            setCurrentWeapons(
-                filterItems(game, weapons, filters, searchValue, sortParams),
-            );
-        });
-    }, [filters, searchValue, hideUnreleasedContent, sortParams]);
-
-    function renderGallery() {
-        switch (sortParams.view) {
-            case "icon":
-            default:
-                if (loading) return <LinearProgress />;
-                return (
-                    <Grid container spacing={3}>
-                        {currentWeapons.map((weapon) => (
-                            <NTEWeaponInfoCard
-                                key={weapon.id}
-                                weapon={weapon}
-                            />
-                        ))}
-                    </Grid>
-                );
-            case "list":
-                return (
-                    <WeaponList weapons={currentWeapons} loading={loading} />
-                );
-        }
-    }
-
-    const params = {
-        view: sortParams.view,
-        handleView: useView("nte/arcs"),
-        searchValue,
-        handleInputChange: (event: BaseSyntheticEvent) => {
-            setSearchValue(event.target.value);
+    const { params, gallery } = useInfoGallery({
+        game: "nte",
+        galleryKey: "nte/arcs", // Pathname
+        filterKey: "nte/weapons", // Data tag
+        items: props.weapons,
+        views: {
+            icon: (weapon) => (
+                <NTEWeaponInfoCard key={weapon.id} weapon={weapon} />
+            ),
+            list: (weapons, isPending) => (
+                <WeaponList weapons={weapons} loading={isPending} />
+            ),
         },
-    };
+    });
 
     return (
-        <InfoGallery title="Arcs" buttonKeys={["icon", "list"]} {...params}>
-            {renderGallery()}
+        <InfoGallery
+            title={categories["nte/weapons"]}
+            buttonKeys={["icon", "list"]}
+            {...params}
+        >
+            {gallery}
         </InfoGallery>
     );
 }

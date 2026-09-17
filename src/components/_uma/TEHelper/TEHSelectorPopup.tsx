@@ -8,7 +8,7 @@ import {
 
 // Component imports
 import SearchDialog from "@/components/SearchDialog";
-import FilterButtonsRoot from "@/components/Filters/FilterButtonsRoot";
+import FilterButtonsLocal from "@/components/Filters/FilterButtonsLocal";
 import FlexBox from "@/components/FlexBox";
 import Dropdown from "@/components/Dropdown";
 import TextLabel from "@/components/TextLabel";
@@ -29,17 +29,21 @@ import {
     TEHInvalidTag,
     useTEHelperData,
 } from "./TEHelper.utils";
-import { filterGroups } from "@/data/filters";
-import { filterItems } from "@/helpers/filterItems";
+import { useFilterGroups } from "@/components/Filters";
+import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { rarityMap } from "@/data/uma/common";
 
 // Type imports
-import { ContentDialogProps } from "@/components/ContentDialog";
-import { UmaCharacter, UmaRarity, UmaSpecialty, UmaSupport } from "@/types/uma";
-import { TEHItemCategory } from "@/types/uma/te-helper";
-import { Filters } from "@/types";
-import { FilterState } from "@/stores/useFilterStore";
+import type { ContentDialogProps } from "@/components/ContentDialog";
+import type {
+    UmaCharacter,
+    UmaRarity,
+    UmaSpecialty,
+    UmaSupport,
+} from "@/types/uma";
+import type { TEHItemCategory } from "@/types/uma/te-helper";
+import type { Filters } from "@/types/filters";
 
 interface TEHSelectorPopupProps extends ContentDialogProps {
     open: boolean;
@@ -87,7 +91,7 @@ export default function TEHSelectorPopup({
         data = filterUnreleasedContent(
             hideUnreleasedContent,
             characters,
-            "uma"
+            "uma",
         );
     }
     if (category === "support") {
@@ -95,22 +99,10 @@ export default function TEHSelectorPopup({
     }
 
     const [filters, setFilters] = useState<TEHSelectorFilters>(initialFilters);
-    const setFilterState = (
-        _: keyof FilterState,
-        tag: string,
-        filters: (string | number)[]
-    ) => {
-        setFilters((state) => {
-            return { ...state, [`${tag}`]: filters };
-        });
-    };
 
-    const { specialty, rarity } = filterGroups({
+    const { specialty, rarity } = useFilterGroups("uma", {
         key: "uma/supports",
-        filters,
-        setFilters: setFilterState,
-        hideUnreleasedContent,
-    }).uma;
+    });
     const groups = [];
     if (category === "support") groups.push(specialty, rarity);
 
@@ -125,7 +117,7 @@ export default function TEHSelectorPopup({
     useEffect(() => {
         startHitsTransition(() => {
             setSearchResults(() =>
-                filterItems(
+                transformItems(
                     "uma",
                     data,
                     category === "support" ? filters : {},
@@ -133,14 +125,14 @@ export default function TEHSelectorPopup({
                     {
                         sortBy: category === "character" ? "id" : "rarity",
                         sortDirection: "asc",
-                    }
-                )
+                    },
+                ),
             );
         });
     }, [open, filters, searchValue]);
     const hits = useMemo(
         () => [...searchResults],
-        [data, filters, searchResults]
+        [data, filters, searchResults],
     );
 
     useEffect(() => {
@@ -154,7 +146,7 @@ export default function TEHSelectorPopup({
                 addCharacter(item.id);
                 // Removes any conflicting support cards when adding a character
                 const charIndex = supportCharIDs.findIndex(
-                    (id) => id === item.charID
+                    (id) => id === item.charID,
                 );
                 addSupport(charIndex, null);
             } else {
@@ -229,7 +221,7 @@ export default function TEHSelectorPopup({
                         }}
                     />
                     <Text weight="highlight">{`Remove ${toTitleCase(
-                        `${category}`
+                        `${category}`,
                     )}`}</Text>
                 </FlexBox>
             </ButtonBase>
@@ -350,10 +342,11 @@ export default function TEHSelectorPopup({
                     <Dropdown title="Filters" textVariant="body1" defaultOpen>
                         <Stack>
                             {groups.map((filter) => (
-                                <FilterButtonsRoot
-                                    key={filter.name}
+                                <FilterButtonsLocal
+                                    key={filter.tag}
                                     filter={filter}
-                                    buttons={filter.buttons}
+                                    filters={filters}
+                                    setFilters={setFilters}
                                 />
                             ))}
                         </Stack>

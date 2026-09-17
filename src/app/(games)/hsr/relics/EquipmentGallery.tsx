@@ -1,25 +1,18 @@
 "use client";
 
-import { BaseSyntheticEvent, useState, useEffect, useTransition } from "react";
-import { useShallow } from "zustand/react/shallow";
+import { useState } from "react";
 
 // Component imports
-import InfoGallery from "@/components/InfoGallery";
+import InfoGallery, { useInfoGallery } from "@/components/InfoGallery";
 import EquipmentList from "@/components/EquipmentList";
 import ToggleButtons from "@/components/ToggleButtons";
 import Image from "@/components/Image";
 import { HSRRelicInfoCard } from "@/components/InfoCard";
 
-// MUI imports
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
-
 // Helper imports
-import { useView } from "@/hooks";
-import { useStore, useGalleryStore, useSettingsStore } from "@/stores";
-import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
+import { categories } from "@/data/categories";
 import { filterEquipment } from "@/helpers/equipment";
-import sortItems from "@/helpers/hsr/sortItems";
+import sortItems from "@/helpers/_sort/hsr";
 
 // Type imports
 import { HSRRelic } from "@/types/hsr/relic";
@@ -28,30 +21,6 @@ import { InfoGalleryButtonProps } from "@/components/InfoGallery/InfoGallery.typ
 type RelicType = "all" | "head" | "orb";
 
 export default function EquipmentGallery(props: { equipment: HSRRelic[] }) {
-    const game = "hsr";
-    const tag = "hsr/relics";
-
-    const { view } = useGalleryStore(useShallow((state) => state[tag]));
-
-    const hideUnreleasedContent = useStore(
-        useSettingsStore,
-        (state) => state.hideUnreleasedContent
-    );
-
-    const relics = sortItems({
-        items: filterUnreleasedContent(
-            hideUnreleasedContent,
-            props.equipment,
-            game
-        ),
-        value: "version",
-        reverse: false,
-    });
-
-    const [loading, startTransition] = useTransition();
-    const [searchValue, setSearchValue] = useState("");
-    const [currentRelics, setCurrentRelics] = useState<HSRRelic[]>([]);
-
     const [relicType, setRelicType] = useState<RelicType>("all");
     const handleView = (_: React.BaseSyntheticEvent, type: RelicType) => {
         if (type !== null) {
@@ -70,47 +39,36 @@ export default function EquipmentGallery(props: { equipment: HSRRelic[] }) {
         />
     );
 
-    useEffect(() => {
-        startTransition(() => {
-            setCurrentRelics(filterEquipment(relics, searchValue, relicType));
-        });
-    }, [searchValue, hideUnreleasedContent, view, relicType]);
-
-    function renderGallery() {
-        switch (view) {
-            case "icon":
-            default:
-                if (loading) return <LinearProgress />;
-                return (
-                    <Grid container spacing={3}>
-                        {currentRelics.map((relic) => (
-                            <HSRRelicInfoCard key={relic.id} relic={relic} />
-                        ))}
-                    </Grid>
-                );
-            case "list":
-                return <EquipmentList equipment={currentRelics} />;
-        }
-    }
-
-    const params = {
-        view,
-        handleView: useView(tag),
-        searchValue,
-        handleInputChange: (event: BaseSyntheticEvent) => {
-            setSearchValue(event.target.value);
+    const { params, gallery } = useInfoGallery({
+        game: "hsr",
+        galleryKey: "hsr/relics", // Pathname
+        items: props.equipment,
+        views: {
+            icon: (relic) => <HSRRelicInfoCard key={relic.id} relic={relic} />,
+            list: (relics) => <EquipmentList equipment={relics} />,
         },
-        extraButtons,
-    };
+        transformItems: (items, { searchValue }) =>
+            filterEquipment(
+                sortItems({
+                    items,
+                    value: "version",
+                    reverse: false,
+                }),
+                searchValue,
+                relicType,
+            ),
+        dependencies: [relicType],
+    });
 
     return (
         <InfoGallery
-            title="Relics"
+            title={categories["hsr/equipment"]}
             buttonKeys={["icon", "list"]}
             hideFilters
+            extraButtons={extraButtons}
             {...params}
         >
-            {renderGallery()}
+            {gallery}
         </InfoGallery>
     );
 }

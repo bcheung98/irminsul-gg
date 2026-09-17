@@ -13,7 +13,7 @@ import Skeleton from "@mui/material/Skeleton";
 // Helper imports
 import { countText, objectKeys, range } from "@/utils";
 import { useGameTag } from "@/context";
-import { useSort } from "@/helpers/sort";
+import { gameSorters } from "@/helpers/sort";
 
 // Type imports
 import { BaseData, SortOrder } from "@/types";
@@ -33,7 +33,7 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
     const game = useGameTag();
 
     const [sortBy, setSortBy] = useState<keyof T>(
-        defaultSortBy || objectKeys(columns)[0]
+        defaultSortBy || objectKeys(columns)[0],
     );
     const [sortOrder, setSortOrder] = useState<SortOrder>(defaultSortOrder);
 
@@ -43,13 +43,11 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
         setSortBy(key);
     };
 
-    const rows = useSort()
-        [game]({
-            items,
-            value: sortBy.toString(),
-            reverse: sortOrder === "desc",
-        })
-        .map((item) => createRow(item));
+    const rows = gameSorters[game]({
+        items,
+        value: sortBy.toString(),
+        reverse: sortOrder === "desc",
+    }).map((item) => createRow(item));
 
     return (
         <ContentBox
@@ -90,12 +88,12 @@ export default function SortTable<T extends ColumnHeaders, U extends BaseData>({
                                                     }}
                                                 />
                                             </td>
-                                        )
+                                        ),
                                     )}
                                 </Table.Row>
                             ) : (
                                 <SortTableRow key={index} row={row} />
-                            )
+                            ),
                         )}
                     </Table.Body>
                 </Table.Root>
