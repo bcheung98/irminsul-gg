@@ -1,22 +1,34 @@
 // Component imports
+import GenshinCharacterFilters from "./CharacterFilters";
+import GenshinWeaponFilters from "./WeaponFilters";
+import GenshinTCGFilters from "./TCGFilters";
 import RarityStars from "@/components/RarityStars";
 
 // Helper imports
-import { objectKeys } from "@/utils";
 import {
     createFilterButtons,
     createGroupedFilterButtons,
 } from "@/components/Filters";
+import { characterAscensionStats } from "@/data/genshin/characterAscensionStats";
+import { elements, weapons, rarities, nations } from "@/data/genshin/common";
+import {
+    tcgWeaponTypes,
+    tcgFactions,
+    tcgActionCardSubTypes,
+} from "@/data/genshin/tcg";
+import {
+    weaponSubStats,
+    GenshinWeaponSubStat,
+} from "@/data/genshin/weaponStats";
 import { useMaterialsCategory } from "@/helpers/materials";
-import { elements, nations, rarities, weapons } from "@/data/genshin/common";
-import { characterAscensionStats } from "./characterAscensionStats";
-import { GenshinWeaponSubStat, weaponSubStats } from "./weaponStats";
-import { tcgActionCardSubTypes, tcgFactions, tcgWeaponTypes } from "./tcg";
+import { objectKeys } from "@/utils";
 
 // Type imports
-import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
+import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
 import type { CharacterAscensionStat } from "@/types/genshin/character";
 import type { GenshinMaterialCategory } from "@/types/genshin/materials";
+
+export { GenshinCharacterFilters, GenshinWeaponFilters, GenshinTCGFilters };
 
 export function genshinFilters({
     key,

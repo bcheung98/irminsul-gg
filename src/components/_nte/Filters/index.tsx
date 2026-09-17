@@ -1,61 +1,48 @@
 // Component imports
+import NTECharacterFilters from "./CharacterFilters";
+import NTEWeaponFilters from "./WeaponFilters";
 import RarityStars from "@/components/RarityStars";
-import Text from "@/components/Text";
-import Tooltip from "@/components/Tooltip";
-
-// MUI imports
-import HelpIcon from "@mui/icons-material/Help";
 
 // Helper imports
 import { createFilterButtons } from "@/components/Filters";
+import { combatRoleNames, combatRoles } from "@/data/nte/combatRoles";
+import { elements, weapons, rarities } from "@/data/nte/common";
+import { weaponSubStats, NTEWeaponSubStat } from "@/data/nte/weaponStats";
 import { useMaterialsCategory } from "@/helpers/materials";
-import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { echoClass, elements, rarities, weapons } from "@/data/wuwa/common";
-import { combatRoleNames, combatRoles } from "./combatRoles";
-import { weaponSubStats } from "./weaponStats";
-import { sonataEffects } from "./sonataEffects";
 
 // Type imports
-import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
+import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
 
-export function wuwaFilters({
+export { NTECharacterFilters, NTEWeaponFilters };
+
+export function nteFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(
-        hideUnreleasedContent,
-    ).wuwa;
-
-    let sonatas = [...sonataEffects];
-    if (hideUnreleasedContent) {
-        sonatas = sonatas.filter((sonata) =>
-            isUnreleasedContent(sonata.release.version, "wuwa"),
-        );
-    }
+    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).nte;
 
     return {
         element: {
-            name: "Attribute",
+            name: "Esper Type",
             tag: "element",
             buttons: createFilterButtons({
                 items: elements,
-                url: "wuwa/icons/elements",
+                url: "nte/icons/elements",
             }),
         },
         weaponType: {
-            name: "Weapon",
+            name: "Arc Type",
             tag: "weaponType",
             buttons: createFilterButtons({
                 items: weapons,
-                url: "wuwa/skills",
-                getURL: (item: string) => `Attack_${item}`,
+                url: "nte/icons/arcs",
             }),
         },
         rarity: {
             name: "Rarity",
             tag: "rarity",
             buttons: rarities
-                .slice(0, key === "wuwa/characters" ? -3 : undefined)
+                .slice(0, key === "nte/characters" ? -3 : -2)
                 .map((rarity) => ({
                     value: rarity,
                     label: (
@@ -73,7 +60,7 @@ export function wuwaFilters({
             tag: "combatRoles",
             buttons: createFilterButtons({
                 items: combatRoleNames,
-                url: "wuwa/icons/tags",
+                url: "nte/icons/tags",
                 getURL: (item: string) => {
                     const tag = combatRoles.find((tag) => tag.name === item);
                     return tag
@@ -81,37 +68,60 @@ export function wuwaFilters({
                         : "_common/images/Unknown";
                 },
             }),
-
             option: {
                 type: "matchAll",
                 tag: "_combatRoles",
-                text: "If toggled, will filter resonators that only have all selected combat roles.",
+                text: "If toggled, will filter espers that only have all selected combat roles.",
             },
         },
         subStat: {
             name: "Substat",
             tag: "subStat",
             buttons: createFilterButtons({
-                items: weaponSubStats,
-                url: "wuwa/icons/stat-icons",
+                items: Object.keys(weaponSubStats).slice(1),
+                url: "nte/icons/stat-icons",
+                getTooltip: (item: NTEWeaponSubStat) =>
+                    weaponSubStats[item].title,
             }),
         },
-        forgeryMat: {
-            name: "Forgery Material",
-            tag: "forgeryMat",
+        skillMat: {
+            name: "Skill Material",
+            tag: "skillMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("forgery")
-                    .filter((material) => !material.rarity)
+                items: getMaterialCategory("skill")
+                    .filter((material) => material.rarity === 1)
                     .map((material) => material.tag || ""),
-                url: "wuwa/materials",
+                url: "nte/materials",
                 getURL: (item: string) => {
-                    const mat = getMaterialCategory("forgery").find(
-                        (material) => material.tag === `${item}4`,
+                    const mat = getMaterialCategory("skill").find(
+                        (material) => material.tag === `${item}3`,
                     );
                     return mat ? `${mat.id}` : "0";
                 },
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("forgery").find(
+                    const mat = getMaterialCategory("skill").find(
+                        (material) => material.tag === item,
+                    );
+                    return mat ? `${mat.name}` : "";
+                },
+            }),
+        },
+        weaponMat: {
+            name: "Weapon Material",
+            tag: "weaponMat",
+            buttons: createFilterButtons({
+                items: getMaterialCategory("weapon")
+                    .filter((material) => material.rarity === 1)
+                    .map((material) => material.tag || ""),
+                url: "nte/materials",
+                getURL: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
+                        (material) => material.tag === `${item}3`,
+                    );
+                    return mat ? `${mat.id}` : "0";
+                },
+                getTooltip: (item: string) => {
+                    const mat = getMaterialCategory("weapon").find(
                         (material) => material.tag === item,
                     );
                     return mat ? `${mat.name}` : "";
@@ -125,37 +135,15 @@ export function wuwaFilters({
                 items: getMaterialCategory("common")
                     .filter((material) => !material.rarity)
                     .map((material) => material.tag || ""),
-                url: "wuwa/materials",
+                url: "nte/materials",
                 getURL: (item: string) => {
                     const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === `${item}4`,
+                        (material) => material.tag === `${item}3`,
                     );
                     return mat ? `${mat.id}` : "0";
                 },
                 getTooltip: (item: string) => {
                     const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
-            }),
-        },
-        localMat: {
-            name: "Ascension Material",
-            tag: "localMat",
-            buttons: createFilterButtons({
-                items: getMaterialCategory("local").map(
-                    (material) => material.tag || "",
-                ),
-                url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("local").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("local").find(
                         (material) => material.tag === item,
                     );
                     return mat ? `${mat.name}` : "";
@@ -169,7 +157,7 @@ export function wuwaFilters({
                 items: getMaterialCategory("boss").map(
                     (material) => material.tag || "",
                 ),
-                url: "wuwa/materials",
+                url: "nte/materials",
                 getURL: (item: string) => {
                     const mat = getMaterialCategory("boss").find(
                         (material) => material.tag === item,
@@ -190,10 +178,10 @@ export function wuwaFilters({
             name: "Weekly Boss Material",
             tag: "weeklyBossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weekly").map(
-                    (material) => material.tag || "",
-                ),
-                url: "wuwa/materials",
+                items: getMaterialCategory("weekly")
+                    .filter((material) => material.id.toString().endsWith("01"))
+                    .map((material) => material.tag || ""),
+                url: "nte/materials",
                 getURL: (item: string) => {
                     const mat = getMaterialCategory("weekly").find(
                         (material) => material.tag === item,
@@ -208,51 +196,5 @@ export function wuwaFilters({
                 },
             }),
         },
-        echoRarity: {
-            name: "Echo Class",
-            tag: "echoRarity",
-            buttons: rarities.slice(0, -1).map((rarity) => ({
-                value: rarity,
-                label: <Text variant="body2">{echoClass[`${rarity}`]}</Text>,
-            })),
-            padding: "4px 8px",
-        },
-        sonata: {
-            name: "Sonata Effects",
-            tag: "sonata",
-            buttons: createFilterButtons({
-                items: sonatas.map((sonata) => sonata.id),
-                url: "wuwa/sonata",
-                getTooltip: (item: number) => {
-                    const sonata = sonataEffects.find(
-                        (sonata) => sonata.id === item,
-                    );
-                    return sonata ? `${sonata.displayName}` : "";
-                },
-            }),
-            option: {
-                type: "matchAll",
-                tag: "_sonata",
-                text: "If toggled, will filter echoes that only have all selected sonata effects.",
-            },
-        },
     };
-}
-
-function UniqueModeHelper({ text }: { text?: string }) {
-    return (
-        <>
-            <Text variant="body2" weight="highlight">
-                Match All
-            </Text>
-            <Tooltip title={text} arrow placement="top">
-                <HelpIcon
-                    sx={(theme) => ({
-                        fontSize: "18px",
-                        color: theme.drawer.color.primary,
-                    })}
-                />
-            </Tooltip>
-        </>
-    );
 }

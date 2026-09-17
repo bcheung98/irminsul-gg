@@ -1,13 +1,13 @@
 import type { Game, GameData } from "@/types";
 import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
 import { useStore, useSettingsStore } from "@/stores";
-import { endfieldFilters } from "@/data/endfield/filters";
-import { genshinFilters } from "@/data/genshin/filters";
-import { hsrFilters } from "@/data/hsr/filters";
-import { umaFilters } from "@/data/uma/filters";
-import { wuwaFilters } from "@/data/wuwa/filters";
-import { zzzFilters } from "@/data/zzz/filters";
-import { nteFilters } from "@/data/nte/filters";
+import { endfieldFilters } from "@/components/_endfield/Filters";
+import { genshinFilters } from "@/components/_genshin/Filters";
+import { hsrFilters } from "@/components/_hsr/Filters";
+import { umaFilters } from "@/components/_uma/Filters";
+import { wuwaFilters } from "@/components/_wuwa/Filters";
+import { zzzFilters } from "@/components/_zzz/Filters";
+import { nteFilters } from "@/components/_nte/Filters";
 
 type FilterGroupsFactory = (props: FilterGroupsProps) => FilterGroups;
 

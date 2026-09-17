@@ -1,13 +1,17 @@
 // Component imports
+import HSRCharacterFilters from "./CharacterFilters";
+import HSRWeaponFilters from "./WeaponFilters";
 import RarityStars from "@/components/RarityStars";
 
 // Helper imports
 import { createFilterButtons } from "@/components/Filters";
+import { elements, weapons, rarities, worlds } from "@/data/hsr/common";
 import { useMaterialsCategory } from "@/helpers/materials";
-import { elements, rarities, weapons, worlds } from "@/data/hsr/common";
 
 // Type imports
-import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
+import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
+
+export { HSRCharacterFilters, HSRWeaponFilters };
 
 export function hsrFilters({
     key,

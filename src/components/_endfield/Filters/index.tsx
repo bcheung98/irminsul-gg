@@ -1,22 +1,27 @@
 // Component imports
+import EndfieldCharacterFilters from "./CharacterFilters";
+import EndfieldWeaponFilters from "./WeaponFilters";
+import EndfieldGearFilters from "./GearFilters";
 import RarityStars from "@/components/RarityStars";
 
 // Helper imports
-import { splitJoin, toTitleCase } from "@/utils";
 import { createFilterButtons } from "@/components/Filters";
 import {
-    elements,
-    gearTypes,
-    opClasses,
     rarities as endfieldRarities,
+    elements,
+    opClasses,
     weapons,
-} from "./common";
-import { gearSets, nonSetGear } from "./gearSets";
-import { gearStats } from "./gearStats";
+    gearTypes,
+} from "@/data/endfield/common";
+import { gearSets, nonSetGear } from "@/data/endfield/gearSets";
+import { gearStats } from "@/data/endfield/gearStats";
+import type { FilterState } from "@/stores/useFilterStore";
+import { splitJoin, toTitleCase } from "@/utils";
 
 // Type imports
-import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
-import type { FilterState } from "@/stores/useFilterStore";
+import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
+
+export { EndfieldCharacterFilters, EndfieldWeaponFilters, EndfieldGearFilters };
 
 export function endfieldFilters({ key }: FilterGroupsProps): FilterGroups {
     const rarities = ((key: keyof FilterState) => {

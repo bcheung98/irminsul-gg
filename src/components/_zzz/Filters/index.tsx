@@ -1,20 +1,26 @@
+// Component imports
+import ZZZCharacterFilters from "./CharacterFilters";
+import ZZZWeaponFilters from "./WeaponFilters";
+
 // Helper imports
-import { objectKeys } from "@/utils";
 import { createFilterButtons } from "@/components/Filters";
-import { useMaterialsCategory } from "@/helpers/materials";
 import {
-    attackTypes,
     elements,
-    factions,
+    weapons,
+    attackTypes,
     rarities,
     rarityMap,
-    weapons,
+    factions,
 } from "@/data/zzz/common";
-import { ZZZWeaponSubStat, weaponSubStats } from "./weaponStats";
+import { weaponSubStats, ZZZWeaponSubStat } from "@/data/zzz/weaponStats";
+import { useMaterialsCategory } from "@/helpers/materials";
+import { objectKeys } from "@/utils";
 
 // Type imports
-import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
+import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
 import type { ZZZRarity } from "@/types/zzz";
+
+export { ZZZCharacterFilters, ZZZWeaponFilters };
 
 export function zzzFilters({
     key,
