@@ -8,7 +8,7 @@ import { ZZZDriveDiscInfoCard } from "@/components/InfoCard";
 // Helper imports
 import { categories } from "@/data/categories";
 import { filterEquipment } from "@/helpers/equipment";
-import sortItems from "@/helpers/zzz/sortItems";
+import sortItems from "@/helpers/_sort/zzz";
 
 // Type imports
 import { ZZZDriveDisc } from "@/types/zzz/drive-disc";

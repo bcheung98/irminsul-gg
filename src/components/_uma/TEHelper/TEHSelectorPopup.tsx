@@ -30,7 +30,7 @@ import {
     useTEHelperData,
 } from "./TEHelper.utils";
 import { filterGroups } from "@/data/filters";
-import { filterItems } from "@/helpers/filterItems";
+import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { rarityMap } from "@/data/uma/common";
 
@@ -125,7 +125,7 @@ export default function TEHSelectorPopup({
     useEffect(() => {
         startHitsTransition(() => {
             setSearchResults(() =>
-                filterItems(
+                transformItems(
                     "uma",
                     data,
                     category === "support" ? filters : {},

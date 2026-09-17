@@ -6,7 +6,7 @@ import { ZZZBangbooInfoCard } from "@/components/InfoCard";
 
 // Helper imports
 import { categories } from "@/data/categories";
-import sortItems from "@/helpers/zzz/sortItems";
+import sortItems from "@/helpers/_sort/zzz";
 
 // Type imports
 import { ZZZBangboo } from "@/types/zzz";

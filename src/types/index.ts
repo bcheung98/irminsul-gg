@@ -33,6 +33,7 @@ export interface BaseDataWithRelease extends BaseData {
 export type DataType = BaseDataWithRelease & {
     [key: string]: any;
 };
+export type Item = Record<string, any>;
 
 // Attribute data
 export interface AttributeData {

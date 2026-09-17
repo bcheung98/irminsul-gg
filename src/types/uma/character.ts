@@ -24,6 +24,8 @@ export interface UmaCharacterStats {
     wit: number[];
 }
 
+export type UmaCharacterAptitudeCategory = keyof UmaCharacterAptitude;
+
 export interface UmaCharacterAptitude {
     surface: UmaCharacterAptitudeSurface;
     distance: UmaCharacterAptitudeDistance;

@@ -26,7 +26,11 @@ export default function EchoGallery(props: { echoes: WuWaEcho[] }) {
     });
 
     return (
-        <InfoGallery title={categories["wuwa/equipment"]} {...params}>
+        <InfoGallery
+            title={categories["wuwa/equipment"]}
+            buttonKeys={["icon", "list"]}
+            {...params}
+        >
             {gallery}
         </InfoGallery>
     );

@@ -12,7 +12,7 @@ import { HSRRelicInfoCard } from "@/components/InfoCard";
 // Helper imports
 import { categories } from "@/data/categories";
 import { filterEquipment } from "@/helpers/equipment";
-import sortItems from "@/helpers/hsr/sortItems";
+import sortItems from "@/helpers/_sort/hsr";
 
 // Type imports
 import { HSRRelic } from "@/types/hsr/relic";

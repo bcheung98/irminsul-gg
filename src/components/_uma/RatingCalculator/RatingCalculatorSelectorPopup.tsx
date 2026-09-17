@@ -22,7 +22,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 // Helper imports
 import { useStore, useServerStore } from "@/stores";
 import { searchResultStyle, useTEHelperData } from "../TEHelper/TEHelper.utils";
-import { filterItems } from "@/helpers/filterItems";
+import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
@@ -64,7 +64,7 @@ export default function RatingCalculatorSelectorPopup({
     useEffect(() => {
         startHitsTransition(() => {
             setSearchResults(() =>
-                filterItems("uma", data, {}, searchValue, {
+                transformItems("uma", data, {}, searchValue, {
                     sortBy: "id",
                     sortDirection: "asc",
                 }),

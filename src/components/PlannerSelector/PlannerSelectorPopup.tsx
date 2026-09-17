@@ -27,7 +27,7 @@ import { useGameTag } from "@/context";
 import { useStore, useSettingsStore, usePlannerStore } from "@/stores";
 import { usePlannerData } from "../Planner/Planner.utils";
 import { filterGroups } from "@/data/filters";
-import { filterItems } from "@/helpers/filterItems";
+import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
@@ -122,7 +122,7 @@ export default function PlannerSelectorPopup({
                 (item) => !selectedItems.map((i) => i.id).includes(item.id)
             );
             setSearchResults(() =>
-                filterItems(game, items, filters, searchValue, {
+                transformItems(game, items, filters, searchValue, {
                     sortBy: "version",
                     sortDirection: "asc",
                 })

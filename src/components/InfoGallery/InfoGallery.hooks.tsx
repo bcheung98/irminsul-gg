@@ -9,11 +9,11 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useView } from "@/hooks";
 import { useGalleryStore, useFilterStore } from "@/stores";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
-import { filterItems } from "@/helpers/filterItems";
+import { transformItems as defaultTransform } from "@/helpers/transformItems";
 
 // Type imports
-import { BaseDataWithRelease, Filters } from "@/types";
-import {
+import type { BaseDataWithRelease, Filters } from "@/types";
+import type {
     FilterUnreleasedItems,
     InfoGalleryConfig,
     TransformItems,
@@ -64,12 +64,12 @@ export function useInfoGallery<T extends Record<string, any>>({
         game,
     });
 
-    const defaultTransform: TransformItems<T> = (
+    const defaultTransformItems: TransformItems<T> = (
         items,
         { filters, searchValue, sortParams },
-    ) => filterItems(game, items, filters, searchValue, sortParams);
+    ) => defaultTransform(game, items, filters, searchValue, sortParams);
 
-    const transform = transformItems ?? defaultTransform;
+    const transform = transformItems ?? defaultTransformItems;
 
     const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState("");
