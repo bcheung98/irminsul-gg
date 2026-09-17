@@ -23,9 +23,9 @@ import { gameNames } from "@/data/games";
 import { createEventSourceObject } from "@/helpers/calendar";
 
 // Type imports
-import { Banner } from "@/types/banner";
-import { Game } from "@/types";
-import { SearchResult } from "../SiteSearch";
+import type { Banner } from "@/types/banner";
+import type { Game } from "@/types";
+import type { SearchResult } from "@/components/SiteSearch";
 
 export default function Calendar(props: {
     banners: Record<string, Banner[]>;
@@ -39,9 +39,11 @@ export default function Calendar(props: {
     const server = useServerStore(useShallow((state) => state));
     const settings = useCalendarStore(useShallow((state) => state));
 
+    const firstDay = settings.firstDay ?? 0;
+
     const enabledGames = gameNames.filter((game) => settings[game].enabled);
     const fullDurationGames = gameNames.filter(
-        (game) => settings[game].fullDuration
+        (game) => settings[game].fullDuration,
     );
 
     const banners = useMemo(() => {
@@ -61,7 +63,7 @@ export default function Calendar(props: {
         props.data.filter(
             (item) =>
                 item.category.endsWith("weapons") ||
-                item.category.endsWith("supports")
+                item.category.endsWith("supports"),
         ) || [];
 
     const eventSources = useMemo(() => {
@@ -111,6 +113,7 @@ export default function Calendar(props: {
                                 weapons={weapons}
                             />
                         )}
+                        firstDay={firstDay}
                     />
                 </Box>
                 <CalendarFooter />

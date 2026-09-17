@@ -19,15 +19,15 @@ import { useCalendarStore, useServerStore } from "@/stores";
 import { getServerButtons } from "@/data/settings";
 
 // Type imports
-import { GameInfo, Server } from "@/types";
+import type { GameInfo, Server } from "@/types";
 
-const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
+const CalendarSettingsGameItem = memo(function (props: GameInfo) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const server = useServerStore();
     const settings = useCalendarStore();
-    const { setCalendarSettings } = useCalendarStore();
+    const { setCalendarGameSettings } = useCalendarStore();
 
     const [open, setOpen] = useState(false);
     const toggleDropdownState = () => {
@@ -50,7 +50,10 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                 <ExpandMoreIcon
                     fontSize={matches ? "medium" : "small"}
                     sx={{
-                        color: theme.border.color.accent,
+                        color:
+                            theme.id === 1
+                                ? props.color
+                                : theme.border.color.accent,
                         transform: open ? `rotateZ(0deg)` : `rotateZ(-90deg)`,
                         transition: "transform 0.25s",
                     }}
@@ -90,11 +93,14 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                                 checked={settings[props.tag].enabled}
                                 size="small"
                                 onChange={(event) =>
-                                    setCalendarSettings(
+                                    setCalendarGameSettings(
                                         props.tag,
                                         "enabled",
                                         event.target.checked,
                                     )
+                                }
+                                switchColor={
+                                    theme.id === 1 ? props.color : undefined
                                 }
                             />
                         }
@@ -108,7 +114,7 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                                 checked={settings[props.tag].fullDuration}
                                 size="small"
                                 onChange={(event) =>
-                                    setCalendarSettings(
+                                    setCalendarGameSettings(
                                         props.tag,
                                         "fullDuration",
                                         event.target.checked,
@@ -123,4 +129,4 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
     );
 });
 
-export default CalendarDrawerItem;
+export default CalendarSettingsGameItem;

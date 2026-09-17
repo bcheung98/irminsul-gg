@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Component imports
-import CalendarDrawer from "./CalendarDrawer";
+import CalendarSettings from "./CalendarSettings";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Tooltip from "@/components/Tooltip";
@@ -28,7 +28,7 @@ import {
 } from "./Calendar.styles";
 
 // Type imports
-import { CalendarApi } from "@fullcalendar/core/index.js";
+import type { CalendarApi } from "@fullcalendar/core/index.js";
 
 export default function CalendarHeader({
     calendarApi,
@@ -251,7 +251,7 @@ export default function CalendarHeader({
                 sx={{ zIndex: theme.zIndex.appBar - 1 }}
                 keepMounted
             >
-                <CalendarDrawer />
+                <CalendarSettings />
             </Drawer>
         </AppBar>
     );

@@ -1,19 +1,24 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { Game, GameData } from "@/types";
+import type { Game, GameData } from "@/types";
 
 interface CalendarSettings {
+    firstDay: number;
+}
+
+interface CalendarGameSettings {
     enabled: boolean;
     fullDuration: boolean;
 }
 
-export type CalendarState = GameData<CalendarSettings>;
+export type CalendarState = CalendarSettings & GameData<CalendarGameSettings>;
 
 export interface CalendarActions {
-    setCalendarSettings: (
+    setCalendarStartDay: (newValue: number) => void;
+    setCalendarGameSettings: (
         game: Game,
-        key: keyof CalendarSettings,
+        key: keyof CalendarGameSettings,
         newValue: boolean,
     ) => void;
 }
@@ -21,6 +26,7 @@ export interface CalendarActions {
 export type CalendarStore = CalendarState & CalendarActions;
 
 export const initialState: CalendarState = {
+    firstDay: 0,
     genshin: {
         enabled: true,
         fullDuration: false,
@@ -55,7 +61,12 @@ export const useCalendarStore = create(
     persist<CalendarStore>(
         (set) => ({
             ...initialState,
-            setCalendarSettings: function (game, key, newValue) {
+            setCalendarStartDay: function (newValue) {
+                return set(() => ({
+                    firstDay: newValue,
+                }));
+            },
+            setCalendarGameSettings: function (game, key, newValue) {
                 return set((state) => ({
                     [`${game}`]: { ...state[game], [`${key}`]: newValue },
                 }));
