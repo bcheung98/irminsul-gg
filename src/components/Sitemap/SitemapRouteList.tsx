@@ -67,8 +67,9 @@ function RouteItem({ node }: { node: RouteNode }) {
                             sx={{
                                 color:
                                     theme.id === 1
-                                        ? games[path.split("/")[1] as Game]
-                                              ?.color
+                                        ? (games[path.split("/")[1] as Game]
+                                              ?.color ??
+                                          theme.border.color.accent)
                                         : theme.text.primary,
                                 transform: open
                                     ? `rotateZ(0deg)`
