@@ -45,13 +45,13 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
         if (page.path === "/")
             return {
                 title: "Home",
-                description: isSitemap ? "The main page of Irminsul.GG" : "",
+                description: isSitemap ? "The main page of Irminsul.GG." : "",
             };
         if (page.path === "/blog")
             return {
                 title: "Blog",
                 description: isSitemap
-                    ? "Keep up with the latest news and content of Irminsul.GG"
+                    ? "Keep up with the latest news and content of Irminsul.GG."
                     : "",
             };
         if (page.path === "/calendar")
@@ -65,14 +65,14 @@ export default function PopularPagesLabel({ page }: { page: PopularPageData }) {
             return {
                 title: "Privacy Policy",
                 description: isSitemap
-                    ? "Read the privacy policy of Irminsul.GG"
+                    ? "Read the privacy policy of Irminsul.GG."
                     : "",
             };
         if (page.path === "/site-map")
             return {
                 title: "Sitemap",
                 description: isSitemap
-                    ? "A complete directory of every page on IRMINSUL.GG, organized by category"
+                    ? "A complete directory of every page on IRMINSUL.GG, organized by category."
                     : "",
             };
 
