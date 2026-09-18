@@ -19,7 +19,7 @@ import { games } from "@/data/games";
 import { isLeafList, RouteNode } from "./Sitemap.utils";
 
 // Helper imports
-import { Game } from "@/types";
+import type { Game } from "@/types";
 
 const ROW_HEIGHT = 56;
 
@@ -27,7 +27,6 @@ export default function SitemapRouteList({ nodes }: { nodes: RouteNode[] }) {
     if (isLeafList(nodes)) {
         return <VirtualRouteList nodes={nodes} />;
     }
-
     return (
         <Stack spacing={2} divider={<Divider />}>
             {nodes.map((node) => (
@@ -48,7 +47,7 @@ function RouteItem({ node }: { node: RouteNode }) {
         // false,
     );
     const toggleDropdownState = () => {
-        setOpen(!open);
+        setOpen((current) => !current);
     };
 
     return (
@@ -67,8 +66,10 @@ function RouteItem({ node }: { node: RouteNode }) {
                             fontSize={matches ? "medium" : "small"}
                             sx={{
                                 color:
-                                    games[path.split("/")[1] as Game]?.color ||
-                                    theme.border.color.accent,
+                                    theme.id === 1
+                                        ? games[path.split("/")[1] as Game]
+                                              ?.color
+                                        : theme.text.primary,
                                 transform: open
                                     ? `rotateZ(0deg)`
                                     : `rotateZ(-90deg)`,
