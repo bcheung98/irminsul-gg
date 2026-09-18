@@ -1,107 +1,150 @@
-import { alpha, SxProps, Theme } from "@mui/material/styles";
+import { alpha } from "@mui/material/styles";
+import type { SxProps, Theme } from "@mui/material/styles";
+import type { CalendarView } from "@/types/calendar";
 
-export const calendarStyles: SxProps<Theme> = (theme) => ({
-    pt: { xs: 0, sm: 2, md: 3 },
-    color: theme.text.primary,
-    fontFamily: theme.typography.fontFamily,
-    fontWeight: theme.font.weight.highlight,
-    "--fc-page-bg-color": alpha(theme.contentBox.backgroundColor.header, 0.95),
-    "--fc-border-color": theme.border.color.primary,
-    "--fc-event-bg-color": "transparent",
-    "--fc-event-border-color": "transparent",
-    "--fc-event-selected-overlay-color": "transparent",
-    "--fc-today-bg-color": alpha(theme.palette.info.main, 0.5),
-    ".fc-toolbar-chunk": {
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: 1,
-    },
-    ".fc-header-toolbar.fc-toolbar": {
-        mb: "16px",
-    },
-    ".fc-daygrid": {
-        backgroundColor: alpha(theme.background(1, "dark"), 0.75),
-        backdropFilter: "blur(4px)",
-    },
-    ".fc-col-header-cell": {
-        p: "4px",
-        userSelect: "none",
-    },
-    ".fc .fc-daygrid-day-top": {
-        p: "4px",
-        display: "block",
-        textAlign: "center",
-    },
-    ".fc .fc-daygrid-day-frame": {
-        userSelect: "none",
-    },
-    ".fc-daygrid-day-events": {
-        display: "flex",
-        flexDirection: "column",
-        rowGap: "4px",
-    },
-    [theme.containerQueries.up("xs")]: {
-        ".fc-header-toolbar": {
-            px: "8px",
+export function getCalendarStyles(view: CalendarView): SxProps<Theme> {
+    return (theme) => ({
+        pt: view === "listMonth" ? { xs: 0.5, sm: 3 } : { xs: 0, sm: 2, md: 3 },
+        color: theme.text.primary,
+        fontFamily: theme.typography.fontFamily,
+        fontWeight: theme.font.weight.highlight,
+        "--fc-page-bg-color": alpha(
+            theme.contentBox.backgroundColor.header,
+            0.95,
+        ),
+        "--fc-border-color": theme.border.color.primary,
+        "--fc-event-bg-color": "transparent",
+        "--fc-event-border-color": "transparent",
+        "--fc-event-selected-overlay-color": "transparent",
+        "--fc-list-event-hover-bg-color": "transparent",
+        "--fc-today-bg-color": alpha(theme.palette.info.main, 0.5),
+        "--fc-neutral-bg-color": alpha(theme.background(1, "dark"), 0.75),
+        ".fc-toolbar-chunk": {
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: 1,
         },
-        ".fc-toolbar-title": {
-            fontSize: theme.font.sizes.body1.xs,
+        ".fc-header-toolbar.fc-toolbar": {
+            mb: "16px",
+        },
+        ".fc-daygrid, .fc-list-event": {
+            backgroundColor: alpha(theme.background(1, "dark"), 0.75),
+            backdropFilter: "blur(4px)",
+        },
+        ".fc-col-header-cell": {
+            p: "4px",
             userSelect: "none",
         },
-        ".fc-scrollgrid": {
-            borderLeftWidth: "0px",
+        ".fc .fc-daygrid-day-top": {
+            p: "4px",
+            display: "block",
+            textAlign: "center",
         },
-        ".fc-scrollgrid-section > td": {
-            borderRightWidth: "0px",
+        ".fc .fc-daygrid-day-frame": {
+            userSelect: "none",
         },
-        ".fc-scrollgrid-section > th": {
-            borderRightWidth: "0px",
+        ".fc-daygrid-day-events": {
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "4px",
         },
-        ".fc-event-title-container": {
-            fontSize: theme.font.sizes.subtitle2.xs,
+        ".fc-list-day-cushion": {
+            backgroundColor: theme.contentBox.backgroundColor.header,
+            padding: "8px 24px",
+            userSelect: "none",
         },
-        ".fc-col-header-cell-cushion": {
-            fontSize: theme.font.sizes.body2.xs,
+        ".fc-list-event-graphic": {
+            display: "none",
+        },
+        ".fc-list-event-dot": {
+            display: "none",
+        },
+        ".fc-list-day-text, .fc-list-day-side-text": {
             fontWeight: theme.font.weight.highlight,
         },
-        ".fc .fc-daygrid-day-frame": {
-            minHeight: "96px",
+        [theme.containerQueries.up("xs")]: {
+            ".fc-header-toolbar": {
+                px: "8px",
+            },
+            ".fc-toolbar-title": {
+                fontSize: theme.font.sizes.body1.xs,
+                userSelect: "none",
+            },
+            ".fc-scrollgrid": {
+                borderLeftWidth: "0px",
+            },
+            ".fc-scrollgrid-section > td": {
+                borderRightWidth: "0px",
+            },
+            ".fc-scrollgrid-section > th": {
+                borderRightWidth: "0px",
+            },
+            ".fc-event-title-container": {
+                fontSize: theme.font.sizes.subtitle2.xs,
+            },
+            ".fc-col-header-cell-cushion": {
+                fontSize: theme.font.sizes.body2.xs,
+                fontWeight: theme.font.weight.highlight,
+            },
+            ".fc .fc-daygrid-day-frame": {
+                minHeight: "96px",
+            },
+            ".fc-list": {
+                borderWidth: 0,
+            },
+            ".fc .fc-list-table td": {
+                padding: "16px 32px",
+            },
         },
-    },
-    [theme.containerQueries.up("sm")]: {
-        ".fc-header-toolbar": {
-            px: "4px",
+        [theme.containerQueries.up("sm")]: {
+            ".fc-header-toolbar": {
+                px: "4px",
+            },
+            ".fc-toolbar-title": {
+                fontSize: theme.font.sizes.h6.sm,
+            },
+            ".fc-daygrid": {
+                borderRadius: "8px 8px 0px 0px",
+            },
+            ".fc-scrollgrid": {
+                borderLeftWidth: "1px",
+                borderRadius: "8px 8px 0px 0px",
+            },
+            ".fc-scrollgrid-section > td": {
+                borderRightWidth: "1px",
+            },
+            ".fc-scrollgrid-section > th": {
+                borderRightWidth: "1px",
+                borderRadius: "8px 8px 0px 0px",
+            },
+            ".fc-event-title-container": {
+                fontSize: theme.font.sizes.subtitle2.sm,
+                px: "4px",
+            },
+            ".fc-col-header-cell-cushion": {
+                fontSize: theme.font.sizes.body2.sm,
+            },
+            ".fc .fc-daygrid-day-frame": {
+                minHeight: "120px",
+            },
+            ".fc-list": {
+                border: `1px solid ${theme.border.color.primary}`,
+                borderRadius: "8px 8px 0 0",
+                overflow: "clip",
+            },
+            ".fc-list-day-text, .fc-list-day-side-text": {
+                fontSize: theme.font.sizes.h6.sm,
+                paddingBottom: "4px",
+            },
         },
-        ".fc-toolbar-title": {
-            fontSize: theme.font.sizes.h6.sm,
+        [theme.containerQueries.up("md")]: {
+            ".fc .fc-list-table td": {
+                padding: "0px 0px 8px 0px",
+            },
         },
-        ".fc-daygrid": {
-            borderRadius: "8px 8px 0px 0px",
-        },
-        ".fc-scrollgrid": {
-            borderLeftWidth: "1px",
-            borderRadius: "8px 8px 0px 0px",
-        },
-        ".fc-scrollgrid-section > td": {
-            borderRightWidth: "1px",
-        },
-        ".fc-scrollgrid-section > th": {
-            borderRightWidth: "1px",
-            borderRadius: "8px 8px 0px 0px",
-        },
-        ".fc-event-title-container": {
-            fontSize: theme.font.sizes.subtitle2.sm,
-            px: "4px",
-        },
-        ".fc-col-header-cell-cushion": {
-            fontSize: theme.font.sizes.body2.sm,
-        },
-        ".fc .fc-daygrid-day-frame": {
-            minHeight: "120px",
-        },
-    },
-});
+    });
+}
 
 export const calendarHeaderStyles: SxProps<Theme> = () => ({
     columnGap: 2,

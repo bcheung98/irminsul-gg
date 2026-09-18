@@ -211,13 +211,13 @@ export const navItems: GameData<NavItem[]> = {
             icon: <WorkspacePremiumIcon sx={iconSx} />,
             title: "Rating Calculator",
             description:
-                "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills",
+                "Calculate your Umamusume career rating and generate a shareable showcase card from your stats, aptitudes, and skills.",
             href: "rating-calculator",
         },
         {
             icon: "icons/Training",
             title: "Training Event Helper",
-            description: "Tool for viewing Training Events in Umamusume",
+            description: "Tool for viewing Training Events in Umamusume.",
             href: "training-event-helper",
         },
         {
@@ -300,5 +300,5 @@ export const navItems: GameData<NavItem[]> = {
 };
 
 function getGamePageDescription(game: Game) {
-    return `The ${games[game].name} branch of Irminsul.GG`;
+    return `The ${games[game].name} branch of Irminsul.GG.`;
 }

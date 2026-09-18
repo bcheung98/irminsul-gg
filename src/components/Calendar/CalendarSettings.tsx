@@ -1,5 +1,7 @@
 // Component imports
-import CalendarDrawerItem from "./CalendarDrawerItem";
+import CalendarSettingsViewSelect from "./CalendarSettingsViewSelect";
+import CalendarSettingsDaySelect from "./CalendarSettingsDaySelect";
+import CalendarSettingsGameItem from "./CalendarSettingsGameItem";
 import Text from "@/components/Text";
 
 // MUI imports
@@ -12,7 +14,14 @@ import Divider from "@mui/material/Divider";
 // Helper imports
 import { useGameList } from "@/context";
 
-export default function CalendarDrawer() {
+// Type imports
+import type { CalendarApi } from "@fullcalendar/core/index.js";
+
+export default function CalendarSettings({
+    calendarApi,
+}: {
+    calendarApi: () => CalendarApi | undefined;
+}) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -28,11 +37,14 @@ export default function CalendarDrawer() {
                 spacing={3}
                 sx={{
                     width: { xs: "100vw", sm: "350px" },
-                    height: "100vh",
-                    py: 2,
+                    height: "100vh", // Extends border to bottom of screen
+                    pt: { xs: 7, lg: 2 },
+                    pb: 6,
                     borderRight: matches
                         ? `1px solid ${theme.border.color.secondary}`
                         : 0,
+                    overflowY: "auto",
+                    scrollbarWidth: "none",
                 }}
             >
                 <Text weight="highlight" sx={{ px: 2 }}>
@@ -46,8 +58,12 @@ export default function CalendarDrawer() {
                         />
                     }
                 >
+                    <Stack spacing={2}>
+                        <CalendarSettingsViewSelect calendarApi={calendarApi} />
+                        <CalendarSettingsDaySelect />
+                    </Stack>
                     {games.map((game) => (
-                        <CalendarDrawerItem key={game.tag} {...game} />
+                        <CalendarSettingsGameItem key={game.tag} {...game} />
                     ))}
                 </Stack>
             </Stack>

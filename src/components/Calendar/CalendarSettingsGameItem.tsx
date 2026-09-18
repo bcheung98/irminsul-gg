@@ -9,6 +9,7 @@ import Switch from "@/components/Switch";
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 import Collapse from "@mui/material/Collapse";
@@ -19,19 +20,22 @@ import { useCalendarStore, useServerStore } from "@/stores";
 import { getServerButtons } from "@/data/settings";
 
 // Type imports
-import { GameInfo, Server } from "@/types";
+import type { GameInfo, Server } from "@/types";
 
-const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
+const CalendarSettingsGameItem = memo(function (props: GameInfo) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const server = useServerStore();
     const settings = useCalendarStore();
-    const { setCalendarSettings } = useCalendarStore();
+    const view = useCalendarStore((state) => state.view);
+    const setCalendarGameSettings = useCalendarStore(
+        (state) => state.setCalendarGameSettings,
+    );
 
     const [open, setOpen] = useState(false);
     const toggleDropdownState = () => {
-        setOpen(() => !open);
+        setOpen((current) => !current);
     };
 
     return (
@@ -50,7 +54,10 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                 <ExpandMoreIcon
                     fontSize={matches ? "medium" : "small"}
                     sx={{
-                        color: theme.border.color.accent,
+                        color:
+                            theme.id === 1
+                                ? props.color
+                                : theme.border.color.accent,
                         transform: open ? `rotateZ(0deg)` : `rotateZ(-90deg)`,
                         transition: "transform 0.25s",
                     }}
@@ -90,37 +97,46 @@ const CalendarDrawerItem = memo(function CalendarDrawerItem(props: GameInfo) {
                                 checked={settings[props.tag].enabled}
                                 size="small"
                                 onChange={(event) =>
-                                    setCalendarSettings(
+                                    setCalendarGameSettings(
                                         props.tag,
                                         "enabled",
                                         event.target.checked,
                                     )
                                 }
-                            />
-                        }
-                    />
-                    <SettingsItem
-                        label="Show full duration"
-                        alignItems="center"
-                        textVariant="body2"
-                        input={
-                            <Switch
-                                checked={settings[props.tag].fullDuration}
-                                size="small"
-                                onChange={(event) =>
-                                    setCalendarSettings(
-                                        props.tag,
-                                        "fullDuration",
-                                        event.target.checked,
-                                    )
+                                switchColor={
+                                    theme.id === 1 ? props.color : undefined
                                 }
                             />
                         }
                     />
+                    <Box sx={{ opacity: view === "listMonth" ? 0.35 : 1 }}>
+                        <SettingsItem
+                            label="Show full duration"
+                            alignItems="center"
+                            textVariant="body2"
+                            input={
+                                <Switch
+                                    checked={settings[props.tag].fullDuration}
+                                    size="small"
+                                    onChange={(event) =>
+                                        setCalendarGameSettings(
+                                            props.tag,
+                                            "fullDuration",
+                                            event.target.checked,
+                                        )
+                                    }
+                                    switchColor={
+                                        theme.id === 1 ? props.color : undefined
+                                    }
+                                    disabled={view === "listMonth"}
+                                />
+                            }
+                        />
+                    </Box>
                 </Stack>
             </Collapse>
         </Stack>
     );
 });
 
-export default CalendarDrawerItem;
+export default CalendarSettingsGameItem;

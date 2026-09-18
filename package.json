@@ -1,11 +1,11 @@
 {
-    "name": "irminsul-gg-v2",
+    "name": "irminsul-gg",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "cmd.exe /c start chrome.exe http://localhost:8080 && next dev --port 8080",
         "build": "next build",
-        "start": "next start",
+        "start": "cmd.exe /c start chrome.exe http://localhost:8081 && next start --port 8081",
         "lint": "eslint",
         "tsc": "tsc --noEmit",
         "verify": "npm run tsc && npm run build"
@@ -20,6 +20,7 @@
         "@emotion/styled": "^11.14.1",
         "@fullcalendar/core": "^6.1.15",
         "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/list": "^6.1.15",
         "@fullcalendar/react": "^6.1.15",
         "@fullcalendar/rrule": "^6.1.15",
         "@mui/icons-material": "^7.3.4",

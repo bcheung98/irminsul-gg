@@ -1,5 +1,7 @@
-import { Game } from ".";
-import { Banner } from "./banner";
+import type { Game } from ".";
+import type { Banner } from "./banner";
+
+export type CalendarView = "dayGridMonth" | "listMonth";
 
 export interface CalendarVersionInfo extends Banner {
     isCurrent?: boolean;
