@@ -16,6 +16,7 @@ import { days } from "@/helpers/dates";
 
 const CalendarSettingsDaySelect = memo(function () {
     const firstDay = useCalendarStore((state) => state.firstDay);
+    const view = useCalendarStore((state) => state.view);
     const setCalendarStartDay = useCalendarStore(
         (state) => state.setCalendarStartDay,
     );
@@ -28,7 +29,12 @@ const CalendarSettingsDaySelect = memo(function () {
     };
 
     return (
-        <Box sx={{ px: { xs: 2, sm: 1 } }}>
+        <Box
+            sx={{
+                px: { xs: 2, sm: 1 },
+                display: view === "dayGridMonth" ? "block" : "none",
+            }}
+        >
             <SettingsItem
                 label="Start week on"
                 alignItems="center"
@@ -46,6 +52,7 @@ const CalendarSettingsDaySelect = memo(function () {
                                 }}
                             />
                         }
+                        disabled={view === "listMonth"}
                     >
                         {days.map((day, index) => (
                             <MenuItem key={day} value={index}>

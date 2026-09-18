@@ -251,7 +251,7 @@ export default function CalendarHeader({
                 sx={{ zIndex: theme.zIndex.appBar - 1 }}
                 keepMounted
             >
-                <CalendarSettings />
+                <CalendarSettings calendarApi={calendarApi} />
             </Drawer>
         </AppBar>
     );

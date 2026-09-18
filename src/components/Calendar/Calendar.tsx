@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import { useShallow } from "zustand/react/shallow";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import listPlugin from "@fullcalendar/list";
 
 // Component imports
 import CalendarHeader from "./CalendarHeader";
@@ -14,9 +15,10 @@ import CalendarEvent from "./CalendarEvent";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container";
 
 // Helper imports
-import { calendarStyles } from "./Calendar.styles";
+import { getCalendarStyles } from "./Calendar.styles";
 import { useCalendarStore, useServerStore } from "@/stores";
 import { objectKeys } from "@/utils";
 import { gameNames } from "@/data/games";
@@ -39,7 +41,8 @@ export default function Calendar(props: {
     const server = useServerStore(useShallow((state) => state));
     const settings = useCalendarStore(useShallow((state) => state));
 
-    const firstDay = settings.firstDay ?? 0;
+    const { view, firstDay } = settings;
+    const initialView = view ?? (matches ? "dayGridMonth" : "listMonth");
 
     const enabledGames = gameNames.filter((game) => settings[game].enabled);
     const fullDurationGames = gameNames.filter(
@@ -69,32 +72,41 @@ export default function Calendar(props: {
     const eventSources = useMemo(() => {
         return Object.entries(banners).map(([tag, banners]) => {
             const game = tag.split("/")[0] as Game;
-            const showFullDuration = fullDurationGames.includes(game);
             return createEventSourceObject({
                 tag,
                 banners,
                 server: server[game],
-                showFullDuration,
+                showFullDuration:
+                    view !== "listMonth" && fullDurationGames.includes(game),
             });
         });
-    }, [banners, JSON.stringify(server), JSON.stringify(fullDurationGames)]);
+    }, [
+        view,
+        banners,
+        JSON.stringify(server),
+        JSON.stringify(fullDurationGames),
+    ]);
+
+    const styles = getCalendarStyles(initialView);
 
     return (
         <Box>
             <CalendarHeader calendarApi={calendarApi} />
             <Toolbar variant="dense" />
-            <Box
+            <Container
+                maxWidth={view === "listMonth" && "lg"}
                 sx={{
-                    px: { xs: 0, sm: 2, md: 3 },
+                    px: view === "listMonth" ? 0 : { xs: 0, sm: 2, md: 3 },
                     pb: 4,
                     containerType: "inline-size",
                 }}
             >
-                <Box sx={calendarStyles}>
+                <Box sx={styles}>
                     <FullCalendar
                         ref={calendarRef}
-                        plugins={[dayGridPlugin]}
-                        initialView="dayGridMonth"
+                        plugins={[dayGridPlugin, listPlugin]}
+                        initialView={initialView}
+                        firstDay={firstDay}
                         height="auto"
                         eventSources={eventSources}
                         eventOrder="title"
@@ -113,11 +125,10 @@ export default function Calendar(props: {
                                 weapons={weapons}
                             />
                         )}
-                        firstDay={firstDay}
                     />
                 </Box>
                 <CalendarFooter />
-            </Box>
+            </Container>
         </Box>
     );
 }

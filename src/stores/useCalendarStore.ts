@@ -2,8 +2,10 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import type { Game, GameData } from "@/types";
+import type { CalendarView } from "@/types/calendar";
 
 interface CalendarSettings {
+    view: CalendarView;
     firstDay: number;
 }
 
@@ -15,6 +17,7 @@ interface CalendarGameSettings {
 export type CalendarState = CalendarSettings & GameData<CalendarGameSettings>;
 
 export interface CalendarActions {
+    setCalendarView: (newValue: CalendarView) => void;
     setCalendarStartDay: (newValue: number) => void;
     setCalendarGameSettings: (
         game: Game,
@@ -26,6 +29,7 @@ export interface CalendarActions {
 export type CalendarStore = CalendarState & CalendarActions;
 
 export const initialState: CalendarState = {
+    view: "dayGridMonth",
     firstDay: 0,
     genshin: {
         enabled: true,
@@ -64,6 +68,11 @@ export const useCalendarStore = create(
             setCalendarStartDay: function (newValue) {
                 return set(() => ({
                     firstDay: newValue,
+                }));
+            },
+            setCalendarView: function (newValue) {
+                return set(() => ({
+                    view: newValue,
                 }));
             },
             setCalendarGameSettings: function (game, key, newValue) {

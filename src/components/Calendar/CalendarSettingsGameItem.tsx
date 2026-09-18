@@ -9,6 +9,7 @@ import Switch from "@/components/Switch";
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 import Collapse from "@mui/material/Collapse";
@@ -27,11 +28,14 @@ const CalendarSettingsGameItem = memo(function (props: GameInfo) {
 
     const server = useServerStore();
     const settings = useCalendarStore();
-    const { setCalendarGameSettings } = useCalendarStore();
+    const view = useCalendarStore((state) => state.view);
+    const setCalendarGameSettings = useCalendarStore(
+        (state) => state.setCalendarGameSettings,
+    );
 
     const [open, setOpen] = useState(false);
     const toggleDropdownState = () => {
-        setOpen(() => !open);
+        setOpen((current) => !current);
     };
 
     return (
@@ -105,24 +109,30 @@ const CalendarSettingsGameItem = memo(function (props: GameInfo) {
                             />
                         }
                     />
-                    <SettingsItem
-                        label="Show full duration"
-                        alignItems="center"
-                        textVariant="body2"
-                        input={
-                            <Switch
-                                checked={settings[props.tag].fullDuration}
-                                size="small"
-                                onChange={(event) =>
-                                    setCalendarGameSettings(
-                                        props.tag,
-                                        "fullDuration",
-                                        event.target.checked,
-                                    )
-                                }
-                            />
-                        }
-                    />
+                    <Box sx={{ opacity: view === "listMonth" ? 0.35 : 1 }}>
+                        <SettingsItem
+                            label="Show full duration"
+                            alignItems="center"
+                            textVariant="body2"
+                            input={
+                                <Switch
+                                    checked={settings[props.tag].fullDuration}
+                                    size="small"
+                                    onChange={(event) =>
+                                        setCalendarGameSettings(
+                                            props.tag,
+                                            "fullDuration",
+                                            event.target.checked,
+                                        )
+                                    }
+                                    switchColor={
+                                        theme.id === 1 ? props.color : undefined
+                                    }
+                                    disabled={view === "listMonth"}
+                                />
+                            }
+                        />
+                    </Box>
                 </Stack>
             </Collapse>
         </Stack>

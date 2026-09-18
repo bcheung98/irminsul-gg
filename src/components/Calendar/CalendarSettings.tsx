@@ -1,4 +1,5 @@
 // Component imports
+import CalendarSettingsViewSelect from "./CalendarSettingsViewSelect";
 import CalendarSettingsDaySelect from "./CalendarSettingsDaySelect";
 import CalendarSettingsGameItem from "./CalendarSettingsGameItem";
 import Text from "@/components/Text";
@@ -13,7 +14,14 @@ import Divider from "@mui/material/Divider";
 // Helper imports
 import { useGameList } from "@/context";
 
-export default function CalendarSettings() {
+// Type imports
+import type { CalendarApi } from "@fullcalendar/core/index.js";
+
+export default function CalendarSettings({
+    calendarApi,
+}: {
+    calendarApi: () => CalendarApi | undefined;
+}) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -50,7 +58,10 @@ export default function CalendarSettings() {
                         />
                     }
                 >
-                    <CalendarSettingsDaySelect />
+                    <Stack spacing={2}>
+                        <CalendarSettingsViewSelect calendarApi={calendarApi} />
+                        <CalendarSettingsDaySelect />
+                    </Stack>
                     {games.map((game) => (
                         <CalendarSettingsGameItem key={game.tag} {...game} />
                     ))}
