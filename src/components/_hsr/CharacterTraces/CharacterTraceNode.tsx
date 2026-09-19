@@ -17,11 +17,11 @@ import {
     formatCharacterBonusStatTitle,
 } from "./CharacterTraces.utils";
 import { characterBonusStats } from "@/data/hsr/characterBonusStats";
-import { incrementTraceNodeID } from "@/helpers/hsr/incrementTraceNodeID";
+import { incrementTraceNodeID } from "@/helpers/hsr/characterTraces";
 
 // Type imports
-import { AttributeData } from "@/types";
-import {
+import type { AttributeData } from "@/types";
+import type {
     HSRCharacterTraceNodeData,
     HSRCharacterTraceNodeMain,
     HSRCharacterTraceNodeSmall,

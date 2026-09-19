@@ -20,11 +20,11 @@ import {
     usePlannerCardData,
     usePlannerCardMode,
 } from "@/components/PlannerCardRoot/PlannerCard.utils";
-import { characterTraceIDs } from "@/data/hsr/characterTraceIDs";
+import { characterTraceTemplates } from "@/data/hsr/characterTraces";
 
 // Type imports
-import { CostSliderValues, PlannerType } from "@/types/planner";
-import { HSRWeaponType } from "@/types/hsr";
+import type { CostSliderValues, PlannerType } from "@/types/planner";
+import type { HSRWeaponType } from "@/types/hsr";
 
 export default function HSRPlannerCard() {
     const theme = useTheme();
@@ -57,12 +57,6 @@ export default function HSRPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
-        selected: true,
-    };
-
-    const defaultNodeValues: CostSliderValues = {
-        start: 0,
-        stop: 0,
         selected: true,
     };
 
@@ -116,12 +110,7 @@ export default function HSRPlannerCard() {
         },
     ];
 
-    const nodes = Object.fromEntries(
-        characterTraceIDs[item.weaponType as HSRWeaponType].map((node) => [
-            `trace-${node}`,
-            item.values[`trace-${node}`] || defaultNodeValues,
-        ])
-    );
+    const traces = characterTraceTemplates[item.weaponType as HSRWeaponType];
 
     const textColor = useTextColor(theme.text);
     const color =
@@ -176,17 +165,20 @@ export default function HSRPlannerCard() {
             </MainContainer>
             {type === "characters" && (
                 <FlexBox spacing={[2, 4]} sx={{ px: 1 }} wrap>
-                    {item.traces &&
-                        item.traces.map((trace, index) => (
+                    {traces.map((trace, index) => {
+                        const id = `${String.fromCharCode(index + 65)}-1`;
+                        return (
                             <StatNode
-                                key={`${String.fromCharCode(index + 65)}-1`}
-                                id={`${String.fromCharCode(index + 65)}-1`}
+                                key={id}
+                                id={id}
                                 mode={mode}
                                 trace={trace}
-                                values={nodes}
+                                traceStats={item.traceStats}
+                                values={item.values}
                                 attributes={{ ...item }}
                             />
-                        ))}
+                        );
+                    })}
                 </FlexBox>
             )}
         </Stack>
