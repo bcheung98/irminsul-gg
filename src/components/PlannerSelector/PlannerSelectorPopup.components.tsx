@@ -84,7 +84,11 @@ export function SearchResults({
     );
 }
 
-const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>(["genshin", "hsr"]);
+const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>([
+    "genshin",
+    "hsr",
+    "wuwa",
+]);
 
 function SearchContent({
     hits,
