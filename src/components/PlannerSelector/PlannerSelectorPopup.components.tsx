@@ -88,6 +88,7 @@ const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>([
     "genshin",
     "hsr",
     "wuwa",
+    "zzz",
 ]);
 
 function SearchContent({
@@ -304,8 +305,8 @@ function AddCustomContent({
 
     const [item, setItem] = useState<Item>(() => createCustomItem(groups));
 
-    const groupKeys = groups.map((group) => group.tag);
-    const materialKeys = objectKeys(sampleItem.materials);
+    const attributeKeys = groups.map((attr) => attr.tag);
+    const materialKeys = objectKeys(sampleItem?.materials ?? {});
 
     const materialGroups = useFilterGroups(game, {
         key: `${game}/${type}` as FilterKey,
@@ -325,7 +326,7 @@ function AddCustomContent({
     useEffect(() => {
         setValid(
             ((item: Item) => {
-                for (const key of groupKeys) {
+                for (const key of attributeKeys) {
                     if (!item[key]) {
                         return false;
                     }

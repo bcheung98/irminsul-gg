@@ -98,6 +98,9 @@ export function zzzFilters({
                 },
                 imgFormat: "gif",
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Notorious Hunt Material",
@@ -121,6 +124,9 @@ export function zzzFilters({
                 },
                 imgFormat: "gif",
             }),
+            customMaterial: {
+                rarities: [5],
+            },
         },
         nation: {
             name: "Faction",
