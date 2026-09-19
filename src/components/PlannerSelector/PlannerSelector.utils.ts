@@ -1,8 +1,15 @@
-export function formatMaterialKey(key: string) {
-    return `${key}Mat`
+import type { GameNoUma } from "@/types";
+
+export function formatMaterialKey(game: GameNoUma, key: string) {
+    let res = `${key}Mat`;
+    if (game !== "nte") {
+        res = res.replace("weapon", "weaponAscension");
+    }
+    res = res
         .replace("talentMat", "talentBook")
-        .replace("weekly", "weeklyBoss")
-        .replace("weapon", "weaponAscension");
+        .replace("weekly", "weeklyBoss");
+
+    return res;
 }
 
 function formatMaterialTitle(title: string) {

@@ -16,17 +16,19 @@ import {
     VirtualizedAutocompletePopper,
     VirtualizedRowProps,
 } from "@/components/VirtualizedAutocomplete";
+import NumberField from "@/components/NumberField";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import ButtonBase from "@mui/material/ButtonBase";
 import Divider from "@mui/material/Divider";
+import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -89,6 +91,7 @@ const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>([
     "hsr",
     "wuwa",
     "zzz",
+    "nte",
 ]);
 
 function SearchContent({
@@ -195,6 +198,7 @@ function AddCustomCard({
     type: PlannerType;
 }) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -235,6 +239,7 @@ function AddCustomCard({
                 header={`Add custom ${label}`}
                 actions={<></>}
                 maxWidth="sm"
+                fullScreen={!matches}
                 contentProps={{ padding: 0 }}
             >
                 <AddCustomContent
@@ -250,7 +255,11 @@ function AddCustomCard({
     );
 }
 
-function createCustomItem(groups: FilterGroup[]): Item {
+function createCustomItem(
+    game: GameNoUma,
+    type: PlannerType,
+    groups: FilterGroup[],
+): Item {
     const item: Item = {
         custom: true,
         id: 999999990,
@@ -267,6 +276,10 @@ function createCustomItem(groups: FilterGroup[]): Item {
 
     for (const group of groups) {
         item[group.tag] = null;
+    }
+
+    if (game === "nte" && type === "characters") {
+        item.lifeSkills = [5, 2];
     }
 
     return item;
@@ -303,7 +316,9 @@ function AddCustomContent({
         setInputValue(event.target.value);
     };
 
-    const [item, setItem] = useState<Item>(() => createCustomItem(groups));
+    const [item, setItem] = useState<Item>(() =>
+        createCustomItem(game, type, groups),
+    );
 
     const attributeKeys = groups.map((attr) => attr.tag);
     const materialKeys = objectKeys(sampleItem?.materials ?? {});
@@ -360,21 +375,31 @@ function AddCustomContent({
                     inputIcon={<></>}
                     height="32px"
                 />
-                <Stack>
-                    {groups.map((filter) => (
-                        <AddCustomAttribute
-                            key={filter.tag}
-                            item={item}
+                <Stack spacing={1}>
+                    <Stack>
+                        {groups.map((filter) => (
+                            <AddCustomAttribute
+                                key={filter.tag}
+                                item={item}
+                                setItem={setItem}
+                                filter={filter}
+                            />
+                        ))}
+                    </Stack>
+                    {game === "nte" && type === "characters" && (
+                        <NTEAddCustomLifeSkills
+                            lifeSkills={item.lifeSkills}
                             setItem={setItem}
-                            filter={filter}
                         />
-                    ))}
+                    )}
                 </Stack>
                 {materialKeys.map((key) => (
                     <AddCustomMaterial
                         key={key}
                         materials={
-                            materialGroups[formatMaterialKey(key.toString())]
+                            materialGroups[
+                                formatMaterialKey(game, key.toString())
+                            ]
                         }
                         materialKey={key.toString()}
                         setItem={setItem}
@@ -439,7 +464,11 @@ function AddCustomAttribute({
 
     return (
         <FlexBox key={filter.tag} spacing={1}>
-            <Text variant="subtitle1" weight="highlight" sx={{ width: "72px" }}>
+            <Text
+                variant="subtitle1"
+                weight="highlight"
+                sx={{ minWidth: "80px" }}
+            >
                 {filter.name}
             </Text>
             <ToggleButtons
@@ -622,6 +651,93 @@ function CustomMaterialRow({
                 }}
             />
         </MenuItem>
+    );
+}
+
+const MAX_LIFE_SKILL_COUNT = 2;
+
+const MIN_LIFE_SKILL_LEVEL = 1;
+const MAX_LIFE_SKILL_LEVEL = 5;
+
+const DEFAULT_LIFE_SKILLS = [5, 2];
+
+function NTEAddCustomLifeSkills({
+    lifeSkills = DEFAULT_LIFE_SKILLS,
+    setItem,
+}: {
+    lifeSkills: number[];
+    setItem: React.Dispatch<React.SetStateAction<Item>>;
+}) {
+    const handleCountChange = () => {
+        setItem((item) => ({
+            ...item,
+            lifeSkills:
+                item.lifeSkills?.length === MAX_LIFE_SKILL_COUNT
+                    ? item.lifeSkills.slice(0, 1)
+                    : [...(item.lifeSkills ?? [5]), 2],
+        }));
+    };
+
+    const handleLevelChange = (index: number) => (newValue: number | null) => {
+        if (newValue === null) return;
+
+        const levels = Math.min(
+            Math.max(Math.round(newValue), MIN_LIFE_SKILL_LEVEL),
+            MAX_LIFE_SKILL_LEVEL,
+        );
+
+        setItem((item) => ({
+            ...item,
+            lifeSkills: (item.lifeSkills ?? DEFAULT_LIFE_SKILLS).map(
+                (value: number, i: number) => (i === index ? levels : value),
+            ),
+        }));
+    };
+
+    return (
+        <FlexBox spacing={1} sx={{ alignItems: "flex-start" }}>
+            <Text
+                variant="subtitle1"
+                weight="highlight"
+                sx={{ minWidth: "80px" }}
+            >
+                Life Skills
+            </Text>
+            <Stack spacing={1} sx={{ ml: 0.5 }}>
+                {lifeSkills.map((levels, index) => (
+                    <Stack key={index} spacing={0.5}>
+                        <Text variant="subtitle2" weight="highlight">
+                            No. of Levels
+                        </Text>
+                        <FlexBox spacing={2}>
+                            <NumberField
+                                min={MIN_LIFE_SKILL_LEVEL}
+                                max={MAX_LIFE_SKILL_LEVEL}
+                                value={levels}
+                                smallStep={1}
+                                largeStep={2}
+                                size="small"
+                                onValueChange={handleLevelChange(index)}
+                                style={{ width: "25%", minWidth: "80px" }}
+                            />
+                            {lifeSkills.length === index + 1 && (
+                                <Button
+                                    variant="contained"
+                                    color={!index ? "info" : "error"}
+                                    onClick={handleCountChange}
+                                    disableRipple
+                                    sx={{ p: "4px 16px" }}
+                                >
+                                    <Text variant="body2" weight="highlight">
+                                        {`${!index ? "Add" : "Remove"} Life Skill`}
+                                    </Text>
+                                </Button>
+                            )}
+                        </FlexBox>
+                    </Stack>
+                ))}
+            </Stack>
+        </FlexBox>
     );
 }
 

@@ -105,6 +105,9 @@ export function nteFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         weaponMat: {
             name: "Weapon Material",
@@ -127,6 +130,9 @@ export function nteFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         commonMat: {
             name: "Common Material",
@@ -149,6 +155,9 @@ export function nteFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         bossMat: {
             name: "Boss Material",
@@ -173,6 +182,9 @@ export function nteFilters({
                         : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
@@ -195,6 +207,9 @@ export function nteFilters({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [5],
+            },
         },
     };
 }

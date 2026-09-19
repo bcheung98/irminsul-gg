@@ -2,23 +2,24 @@ import { useEffect, useState } from "react";
 
 // Component imports
 import Image from "@/components/Image";
-import SkillDescription from "@/components/SkillDescription";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
 import { usePlannerStore } from "@/stores";
-import { splitJoin } from "@/utils";
 
 // Type imports
-import { CardMode, CostSliderValues } from "@/types/planner";
-import { AttributeData } from "@/types";
+import type {
+    CardMode,
+    CostSliderValues,
+    PlannerItemData,
+} from "@/types/planner";
 
 interface StatNodeProps {
     id: string;
     mode: CardMode;
-    attributes: AttributeData;
+    attributes: PlannerItemData;
     values: Record<string, CostSliderValues>;
 }
 
@@ -32,7 +33,7 @@ export default function StatNode({
 
     const nodeNumber = Number(id.slice(-1));
 
-    const [selected, setSelected] = useState(values[`${id}`].selected);
+    const [selected, setSelected] = useState(values[id]?.selected ?? true);
     const handleSelect = () => {
         setSelected(!selected);
     };
