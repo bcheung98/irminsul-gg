@@ -143,5 +143,10 @@ export default function PlannerMaterials() {
         updateTotalCosts(item.id, materialCosts);
     }, [JSON.stringify(item.values)]);
 
-    return <MaterialGrid costs={materialCosts} />;
+    return (
+        <MaterialGrid
+            costs={materialCosts}
+            customMaterials={item.customMaterials}
+        />
+    );
 }

@@ -19,8 +19,8 @@ import { skillKeys } from "@/data/skills";
 import { usePlannerStore } from "@/stores";
 
 // Type imports
-import { PlannerSliderProps } from "./PlannerSlider.types";
-import { GameNoUma } from "@/types";
+import type { PlannerSliderProps } from "./PlannerSlider.types";
+import type { GameNoUma } from "@/types";
 
 const threshold = "@500";
 
@@ -139,6 +139,7 @@ const PlannerSlider = memo(function PlannerSlider({
                             backgroundColor: theme.iconBackground.primary,
                         }}
                         tooltip={mode === "view" ? title : ""}
+                        supressLoadImageWarning
                     />
                 )}
                 {mode === "edit" ? (

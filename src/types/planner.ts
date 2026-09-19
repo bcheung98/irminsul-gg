@@ -1,3 +1,4 @@
+import { CustomMaterials } from "@/components/PlannerMaterials/PlannerMaterials.utils";
 import { BaseDataWithRelease } from ".";
 import { EndfieldClass, EndfieldStatAttribute } from "./endfield";
 import { EndfieldCharacterPassive } from "./endfield/character";
@@ -12,6 +13,7 @@ export type PlannerType = "characters" | "weapons";
 export type CardMode = "edit" | "view";
 
 export interface PlannerItemData extends BaseDataWithRelease {
+    custom?: boolean;
     id: number;
     name: string;
     displayName: string;
@@ -21,6 +23,7 @@ export interface PlannerItemData extends BaseDataWithRelease {
     weaponType: string;
     specialty?: EndfieldClass;
     materials: Materials;
+    customMaterials?: CustomMaterials;
     traces?: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[];
     bonusStats?: WuWaCharacterBonusStats;
     mainAttribute?: EndfieldStatAttribute;

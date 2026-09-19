@@ -29,9 +29,9 @@ import { usePlannerData } from "@/components/Planner/Planner.utils";
 import { useTextColor } from "@/helpers/styles";
 
 // Type imports
-import { PlannerCardProps } from "./PlannerCardRoot.types";
-import { GameData, GameNoUma } from "@/types";
-import { CardMode, PlannerItemData } from "@/types/planner";
+import type { PlannerCardProps } from "./PlannerCardRoot.types";
+import type { GameData, GameNoUma } from "@/types";
+import type { CardMode, PlannerItemData } from "@/types/planner";
 
 export default function PlannerCardRoot(props: PlannerCardProps) {
     const theme = useTheme();
@@ -43,6 +43,9 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
 
     // Updates the item's data in case the names or materials change
     function validateItem(inputItem: PlannerItemData) {
+        // Custom items don't require validation
+        if (inputItem.custom) return inputItem;
+
         const item = [...characters, ...weapons].find(
             (item) => item.id === inputItem.id,
         );
@@ -52,6 +55,7 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
         inputItem.materials = item.materials;
         return inputItem;
     }
+
     const item = validateItem(props.item);
 
     const store = usePlannerStore();

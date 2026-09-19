@@ -27,7 +27,9 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
     const { characters, weapons } = usePlannerData();
 
     const dataSet = type === "characters" ? characters : weapons;
-    const item = dataSet.find((i) => i.id === props.item.id);
+    const item = props.item.custom
+        ? props.item
+        : dataSet.find((i) => i.id === props.item.id);
 
     if (!item) {
         throw new Error(`Could not find item with ID ${props.item.id}`);
@@ -40,6 +42,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
     const { gender } = useSettingsStore();
 
     const rarity =
+        !item.custom &&
         game === "hsr" &&
         type === "characters" &&
         item.name.startsWith("Trailblazer")
@@ -98,6 +101,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
                     backgroundImage: theme.materialCard.backgroundImage(rarity),
                     backgroundSize: "contain",
                 },
+                supressLoadImageWarning: item.custom,
             }}
             title={item.displayName}
             titleProps={{ variant: textVariant, sx: { userSelect: "none" } }}

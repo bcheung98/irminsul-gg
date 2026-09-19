@@ -1,4 +1,10 @@
-import { Version } from "./version";
+import type { Version } from "./version";
+import type { GenshinMaterialCategory } from "./genshin/materials";
+import type { HSRMaterialCategory } from "./hsr/materials";
+import type { WuWaMaterialCategory } from "./wuwa/materials";
+import type { ZZZMaterialCategory } from "./zzz/materials";
+import type { EndfieldMaterialCategory } from "./endfield/materials";
+import type { NTEMaterialCategory } from "./nte/materials";
 
 export interface Materials {
     [material: string]: string | number;
@@ -15,3 +21,11 @@ export interface Material {
     release: Version;
     imgURL?: string;
 }
+
+export type MaterialCategory =
+    | GenshinMaterialCategory
+    | HSRMaterialCategory
+    | WuWaMaterialCategory
+    | ZZZMaterialCategory
+    | EndfieldMaterialCategory
+    | NTEMaterialCategory;

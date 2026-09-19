@@ -15,6 +15,7 @@ export interface FilterGroup {
     padding?: string | number;
     width?: string;
     groupButtons?: GroupFilterButtons[];
+    customMaterial?: CustomMaterialConfig; // Define material data for Ascension Planner custom materials
 }
 export interface FilterButtons {
     value: string | number;
@@ -31,4 +32,8 @@ export interface FilterOption {
     type: "matchAll";
     tag: string;
     text: string;
+}
+
+interface CustomMaterialConfig {
+    rarities: number[];
 }

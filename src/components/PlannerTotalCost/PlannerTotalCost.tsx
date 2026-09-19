@@ -8,15 +8,26 @@ import { usePlannerStore } from "@/stores";
 import { objectKeys } from "@/utils";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { CostValue } from "@/types/costs";
+import type { GameNoUma } from "@/types";
+import type { CostValue } from "@/types/costs";
+import type { CustomMaterials } from "../PlannerMaterials/PlannerMaterials.utils";
 
 export default function PlannerTotalCost() {
     const game = useGameTag() as GameNoUma;
 
     const store = usePlannerStore();
-    const hiddenItems = store[`${game}/hidden`];
+
     const totalCosts = store[`${game}/totalCost`];
+    const items = store[`${game}/items`];
+    const hiddenItems = store[`${game}/hidden`];
+
+    const customMaterials = items.reduce<CustomMaterials>(
+        (customMaterials, item) => {
+            Object.assign(customMaterials, item.customMaterials);
+            return customMaterials;
+        },
+        {},
+    );
 
     const materialCosts: Record<string, CostValue> = {};
     Object.entries(totalCosts).forEach(([itemID, costs]) => {
@@ -36,7 +47,7 @@ export default function PlannerTotalCost() {
     });
 
     return objectKeys(materialCosts).length > 0 ? (
-        <MaterialGrid costs={materialCosts} />
+        <MaterialGrid costs={materialCosts} customMaterials={customMaterials} />
     ) : (
         <Text weight="highlight" sx={{ px: 4 }}>
             Its empty here...
