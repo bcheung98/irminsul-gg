@@ -10,11 +10,11 @@ import Box from "@mui/material/Box";
 
 // Helper imports
 import { materialCardStyles } from "./MaterialCard.styles";
-import { useMaterials } from "@/helpers/materials";
+import { getMaterialResolver } from "@/helpers/materials";
 
 // Type imports
-import { Game } from "@/types";
-import { ResolvedCustomMaterial } from "../PlannerMaterials/PlannerMaterials.utils";
+import type { Game } from "@/types";
+import type { ResolvedCustomMaterial } from "@/components/PlannerMaterials/PlannerMaterials.utils";
 
 export interface MaterialCardProps {
     id?: number;
@@ -42,7 +42,7 @@ export default function MaterialCard({
         imgSize = imgSize - imgSize * responsiveSize;
     }
 
-    const materials = useMaterials()[game];
+    const materials = getMaterialResolver(game);
 
     const materialData = materials(
         Boolean(Number(material)) ? Number(material) : material,

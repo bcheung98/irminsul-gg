@@ -29,3 +29,12 @@ export type MaterialCategory =
     | ZZZMaterialCategory
     | EndfieldMaterialCategory
     | NTEMaterialCategory;
+
+export type MaterialResolver = (material: string | number) => Material;
+
+export type MaterialCategoryResolver = (category: string) => Material[];
+
+export interface MaterialResolvers {
+    getMaterial: MaterialResolver;
+    getMaterialCategory: MaterialCategoryResolver;
+}

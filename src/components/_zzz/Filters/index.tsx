@@ -13,7 +13,7 @@ import {
     factions,
 } from "@/data/zzz/common";
 import { weaponSubStats, ZZZWeaponSubStat } from "@/data/zzz/weaponStats";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialCategoryResolver } from "@/helpers/materials";
 import { objectKeys } from "@/utils";
 
 // Type imports
@@ -26,7 +26,10 @@ export function zzzFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).zzz;
+    const getMaterialCategory = getMaterialCategoryResolver(
+        "zzz",
+        hideUnreleasedContent,
+    );
 
     return {
         element: {

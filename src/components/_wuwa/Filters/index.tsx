@@ -11,7 +11,7 @@ import { combatRoleNames, combatRoles } from "@/data/wuwa/combatRoles";
 import { echoClass, elements, rarities, weapons } from "@/data/wuwa/common";
 import { weaponSubStats } from "@/data/wuwa/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialCategoryResolver } from "@/helpers/materials";
 import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
@@ -23,9 +23,10 @@ export function wuwaFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(
+    const getMaterialCategory = getMaterialCategoryResolver(
+        "wuwa",
         hideUnreleasedContent,
-    ).wuwa;
+    );
 
     let sonatas = [...sonataEffects];
     if (hideUnreleasedContent) {

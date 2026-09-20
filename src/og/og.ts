@@ -1,5 +1,5 @@
-import { useMaterials } from "@/helpers/materials";
-import { Game, GameData } from "@/types";
+import { getMaterialResolver } from "@/helpers/materials";
+import type { Game, GameData } from "@/types";
 
 export const size = {
     width: 1200,
@@ -66,7 +66,7 @@ export function getMaterialIcon(props: {
         }
     }
 
-    const material = useMaterials()[props.game](materialTag);
+    const material = getMaterialResolver(props.game)(materialTag);
 
     return `${props.game}/materials/${material.id}`;
 }

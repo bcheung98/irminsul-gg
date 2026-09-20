@@ -6,7 +6,7 @@ import RarityStars from "@/components/RarityStars";
 // Helper imports
 import { createFilterButtons } from "@/components/Filters";
 import { elements, weapons, rarities, worlds } from "@/data/hsr/common";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialCategoryResolver } from "@/helpers/materials";
 
 // Type imports
 import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
@@ -17,7 +17,10 @@ export function hsrFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).hsr;
+    const getMaterialCategory = getMaterialCategoryResolver(
+        "hsr",
+        hideUnreleasedContent,
+    );
 
     return {
         element: {

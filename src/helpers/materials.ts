@@ -1,11 +1,14 @@
+import type { Game } from "@/types";
+import type {
+    MaterialCategoryResolver,
+    MaterialResolver,
+} from "@/types/materials";
 import {
     getGenshinMaterial,
     getGenshinMaterialCategory,
 } from "@/helpers/genshin/getMaterials";
 import { getHSRMaterial, getHSRMaterialCategory } from "./hsr/getMaterials";
 import { getWuWaMaterial, getWuWaMaterialCategory } from "./wuwa/getMaterials";
-import { GameData } from "@/types";
-import { Material } from "@/types/materials";
 import { getZZZMaterial, getZZZMaterialCategory } from "./zzz/getMaterials";
 import {
     getEndfieldMaterial,
@@ -13,34 +16,50 @@ import {
 } from "./endfield/getMaterials";
 import { getNTEMaterial, getNTEMaterialCategory } from "./nte/getMaterials";
 
-export function useMaterials(
+export function getMaterialResolver(
+    game: Game,
     hideUnreleasedContent = false,
-): GameData<(material: string | number) => Material> {
-    return {
-        genshin: getGenshinMaterial(hideUnreleasedContent),
-        hsr: getHSRMaterial(hideUnreleasedContent),
-        wuwa: getWuWaMaterial(hideUnreleasedContent),
-        zzz: getZZZMaterial(hideUnreleasedContent),
-        uma: function (): Material {
-            throw new Error("Function not implemented.");
-        },
-        endfield: getEndfieldMaterial(hideUnreleasedContent),
-        nte: getNTEMaterial(hideUnreleasedContent),
-    };
+): MaterialResolver {
+    switch (game) {
+        case "genshin":
+            return getGenshinMaterial(hideUnreleasedContent);
+        case "hsr":
+            return getHSRMaterial(hideUnreleasedContent);
+        case "wuwa":
+            return getWuWaMaterial(hideUnreleasedContent);
+        case "zzz":
+            return getZZZMaterial(hideUnreleasedContent);
+        case "uma":
+            return () => {
+                throw new Error("Uma materials not implemented.");
+            };
+        case "endfield":
+            return getEndfieldMaterial(hideUnreleasedContent);
+        case "nte":
+            return getNTEMaterial(hideUnreleasedContent);
+    }
 }
 
-export function useMaterialsCategory(
+export function getMaterialCategoryResolver(
+    game: Game,
     hideUnreleasedContent = false,
-): GameData<(category: string) => Material[]> {
-    return {
-        genshin: getGenshinMaterialCategory(hideUnreleasedContent),
-        hsr: getHSRMaterialCategory(hideUnreleasedContent),
-        wuwa: getWuWaMaterialCategory(hideUnreleasedContent),
-        zzz: getZZZMaterialCategory(hideUnreleasedContent),
-        uma: function (): Material[] {
-            throw new Error("Function not implemented.");
-        },
-        endfield: getEndfieldMaterialCategory(hideUnreleasedContent),
-        nte: getNTEMaterialCategory(hideUnreleasedContent),
-    };
+): MaterialCategoryResolver {
+    switch (game) {
+        case "genshin":
+            return getGenshinMaterialCategory(hideUnreleasedContent);
+        case "hsr":
+            return getHSRMaterialCategory(hideUnreleasedContent);
+        case "wuwa":
+            return getWuWaMaterialCategory(hideUnreleasedContent);
+        case "uma":
+            return () => {
+                throw new Error("Uma materials not implemented.");
+            };
+        case "zzz":
+            return getZZZMaterialCategory(hideUnreleasedContent);
+        case "endfield":
+            return getEndfieldMaterialCategory(hideUnreleasedContent);
+        case "nte":
+            return getNTEMaterialCategory(hideUnreleasedContent);
+    }
 }

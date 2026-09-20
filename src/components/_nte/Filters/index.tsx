@@ -8,7 +8,7 @@ import { createFilterButtons } from "@/components/Filters";
 import { combatRoleNames, combatRoles } from "@/data/nte/combatRoles";
 import { elements, weapons, rarities } from "@/data/nte/common";
 import { weaponSubStats, NTEWeaponSubStat } from "@/data/nte/weaponStats";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialCategoryResolver } from "@/helpers/materials";
 
 // Type imports
 import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
@@ -19,7 +19,10 @@ export function nteFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).nte;
+    const getMaterialCategory = getMaterialCategoryResolver(
+        "nte",
+        hideUnreleasedContent,
+    );
 
     return {
         element: {

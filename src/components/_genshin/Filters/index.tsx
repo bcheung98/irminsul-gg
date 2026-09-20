@@ -20,7 +20,7 @@ import {
     weaponSubStats,
     GenshinWeaponSubStat,
 } from "@/data/genshin/weaponStats";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialCategoryResolver } from "@/helpers/materials";
 import { objectKeys } from "@/utils";
 
 // Type imports
@@ -34,9 +34,10 @@ export function genshinFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(
+    const getMaterialCategory = getMaterialCategoryResolver(
+        "genshin",
         hideUnreleasedContent,
-    ).genshin;
+    );
 
     function getGroupedMatNames(category: GenshinMaterialCategory) {
         const res: Record<string, string[]> = {};
