@@ -22,14 +22,13 @@ import { usePlannerData } from "@/components/Planner/Planner.utils";
 import { useFilterGroups } from "@/components/Filters";
 import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
+import { useProgressiveResults } from "@/hooks";
 
 // Type imports
 import type { ContentDialogProps } from "@/components/ContentDialog";
 import type { GameNoUma } from "@/types";
 import type { Filters } from "@/types/filters";
 import type { PlannerItemData, PlannerType } from "@/types/planner";
-
-const RESULTS_PER_PAGE = 20;
 
 interface PlannerSelectorPopupProps extends ContentDialogProps {
     open: boolean;
@@ -109,6 +108,20 @@ export default function PlannerSelectorPopup({
     const hitsLoading =
         filters !== deferredFilters || searchValue !== deferredSearchValue;
 
+    const { visibleResultCount, resetVisibleResults, handleContentScroll } =
+        useProgressiveResults({
+            resultCount: hits.length,
+        });
+
+    const visibleHits = useMemo(
+        () => hits.slice(0, visibleResultCount),
+        [hits, visibleResultCount],
+    );
+
+    useEffect(() => {
+        resetVisibleResults();
+    }, [deferredSearchValue, deferredFilters, resetVisibleResults]);
+
     const { element, weaponType, rarity, specialty } = useFilterGroups(game, {
         key: `${game}/${type}`,
     });
@@ -135,6 +148,7 @@ export default function PlannerSelectorPopup({
             value={searchValue}
             handleInputChange={handleInputChange}
             placeholder={`Add ${categoryLabel}`}
+            onContentScroll={handleContentScroll}
         >
             <Stack spacing={2}>
                 <Dropdown title="Filters" textVariant="body1">
@@ -150,7 +164,7 @@ export default function PlannerSelectorPopup({
                     </Stack>
                 </Dropdown>
                 <SearchResults
-                    hits={hits}
+                    hits={visibleHits}
                     searchValue={searchValue}
                     categoryLabel={categoryLabel}
                     type={type}

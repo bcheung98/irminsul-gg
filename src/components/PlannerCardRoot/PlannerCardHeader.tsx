@@ -13,7 +13,6 @@ import { useSettingsStore } from "@/stores";
 import { categories, categoryImgURLs } from "@/data/categories";
 import { useRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
-import { usePlannerData } from "../Planner/Planner.utils";
 import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
@@ -24,12 +23,7 @@ import { PlannerCardHeaderProps } from "./PlannerCardRoot.types";
 export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
     const { type, chipColor, textVariant, href } = props;
 
-    const { characters, weapons } = usePlannerData();
-
-    const dataSet = type === "characters" ? characters : weapons;
-    const item = props.item.custom
-        ? props.item
-        : dataSet.find((i) => i.id === props.item.id);
+    const item = props.item;
 
     if (!item) {
         throw new Error(`Could not find item with ID ${props.item.id}`);
@@ -39,7 +33,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
 
     const game = useGameTag() as GameNoUma;
 
-    const { gender } = useSettingsStore();
+    const gender = useSettingsStore((state) => state.gender);
 
     const rarity =
         !item.custom &&
