@@ -3,37 +3,47 @@ import type { DataType, GameNoUma } from "@/types";
 import type { NTECharacterPassive } from "@/types/nte/character";
 import type { LegacyPlannerItemData, PlannerItemData } from "@/types/planner";
 
-/** Takes a item's data and converts it into a compact version for the Ascension Planner */
-export function parseData<T extends DataType, U extends DataType>(
+/** Takes a item's data and converts it into a compact version for the Ascension Planner. */
+export function createPlannerItemData<T extends DataType, U extends DataType>(
     _: GameNoUma,
     item: T | U,
 ): PlannerItemData {
     return {
-        id: Number(item.id),
+        /** Baseline shared attributes */
+        id: item.id,
         name: item.name,
         displayName: item.displayName,
         rarity: item.rarity,
         element: "element" in item ? item.element : undefined,
         weaponType: item.weaponType,
-        /** Endfield operator class */
-        specialty: "baseSkills" in item ? item.specialty : undefined,
         materials: item.materials,
-        /** HSR trace stats */
+        release: item.release,
+        url: item.url,
+        values: {},
+
+        /** Endfield operator class. */
+        specialty: "baseSkills" in item ? item.specialty : undefined,
+
+        /** HSR trace stats. */
         traceStats:
             "traces" in item
                 ? createCharacterTraceStats(item.traces)
                 : undefined,
-        /** WuWa bonus stats */
+
+        /** WuWa bonus stats. */
         bonusStats: "bonusStats" in item ? item.bonusStats : undefined,
-        release: item.release,
-        /** Endfield main attribute */
+
+        /** Endfield main attribute. */
         mainAttribute:
             "baseSkills" in item ? item.stats.attributes[0] : undefined,
-        /** Endfield passive talents */
+
+        /** Endfield passive talents. */
         talents: "baseSkills" in item ? item.passives : undefined,
-        /** Endfield base skills */
+
+        /** Endfield base skills. */
         baseSkills: "baseSkills" in item ? item.baseSkills : undefined,
-        /** NTE character life skills, returns an array of how many levels each life skill has */
+
+        /** NTE character life skills, returns an array of how many levels each life skill has. */
         lifeSkills:
             "console" in item
                 ? item.passives
@@ -46,12 +56,10 @@ export function parseData<T extends DataType, U extends DataType>(
                       )
                       .filter(Boolean)
                 : undefined,
-        url: item.url,
-        values: {},
     };
 }
 
-/** Updates the item's data in case the names or materials change */
+/** Updates the item's data in case the names or materials change. */
 export function validatePlannerItem(
     inputItem: LegacyPlannerItemData,
     characters: PlannerItemData[],

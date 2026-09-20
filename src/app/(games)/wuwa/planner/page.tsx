@@ -6,7 +6,7 @@ import Loader from "@/components/Loader";
 
 // Helper imports
 import { getDataSet } from "@/api";
-import { parseData } from "@/helpers/planner";
+import { createPlannerItemData } from "@/helpers/planner";
 import { getMetadata, plannerMetaData } from "@/helpers/metadata";
 
 // Type imports
@@ -21,8 +21,8 @@ export default async function Page() {
     const weaponData = await getDataSet<WuWaWeapon>("wuwa/weapons");
 
     const [characters, weapons] = await Promise.all([
-        characterData.map((item) => parseData("wuwa", item)),
-        weaponData.map((item) => parseData("wuwa", item)),
+        characterData.map((item) => createPlannerItemData("wuwa", item)),
+        weaponData.map((item) => createPlannerItemData("wuwa", item)),
     ]);
 
     return (
