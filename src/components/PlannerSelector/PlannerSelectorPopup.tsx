@@ -1,16 +1,16 @@
 import {
     useCallback,
+    useDeferredValue,
     useEffect,
     useMemo,
     useState,
-    useTransition,
 } from "react";
 
 // Component imports
 import SearchDialog from "@/components/SearchDialog";
 import FilterButtonsLocal from "@/components/Filters/FilterButtonsLocal";
 import Dropdown from "@/components/Dropdown";
-import { Loader, SearchResults } from "./PlannerSelectorPopup.components";
+import { SearchResults } from "./PlannerSelectorPopup.components";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -28,6 +28,8 @@ import type { ContentDialogProps } from "@/components/ContentDialog";
 import type { GameNoUma } from "@/types";
 import type { Filters } from "@/types/filters";
 import type { PlannerItemData, PlannerType } from "@/types/planner";
+
+const RESULTS_PER_PAGE = 20;
 
 interface PlannerSelectorPopupProps extends ContentDialogProps {
     open: boolean;
@@ -57,68 +59,69 @@ export default function PlannerSelectorPopup({
 }: PlannerSelectorPopupProps) {
     const game = useGameTag() as GameNoUma;
 
+    const { characters, weapons } = usePlannerData();
+
     const hideUnreleasedContent = useStore(
         useSettingsStore,
         (state) => state.hideUnreleasedContent,
     );
 
-    const store = usePlannerStore();
+    const selectedItems = usePlannerStore((state) => state[`${game}/items`]);
 
-    const { characters, weapons } = usePlannerData();
+    const data = useMemo(() => {
+        const items = type === "characters" ? characters : weapons;
 
-    const [dataLoading, startDataTransition] = useTransition();
-    const [hitsLoading, startHitsTransition] = useTransition();
+        return filterUnreleasedContent(hideUnreleasedContent, items, game);
+    }, [type, characters, weapons, hideUnreleasedContent, game]);
 
-    const [data, setData] = useState<PlannerItemData[]>([]);
-    useEffect(() => {
-        startDataTransition(() => {
-            const items = type === "characters" ? characters : weapons;
-            startDataTransition(() => {
-                setData(
-                    filterUnreleasedContent(hideUnreleasedContent, items, game),
-                );
-            });
-        });
-    }, [open, hideUnreleasedContent]);
+    const availableItems = useMemo(() => {
+        const selectedIds = new Set(selectedItems.map((item) => item.id));
+
+        return data.filter((item) => !selectedIds.has(item.id));
+    }, [data, selectedItems]);
 
     const [filters, setFilters] =
         useState<PlannerSelectorFilters>(initialFilters);
 
+    const [searchValue, setSearchValue] = useState("");
+    const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
+        setSearchValue(event.target.value);
+    }, []);
+
+    const deferredSearchValue = useDeferredValue(searchValue);
+    const deferredFilters = useDeferredValue(filters);
+
+    const hits = useMemo(
+        () =>
+            transformItems(
+                game,
+                availableItems,
+                deferredFilters,
+                deferredSearchValue,
+                {
+                    sortBy: "version",
+                    sortDirection: "asc",
+                },
+            ),
+        [game, availableItems, deferredFilters, deferredSearchValue],
+    );
+
+    const hitsLoading =
+        filters !== deferredFilters || searchValue !== deferredSearchValue;
+
     const { element, weaponType, rarity, specialty } = useFilterGroups(game, {
         key: `${game}/${type}`,
     });
-    const groups = [weaponType, rarity];
-    if (type === "characters") {
-        if (game === "endfield") {
-            groups.unshift(specialty);
+
+    const groups = useMemo(() => {
+        if (type !== "characters") {
+            return [weaponType, rarity];
         }
-        groups.unshift(element);
-    }
 
-    const [searchValue, setSearchValue] = useState("");
-    const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
-        setSearchValue(() => event.target.value);
-    }, []);
-
-    const [searchResults, setSearchResults] = useState<PlannerItemData[]>([]);
-    useEffect(() => {
-        startHitsTransition(() => {
-            const selectedItems = store[`${game}/items`];
-            const items = data.filter(
-                (item) => !selectedItems.map((i) => i.id).includes(item.id),
-            );
-            setSearchResults(() =>
-                transformItems(game, items, filters, searchValue, {
-                    sortBy: "version",
-                    sortDirection: "asc",
-                }),
-            );
-        });
-    }, [open, filters, searchValue]);
-    const hits = useMemo(
-        () => [...searchResults],
-        [data, filters, searchResults],
-    );
+        return game === "endfield"
+            ? [element, specialty, weaponType, rarity]
+            : [element, weaponType, rarity];
+    }, [type, game, element, specialty, weaponType, rarity]);
 
     useEffect(() => {
         setSearchValue("");
@@ -146,20 +149,16 @@ export default function PlannerSelectorPopup({
                         ))}
                     </Stack>
                 </Dropdown>
-                {!dataLoading ? (
-                    <SearchResults
-                        hits={hits}
-                        searchValue={searchValue}
-                        categoryLabel={categoryLabel}
-                        type={type}
-                        isPending={hitsLoading}
-                        handleSelect={handleSelect}
-                        sampleItem={data[0]}
-                        groups={groups}
-                    />
-                ) : (
-                    <Loader />
-                )}
+                <SearchResults
+                    hits={hits}
+                    searchValue={searchValue}
+                    categoryLabel={categoryLabel}
+                    type={type}
+                    isPending={hitsLoading}
+                    handleSelect={handleSelect}
+                    sampleItem={data[0]}
+                    groups={groups}
+                />
             </Stack>
         </SearchDialog>
     );

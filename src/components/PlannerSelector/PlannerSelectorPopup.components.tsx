@@ -1,5 +1,8 @@
+import { memo, useEffect, useState } from "react";
+
 // Component imports
 import FlexBox from "@/components/FlexBox";
+import Text from "@/components/Text";
 import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
 import PlannerCustomItem from "@/components/PlannerCustomItem";
 
@@ -37,14 +40,6 @@ interface SearchResultsProps {
     groups: FilterGroup[];
 }
 
-export function Loader() {
-    return (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
-    );
-}
-
 export function SearchResults({
     hits,
     searchValue,
@@ -57,43 +52,20 @@ export function SearchResults({
 }: SearchResultsProps) {
     const game = useGameTag() as GameNoUma;
 
-    return hits.length > 0 || searchValue === "" ? (
-        <SearchContent
-            hits={hits}
-            categoryLabel={categoryLabel}
-            type={type}
-            isPending={isPending}
-            handleSelect={handleSelect}
-            sampleItem={sampleItem}
-            groups={groups}
-        />
-    ) : (
-        <>
-            {CUSTOM_ITEMS_ENABLED_GAMES.has(game) && (
-                <PlannerCustomItem
-                    label={categoryLabel}
-                    handleSelect={handleSelect}
-                    sampleItem={sampleItem}
-                    groups={groups}
-                    type={type}
-                />
-            )}
-        </>
-    );
-}
+    const [showLoader, setShowLoader] = useState(false);
 
-function SearchContent({
-    hits,
-    categoryLabel,
-    type,
-    isPending,
-    handleSelect,
-    sampleItem,
-    groups,
-}: Omit<SearchResultsProps, "searchValue">) {
-    const game = useGameTag() as GameNoUma;
+    useEffect(() => {
+        if (!isPending) {
+            setShowLoader(false);
+            return;
+        }
+        const timeout = setTimeout(() => {
+            setShowLoader(true);
+        }, 150);
+        return () => clearTimeout(timeout);
+    }, [isPending]);
 
-    return !isPending ? (
+    return (
         <Stack spacing={1}>
             {CUSTOM_ITEMS_ENABLED_GAMES.has(game) && (
                 <PlannerCustomItem
@@ -104,42 +76,83 @@ function SearchContent({
                     type={type}
                 />
             )}
-            {hits.map((item) => (
-                <ButtonBase
-                    key={item.id}
-                    onClick={() => handleSelect(item)}
-                    sx={{ display: "inline" }}
+            {!!hits.length && showLoader && <Loader />}
+            {hits.length ? (
+                <Stack
+                    spacing={1}
+                    sx={{
+                        display: showLoader ? "none" : undefined,
+                    }}
                 >
-                    <SearchResultCard item={item} type={type} />
-                </ButtonBase>
-            ))}
+                    {hits.map((item) => (
+                        <SearchResultCard
+                            key={item.id}
+                            item={item}
+                            type={type}
+                            handleSelect={handleSelect}
+                        />
+                    ))}
+                </Stack>
+            ) : (
+                !showLoader && <NoHits searchValue={searchValue} />
+            )}
         </Stack>
-    ) : (
-        <Loader />
     );
 }
 
-function SearchResultCard({
+const SearchResultCard = memo(function ({
     item,
     type,
+    handleSelect,
 }: {
     item: PlannerItemData;
     type: PlannerType;
+    handleSelect: (option: PlannerItemData | null) => void;
 }) {
     const theme = useTheme();
 
     return (
-        <Card
-            sx={{
-                p: 1,
-                backgroundColor: theme.background(0),
-                "&:hover": {
-                    backgroundColor: theme.background(0, "light"),
-                    cursor: "pointer",
-                },
-            }}
+        <ButtonBase
+            onClick={() => handleSelect(item)}
+            sx={{ display: "inline" }}
         >
-            <PlannerCardHeader item={item} type={type} />
-        </Card>
+            <Card
+                sx={{
+                    p: 1,
+                    backgroundColor: theme.background(0),
+                    "&:hover": {
+                        backgroundColor: theme.background(0, "light"),
+                        cursor: "pointer",
+                    },
+                }}
+            >
+                <PlannerCardHeader item={item} type={type} />
+            </Card>
+        </ButtonBase>
+    );
+});
+
+function NoHits({ searchValue }: Pick<SearchResultsProps, "searchValue">) {
+    if (!searchValue) return null;
+
+    return (
+        <Text sx={{ textAlign: "center", pt: 2 }}>
+            {`No results for "`}
+            <Text component="span" weight="highlight">
+                {searchValue}
+            </Text>
+            {`"`}
+            <br />
+            <br />
+            The item you are looking for may have already been selected.
+        </Text>
+    );
+}
+
+function Loader() {
+    return (
+        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
+            <CircularProgress color="info" />
+        </FlexBox>
     );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // Component imports
 import PlannerSelectorPopup from "./PlannerSelectorPopup";
@@ -28,20 +28,17 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
     const handleSearchOpen = () => setSearchOpen(true);
     const handleSearchClose = () => setSearchOpen(false);
 
-    const store = usePlannerStore();
-
-    const items = store[`${game}/items`];
-
-    const handleSelect = (item: PlannerItemData | null) => {
-        const newValues = [...items];
-        if (item) {
-            newValues.unshift(item);
-        }
-        usePlannerStore.setState(() => ({
-            [`${game}/items`]: newValues,
-        }));
-        setSearchOpen(false);
-    };
+    const handleSelect = useCallback(
+        (item: PlannerItemData | null) => {
+            if (item) {
+                usePlannerStore.setState((state) => ({
+                    [`${game}/items`]: [item, ...state[`${game}/items`]],
+                }));
+            }
+            setSearchOpen(false);
+        },
+        [game],
+    );
 
     const iconProps: SvgIconOwnProps = {
         sx: {

@@ -66,26 +66,28 @@ export default function PlannerCustomItem({
                     </FlexBox>
                 </ButtonBase>
             </Card>
-            <ContentDialog
-                open={open}
-                setOpen={setOpen}
-                // Prevent close on pressing `esc` or clicking backdrop
-                onClose={() => {}}
-                header={`Add custom ${label}`}
-                actions={<></>}
-                maxWidth="sm"
-                fullScreen={!matches}
-                contentProps={{ padding: 0 }}
-            >
-                <CustomItemCreator
-                    label={label}
-                    handleClose={handleClose}
-                    handleSelect={handleSelect}
-                    sampleItem={sampleItem}
-                    groups={groups}
-                    type={type}
-                />
-            </ContentDialog>
+            {open && (
+                <ContentDialog
+                    open={open}
+                    setOpen={setOpen}
+                    // Prevent close on pressing `esc` or clicking backdrop
+                    onClose={() => {}}
+                    header={`Add custom ${label}`}
+                    actions={<></>}
+                    maxWidth="sm"
+                    fullScreen={!matches}
+                    contentProps={{ padding: 0 }}
+                >
+                    <CustomItemCreator
+                        label={label}
+                        handleClose={handleClose}
+                        handleSelect={handleSelect}
+                        sampleItem={sampleItem}
+                        groups={groups}
+                        type={type}
+                    />
+                </ContentDialog>
+            )}
         </>
     );
 }
