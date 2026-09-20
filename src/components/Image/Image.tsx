@@ -1,5 +1,3 @@
-import { default as NextImage } from "next/image";
-
 // Component imports
 import Tooltip from "@/components/Tooltip";
 
@@ -27,7 +25,6 @@ export default function Image({
     responsive = false,
     responsiveSize = 0.125,
     onClick,
-    useNext = false,
     supressLoadImageWarning = false,
     format = "png",
 }: ImageProps) {
@@ -66,41 +63,34 @@ export default function Image({
         zoomOnHover && zoomImageOnHover({ direction, id, zoom: 1.05 });
     };
 
-    function onError(event: React.SyntheticEvent<HTMLImageElement, Event>) {
-        !supressLoadImageWarning && console.warn(`Failed to load image ${src}`);
+    function onError(event: React.SyntheticEvent<HTMLImageElement>) {
+        if (event.currentTarget.src === fallbackSrc) return;
+
+        if (!supressLoadImageWarning) {
+            console.warn(`Failed to load image ${src}`);
+        }
+
         event.currentTarget.src = fallbackSrc;
-        onerror = null;
     }
 
-    return (
+    const image = (
+        <img
+            src={src}
+            id={id}
+            style={imgStyle}
+            onError={onError}
+            onClick={onClick}
+            onMouseEnter={() => handleHover("enter")}
+            onMouseLeave={() => handleHover("leave")}
+            loading={loading}
+        />
+    );
+
+    return tooltip ? (
         <Tooltip title={tooltip} arrow placement={tooltipArrow}>
-            {useNext ? (
-                <NextImage
-                    src={src}
-                    alt={alt}
-                    id={id}
-                    width={width}
-                    height={height}
-                    fill={fill}
-                    style={style}
-                    onError={onError}
-                    onClick={onClick}
-                    onMouseEnter={() => handleHover("enter")}
-                    onMouseLeave={() => handleHover("leave")}
-                    loading={loading}
-                />
-            ) : (
-                <img
-                    src={src}
-                    id={id}
-                    style={imgStyle}
-                    onError={onError}
-                    onClick={onClick}
-                    onMouseEnter={() => handleHover("enter")}
-                    onMouseLeave={() => handleHover("leave")}
-                    loading={loading}
-                />
-            )}
+            {image}
         </Tooltip>
+    ) : (
+        image
     );
 }
