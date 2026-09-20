@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 // Component imports
 import PlannerSelector from "@/components/PlannerSelector";
 import PlannerSorter from "@/components/PlannerSorter";
@@ -19,11 +21,12 @@ import Grid from "@mui/material/Grid";
 import { useGameTag } from "@/context";
 import { usePlannerStore } from "@/stores";
 import { categories } from "@/data/categories";
+import { validatePlannerItem } from "@/helpers/planner";
+import { PlannerDataContext } from "./Planner.utils";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { PlannerDataContext } from "./Planner.utils";
-import { PlannerItemData } from "@/types/planner";
+import type { GameNoUma } from "@/types";
+import type { PlannerItemData } from "@/types/planner";
 
 export default function Planner({
     characters,
@@ -38,6 +41,16 @@ export default function Planner({
 
     const store = usePlannerStore();
     const items = store[`${game}/items`];
+
+    useEffect(() => {
+        if (!items.some((item) => "traces" in item)) return;
+
+        usePlannerStore.setState(() => ({
+            [`${game}/items`]: items.map((item) =>
+                validatePlannerItem(item, characters, weapons),
+            ),
+        }));
+    }, [game, items, characters, weapons]);
 
     const titleCharacters = `${categories[`${game}/characters`].slice(0, -1)}`;
     const titleWeapons = `${categories[`${game}/weapons`].slice(0, -1)}`;

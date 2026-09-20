@@ -118,6 +118,9 @@ export function wuwaFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4, 5],
+            },
         },
         commonMat: {
             name: "Common Material",
@@ -140,6 +143,9 @@ export function wuwaFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4, 5],
+            },
         },
         localMat: {
             name: "Ascension Material",
@@ -162,6 +168,9 @@ export function wuwaFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [1],
+            },
         },
         bossMat: {
             name: "Boss Material",
@@ -186,6 +195,9 @@ export function wuwaFilters({
                         : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
@@ -208,6 +220,9 @@ export function wuwaFilters({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         echoRarity: {
             name: "Echo Class",

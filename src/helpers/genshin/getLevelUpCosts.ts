@@ -7,9 +7,10 @@ import {
 } from "@/data/genshin/levelUpCosts";
 import { getGenshinMaterial } from "./getMaterials";
 import { GenshinMaterials } from "@/types/genshin/materials";
-import { calculateCosts } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "../costs";
 
 const mats = getGenshinMaterial();
+const materialId = createMaterialIdResolver(mats);
 
 export interface GetLevelUpCostsProps {
     start?: number;
@@ -84,21 +85,21 @@ export function getCharacterLevelCost({
             104003: characterXP3,
         },
         boss: {
-            [mats(materials.boss).id]: mats(materials.boss).id ? boss : 0,
+            [materialId(materials.boss)]: materialId(materials.boss) ? boss : 0,
         },
         local: {
-            [mats(materials.local).id]: local,
+            [materialId(materials.local)]: local,
         },
         gemstone: {
-            [mats(`${materials.gemstone}1`).id]: gemstone1,
-            [mats(`${materials.gemstone}2`).id]: gemstone2,
-            [mats(`${materials.gemstone}3`).id]: gemstone3,
-            [mats(`${materials.gemstone}4`).id]: gemstone4,
+            [materialId(materials.gemstone, 1)]: gemstone1,
+            [materialId(materials.gemstone, 2)]: gemstone2,
+            [materialId(materials.gemstone, 3)]: gemstone3,
+            [materialId(materials.gemstone, 4)]: gemstone4,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -204,8 +205,7 @@ export function getCharacterSkillCost({
             talentB3,
             talentC3,
         ].forEach((mat, i) => {
-            talent[`${travelerTalentMatIndex[materials.talent][index] + i}`] =
-                mat;
+            talent[travelerTalentMatIndex[materials.talent][index] + i] = mat;
         });
 
         return {
@@ -213,7 +213,7 @@ export function getCharacterSkillCost({
                 202: credits,
             },
             weekly: {
-                [mats(travelerWeeklyMatIndex[materials.talent][index]).id]:
+                [materialId(travelerWeeklyMatIndex[materials.talent][index])]:
                     weekly,
             },
             crown: {
@@ -221,12 +221,18 @@ export function getCharacterSkillCost({
             },
             talent,
             common: {
-                [mats(`${travelerCommonMatIndex[materials.talent][index]}1`)
-                    .id]: common1,
-                [mats(`${travelerCommonMatIndex[materials.talent][index]}2`)
-                    .id]: common2,
-                [mats(`${travelerCommonMatIndex[materials.talent][index]}3`)
-                    .id]: common3,
+                [materialId(
+                    travelerCommonMatIndex[materials.talent][index],
+                    1,
+                )]: common1,
+                [materialId(
+                    travelerCommonMatIndex[materials.talent][index],
+                    2,
+                )]: common2,
+                [materialId(
+                    travelerCommonMatIndex[materials.talent][index],
+                    3,
+                )]: common3,
             },
         };
     } else {
@@ -262,20 +268,20 @@ export function getCharacterSkillCost({
                 202: credits,
             },
             weekly: {
-                [mats(materials.weekly).id]: weekly,
+                [materialId(materials.weekly)]: weekly,
             },
             crown: {
                 104319: crown,
             },
             talent: {
-                [mats(`${materials.talent}1`).id]: talent1,
-                [mats(`${materials.talent}2`).id]: talent2,
-                [mats(`${materials.talent}3`).id]: talent3,
+                [materialId(materials.talent, 1)]: talent1,
+                [materialId(materials.talent, 2)]: talent2,
+                [materialId(materials.talent, 3)]: talent3,
             },
             common: {
-                [mats(`${materials.common}1`).id]: common1,
-                [mats(`${materials.common}2`).id]: common2,
-                [mats(`${materials.common}3`).id]: common3,
+                [materialId(materials.common, 1)]: common1,
+                [materialId(materials.common, 2)]: common2,
+                [materialId(materials.common, 3)]: common3,
             },
         };
     }
@@ -341,20 +347,20 @@ export function getWeaponLevelCost({
             104013: weaponXP3,
         },
         weapon: {
-            [mats(`${materials.weapon}1`).id]: weapon1,
-            [mats(`${materials.weapon}2`).id]: weapon2,
-            [mats(`${materials.weapon}3`).id]: weapon3,
-            [mats(`${materials.weapon}4`).id]: weapon4,
+            [materialId(materials.weapon, 1)]: weapon1,
+            [materialId(materials.weapon, 2)]: weapon2,
+            [materialId(materials.weapon, 3)]: weapon3,
+            [materialId(materials.weapon, 4)]: weapon4,
         },
         elite: {
-            [mats(`${materials.elite}1`).id]: elite1,
-            [mats(`${materials.elite}2`).id]: elite2,
-            [mats(`${materials.elite}3`).id]: elite3,
+            [materialId(materials.elite, 1)]: elite1,
+            [materialId(materials.elite, 2)]: elite2,
+            [materialId(materials.elite, 3)]: elite3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }

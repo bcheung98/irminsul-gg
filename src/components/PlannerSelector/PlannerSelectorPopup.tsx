@@ -9,20 +9,13 @@ import {
 // Component imports
 import SearchDialog from "@/components/SearchDialog";
 import FilterButtonsLocal from "@/components/Filters/FilterButtonsLocal";
-import FlexBox from "@/components/FlexBox";
 import Dropdown from "@/components/Dropdown";
-import Text from "@/components/Text";
-import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
+import { Loader, SearchResults } from "./PlannerSelectorPopup.components";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Card from "@mui/material/Card";
-import ButtonBase from "@mui/material/ButtonBase";
-import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
-import { toTitleCase } from "@/utils";
 import { useGameTag } from "@/context";
 import { useStore, useSettingsStore, usePlannerStore } from "@/stores";
 import { usePlannerData } from "@/components/Planner/Planner.utils";
@@ -39,7 +32,8 @@ import type { PlannerItemData, PlannerType } from "@/types/planner";
 interface PlannerSelectorPopupProps extends ContentDialogProps {
     open: boolean;
     type: PlannerType;
-    handleSelect: (option: PlannerItemData) => void;
+    categoryLabel: string;
+    handleSelect: (option: PlannerItemData | null) => void;
 }
 
 interface PlannerSelectorFilters extends Filters {
@@ -58,10 +52,9 @@ export default function PlannerSelectorPopup({
     open,
     setOpen,
     type,
+    categoryLabel,
     handleSelect,
 }: PlannerSelectorPopupProps) {
-    const theme = useTheme();
-
     const game = useGameTag() as GameNoUma;
 
     const hideUnreleasedContent = useStore(
@@ -91,11 +84,16 @@ export default function PlannerSelectorPopup({
     const [filters, setFilters] =
         useState<PlannerSelectorFilters>(initialFilters);
 
-    const { element, weaponType, rarity } = useFilterGroups(game, {
+    const { element, weaponType, rarity, specialty } = useFilterGroups(game, {
         key: `${game}/${type}`,
     });
     const groups = [weaponType, rarity];
-    if (type === "characters") groups.unshift(element);
+    if (type === "characters") {
+        if (game === "endfield") {
+            groups.unshift(specialty);
+        }
+        groups.unshift(element);
+    }
 
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
@@ -127,69 +125,13 @@ export default function PlannerSelectorPopup({
         setFilters(initialFilters);
     }, [open]);
 
-    const Loader = (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
-    );
-
-    function SearchResultCard({ item }: { item: PlannerItemData }) {
-        return (
-            <Card
-                sx={{
-                    p: 1,
-                    backgroundColor: theme.background(0),
-                    "&:hover": {
-                        backgroundColor: theme.background(0, "light"),
-                        cursor: "pointer",
-                    },
-                }}
-            >
-                <PlannerCardHeader item={item} type={type} />
-            </Card>
-        );
-    }
-
-    const NoHits =
-        searchValue !== "" && !hitsLoading ? (
-            <Text sx={{ textAlign: "center", pt: 2 }}>
-                {`No results for "`}
-                <span style={{ fontWeight: theme.font.weight.highlight }}>
-                    {searchValue}
-                </span>
-                {`"`}
-                <br />
-                <br />
-                {`The item you are looking for may have already been selected.`}
-            </Text>
-        ) : null;
-
-    const SearchResults =
-        hits.length > 0 || searchValue === "" ? (
-            <Stack spacing={1}>
-                {!hitsLoading
-                    ? hits.map((item) => (
-                          <ButtonBase
-                              key={item.id}
-                              onClick={() => handleSelect(item)}
-                              sx={{ display: "inline" }}
-                          >
-                              <SearchResultCard item={item} />
-                          </ButtonBase>
-                      ))
-                    : Loader}
-            </Stack>
-        ) : (
-            NoHits
-        );
-
     return (
         <SearchDialog
             open={open}
             setOpen={setOpen}
             value={searchValue}
             handleInputChange={handleInputChange}
-            placeholder={`Add ${toTitleCase(type.slice(0, -1))}`}
+            placeholder={`Add ${categoryLabel}`}
         >
             <Stack spacing={2}>
                 <Dropdown title="Filters" textVariant="body1">
@@ -204,7 +146,20 @@ export default function PlannerSelectorPopup({
                         ))}
                     </Stack>
                 </Dropdown>
-                {!dataLoading ? SearchResults : Loader}
+                {!dataLoading ? (
+                    <SearchResults
+                        hits={hits}
+                        searchValue={searchValue}
+                        categoryLabel={categoryLabel}
+                        type={type}
+                        isPending={hitsLoading}
+                        handleSelect={handleSelect}
+                        sampleItem={data[0]}
+                        groups={groups}
+                    />
+                ) : (
+                    <Loader />
+                )}
             </Stack>
         </SearchDialog>
     );

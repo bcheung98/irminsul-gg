@@ -23,7 +23,7 @@ import {
 } from "@/components/PlannerCardRoot/PlannerCard.utils";
 
 // Type imports
-import { CostSliderValues, PlannerType } from "@/types/planner";
+import type { CostSliderValues, PlannerType } from "@/types/planner";
 
 export default function WuWaPlannerCard() {
     const theme = useTheme();
@@ -49,12 +49,6 @@ export default function WuWaPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
-        selected: true,
-    };
-
-    const defaultNodeValues: CostSliderValues = {
-        start: 0,
-        stop: 0,
         selected: true,
     };
 
@@ -96,13 +90,6 @@ export default function WuWaPlannerCard() {
         },
     ];
 
-    const nodes = Object.fromEntries(
-        range(0, 9).map((index) => [
-            getNodeKey(index),
-            item.values[`node-${getNodeKey(index)}`] || defaultNodeValues,
-        ])
-    );
-
     const textColor = useTextColor(theme.text);
     const color =
         type === "characters"
@@ -119,7 +106,7 @@ export default function WuWaPlannerCard() {
                 {...item}
                 {...slider}
             />
-        )
+        ),
     );
 
     return (
@@ -141,16 +128,19 @@ export default function WuWaPlannerCard() {
                             spacing={2}
                             direction="column-reverse"
                         >
-                            {range(0, 1).map((i) => (
-                                <StatNode
-                                    key={`${getNodeID(index + i)}`}
-                                    id={`${getNodeID(index + i)}`}
-                                    bonusStats={item.bonusStats}
-                                    mode={mode}
-                                    values={nodes}
-                                    attributes={{ ...item }}
-                                />
-                            ))}
+                            {range(0, 1).map((i) => {
+                                const id = getNodeID(index + i);
+                                return (
+                                    <StatNode
+                                        key={id}
+                                        id={id}
+                                        bonusStats={item.bonusStats}
+                                        mode={mode}
+                                        values={item.values}
+                                        attributes={{ ...item }}
+                                    />
+                                );
+                            })}
                         </Stack>
                     ))}
                 </FlexBox>
@@ -158,11 +148,6 @@ export default function WuWaPlannerCard() {
         </Stack>
     );
 }
-
-const getNodeKey = (index: number) =>
-    `${index < 2 ? "passive" : "bonusStat"}${
-        index < 2 ? index + 1 : index - 1
-    }`;
 
 const getNodeID = (index: number) =>
     `${

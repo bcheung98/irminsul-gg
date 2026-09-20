@@ -42,6 +42,7 @@ import {
     getCharacterLifeSkillCost as getNTECharacterLifeSkillCost,
     getWeaponLevelCost as getNTEWeaponLevelCost,
 } from "./nte/getLevelUpCosts";
+import type { Material } from "@/types/materials";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -97,4 +98,15 @@ export function calculateCosts(costs: CostArray, start: number, stop: number) {
     return Object.values(costs).map((arr) =>
         arr.slice(start, stop).reduce((a, c) => a + c),
     );
+}
+
+type MaterialLookup = (material: string | number) => Material;
+
+export function createMaterialIdResolver(mats: MaterialLookup) {
+    return (material: string | number, tier?: number) => {
+        if (typeof material === "string" && material.startsWith("custom-")) {
+            return tier ? `${material}-${tier}` : material;
+        }
+        return mats(tier === undefined ? material : `${material}${tier}`).id;
+    };
 }

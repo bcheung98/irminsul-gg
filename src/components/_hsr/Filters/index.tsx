@@ -75,6 +75,9 @@ export function hsrFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         commonMat: {
             name: "Common Material",
@@ -97,6 +100,9 @@ export function hsrFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         bossMat: {
             name: "Boss Material",
@@ -119,6 +125,9 @@ export function hsrFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
@@ -141,6 +150,9 @@ export function hsrFilters({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         nation: {
             name: "World",

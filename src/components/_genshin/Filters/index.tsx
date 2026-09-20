@@ -133,6 +133,9 @@ export function genshinFilters({
                 },
             }),
             width: "128px",
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         commonMat: {
             name: "Common Material",
@@ -155,6 +158,9 @@ export function genshinFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [1, 2, 3],
+            },
         },
         bossMat: {
             name: "Boss Material",
@@ -177,6 +183,9 @@ export function genshinFilters({
                     return mat ? `${mat.name} (${mat.source})` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
@@ -199,6 +208,9 @@ export function genshinFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [5],
+            },
         },
         localMat: {
             name: "Local Specialty",
@@ -215,6 +227,9 @@ export function genshinFilters({
                     return mat ? `${mat.id}` : "0";
                 },
             }),
+            customMaterial: {
+                rarities: [1],
+            },
         },
         weaponAscensionMat: {
             name: "Ascension Material",
@@ -238,6 +253,9 @@ export function genshinFilters({
                 },
             }),
             width: "128px",
+            customMaterial: {
+                rarities: [2, 3, 4, 5],
+            },
         },
         eliteMat: {
             name: "Elite Material",
@@ -260,6 +278,9 @@ export function genshinFilters({
                     return mat ? `${mat.name}` : "";
                 },
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         nation: {
             name: "Nation",

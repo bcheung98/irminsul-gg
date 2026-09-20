@@ -11,7 +11,8 @@ import {
 import { getEndfieldMaterial } from "./getMaterials";
 import { EndfieldMaterials } from "@/types/endfield/materials";
 import { calculateCosts } from "../costs";
-import { EndfieldCharacterPassive } from "@/types/endfield/character";
+import { getTalentNodes } from "./getTalentNodes";
+import type { EndfieldCharacterPassive } from "@/types/endfield/character";
 
 const mats = getEndfieldMaterial();
 
@@ -24,7 +25,6 @@ export interface GetLevelUpCostsProps {
     rarity?: number;
     materials: EndfieldMaterials;
     skillKey?: string;
-    baseSkills?: EndfieldCharacterPassive[];
     talents?: EndfieldCharacterPassive[];
 }
 
@@ -180,9 +180,9 @@ export function getCharacterAttributeCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterAttribute };
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,
@@ -199,12 +199,10 @@ export function getCharacterTalentCost({
     selected,
     talents,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected" | "talents">>) {
-    const levels = talents
-        .map((skill) => skill.levels.filter((i) => i != 0))
-        .flat();
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const levels = getTalentNodes(talents).map(({ level }) => level);
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = characterPassives(levels);
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,
@@ -220,9 +218,9 @@ export function getCharacterBaseSkillCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterBaseSkill[index < 2 ? 0 : 1] };
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
 
     return {
         credits: {
@@ -239,9 +237,9 @@ export function getCharacterOutfittingCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterOutfitting };
-    let { credits } = costs;
+    const { credits } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,

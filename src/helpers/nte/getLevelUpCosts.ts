@@ -7,10 +7,11 @@ import {
     weaponLevel,
 } from "@/data/nte/levelUpCosts";
 import { getNTEMaterial } from "./getMaterials";
-import { NTEMaterials } from "@/types/nte/materials";
-import { calculateCosts } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "../costs";
+import type { NTEMaterials } from "@/types/nte/materials";
 
 const mats = getNTEMaterial();
+const materialId = createMaterialIdResolver(mats);
 
 export interface GetLevelUpCostsProps {
     start?: number;
@@ -75,12 +76,12 @@ export function getCharacterLevelCost({
             CharacterUpMaterial_lv3: characterXP3,
         },
         boss: {
-            [mats(materials.boss).id]: boss,
+            [materialId(materials.boss)]: boss,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -107,17 +108,17 @@ export function getCharacterSkillCost({
             Gold: credits,
         },
         weekly: {
-            [mats(materials.weekly).id]: weekly,
+            [materialId(materials.weekly)]: weekly,
         },
         skill: {
-            [mats(`${materials.skill}1`).id]: skill1,
-            [mats(`${materials.skill}2`).id]: skill2,
-            [mats(`${materials.skill}3`).id]: skill3,
+            [materialId(materials.skill, 1)]: skill1,
+            [materialId(materials.skill, 2)]: skill2,
+            [materialId(materials.skill, 3)]: skill3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -137,13 +138,13 @@ export function getCharacterPassiveCost({
             Gold: selected && credits ? credits : 0,
         },
         weekly: {
-            [mats(materials.weekly).id]: selected && weekly ? weekly : 0,
+            [materialId(materials.weekly)]: selected && weekly ? weekly : 0,
         },
         common: {
-            [mats(`${materials.common}1`).id]: 0,
-            [mats(`${materials.common}2`).id]:
+            [materialId(materials.common, 1)]: 0,
+            [materialId(materials.common, 2)]:
                 selected && common2 ? common2 : 0,
-            [mats(`${materials.common}3`).id]:
+            [materialId(materials.common, 3)]:
                 selected && common3 ? common3 : 0,
         },
     };
@@ -230,14 +231,14 @@ export function getWeaponLevelCost({
             WeaponUpMaterial_lv3: weaponXP3,
         },
         weapon: {
-            [mats(`${materials.weapon}1`).id]: weapon1,
-            [mats(`${materials.weapon}2`).id]: weapon2,
-            [mats(`${materials.weapon}3`).id]: weapon3,
+            [materialId(materials.weapon, 1)]: weapon1,
+            [materialId(materials.weapon, 2)]: weapon2,
+            [materialId(materials.weapon, 3)]: weapon3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }

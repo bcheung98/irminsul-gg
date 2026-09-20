@@ -8,19 +8,25 @@ import SkillDescription from "@/components/SkillDescription";
 import { useTheme } from "@mui/material/styles";
 
 // Helper imports
+import { splitJoin } from "@/utils";
 import { usePlannerStore } from "@/stores";
 import { characterBonusStats } from "@/data/wuwa/characterBonusStats";
 
 // Type imports
-import { CardMode, CostSliderValues } from "@/types/planner";
-import { AttributeData } from "@/types";
-import { WuWaBonusStat, WuWaCharacterBonusStats } from "@/types/wuwa/character";
-import { splitJoin } from "@/utils";
+import type {
+    CardMode,
+    CostSliderValues,
+    PlannerItemData,
+} from "@/types/planner";
+import type {
+    WuWaBonusStat,
+    WuWaCharacterBonusStats,
+} from "@/types/wuwa/character";
 
 interface StatNodeProps {
     id: string;
     mode: CardMode;
-    attributes: AttributeData;
+    attributes: PlannerItemData;
     bonusStats?: WuWaCharacterBonusStats;
     values: Record<string, CostSliderValues>;
 }
@@ -34,37 +40,42 @@ export default function StatNode({
 }: StatNodeProps) {
     const theme = useTheme();
 
-    const nodeNumber = Number(id.slice(-1)) % 2 ? 1 : 2;
-
-    const [selected, setSelected] = useState(values[`${id}`].selected);
+    const [selected, setSelected] = useState(
+        values[`node-${id}`]?.selected ?? true,
+    );
     const handleSelect = () => {
         setSelected(!selected);
     };
 
     const setItemValues = usePlannerStore()["wuwa/setItemValues"];
 
+    const nodeNumber = Number(id.slice(-1)) % 2 ? 1 : 2;
+    const index = Number(!["3", "4", "5", "6"].includes(id.slice(-1)));
+    const stat = bonusStats?.[index];
+
     function getIcon() {
-        if (id.startsWith("passive"))
-            return `wuwa/skills/${attributes.id}_${id}`;
-        else {
-            const index = ["3", "4", "5", "6"].includes(id.slice(-1)) ? 0 : 1;
-            return `wuwa/icons/stat-icons/${splitJoin(bonusStats[index])}`;
+        if (id.startsWith("passive")) {
+            return attributes.custom
+                ? ""
+                : `wuwa/skills/${attributes.id}_${id}`;
         }
+        return stat ? `wuwa/icons/stat-icons/${splitJoin(stat)}` : "";
     }
 
     function getTooltip() {
-        if (id.startsWith("passive")) return `Inherent Skill ${nodeNumber}`;
-        else {
-            const index = ["3", "4", "5", "6"].includes(id.slice(-1)) ? 0 : 1;
-            const stat = bonusStats[index];
-            const value = characterBonusStats[stat][nodeNumber - 1];
-            return (
-                <SkillDescription
-                    game="wuwa"
-                    description={`${formatCharacterBonusStats(stat)} +${value}`}
-                />
-            );
+        if (id.startsWith("passive")) {
+            return `Inherent Skill ${nodeNumber}`;
         }
+        if (!stat) {
+            return `Bonus Stat ${Number(!index) + 1}`;
+        }
+        const value = characterBonusStats[stat][nodeNumber - 1];
+        return (
+            <SkillDescription
+                game="wuwa"
+                description={`${formatCharacterBonusStats(stat)} +${value}`}
+            />
+        );
     }
 
     useEffect(() => {

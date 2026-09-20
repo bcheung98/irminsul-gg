@@ -9,18 +9,24 @@ import Grid, { GridProps } from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import {
+    getCustomMaterial,
+    CustomMaterials,
+} from "../PlannerMaterials/PlannerMaterials.utils";
 
 // Type imports
-import { CostValue } from "@/types/costs";
+import type { CostValue } from "@/types/costs";
 
 interface MaterialGridProps {
     costs: Record<string | number, CostValue>;
+    customMaterials?: CustomMaterials;
     size?: number;
     spacing?: GridProps["spacing"];
 }
 
 export default function MaterialGrid({
     costs,
+    customMaterials,
     size = 56,
     spacing = 2,
 }: MaterialGridProps) {
@@ -38,6 +44,10 @@ export default function MaterialGrid({
                         <MaterialCard
                             game={game}
                             material={material}
+                            customMaterial={getCustomMaterial(
+                                material,
+                                customMaterials,
+                            )}
                             cost={cost}
                             size={size}
                         />
