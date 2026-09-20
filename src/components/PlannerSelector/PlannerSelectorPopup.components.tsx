@@ -1,6 +1,5 @@
 // Component imports
 import FlexBox from "@/components/FlexBox";
-import Text from "@/components/Text";
 import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
 import PlannerCustomItem from "@/components/PlannerCustomItem";
 
@@ -56,6 +55,8 @@ export function SearchResults({
     sampleItem,
     groups,
 }: SearchResultsProps) {
+    const game = useGameTag() as GameNoUma;
+
     return hits.length > 0 || searchValue === "" ? (
         <SearchContent
             hits={hits}
@@ -67,7 +68,17 @@ export function SearchResults({
             groups={groups}
         />
     ) : (
-        <NoHits searchValue={searchValue} isPending={isPending} />
+        <>
+            {CUSTOM_ITEMS_ENABLED_GAMES.has(game) && (
+                <PlannerCustomItem
+                    label={categoryLabel}
+                    handleSelect={handleSelect}
+                    sampleItem={sampleItem}
+                    groups={groups}
+                    type={type}
+                />
+            )}
+        </>
     );
 }
 
@@ -130,25 +141,5 @@ function SearchResultCard({
         >
             <PlannerCardHeader item={item} type={type} />
         </Card>
-    );
-}
-
-function NoHits({
-    searchValue,
-    isPending,
-}: Pick<SearchResultsProps, "searchValue" | "isPending">) {
-    if (!searchValue || isPending) return null;
-
-    return (
-        <Text sx={{ textAlign: "center", pt: 2 }}>
-            {`No results for "`}
-            <Text component="span" weight="highlight">
-                {searchValue}
-            </Text>
-            {`"`}
-            <br />
-            <br />
-            {`The item you are looking for may have already been selected.`}
-        </Text>
     );
 }
