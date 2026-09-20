@@ -1,46 +1,31 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { matchSorter } from "match-sorter";
-
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
-import TextLabel from "@/components/TextLabel";
-import SearchBar from "@/components/SearchBar";
 import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
-import ToggleButtons from "@/components/ToggleButtons";
-import ContentDialog from "@/components/ContentDialog";
-import MenuItem from "@/components/MenuItem";
-import {
-    createVirtualizedListbox,
-    useVirtualizedAutocomplete,
-    VirtualizedAutocompletePopper,
-    VirtualizedRowProps,
-} from "@/components/VirtualizedAutocomplete";
-import NumberField from "@/components/NumberField";
+import PlannerCustomItem from "@/components/PlannerCustomItem";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import ButtonBase from "@mui/material/ButtonBase";
-import Divider from "@mui/material/Divider";
-import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { usePlannerStore } from "@/stores";
-import { objectKeys, sortBy } from "@/utils";
-import { formatMaterialKey, getOption } from "./PlannerSelector.utils";
-import { useFilterGroups } from "@/components/Filters";
 
 // Type imports
-import type { GameNoUma, Item } from "@/types";
+import type { GameNoUma } from "@/types";
 import type { PlannerItemData, PlannerType } from "@/types/planner";
-import type { FilterGroup, FilterKey } from "@/types/filters";
+import type { FilterGroup } from "@/types/filters";
+
+const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>([
+    "genshin",
+    "hsr",
+    "wuwa",
+    "zzz",
+    "nte",
+]);
 
 interface SearchResultsProps {
     hits: PlannerItemData[];
@@ -86,14 +71,6 @@ export function SearchResults({
     );
 }
 
-const CUSTOM_ITEMS_ENABLED_GAMES = new Set<GameNoUma>([
-    "genshin",
-    "hsr",
-    "wuwa",
-    "zzz",
-    "nte",
-]);
-
 function SearchContent({
     hits,
     categoryLabel,
@@ -108,7 +85,7 @@ function SearchContent({
     return !isPending ? (
         <Stack spacing={1}>
             {CUSTOM_ITEMS_ENABLED_GAMES.has(game) && (
-                <AddCustomCard
+                <PlannerCustomItem
                     label={categoryLabel}
                     handleSelect={handleSelect}
                     sampleItem={sampleItem}
@@ -131,6 +108,31 @@ function SearchContent({
     );
 }
 
+function SearchResultCard({
+    item,
+    type,
+}: {
+    item: PlannerItemData;
+    type: PlannerType;
+}) {
+    const theme = useTheme();
+
+    return (
+        <Card
+            sx={{
+                p: 1,
+                backgroundColor: theme.background(0),
+                "&:hover": {
+                    backgroundColor: theme.background(0, "light"),
+                    cursor: "pointer",
+                },
+            }}
+        >
+            <PlannerCardHeader item={item} type={type} />
+        </Card>
+    );
+}
+
 function NoHits({
     searchValue,
     isPending,
@@ -149,602 +151,4 @@ function NoHits({
             {`The item you are looking for may have already been selected.`}
         </Text>
     );
-}
-
-function CardRoot({ children }: { children?: React.ReactNode }) {
-    const theme = useTheme();
-
-    return (
-        <Card
-            sx={{
-                p: 1,
-                backgroundColor: theme.background(0),
-                "&:hover": {
-                    backgroundColor: theme.background(0, "light"),
-                    cursor: "pointer",
-                },
-            }}
-        >
-            {children}
-        </Card>
-    );
-}
-
-function SearchResultCard({
-    item,
-    type,
-}: {
-    item: PlannerItemData;
-    type: PlannerType;
-}) {
-    return (
-        <CardRoot>
-            <PlannerCardHeader item={item} type={type} />
-        </CardRoot>
-    );
-}
-
-function AddCustomCard({
-    sampleItem,
-    label,
-    handleSelect,
-    groups,
-    type,
-}: {
-    sampleItem: PlannerItemData;
-    label: string;
-    handleSelect: (option: PlannerItemData | null) => void;
-    groups: FilterGroup[];
-    type: PlannerType;
-}) {
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
-
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    return (
-        <>
-            <CardRoot>
-                <ButtonBase
-                    disableRipple
-                    disableTouchRipple
-                    onClick={handleOpen}
-                    sx={{
-                        display: "inline",
-                        width: "100%",
-                    }}
-                >
-                    <FlexBox spacing={2}>
-                        <AutoAwesomeIcon
-                            sx={{
-                                width: "48px",
-                                height: "48px",
-                                p: "8px",
-                                color: theme.text.primary,
-                            }}
-                        />
-                        <Text weight="highlight">{`Add custom ${label}`}</Text>
-                    </FlexBox>
-                </ButtonBase>
-            </CardRoot>
-            <ContentDialog
-                open={open}
-                setOpen={setOpen}
-                // Prevent close on pressing `esc` or clicking backdrop
-                onClose={() => {}}
-                header={`Add custom ${label}`}
-                actions={<></>}
-                maxWidth="sm"
-                fullScreen={!matches}
-                contentProps={{ padding: 0 }}
-            >
-                <AddCustomContent
-                    label={label}
-                    handleClose={handleClose}
-                    handleSelect={handleSelect}
-                    sampleItem={sampleItem}
-                    groups={groups}
-                    type={type}
-                />
-            </ContentDialog>
-        </>
-    );
-}
-
-function createCustomItem(
-    game: GameNoUma,
-    type: PlannerType,
-    groups: FilterGroup[],
-): Item {
-    const item: Item = {
-        custom: true,
-        id: 999999990,
-        name: "",
-        displayName: "",
-        rarity: 0,
-        materials: {},
-        customMaterials: {},
-        values: {},
-        release: {
-            version: "",
-        },
-    };
-
-    for (const group of groups) {
-        item[group.tag] = null;
-    }
-
-    if (game === "nte" && type === "characters") {
-        item.lifeSkills = [5, 2];
-    }
-
-    return item;
-}
-
-function AddCustomContent({
-    label,
-    sampleItem,
-    handleSelect,
-    handleClose,
-    groups,
-    type,
-}: {
-    label: string;
-    sampleItem: PlannerItemData;
-    handleClose: () => void;
-    handleSelect: (option: PlannerItemData | null) => void;
-    groups: FilterGroup[];
-    type: PlannerType;
-}) {
-    const game = useGameTag() as GameNoUma;
-
-    const theme = useTheme();
-
-    const store = usePlannerStore();
-    const items = store[`${game}/items`];
-
-    const customItemCount = items.filter((item) => item.custom).length;
-
-    const [inputValue, setInputValue] = useState(
-        `Custom ${label} #${customItemCount + 1}`,
-    );
-    const handleInputChange = (event: React.BaseSyntheticEvent) => {
-        setInputValue(event.target.value);
-    };
-
-    const [item, setItem] = useState<Item>(() =>
-        createCustomItem(game, type, groups),
-    );
-
-    const attributeKeys = groups.map((attr) => attr.tag);
-    const materialKeys = objectKeys(sampleItem?.materials ?? {});
-
-    const materialGroups = useFilterGroups(game, {
-        key: `${game}/${type}` as FilterKey,
-    });
-
-    const [valid, setValid] = useState(false);
-
-    const handleSubmit = () => {
-        handleSelect({
-            ...item,
-            id: item.id + customItemCount,
-            name: inputValue,
-            displayName: inputValue,
-        } as PlannerItemData);
-    };
-
-    useEffect(() => {
-        setValid(
-            ((item: Item) => {
-                for (const key of attributeKeys) {
-                    if (!item[key]) {
-                        return false;
-                    }
-                }
-                for (const key of materialKeys) {
-                    if (!item.materials[key]) {
-                        return false;
-                    }
-                }
-                return true;
-            })(item),
-        );
-    }, [item]);
-
-    return (
-        <Stack
-            spacing={2}
-            sx={{ p: 2, backgroundColor: theme.background(1, "light") }}
-            divider={<Divider />}
-        >
-            <Stack spacing={2}>
-                <SearchBar
-                    placeholder={`Name`}
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onKeyDown={(event: React.KeyboardEvent) => {
-                        if (event.key === "Enter") {
-                            event.preventDefault();
-                        }
-                    }}
-                    inputIcon={<></>}
-                    height="32px"
-                />
-                <Stack spacing={1}>
-                    <Stack>
-                        {groups.map((filter) => (
-                            <AddCustomAttribute
-                                key={filter.tag}
-                                item={item}
-                                setItem={setItem}
-                                filter={filter}
-                            />
-                        ))}
-                    </Stack>
-                    {game === "nte" && type === "characters" && (
-                        <NTEAddCustomLifeSkills
-                            lifeSkills={item.lifeSkills}
-                            setItem={setItem}
-                        />
-                    )}
-                </Stack>
-                {materialKeys.map((key) => (
-                    <AddCustomMaterial
-                        key={key}
-                        materials={
-                            materialGroups[
-                                formatMaterialKey(game, key.toString())
-                            ]
-                        }
-                        materialKey={key.toString()}
-                        setItem={setItem}
-                    />
-                ))}
-            </Stack>
-            <FlexBox spacing={[1, 2]} wrap sx={{ justifyContent: "right" }}>
-                <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleClose}
-                    disableRipple
-                    sx={{ p: "4px 16px" }}
-                >
-                    <Text variant="body2" weight="highlight">
-                        Cancel
-                    </Text>
-                </Button>
-                <Button
-                    variant="contained"
-                    color="success"
-                    onClick={handleSubmit}
-                    disableRipple
-                    sx={{
-                        p: "4px 16px",
-                        "&.Mui-disabled": {
-                            backgroundColor: theme.palette.success.main,
-                            color: theme.text.primary,
-                            opacity: 0.5,
-                            cursor: "not-allowed",
-                        },
-                    }}
-                    disabled={!valid}
-                >
-                    <Text variant="body2" weight="highlight">
-                        Add
-                    </Text>
-                </Button>
-            </FlexBox>
-        </Stack>
-    );
-}
-
-function AddCustomAttribute({
-    item,
-    filter,
-    setItem,
-}: {
-    item: Item;
-    filter: FilterGroup;
-    setItem: Dispatch<SetStateAction<Item>>;
-}) {
-    const handleAttributeSelect = (
-        _: React.BaseSyntheticEvent,
-        value: string | number,
-    ) => {
-        setItem((current) => ({
-            ...current,
-            [`${filter.tag}`]: value,
-        }));
-    };
-
-    return (
-        <FlexBox key={filter.tag} spacing={1}>
-            <Text
-                variant="subtitle1"
-                weight="highlight"
-                sx={{ minWidth: "80px" }}
-            >
-                {filter.name}
-            </Text>
-            <ToggleButtons
-                buttons={filter.buttons}
-                value={item[filter.tag]}
-                spacing={4}
-                padding={filter.padding ?? 0}
-                width={filter.width}
-                exclusive
-                onChange={handleAttributeSelect}
-            />
-        </FlexBox>
-    );
-}
-
-type MaterialValue = MaterialRow | string | null;
-
-interface MaterialRow {
-    groupKey?: string | undefined;
-    icon: React.ReactNode;
-    title: string | number;
-    value: string | number;
-    inputValue?: string;
-}
-
-function AddCustomMaterial({
-    materials,
-    materialKey,
-    setItem,
-}: {
-    materials: FilterGroup;
-    materialKey: string;
-    setItem: Dispatch<SetStateAction<Item>>;
-}) {
-    const buttons = materials.groupButtons || materials.buttons;
-    const options: MaterialRow[] = buttons
-        .map((button) => {
-            if ("buttons" in button) {
-                return button.buttons.map((option) => getOption(option));
-            } else {
-                return getOption(button);
-            }
-        })
-        .flat();
-
-    const [value, setValue] = useState<MaterialValue | null>(null);
-
-    const BannerListbox = createVirtualizedListbox<MaterialRow>({
-        listboxPadding: 0,
-        renderRow: CustomMaterialRow,
-    });
-
-    const { listRef, handleItemsBuilt, handleHighlightChange } =
-        useVirtualizedAutocomplete<MaterialRow>();
-
-    const addCustomMaterial = (name: string) => {
-        const id = `custom-${crypto.randomUUID()}`;
-
-        setValue(name);
-
-        setItem((current) => ({
-            ...current,
-            materials: {
-                ...current.materials,
-                [materialKey]: id,
-            },
-            customMaterials: {
-                ...current.customMaterials,
-                [id]: {
-                    name,
-                    rarities: materials.customMaterial?.rarities,
-                },
-            },
-        }));
-    };
-
-    return (
-        <Autocomplete
-            freeSolo
-            autoComplete
-            filterSelectedOptions
-            options={options}
-            getOptionLabel={(option) =>
-                typeof option === "string" ? option : `${option.title}`
-            }
-            filterOptions={(options, params) => {
-                const { inputValue } = params;
-                const filtered = filterOptions(options, inputValue);
-
-                // Suggest the creation of a new value
-                const isExisting = options.some(
-                    (option) => inputValue === option.title,
-                );
-                if (inputValue !== "" && !isExisting) {
-                    filtered.push({
-                        inputValue,
-                        title: `Add "${inputValue}"`,
-                        icon: "",
-                        value: inputValue,
-                    });
-                }
-
-                return filtered;
-            }}
-            value={value}
-            isOptionEqualToValue={(option, value) =>
-                typeof value !== "string" && option.icon === value.icon
-            }
-            renderInput={(params) => (
-                <SearchBar
-                    params={params}
-                    inputIcon={<></>}
-                    placeholder={materials.name}
-                />
-            )}
-            renderOption={(props, option) => [props, option] as React.ReactNode}
-            onHighlightChange={handleHighlightChange}
-            onChange={(_, newValue) => {
-                if (typeof newValue === "string") {
-                    addCustomMaterial(newValue);
-                    return;
-                }
-
-                if (newValue?.inputValue) {
-                    addCustomMaterial(newValue.inputValue);
-                    return;
-                }
-
-                setValue(newValue);
-
-                setItem((current) => ({
-                    ...current,
-                    materials: {
-                        ...current.materials,
-                        [materialKey]: newValue?.value,
-                    },
-                }));
-            }}
-            slots={{
-                popper: VirtualizedAutocompletePopper,
-            }}
-            slotProps={{
-                listbox: {
-                    component: BannerListbox,
-                    internalListRef: listRef,
-                    onItemsBuilt: handleItemsBuilt,
-                } as any,
-            }}
-            sx={(theme) => ({
-                "& .MuiAutocomplete-inputRoot": {
-                    backgroundColor: theme.background(2),
-                    borderRadius: theme.contentBox.border.radius,
-                    p: 0,
-                },
-            })}
-        />
-    );
-}
-
-function CustomMaterialRow({
-    option,
-    optionProps,
-    disabled,
-    style,
-}: VirtualizedRowProps<MaterialRow>) {
-    const theme = useTheme();
-
-    return (
-        <MenuItem {...optionProps} disabled={disabled} sx={style}>
-            <TextLabel
-                icon={option.icon}
-                iconProps={{
-                    styles: {
-                        border: `$1px solid ${theme.border.color.primary}`,
-                    },
-                }}
-                title={option.title}
-                titleProps={{
-                    variant: "subtitle1",
-                }}
-            />
-        </MenuItem>
-    );
-}
-
-const MAX_LIFE_SKILL_COUNT = 2;
-
-const MIN_LIFE_SKILL_LEVEL = 1;
-const MAX_LIFE_SKILL_LEVEL = 5;
-
-const DEFAULT_LIFE_SKILLS = [5, 2];
-
-function NTEAddCustomLifeSkills({
-    lifeSkills = DEFAULT_LIFE_SKILLS,
-    setItem,
-}: {
-    lifeSkills: number[];
-    setItem: React.Dispatch<React.SetStateAction<Item>>;
-}) {
-    const handleCountChange = () => {
-        setItem((item) => ({
-            ...item,
-            lifeSkills:
-                item.lifeSkills?.length === MAX_LIFE_SKILL_COUNT
-                    ? item.lifeSkills.slice(0, 1)
-                    : [...(item.lifeSkills ?? [5]), 2],
-        }));
-    };
-
-    const handleLevelChange = (index: number) => (newValue: number | null) => {
-        if (newValue === null) return;
-
-        const levels = Math.min(
-            Math.max(Math.round(newValue), MIN_LIFE_SKILL_LEVEL),
-            MAX_LIFE_SKILL_LEVEL,
-        );
-
-        setItem((item) => ({
-            ...item,
-            lifeSkills: (item.lifeSkills ?? DEFAULT_LIFE_SKILLS).map(
-                (value: number, i: number) => (i === index ? levels : value),
-            ),
-        }));
-    };
-
-    return (
-        <FlexBox spacing={1} sx={{ alignItems: "flex-start" }}>
-            <Text
-                variant="subtitle1"
-                weight="highlight"
-                sx={{ minWidth: "80px" }}
-            >
-                Life Skills
-            </Text>
-            <Stack spacing={1} sx={{ ml: 0.5 }}>
-                {lifeSkills.map((levels, index) => (
-                    <Stack key={index} spacing={0.5}>
-                        <Text variant="subtitle2" weight="highlight">
-                            No. of Levels
-                        </Text>
-                        <FlexBox spacing={2}>
-                            <NumberField
-                                min={MIN_LIFE_SKILL_LEVEL}
-                                max={MAX_LIFE_SKILL_LEVEL}
-                                value={levels}
-                                smallStep={1}
-                                largeStep={2}
-                                size="small"
-                                onValueChange={handleLevelChange(index)}
-                                style={{ width: "25%", minWidth: "80px" }}
-                            />
-                            {lifeSkills.length === index + 1 && (
-                                <Button
-                                    variant="contained"
-                                    color={!index ? "info" : "error"}
-                                    onClick={handleCountChange}
-                                    disableRipple
-                                    sx={{ p: "4px 16px" }}
-                                >
-                                    <Text variant="body2" weight="highlight">
-                                        {`${!index ? "Add" : "Remove"} Life Skill`}
-                                    </Text>
-                                </Button>
-                            )}
-                        </FlexBox>
-                    </Stack>
-                ))}
-            </Stack>
-        </FlexBox>
-    );
-}
-
-function filterOptions(options: MaterialRow[], searchValue: string) {
-    if (searchValue === "") return options;
-    return matchSorter(options, searchValue, {
-        keys: ["title", "value"],
-        threshold: matchSorter.rankings.WORD_STARTS_WITH,
-    }).sort((a, b) => sortBy(b.title.toString(), a.title.toString()));
 }
