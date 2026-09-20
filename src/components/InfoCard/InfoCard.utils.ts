@@ -1,5 +1,13 @@
 import { getCharacterImageURLs } from "@/helpers/characterImage";
-import { Game, Gender } from "@/types";
+import type { Game, Gender } from "@/types";
+
+const CHARACTER_TAGS = new Set([
+    "characters",
+    "resonators",
+    "agents",
+    "operators",
+    "espers",
+]);
 
 export function getImageURL({
     game,
@@ -15,7 +23,7 @@ export function getImageURL({
     url?: string;
 }) {
     if (url) return `${tag}/${url}`;
-    if (tag.includes("/characters")) {
+    if (CHARACTER_TAGS.has(tag.split("/")[1])) {
         return getCharacterImageURLs({ game, id, gender }).icon;
     }
     return `${tag}/${id}`;
