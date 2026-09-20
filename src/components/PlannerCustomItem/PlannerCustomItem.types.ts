@@ -9,6 +9,7 @@ export interface MaterialRow {
     title: string | number;
     value: string | number;
     inputValue?: string;
+    custom?: boolean;
 }
 
 export interface PlannerCustomItemProps {

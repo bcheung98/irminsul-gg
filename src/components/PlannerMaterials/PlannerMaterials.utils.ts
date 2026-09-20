@@ -1,5 +1,8 @@
+import type { MaterialCategory } from "@/types/materials";
+
 export interface CustomMaterial {
     name: string;
+    materialKey: MaterialCategory;
     rarities: number[];
 }
 

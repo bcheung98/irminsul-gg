@@ -24,6 +24,7 @@ import {
     createCustomItem,
     createCustomItemId,
     createCustomItemName,
+    getPlannerCustomMaterials,
 } from "./PlannerCustomItem.utils";
 
 // Type imports
@@ -31,6 +32,7 @@ import type { GameNoUma, Item } from "@/types";
 import type { PlannerItemData } from "@/types/planner";
 import type { FilterKey } from "@/types/filters";
 import type { CustomItemCreatorProps } from "./PlannerCustomItem.types";
+import type { MaterialCategory } from "@/types/materials";
 
 export function CustomItemCreator({
     label,
@@ -47,6 +49,8 @@ export function CustomItemCreator({
     const store = usePlannerStore();
     const items = store[`${game}/items`];
 
+    const customMaterials = getPlannerCustomMaterials(items);
+
     const [inputValue, setInputValue] = useState(() =>
         createCustomItemName(items, label),
     );
@@ -59,7 +63,9 @@ export function CustomItemCreator({
     );
 
     const attributeKeys = groups.map((attr) => attr.tag);
-    const materialKeys = objectKeys(sampleItem?.materials ?? {});
+    const materialKeys = objectKeys(
+        sampleItem?.materials ?? {},
+    ) as MaterialCategory[];
 
     const materialGroups = useFilterGroups(game, {
         key: `${game}/${type}` as FilterKey,
@@ -102,7 +108,7 @@ export function CustomItemCreator({
         >
             <Stack spacing={2}>
                 <SearchBar
-                    placeholder={`Name`}
+                    placeholder="Name"
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyDown={(event: React.KeyboardEvent) => {
@@ -131,18 +137,29 @@ export function CustomItemCreator({
                         />
                     )}
                 </Stack>
-                {materialKeys.map((key) => (
-                    <AddCustomMaterial
-                        key={key}
-                        materials={
-                            materialGroups[
-                                formatMaterialKey(game, key.toString())
-                            ]
-                        }
-                        materialKey={key.toString()}
-                        setItem={setItem}
-                    />
-                ))}
+                <Stack spacing={1}>
+                    {materialKeys.map((key) => {
+                        const mats =
+                            materialGroups[formatMaterialKey(game, key)];
+                        return (
+                            <FlexBox spacing={1} key={key}>
+                                <Text
+                                    variant="subtitle1"
+                                    weight="highlight"
+                                    sx={{ minWidth: "160px" }}
+                                >
+                                    {mats.name}
+                                </Text>
+                                <AddCustomMaterial
+                                    materials={mats}
+                                    customMaterials={customMaterials}
+                                    materialKey={key}
+                                    setItem={setItem}
+                                />
+                            </FlexBox>
+                        );
+                    })}
+                </Stack>
             </Stack>
             <FlexBox spacing={[1, 2]} wrap sx={{ justifyContent: "right" }}>
                 <Button

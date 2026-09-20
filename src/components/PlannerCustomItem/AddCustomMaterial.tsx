@@ -17,32 +17,46 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 // Helper imports
 import { getOption } from "@/components/PlannerSelector/PlannerSelector.utils";
-import { filterOptions } from "./PlannerCustomItem.utils";
+import { filterPlannerMaterialOptions } from "./PlannerCustomItem.utils";
 
 // Type imports
 import type { Item } from "@/types";
 import type { FilterGroup } from "@/types/filters";
 import type { MaterialRow, MaterialValue } from "./PlannerCustomItem.types";
+import type {
+    CustomMaterial,
+    CustomMaterials,
+} from "@/components/PlannerMaterials/PlannerMaterials.utils";
+import type { MaterialCategory } from "@/types/materials";
 
 export function AddCustomMaterial({
     materials,
+    customMaterials,
     materialKey,
     setItem,
 }: {
     materials: FilterGroup;
-    materialKey: string;
+    customMaterials: CustomMaterials;
+    materialKey: MaterialCategory;
     setItem: Dispatch<SetStateAction<Item>>;
 }) {
     const buttons = materials.groupButtons || materials.buttons;
-    const options: MaterialRow[] = buttons
-        .map((button) => {
-            if ("buttons" in button) {
-                return button.buttons.map((option) => getOption(option));
-            } else {
-                return getOption(button);
-            }
-        })
-        .flat();
+
+    const options: MaterialRow[] = [
+        ...buttons.flatMap((button) =>
+            "buttons" in button
+                ? button.buttons.map(getOption)
+                : [getOption(button)],
+        ),
+        ...Object.entries(customMaterials)
+            .filter(([, material]) => material.materialKey === materialKey)
+            .map(([id, material]) => ({
+                title: material.name,
+                icon: "__custom__",
+                value: id,
+                custom: true,
+            })),
+    ];
 
     const [value, setValue] = useState<MaterialValue | null>(null);
 
@@ -54,31 +68,58 @@ export function AddCustomMaterial({
     const { listRef, handleItemsBuilt, handleHighlightChange } =
         useVirtualizedAutocomplete<MaterialRow>();
 
-    const addCustomMaterial = (name: string) => {
-        const id = `custom-${crypto.randomUUID()}`;
+    const selectMaterial = (
+        current: Item,
+        value: string | number | undefined,
+        customMaterial?: CustomMaterial,
+    ) => {
+        const previous = current.materials[materialKey];
+        const nextCustomMaterials = { ...current.customMaterials };
 
-        setValue(name);
+        if (typeof previous === "string" && previous.startsWith("custom-")) {
+            delete nextCustomMaterials[previous];
+        }
+        if (
+            typeof value === "string" &&
+            value.startsWith("custom-") &&
+            customMaterial
+        ) {
+            nextCustomMaterials[value] = customMaterial;
+        }
 
-        setItem((current) => ({
+        return {
             ...current,
             materials: {
                 ...current.materials,
-                [materialKey]: id,
+                [materialKey]: value,
             },
-            customMaterials: {
-                ...current.customMaterials,
-                [id]: {
-                    name,
-                    rarities: materials.customMaterial?.rarities,
-                },
-            },
-        }));
+            customMaterials: nextCustomMaterials,
+        };
+    };
+
+    const addCustomMaterial = (name: string) => {
+        if (!materials.customMaterial) return;
+
+        const id = `custom-${crypto.randomUUID()}`;
+
+        const customMaterial: CustomMaterial = {
+            name,
+            materialKey,
+            rarities: materials.customMaterial.rarities,
+        };
+
+        setValue(name);
+
+        setItem((current) => selectMaterial(current, id, customMaterial));
     };
 
     return (
         <Autocomplete
             freeSolo
             autoComplete
+            selectOnFocus
+            clearOnBlur
+            handleHomeEndKeys
             filterSelectedOptions
             options={options}
             getOptionLabel={(option) =>
@@ -86,7 +127,10 @@ export function AddCustomMaterial({
             }
             filterOptions={(options, params) => {
                 const { inputValue } = params;
-                const filtered = filterOptions(options, inputValue);
+                const filtered = filterPlannerMaterialOptions(
+                    options,
+                    inputValue,
+                );
 
                 // Suggest the creation of a new value
                 const isExisting = options.some(
@@ -105,13 +149,13 @@ export function AddCustomMaterial({
             }}
             value={value}
             isOptionEqualToValue={(option, value) =>
-                typeof value !== "string" && option.icon === value.icon
+                typeof value !== "string" && option.value === value.value
             }
             renderInput={(params) => (
                 <SearchBar
                     params={params}
                     inputIcon={<></>}
-                    placeholder={materials.name}
+                    placeholder="Select material"
                 />
             )}
             renderOption={(props, option) => [props, option] as React.ReactNode}
@@ -129,13 +173,15 @@ export function AddCustomMaterial({
 
                 setValue(newValue);
 
-                setItem((current) => ({
-                    ...current,
-                    materials: {
-                        ...current.materials,
-                        [materialKey]: newValue?.value,
-                    },
-                }));
+                setItem((current) =>
+                    selectMaterial(
+                        current,
+                        newValue?.value,
+                        newValue?.custom && newValue.value
+                            ? customMaterials[newValue.value]
+                            : undefined,
+                    ),
+                );
             }}
             slots={{
                 popper: VirtualizedAutocompletePopper,
@@ -147,13 +193,12 @@ export function AddCustomMaterial({
                     onItemsBuilt: handleItemsBuilt,
                 } as any,
             }}
-            sx={(theme) => ({
+            sx={{
+                width: "100%",
                 "& .MuiAutocomplete-inputRoot": {
-                    backgroundColor: theme.background(2),
-                    borderRadius: theme.contentBox.border.radius,
                     p: 0,
                 },
-            })}
+            }}
         />
     );
 }
@@ -171,9 +216,7 @@ function CustomMaterialRow({
             <TextLabel
                 icon={option.icon}
                 iconProps={{
-                    styles: {
-                        border: `$1px solid ${theme.border.color.primary}`,
-                    },
+                    supressLoadImageWarning: option.custom,
                 }}
                 title={option.title}
                 titleProps={{

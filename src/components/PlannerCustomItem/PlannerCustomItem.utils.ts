@@ -1,9 +1,11 @@
-import { sortBy } from "@/utils";
 import { matchSorter } from "match-sorter";
+import { sortBy } from "@/utils";
+
 import type { MaterialRow } from "./PlannerCustomItem.types";
 import type { GameNoUma, Item } from "@/types";
 import type { FilterGroup } from "@/types/filters";
 import type { PlannerItemData, PlannerType } from "@/types/planner";
+import type { CustomMaterials } from "@/components/PlannerMaterials/PlannerMaterials.utils";
 
 const CUSTOM_ITEM_ID_START = 999999990;
 
@@ -62,7 +64,17 @@ export function createCustomItemName(items: PlannerItemData[], label: string) {
     return `${name} (${index})`;
 }
 
-export function filterOptions(options: MaterialRow[], searchValue: string) {
+export function getPlannerCustomMaterials(items: PlannerItemData[]): CustomMaterials {
+    return items.reduce<CustomMaterials>((materials, item) => {
+        Object.assign(materials, item.customMaterials);
+        return materials;
+    }, {});
+}
+
+export function filterPlannerMaterialOptions(
+    options: MaterialRow[],
+    searchValue: string,
+) {
     if (searchValue === "") return options;
     return matchSorter(options, searchValue, {
         keys: ["title", "value"],
