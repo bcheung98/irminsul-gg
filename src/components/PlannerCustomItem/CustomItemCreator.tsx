@@ -20,7 +20,11 @@ import { usePlannerStore } from "@/stores";
 import { objectKeys } from "@/utils";
 import { formatMaterialKey } from "@/components/PlannerSelector/PlannerSelector.utils";
 import { useFilterGroups } from "@/components/Filters";
-import { createCustomItem } from "./PlannerCustomItem.utils";
+import {
+    createCustomItem,
+    createCustomItemId,
+    createCustomItemName,
+} from "./PlannerCustomItem.utils";
 
 // Type imports
 import type { GameNoUma, Item } from "@/types";
@@ -43,10 +47,8 @@ export function CustomItemCreator({
     const store = usePlannerStore();
     const items = store[`${game}/items`];
 
-    const customItemCount = items.filter((item) => item.custom).length;
-
-    const [inputValue, setInputValue] = useState(
-        `Custom ${label} #${customItemCount + 1}`,
+    const [inputValue, setInputValue] = useState(() =>
+        createCustomItemName(items, label),
     );
     const handleInputChange = (event: React.BaseSyntheticEvent) => {
         setInputValue(event.target.value);
@@ -68,7 +70,7 @@ export function CustomItemCreator({
     const handleSubmit = () => {
         handleSelect({
             ...item,
-            id: item.id + customItemCount,
+            id: createCustomItemId(items),
             name: inputValue,
             displayName: inputValue,
         } as PlannerItemData);
