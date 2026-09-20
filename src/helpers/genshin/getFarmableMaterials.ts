@@ -1,4 +1,4 @@
-import { getMaterialCategoryResolver } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import { Day } from "@/helpers/dates";
 import type { GenshinMaterialCategory } from "@/types/genshin/materials";
 
@@ -20,23 +20,35 @@ export function getFarmableMaterials(day: Day, hideUnreleasedContent = false) {
         case "Sunday":
             break;
     }
-    return {
-        characterMats: getMaterials("talent", index, hideUnreleasedContent),
-        weaponMats: getMaterials("weapon", index, hideUnreleasedContent),
-    };
+
+    const characterMats = filterFarmableMaterials(
+        "talent",
+        index,
+        hideUnreleasedContent,
+    );
+
+    const weaponMats = filterFarmableMaterials(
+        "weapon",
+        index,
+        hideUnreleasedContent,
+    );
+
+    return { characterMats, weaponMats };
 }
 
-function getMaterials(
+function filterFarmableMaterials(
     category: Extract<GenshinMaterialCategory, "talent" | "weapon">,
     index: number,
     hideUnreleasedContent = false,
 ) {
     const dropDates = ["Mon/Thu", "Tue/Fri", "Wed/Sat"];
 
-    const materials = getMaterialCategoryResolver(
+    const { getMaterialCategory } = getMaterialResolvers(
         "genshin",
         hideUnreleasedContent,
-    )(category);
+    );
+
+    const materials = getMaterialCategory(category);
 
     return index === -1
         ? materials

@@ -11,7 +11,7 @@ import { combatRoleNames, combatRoles } from "@/data/wuwa/combatRoles";
 import { echoClass, elements, rarities, weapons } from "@/data/wuwa/common";
 import { weaponSubStats } from "@/data/wuwa/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
-import { getMaterialCategoryResolver } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import { isUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
@@ -23,10 +23,16 @@ export function wuwaFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = getMaterialCategoryResolver(
+    const { getMaterial, getMaterialCategory } = getMaterialResolvers(
         "wuwa",
         hideUnreleasedContent,
     );
+
+    const forgeryMaterials = getMaterialCategory("forgery");
+    const commonMaterials = getMaterialCategory("common");
+    const localMaterials = getMaterialCategory("local");
+    const bossMaterials = getMaterialCategory("boss");
+    const weeklyBossMaterials = getMaterialCategory("weekly");
 
     let sonatas = [...sonataEffects];
     if (hideUnreleasedContent) {
@@ -102,22 +108,12 @@ export function wuwaFilters({
             name: "Forgery Material",
             tag: "forgeryMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("forgery")
+                items: forgeryMaterials
                     .filter((material) => !material.rarity)
                     .map((material) => material.tag || ""),
                 url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("forgery").find(
-                        (material) => material.tag === `${item}4`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("forgery").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}4`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
             customMaterial: {
                 rarities: [2, 3, 4, 5],
@@ -127,22 +123,12 @@ export function wuwaFilters({
             name: "Common Material",
             tag: "commonMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("common")
+                items: commonMaterials
                     .filter((material) => !material.rarity)
                     .map((material) => material.tag || ""),
                 url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === `${item}4`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}4`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
             customMaterial: {
                 rarities: [2, 3, 4, 5],
@@ -152,22 +138,10 @@ export function wuwaFilters({
             name: "Ascension Material",
             tag: "localMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("local").map(
-                    (material) => material.tag || "",
-                ),
+                items: localMaterials.map((material) => material.tag || ""),
                 url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("local").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("local").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
             customMaterial: {
                 rarities: [1],
@@ -177,23 +151,14 @@ export function wuwaFilters({
             name: "Boss Material",
             tag: "bossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("boss").map(
-                    (material) => material.tag || "",
-                ),
+                items: bossMaterials.map((material) => material.tag || ""),
                 url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat
-                        ? `${mat.name}${mat.source ? ` (${mat.source})` : ""}`
-                        : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
             customMaterial: {
@@ -204,21 +169,16 @@ export function wuwaFilters({
             name: "Weekly Boss Material",
             tag: "weeklyBossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weekly").map(
+                items: weeklyBossMaterials.map(
                     (material) => material.tag || "",
                 ),
                 url: "wuwa/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name} (${mat.source})` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
             customMaterial: {
@@ -241,10 +201,8 @@ export function wuwaFilters({
                 items: sonatas.map((sonata) => sonata.id),
                 url: "wuwa/sonata",
                 getTooltip: (item: number) => {
-                    const sonata = sonataEffects.find(
-                        (sonata) => sonata.id === item,
-                    );
-                    return sonata ? `${sonata.displayName}` : "";
+                    const sonata = sonatas.find((sonata) => sonata.id === item);
+                    return sonata?.displayName ?? "";
                 },
             }),
             option: {

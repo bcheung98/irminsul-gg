@@ -5,7 +5,7 @@ import type { MaterialRow } from "./PlannerCustomItem.types";
 import type { GameNoUma, Item } from "@/types";
 import type { FilterGroup } from "@/types/filters";
 import type { PlannerItemData, PlannerType } from "@/types/planner";
-import type { CustomMaterials } from "@/components/PlannerMaterials/PlannerMaterials.utils";
+import type { CustomMaterials } from "@/types/materials";
 
 const CUSTOM_ITEM_ID_START = 999999990;
 

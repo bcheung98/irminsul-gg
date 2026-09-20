@@ -1,4 +1,4 @@
-import type { CustomMaterials } from "@/components/PlannerMaterials/PlannerMaterials.utils";
+import type { CustomMaterials } from "./materials";
 import type { BaseDataWithRelease } from ".";
 import type { EndfieldClass, EndfieldStatAttribute } from "./endfield";
 import type { EndfieldCharacterPassive } from "./endfield/character";

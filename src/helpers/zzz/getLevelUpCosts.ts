@@ -5,13 +5,13 @@ import {
     characterCoreSkill,
     weaponLevel,
 } from "@/data/zzz/levelUpCosts";
-import { getZZZMaterial } from "./getMaterials";
-import { calculateCosts, createMaterialIdResolver } from "../costs";
-import type { ZZZElement, ZZZRarity, ZZZWeaponType } from "@/types/zzz";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getZZZMaterialResolvers } from "./getMaterials";
 import type { ZZZMaterials } from "@/types/zzz/materials";
+import type { ZZZElement, ZZZRarity, ZZZWeaponType } from "@/types/zzz";
 
-const mats = getZZZMaterial();
-const materialId = createMaterialIdResolver(mats);
+const { getMaterial } = getZZZMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 export interface GetLevelUpCostsProps {
     start?: number;

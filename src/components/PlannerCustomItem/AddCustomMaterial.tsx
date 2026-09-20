@@ -25,10 +25,8 @@ import { filterPlannerMaterialOptions } from "./PlannerCustomItem.utils";
 import type { Item } from "@/types";
 import type { FilterGroup } from "@/types/filters";
 import type { MaterialRow, MaterialValue } from "./PlannerCustomItem.types";
-import type {
-    CustomMaterial,
-    CustomMaterials,
-} from "@/components/PlannerMaterials/PlannerMaterials.utils";
+import type { CustomMaterials } from "@/types/materials";
+import type { CustomMaterial } from "@/types/materials";
 import type { MaterialCategory } from "@/types/materials";
 
 export function AddCustomMaterial({

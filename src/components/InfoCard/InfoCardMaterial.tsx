@@ -16,7 +16,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { infoCardStyles } from "./InfoCard.styles";
 import { getImageURL } from "./InfoCard.utils";
 import { formatHref } from "@/utils";
-import { getMaterialResolver } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import { useSettingsStore } from "@/stores";
 
 // Type imports
@@ -85,7 +85,8 @@ export default function InfoCardMaterial({
             materialTag += nums[game];
         }
 
-        const material = getMaterialResolver(game)(materialTag);
+        const { getMaterial } = getMaterialResolvers(game);
+        const material = getMaterial(materialTag);
 
         let imgURL = `${game}/materials/${material.id}`;
 

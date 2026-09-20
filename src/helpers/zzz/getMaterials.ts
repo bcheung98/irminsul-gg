@@ -1,12 +1,7 @@
 import { zzzMaterials } from "@/data/zzz/materials";
-import { createGameMaterialResolvers } from "../createMaterialResolvers";
+import { createGameMaterialResolvers } from "@/helpers/createMaterialResolvers";
 
-const getResolvers = createGameMaterialResolvers(zzzMaterials, "zzz");
-
-export function getZZZMaterial(hideUnreleasedContent = false) {
-    return getResolvers(hideUnreleasedContent).getMaterial;
-}
-
-export function getZZZMaterialCategory(hideUnreleasedContent = false) {
-    return getResolvers(hideUnreleasedContent).getMaterialCategory;
-}
+export const getZZZMaterialResolvers = createGameMaterialResolvers(
+    zzzMaterials,
+    "zzz",
+);

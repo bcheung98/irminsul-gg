@@ -1,12 +1,7 @@
 import { endfieldMaterials } from "@/data/endfield/materials";
-import { createGameMaterialResolvers } from "../createMaterialResolvers";
+import { createGameMaterialResolvers } from "@/helpers/createMaterialResolvers";
 
-const getResolvers = createGameMaterialResolvers(endfieldMaterials, "endfield");
-
-export function getEndfieldMaterial(hideUnreleasedContent = false) {
-    return getResolvers(hideUnreleasedContent).getMaterial;
-}
-
-export function getEndfieldMaterialCategory(hideUnreleasedContent = false) {
-    return getResolvers(hideUnreleasedContent).getMaterialCategory;
-}
+export const getEndfieldMaterialResolvers = createGameMaterialResolvers(
+    endfieldMaterials,
+    "endfield",
+);

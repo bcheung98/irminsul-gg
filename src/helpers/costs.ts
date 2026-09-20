@@ -1,5 +1,6 @@
-import { GameData } from "@/types";
-import { CostArray, CostValue } from "@/types/costs";
+import type { GameData } from "@/types";
+import type { MaterialResolver } from "@/types/materials";
+import type { CostArray, CostValue } from "@/types/costs";
 import {
     getCharacterLevelCost as getGenshinCharacterLevelCost,
     getCharacterSkillCost as getGenshinCharacterSkillCost,
@@ -42,7 +43,6 @@ import {
     getCharacterLifeSkillCost as getNTECharacterLifeSkillCost,
     getWeaponLevelCost as getNTEWeaponLevelCost,
 } from "./nte/getLevelUpCosts";
-import type { Material } from "@/types/materials";
 
 interface Costs {
     [tag: string]: (arg0: any) => { [key: string]: CostValue };
@@ -100,9 +100,7 @@ export function calculateCosts(costs: CostArray, start: number, stop: number) {
     );
 }
 
-type MaterialLookup = (material: string | number) => Material;
-
-export function createMaterialIdResolver(mats: MaterialLookup) {
+export function createMaterialIdResolver(mats: MaterialResolver) {
     return (material: string | number, tier?: number) => {
         if (typeof material === "string" && material.startsWith("custom-")) {
             return tier ? `${material}-${tier}` : material;

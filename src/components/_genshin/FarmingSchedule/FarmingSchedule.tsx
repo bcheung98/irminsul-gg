@@ -27,7 +27,7 @@ import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { getFarmableMaterials } from "@/helpers/genshin/getFarmableMaterials";
 import { Day, days } from "@/helpers/dates";
-import { getMaterialResolver } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
 import type { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
@@ -76,12 +76,13 @@ export default function FarmingSchedule(props: {
         return day;
     };
 
-    const materialLookup = getMaterialResolver("genshin");
+    const { getMaterial } = getMaterialResolvers("genshin");
 
     const { characterMats, weaponMats } = getFarmableMaterials(
         days[index],
         hideUnreleasedContent,
     );
+
     const characters = filterUnreleasedContent(
         hideUnreleasedContent,
         props.characters,
@@ -91,6 +92,7 @@ export default function FarmingSchedule(props: {
             characterMats.includes(character.materials.talent.toString()),
         )
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
+
     const weapons = filterUnreleasedContent(
         hideUnreleasedContent,
         props.weapons,
@@ -142,8 +144,8 @@ export default function FarmingSchedule(props: {
         const getImgSrc = (material = "") => {
             return `genshin/materials/${
                 index
-                    ? materialLookup(`${material}4`).id
-                    : materialLookup(`${material}3`).id
+                    ? getMaterial(`${material}4`).id
+                    : getMaterial(`${material}3`).id
             }`;
         };
 

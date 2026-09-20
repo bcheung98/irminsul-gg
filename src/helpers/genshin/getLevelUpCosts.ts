@@ -5,12 +5,12 @@ import {
     characterSkillTraveler,
     weaponLevel,
 } from "@/data/genshin/levelUpCosts";
-import { getGenshinMaterial } from "./getMaterials";
-import { GenshinMaterials } from "@/types/genshin/materials";
-import { calculateCosts, createMaterialIdResolver } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getGenshinMaterialResolvers } from "./getMaterials";
+import type { GenshinMaterials } from "@/types/genshin/materials";
 
-const mats = getGenshinMaterial();
-const materialId = createMaterialIdResolver(mats);
+const { getMaterial } = getGenshinMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 export interface GetLevelUpCostsProps {
     start?: number;

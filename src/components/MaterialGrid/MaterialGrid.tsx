@@ -9,13 +9,11 @@ import Grid, { GridProps } from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import {
-    getCustomMaterial,
-    CustomMaterials,
-} from "../PlannerMaterials/PlannerMaterials.utils";
+import { getCustomMaterial } from "@/helpers/materials";
 
 // Type imports
 import type { CostValue } from "@/types/costs";
+import type { CustomMaterials } from "@/types/materials";
 
 interface MaterialGridProps {
     costs: Record<string | number, CostValue>;
@@ -35,7 +33,7 @@ export default function MaterialGrid({
     const pathname = usePathname();
 
     const materialArray: React.ReactNode[] = [];
-    sortItems(Object.keys(costs), pathname).forEach((key) =>
+    sortMaterialByKey(Object.keys(costs), pathname).forEach((key) =>
         Object.entries(costs[key]).forEach(
             ([material, cost]: [string | number, number]) =>
                 cost &&
@@ -67,7 +65,7 @@ export default function MaterialGrid({
     );
 }
 
-function sortItems(items: string[], pathname: string) {
+function sortMaterialByKey(items: string[], pathname: string) {
     const sortIndex: Record<string, number> = {};
     const sortOrder = pathname.endsWith("planner")
         ? [

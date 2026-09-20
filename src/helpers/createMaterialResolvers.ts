@@ -1,5 +1,9 @@
 import { isUnreleasedContent } from "./isUnreleasedContent";
-import type { Material, MaterialResolvers } from "@/types/materials";
+import type {
+    Material,
+    MaterialIndex,
+    MaterialResolvers,
+} from "@/types/materials";
 import type { GameNoUma } from "@/types";
 
 const defaultMaterial: Material = {
@@ -12,20 +16,14 @@ const defaultMaterial: Material = {
     },
 };
 
-interface MaterialIndex {
-    byId: Map<string | number, Material>;
-    byName: Map<string, Material>;
-    byCategory: Map<string, Material[]>;
-}
-
 // Index materials for fast lookup by ID, name/tag, or category.
 function createMaterialIndex(materials: Material[]): MaterialIndex {
-    const byId = new Map<string | number, Material>();
+    const byId = new Map<string, Material>();
     const byName = new Map<string, Material>();
     const byCategory = new Map<string, Material[]>();
 
     for (const material of materials) {
-        byId.set(material.id, material);
+        byId.set(`${material.id}`, material);
         byName.set(material.name, material);
 
         if (material.tag) {
@@ -47,7 +45,6 @@ function createMaterialIndex(materials: Material[]): MaterialIndex {
         byCategory,
     };
 }
-
 // Create lookup functions backed by a precomputed material index.
 function createMaterialResolvers(materials: Material[]): MaterialResolvers {
     const { byId, byName, byCategory } = createMaterialIndex(materials);
@@ -55,22 +52,23 @@ function createMaterialResolvers(materials: Material[]): MaterialResolvers {
     return {
         getMaterial(material: string | number) {
             return (
-                byId.get(material) ??
+                byId.get(`${material}`) ??
                 (typeof material === "string"
                     ? byName.get(material)
                     : undefined) ??
                 defaultMaterial
             );
         },
-
         getMaterialCategory(category: string) {
             return byCategory.get(category) ?? [];
         },
     };
 }
 
-// Precompute resolvers for all materials and released materials,
-// then select the appropriate set based on the user's unreleased content setting.
+/**
+ * Precompute resolvers for all materials and released materials,
+ * then select the appropriate set based on the user's unreleased content setting.
+ */
 export function createGameMaterialResolvers(
     materials: Material[],
     game: GameNoUma,

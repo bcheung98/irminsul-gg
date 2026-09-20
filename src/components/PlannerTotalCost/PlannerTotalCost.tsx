@@ -10,7 +10,7 @@ import { objectKeys } from "@/utils";
 // Type imports
 import type { GameNoUma } from "@/types";
 import type { CostValue } from "@/types/costs";
-import type { CustomMaterials } from "../PlannerMaterials/PlannerMaterials.utils";
+import type { CustomMaterials } from "@/types/materials";
 
 export default function PlannerTotalCost() {
     const game = useGameTag() as GameNoUma;

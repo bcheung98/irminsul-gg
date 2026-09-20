@@ -11,13 +11,13 @@ import {
     characterTraceSmallCostsRemembrance,
     weaponLevel,
 } from "@/data/hsr/levelUpCosts";
-import { getHSRMaterial } from "./getMaterials";
-import { calculateCosts, createMaterialIdResolver } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getHSRMaterialResolvers } from "./getMaterials";
 import type { HSRMaterials } from "@/types/hsr/materials";
 import type { HSRCharacterUnlockKeys } from "@/types/hsr/character";
 
-const mats = getHSRMaterial();
-const materialId = createMaterialIdResolver(mats);
+const { getMaterial } = getHSRMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 interface GetLevelUpCostsProps {
     start?: number;

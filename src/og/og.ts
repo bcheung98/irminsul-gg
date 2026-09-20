@@ -1,4 +1,4 @@
-import { getMaterialResolver } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import type { Game, GameData } from "@/types";
 
 export const size = {
@@ -66,7 +66,8 @@ export function getMaterialIcon(props: {
         }
     }
 
-    const material = getMaterialResolver(props.game)(materialTag);
+    const { getMaterial } = getMaterialResolvers(props.game);
+    const material = getMaterial(materialTag);
 
     return `${props.game}/materials/${material.id}`;
 }

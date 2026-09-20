@@ -30,6 +30,12 @@ export type MaterialCategory =
     | EndfieldMaterialCategory
     | NTEMaterialCategory;
 
+export interface MaterialIndex {
+    byId: Map<string, Material>;
+    byName: Map<string, Material>;
+    byCategory: Map<string, Material[]>;
+}
+
 export type MaterialResolver = (material: string | number) => Material;
 
 export type MaterialCategoryResolver = (category: string) => Material[];
@@ -38,3 +44,17 @@ export interface MaterialResolvers {
     getMaterial: MaterialResolver;
     getMaterialCategory: MaterialCategoryResolver;
 }
+
+export interface CustomMaterial {
+    name: string;
+    materialKey: MaterialCategory;
+    rarities: number[];
+}
+
+export interface ResolvedCustomMaterial {
+    id: string;
+    name: string;
+    rarity?: number;
+}
+
+export type CustomMaterials = Record<string, CustomMaterial>;

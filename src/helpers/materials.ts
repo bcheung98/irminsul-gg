@@ -1,65 +1,85 @@
 import type { Game } from "@/types";
 import type {
-    MaterialCategoryResolver,
-    MaterialResolver,
+    CustomMaterials,
+    MaterialResolvers,
+    ResolvedCustomMaterial,
 } from "@/types/materials";
-import {
-    getGenshinMaterial,
-    getGenshinMaterialCategory,
-} from "@/helpers/genshin/getMaterials";
-import { getHSRMaterial, getHSRMaterialCategory } from "./hsr/getMaterials";
-import { getWuWaMaterial, getWuWaMaterialCategory } from "./wuwa/getMaterials";
-import { getZZZMaterial, getZZZMaterialCategory } from "./zzz/getMaterials";
-import {
-    getEndfieldMaterial,
-    getEndfieldMaterialCategory,
-} from "./endfield/getMaterials";
-import { getNTEMaterial, getNTEMaterialCategory } from "./nte/getMaterials";
+import { getGenshinMaterialResolvers } from "@/helpers/genshin/getMaterials";
+import { getHSRMaterialResolvers } from "./hsr/getMaterials";
+import { getWuWaMaterialResolvers } from "./wuwa/getMaterials";
+import { getZZZMaterialResolvers } from "./zzz/getMaterials";
+import { getEndfieldMaterialResolvers } from "./endfield/getMaterials";
+import { getNTEMaterialResolvers } from "./nte/getMaterials";
 
-export function getMaterialResolver(
+/**
+ * Returns the precomputed material resolvers for the specified game,
+ * selecting the appropriate dataset based on the unreleased content setting.
+ * @returns
+ * - `getMaterial`: Look up a material by ID, name, or tag.
+ * - `getMaterialCategory`: Get all materials belonging to a category.
+ */
+export function getMaterialResolvers(
     game: Game,
     hideUnreleasedContent = false,
-): MaterialResolver {
+): MaterialResolvers {
     switch (game) {
         case "genshin":
-            return getGenshinMaterial(hideUnreleasedContent);
+            return getGenshinMaterialResolvers(hideUnreleasedContent);
         case "hsr":
-            return getHSRMaterial(hideUnreleasedContent);
+            return getHSRMaterialResolvers(hideUnreleasedContent);
         case "wuwa":
-            return getWuWaMaterial(hideUnreleasedContent);
+            return getWuWaMaterialResolvers(hideUnreleasedContent);
         case "zzz":
-            return getZZZMaterial(hideUnreleasedContent);
+            return getZZZMaterialResolvers(hideUnreleasedContent);
         case "uma":
-            return () => {
-                throw new Error("Uma materials not implemented.");
-            };
+            return umaMaterialResolvers;
         case "endfield":
-            return getEndfieldMaterial(hideUnreleasedContent);
+            return getEndfieldMaterialResolvers(hideUnreleasedContent);
         case "nte":
-            return getNTEMaterial(hideUnreleasedContent);
+            return getNTEMaterialResolvers(hideUnreleasedContent);
     }
 }
 
-export function getMaterialCategoryResolver(
-    game: Game,
-    hideUnreleasedContent = false,
-): MaterialCategoryResolver {
-    switch (game) {
-        case "genshin":
-            return getGenshinMaterialCategory(hideUnreleasedContent);
-        case "hsr":
-            return getHSRMaterialCategory(hideUnreleasedContent);
-        case "wuwa":
-            return getWuWaMaterialCategory(hideUnreleasedContent);
-        case "uma":
-            return () => {
-                throw new Error("Uma materials not implemented.");
-            };
-        case "zzz":
-            return getZZZMaterialCategory(hideUnreleasedContent);
-        case "endfield":
-            return getEndfieldMaterialCategory(hideUnreleasedContent);
-        case "nte":
-            return getNTEMaterialCategory(hideUnreleasedContent);
+// Uma doesn't have materials.
+const umaMaterialResolvers: MaterialResolvers = {
+    getMaterial() {
+        throw new Error("Uma materials not implemented.");
+    },
+    getMaterialCategory() {
+        throw new Error("Uma materials not implemented.");
+    },
+};
+
+/** Returns resolved custom material data. */
+export function getCustomMaterial(
+    material: string | number,
+    customMaterials?: CustomMaterials,
+): ResolvedCustomMaterial | undefined {
+    if (typeof material !== "string" || !material.startsWith("custom-")) {
+        return;
     }
+
+    const direct = customMaterials?.[material];
+
+    if (direct) {
+        return {
+            id: material,
+            name: direct.name,
+            rarity: direct.rarities[0],
+        };
+    }
+
+    const match = material.match(/^(custom-.+)-(\d+)$/);
+    if (!match) return;
+
+    const [, id, tier] = match;
+    const customMaterial = customMaterials?.[id];
+
+    if (!customMaterial) return;
+
+    return {
+        id: material,
+        name: `${customMaterial.name} ${tier}`,
+        rarity: customMaterial.rarities[Number(tier) - 1],
+    };
 }

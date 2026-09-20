@@ -6,12 +6,12 @@ import {
     characterSkill,
     weaponLevel,
 } from "@/data/wuwa/levelUpCosts";
-import { getWuWaMaterial } from "./getMaterials";
-import { calculateCosts, createMaterialIdResolver } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getWuWaMaterialResolvers } from "./getMaterials";
 import type { WuWaMaterials } from "@/types/wuwa/materials";
 
-const mats = getWuWaMaterial();
-const materialId = createMaterialIdResolver(mats);
+const { getMaterial } = getWuWaMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 export interface GetLevelUpCostsProps {
     start?: number;
