@@ -10,7 +10,7 @@ import { AddCustomMaterial } from "./AddCustomMaterial";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
+import Stack, { StackProps } from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 
@@ -33,6 +33,34 @@ import type { PlannerItemData } from "@/types/planner";
 import type { FilterKey } from "@/types/filters";
 import type { CustomItemCreatorProps } from "./PlannerCustomItem.types";
 import type { MaterialCategory } from "@/types/materials";
+
+function InputWrapper({
+    children,
+    valid,
+    alignItems = "center",
+}: {
+    children?: React.ReactNode;
+    valid: boolean;
+    alignItems?: StackProps["alignItems"];
+}) {
+    const theme = useTheme();
+
+    return (
+        <FlexBox spacing={1.5} sx={{ alignItems }}>
+            <div
+                style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: valid
+                        ? theme.palette.success.main
+                        : theme.palette.error.main,
+                }}
+            />
+            {children}
+        </FlexBox>
+    );
+}
 
 export function CustomItemCreator({
     label,
@@ -108,6 +136,7 @@ export function CustomItemCreator({
         >
             <Stack spacing={2}>
                 <SearchBar
+                    autoFocus
                     placeholder="Name"
                     value={inputValue}
                     onChange={handleInputChange}
@@ -122,19 +151,25 @@ export function CustomItemCreator({
                 <Stack spacing={1}>
                     <Stack>
                         {groups.map((filter) => (
-                            <AddCustomAttribute
+                            <InputWrapper
                                 key={filter.tag}
-                                item={item}
-                                setItem={setItem}
-                                filter={filter}
-                            />
+                                valid={!!item[filter.tag]}
+                            >
+                                <AddCustomAttribute
+                                    item={item}
+                                    setItem={setItem}
+                                    filter={filter}
+                                />
+                            </InputWrapper>
                         ))}
                     </Stack>
                     {game === "nte" && type === "characters" && (
-                        <NTEAddCustomLifeSkills
-                            lifeSkills={item.lifeSkills}
-                            setItem={setItem}
-                        />
+                        <InputWrapper valid={true} alignItems="baseline">
+                            <NTEAddCustomLifeSkills
+                                lifeSkills={item.lifeSkills}
+                                setItem={setItem}
+                            />
+                        </InputWrapper>
                     )}
                 </Stack>
                 <Stack spacing={1}>
@@ -142,21 +177,17 @@ export function CustomItemCreator({
                         const mats =
                             materialGroups[formatMaterialKey(game, key)];
                         return (
-                            <FlexBox spacing={1} key={key}>
-                                <Text
-                                    variant="subtitle1"
-                                    weight="highlight"
-                                    sx={{ minWidth: "160px" }}
-                                >
-                                    {mats.name}
-                                </Text>
+                            <InputWrapper
+                                key={key}
+                                valid={!!item.materials[key]}
+                            >
                                 <AddCustomMaterial
                                     materials={mats}
                                     customMaterials={customMaterials}
                                     materialKey={key}
                                     setItem={setItem}
                                 />
-                            </FlexBox>
+                            </InputWrapper>
                         );
                     })}
                 </Stack>
