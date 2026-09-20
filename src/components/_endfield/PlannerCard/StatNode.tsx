@@ -8,12 +8,13 @@ import { useTheme } from "@mui/material/styles";
 
 // Helper imports
 import { usePlannerStore } from "@/stores";
+import { getTalentNodes } from "@/helpers/endfield/getTalentNodes";
 
 // Type imports
-import { CardMode, CostSliderValues } from "@/types/planner";
-import { AttributeData } from "@/types";
-import { EndfieldStatAttribute } from "@/types/endfield";
-import { EndfieldCharacterPassive } from "@/types/endfield/character";
+import type { CardMode, CostSliderValues } from "@/types/planner";
+import type { AttributeData } from "@/types";
+import type { EndfieldStatAttribute } from "@/types/endfield";
+import type { EndfieldCharacterPassive } from "@/types/endfield/character";
 
 interface StatNodeProps {
     id: string;
@@ -22,7 +23,6 @@ interface StatNodeProps {
     mainAttribute?: EndfieldStatAttribute;
     baseSkills?: EndfieldCharacterPassive[];
     talents?: EndfieldCharacterPassive[];
-    levels?: number[];
     values: Record<string, CostSliderValues>;
 }
 
@@ -37,22 +37,33 @@ export default function StatNode({
 }: StatNodeProps) {
     const theme = useTheme();
 
-    const index = id.slice(-1)[0];
+    const index = Number(id.slice(-1));
 
-    const [selected, setSelected] = useState(values[`${id}`].selected);
+    const [selected, setSelected] = useState(values[id]?.selected ?? true);
     const handleSelect = () => {
         setSelected(!selected);
     };
 
     const setItemValues = usePlannerStore()["endfield/setItemValues"];
 
+    const talentNode = getTalentNodes(talents)[index - 1];
+
+    const baseSkillNodes = baseSkills.flatMap((skill) =>
+        skill.levels.map((level) => ({
+            skill,
+            level,
+        })),
+    );
+    const baseSkillNode = baseSkillNodes[index - 1];
+
     function getIcon() {
-        if (id.startsWith("talent"))
-            return `endfield/skills/${attributes.id}_talent${Number(index) < 3 ? 1 : 2}`;
-        else if (id.startsWith("base")) {
-            const baseSkill = baseSkills[Number(index) < 3 ? 0 : 1];
-            return baseSkill
-                ? `endfield/icons/base-skills/${baseSkills[Number(index) < 3 ? 0 : 1].icon}`
+        if (id.startsWith("talent")) {
+            return talentNode
+                ? `endfield/skills/${attributes.id}_talent${talentNode.talentIndex + 1}`
+                : "";
+        } else if (id.startsWith("base")) {
+            return baseSkillNode
+                ? `endfield/icons/base-skills/${baseSkillNode.skill.icon}`
                 : "";
         } else if (id.startsWith("outfitting")) {
             return `endfield/icons/Gear`;
@@ -63,26 +74,17 @@ export default function StatNode({
 
     function getTooltip() {
         if (id.startsWith("talent")) {
-            const talentLevels = talents
-                .map((skill) => skill.levels.filter((i) => i != 0))
-                .flat();
-            let threshold = 3;
-            if (JSON.stringify(talentLevels) === JSON.stringify([2, 1, 3])) {
-                threshold = 2;
-            }
-            return `${talents[Number(index) < threshold ? 0 : 1].name} (E${talentLevels[Number(index) - 1]})`;
+            return talentNode
+                ? `${talentNode.talent.name} (E${talentNode.level})`
+                : "";
         } else if (id.startsWith("base")) {
-            const baseSkill = baseSkills[Number(index) < 3 ? 0 : 1];
-            const baseSkillLevels = baseSkills
-                .map((skill) => skill.levels)
-                .flat();
-            return baseSkill
-                ? `${baseSkill} (E${baseSkillLevels[Number(index) - 1]})`
+            return baseSkillNode
+                ? `${baseSkillNode.skill.name} (E${baseSkillNode.level})`
                 : "";
         } else if (id.startsWith("outfitting")) {
-            return `Outfitting ${numerals[Number(index) - 1]} (E${index})`;
+            return `Outfitting ${numerals[index - 1]} (E${index})`;
         } else {
-            return `${charAttributes[mainAttribute]} +${attrValues[Number(index) - 1]}`;
+            return `${charAttributes[mainAttribute]} +${attrValues[index - 1]}`;
         }
     }
 
