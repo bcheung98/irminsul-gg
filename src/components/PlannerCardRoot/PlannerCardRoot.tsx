@@ -27,11 +27,12 @@ import {
 } from "./PlannerCard.utils";
 import { usePlannerData } from "@/components/Planner/Planner.utils";
 import { useTextColor } from "@/helpers/styles";
+import { validatePlannerItem } from "@/helpers/planner";
 
 // Type imports
-import { PlannerCardProps } from "./PlannerCardRoot.types";
-import { GameData, GameNoUma } from "@/types";
-import { CardMode, PlannerItemData } from "@/types/planner";
+import type { PlannerCardProps } from "./PlannerCardRoot.types";
+import type { GameData, GameNoUma } from "@/types";
+import type { CardMode } from "@/types/planner";
 
 export default function PlannerCardRoot(props: PlannerCardProps) {
     const theme = useTheme();
@@ -41,18 +42,7 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
 
     const textColors = useTextColor(theme.text);
 
-    // Updates the item's data in case the names or materials change
-    function validateItem(inputItem: PlannerItemData) {
-        const item = [...characters, ...weapons].find(
-            (item) => item.id === inputItem.id,
-        );
-        if (!item) throw new Error("Item not found");
-        inputItem.name = item.name;
-        inputItem.displayName = item.displayName;
-        inputItem.materials = item.materials;
-        return inputItem;
-    }
-    const item = validateItem(props.item);
+    const item = validatePlannerItem(props.item, characters, weapons);
 
     const store = usePlannerStore();
     const hiddenItems = store[`${game}/hidden`];

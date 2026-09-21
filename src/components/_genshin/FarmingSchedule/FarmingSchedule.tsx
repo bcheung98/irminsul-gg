@@ -27,10 +27,10 @@ import { useSettingsStore } from "@/stores/useSettingsStore";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 import { getFarmableMaterials } from "@/helpers/genshin/getFarmableMaterials";
 import { Day, days } from "@/helpers/dates";
-import { useMaterials } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
-import { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
+import type { GenshinCharacter, GenshinWeapon } from "@/types/genshin";
 
 export default function FarmingSchedule(props: {
     characters: GenshinCharacter[];
@@ -39,7 +39,7 @@ export default function FarmingSchedule(props: {
     const theme = useTheme();
 
     const hideUnreleasedContent = useSettingsStore(
-        useShallow((state) => state.hideUnreleasedContent)
+        useShallow((state) => state.hideUnreleasedContent),
     );
 
     const [tabValue, setTabValue] = useState(0);
@@ -76,33 +76,35 @@ export default function FarmingSchedule(props: {
         return day;
     };
 
-    const getMaterials = useMaterials().genshin;
+    const { getMaterial } = getMaterialResolvers("genshin");
 
     const { characterMats, weaponMats } = getFarmableMaterials(
         days[index],
-        hideUnreleasedContent
+        hideUnreleasedContent,
     );
+
     const characters = filterUnreleasedContent(
         hideUnreleasedContent,
         props.characters,
-        "genshin"
+        "genshin",
     )
         .filter((character) =>
-            characterMats.includes(character.materials.talent.toString())
+            characterMats.includes(character.materials.talent.toString()),
         )
         .sort((a, b) => a.displayName.localeCompare(b.displayName));
+
     const weapons = filterUnreleasedContent(
         hideUnreleasedContent,
         props.weapons,
-        "genshin"
+        "genshin",
     )
         .filter((weapon) =>
-            weaponMats.includes(weapon.materials.weapon.toString())
+            weaponMats.includes(weapon.materials.weapon.toString()),
         )
         .sort(
             (a, b) =>
                 b.rarity - a.rarity ||
-                a.displayName.localeCompare(b.displayName)
+                a.displayName.localeCompare(b.displayName),
         );
 
     const selectProps = {
@@ -142,8 +144,8 @@ export default function FarmingSchedule(props: {
         const getImgSrc = (material = "") => {
             return `genshin/materials/${
                 index
-                    ? getMaterials(`${material}4`).id
-                    : getMaterials(`${material}3`).id
+                    ? getMaterial(`${material}4`).id
+                    : getMaterial(`${material}3`).id
             }`;
         };
 
@@ -182,7 +184,7 @@ export default function FarmingSchedule(props: {
                                                       componentID: `${item.url}-farmingSchedule`,
                                                   }}
                                               />
-                                          )
+                                          ),
                                 )}
                             </Grid>
                         </Stack>

@@ -11,12 +11,13 @@ import {
     characterTraceSmallCostsRemembrance,
     weaponLevel,
 } from "@/data/hsr/levelUpCosts";
-import { getHSRMaterial } from "./getMaterials";
-import { HSRMaterials } from "@/types/hsr/materials";
-import { HSRCharacterUnlockKeys } from "@/types/hsr/character";
-import { calculateCosts } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getHSRMaterialResolvers } from "./getMaterials";
+import type { HSRMaterials } from "@/types/hsr/materials";
+import type { HSRCharacterUnlockKeys } from "@/types/hsr/character";
 
-const mats = getHSRMaterial();
+const { getMaterial } = getHSRMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 interface GetLevelUpCostsProps {
     start?: number;
@@ -90,12 +91,12 @@ export function getCharacterLevelCost({
             213: characterXP3,
         },
         boss: {
-            [mats(materials.boss).id]: boss,
+            [materialId(materials.boss)]: boss,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -150,20 +151,20 @@ export function getCharacterSkillCost({
             2: credits,
         },
         weekly: {
-            [mats(`${materials.weekly}`).id]: weekly,
+            [materialId(materials.weekly)]: weekly,
         },
         crown: {
             241: crown,
         },
         calyx: {
-            [mats(`${materials.calyx}1`).id]: calyx1,
-            [mats(`${materials.calyx}2`).id]: calyx2,
-            [mats(`${materials.calyx}3`).id]: calyx3,
+            [materialId(materials.calyx, 1)]: calyx1,
+            [materialId(materials.calyx, 2)]: calyx2,
+            [materialId(materials.calyx, 3)]: calyx3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -184,7 +185,7 @@ export function getCharacterMemosprite({
     let [credits, calyx1, calyx2, calyx3, common1, common2, common3] = range(
         0,
         objectKeys(costs).length,
-        0
+        0,
     );
     if (selected) {
         [credits, calyx1, calyx2, calyx3, common1, common2, common3] =
@@ -195,14 +196,14 @@ export function getCharacterMemosprite({
             2: credits,
         },
         calyx: {
-            [mats(`${materials.calyx}1`).id]: calyx1,
-            [mats(`${materials.calyx}2`).id]: calyx2,
-            [mats(`${materials.calyx}3`).id]: calyx3,
+            [materialId(materials.calyx, 1)]: calyx1,
+            [materialId(materials.calyx, 2)]: calyx2,
+            [materialId(materials.calyx, 3)]: calyx3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }
@@ -239,17 +240,18 @@ export function getCharacterTraceMain({
             2: selected && credits ? credits[index] : 0,
         },
         weekly: {
-            [mats(materials.weekly).id]: selected && weekly ? weekly[index] : 0,
+            [materialId(materials.weekly)]:
+                selected && weekly ? weekly[index] : 0,
         },
         crown: {
             241: selected && crown ? crown[index] : 0,
         },
         calyx: {
-            [mats(`${materials.calyx}1`).id]:
+            [materialId(materials.calyx, 1)]:
                 selected && calyx1 ? calyx1[index] : 0,
-            [mats(`${materials.calyx}2`).id]:
+            [materialId(materials.calyx, 2)]:
                 selected && calyx2 ? calyx2[index] : 0,
-            [mats(`${materials.calyx}3`).id]:
+            [materialId(materials.calyx, 3)]:
                 selected && calyx3 ? calyx3[index] : 0,
         },
     };
@@ -287,19 +289,19 @@ export function getCharacterTraceSmall({
             2: selected && credits ? credits[index] : 0,
         },
         calyx: {
-            [mats(`${materials.calyx}1`).id]:
+            [materialId(materials.calyx, 1)]:
                 selected && calyx1 ? calyx1[index] : 0,
-            [mats(`${materials.calyx}2`).id]:
+            [materialId(materials.calyx, 2)]:
                 selected && calyx2 ? calyx2[index] : 0,
-            [mats(`${materials.calyx}3`).id]:
+            [materialId(materials.calyx, 3)]:
                 selected && calyx3 ? calyx3[index] : 0,
         },
         common: {
-            [mats(`${materials.common}1`).id]:
+            [materialId(materials.common, 1)]:
                 selected && common1 ? common1[index] : 0,
-            [mats(`${materials.common}2`).id]:
+            [materialId(materials.common, 2)]:
                 selected && common2 ? common2[index] : 0,
-            [mats(`${materials.common}3`).id]:
+            [materialId(materials.common, 3)]:
                 selected && common3 ? common3[index] : 0,
         },
     };
@@ -362,14 +364,14 @@ export function getWeaponLevelCost({
             223: weaponXP3,
         },
         calyx: {
-            [mats(`${materials.calyx}1`).id]: calyx1,
-            [mats(`${materials.calyx}2`).id]: calyx2,
-            [mats(`${materials.calyx}3`).id]: calyx3,
+            [materialId(materials.calyx, 1)]: calyx1,
+            [materialId(materials.calyx, 2)]: calyx2,
+            [materialId(materials.calyx, 3)]: calyx3,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
         },
     };
 }

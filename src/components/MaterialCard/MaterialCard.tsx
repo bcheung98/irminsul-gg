@@ -10,15 +10,17 @@ import Box from "@mui/material/Box";
 
 // Helper imports
 import { materialCardStyles } from "./MaterialCard.styles";
-import { useMaterials } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
-import { Game } from "@/types";
+import type { Game } from "@/types";
+import type { ResolvedCustomMaterial } from "@/types/materials";
 
 export interface MaterialCardProps {
     id?: number;
     game: Game;
     material: string | number;
+    customMaterial?: ResolvedCustomMaterial;
     cost: number;
     size?: number;
     labelColor?: string;
@@ -27,6 +29,7 @@ export interface MaterialCardProps {
 export default function MaterialCard({
     game,
     material,
+    customMaterial,
     cost,
     size = 56,
 }: MaterialCardProps) {
@@ -39,26 +42,32 @@ export default function MaterialCard({
         imgSize = imgSize - imgSize * responsiveSize;
     }
 
-    const materials = useMaterials()[game];
+    const { getMaterial } = getMaterialResolvers(game);
+    const materialData = getMaterial(material);
 
     const {
         id,
         name,
         displayName,
         category,
-        rarity: rarity = 3,
+        rarity = 3,
         source,
         imgURL,
-    } = materials(Boolean(Number(material)) ? Number(material) : material);
+    } = materialData;
 
-    const styles = materialCardStyles({ rarity, size: imgSize });
+    const materialRarity = customMaterial?.rarity ?? rarity;
+
+    const styles = materialCardStyles({
+        rarity: materialRarity,
+        size: imgSize,
+    });
 
     const costLength = cost.toLocaleString().length;
     const fontSize =
         costLength < 8 ? imgSize / 4 - 4 : imgSize / 4 - (costLength - 4);
 
-    let tooltip = displayName || name;
-    if (source) tooltip += ` (${source})`;
+    let tooltip = customMaterial?.name ?? displayName ?? name;
+    if (source && !customMaterial) tooltip += ` (${source})`;
 
     return (
         <Card sx={styles.root()}>

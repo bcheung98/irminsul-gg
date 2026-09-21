@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 // Helper imports
+import { useProgressiveResults } from "@/hooks";
 import { filterSearchResults } from "./SiteSearch.search";
 
 // Type imports
 import { SearchResult } from "./SiteSearch";
-
-const RESULTS_PER_BATCH = 25;
-const LOAD_MORE_THRESHOLD = 350; // px
 
 interface UseSiteSearchPopupProps {
     open: boolean;
@@ -29,8 +27,15 @@ export function useSiteSearchPopup({
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
     const [keyboardNavigation, setKeyboardNavigation] = useState(false);
-    const [visibleResultCount, setVisibleResultCount] =
-        useState(RESULTS_PER_BATCH);
+
+    const {
+        visibleResultCount,
+        resetVisibleResults,
+        showResult,
+        handleContentScroll,
+    } = useProgressiveResults({
+        resultCount: searchResults.length,
+    });
 
     /*
      * Search
@@ -66,8 +71,8 @@ export function useSiteSearchPopup({
      * Reset the visible result count whenever the search query changes
      */
     useEffect(() => {
-        setVisibleResultCount(RESULTS_PER_BATCH);
-    }, [searchValue]);
+        resetVisibleResults();
+    }, [searchValue, resetVisibleResults]);
 
     /*
      * Input
@@ -160,19 +165,11 @@ export function useSiteSearchPopup({
     useEffect(() => {
         if (highlightedIndex === -1 || searchValue === "") return;
 
-        if (
-            highlightedIndex >= visibleResultCount &&
-            highlightedIndex < searchResults.length
-        ) {
-            setVisibleResultCount(
-                Math.min(
-                    Math.ceil((highlightedIndex + 1) / RESULTS_PER_BATCH) *
-                        RESULTS_PER_BATCH,
-                    searchResults.length,
-                ),
-            );
+        if (highlightedIndex >= visibleResultCount) {
+            showResult(highlightedIndex);
             return;
         }
+
         document
             .getElementById(navigationItems[highlightedIndex]?.url)
             ?.scrollIntoView({
@@ -184,33 +181,8 @@ export function useSiteSearchPopup({
         navigationItems,
         searchValue,
         visibleResultCount,
-        searchResults.length,
+        showResult,
     ]);
-
-    /*
-     * Progressive rendering based on scroll position
-     */
-    const handleContentScroll = useCallback(
-        (event: React.UIEvent<HTMLDivElement>) => {
-            if (searchValue === "") return;
-
-            const element = event.currentTarget;
-            const distanceFromBottom =
-                element.scrollHeight - element.scrollTop - element.clientHeight;
-            if (distanceFromBottom <= LOAD_MORE_THRESHOLD) {
-                setVisibleResultCount((count) => {
-                    if (count >= searchResults.length) {
-                        return count;
-                    }
-                    return Math.min(
-                        count + RESULTS_PER_BATCH,
-                        searchResults.length,
-                    );
-                });
-            }
-        },
-        [searchValue, searchResults.length],
-    );
 
     /*
      * Reset popup state when it opens.
@@ -219,8 +191,8 @@ export function useSiteSearchPopup({
         setHighlightedIndex(-1);
         setKeyboardNavigation(false);
         setSearchValue("");
-        setVisibleResultCount(RESULTS_PER_BATCH);
-    }, [open]);
+        resetVisibleResults();
+    }, [open, resetVisibleResults]);
 
     return {
         searchValue,

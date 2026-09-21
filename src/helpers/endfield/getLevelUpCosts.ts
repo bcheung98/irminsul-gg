@@ -8,12 +8,13 @@ import {
     characterSkill,
     weaponLevel,
 } from "@/data/endfield/levelUpCosts";
-import { getEndfieldMaterial } from "./getMaterials";
-import { EndfieldMaterials } from "@/types/endfield/materials";
-import { calculateCosts } from "../costs";
-import { EndfieldCharacterPassive } from "@/types/endfield/character";
+import { calculateCosts } from "@/helpers/costs";
+import { getEndfieldMaterialResolvers } from "./getMaterials";
+import { getTalentNodes } from "./getTalentNodes";
+import type { EndfieldMaterials } from "@/types/endfield/materials";
+import type { EndfieldCharacterPassive } from "@/types/endfield/character";
 
-const mats = getEndfieldMaterial();
+const { getMaterial } = getEndfieldMaterialResolvers();
 
 export interface GetLevelUpCostsProps {
     start?: number;
@@ -24,7 +25,6 @@ export interface GetLevelUpCostsProps {
     rarity?: number;
     materials: EndfieldMaterials;
     skillKey?: string;
-    baseSkills?: EndfieldCharacterPassive[];
     talents?: EndfieldCharacterPassive[];
 }
 
@@ -99,10 +99,10 @@ export function getCharacterLevelCost({
             item_plant_mushroom_1_1: fungi1,
             item_plant_mushroom_1_2: fungi2,
             item_plant_mushroom_1_3: fungi3,
-            [mats(materials.fungi).id]: fungi4,
+            [getMaterial(materials.fungi).id]: fungi4,
         },
         rare: {
-            [mats(materials.level).id]: level,
+            [getMaterial(materials.level).id]: level,
         },
     };
 }
@@ -159,17 +159,18 @@ export function getCharacterSkillCost({
             item_plant_crylplant_1_1: plant1,
             item_plant_crylplant_1_2: plant2,
             item_plant_crylplant_1_3: plant3,
-            [mats(materials.plant).id]: plant4,
+            [getMaterial(materials.plant).id]: plant4,
         },
         rare: {
-            [mats(materials["skillA"]).id]: ["attack", "combo"].includes(
+            [getMaterial(materials["skillA"]).id]: ["attack", "combo"].includes(
                 skillKey,
             )
                 ? skill
                 : 0,
-            [mats(materials["skillB"]).id]: ["skill", "ultimate"].includes(
-                skillKey,
-            )
+            [getMaterial(materials["skillB"]).id]: [
+                "skill",
+                "ultimate",
+            ].includes(skillKey)
                 ? skill
                 : 0,
         },
@@ -180,9 +181,9 @@ export function getCharacterAttributeCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterAttribute };
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,
@@ -199,12 +200,10 @@ export function getCharacterTalentCost({
     selected,
     talents,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected" | "talents">>) {
-    const levels = talents
-        .map((skill) => skill.levels.filter((i) => i != 0))
-        .flat();
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const levels = getTalentNodes(talents).map(({ level }) => level);
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = characterPassives(levels);
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,
@@ -220,9 +219,9 @@ export function getCharacterBaseSkillCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterBaseSkill[index < 2 ? 0 : 1] };
-    let { credits, prism1, prism2 } = costs;
+    const { credits, prism1, prism2 } = costs;
 
     return {
         credits: {
@@ -239,9 +238,9 @@ export function getCharacterOutfittingCost({
     skillKey,
     selected,
 }: Required<Pick<GetLevelUpCostsProps, "skillKey" | "selected">>) {
-    const index = Number(skillKey.slice(-1)[0]) - 1;
+    const index = Number(skillKey.slice(-1)) - 1;
     const costs = { ...characterOutfitting };
-    let { credits } = costs;
+    const { credits } = costs;
     return {
         credits: {
             item_gold: selected ? credits[index] : 0,
@@ -314,10 +313,10 @@ export function getWeaponLevelCost({
             item_plant_spcstone_1_1: mineral1,
             item_plant_spcstone_1_2: mineral2,
             item_plant_spcstone_1_3: mineral3,
-            [mats(materials.mineral).id]: mineral4,
+            [getMaterial(materials.mineral).id]: mineral4,
         },
         rare: {
-            [mats(materials.level).id]: level,
+            [getMaterial(materials.level).id]: level,
         },
     };
 }

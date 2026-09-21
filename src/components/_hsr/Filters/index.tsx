@@ -6,7 +6,7 @@ import RarityStars from "@/components/RarityStars";
 // Helper imports
 import { createFilterButtons } from "@/components/Filters";
 import { elements, weapons, rarities, worlds } from "@/data/hsr/common";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
 import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
@@ -17,7 +17,26 @@ export function hsrFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).hsr;
+    const { getMaterial, getMaterialCategory } = getMaterialResolvers(
+        "hsr",
+        hideUnreleasedContent,
+    );
+
+    const calyxMaterials = getMaterialCategory("calyx")
+        .filter((material) => !material.rarity)
+        .map((material) => material.tag || "");
+
+    const commonMaterials = getMaterialCategory("common")
+        .filter((material) => !material.rarity)
+        .map((material) => material.tag || "");
+
+    const bossMaterials = getMaterialCategory("boss").map(
+        (material) => material.tag || "",
+    );
+
+    const weeklyBossMaterials = getMaterialCategory("weekly").map(
+        (material) => material.tag || "",
+    );
 
     return {
         element: {
@@ -58,89 +77,63 @@ export function hsrFilters({
             name: "Calyx Material",
             tag: "calyxMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("calyx")
-                    .filter((material) => !material.rarity)
-                    .map((material) => material.tag || ""),
+                items: calyxMaterials,
                 url: "hsr/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("calyx").find(
-                        (material) => material.tag === `${item}3`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("calyx").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}3`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         commonMat: {
             name: "Common Material",
             tag: "commonMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("common")
-                    .filter((material) => !material.rarity)
-                    .map((material) => material.tag || ""),
+                items: commonMaterials,
                 url: "hsr/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === `${item}3`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}3`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         bossMat: {
             name: "Boss Material",
             tag: "bossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("boss").map(
-                    (material) => material.tag || "",
-                ),
+                items: bossMaterials,
                 url: "hsr/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
             tag: "weeklyBossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weekly").map(
-                    (material) => material.tag || "",
-                ),
+                items: weeklyBossMaterials,
                 url: "hsr/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name} (${mat.source})` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         nation: {
             name: "World",

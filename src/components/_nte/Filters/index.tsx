@@ -8,7 +8,7 @@ import { createFilterButtons } from "@/components/Filters";
 import { combatRoleNames, combatRoles } from "@/data/nte/combatRoles";
 import { elements, weapons, rarities } from "@/data/nte/common";
 import { weaponSubStats, NTEWeaponSubStat } from "@/data/nte/weaponStats";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
 import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
@@ -19,7 +19,30 @@ export function nteFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).nte;
+    const { getMaterial, getMaterialCategory } = getMaterialResolvers(
+        "nte",
+        hideUnreleasedContent,
+    );
+
+    const skillMaterials = getMaterialCategory("skill")
+        .filter((material) => material.rarity === 1)
+        .map((material) => material.tag || "");
+
+    const weaponMaterials = getMaterialCategory("weapon")
+        .filter((material) => material.rarity === 1)
+        .map((material) => material.tag || "");
+
+    const commonMaterials = getMaterialCategory("common")
+        .filter((material) => !material.rarity)
+        .map((material) => material.tag || "");
+
+    const bossMaterials = getMaterialCategory("boss").map(
+        (material) => material.tag || "",
+    );
+
+    const weeklyBossMaterials = getMaterialCategory("weekly")
+        .filter((material) => material.id.toString().endsWith("01"))
+        .map((material) => material.tag || "");
 
     return {
         element: {
@@ -88,113 +111,76 @@ export function nteFilters({
             name: "Skill Material",
             tag: "skillMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("skill")
-                    .filter((material) => material.rarity === 1)
-                    .map((material) => material.tag || ""),
+                items: skillMaterials,
                 url: "nte/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("skill").find(
-                        (material) => material.tag === `${item}3`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("skill").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}3`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         weaponMat: {
             name: "Weapon Material",
             tag: "weaponMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weapon")
-                    .filter((material) => material.rarity === 1)
-                    .map((material) => material.tag || ""),
+                items: weaponMaterials,
                 url: "nte/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("weapon").find(
-                        (material) => material.tag === `${item}3`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("weapon").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}3`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         commonMat: {
             name: "Common Material",
             tag: "commonMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("common")
-                    .filter((material) => !material.rarity)
-                    .map((material) => material.tag || ""),
+                items: commonMaterials,
                 url: "nte/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === `${item}3`,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
-                getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("common").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name}` : "";
-                },
+                getURL: (item: string) => `${getMaterial(`${item}3`).id}`,
+                getTooltip: (item: string) => getMaterial(item).name,
             }),
+            customMaterial: {
+                rarities: [2, 3, 4],
+            },
         },
         bossMat: {
             name: "Boss Material",
             tag: "bossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("boss").map(
-                    (material) => material.tag || "",
-                ),
+                items: bossMaterials,
                 url: "nte/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat
-                        ? `${mat.name}${mat.source ? ` (${mat.source})` : ""}`
-                        : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Weekly Boss Material",
             tag: "weeklyBossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weekly")
-                    .filter((material) => material.id.toString().endsWith("01"))
-                    .map((material) => material.tag || ""),
+                items: weeklyBossMaterials,
                 url: "nte/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name} (${mat.source})` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
             }),
+            customMaterial: {
+                rarities: [5],
+            },
         },
     };
 }

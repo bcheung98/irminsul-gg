@@ -16,12 +16,12 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { infoCardStyles } from "./InfoCard.styles";
 import { getImageURL } from "./InfoCard.utils";
 import { formatHref } from "@/utils";
-import { useMaterials } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import { useSettingsStore } from "@/stores";
 
 // Type imports
-import { InfoCardMaterialProps } from "./InfoCard.types";
-import { Game, GameData } from "@/types";
+import type { InfoCardMaterialProps } from "./InfoCard.types";
+import type { Game, GameData } from "@/types";
 
 export default function InfoCardMaterial({
     id,
@@ -85,7 +85,8 @@ export default function InfoCardMaterial({
             materialTag += nums[game];
         }
 
-        const material = useMaterials()[game](materialTag);
+        const { getMaterial } = getMaterialResolvers(game);
+        const material = getMaterial(materialTag);
 
         let imgURL = `${game}/materials/${material.id}`;
 

@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import type { Game, GameData } from "@/types";
 import type { FilterGroups, FilterGroupsProps } from "@/types/filters";
 import { useStore, useSettingsStore } from "@/stores";
@@ -33,8 +35,15 @@ export function useFilterGroups(
         useSettingsStore,
         (state) => state.hideUnreleasedContent,
     );
-    return filterGroups(game, {
-        ...props,
-        hideUnreleasedContent,
-    });
+
+    const { key } = props;
+
+    return useMemo(
+        () =>
+            filterGroups(game, {
+                key,
+                hideUnreleasedContent,
+            }),
+        [game, key, hideUnreleasedContent],
+    );
 }

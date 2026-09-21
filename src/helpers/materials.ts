@@ -1,46 +1,85 @@
-import {
-    getGenshinMaterial,
-    getGenshinMaterialCategory,
-} from "@/helpers/genshin/getMaterials";
-import { getHSRMaterial, getHSRMaterialCategory } from "./hsr/getMaterials";
-import { getWuWaMaterial, getWuWaMaterialCategory } from "./wuwa/getMaterials";
-import { GameData } from "@/types";
-import { Material } from "@/types/materials";
-import { getZZZMaterial, getZZZMaterialCategory } from "./zzz/getMaterials";
-import {
-    getEndfieldMaterial,
-    getEndfieldMaterialCategory,
-} from "./endfield/getMaterials";
-import { getNTEMaterial, getNTEMaterialCategory } from "./nte/getMaterials";
+import type { Game } from "@/types";
+import type {
+    CustomMaterials,
+    MaterialResolvers,
+    ResolvedCustomMaterial,
+} from "@/types/materials";
+import { getGenshinMaterialResolvers } from "@/helpers/genshin/getMaterials";
+import { getHSRMaterialResolvers } from "./hsr/getMaterials";
+import { getWuWaMaterialResolvers } from "./wuwa/getMaterials";
+import { getZZZMaterialResolvers } from "./zzz/getMaterials";
+import { getEndfieldMaterialResolvers } from "./endfield/getMaterials";
+import { getNTEMaterialResolvers } from "./nte/getMaterials";
 
-export function useMaterials(
+/**
+ * Returns the precomputed material resolvers for the specified game,
+ * selecting the appropriate dataset based on the unreleased content setting.
+ * @returns
+ * - `getMaterial`: Look up a material by ID, name, or tag.
+ * - `getMaterialCategory`: Get all materials belonging to a category.
+ */
+export function getMaterialResolvers(
+    game: Game,
     hideUnreleasedContent = false,
-): GameData<(material: string | number) => Material> {
-    return {
-        genshin: getGenshinMaterial(hideUnreleasedContent),
-        hsr: getHSRMaterial(hideUnreleasedContent),
-        wuwa: getWuWaMaterial(hideUnreleasedContent),
-        zzz: getZZZMaterial(hideUnreleasedContent),
-        uma: function (): Material {
-            throw new Error("Function not implemented.");
-        },
-        endfield: getEndfieldMaterial(hideUnreleasedContent),
-        nte: getNTEMaterial(hideUnreleasedContent),
-    };
+): MaterialResolvers {
+    switch (game) {
+        case "genshin":
+            return getGenshinMaterialResolvers(hideUnreleasedContent);
+        case "hsr":
+            return getHSRMaterialResolvers(hideUnreleasedContent);
+        case "wuwa":
+            return getWuWaMaterialResolvers(hideUnreleasedContent);
+        case "zzz":
+            return getZZZMaterialResolvers(hideUnreleasedContent);
+        case "uma":
+            return umaMaterialResolvers;
+        case "endfield":
+            return getEndfieldMaterialResolvers(hideUnreleasedContent);
+        case "nte":
+            return getNTEMaterialResolvers(hideUnreleasedContent);
+    }
 }
 
-export function useMaterialsCategory(
-    hideUnreleasedContent = false,
-): GameData<(category: string) => Material[]> {
+// Uma doesn't have materials.
+const umaMaterialResolvers: MaterialResolvers = {
+    getMaterial() {
+        throw new Error("Uma materials not implemented.");
+    },
+    getMaterialCategory() {
+        throw new Error("Uma materials not implemented.");
+    },
+};
+
+/** Returns resolved custom material data. */
+export function getCustomMaterial(
+    material: string | number,
+    customMaterials?: CustomMaterials,
+): ResolvedCustomMaterial | undefined {
+    if (typeof material !== "string" || !material.startsWith("custom-")) {
+        return;
+    }
+
+    const direct = customMaterials?.[material];
+
+    if (direct) {
+        return {
+            id: material,
+            name: direct.name,
+            rarity: direct.rarities[0],
+        };
+    }
+
+    const match = material.match(/^(custom-.+)-(\d+)$/);
+    if (!match) return;
+
+    const [, id, tier] = match;
+    const customMaterial = customMaterials?.[id];
+
+    if (!customMaterial) return;
+
     return {
-        genshin: getGenshinMaterialCategory(hideUnreleasedContent),
-        hsr: getHSRMaterialCategory(hideUnreleasedContent),
-        wuwa: getWuWaMaterialCategory(hideUnreleasedContent),
-        zzz: getZZZMaterialCategory(hideUnreleasedContent),
-        uma: function (): Material[] {
-            throw new Error("Function not implemented.");
-        },
-        endfield: getEndfieldMaterialCategory(hideUnreleasedContent),
-        nte: getNTEMaterialCategory(hideUnreleasedContent),
+        id: material,
+        name: `${customMaterial.name} ${tier}`,
+        rarity: customMaterial.rarities[Number(tier) - 1],
     };
 }

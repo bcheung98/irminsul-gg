@@ -1,6 +1,6 @@
-import { GenshinMaterialCategory } from "@/types/genshin/materials";
-import { useMaterialsCategory } from "../materials";
-import { Day } from "../dates";
+import { getMaterialResolvers } from "@/helpers/materials";
+import { Day } from "@/helpers/dates";
+import type { GenshinMaterialCategory } from "@/types/genshin/materials";
 
 export function getFarmableMaterials(day: Day, hideUnreleasedContent = false) {
     let index = -1;
@@ -20,22 +20,35 @@ export function getFarmableMaterials(day: Day, hideUnreleasedContent = false) {
         case "Sunday":
             break;
     }
-    return {
-        characterMats: getMaterials("talent", index, hideUnreleasedContent),
-        weaponMats: getMaterials("weapon", index, hideUnreleasedContent),
-    };
+
+    const characterMats = filterFarmableMaterials(
+        "talent",
+        index,
+        hideUnreleasedContent,
+    );
+
+    const weaponMats = filterFarmableMaterials(
+        "weapon",
+        index,
+        hideUnreleasedContent,
+    );
+
+    return { characterMats, weaponMats };
 }
 
-function getMaterials(
+function filterFarmableMaterials(
     category: Extract<GenshinMaterialCategory, "talent" | "weapon">,
     index: number,
-    hideUnreleasedContent = false
+    hideUnreleasedContent = false,
 ) {
     const dropDates = ["Mon/Thu", "Tue/Fri", "Wed/Sat"];
 
-    const materials = useMaterialsCategory(hideUnreleasedContent).genshin(
-        category
+    const { getMaterialCategory } = getMaterialResolvers(
+        "genshin",
+        hideUnreleasedContent,
     );
+
+    const materials = getMaterialCategory(category);
 
     return index === -1
         ? materials
@@ -45,7 +58,7 @@ function getMaterials(
               .filter(
                   (material) =>
                       material.source === dropDates[index] &&
-                      (!material.rarity || material.rarity === 1)
+                      (!material.rarity || material.rarity === 1),
               )
               .map((material) => material.tag);
 }

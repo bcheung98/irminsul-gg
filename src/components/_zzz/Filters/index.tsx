@@ -13,7 +13,7 @@ import {
     factions,
 } from "@/data/zzz/common";
 import { weaponSubStats, ZZZWeaponSubStat } from "@/data/zzz/weaponStats";
-import { useMaterialsCategory } from "@/helpers/materials";
+import { getMaterialResolvers } from "@/helpers/materials";
 import { objectKeys } from "@/utils";
 
 // Type imports
@@ -26,7 +26,17 @@ export function zzzFilters({
     key,
     hideUnreleasedContent = false,
 }: FilterGroupsProps): FilterGroups {
-    const getMaterialCategory = useMaterialsCategory(hideUnreleasedContent).zzz;
+    const { getMaterial, getMaterialCategory } = getMaterialResolvers(
+        "zzz",
+        hideUnreleasedContent,
+    );
+
+    const bossMaterials = getMaterialCategory("boss").map(
+        (material) => material.tag || "",
+    );
+    const weeklyBossMaterials = getMaterialCategory("weekly").map(
+        (material) => material.tag || "",
+    );
 
     return {
         element: {
@@ -80,47 +90,39 @@ export function zzzFilters({
             name: "Expert Challenge Material",
             tag: "bossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("boss").map(
-                    (material) => material.tag || "",
-                ),
+                items: bossMaterials,
                 url: "zzz/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("boss").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name} (${mat.source})` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
                 imgFormat: "gif",
             }),
+            customMaterial: {
+                rarities: [4],
+            },
         },
         weeklyBossMat: {
             name: "Notorious Hunt Material",
             tag: "weeklyBossMat",
             buttons: createFilterButtons({
-                items: getMaterialCategory("weekly").map(
-                    (material) => material.tag || "",
-                ),
+                items: weeklyBossMaterials,
                 url: "zzz/materials",
-                getURL: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.id}` : "0";
-                },
+                getURL: (item: string) => `${getMaterial(item).id}`,
                 getTooltip: (item: string) => {
-                    const mat = getMaterialCategory("weekly").find(
-                        (material) => material.tag === item,
-                    );
-                    return mat ? `${mat.name} (${mat.source})` : "";
+                    const mat = getMaterial(item);
+                    return mat.source
+                        ? `${mat.name} (${mat.source})`
+                        : mat.name;
                 },
                 imgFormat: "gif",
             }),
+            customMaterial: {
+                rarities: [5],
+            },
         },
         nation: {
             name: "Faction",

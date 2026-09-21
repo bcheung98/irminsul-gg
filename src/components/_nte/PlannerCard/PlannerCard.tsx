@@ -23,7 +23,7 @@ import {
 } from "@/components/PlannerCardRoot/PlannerCard.utils";
 
 // Type imports
-import { CostSliderValues, PlannerType } from "@/types/planner";
+import type { CostSliderValues, PlannerType } from "@/types/planner";
 
 export default function NTEPlannerCard() {
     const theme = useTheme();
@@ -49,12 +49,6 @@ export default function NTEPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
-        selected: true,
-    };
-
-    const defaultNodeValues: CostSliderValues = {
-        start: 0,
-        stop: 0,
         selected: true,
     };
 
@@ -90,14 +84,8 @@ export default function NTEPlannerCard() {
         },
     ];
 
-    // Remove old life skill values
-    delete item.values.life;
-    if (!item.lifeSkills) {
-        item.lifeSkills = [1004].includes(item.id) ? [5, 2] : [5];
-    }
-
     const lifeSkills: SliderList = [];
-    item.lifeSkills.forEach((x, i) =>
+    item.lifeSkills?.forEach((x, i) =>
         lifeSkills.push({
             skillKey: `life${i + 1}`,
             levels: range(0, x),
@@ -109,16 +97,9 @@ export default function NTEPlannerCard() {
             title:
                 item.lifeSkills!.length > 1
                     ? `Life Skills ${i + 1}`
-                    : "Life Skils",
+                    : "Life Skills",
             icon: `nte/skills/${item.id}_life${i ? i : ""}`,
         }),
-    );
-
-    const nodes = Object.fromEntries(
-        range(1, 2).map((index) => [
-            `passive${index}`,
-            item.values[`passive${index}`] || defaultNodeValues,
-        ]),
     );
 
     const textColor = useTextColor(theme.text);
@@ -175,7 +156,7 @@ export default function NTEPlannerCard() {
                             key={`passive${index}`}
                             id={`passive${index}`}
                             mode={mode}
-                            values={nodes}
+                            values={item.values}
                             attributes={{ ...item }}
                         />
                     ))}

@@ -1,10 +1,10 @@
-import { BaseData, Gender, VoiceActorData } from "@/types";
-import { HSRElement, HSRRarity, HSRWeaponType, HSRWorld } from ".";
-import { VersionWithDate } from "../version";
-import { CharacterOutfit, CharacterStats } from "@/types/character";
-import { characterBonusStats } from "@/data/hsr/characterBonusStats";
-import { HSRCharacterMaterials } from "./materials";
-import {
+import type { BaseData, Gender, VoiceActorData } from "@/types";
+import type { HSRElement, HSRRarity, HSRWeaponType, HSRWorld } from ".";
+import type { VersionWithDate } from "../version";
+import type { CharacterOutfit, CharacterStats } from "@/types/character";
+import type { characterBonusStats } from "@/data/hsr/characterBonusStats";
+import type { HSRCharacterMaterials } from "./materials";
+import type {
     CharacterSkillsList,
     Skill,
     SkillKeyword,
@@ -24,7 +24,7 @@ export interface HSRCharacter extends BaseData {
     stats: HSRCharacterStats;
     materials: HSRCharacterMaterials;
     description: string;
-    gender: Gender
+    gender: Gender;
     faction: string;
     world: HSRWorld;
     outfits: CharacterOutfit[];
@@ -78,6 +78,8 @@ export type HSRCharacterUnlockKeys =
     | "A6"
     | "Lv. 75"
     | "Lv. 80";
+
+export type HSRCharacterTraceStats = Record<string, BonusStat>;
 
 export interface HSRCharacterTraceNodeData {
     id: string;

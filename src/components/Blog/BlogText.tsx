@@ -27,6 +27,20 @@ export function H6({ children }: TextProps) {
     );
 }
 
+export function SubHeader({ children, weight = "highlight", sx }: TextProps) {
+    return (
+        <Text
+            weight={weight}
+            sx={{
+                ...sx,
+            }}
+            gutterBottom
+        >
+            {children}
+        </Text>
+    );
+}
+
 export function Description({ children, weight, sx }: TextProps) {
     const theme = useTheme();
 
@@ -35,6 +49,25 @@ export function Description({ children, weight, sx }: TextProps) {
             variant="subtitle1"
             weight={weight}
             sx={{
+                color: theme.text.description,
+                ...sx,
+            }}
+            gutterBottom
+        >
+            {children}
+        </Text>
+    );
+}
+
+export function DescriptionSmall({ children, weight, sx }: TextProps) {
+    const theme = useTheme();
+
+    return (
+        <Text
+            variant="body2"
+            weight={weight}
+            sx={{
+                lineHeight: theme.typography.subtitle2.lineHeight,
                 color: theme.text.description,
                 ...sx,
             }}

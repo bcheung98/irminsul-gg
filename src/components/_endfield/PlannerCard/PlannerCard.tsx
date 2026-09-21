@@ -21,9 +21,10 @@ import {
     usePlannerCardData,
     usePlannerCardMode,
 } from "@/components/PlannerCardRoot/PlannerCard.utils";
+import { getTalentNodes } from "@/helpers/endfield/getTalentNodes";
 
 // Type imports
-import { CostSliderValues, PlannerType } from "@/types/planner";
+import type { CostSliderValues, PlannerType } from "@/types/planner";
 
 export default function EndfieldPlannerCard() {
     const theme = useTheme();
@@ -49,12 +50,6 @@ export default function EndfieldPlannerCard() {
     const defaultSkillValues: CostSliderValues = {
         start: 1,
         stop: skillLevel.length,
-        selected: true,
-    };
-
-    const defaultNodeValues: CostSliderValues = {
-        start: 0,
-        stop: 0,
         selected: true,
     };
 
@@ -90,37 +85,7 @@ export default function EndfieldPlannerCard() {
         },
     ];
 
-    const attributes = Object.fromEntries(
-        range(1, 4).map((index) => [
-            `attribute${index}`,
-            item.values[`attribute${index}`] || defaultNodeValues,
-        ]),
-    );
-
-    const talents = Object.fromEntries(
-        (
-            item.talents
-                ?.map((talent) => talent.levels.filter((i) => i !== 0))
-                .flat() || []
-        ).map((_, index) => [
-            `talent${index + 1}`,
-            item.values[`talent${index + 1}`] || defaultNodeValues,
-        ]),
-    );
-
-    const baseSkills = Object.fromEntries(
-        range(1, 4).map((index) => [
-            `baseSkill${index}`,
-            item.values[`baseSkill${index}`] || defaultNodeValues,
-        ]),
-    );
-
-    const outfitting = Object.fromEntries(
-        range(1, 3).map((index) => [
-            `outfitting${index}`,
-            item.values[`outfitting${index}`] || defaultNodeValues,
-        ]),
-    );
+    const talentCount = getTalentNodes(item.talents ?? []).length;
 
     const textColor = useTextColor(theme.text);
     const color =
@@ -153,25 +118,29 @@ export default function EndfieldPlannerCard() {
             {type === "characters" && (
                 <Stack spacing={2}>
                     <FlexBox spacing={2}>
-                        {Object.keys(talents).map((key) => (
+                        {range(1, talentCount).map((index) => (
                             <StatNode
-                                key={key}
-                                id={key}
+                                key={`talent${index}`}
+                                id={`talent${index}`}
                                 mode={mode}
-                                values={talents}
+                                values={item.values}
                                 talents={item.talents}
                                 attributes={{ ...item }}
                             />
                         ))}
                     </FlexBox>
-                    {item.id !== 1003 && (
+                    {!!item.baseSkills?.length && (
                         <FlexBox spacing={2}>
-                            {Object.keys(baseSkills).map((key) => (
+                            {range(
+                                1,
+                                item.baseSkills.flatMap((skill) => skill.levels)
+                                    .length,
+                            ).map((index) => (
                                 <StatNode
-                                    key={key}
-                                    id={key}
+                                    key={`baseSkill${index}`}
+                                    id={`baseSkill${index}`}
                                     mode={mode}
-                                    values={baseSkills}
+                                    values={item.values}
                                     baseSkills={item.baseSkills}
                                     attributes={{ ...item }}
                                 />
@@ -184,7 +153,7 @@ export default function EndfieldPlannerCard() {
                                 key={`attribute${i}`}
                                 id={`attribute${i}`}
                                 mode={mode}
-                                values={attributes}
+                                values={item.values}
                                 mainAttribute={item.mainAttribute}
                                 attributes={{ ...item }}
                             />
@@ -196,7 +165,7 @@ export default function EndfieldPlannerCard() {
                                 key={`outfitting${i}`}
                                 id={`outfitting${i}`}
                                 mode={mode}
-                                values={outfitting}
+                                values={item.values}
                                 attributes={{ ...item }}
                             />
                         ))}

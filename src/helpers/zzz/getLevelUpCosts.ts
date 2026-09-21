@@ -5,12 +5,13 @@ import {
     characterCoreSkill,
     weaponLevel,
 } from "@/data/zzz/levelUpCosts";
-import { getZZZMaterial } from "./getMaterials";
-import { ZZZElement, ZZZRarity, ZZZWeaponType } from "@/types/zzz";
-import { ZZZMaterials } from "@/types/zzz/materials";
-import { calculateCosts } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getZZZMaterialResolvers } from "./getMaterials";
+import type { ZZZMaterials } from "@/types/zzz/materials";
+import type { ZZZElement, ZZZRarity, ZZZWeaponType } from "@/types/zzz";
 
-const mats = getZZZMaterial();
+const { getMaterial } = getZZZMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 export interface GetLevelUpCostsProps {
     start?: number;
@@ -73,9 +74,9 @@ export function getCharacterLevelCost({
             300003: characterXP3,
         },
         characterLevel: {
-            [mats(`Character${weaponType}1`).id]: characterLevel1,
-            [mats(`Character${weaponType}2`).id]: characterLevel2,
-            [mats(`Character${weaponType}3`).id]: characterLevel3,
+            [materialId(`Character${weaponType}`, 1)]: characterLevel1,
+            [materialId(`Character${weaponType}`, 2)]: characterLevel2,
+            [materialId(`Character${weaponType}`, 3)]: characterLevel3,
         },
     };
 }
@@ -104,9 +105,9 @@ export function getCharacterSkillCost({
             10: credits,
         },
         characterSkill: {
-            [mats(`${element}1`).id]: characterSkill1,
-            [mats(`${element}2`).id]: characterSkill2,
-            [mats(`${element}3`).id]: characterSkill3,
+            [materialId(`${element}`, 1)]: characterSkill1,
+            [materialId(`${element}`, 2)]: characterSkill2,
+            [materialId(`${element}`, 3)]: characterSkill3,
         },
         crown: { 100941: crown },
     };
@@ -130,10 +131,10 @@ export function getCharacterCoreSkillCost({
             10: credits,
         },
         boss: {
-            [mats(materials.boss).id]: boss,
+            [materialId(materials.boss)]: boss,
         },
         weekly: {
-            [mats(materials.weekly).id]: weekly,
+            [materialId(materials.weekly)]: weekly,
         },
     };
 }
@@ -189,9 +190,9 @@ export function getWeaponLevelCost({
             301003: weaponXP3,
         },
         weaponLevel: {
-            [mats(`Weapon${weaponType}1`).id]: weaponLevel1,
-            [mats(`Weapon${weaponType}2`).id]: weaponLevel2,
-            [mats(`Weapon${weaponType}3`).id]: weaponLevel3,
+            [materialId(`Weapon${weaponType}`, 1)]: weaponLevel1,
+            [materialId(`Weapon${weaponType}`, 2)]: weaponLevel2,
+            [materialId(`Weapon${weaponType}`, 3)]: weaponLevel3,
         },
     };
 }

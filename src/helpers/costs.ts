@@ -1,5 +1,6 @@
-import { GameData } from "@/types";
-import { CostArray, CostValue } from "@/types/costs";
+import type { GameData } from "@/types";
+import type { MaterialResolver } from "@/types/materials";
+import type { CostArray, CostValue } from "@/types/costs";
 import {
     getCharacterLevelCost as getGenshinCharacterLevelCost,
     getCharacterSkillCost as getGenshinCharacterSkillCost,
@@ -97,4 +98,13 @@ export function calculateCosts(costs: CostArray, start: number, stop: number) {
     return Object.values(costs).map((arr) =>
         arr.slice(start, stop).reduce((a, c) => a + c),
     );
+}
+
+export function createMaterialIdResolver(mats: MaterialResolver) {
+    return (material: string | number, tier?: number) => {
+        if (typeof material === "string" && material.startsWith("custom-")) {
+            return tier ? `${material}-${tier}` : material;
+        }
+        return mats(tier === undefined ? material : `${material}${tier}`).id;
+    };
 }

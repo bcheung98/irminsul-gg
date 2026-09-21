@@ -16,7 +16,6 @@ export interface ImageProps {
     responsive?: boolean;
     responsiveSize?: number;
     onClick?: () => void;
-    useNext?: boolean;
     supressLoadImageWarning?: boolean;
     format?: "png" | "gif" | "webp";
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // Component imports
 import PlannerSelectorPopup from "./PlannerSelectorPopup";
@@ -8,7 +8,6 @@ import TextLabel from "@/components/TextLabel";
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import { SvgIconOwnProps } from "@mui/material/SvgIcon";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -16,8 +15,9 @@ import { categories } from "@/data/categories";
 import { usePlannerStore } from "@/stores";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { PlannerItemData, PlannerType } from "@/types/planner";
+import type { GameNoUma } from "@/types";
+import type { PlannerItemData, PlannerType } from "@/types/planner";
+import type { SvgIconOwnProps } from "@mui/material/SvgIcon";
 
 export default function PlannerSelector({ type }: { type: PlannerType }) {
     const theme = useTheme();
@@ -28,18 +28,17 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
     const handleSearchOpen = () => setSearchOpen(true);
     const handleSearchClose = () => setSearchOpen(false);
 
-    const store = usePlannerStore();
-
-    const items = store[`${game}/items`];
-
-    const handleSelect = (item: PlannerItemData) => {
-        const newValues = [...items];
-        newValues.push(item);
-        usePlannerStore.setState(() => ({
-            [`${game}/items`]: newValues,
-        }));
-        setSearchOpen(false);
-    };
+    const handleSelect = useCallback(
+        (item: PlannerItemData | null) => {
+            if (item) {
+                usePlannerStore.setState((state) => ({
+                    [`${game}/items`]: [item, ...state[`${game}/items`]],
+                }));
+            }
+            setSearchOpen(false);
+        },
+        [game],
+    );
 
     const iconProps: SvgIconOwnProps = {
         sx: {
@@ -51,12 +50,14 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
         },
     };
 
+    const categoryLabel = categories[`${game}/${type}`].slice(0, -1);
+
     return (
         <>
             <Button onClick={handleSearchOpen} variant="contained" color="info">
                 <TextLabel
                     icon={<AddIcon {...iconProps} />}
-                    title={`Add ${categories[`${game}/${type}`].slice(0, -1)}`}
+                    title={`Add ${categoryLabel}`}
                     titleProps={{ variant: "subtitle2" }}
                 />
             </Button>
@@ -66,6 +67,7 @@ export default function PlannerSelector({ type }: { type: PlannerType }) {
                 onClose={handleSearchClose}
                 handleSelect={handleSelect}
                 type={type}
+                categoryLabel={categoryLabel}
             />
         </>
     );

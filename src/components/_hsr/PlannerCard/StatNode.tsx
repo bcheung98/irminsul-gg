@@ -14,21 +14,32 @@ import Stack from "@mui/material/Stack";
 import { usePlannerStore } from "@/stores";
 import { formatCharacterBonusStats } from "../CharacterTraces/CharacterTraces.utils";
 import { characterBonusStats } from "@/data/hsr/characterBonusStats";
-import { incrementTraceNodeID } from "@/helpers/hsr/incrementTraceNodeID";
+import { incrementTraceNodeID } from "@/helpers/hsr/characterTraces";
 
 // Type imports
-import {
+import type {
     HSRCharacterTraceNodeMain,
     HSRCharacterTraceNodeSmall,
+    HSRCharacterTraceStats,
 } from "@/types/hsr/character";
-import { CardMode, CostSliderValues } from "@/types/planner";
-import { AttributeData } from "@/types";
+import type {
+    CardMode,
+    CostSliderValues,
+    PlannerItemData,
+} from "@/types/planner";
+
+const defaultNodeValues: CostSliderValues = {
+    start: 0,
+    stop: 0,
+    selected: true,
+};
 
 interface StatNodeProps {
     id: string;
     mode: CardMode;
-    attributes: AttributeData;
+    attributes: PlannerItemData;
     trace: HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall;
+    traceStats?: HSRCharacterTraceStats;
     values: Record<string, CostSliderValues>;
 }
 
@@ -37,11 +48,14 @@ export default function StatNode({
     mode,
     attributes,
     trace,
+    traceStats,
     values,
 }: StatNodeProps) {
     const theme = useTheme();
 
-    const [selected, setSelected] = useState(values[`trace-${id}`].selected);
+    const nodeValues = values[`trace-${id}`] ?? defaultNodeValues;
+
+    const [selected, setSelected] = useState(nodeValues.selected);
     const handleSelect = () => {
         setSelected(!selected);
     };
@@ -52,15 +66,26 @@ export default function StatNode({
     let imgSrc = "";
     let imgSize = 40;
     let unlock = trace.unlock;
+    const stat = traceStats?.[id];
 
+    // Main trace node
     if ("name" in trace) {
         title = `${unlock} Trace`;
-        imgSrc = `hsr/skills/${attributes.id}_${unlock.toLowerCase()}`;
-    } else {
-        title = `${formatCharacterBonusStats(trace.stat)} +${
-            characterBonusStats[trace.stat][unlock]
+        if (!attributes.custom) {
+            imgSrc = `hsr/skills/${attributes.id}_${unlock.toLowerCase()}`;
+        }
+    }
+    // Minor trace node
+    else if (stat) {
+        title = `${formatCharacterBonusStats(stat)} +${
+            characterBonusStats[stat][unlock]
         } (${unlock})`;
-        imgSrc = `hsr/icons/stat-icons/${trace.stat}`;
+        imgSrc = `hsr/icons/stat-icons/${stat}`;
+        imgSize = 32;
+    }
+    // Custom minor trace node
+    else {
+        title = `${id} (${unlock})`;
         imgSize = 32;
     }
 
@@ -112,6 +137,7 @@ export default function StatNode({
                                     mode={mode}
                                     attributes={attributes}
                                     trace={subTrace}
+                                    traceStats={traceStats}
                                     values={values}
                                 />
                                 <Xarrow

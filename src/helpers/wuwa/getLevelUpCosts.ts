@@ -6,11 +6,12 @@ import {
     characterSkill,
     weaponLevel,
 } from "@/data/wuwa/levelUpCosts";
-import { getWuWaMaterial } from "./getMaterials";
-import { WuWaMaterials } from "@/types/wuwa/materials";
-import { calculateCosts } from "../costs";
+import { calculateCosts, createMaterialIdResolver } from "@/helpers/costs";
+import { getWuWaMaterialResolvers } from "./getMaterials";
+import type { WuWaMaterials } from "@/types/wuwa/materials";
 
-const mats = getWuWaMaterial();
+const { getMaterial } = getWuWaMaterialResolvers();
+const materialId = createMaterialIdResolver(getMaterial);
 
 export interface GetLevelUpCostsProps {
     start?: number;
@@ -83,16 +84,16 @@ export function getCharacterLevelCost({
             43010004: characterXP4,
         },
         boss: {
-            [mats(materials.boss).id]: boss,
+            [materialId(materials.boss)]: boss,
         },
         local: {
-            [mats(materials.local).id]: local,
+            [materialId(materials.local)]: local,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
-            [mats(`${materials.common}4`).id]: common4,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
+            [materialId(materials.common, 4)]: common4,
         },
     };
 }
@@ -137,19 +138,19 @@ export function getCharacterSkillCost({
             2: credits,
         },
         weekly: {
-            [mats(materials.weekly).id]: weekly,
+            [materialId(materials.weekly)]: weekly,
         },
         forgery: {
-            [mats(`${materials.forgery}1`).id]: forgery1,
-            [mats(`${materials.forgery}2`).id]: forgery2,
-            [mats(`${materials.forgery}3`).id]: forgery3,
-            [mats(`${materials.forgery}4`).id]: forgery4,
+            [materialId(materials.forgery, 1)]: forgery1,
+            [materialId(materials.forgery, 2)]: forgery2,
+            [materialId(materials.forgery, 3)]: forgery3,
+            [materialId(materials.forgery, 4)]: forgery4,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
-            [mats(`${materials.common}4`).id]: common4,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
+            [materialId(materials.common, 4)]: common4,
         },
     };
 }
@@ -168,23 +169,23 @@ export function getCharacterPassiveCost({
             2: selected && credits ? credits : 0,
         },
         weekly: {
-            [mats(materials.weekly).id]: selected && weekly ? weekly : 0,
+            [materialId(materials.weekly)]: selected && weekly ? weekly : 0,
         },
         forgery: {
-            [mats(`${materials.forgery}1`).id]: 0,
-            [mats(`${materials.forgery}2`).id]:
+            [materialId(materials.forgery, 1)]: 0,
+            [materialId(materials.forgery, 2)]:
                 selected && forgery2 ? forgery2 : 0,
-            [mats(`${materials.forgery}3`).id]:
+            [materialId(materials.forgery, 3)]:
                 selected && forgery3 ? forgery3 : 0,
-            [mats(`${materials.forgery}4`).id]: 0,
+            [materialId(materials.forgery, 4)]: 0,
         },
         common: {
-            [mats(`${materials.common}1`).id]: 0,
-            [mats(`${materials.common}2`).id]:
+            [materialId(materials.common, 1)]: 0,
+            [materialId(materials.common, 2)]:
                 selected && common2 ? common2 : 0,
-            [mats(`${materials.common}3`).id]:
+            [materialId(materials.common, 3)]:
                 selected && common3 ? common3 : 0,
-            [mats(`${materials.common}4`).id]: 0,
+            [materialId(materials.common, 4)]: 0,
         },
     };
 }
@@ -203,22 +204,22 @@ export function getCharacterBonusStatCost({
             2: selected && credits ? credits : 0,
         },
         weekly: {
-            [mats(materials.weekly).id]: selected && weekly ? weekly : 0,
+            [materialId(materials.weekly)]: selected && weekly ? weekly : 0,
         },
         forgery: {
-            [mats(`${materials.forgery}1`).id]: 0,
-            [mats(`${materials.forgery}2`).id]: 0,
-            [mats(`${materials.forgery}3`).id]:
+            [materialId(materials.forgery, 1)]: 0,
+            [materialId(materials.forgery, 2)]: 0,
+            [materialId(materials.forgery, 3)]:
                 selected && forgery3 ? forgery3 : 0,
-            [mats(`${materials.forgery}4`).id]:
+            [materialId(materials.forgery, 4)]:
                 selected && forgery4 ? forgery4 : 0,
         },
         common: {
-            [mats(`${materials.common}1`).id]: 0,
-            [mats(`${materials.common}2`).id]: 0,
-            [mats(`${materials.common}3`).id]:
+            [materialId(materials.common, 1)]: 0,
+            [materialId(materials.common, 2)]: 0,
+            [materialId(materials.common, 3)]:
                 selected && common3 ? common3 : 0,
-            [mats(`${materials.common}4`).id]:
+            [materialId(materials.common, 4)]:
                 selected && common4 ? common4 : 0,
         },
     };
@@ -288,16 +289,16 @@ export function getWeaponLevelCost({
             43020004: weaponXP4,
         },
         forgery: {
-            [mats(`${materials.forgery}1`).id]: forgery1,
-            [mats(`${materials.forgery}2`).id]: forgery2,
-            [mats(`${materials.forgery}3`).id]: forgery3,
-            [mats(`${materials.forgery}4`).id]: forgery4,
+            [materialId(materials.forgery, 1)]: forgery1,
+            [materialId(materials.forgery, 2)]: forgery2,
+            [materialId(materials.forgery, 3)]: forgery3,
+            [materialId(materials.forgery, 4)]: forgery4,
         },
         common: {
-            [mats(`${materials.common}1`).id]: common1,
-            [mats(`${materials.common}2`).id]: common2,
-            [mats(`${materials.common}3`).id]: common3,
-            [mats(`${materials.common}4`).id]: common4,
+            [materialId(materials.common, 1)]: common1,
+            [materialId(materials.common, 2)]: common2,
+            [materialId(materials.common, 3)]: common3,
+            [materialId(materials.common, 4)]: common4,
         },
     };
 }
