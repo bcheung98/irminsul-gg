@@ -10,6 +10,7 @@ import {
 } from "@/components/VirtualizedAutocomplete";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Autocomplete from "@mui/material/Autocomplete";
 
 // Helper imports
@@ -92,6 +93,8 @@ function BannerRow({
     disabled,
     style,
 }: VirtualizedRowProps<BannerOption>) {
+    const theme = useTheme();
+
     const game = useGameTag();
     const rarityColors = useRarityColors()[game];
 
@@ -108,7 +111,27 @@ function BannerRow({
     }
 
     return (
-        <MenuItem {...optionProps} disabled={disabled} sx={style}>
+        <MenuItem
+            {...optionProps}
+            disabled={disabled}
+            sx={{
+                ...style,
+                "&.MuiMenuItem-root": {
+                    "&:hover": {
+                        backgroundColor: theme.menu.backgroundColor.primary,
+                    },
+                    "&.Mui-focused": {
+                        backgroundColor: theme.menu.backgroundColor.hover,
+                    },
+                    "&.Mui-selected": {
+                        backgroundColor: theme.palette.info.main,
+                        "&:hover, &.Mui-focused": {
+                            backgroundColor: theme.palette.info.light,
+                        },
+                    },
+                },
+            }}
+        >
             <TextLabel
                 icon={categoryImgURLs[`${game}/${option.category}`](option.id)}
                 iconProps={{
