@@ -1,5 +1,12 @@
 export const blogList = [
     {
+        slug: "irminsul-gg-2nd-anni",
+        title: "Irminsul.GG 2nd Anniversary Changelog",
+        description:
+            "Thanks for two years of Irminsul.GG! Check out what's new in the latest update.",
+        date: "2026-09-21 10:00:00",
+    },
+    {
         slug: "nte-update",
         title: "Neverness to Everness is here!",
         description: "Check out the new NTE site for Irminsul.GG.",
