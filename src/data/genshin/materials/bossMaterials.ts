@@ -422,4 +422,13 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "7.0" },
     },
+    {
+        id: 113092,
+        category: "boss",
+        tag: "Vagabond's Cracked Armor",
+        name: "Vagabond's Cracked Armor",
+        source: "Guardian Blade of Drifting Snow",
+        rarity: 4,
+        release: { version: "7.1" },
+    },
 ];
