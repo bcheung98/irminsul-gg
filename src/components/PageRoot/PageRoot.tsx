@@ -5,7 +5,7 @@ import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
 
 // MUI imports
-import { rgbToHex, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Grid, { GridProps } from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { useGame } from "@/context";
 import { navItems } from "@/data/navItems";
 import { getContrastText } from "@/utils/getContrastText";
-import { adjustColor } from "@/utils/colors";
+import Color from "@/utils/colors";
 
 type PageNode = React.ReactNode | React.ReactNode[] | undefined;
 type PageColumnSize = GridProps["size"];
@@ -148,10 +148,9 @@ function NavButtons() {
                                 borderRadius: "4px",
                                 backgroundColor: game.color,
                                 "&:hover": {
-                                    backgroundColor: adjustColor(
-                                        rgbToHex(game.color),
-                                        -0.1,
-                                    ),
+                                    backgroundColor: new Color(game.color)
+                                        .darken(0.1)
+                                        .toString(),
                                 },
                                 transition: "background-color 0.15s",
                             }}

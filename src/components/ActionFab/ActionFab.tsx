@@ -3,16 +3,15 @@ import Text from "@/components/Text";
 import Tooltip from "@/components/Tooltip";
 
 // MUI imports
-import { rgbToHex } from "@mui/material/styles";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box, { BoxProps } from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { TooltipProps } from "@mui/material/Tooltip";
+import type { TooltipProps } from "@mui/material/Tooltip";
 
 // Helper imports
-import { adjustColor } from "@/utils/colors";
+import Color from "@/utils/colors";
 
 interface ActionFabProps {
     action?: (args: any) => void;
@@ -75,7 +74,7 @@ function ActionFab({
                                 color || theme.background(2, "dark"),
                             "&:hover": {
                                 backgroundColor: color
-                                    ? adjustColor(rgbToHex(color), 0.15)
+                                    ? new Color(color).lighten(0.15).toString()
                                     : theme.background(2),
                             },
                         })}
