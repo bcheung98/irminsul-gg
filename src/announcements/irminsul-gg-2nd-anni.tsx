@@ -1,6 +1,5 @@
 // Component imports
 import { SubHeader, DescriptionSmall } from "@/components/Blog";
-import NavLink from "@/components/NavLink";
 import TextLabel from "@/components/TextLabel";
 import FlexBox from "@/components/FlexBox";
 
@@ -23,13 +22,6 @@ export default function TwoYearAnniAnnouncement({
     onDismiss,
 }: AnnouncementContentProps) {
     const theme = useTheme();
-
-    const linkStyle = {
-        color: theme.text.selected,
-        textDecoration: "underline",
-        fontWeight: theme.font.weight.highlight,
-        cursor: "pointer",
-    };
 
     const buttonStyles = {
         p: 0.5,
@@ -64,15 +56,7 @@ export default function TwoYearAnniAnnouncement({
                 <DescriptionSmall>
                     The following is a quick summary of the major additions
                     included in this update. You can read a more detailed
-                    changelog{" "}
-                    <NavLink
-                        href="/blog/irminsul-gg-2nd-anni"
-                        onClick={onDismiss}
-                        style={linkStyle}
-                    >
-                        here
-                    </NavLink>{" "}
-                    or by clicking the button below.
+                    changelog by clicking the button below.
                 </DescriptionSmall>
             </Stack>
             <Card
