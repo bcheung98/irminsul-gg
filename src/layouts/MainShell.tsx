@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 import NavBarMini from "@/components/NavBarMini";
+import Announcements from "@/components/Announcements";
 
 // MUI imports
 import Box from "@mui/material/Box";
@@ -44,6 +45,7 @@ export default function RouteShell({
 
     return (
         <GameContext value={games[gameTag]}>
+            <Announcements />
             <NavBar />
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { xs: "flex", lg: "none" } }}>

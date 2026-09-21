@@ -1,4 +1,5 @@
 import { useStore } from "./useStore";
+import { useAnnouncementStore } from "./useAnnouncementStore";
 import { useCalendarStore } from "./useCalendarStore";
 import { useDrawerStore } from "./useDrawerStore";
 import { useFilterStore } from "./useFilterStore";
@@ -13,6 +14,7 @@ import { useRatingCalculatorStore } from "./useRatingCalculatorStore";
 
 export {
     useStore,
+    useAnnouncementStore,
     useCalendarStore,
     useDrawerStore,
     useFilterStore,
@@ -25,4 +27,5 @@ export {
     useTEHelperStore,
     useRatingCalculatorStore,
 };
+
 export default useStore;
