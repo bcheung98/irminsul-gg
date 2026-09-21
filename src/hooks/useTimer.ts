@@ -47,7 +47,7 @@ export function useTimer(
         if (endAtZero) {
             return Math.max(diff, 0);
         }
-        return Math.abs(diff);
+        return diff;
     };
 
     const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining);
@@ -69,11 +69,13 @@ export function useTimer(
         return () => clearInterval(interval);
     }, [startDate, endAtZero]);
 
-    const years = Math.floor(timeRemaining / YEAR);
-    const days = Math.floor((timeRemaining % YEAR) / DAY);
-    const hours = Math.floor((timeRemaining % DAY) / HOUR);
-    const minutes = Math.floor((timeRemaining % HOUR) / MINUTE);
-    const seconds = Math.floor((timeRemaining % MINUTE) / SECOND);
+    const displayTime = Math.abs(timeRemaining);
+
+    const years = Math.floor(displayTime / YEAR);
+    const days = Math.floor((displayTime % YEAR) / DAY);
+    const hours = Math.floor((displayTime % DAY) / HOUR);
+    const minutes = Math.floor((displayTime % HOUR) / MINUTE);
+    const seconds = Math.floor((displayTime % MINUTE) / SECOND);
 
     const units = [
         ["years", years],
