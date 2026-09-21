@@ -34,7 +34,7 @@ export default function VersionReleaseDate({
     );
 
     const dayText =
-        timeRemaining < 0 ? `In ${timeString}` : `${timeString} ago`;
+        timeRemaining > 0 ? `In ${timeString}` : `${timeString} ago`;
 
     return mode === "release" ? (
         <Text
