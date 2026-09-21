@@ -83,18 +83,13 @@ export default function Announcements() {
             }
             headerProps={{ padding: "0 16px" }}
             maxWidth="sm"
-            sx={{
-                ".MuiDialog-paper": {
-                    maxHeight: { md: "750px" },
-                },
-            }}
             contentProps={{ padding: 0 }}
         >
             <Stack divider={<Divider />}>
                 <Box
                     sx={{
                         p: 2,
-                        maxHeight: "600px",
+                        maxHeight: "70vh",
                         overflowY: "auto",
                         scrollbarWidth: "thin",
                     }}

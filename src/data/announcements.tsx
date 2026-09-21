@@ -4,7 +4,7 @@ export const announcementList: Announcement[] = [
     {
         slug: "irminsul-gg-2nd-anni",
         title: "🎉 Two Years of Irminsul.GG!",
-        date: "2026-09-21 10:00:00 UTC+8",
+        date: "2026-09-21 10:00:00",
         expires: "2026-10-06 10:00:00",
         Content: TwoYearAnniAnnouncement,
         link: "/blog/irminsul-gg-2nd-anni",
