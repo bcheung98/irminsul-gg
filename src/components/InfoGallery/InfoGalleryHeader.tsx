@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // Component imports
 import Text from "@/components/Text";
 import ToggleButtons from "@/components/ToggleButtons";
-import SearchBar from "@/components/SearchBar";
+import InfoGallerySearch from "./InfoGallerySearch";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -20,8 +20,11 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useDrawerStore } from "@/stores";
 
 // Type imports
-import { InfoGalleryButtonProps, InfoGalleryProps } from "./InfoGallery.types";
-import { GalleryView } from "@/types";
+import type {
+    InfoGalleryButtonProps,
+    InfoGalleryProps,
+} from "./InfoGallery.types";
+import type { GalleryView } from "@/types";
 
 const DEFAULT_BUTTONS: GalleryView[] = ["icon", "card", "list"];
 
@@ -32,7 +35,7 @@ export default function InfoGalleryHeader({
     view,
     handleView,
     searchValue,
-    handleInputChange,
+    setSearchValue,
     hideSearchBar = false,
     hideFilters = false,
 }: InfoGalleryProps) {
@@ -86,11 +89,9 @@ export default function InfoGalleryHeader({
             )}
             {!hideSearchBar && (
                 <Grid size={{ xs: 12, sm: "auto" }}>
-                    <SearchBar
-                        placeholder="Search"
-                        value={searchValue}
-                        onChange={handleInputChange}
-                        sx={{ height: "32px" }}
+                    <InfoGallerySearch
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
                     />
                 </Grid>
             )}

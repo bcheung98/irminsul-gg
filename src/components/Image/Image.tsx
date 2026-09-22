@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+
 // Component imports
 import Tooltip from "@/components/Tooltip";
 
@@ -9,7 +11,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { combineStyles, splitJoin, zoomImageOnHover } from "@/utils";
 
 // Type imports
-import { ImageProps } from "./Image.types";
+import type { ImageProps } from "./Image.types";
+
+const TOOLTIP_TIMEOUT = 300;
 
 export default function Image({
     src,
@@ -31,7 +35,6 @@ export default function Image({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    let fill = false;
     let [width, height]: (number | undefined)[] = [undefined, undefined];
     if (size) {
         if (Array.isArray(size)) [width, height] = size;
@@ -40,8 +43,6 @@ export default function Image({
             width = width - width * responsiveSize;
             height = height - height * responsiveSize;
         }
-    } else {
-        fill = true;
     }
 
     const defaultImageStyle: React.CSSProperties = {
@@ -59,10 +60,38 @@ export default function Image({
 
     const imgStyle = combineStyles(defaultImageStyle, style);
 
+    const [showTooltip, setShowTooltip] = useState(false);
+    const tooltipTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+
     const handleHover = (direction: "enter" | "leave") => {
         zoomOnHover && zoomImageOnHover({ direction, id, zoom: 1.05 });
+
+        // Only mount tooltip when hovering over the image.
+        // This prevents expensive component teardowns when
+        // there are 500+ tooltips on a page.
+        if (tooltipTimeout.current) {
+            clearTimeout(tooltipTimeout.current);
+            tooltipTimeout.current = null;
+        }
+        if (direction === "enter") {
+            setShowTooltip(true);
+        } else {
+            tooltipTimeout.current = setTimeout(() => {
+                setShowTooltip(false);
+            }, TOOLTIP_TIMEOUT);
+        }
     };
 
+    // Clear timeout when Image unmounts
+    useEffect(() => {
+        return () => {
+            if (tooltipTimeout.current) {
+                clearTimeout(tooltipTimeout.current);
+            }
+        };
+    }, []);
+
+    // Set fallback image
     function onError(event: React.SyntheticEvent<HTMLImageElement>) {
         if (event.currentTarget.src === fallbackSrc) return;
 
@@ -77,6 +106,7 @@ export default function Image({
         <img
             src={src}
             id={id}
+            alt={alt}
             style={imgStyle}
             onError={onError}
             onClick={onClick}
@@ -86,7 +116,7 @@ export default function Image({
         />
     );
 
-    return tooltip ? (
+    return tooltip && showTooltip ? (
         <Tooltip title={tooltip} arrow placement={tooltipArrow}>
             {image}
         </Tooltip>

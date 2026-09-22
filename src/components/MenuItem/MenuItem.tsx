@@ -9,9 +9,9 @@ const MenuItem = styled(MuiMenuItem)(({ theme }) => ({
             backgroundColor: theme.menu.backgroundColor.hover,
         },
         "&.Mui-selected": {
-            backgroundColor: theme.menu.backgroundColor.selected,
-            "&:hover": {
-                backgroundColor: theme.menu.backgroundColor.selectedHover,
+            backgroundColor: theme.palette.info.main,
+            "&:hover, &.Mui-focused": {
+                backgroundColor: theme.palette.info.light,
             },
         },
     },

@@ -4,7 +4,7 @@ import TextLabel from "@/components/TextLabel";
 import FlexBox from "@/components/FlexBox";
 
 // MUI imports
-import { alpha, rgbToHex, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
@@ -12,7 +12,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 // Helper imports
 import { games } from "@/data/games";
-import { adjustColor } from "@/utils/colors";
+import Color from "@/utils/colors";
 
 // Type imports
 import type { AnnouncementContentProps } from "@/data/announcements";
@@ -56,7 +56,23 @@ export default function TwoYearAnniAnnouncement({
                 <DescriptionSmall>
                     The following is a quick summary of the major additions
                     included in this update. You can read a more detailed
-                    changelog by clicking the button below.
+                    changelog{" "}
+                    <ButtonBase
+                        href="/blog/irminsul-gg-2nd-anni"
+                        onClick={onDismiss}
+                        disableRipple
+                    >
+                        <span
+                            style={{
+                                color: theme.text.selected,
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                            }}
+                        >
+                            here
+                        </span>
+                    </ButtonBase>{" "}
+                    or by clicking the button below.
                 </DescriptionSmall>
             </Stack>
             <Card
@@ -64,10 +80,10 @@ export default function TwoYearAnniAnnouncement({
                     p: 2,
                     borderRadius: theme.contentBox.border.radius,
                     border: `1px solid ${games.genshin.color}`,
-                    backgroundColor: alpha(
-                        `${adjustColor(rgbToHex(games.genshin.color), -0.5)}`,
-                        0.5,
-                    ),
+                    backgroundColor: new Color(games.genshin.color)
+                        .alpha(0.5)
+                        .darken(0.5)
+                        .toString(),
                 }}
             >
                 <Stack spacing={2}>
@@ -193,10 +209,10 @@ export default function TwoYearAnniAnnouncement({
                             </ButtonBase>
                         </FlexBox>
                         <DescriptionSmall>
-                            A new site directory page provides a centralized
-                            list of pages across Irminsul.GG, including the
-                            different game databases, tools, and individual
-                            content pages.
+                            A new site directory page that provides a
+                            centralized list of pages across Irminsul.GG,
+                            including the different game databases, tools, and
+                            individual content pages.
                         </DescriptionSmall>
                     </Stack>
                 </Stack>
@@ -205,11 +221,11 @@ export default function TwoYearAnniAnnouncement({
                 sx={{
                     p: 2,
                     borderRadius: theme.contentBox.border.radius,
-                    border: `1px solid ${adjustColor(rgbToHex(games.endfield.color), -0.5)}`,
-                    backgroundColor: alpha(
-                        `${adjustColor(rgbToHex(games.endfield.color), -0.75)}`,
-                        0.5,
-                    ),
+                    border: `1px solid ${new Color(games.endfield.color).darken(0.5)}`,
+                    backgroundColor: new Color(games.endfield.color)
+                        .alpha(0.5)
+                        .darken(0.75)
+                        .toString(),
                 }}
             >
                 <Stack spacing={2}>
@@ -242,10 +258,10 @@ export default function TwoYearAnniAnnouncement({
                     p: 2,
                     borderRadius: theme.contentBox.border.radius,
                     border: `1px solid ${games.uma.color}`,
-                    backgroundColor: alpha(
-                        `${adjustColor(rgbToHex(games.uma.color), -0.5)}`,
-                        0.5,
-                    ),
+                    backgroundColor: new Color(games.uma.color)
+                        .alpha(0.5)
+                        .darken(0.5)
+                        .toString(),
                 }}
             >
                 <Stack spacing={2}>
@@ -269,9 +285,9 @@ export default function TwoYearAnniAnnouncement({
                             </ButtonBase>
                         </FlexBox>
                         <DescriptionSmall>
-                            A new tool lets you calculate a trainee's rating and
-                            create a customizable showcase card from their
-                            stats, aptitudes, and skills.
+                            A new tool that lets you calculate a trainee's
+                            rating and create a customizable showcase card from
+                            their stats, aptitudes, and skills.
                         </DescriptionSmall>
                     </Stack>
                     <Stack spacing={1}>

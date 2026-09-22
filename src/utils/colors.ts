@@ -1,173 +1,259 @@
-interface RGB {
+export interface RGB {
     r: number;
     g: number;
     b: number;
     a?: number;
 }
 
-interface HSL {
+export interface HSL {
     h: number;
     s: number;
     l: number;
+    a?: number;
 }
 
-export function parseColor(color: string): RGB | null {
-    const n = color.length;
+export type ColorFormat = "rgb" | "hex";
 
-    // rgb(...) / rgba(...)
-    if (n > 9 && color.startsWith("rgb")) {
-        const parts = color.split(",");
+export default class Color {
+    private readonly _rgb: RGB;
+    private readonly _format: ColorFormat;
 
-        if (parts.length < 3 || parts.length > 4) {
-            return null;
+    constructor(color: string | RGB, format?: ColorFormat) {
+        if (typeof color === "string") {
+            const rgb = parseColor(color);
+
+            if (!rgb) {
+                throw new Error(`Invalid color: ${color}`);
+            }
+
+            this._rgb = rgb;
+            this._format = color.startsWith("#") ? "hex" : "rgb";
+        } else {
+            this._rgb = color;
+            this._format = format ?? "rgb";
         }
-
-        const r = parseInt(parts[0].slice(parts[0].indexOf("(") + 1));
-        const g = parseInt(parts[1]);
-        const b = parseInt(parts[2]);
-        const a = parts[3] !== undefined ? parseFloat(parts[3]) : -1;
-
-        return { r, g, b, a };
     }
 
-    // Hex colors
-    if (color.startsWith("#")) {
-        let hex = color;
+    /** Returns the red channel of the color. */
+    get r(): number {
+        return this._rgb.r;
+    }
 
-        // #RGB / #RGBA → #RRGGBB / #RRGGBBAA
-        if (n === 4 || n === 5) {
-            hex =
-                "#" +
-                hex[1] +
-                hex[1] +
-                hex[2] +
-                hex[2] +
-                hex[3] +
-                hex[3] +
-                (n === 5 ? hex[4] + hex[4] : "");
+    /** Returns the green channel of the color. */
+    get g(): number {
+        return this._rgb.g;
+    }
+
+    /** Returns the blue channel of the color. */
+    get b(): number {
+        return this._rgb.b;
+    }
+
+    /** Returns the alpha channel of the color, if present. */
+    get a(): number | undefined {
+        return this._rgb.a;
+    }
+
+    /** Returns the color as an RGB string. */
+    get rgb(): string {
+        const { r, g, b, a } = this._rgb;
+        return a !== undefined
+            ? `rgba(${r}, ${g}, ${b}, ${a})`
+            : `rgb(${r}, ${g}, ${b})`;
+    }
+
+    /** Returns the color as an RGB object. */
+    toRGBObject(): RGB {
+        return this._rgb;
+    }
+
+    /** Returns the color as a hex string. */
+    get hex(): string {
+        const { r, g, b, a } = this._rgb;
+
+        const hex =
+            r.toString(16).padStart(2, "0") +
+            g.toString(16).padStart(2, "0") +
+            b.toString(16).padStart(2, "0");
+
+        if (a !== undefined) {
+            const alpha = Math.round(a * 255)
+                .toString(16)
+                .padStart(2, "0");
+
+            return `#${hex}${alpha}`;
         }
 
-        if (hex.length !== 7 && hex.length !== 9) {
-            return null;
+        return `#${hex}`;
+    }
+
+    /** Returns the color as an HSL string. */
+    get hsl(): string {
+        const { h, s, l, a } = this.toHSLObject();
+
+        return a !== undefined
+            ? `hsla(${h}, ${s}%, ${l}%, ${a})`
+            : `hsl(${h}, ${s}%, ${l}%)`;
+    }
+
+    /** Returns the color as an HSL object. */
+    toHSLObject(): HSL {
+        return this.parseHSL(this._rgb);
+    }
+
+    /** Returns the color as a string. */
+    toString(): string {
+        return this._format === "hex" ? this.hex : this.rgb;
+    }
+
+    /** Lightens or darkens the color. Returns a new `Color` object. */
+    adjust(amount: number): Color {
+        if (amount < -1 || amount > 1) {
+            console.warn("Color adjustment value must be between -1 and 1.");
+            return this;
         }
 
-        if (!/^#[0-9a-fA-F]+$/.test(hex)) {
-            return null;
+        const target = amount < 0 ? 0 : 255;
+        const factor = Math.abs(amount);
+
+        return new Color(
+            {
+                r: Math.round(this.r + (target - this.r) * factor),
+                g: Math.round(this.g + (target - this.g) * factor),
+                b: Math.round(this.b + (target - this.b) * factor),
+                ...(this.a !== undefined && { a: this.a }),
+            },
+            this._format,
+        );
+    }
+
+    /** Lightens the color. Returns a new `Color` object. */
+    lighten(amount: number): Color {
+        return this.adjust(Math.abs(amount));
+    }
+
+    /** Darkens the color. Returns a new `Color` object. */
+    darken(amount: number): Color {
+        return this.adjust(-Math.abs(amount));
+    }
+
+    /** Sets the alpha channel of the color. Returns a new `Color` object. */
+    alpha(alpha: number): Color {
+        if (alpha < 0 || alpha > 1) {
+            console.warn("Alpha value must be between 0 and 1.");
+            return this;
         }
 
-        const value = parseInt(hex.slice(1), 16);
+        return new Color(
+            {
+                r: this.r,
+                g: this.g,
+                b: this.b,
+                a: alpha,
+            },
+            this._format,
+        );
+    }
 
-        if (hex.length === 9) {
-            return {
-                r: (value >> 24) & 255,
-                g: (value >> 16) & 255,
-                b: (value >> 8) & 255,
-                a: Math.round((value & 255) / 2.55) / 100,
-            };
+    /** Takes an RGB object and converts it into an HSL object. */
+    private parseHSL({ r, g, b, a }: RGB): HSL {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        const d = max - min;
+
+        let h = 0;
+        let s = 0;
+        const l = (max + min) / 2;
+
+        if (d !== 0) {
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+            switch (max) {
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+
+            h /= 6;
         }
 
         return {
-            r: (value >> 16) & 255,
-            g: (value >> 8) & 255,
-            b: value & 255,
-            a: -1,
+            h: Math.round(h * 360),
+            s: Math.round(s * 100),
+            l: Math.round(l * 100),
+            ...(a !== undefined && { a }),
         };
     }
-
-    return null;
 }
 
-export function adjustColor(color: string, amount: number): string | null {
-    if (amount < -1 || amount > 1) {
-        return null;
-    }
+function parseColor(color: string): RGB | null {
+    const value = color.trim();
 
-    let hex = color;
-
-    // Convert shorthand hex (#RGB) to #RRGGBB
-    if (/^#[0-9a-fA-F]{3}$/.test(hex)) {
-        hex = hex.replace(/^#(.)(.)(.)$/, "#$1$1$2$2$3$3");
-    }
-
-    if (!/^#[0-9a-fA-F]{6}$/.test(hex)) {
-        return null;
-    }
-
-    const rgb: RGB = {
-        r: parseInt(hex.slice(1, 3), 16),
-        g: parseInt(hex.slice(3, 5), 16),
-        b: parseInt(hex.slice(5, 7), 16),
-    };
-
-    if (amount < 0) {
-        // Darken
-        const factor = 1 + amount;
-
-        rgb.r = Math.round(rgb.r * factor);
-        rgb.g = Math.round(rgb.g * factor);
-        rgb.b = Math.round(rgb.b * factor);
-    } else {
-        // Lighten
-        rgb.r = Math.round(rgb.r + (255 - rgb.r) * amount);
-        rgb.g = Math.round(rgb.g + (255 - rgb.g) * amount);
-        rgb.b = Math.round(rgb.b + (255 - rgb.b) * amount);
-    }
-
-    return (
-        "#" +
-        rgb.r.toString(16).padStart(2, "0") +
-        rgb.g.toString(16).padStart(2, "0") +
-        rgb.b.toString(16).padStart(2, "0")
+    // rgb(...) / rgba(...)
+    const rgbMatch = value.match(
+        /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)$/,
     );
-}
 
-export function hexToRGB(hex: string) {
-    const regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    let result: RGB;
-    if (regex) {
-        result = {
-            r: parseInt(regex[1], 16),
-            g: parseInt(regex[2], 16),
-            b: parseInt(regex[3], 16),
-        };
-    } else {
-        hex = hex
-            .replace("rgb", "")
-            .replace("(", "")
-            .replace(")", "")
-            .replace(" ", "");
-        const [r, g, b] = hex.split(",").map((i) => parseInt(i));
-        result = { r, g, b };
-    }
-    return result;
-}
+    if (rgbMatch) {
+        const r = Math.min(Number(rgbMatch[1]), 255);
+        const g = Math.min(Number(rgbMatch[2]), 255);
+        const b = Math.min(Number(rgbMatch[3]), 255);
+        const a = rgbMatch[4] !== undefined ? Number(rgbMatch[4]) : undefined;
 
-export function rgbToHSL({ r, g, b }: RGB): HSL {
-    ((r /= 255), (g /= 255), (b /= 255));
-
-    let max = Math.max(r, g, b),
-        min = Math.min(r, g, b);
-    let h = (max + min) / 2;
-    let s = (max + min) / 2;
-    let l = (max + min) / 2;
-
-    if (max == min) {
-        h = s = 0;
-    } else {
-        let d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-            case r:
-                h = (g - b) / d + (g < b ? 6 : 0);
-                break;
-            case g:
-                h = (b - r) / d + 2;
-                break;
-            case b:
-                h = (r - g) / d + 4;
-                break;
+        if (
+            r > 255 ||
+            g > 255 ||
+            b > 255 ||
+            (a !== undefined && (a < 0 || a > 1))
+        ) {
+            console.warn(`Invalid color ${color}`);
+            return null;
         }
-        h /= 6;
+
+        return { r, g, b, ...(a !== undefined && { a }) };
     }
-    return { h, s, l };
+
+    // #RGB / #RGBA / #RRGGBB / #RRGGBBAA
+    const hexMatch = value.match(
+        /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/,
+    );
+
+    if (!hexMatch) {
+        console.warn(`Invalid color ${color}`);
+        return null;
+    }
+
+    let hex = hexMatch[1];
+
+    if (hex.length === 3 || hex.length === 4) {
+        hex = [...hex].map((char) => char + char).join("");
+    }
+
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+
+    if (hex.length === 8) {
+        const a =
+            Math.round((parseInt(hex.slice(6, 8), 16) / 255) * 1000) / 1000;
+
+        return {
+            r,
+            g,
+            b,
+            a,
+        };
+    }
+
+    return { r, g, b };
 }

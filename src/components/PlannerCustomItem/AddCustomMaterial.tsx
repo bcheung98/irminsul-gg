@@ -257,9 +257,9 @@ function CustomMaterialRow({
                         backgroundColor: theme.menu.backgroundColor.hover,
                     },
                     "&.Mui-selected": {
-                        backgroundColor: theme.palette.info.dark,
+                        backgroundColor: theme.palette.info.main,
                         "&:hover, &.Mui-focused": {
-                            backgroundColor: theme.palette.info.main,
+                            backgroundColor: theme.palette.info.light,
                         },
                     },
                 },

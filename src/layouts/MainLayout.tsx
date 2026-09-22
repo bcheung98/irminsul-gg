@@ -3,9 +3,10 @@
 import { useEffect, Suspense } from "react";
 
 // Component imports
-import RouteShell from "./MainShell";
+import MainShell from "./MainShell";
 import ActionFab from "@/components/ActionFab";
 import Loader from "@/components/Loader";
+import LoaderGlobal from "@/components/Loader/LoaderGlobal";
 
 // MUI imports
 import { CssBaseline } from "@mui/material";
@@ -14,13 +15,13 @@ import Toolbar from "@mui/material/Toolbar";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 // Helper imports
-import { GameListContext } from "@/context";
 import getTheme from "@/themes/theme";
+import { GameListContext } from "@/context";
 import { games } from "@/data/games";
 import { useSettingsStore } from "@/stores/useSettingsStore";
 
 // Type imports
-import { GameInfo } from "@/types";
+import type { GameInfo } from "@/types";
 
 export default function MainLayout({
     children,
@@ -28,7 +29,7 @@ export default function MainLayout({
     children: React.ReactNode;
 }>) {
     useEffect(() => {
-        console.log(
+        console.info(
             `MKCLXYKCM\nOZBLLCZAN\nBFIKCLELC\nCDMNXLQZZ\nGILFCQOGI\nWXTDQWLBL\nSZIBIWIVC\nFWLLGCWAL`,
         );
     }, []);
@@ -55,7 +56,7 @@ export default function MainLayout({
     }, []);
 
     if (!hydrated) {
-        return <Loader />;
+        return <LoaderGlobal />;
     }
 
     const theme = getTheme(themeIndex);
@@ -74,7 +75,7 @@ export default function MainLayout({
             />
             <GameListContext value={websites}>
                 <Suspense fallback={<Loader />}>
-                    <RouteShell>{children}</RouteShell>
+                    <MainShell>{children}</MainShell>
                 </Suspense>
             </GameListContext>
             <ActionFab

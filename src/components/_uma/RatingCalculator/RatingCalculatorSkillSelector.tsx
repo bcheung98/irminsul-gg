@@ -143,8 +143,30 @@ function SkillRow({
     disabled,
     style,
 }: VirtualizedRowProps<UmaSkillOption>) {
+    const theme = useTheme();
+
     return (
-        <MenuItem {...optionProps} disabled={disabled} sx={style}>
+        <MenuItem
+            {...optionProps}
+            disabled={disabled}
+            sx={{
+                ...style,
+                "&.MuiMenuItem-root": {
+                    "&:hover": {
+                        backgroundColor: theme.menu.backgroundColor.primary,
+                    },
+                    "&.Mui-focused": {
+                        backgroundColor: theme.menu.backgroundColor.hover,
+                    },
+                    "&.Mui-selected": {
+                        backgroundColor: theme.palette.info.main,
+                        "&:hover, &.Mui-focused": {
+                            backgroundColor: theme.palette.info.light,
+                        },
+                    },
+                },
+            }}
+        >
             <TextLabel
                 title={option.name}
                 icon={`uma/skills/${option.icon}`}

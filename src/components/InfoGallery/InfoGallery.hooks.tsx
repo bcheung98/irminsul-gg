@@ -1,4 +1,4 @@
-import { useState, useEffect, useTransition } from "react";
+import { useState, useMemo, useDeferredValue } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 // MUI imports
@@ -57,37 +57,31 @@ export function useInfoGallery<T extends Item>({
     );
 
     const view = defaultView ?? sortParams.view;
+    const deferredView = useDeferredValue(view);
 
-    const [isPending, startTransition] = useTransition();
     const [searchValue, setSearchValue] = useState("");
-    const [currentItems, setCurrentItems] = useState<T[]>([]);
 
-    useEffect(() => {
-        startTransition(() => {
-            const filteredItems = (filterUnreleased ?? defaultFilterUnreleased)(
-                items,
-                {
-                    hideUnreleased,
-                    game,
-                },
-            );
-            const context = {
-                filters,
-                searchValue,
-                sortParams,
-            };
-            setCurrentItems(
-                transformItems
-                    ? transformItems(filteredItems, context)
-                    : defaultTransform(
-                          game,
-                          filteredItems,
-                          filters,
-                          searchValue,
-                          sortParams,
-                      ),
-            );
-        });
+    const currentItems = useMemo(() => {
+        const filteredItems = (filterUnreleased ?? defaultFilterUnreleased)(
+            items,
+            { hideUnreleased, game },
+        );
+
+        const context = {
+            filters,
+            searchValue,
+            sortParams,
+        };
+
+        return transformItems
+            ? transformItems(filteredItems, context)
+            : defaultTransform(
+                  game,
+                  filteredItems,
+                  filters,
+                  searchValue,
+                  sortParams,
+              );
     }, [
         game,
         items,
@@ -102,30 +96,30 @@ export function useInfoGallery<T extends Item>({
         view,
         handleView: useView(galleryKey),
         searchValue,
-        handleInputChange: (event: React.BaseSyntheticEvent) =>
-            setSearchValue(event.target.value),
+        setSearchValue,
     };
 
+    const loading = view !== deferredView;
+
     const gallery = (() => {
+        if (loading) return <LinearProgress color="info" />;
         const { icon, card, list } = views;
-        switch (view) {
+        switch (deferredView) {
             case "icon":
             default:
-                if (isPending) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {icon && currentItems.map(icon)}
                     </Grid>
                 );
             case "card":
-                if (isPending) return <LinearProgress />;
                 return (
                     <Grid container spacing={3}>
                         {card && currentItems.map(card)}
                     </Grid>
                 );
             case "list":
-                return list?.(currentItems, isPending);
+                return list?.(currentItems);
         }
     })();
 

@@ -1,5 +1,5 @@
-import { adjustColor } from "@/utils/colors";
-import { UmaCharacterProfile } from "@/types/uma/character";
+import Color from "@/utils/colors";
+import type { UmaCharacterProfile } from "@/types/uma/character";
 
 /**
  * Add IDs of Umas that use their secondary color
@@ -34,9 +34,13 @@ export function getUmaStatColors({
 }) {
     const accent = getUmaAccentColor(profile);
     const headerColor =
-        adjustColor(accent, overrides?.header ?? HEADER_ADJUSTMENT) ?? accent;
+        new Color(accent)
+            .adjust(overrides?.header ?? HEADER_ADJUSTMENT)
+            .toString() ?? accent;
     const borderColor =
-        adjustColor(accent, overrides?.border ?? BORDER_ADJUSTMENT) ?? accent;
+        new Color(accent)
+            .adjust(overrides?.border ?? BORDER_ADJUSTMENT)
+            .toString() ?? accent;
 
     return { headerColor, borderColor };
 }
