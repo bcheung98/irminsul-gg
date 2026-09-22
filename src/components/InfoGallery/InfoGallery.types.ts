@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import type { FilterState } from "@/stores/useFilterStore";
 import type { GalleryState } from "@/stores/useGalleryStore";
 import type { GalleryView, Game, Item } from "@/types";
@@ -13,7 +14,7 @@ export interface InfoGalleryConfig {
     /** Current search value. */
     searchValue: string;
     /** Callback fired when the search value changes. */
-    handleInputChange: (event: React.BaseSyntheticEvent) => void;
+    setSearchValue: Dispatch<SetStateAction<string>>;
 }
 
 export interface InfoGalleryProps extends InfoGalleryConfig {
@@ -49,7 +50,7 @@ export interface InfoGalleryButtonProps extends ToggleButtonProps {
 interface GalleryViews<T> {
     icon?: (item: T) => React.ReactNode;
     card?: (item: T) => React.ReactNode;
-    list?: (items: T[], isPending: boolean) => React.ReactNode;
+    list?: (items: T[], isPending?: boolean) => React.ReactNode;
 }
 
 interface TransformContext {
