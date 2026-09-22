@@ -94,3 +94,20 @@ video {
 .global-error-code-text {
     font-size: 11pt;
 }
+
+.loading-image {
+    width: 256px;
+    height: 256px;
+    opacity: 1;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
