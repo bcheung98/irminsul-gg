@@ -1,15 +1,14 @@
-import { useState } from "react";
-
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import Text from "@/components/Text";
 import NavLink from "@/components/NavLink";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { UmaSkill } from "@/types/uma/skill";
+import type { UmaSkill } from "@/types/uma/skill";
 
 export default function SkillListRow({
     skill,
@@ -18,12 +17,14 @@ export default function SkillListRow({
     skill: UmaSkill;
     index: number;
 }) {
+    const theme = useTheme();
+
     return (
         <NavLink href={`/uma/skills/${skill.id}`}>
             <Grid
                 container
                 spacing={{ xs: 1, md: 2 }}
-                sx={(theme) => ({
+                sx={{
                     p: "8px 16px",
                     flexWrap: "wrap",
                     alignItems: "center",
@@ -36,7 +37,7 @@ export default function SkillListRow({
                         outline: `2px solid ${theme.text.primary}`,
                         outlineOffset: "-2px",
                     },
-                })}
+                }}
             >
                 <Grid size={{ xs: 12, md: 4 }}>
                     <TextLabel

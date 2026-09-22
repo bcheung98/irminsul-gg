@@ -10,7 +10,7 @@ import { categories } from "@/data/categories";
 import { useStore, useServerStore } from "@/stores";
 
 // Type imports
-import { UmaSkill } from "@/types/uma/skill";
+import type { UmaSkill } from "@/types/uma/skill";
 
 export default function SkillsGallery(props: { skills: UmaSkill[] }) {
     const { params, gallery } = useInfoGallery({
@@ -19,9 +19,7 @@ export default function SkillsGallery(props: { skills: UmaSkill[] }) {
         filterKey: "uma/skills", // Data tag
         items: props.skills,
         views: {
-            list: (skills, isPending) => (
-                <SkillList skills={skills} loading={isPending} />
-            ),
+            list: (skills) => <SkillList skills={skills} />,
         },
         defaultView: "list",
         hideUnreleased: useStore(useServerStore, (state) => state.uma) === "NA",
