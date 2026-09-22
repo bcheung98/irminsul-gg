@@ -44,7 +44,7 @@ export default function InfoCardMaterial({
 
     const [game, type] = tag.split("/") as [Game, string];
 
-    const { gender } = useSettingsStore();
+    const gender = useSettingsStore((state) => state.gender);
 
     let imgSize = size;
     if (matches) {
@@ -62,75 +62,6 @@ export default function InfoCardMaterial({
         imgSize: `${imgSize}px`,
         variant: "material-card",
     });
-
-    function MaterialIcon(props: {
-        material: string | number;
-        category: string;
-    }) {
-        const nums: GameData<string> = {
-            genshin: "3",
-            hsr: "3",
-            wuwa: "4",
-            zzz: "3",
-            uma: "",
-            endfield: "",
-            nte: "3",
-        };
-        let materialTag = props.material;
-        if (
-            ["talent", "calyx", "forgery", "common", "skill"].includes(
-                props.category,
-            )
-        ) {
-            materialTag += nums[game];
-        }
-
-        const { getMaterial } = getMaterialResolvers(game);
-        const material = getMaterial(materialTag);
-
-        let imgURL = `${game}/materials/${material.id}`;
-
-        let tooltip;
-        switch (props.category) {
-            case "talent":
-            case "calyx":
-            case "forgery":
-            case "common":
-            case "skill":
-                tooltip = material.tag?.slice(0, -1);
-                break;
-            case "characterSkill":
-                tooltip = `${badgeLeft?.element} Chip`;
-                break;
-            case "characterLevel":
-                tooltip = `${badgeLeft?.weaponType} Seal`;
-                break;
-            default:
-                tooltip = material.name;
-        }
-        if (material.source) {
-            tooltip += ` (${material.source})`;
-        }
-
-        return (
-            <Image
-                src={imgURL}
-                tooltip={tooltip}
-                size={imgSize / (8 / 3.5)}
-                style={{
-                    border: `1px solid ${theme.border.color.primary}`,
-                    borderRadius: "4px",
-                    backgroundColor: theme.background(1),
-                }}
-                format={
-                    game === "zzz" &&
-                    ["boss", "weekly"].includes(props.category)
-                        ? "gif"
-                        : "png"
-                }
-            />
-        );
-    }
 
     if (game === "zzz") {
         materials = {
@@ -166,11 +97,14 @@ export default function InfoCardMaterial({
                             }}
                         >
                             {Object.entries(materials).map(
-                                ([key, material], index) => (
+                                ([category, material]) => (
                                     <MaterialIcon
-                                        key={index}
+                                        key={category}
+                                        game={game}
                                         material={material}
-                                        category={key}
+                                        category={category}
+                                        imgSize={imgSize}
+                                        badgeLeft={badgeLeft}
                                     />
                                 ),
                             )}
@@ -215,5 +149,79 @@ export default function InfoCardMaterial({
                 />
             )}
         </Card>
+    );
+}
+
+function MaterialIcon(props: {
+    game: Game;
+    material: string | number;
+    category: string;
+    imgSize: number;
+    badgeLeft?: InfoCardMaterialProps["badgeLeft"];
+}) {
+    const theme = useTheme();
+
+    const nums: GameData<string> = {
+        genshin: "3",
+        hsr: "3",
+        wuwa: "4",
+        zzz: "3",
+        uma: "",
+        endfield: "",
+        nte: "3",
+    };
+    let materialTag = props.material;
+    if (
+        ["talent", "calyx", "forgery", "common", "skill"].includes(
+            props.category,
+        )
+    ) {
+        materialTag += nums[props.game];
+    }
+
+    const { getMaterial } = getMaterialResolvers(props.game);
+    const material = getMaterial(materialTag);
+
+    let imgURL = `${props.game}/materials/${material.id}`;
+
+    let tooltip;
+    switch (props.category) {
+        case "talent":
+        case "calyx":
+        case "forgery":
+        case "common":
+        case "skill":
+            tooltip = material.tag?.slice(0, -1);
+            break;
+        case "characterSkill":
+            tooltip = `${props.badgeLeft?.element} Chip`;
+            break;
+        case "characterLevel":
+            tooltip = `${props.badgeLeft?.weaponType} Seal`;
+            break;
+        default:
+            tooltip = material.name;
+    }
+    if (material.source) {
+        tooltip += ` (${material.source})`;
+    }
+
+    return (
+        <Image
+            src={imgURL}
+            tooltip={tooltip}
+            size={props.imgSize / (8 / 3.5)}
+            style={{
+                border: `1px solid ${theme.border.color.primary}`,
+                borderRadius: "4px",
+                backgroundColor: theme.background(1),
+            }}
+            format={
+                props.game === "zzz" &&
+                ["boss", "weekly"].includes(props.category)
+                    ? "gif"
+                    : "png"
+            }
+        />
     );
 }
