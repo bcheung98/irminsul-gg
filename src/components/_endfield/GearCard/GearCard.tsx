@@ -1,15 +1,16 @@
-import { useShallow } from "zustand/react/shallow";
+import { memo } from "react";
 
 // Component imports
 import ContentBox from "@/components/ContentBox";
+import FlexBox from "@/components/FlexBox";
 import Image from "@/components/Image";
 import NavLink from "@/components/NavLink";
 import Text from "@/components/Text";
-import * as Table from "@/components/Table";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
@@ -21,15 +22,20 @@ import { useFilterStore } from "@/stores";
 // Type imports
 import { EndfieldGear } from "@/types/endfield";
 import { EndfieldGearAttributes } from "@/types/endfield/gear";
-import { TitleProps } from "@/components/TextLabel/TextLabel.types";
 
-export default function GearCard({ gear }: { gear: EndfieldGear }) {
+export default memo(function GearCard({ gear }: { gear: EndfieldGear }) {
     const theme = useTheme();
 
     const imgSize = 72;
     const imgURL = `endfield/gear/${gear.stringId}`;
 
     const href = `/endfield/gear/${formatHref(gear.url)}`;
+
+    const attributes = useFilterStore(
+        (state) => state["endfield/gear"].attributes,
+    );
+
+    const backgroundColor = useRarityColors()["endfield"](gear.rarity);
 
     return (
         <Grid size={{ xs: 12, sm: 6, md: 4 }}>
@@ -61,7 +67,7 @@ export default function GearCard({ gear }: { gear: EndfieldGear }) {
                                 responsive
                                 responsiveSize={0.25}
                                 style={{
-                                    border: `1px solid ${useRarityColors()["endfield"](gear.rarity)}`,
+                                    border: `1px solid ${backgroundColor}`,
                                     borderRadius:
                                         theme.contentBox.border.radius * 4,
                                     backgroundColor: theme.background(2),
@@ -76,66 +82,46 @@ export default function GearCard({ gear }: { gear: EndfieldGear }) {
                         </ButtonBase>
                     </Grid>
                     <Grid size="grow">
-                        <Table.Container sx={{ px: 0.25, py: 1 }}>
-                            <Table.Root size="small">
-                                <Table.Body>
-                                    {gear.stats.map((row, index) => (
-                                        <StatRow
-                                            key={`${gear.stringId}-${index}`}
-                                            {...row}
-                                        />
-                                    ))}
-                                </Table.Body>
-                            </Table.Root>
-                        </Table.Container>
+                        <Stack spacing={0.5} sx={{ py: 1 }}>
+                            {gear.stats.map((row, index) => (
+                                <StatRow
+                                    key={`${gear.stringId}-${index}`}
+                                    {...row}
+                                    selected={attributes.includes(row.stat)}
+                                />
+                            ))}
+                        </Stack>
                     </Grid>
                 </Grid>
             </ContentBox>
         </Grid>
     );
+});
+
+interface StatRowProps extends EndfieldGearAttributes {
+    selected: boolean;
 }
 
-function StatRow({ stat, values }: EndfieldGearAttributes) {
+function StatRow({ stat, values, selected }: StatRowProps) {
     const theme = useTheme();
 
-    const filters = useFilterStore(
-        useShallow((state) => state["endfield/gear"]),
-    );
-
-    const cellProps = {
-        borderColor: "transparent",
-        padding: "2px 16px 2px 0px",
+    const textStyles = {
+        color: selected ? theme.text.header : theme.text.primary,
     };
-
-    const titleProps: TitleProps = (function () {
-        let color = theme.text.primary;
-        const variant = "subtitle2";
-        if (filters.attributes.includes(stat)) {
-            color = theme.text.header;
-        }
-        return { color, variant };
-    })();
 
     const { title, icon } = gearStats[stat];
 
     return (
-        <Table.Row color="secondary">
-            <Table.Cell
-                align="left"
-                label={{
-                    title: `${title}|endfield/icons/stat-icons/${icon}`,
-                    titleProps,
-                }}
-                {...cellProps}
-            />
-            <Table.Cell
-                align="right"
-                label={{
-                    title: `+${values[0]}` || "???",
-                    titleProps,
-                }}
-                {...cellProps}
-            />
-        </Table.Row>
+        <FlexBox sx={{ justifyContent: "space-between", pr: 1.5 }}>
+            <FlexBox spacing={1} sx={{ justifyContent: "space-between" }}>
+                <Image src={`endfield/icons/stat-icons/${icon}`} size={24} />
+                <Text variant="subtitle2" weight="highlight" sx={textStyles}>
+                    {title}
+                </Text>
+            </FlexBox>
+            <Text variant="subtitle2" weight="highlight" sx={textStyles}>
+                {values[0] != null ? `+${values[0]}` : "???"}
+            </Text>
+        </FlexBox>
     );
 }
