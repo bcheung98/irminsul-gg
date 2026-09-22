@@ -1,27 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import styles from "./styles.module.css";
 
 // Component imports
 import Tooltip from "@/components/Tooltip";
 
-// MUI imports
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-
 // Helper imports
-import { combineStyles, splitJoin, zoomImageOnHover } from "@/utils";
+import {
+    DEFAULT_FALLBACK_URL,
+    EMPTY_IMAGE,
+    resolveFallbackImages,
+    resolveImageUrl,
+    toCssLength,
+} from "./Image.utils";
 
 // Type imports
-import type { ImageProps } from "./Image.types";
-
-const TOOLTIP_TIMEOUT = 300;
+import type { ImageLoadStatus, ImageProps } from "./Image.types";
 
 export default function Image({
     src,
-    fallbackSrc = "_common/images/Unknown",
+    fallbackSrc,
     size,
     alt = "",
     id = src,
     loading = "lazy",
+    fadeOnLoad = false,
     style,
     tooltip = "",
     tooltipArrow = "top",
@@ -32,95 +34,174 @@ export default function Image({
     supressLoadImageWarning = false,
     format = "png",
 }: ImageProps) {
-    const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down("md"));
+    const [width, height] = Array.isArray(size) ? size : [size, size];
 
-    let [width, height]: (number | undefined)[] = [undefined, undefined];
-    if (size) {
-        if (Array.isArray(size)) [width, height] = size;
-        else width = height = size;
-        if (matches && responsive) {
-            width = width - width * responsiveSize;
-            height = height - height * responsiveSize;
+    const resolvedWidth = style?.width ?? width ?? "auto";
+    const resolvedHeight = style?.height ?? height ?? "auto";
+
+    const imgStyle = {
+        ...style,
+        width: responsive ? undefined : resolvedWidth,
+        height: responsive ? undefined : resolvedHeight,
+        ...(responsive && {
+            "--image-width": toCssLength(resolvedWidth),
+            "--image-height": toCssLength(resolvedHeight),
+            "--responsive-scale": 1 - responsiveSize,
+        }),
+    } as React.CSSProperties;
+
+    const imageUrl = resolveImageUrl(src, format);
+
+    const [loadState, setLoadState] = useState<{
+        src: string;
+        status: ImageLoadStatus;
+    }>({
+        src: imageUrl,
+        status: "loading",
+    });
+
+    const currentStatus =
+        loadState.src === imageUrl ? loadState.status : "loading";
+
+    const imageLoaded =
+        !fadeOnLoad || currentStatus === "loaded" || currentStatus === "failed";
+
+    function onLoad(event: React.SyntheticEvent<HTMLImageElement>) {
+        const loadedUrl = event.currentTarget.src;
+
+        if (loadedUrl === EMPTY_IMAGE) return;
+
+        if (
+            !supressLoadImageWarning &&
+            loadedUrl === DEFAULT_FALLBACK_URL &&
+            imageUrl !== DEFAULT_FALLBACK_URL
+        ) {
+            console.warn(`Failed to load image ${imageUrl}`);
+        }
+
+        if (fadeOnLoad) {
+            setLoadState({
+                src: imageUrl,
+                status: "loaded",
+            });
         }
     }
 
-    const defaultImageStyle: React.CSSProperties = {
-        width: width || "auto",
-        height: height || "auto",
-    };
+    const fallbacks = resolveFallbackImages(imageUrl, fallbackSrc);
 
-    if (!src.startsWith("https")) {
-        src = `https://assets.irminsul.gg/v2/${splitJoin(src)}.${format}`;
+    const fallbackRef = useRef({
+        src: imageUrl,
+        index: 0,
+    });
+
+    if (fallbackRef.current.src !== imageUrl) {
+        fallbackRef.current = {
+            src: imageUrl,
+            index: 0,
+        };
     }
 
-    if (!fallbackSrc.startsWith("https")) {
-        fallbackSrc = `https://assets.irminsul.gg/v2/${fallbackSrc}.png`;
+    // Set fallback images in sequence
+    function onError(event: React.SyntheticEvent<HTMLImageElement>) {
+        const image = event.currentTarget;
+        const nextFallback = fallbacks[fallbackRef.current.index];
+
+        if (!nextFallback) {
+            if (!supressLoadImageWarning) {
+                console.warn(`Failed to load image ${imageUrl}`);
+            }
+
+            image.src = EMPTY_IMAGE;
+
+            setLoadState({
+                src: imageUrl,
+                status: "failed",
+            });
+
+            return;
+        }
+
+        fallbackRef.current.index++;
+        image.src = nextFallback;
     }
 
-    const imgStyle = combineStyles(defaultImageStyle, style);
-
+    const tooltipOpenRef = useRef(false);
     const [showTooltip, setShowTooltip] = useState(false);
-    const tooltipTimeout = useRef<ReturnType<typeof setTimeout>>(null);
+    const [mountTooltip, setMountTooltip] = useState(false);
 
-    const handleHover = (direction: "enter" | "leave") => {
-        zoomOnHover && zoomImageOnHover({ direction, id, zoom: 1.05 });
+    const handleHover = (entering: boolean) => {
+        tooltipOpenRef.current = entering;
 
         // Only mount tooltip when hovering over the image.
         // This prevents expensive component teardowns when
         // there are 500+ tooltips on a page.
-        if (tooltipTimeout.current) {
-            clearTimeout(tooltipTimeout.current);
-            tooltipTimeout.current = null;
+        if (entering) {
+            setMountTooltip(true);
         }
-        if (direction === "enter") {
-            setShowTooltip(true);
-        } else {
-            tooltipTimeout.current = setTimeout(() => {
-                setShowTooltip(false);
-            }, TOOLTIP_TIMEOUT);
-        }
+
+        setShowTooltip(entering);
     };
 
-    // Clear timeout when Image unmounts
-    useEffect(() => {
-        return () => {
-            if (tooltipTimeout.current) {
-                clearTimeout(tooltipTimeout.current);
-            }
-        };
-    }, []);
-
-    // Set fallback image
-    function onError(event: React.SyntheticEvent<HTMLImageElement>) {
-        if (event.currentTarget.src === fallbackSrc) return;
-
-        if (!supressLoadImageWarning) {
-            console.warn(`Failed to load image ${src}`);
-        }
-
-        event.currentTarget.src = fallbackSrc;
-    }
+    const imageRef = useRef<HTMLImageElement>(null);
 
     const image = (
         <img
-            src={src}
+            ref={imageRef}
             id={id}
+            src={imageUrl}
             alt={alt}
+            className={[
+                responsive && styles.responsive,
+                zoomOnHover && styles.zoomOnHover,
+                fadeOnLoad && styles.fadeOnLoad,
+                fadeOnLoad && imageLoaded && styles.loaded,
+            ]
+                .filter(Boolean)
+                .join(" ")}
             style={imgStyle}
+            onLoad={onLoad}
             onError={onError}
             onClick={onClick}
-            onMouseEnter={() => handleHover("enter")}
-            onMouseLeave={() => handleHover("leave")}
+            onMouseEnter={tooltip ? () => handleHover(true) : undefined}
+            onMouseLeave={tooltip ? () => handleHover(false) : undefined}
             loading={loading}
         />
     );
 
-    return tooltip && showTooltip ? (
-        <Tooltip title={tooltip} arrow placement={tooltipArrow}>
+    return (
+        <>
             {image}
-        </Tooltip>
-    ) : (
-        image
+            {tooltip && mountTooltip && (
+                <Tooltip
+                    title={tooltip}
+                    placement={tooltipArrow}
+                    open={showTooltip}
+                    disableHoverListener
+                    disableFocusListener
+                    disableTouchListener
+                    slotProps={{
+                        popper: {
+                            anchorEl: imageRef.current,
+                        },
+                        transition: {
+                            onExited: () => {
+                                if (!tooltipOpenRef.current) {
+                                    setMountTooltip(false);
+                                }
+                            },
+                        },
+                    }}
+                >
+                    <span
+                        style={{
+                            position: "absolute",
+                            width: 0,
+                            height: 0,
+                            pointerEvents: "none",
+                        }}
+                    />
+                </Tooltip>
+            )}
+        </>
     );
 }

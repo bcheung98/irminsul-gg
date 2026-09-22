@@ -1,0 +1,34 @@
+.zoomOnHover {
+    transition: transform 0.2s;
+}
+
+.zoomOnHover:hover {
+    transform: scale(1.05);
+}
+
+.fadeOnLoad {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+.fadeOnLoad.loaded {
+    opacity: 1;
+}
+
+.zoomOnHover.fadeOnLoad {
+    transition:
+        transform 0.2s,
+        opacity 0.2s ease-in;
+}
+
+.responsive {
+    width: var(--image-width);
+    height: var(--image-height);
+}
+
+@media (max-width: 899.95px) {
+    .responsive {
+        width: calc(var(--image-width) * var(--responsive-scale));
+        height: calc(var(--image-height) * var(--responsive-scale));
+    }
+}
