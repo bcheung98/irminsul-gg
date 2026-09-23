@@ -13,7 +13,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { UmaSupport } from "@/types/uma";
+import type { UmaSupport } from "@/types/uma";
 
 export default function SupportSplash({ support }: { support: UmaSupport }) {
     const { id, name, title, splash } = support;
@@ -34,7 +34,7 @@ export default function SupportSplash({ support }: { support: UmaSupport }) {
             <SupportCardImage
                 support={support}
                 style={{
-                    width: matches_up_sm ? "100%" : "96px",
+                    width: matches_up_sm ? "225px" : "96px",
                     height: matches_up_sm ? "300px" : "auto",
                     cursor: "pointer",
                 }}
@@ -61,6 +61,7 @@ export default function SupportSplash({ support }: { support: UmaSupport }) {
                                     ? { width: "auto", height: maxHeight }
                                     : { width: "100%", height: "auto" }
                             }
+                            fadeOnLoad
                         />
                     </Grid>
                     <Grid
