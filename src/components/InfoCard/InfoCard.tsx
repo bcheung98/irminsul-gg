@@ -18,8 +18,8 @@ import { formatHref, zoomImageOnHover } from "@/utils";
 import { useSettingsStore } from "@/stores";
 
 // Type imports
-import { InfoCardProps } from "./InfoCard.types";
-import { Game } from "@/types";
+import type { InfoCardProps } from "./InfoCard.types";
+import type { Game } from "@/types";
 
 export default function InfoCard({
     id,
@@ -69,15 +69,18 @@ export default function InfoCard({
             });
     };
 
-    const imgURL = getImageURL({ game, tag, id, gender, url });
+    const imageUrl = getImageURL({ game, tag, id, gender, url });
 
-    const ImageRoot = (
+    const root = (
         <>
             <Box sx={styles.imageContainer()}>
                 <Image
-                    src={imgURL}
+                    src={imageUrl}
                     id={componentID}
                     size={size}
+                    style={{
+                        height: tag !== "zzz/bangboos" ? "100%" : undefined,
+                    }}
                     responsive
                     responsiveSize={0.25}
                 />
@@ -111,10 +114,10 @@ export default function InfoCard({
                         href={`/${tag}/${formatHref(href)}`}
                         LinkComponent={NavLink}
                     >
-                        {ImageRoot}
+                        {root}
                     </ButtonBase>
                 ) : (
-                    ImageRoot
+                    root
                 )}
             </Card>
             {badgeLeft && (

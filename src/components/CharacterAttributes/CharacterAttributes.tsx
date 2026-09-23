@@ -21,7 +21,7 @@ import { useGameTag } from "@/context";
 import { rarityMap } from "@/data/zzz/common";
 
 // Type imports
-import { AttributeData, AttributeDataKey, GameData } from "@/types";
+import type { AttributeData, AttributeDataKey, GameData } from "@/types";
 
 export default function CharacterAttributes({
     attributes,
@@ -35,22 +35,19 @@ export default function CharacterAttributes({
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
     function Rarity() {
-        if (game === "zzz") {
-            return <></>;
-        } else {
-            return (
-                <InfoChip
-                    title={
-                        <RarityStars
-                            rarity={attributes.rarity}
-                            variant="h6"
-                            useRarityColor
-                        />
-                    }
-                    chipProps={{ padding: "0px 8px" }}
-                />
-            );
-        }
+        if (game === "zzz") return null;
+        return (
+            <InfoChip
+                title={
+                    <RarityStars
+                        rarity={attributes.rarity}
+                        variant="h6"
+                        useRarityColor
+                    />
+                }
+                chipProps={{ padding: "0px 8px" }}
+            />
+        );
     }
 
     function Chip(props: { attrKey: AttributeDataKey }) {
@@ -79,7 +76,9 @@ export default function CharacterAttributes({
                             game === "zzz" &&
                             `zzz/ranks/agent/${rarityMap[attributes.rarity || 3]}`
                         }
-                        iconProps={{ size: [48, 0] }}
+                        iconProps={{
+                            styles: { width: "48px", height: "auto" },
+                        }}
                         title={attributes.displayName}
                         subtitle={
                             <Text weight="highlight">
