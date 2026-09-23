@@ -12,7 +12,7 @@ import { getSupportCardRarityColor } from "@/helpers/uma/rarityColors";
 import { rarityMap } from "@/data/uma/common";
 
 // Type imports
-import { UmaSupport } from "@/types/uma";
+import type { UmaSupport } from "@/types/uma";
 
 export default function SupportImage({
     support,
@@ -39,7 +39,7 @@ export default function SupportImage({
             backgroundColor: "transparent",
             border: "4px solid transparent",
             backgroundImage: `linear-gradient(transparent, transparent), ${getSupportCardRarityColor(
-                rarity
+                rarity,
             )}`,
             backgroundOrigin: "border-box",
             backgroundClip: "padding-box, border-box",
@@ -57,6 +57,7 @@ export default function SupportImage({
                     id={componentID}
                     src={`uma/supports/${id}`}
                     style={style}
+                    fadeOnLoad={Boolean(handleClickOpen)}
                 />
             </Box>
             <Stack

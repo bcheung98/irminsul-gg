@@ -7,7 +7,7 @@ import { InfoPageRoot } from "@/components/PageRoot";
 import CharacterInfo from "@/components/_uma/CharacterInfo";
 import CharacterSkills from "@/components/_uma/CharacterSkills";
 import CharacterEvents from "@/components/_uma/CharacterEvents";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import Loader from "@/components/Loader";
 import UmaBetaTag from "@/components/_uma/UmaBetaTag";
 
@@ -22,14 +22,14 @@ import { useStore, useServerStore } from "@/stores";
 import { urls } from "@/api";
 
 // Type imports
-import { AttributeData } from "@/types";
-import {
+import type { AttributeData } from "@/types";
+import type {
     UmaCharacter,
     UmaCharacterProfile,
     UmaCharacterSkills,
 } from "@/types/uma/character";
-import { EventList } from "@/types/uma/event";
-import { UmaSkill } from "@/types/uma/skill";
+import type { EventList } from "@/types/uma/event";
+import type { UmaSkill } from "@/types/uma/skill";
 
 export default function CharacterPage({
     character,
@@ -78,15 +78,13 @@ export default function CharacterPage({
     delete charSkills.eventJP;
 
     const Splash = (
-        <Image
+        <InfoSplash
             src={`uma/characters/${character.id}`}
-            style={{
-                width: matches ? "100%" : "128px",
-                maxWidth: "512px",
-                height: matches ? "100%" : "128px",
-                backgroundColor: theme.background(2),
-                borderRadius: theme.contentBox.border.radius * 4,
-            }}
+            width="96px"
+            height="96px"
+            maxWidth="512px"
+            backgroundColor={theme.background(2)}
+            hideBorder
         />
     );
 

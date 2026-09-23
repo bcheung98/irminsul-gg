@@ -7,7 +7,7 @@ import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
@@ -15,9 +15,9 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Type imports
-import { AttributeData, AttributeDataMisc } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
-import { WuWaCharacter } from "@/types/wuwa/character";
+import type { AttributeData, AttributeDataMisc } from "@/types";
+import type { CharacterSkillsList } from "@/types/skill";
+import type { WuWaCharacter } from "@/types/wuwa/character";
 
 export default function CharacterPage({
     character,
@@ -52,18 +52,7 @@ export default function CharacterPage({
         />
     );
 
-    const SplashMini = (
-        <Image
-            src={`wuwa/resonators/${character.id}`}
-            style={{
-                width: "128px",
-                height: "auto",
-                backgroundColor: theme.background(1),
-                borderRadius: theme.contentBox.border.radius * 4,
-                outline: `1px solid ${theme.border.color.primary}`,
-            }}
-        />
-    );
+    const SplashMini = <InfoSplash src={`wuwa/resonators/${character.id}`} />;
 
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 

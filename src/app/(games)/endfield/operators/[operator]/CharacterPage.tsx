@@ -8,7 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterTalents from "@/components/_endfield/CharacterTalents";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
@@ -16,9 +16,9 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Type imports
-import { AttributeData, AttributeDataMisc } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
-import { EndfieldCharacter } from "@/types/endfield/character";
+import type { AttributeData, AttributeDataMisc } from "@/types";
+import type { CharacterSkillsList } from "@/types/skill";
+import type { EndfieldCharacter } from "@/types/endfield/character";
 
 export default function CharacterPage({
     character,
@@ -67,16 +67,7 @@ export default function CharacterPage({
     );
 
     const SplashMini = (
-        <Image
-            src={`endfield/operators/${character.id}`}
-            style={{
-                width: "128px",
-                height: "auto",
-                backgroundColor: theme.background(2),
-                borderRadius: theme.contentBox.border.radius * 4,
-                outline: `1px solid ${theme.border.color.primary}`,
-            }}
-        />
+        <InfoSplash src={`endfield/operators/${character.id}`} />
     );
 
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;

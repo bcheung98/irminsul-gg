@@ -7,7 +7,7 @@ import CharacterInfo from "@/components/CharacterInfo";
 import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import CharacterPotential from "@/components/_zzz/CharacterPotential";
 import BetaTag from "@/components/BetaTag";
 
@@ -16,9 +16,9 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Type imports
-import { AttributeData, AttributeDataMisc } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
-import { ZZZCharacter } from "@/types/zzz";
+import type { AttributeData, AttributeDataMisc } from "@/types";
+import type { CharacterSkillsList } from "@/types/skill";
+import type { ZZZCharacter } from "@/types/zzz";
 
 export default function CharacterPage({
     character,
@@ -67,18 +67,7 @@ export default function CharacterPage({
         />
     );
 
-    const SplashMini = (
-        <Image
-            src={`zzz/agents/${character.id}`}
-            style={{
-                width: "128px",
-                height: "auto",
-                backgroundColor: theme.background(1),
-                borderRadius: theme.contentBox.border.radius * 4,
-                outline: `1px solid ${theme.border.color.primary}`,
-            }}
-        />
-    );
+    const SplashMini = <InfoSplash src={`zzz/agents/${character.id}`} />;
 
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 
