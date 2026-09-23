@@ -15,8 +15,8 @@ import { formatHref } from "@/utils";
 import { rarityMap } from "@/data/uma/common";
 
 // Type imports
-import { InfoAvatarProps } from "@/components/InfoAvatar/InfoAvatar.types";
-import { UmaSpecialty } from "@/types/uma";
+import type { InfoAvatarProps } from "@/components/InfoAvatar/InfoAvatar.types";
+import type { UmaSpecialty } from "@/types/uma";
 
 export interface InfoAvatarSupportProps extends InfoAvatarProps {
     type: UmaSpecialty;
@@ -41,12 +41,17 @@ export default function InfoAvatarSupport({
         imgURL = `${tag}/${url}`;
     }
 
-    const ImageRoot = (
+    const image = (
         <Image
             src={imgURL}
             size={size}
             id={`${componentID || href}-infoAvatar`}
             zoomOnHover={!disableZoomOnHover}
+            style={{
+                width: "100%",
+                height: "100%",
+            }}
+            fadeOnLoad
         />
     );
 
@@ -55,15 +60,14 @@ export default function InfoAvatarSupport({
             sx={{
                 position: "relative",
                 overflow: "visible",
-                width: size,
-                height: size,
+                width: { xs: size - size * 0.125, md: size },
+                height: { xs: size - size * 0.125, md: size },
                 borderRadius: theme.infoAvatar.border.radius,
                 background: "transparent",
             }}
         >
             <Tooltip
                 title={`${name} (${rarityMap[rarity]} ${type})`}
-                arrow
                 placement="top"
             >
                 <div>
@@ -72,10 +76,10 @@ export default function InfoAvatarSupport({
                             href={`/${tag}/${formatHref(href)}`}
                             LinkComponent={NavLink}
                         >
-                            {ImageRoot}
+                            {image}
                         </ButtonBase>
                     ) : (
-                        ImageRoot
+                        image
                     )}
                 </div>
             </Tooltip>
