@@ -39,13 +39,16 @@ export default function InfoAvatar({
         imageUrl = `${tag}/${url}`;
     }
 
-    const ImageRoot = (
+    const image = (
         <Image
             src={imageUrl}
             size={size}
             id={`${componentID || href}-infoAvatar`}
             zoomOnHover={!disableZoomOnHover}
-            responsive
+            style={{
+                width: "100%",
+                height: "100%",
+            }}
             fadeOnLoad
         />
     );
@@ -73,10 +76,10 @@ export default function InfoAvatar({
                         href={`/${tag}/${formatHref(href)}`}
                         LinkComponent={NavLink}
                     >
-                        {ImageRoot}
+                        {image}
                     </ButtonBase>
                 ) : (
-                    ImageRoot
+                    image
                 )}
             </Card>
         </Tooltip>
