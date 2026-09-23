@@ -24,12 +24,12 @@ import { useStore, useServerStore } from "@/stores";
 import { urls } from "@/api";
 
 // Type imports
-import { AttributeData } from "@/types";
-import { UmaCharacterProfile } from "@/types/uma/character";
-import { EventList } from "@/types/uma/event";
-import { UmaSkill } from "@/types/uma/skill";
-import { UmaSupport } from "@/types/uma";
-import { UmaSupportSkills } from "@/types/uma/support";
+import type { AttributeData } from "@/types";
+import type { UmaCharacterProfile } from "@/types/uma/character";
+import type { EventList } from "@/types/uma/event";
+import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaSupport } from "@/types/uma";
+import type { UmaSupportSkills } from "@/types/uma/support";
 
 export default function SupportPage({
     support,
@@ -44,7 +44,7 @@ export default function SupportPage({
 }) {
     const profiles: UmaCharacterProfile[] = useSWR(
         urls["uma/character-profiles"],
-        (url: string) => fetch(url).then((r) => r.json())
+        (url: string) => fetch(url).then((r) => r.json()),
     ).data;
 
     const theme = useTheme();

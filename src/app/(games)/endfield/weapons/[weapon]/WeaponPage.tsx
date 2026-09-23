@@ -3,49 +3,27 @@
 // Component imports
 import WeaponInfo from "@/components/WeaponInfo";
 import { InfoPageRoot } from "@/components/PageRoot";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import BetaTag from "@/components/BetaTag";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-// Helper imports
-import { useGameTag } from "@/context";
-import {
-    getEndfieldBackgroundColor,
-    getEndfieldRarityColor,
-} from "@/helpers/endfield/rarityColors";
-
 // Type imports
-import { EndfieldWeapon } from "@/types/endfield/weapon";
-import { AttributeData } from "@/types";
+import type { EndfieldWeapon } from "@/types/endfield/weapon";
+import type { AttributeData } from "@/types";
 
 export default function WeaponPage({ weapon }: { weapon: EndfieldWeapon }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("md"));
 
-    const game = useGameTag();
-
     const attributes: AttributeData = { ...weapon };
 
     const Splash = (
-        <Image
-            src={`${game}/weapons/${weapon.id}`}
-            style={{
-                width: matches ? "100%" : "128px",
-                maxWidth: "256px",
-                height: "auto",
-                backgroundColor: theme.background(2),
-                backgroundImage: `url(https://assets.irminsul.gg/v2/_common/rarity-background/${weapon.rarity}.png)`,
-                backgroundSize: "contain",
-                backgroundRepeat: "repeat",
-                borderRadius: theme.contentBox.border.radius * 4,
-                border: `2px solid ${getEndfieldRarityColor(weapon.rarity)}`,
-                boxShadow: `inset 0 0 24px 16px ${getEndfieldBackgroundColor(
-                    weapon.rarity,
-                )}`,
-            }}
+        <InfoSplash
+            src={`endfield/weapons/${weapon.id}`}
+            rarity={weapon.rarity}
         />
     );
 

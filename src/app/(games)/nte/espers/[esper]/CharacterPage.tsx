@@ -8,7 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterPassives from "@/components/_nte/CharacterPassives";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
-import Image from "@/components/Image";
+import InfoSplash from "@/components/InfoSplash";
 import CharacterConsole from "@/components/_nte/CharacterConsole";
 import BetaTag from "@/components/BetaTag";
 
@@ -17,9 +17,9 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Type imports
-import { AttributeData, AttributeDataMisc } from "@/types";
-import { CharacterSkillsList } from "@/types/skill";
-import { NTECharacter } from "@/types/nte/character";
+import type { AttributeData, AttributeDataMisc } from "@/types";
+import type { CharacterSkillsList } from "@/types/skill";
+import type { NTECharacter } from "@/types/nte/character";
 
 export default function CharacterPage({
     character,
@@ -44,18 +44,7 @@ export default function CharacterPage({
         />
     );
 
-    const SplashMini = (
-        <Image
-            src={`nte/espers/${character.id}`}
-            style={{
-                width: "128px",
-                height: "auto",
-                backgroundColor: theme.background(1),
-                borderRadius: theme.contentBox.border.radius * 4,
-                outline: `1px solid ${theme.border.color.primary}`,
-            }}
-        />
-    );
+    const SplashMini = <InfoSplash src={`nte/espers/${character.id}`} />;
 
     const InfoMisc = <CharacterInfoMisc {...attributesMisc} />;
 
