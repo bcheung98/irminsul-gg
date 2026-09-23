@@ -86,7 +86,6 @@ export default function WebsiteCard({
         transform: `scale(${scale}) translate(${translate[0]}px, ${translate[1]}px)`,
         aspectRatio: 16 / 9,
         cursor: enabled ? "pointer" : "auto",
-        opacity: enabled ? 1 : 0.5,
     };
 
     return (
@@ -104,6 +103,7 @@ export default function WebsiteCard({
                             fallbackSrc={`${tag}/_common/wallpapers/${shortName}`}
                             id={`${id}-img`}
                             style={imageStyle}
+                            fadeOnLoad
                         />
                     </Box>
                     <Box

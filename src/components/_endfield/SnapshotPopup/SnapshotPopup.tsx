@@ -120,6 +120,7 @@ export default function SnapshotPopup({
                     height: "100%",
                     maxHeight: "1080px",
                 }}
+                fadeOnLoad
             />
             <Box sx={{ p: 2 }}>
                 <span>
