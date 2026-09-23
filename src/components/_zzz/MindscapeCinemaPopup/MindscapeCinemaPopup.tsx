@@ -106,6 +106,7 @@ export default function MindscapeCinemaPopup({
                     maxHeight: "1080px",
                     marginTop: "-32px",
                 }}
+                fadeOnLoad
             />
         </>
     );

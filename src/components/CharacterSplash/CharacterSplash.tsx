@@ -119,6 +119,7 @@ export default function CharacterSplash({
                                 borderBottom: `1px solid ${theme.border.color.primary}`,
                                 backgroundColor: theme.background(2),
                             }}
+                            fadeOnLoad
                         />
                     </Tabs.Panel>
                 ))}
@@ -213,6 +214,7 @@ export default function CharacterSplash({
                                 objectFit: "cover",
                                 overflowClipMargin: "unset",
                             }}
+                            fadeOnLoad
                         />
                     </Tabs.Panel>
                 ))}

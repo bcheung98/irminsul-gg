@@ -5,7 +5,6 @@ import Tooltip from "@/components/Tooltip";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
 
@@ -14,8 +13,8 @@ import { formatHref } from "@/utils";
 import { useRarityColors } from "@/helpers/rarityColors";
 
 // Type imports
-import { InfoAvatarProps } from "./InfoAvatar.types";
-import { Game } from "@/types";
+import type { InfoAvatarProps } from "./InfoAvatar.types";
+import type { Game } from "@/types";
 
 export default function InfoAvatar({
     id,
@@ -30,38 +29,34 @@ export default function InfoAvatar({
     href,
 }: InfoAvatarProps) {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-    if (matches) {
-        size = size - size * 0.125;
-    }
 
     const game = tag.split("/")[0] as Game;
 
     const rarityColors = useRarityColors()[game];
 
-    let imgURL = `${tag}/${id}`;
+    let imageUrl = `${tag}/${id}`;
     if (url) {
-        imgURL = `${tag}/${url}`;
+        imageUrl = `${tag}/${url}`;
     }
 
     const ImageRoot = (
         <Image
-            src={imgURL}
-            style={{ width: "100%", height: "100%" }}
+            src={imageUrl}
+            size={size}
             id={`${componentID || href}-infoAvatar`}
             zoomOnHover={!disableZoomOnHover}
             responsive
+            fadeOnLoad
         />
     );
 
     return (
-        <Tooltip title={name} arrow placement="top">
+        <Tooltip title={name} placement="top">
             <Card
                 elevation={0}
                 sx={{
-                    width: size,
-                    height: size,
+                    width: { xs: size - size * 0.125, md: size },
+                    height: { xs: size - size * 0.125, md: size },
                     border: `${
                         theme.infoAvatar.border.width
                     }px solid ${rarityColors(rarity)}`,
