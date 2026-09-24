@@ -13,11 +13,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 // Helper imports
 import { urls } from "@/api";
 import { formatHref } from "@/utils";
-import { useStore, useServerStore } from "@/stores";
+import { useServerStore } from "@/stores";
 
 // Type imports
-import { UmaCharacter } from "@/types/uma";
-import { UmaSkillEvolution } from "@/types/uma/skill";
+import type { Server } from "@/types";
+import type { UmaCharacter } from "@/types/uma";
+import type { UmaSkillEvolution } from "@/types/uma/skill";
 
 export default function SkillEvo({
     evolutions,
@@ -31,40 +32,11 @@ export default function SkillEvo({
         (url: string) => fetch(url).then((r) => r.json()),
     ).data;
 
-    const server = useStore(useServerStore, (state) => state.uma);
+    const store = useServerStore();
+    const server = store["uma"];
 
     if (!evolutions || evolutions.length === 0 || server === "NA") return <></>;
     if (!characters) return <LinearProgress color="info" />;
-
-    function ItemImage({ charID, evos }: { charID: number; evos: number[] }) {
-        const character = characters.find((char) => char.id === charID);
-        if (!character) return <></>;
-
-        const { name, outfit, url, release } = character;
-
-        if (server === "NA" && !release.global) return <></>;
-
-        return (
-            <Stack spacing={1}>
-                <TextLabel
-                    icon={`uma/characters/${charID}_icon`}
-                    iconProps={{ size: [48, 0] }}
-                    title={`${name} (${outfit || "Original"})`}
-                    href={`/uma/characters/${formatHref(url)}`}
-                />
-                <Stack spacing={1}>
-                    {evos.map((skill) => (
-                        <SkillInfo
-                            key={skill}
-                            skillID={skill}
-                            handleClick={handleClick}
-                            disablePopup={!Boolean(handleClick)}
-                        />
-                    ))}
-                </Stack>
-            </Stack>
-        );
-    }
 
     return (
         <Stack spacing={1}>
@@ -73,9 +45,57 @@ export default function SkillEvo({
                 {evolutions.map((evo, index) => (
                     <Box key={index}>
                         {evo.cardID && (
-                            <ItemImage charID={evo.cardID} evos={evo.evos} />
+                            <ItemImage
+                                server={server}
+                                characters={characters}
+                                charID={evo.cardID}
+                                evos={evo.evos}
+                                handleClick={handleClick}
+                            />
                         )}
                     </Box>
+                ))}
+            </Stack>
+        </Stack>
+    );
+}
+
+function ItemImage({
+    server,
+    characters,
+    charID,
+    evos,
+    handleClick,
+}: {
+    server: Server;
+    characters: UmaCharacter[];
+    charID: number;
+    evos: number[];
+    handleClick?: (arg: any) => void;
+}) {
+    const character = characters.find((char) => char.id === charID);
+    if (!character) return <></>;
+
+    const { name, outfit, url, release } = character;
+
+    if (server === "NA" && !release.global) return <></>;
+
+    return (
+        <Stack spacing={1}>
+            <TextLabel
+                icon={`uma/characters/${charID}_icon`}
+                iconProps={{ styles: { width: "48px", height: "auto" } }}
+                title={`${name} (${outfit || "Original"})`}
+                href={`/uma/characters/${formatHref(url)}`}
+            />
+            <Stack spacing={1}>
+                {evos.map((skill) => (
+                    <SkillInfo
+                        key={skill}
+                        skillID={skill}
+                        handleClick={handleClick}
+                        disablePopup={!Boolean(handleClick)}
+                    />
                 ))}
             </Stack>
         </Stack>

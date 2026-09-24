@@ -6,12 +6,11 @@ import RarityStars from "@/components/RarityStars";
 // Helper imports
 import DateObject from "@/helpers/dates";
 import { formatHref } from "@/utils";
-import { useGameTag } from "@/context";
-import { useStore, useServerStore } from "@/stores";
+import { useServerStore } from "@/stores";
 
 // Type imports
-import { UmaCharacter } from "@/types/uma/character";
-import { SortTableRow } from "@/components/SortTable/SortTable.types";
+import type { UmaCharacter } from "@/types/uma/character";
+import type { SortTableRow } from "@/components/SortTable/SortTable.types";
 
 export default function CharacterList({
     characters,
@@ -20,8 +19,8 @@ export default function CharacterList({
     characters: UmaCharacter[];
     loading?: boolean;
 }) {
-    const game = useGameTag();
-    const server = useStore(useServerStore, (state) => state[game]);
+    const store = useServerStore();
+    const server = store["uma"];
 
     const columns = {
         name: "Name",
@@ -55,7 +54,7 @@ export default function CharacterList({
                     ),
                     icon: `uma/characters/${character.id}_icon`,
                     iconProps: {
-                        size: [48, 0],
+                        styles: { width: "48px", height: "auto" },
                     },
                     href: `characters/${formatHref(character.url)}`,
                     textSpacing: 0.5,
