@@ -20,7 +20,7 @@ import type { UmaSkill } from "@/types/uma/skill";
 
 const INITIAL_COUNT = 60;
 const BATCH_SIZE = 60;
-const PRELOAD_MARGIN = 0; // px
+const PRELOAD_MARGIN = 600; // px
 
 export default function SkillList({ skills }: { skills: UmaSkill[] }) {
     const [isPending, startTransition] = useTransition();
@@ -75,8 +75,8 @@ export default function SkillList({ skills }: { skills: UmaSkill[] }) {
     useEffect(() => {
         const sentinel = sentinelRef.current;
 
-        // Stop observing once every skill is rendered or
-        // while the next batch is loading.
+        // Stop observing once every skill is rendered
+        // or the sentinel is no longer present.
         if (!sentinel || count >= skills.length) {
             setObserverStatus(
                 count >= skills.length
@@ -86,8 +86,7 @@ export default function SkillList({ skills }: { skills: UmaSkill[] }) {
             return;
         }
 
-        // Preload the next batch before the user
-        // reaches the bottom of the rendered list.
+        // Load the next batch when the sentinel enters the viewport.
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setObserverStatus(
