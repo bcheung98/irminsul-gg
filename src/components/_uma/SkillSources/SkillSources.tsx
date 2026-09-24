@@ -20,9 +20,15 @@ import { scenarios } from "@/data/uma/scenarios";
 import { isUnreleasedContentUma } from "@/helpers/isUnreleasedContent";
 
 // Type imports
-import { UmaCharacter, UmaRarity, UmaSpecialty, UmaSupport } from "@/types/uma";
-import { UmaSkill } from "@/types/uma/skill";
-import { UmaScenario } from "@/types/uma/scenario";
+import type {
+    UmaCharacter,
+    UmaRarity,
+    UmaSpecialty,
+    UmaSupport,
+} from "@/types/uma";
+import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaScenario } from "@/types/uma/scenario";
+import type { Server } from "@/types";
 
 export default function SkillSources({
     skill,
@@ -39,49 +45,18 @@ export default function SkillSources({
         fetch(url).then((r) => r.json()),
     ).data;
 
-    const server = useStore(useServerStore, (state) => state.uma);
+    const store = useServerStore();
+    const server = store["uma"];
 
     const { id } = skill;
 
     if (!characters || !supports) return <LinearProgress color="info" />;
 
-    function ItemImage({
-        type,
-        id,
-        name,
-        rank,
-        specialty,
-        url,
-        outfit = "Original",
-    }: RenderImageProps) {
-        const tooltip =
-            type === "character"
-                ? `${name} (${outfit || "Original"})`
-                : `${name} (${rarityMap[rank]} ${specialty})`;
-        return (
-            <TextLabel
-                icon={`uma/${type}s/${id}_icon`}
-                iconProps={{ size: [48, 0], tooltip }}
-                href={`/uma/${type}s/${formatHref(url)}`}
-            />
-        );
-    }
-
-    function ItemImageScenario({ scenario }: { scenario: UmaScenario }) {
-        return (
-            <Image
-                src={`uma/scenarios/${scenario.id}`}
-                size={48}
-                responsive
-                tooltip={server === "Asia" ? scenario.nameJP : scenario.name}
-            />
-        );
-    }
-
     function filterSources(item: UmaCharacter | UmaSupport) {
         if (server === "NA") {
             return !isUnreleasedContentUma(item.release);
-        } else return item;
+        }
+        return item;
     }
 
     const characterSources = characters
@@ -143,7 +118,9 @@ export default function SkillSources({
         scenarioSources,
     ].flat();
 
-    return sources.length > 0 ? (
+    if (sources.length === 0) return <></>;
+
+    return (
         <Card
             sx={(theme) => ({
                 backgroundColor: backgroundColor || theme.background(1),
@@ -201,6 +178,7 @@ export default function SkillSources({
                             {scenarioSources.map((scenario, index) => (
                                 <ItemImageScenario
                                     key={index}
+                                    server={server}
                                     scenario={scenario}
                                 />
                             ))}
@@ -209,12 +187,18 @@ export default function SkillSources({
                 )}
             </Stack>
         </Card>
-    ) : (
-        <></>
     );
 }
 
-interface RenderImageProps {
+function ItemImage({
+    type,
+    id,
+    name,
+    rank,
+    specialty,
+    url,
+    outfit = "Original",
+}: {
     type: "character" | "support";
     id: number;
     name: string;
@@ -222,4 +206,36 @@ interface RenderImageProps {
     url: string;
     specialty?: UmaSpecialty;
     outfit?: string;
+}) {
+    const tooltip =
+        type === "character"
+            ? `${name} (${outfit || "Original"})`
+            : `${name} (${rarityMap[rank]} ${specialty})`;
+    return (
+        <TextLabel
+            icon={`uma/${type}s/${id}_icon`}
+            iconProps={{
+                styles: { width: "48px", height: "auto" },
+                tooltip,
+            }}
+            href={`/uma/${type}s/${formatHref(url)}`}
+        />
+    );
+}
+
+function ItemImageScenario({
+    server,
+    scenario,
+}: {
+    server: Server;
+    scenario: UmaScenario;
+}) {
+    return (
+        <Image
+            src={`uma/scenarios/${scenario.id}`}
+            size={48}
+            responsive
+            tooltip={server === "Asia" ? scenario.nameJP : scenario.name}
+        />
+    );
 }
