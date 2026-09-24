@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 // Component imports
 import FlexBox from "@/components/FlexBox";
@@ -22,9 +22,9 @@ import { usePlannerStore } from "@/stores";
 import type { PlannerSliderProps } from "./PlannerSlider.types";
 import type { GameNoUma } from "@/types";
 
-const threshold = "@500";
+const THRESHOLD = "@500";
 
-const PlannerSlider = memo(function PlannerSlider({
+export default function PlannerSlider({
     mode,
     type,
     id,
@@ -40,72 +40,134 @@ const PlannerSlider = memo(function PlannerSlider({
 
     const game = useGameTag() as GameNoUma;
 
-    const setItemValues = usePlannerStore()[`${game}/setItemValues`];
+    const setItemValues = usePlannerStore(
+        (state) => state[`${game}/setItemValues`],
+    );
 
-    title = title || skillKeys[game][skillKey] || "Level";
+    const label = title ?? skillKeys[game][skillKey] ?? "Level";
 
     const [selected, setSelected] = useState(values.selected);
     const handleSelect = () => {
-        setSelected(!selected);
-    };
+        const nextSelected = !selected;
 
-    const minDistance = 1;
-    const maxValue = levels.length;
-    const [sliderValue, setSliderValue] = useState([values.start, values.stop]);
-    const handleSliderChange = useCallback(
-        (_: Event, newValue: number | number[], activeThumb: number) => {
-            if (!Array.isArray(newValue)) {
-                return;
-            }
-            if (newValue[1] - newValue[0] < minDistance) {
-                if (activeThumb === 0) {
-                    const clamped = Math.min(
-                        newValue[0],
-                        maxValue - minDistance,
-                    );
-                    setSliderValue(() => [clamped, clamped + minDistance]);
-                } else {
-                    const clamped = Math.max(newValue[1], minDistance + 1);
-                    setSliderValue(() => [clamped - minDistance, clamped]);
-                }
-            } else {
-                setSliderValue(() => newValue);
-            }
-        },
-        [],
-    );
+        setSelected(nextSelected);
 
-    const marks = levels.map((level, index) => ({
-        value: index + 1,
-        label: (
-            <Text
-                variant={sliderValue.includes(index + 1) ? "body1" : "body2"}
-                weight={
-                    sliderValue.includes(index + 1) ? "highlight" : "primary"
-                }
-                sx={{
-                    userSelect: "none",
-                    opacity: sliderValue.includes(index + 1)
-                        ? { "@": 0, [threshold]: 1 }
-                        : { "@": 0, [threshold]: 0.25 },
-                }}
-            >
-                {level}
-            </Text>
-        ),
-    }));
+        const [start, stop] = sliderValueRef.current;
 
-    useEffect(() => {
         setItemValues({
             id,
             skillKey,
             values: {
-                start: sliderValue[0],
-                stop: sliderValue[1],
-                selected,
+                start,
+                stop,
+                selected: nextSelected,
             },
         });
-    }, [sliderValue, selected]);
+    };
+
+    const minDistance = 1;
+    const maxValue = levels.length;
+
+    const clampSliderValue = (
+        newValue: number[],
+        activeThumb: number,
+    ): number[] => {
+        if (newValue[1] - newValue[0] >= minDistance) {
+            return newValue;
+        }
+
+        if (activeThumb === 0) {
+            const clamped = Math.min(newValue[0], maxValue - minDistance);
+
+            return [clamped, clamped + minDistance];
+        }
+
+        const clamped = Math.max(newValue[1], minDistance + 1);
+
+        return [clamped - minDistance, clamped];
+    };
+
+    const [sliderValue, setSliderValue] = useState([values.start, values.stop]);
+
+    const sliderValueRef = useRef(sliderValue);
+
+    const handleSliderChange = useCallback(
+        (_: Event, newValue: number | number[], activeThumb: number) => {
+            if (!Array.isArray(newValue)) return;
+
+            const nextValue = clampSliderValue(newValue, activeThumb);
+
+            sliderValueRef.current = nextValue;
+            setSliderValue(nextValue);
+        },
+        [maxValue],
+    );
+
+    const handleSliderCommit = useCallback(() => {
+        const [start, stop] = sliderValueRef.current;
+
+        setItemValues({
+            id,
+            skillKey,
+            values: { start, stop, selected },
+        });
+    }, [id, skillKey, selected, setItemValues]);
+
+    const marks = useMemo(
+        () =>
+            levels.map((level, index) => {
+                const value = index + 1;
+                const active = sliderValue.includes(value);
+
+                return {
+                    value,
+                    label: (
+                        <Text
+                            variant={active ? "body1" : "body2"}
+                            weight={active ? "highlight" : "primary"}
+                            sx={{
+                                userSelect: "none",
+                                opacity: active
+                                    ? { "@": 0, [THRESHOLD]: 1 }
+                                    : { "@": 0, [THRESHOLD]: 0.25 },
+                            }}
+                        >
+                            {level}
+                        </Text>
+                    ),
+                };
+            }),
+        [levels, sliderValue],
+    );
+
+    const initialized = usePlannerStore(
+        (state) =>
+            state[`${game}/items`].find((item) => item.id === id)?.values[
+                skillKey
+            ] !== undefined,
+    );
+
+    useEffect(() => {
+        if (initialized) return;
+
+        setItemValues({
+            id,
+            skillKey,
+            values: {
+                start: values.start,
+                stop: values.stop,
+                selected: values.selected,
+            },
+        });
+    }, [
+        initialized,
+        id,
+        skillKey,
+        values.start,
+        values.stop,
+        values.selected,
+        setItemValues,
+    ]);
 
     return (
         <Stack
@@ -138,7 +200,7 @@ const PlannerSlider = memo(function PlannerSlider({
                                     : `2px solid ${theme.border.color.primary}`,
                             backgroundColor: theme.iconBackground.primary,
                         }}
-                        tooltip={mode === "view" ? title : ""}
+                        tooltip={mode === "view" ? label : ""}
                         supressLoadImageWarning
                     />
                 )}
@@ -147,7 +209,7 @@ const PlannerSlider = memo(function PlannerSlider({
                         weight="highlight"
                         sx={{ opacity: selected ? 1 : 0.35 }}
                     >
-                        {title}
+                        {label}
                     </Text>
                 ) : (
                     <Text
@@ -174,7 +236,7 @@ const PlannerSlider = memo(function PlannerSlider({
                     opacity: selected ? 1 : 0.35,
                     px: {
                         "@": matches ? 2 : 0,
-                        [threshold]: 2,
+                        [THRESHOLD]: 2,
                     },
                     alignItems: "center",
                 }}
@@ -182,7 +244,7 @@ const PlannerSlider = memo(function PlannerSlider({
                 <Grid
                     size={1}
                     sx={{
-                        display: { "@": "flex", [threshold]: "none" },
+                        display: { "@": "flex", [THRESHOLD]: "none" },
                         mb: 3,
                     }}
                 >
@@ -196,15 +258,21 @@ const PlannerSlider = memo(function PlannerSlider({
                         min={1}
                         max={maxValue}
                         onChange={handleSliderChange}
+                        onChangeCommitted={handleSliderCommit}
                         disableSwap
                         size={matches ? "small" : "medium"}
-                        sx={{ color: color }}
+                        sx={{
+                            color,
+                            "& .MuiSlider-thumb, & .MuiSlider-track": {
+                                transition: "none",
+                            },
+                        }}
                     />
                 </Grid>
                 <Grid
                     size={1}
                     sx={{
-                        display: { "@": "flex", [threshold]: "none" },
+                        display: { "@": "flex", [THRESHOLD]: "none" },
                         mb: 3,
                     }}
                 >
@@ -213,6 +281,4 @@ const PlannerSlider = memo(function PlannerSlider({
             </Grid>
         </Stack>
     );
-});
-
-export default PlannerSlider;
+}

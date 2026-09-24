@@ -1,19 +1,11 @@
-import { CSSProperties, SxProps, Theme } from "@mui/material/styles";
+import type { SxProps, Theme } from "@mui/material/styles";
 
-interface MaterialCardStylesProps {
-    rarity: number;
-    size: number;
-}
-
-export const materialCardStyles = ({
-    rarity,
-    size,
-}: MaterialCardStylesProps) => ({
-    root: (): SxProps<Theme> => (theme) => ({
+export const materialCardStyles = (rarity: number, size: number) => ({
+    root: ((): SxProps<Theme> => (theme) => ({
         backgroundColor: theme.materialCard.backgroundColor.main,
         width: size,
-    }),
-    imageContainer: (theme: Theme): CSSProperties => {
+    }))(),
+    imageContainer: ((): SxProps<Theme> => (theme) => {
         const r = theme.materialCard.imageBorder.radius;
         return {
             display: "flex",
@@ -22,12 +14,10 @@ export const materialCardStyles = ({
             backgroundSize: "contain",
             borderRadius: `${r}px ${r}px 0 0`,
         };
-    },
-    label:
-        (): SxProps<Theme> =>
-        (theme): CSSProperties => ({
-            padding: "4px",
-            textAlign: "center",
-            backgroundColor: theme.materialCard.backgroundColor.label,
-        }),
+    })(),
+    label: ((): SxProps<Theme> => (theme) => ({
+        padding: "4px",
+        textAlign: "center",
+        backgroundColor: theme.materialCard.backgroundColor.label,
+    }))(),
 });

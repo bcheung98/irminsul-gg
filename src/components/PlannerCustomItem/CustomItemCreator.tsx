@@ -74,8 +74,7 @@ export function CustomItemCreator({
 
     const theme = useTheme();
 
-    const store = usePlannerStore();
-    const items = store[`${game}/items`];
+    const items = usePlannerStore((state) => state[`${game}/items`]);
 
     const customMaterials = getPlannerCustomMaterials(items);
 

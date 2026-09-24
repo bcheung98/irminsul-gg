@@ -5,7 +5,7 @@ import MaterialCard from "@/components/MaterialCard";
 import Text from "@/components/Text";
 
 // MUI imports
-import Grid, { GridProps } from "@mui/material/Grid";
+import Grid, { type GridProps } from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -14,12 +14,14 @@ import { getCustomMaterial } from "@/helpers/materials";
 // Type imports
 import type { CostValue } from "@/types/costs";
 import type { CustomMaterials } from "@/types/materials";
+import type { GameNoUma } from "@/types";
 
 interface MaterialGridProps {
     costs: Record<string | number, CostValue>;
     customMaterials?: CustomMaterials;
     size?: number;
     spacing?: GridProps["spacing"];
+    interactive?: boolean;
 }
 
 export default function MaterialGrid({
@@ -27,13 +29,17 @@ export default function MaterialGrid({
     customMaterials,
     size = 56,
     spacing = 2,
+    interactive = false,
 }: MaterialGridProps) {
-    const game = useGameTag();
-
     const pathname = usePathname();
 
+    const game = useGameTag() as GameNoUma;
+
+    const sortedMaterials = sortMaterialByKey(Object.keys(costs), pathname);
+
     const materialArray: React.ReactNode[] = [];
-    sortMaterialByKey(Object.keys(costs), pathname).forEach((key) =>
+
+    sortedMaterials.forEach((key) =>
         Object.entries(costs[key]).forEach(
             ([material, cost]: [string | number, number]) =>
                 cost &&
@@ -41,6 +47,7 @@ export default function MaterialGrid({
                     <Grid key={material}>
                         <MaterialCard
                             game={game}
+                            materialKey={key}
                             material={material}
                             customMaterial={getCustomMaterial(
                                 material,
@@ -48,6 +55,7 @@ export default function MaterialGrid({
                             )}
                             cost={cost}
                             size={size}
+                            interactive={interactive}
                         />
                     </Grid>,
                 ),
