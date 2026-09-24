@@ -39,8 +39,7 @@ export default function Planner({
 
     const game = useGameTag() as GameNoUma;
 
-    const store = usePlannerStore();
-    const items = store[`${game}/items`];
+    const items = usePlannerStore((state) => state[`${game}/items`]);
 
     useEffect(() => {
         if (!items.some((item) => "traces" in item)) return;
@@ -52,8 +51,8 @@ export default function Planner({
         }));
     }, [game, items, characters, weapons]);
 
-    const titleCharacters = `${categories[`${game}/characters`].slice(0, -1)}`;
-    const titleWeapons = `${categories[`${game}/weapons`].slice(0, -1)}`;
+    const characterCategory = `${categories[`${game}/characters`].slice(0, -1)}`;
+    const weaponCategory = `${categories[`${game}/weapons`].slice(0, -1)}`;
 
     return (
         <PlannerDataContext value={{ characters, weapons }}>
@@ -90,8 +89,8 @@ export default function Planner({
                     ) : (
                         <Text weight="highlight">
                             {`Add ${
-                                titleCharacters.startsWith("A") ? "an" : "a"
-                            } ${titleCharacters} or ${titleWeapons} to get started!`}
+                                startsWithVowel(characterCategory) ? "an" : "a"
+                            } ${characterCategory} or ${weaponCategory} to get started!`}
                         </Text>
                     )}
                 </ContentBox>
@@ -112,3 +111,5 @@ export default function Planner({
         </PlannerDataContext>
     );
 }
+
+const startsWithVowel = (str: string) => /^[aeiou]/i.test(str);

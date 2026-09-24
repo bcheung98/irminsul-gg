@@ -1,30 +1,33 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { GameNoUma } from "@/types";
-import { CostValue } from "@/types/costs";
-import { PlannerItemData, SetItemValuesProps } from "@/types/planner";
 
+import type { GameNoUma } from "@/types";
+import type { CostValue } from "@/types/costs";
+import type { PlannerItemData, SetItemValuesProps } from "@/types/planner";
 import {
     createGenshinSlice,
-    GenshinPlannerSlice,
+    type GenshinPlannerSlice,
 } from "./planner/useGenshinStore";
-import { createHSRSlice, HSRPlannerSlice } from "./planner/useHSRStore";
-import { createWuWaSlice, WuWaPlannerSlice } from "./planner/useWuWaStore";
-import { createZZZSlice, ZZZPlannerSlice } from "./planner/useZZZStore";
+import { createHSRSlice, type HSRPlannerSlice } from "./planner/useHSRStore";
+import { createWuWaSlice, type WuWaPlannerSlice } from "./planner/useWuWaStore";
+import { createZZZSlice, type ZZZPlannerSlice } from "./planner/useZZZStore";
 import {
     createEndfieldSlice,
-    EndfieldPlannerSlice,
+    type EndfieldPlannerSlice,
 } from "./planner/useEndfieldStore";
-import { createNTESlice, NTEPlannerSlice } from "./planner/useNTEStore";
+import { createNTESlice, type NTEPlannerSlice } from "./planner/useNTEStore";
 
 export interface PlannerSlice {
     totalCost: Record<number, Record<string, CostValue>>;
     items: PlannerItemData[];
     hidden: number[];
+    completed: CompletedMaterialKey[];
     setItems: (items: PlannerItemData[]) => void;
+    deleteItem: (id: number) => void;
     setItemValues: (item: SetItemValuesProps) => void;
     setHiddenItems: (id: number) => void;
     updateTotalCosts: (id?: number, costs?: Record<string, CostValue>) => void;
+    toggleCompleted: (key: CompletedMaterialKey) => void;
 }
 
 export type GamePlannerSlice<G extends GameNoUma, T> = {
@@ -53,3 +56,12 @@ export const usePlannerStore = create(
         },
     ),
 );
+
+export type CompletedMaterialKey = `${string}:${string}`;
+
+export function getCompletedMaterialKey(
+    category: string,
+    materialID: string,
+): CompletedMaterialKey {
+    return `${category}:${materialID}`;
+}

@@ -34,16 +34,15 @@ import { useGameTag } from "@/context";
 import { usePlannerStore } from "@/stores";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { PlannerItemData } from "@/types/planner";
+import type { GameNoUma } from "@/types";
+import type { PlannerItemData } from "@/types/planner";
 
 export default function PlannerSorter() {
     const theme = useTheme();
 
     const game = useGameTag() as GameNoUma;
 
-    const store = usePlannerStore();
-    const items = store[`${game}/items`];
+    const items = usePlannerStore((state) => state[`${game}/items`]);
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
@@ -73,7 +72,7 @@ export default function PlannerSorter() {
 
         if (activeIndex !== overIndex) {
             setList((prev) =>
-                arrayMove<PlannerItemData>(prev, activeIndex, overIndex)
+                arrayMove<PlannerItemData>(prev, activeIndex, overIndex),
             );
         }
     };
@@ -90,7 +89,7 @@ export default function PlannerSorter() {
 
     return (
         <>
-            {items.length > 0 && (
+            {items.length > 1 && (
                 <Button
                     onClick={handleClickOpen}
                     variant="contained"

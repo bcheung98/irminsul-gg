@@ -38,7 +38,9 @@ export default function StatNode({
         setSelected(!selected);
     };
 
-    const setItemValues = usePlannerStore()["nte/setItemValues"];
+    const setItemValues = usePlannerStore(
+        (state) => state[`nte/setItemValues`],
+    );
 
     useEffect(() => {
         setItemValues({

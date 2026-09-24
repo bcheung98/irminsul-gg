@@ -1,6 +1,7 @@
 // Component imports
 import Image from "@/components/Image";
 import Text from "@/components/Text";
+import MaterialCardButton from "./MaterialCardButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -13,25 +14,29 @@ import { materialCardStyles } from "./MaterialCard.styles";
 import { getMaterialResolvers } from "@/helpers/materials";
 
 // Type imports
-import type { Game } from "@/types";
+import type { GameNoUma } from "@/types";
 import type { ResolvedCustomMaterial } from "@/types/materials";
 
 export interface MaterialCardProps {
     id?: number;
-    game: Game;
+    game: GameNoUma;
+    materialKey: string;
     material: string | number;
     customMaterial?: ResolvedCustomMaterial;
     cost: number;
     size?: number;
     labelColor?: string;
+    interactive?: boolean;
 }
 
 export default function MaterialCard({
     game,
+    materialKey,
     material,
     customMaterial,
     cost,
     size = 56,
+    interactive = false,
 }: MaterialCardProps) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -57,11 +62,6 @@ export default function MaterialCard({
 
     const materialRarity = customMaterial?.rarity ?? rarity;
 
-    const styles = materialCardStyles({
-        rarity: materialRarity,
-        size: imgSize,
-    });
-
     const costLength = cost.toLocaleString().length;
     const fontSize =
         costLength < 8 ? imgSize / 4 - 4 : imgSize / 4 - (costLength - 4);
@@ -69,9 +69,11 @@ export default function MaterialCard({
     let tooltip = customMaterial?.name ?? displayName ?? name;
     if (source && !customMaterial) tooltip += ` (${source})`;
 
-    return (
-        <Card sx={styles.root()}>
-            <Box sx={styles.imageContainer(theme)}>
+    const styles = materialCardStyles(materialRarity, imgSize);
+
+    const root = (
+        <Card sx={styles.root}>
+            <Box sx={styles.imageContainer}>
                 <Image
                     src={imgURL || `${game}/materials/${id}`}
                     size={size}
@@ -88,9 +90,10 @@ export default function MaterialCard({
                             ? "gif"
                             : "png"
                     }
+                    supressLoadImageWarning={Boolean(customMaterial)}
                 />
             </Box>
-            <Box sx={styles.label()}>
+            <Box sx={styles.label}>
                 <Text
                     variant="body2"
                     weight="highlight"
@@ -103,5 +106,17 @@ export default function MaterialCard({
                 </Text>
             </Box>
         </Card>
+    );
+
+    return interactive ? (
+        <MaterialCardButton
+            game={game}
+            category={materialKey}
+            materialID={customMaterial?.id || material}
+        >
+            {root}
+        </MaterialCardButton>
+    ) : (
+        root
     );
 }

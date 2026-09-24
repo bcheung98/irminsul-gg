@@ -44,7 +44,9 @@ export default function StatNode({
         setSelected(!selected);
     };
 
-    const setItemValues = usePlannerStore()["endfield/setItemValues"];
+    const setItemValues = usePlannerStore(
+        (state) => state[`endfield/setItemValues`],
+    );
 
     const talentNode = getTalentNodes(talents)[index - 1];
 

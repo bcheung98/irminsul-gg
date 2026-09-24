@@ -1,53 +1,45 @@
 // Component imports
 import MaterialGrid from "@/components/MaterialGrid";
 import Text from "@/components/Text";
+import TextLabel from "@/components/TextLabel";
+
+// MUI imports
+import { useTheme } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import InfoIcon from "@mui/icons-material/Info";
 
 // Helper imports
 import { useGameTag } from "@/context";
-import { usePlannerStore } from "@/stores";
-import { objectKeys } from "@/utils";
+import { useTotalCosts } from "./PlannerTotalCost.hooks";
 
 // Type imports
 import type { GameNoUma } from "@/types";
-import type { CostValue } from "@/types/costs";
-import type { CustomMaterials } from "@/types/materials";
 
 export default function PlannerTotalCost() {
+    const theme = useTheme();
+
     const game = useGameTag() as GameNoUma;
 
-    const store = usePlannerStore();
+    const { materialCosts, customMaterials, count } = useTotalCosts(game);
 
-    const totalCosts = store[`${game}/totalCost`];
-    const items = store[`${game}/items`];
-    const hiddenItems = store[`${game}/hidden`];
-
-    const customMaterials = items.reduce<CustomMaterials>(
-        (customMaterials, item) => {
-            Object.assign(customMaterials, item.customMaterials);
-            return customMaterials;
-        },
-        {},
-    );
-
-    const materialCosts: Record<string, CostValue> = {};
-    Object.entries(totalCosts).forEach(([itemID, costs]) => {
-        if (!hiddenItems.includes(Number(itemID))) {
-            Object.entries(costs).forEach(([key, value]) => {
-                if (materialCosts[key] === undefined) {
-                    materialCosts[key] = {};
+    return count > 0 ? (
+        <Stack spacing={2}>
+            <MaterialGrid
+                costs={materialCosts}
+                customMaterials={customMaterials}
+                interactive
+            />
+            <TextLabel
+                icon={
+                    <InfoIcon
+                        fontSize="small"
+                        sx={{ color: theme.text.primary }}
+                    />
                 }
-                Object.entries(value).forEach(([material, cost]) => {
-                    if (materialCosts[key][material] === undefined) {
-                        materialCosts[key][material] = 0;
-                    }
-                    materialCosts[key][material] += cost;
-                });
-            });
-        }
-    });
-
-    return objectKeys(materialCosts).length > 0 ? (
-        <MaterialGrid costs={materialCosts} customMaterials={customMaterials} />
+                title="Click on a material to mark it as completed"
+                titleProps={{ variant: "subtitle1" }}
+            />
+        </Stack>
     ) : (
         <Text weight="highlight" sx={{ px: 4 }}>
             Its empty here...

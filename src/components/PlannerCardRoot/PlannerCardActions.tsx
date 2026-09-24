@@ -24,8 +24,8 @@ import { usePlannerStore } from "@/stores";
 import { useGameTag } from "@/context";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { PlannerCardActionProps } from "./PlannerCardRoot.types";
+import type { GameNoUma } from "@/types";
+import type { PlannerCardActionProps } from "./PlannerCardRoot.types";
 
 export default function PlannerCardActions({
     item,
@@ -37,27 +37,20 @@ export default function PlannerCardActions({
 
     const game = useGameTag() as GameNoUma;
 
-    const store = usePlannerStore();
-    const hiddenItems = store[`${game}/hidden`];
-
-    const setHiddenItems = store[`${game}/setHiddenItems`];
-    const updateTotalCosts = usePlannerStore()[`${game}/updateTotalCosts`];
-
-    const [hidden, setHidden] = useState(hiddenItems.includes(item.id));
+    const hidden = usePlannerStore((state) =>
+        state[`${game}/hidden`].includes(item.id),
+    );
+    const setHiddenItems = usePlannerStore(
+        (state) => state[`${game}/setHiddenItems`],
+    );
     const handleHiddenChange = () => {
-        setHidden(!hidden);
         setHiddenItems(item.id);
     };
 
+    const deleteItem = usePlannerStore((state) => state[`${game}/deleteItem`]);
     const handleDelete = () => {
-        if (hidden) setHiddenItems(item.id);
-        const newValues = store[`${game}/items`].filter(
-            (i) => i.id !== item.id
-        );
-        usePlannerStore.setState(() => ({
-            [`${game}/items`]: newValues,
-        }));
-        updateTotalCosts();
+        setAlertOpen(false);
+        deleteItem(item.id);
     };
 
     const [alertOpen, setAlertOpen] = useState(false);
@@ -78,6 +71,10 @@ export default function PlannerCardActions({
             "&:hover": {
                 backgroundColor:
                     theme.contentBox.backgroundColor.headerSelectedHover,
+            },
+            "&.Mui-disabled": {
+                color: theme.text.primary,
+                opacity: 0.5,
             },
         },
     };
@@ -112,7 +109,12 @@ export default function PlannerCardActions({
                         )}
                     </IconButton>
                 </Tooltip>
-                <Tooltip title="Toggle" placement="top">
+                <Tooltip
+                    title={
+                        hidden ? "Show in Total Cost" : "Hide from Total Cost"
+                    }
+                    placement="top"
+                >
                     <IconButton
                         onClick={handleHiddenChange}
                         {...iconButtonProps}
@@ -161,7 +163,9 @@ export default function PlannerCardActions({
                         <Text
                             weight="highlight"
                             sx={{ color: theme.text.header }}
-                        >{`This action cannot be undone.`}</Text>
+                        >
+                            {`This action cannot be undone.`}
+                        </Text>
                     </Stack>
                     <FlexBox spacing={2} sx={{ justifyContent: "right" }}>
                         <Button

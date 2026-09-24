@@ -44,9 +44,9 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
 
     const item = validatePlannerItem(props.item, characters, weapons);
 
-    const store = usePlannerStore();
-    const hiddenItems = store[`${game}/hidden`];
-    const hidden = hiddenItems.includes(item.id);
+    const hidden = usePlannerStore((state) =>
+        state[`${game}/hidden`].includes(item.id),
+    );
 
     const [mode, setMode] = useState<CardMode>("view");
     const handleModeChange = () => {
@@ -79,7 +79,11 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
                     <Stack
                         spacing={2}
                         divider={<Divider />}
-                        sx={{ opacity: hidden ? 0.5 : 1, px: { xs: 0, lg: 2 } }}
+                        sx={{
+                            opacity: hidden ? 0.35 : 1,
+                            px: { xs: 0, lg: 2 },
+                            transition: "opacity 0.15s",
+                        }}
                     >
                         {components[game]}
                         <Dropdown

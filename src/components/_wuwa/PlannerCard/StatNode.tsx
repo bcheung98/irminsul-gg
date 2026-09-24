@@ -47,7 +47,9 @@ export default function StatNode({
         setSelected(!selected);
     };
 
-    const setItemValues = usePlannerStore()["wuwa/setItemValues"];
+    const setItemValues = usePlannerStore(
+        (state) => state[`wuwa/setItemValues`],
+    );
 
     const nodeNumber = Number(id.slice(-1)) % 2 ? 1 : 2;
     const index = Number(!["3", "4", "5", "6"].includes(id.slice(-1)));

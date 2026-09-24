@@ -60,7 +60,9 @@ export default function StatNode({
         setSelected(!selected);
     };
 
-    const setItemValues = usePlannerStore()["hsr/setItemValues"];
+    const setItemValues = usePlannerStore(
+        (state) => state[`hsr/setItemValues`],
+    );
 
     let title = "";
     let imgSrc = "";
