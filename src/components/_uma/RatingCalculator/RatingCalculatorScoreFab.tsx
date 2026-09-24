@@ -17,7 +17,11 @@ export default function RatingCalculatorScoreFab() {
                     display: { xs: "block", xl: "none" },
                     position: "fixed",
                     zIndex: 5,
-                    top: "calc(80px + 0.75rem)",
+                    top: {
+                        xs: "calc(80px + 0.75rem)",
+                        sm: "calc(120px + 0.75rem)",
+                        lg: "calc(80px + 0.75rem)",
+                    },
                     bottom: "auto",
                     left: "50%",
                     right: "auto",
