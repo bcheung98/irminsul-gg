@@ -12,7 +12,6 @@ import Text from "@/components/Text";
 
 // MUI imports
 import Card from "@mui/material/Card";
-import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Type imports
@@ -24,10 +23,6 @@ const PRELOAD_MARGIN = 600; // px
 
 export default function SkillList({ skills }: { skills: UmaSkill[] }) {
     const [isPending, startTransition] = useTransition();
-
-    const [observerStatus, setObserverStatus] = useState(
-        "Observer not initialized",
-    );
 
     const listRef = useRef<HTMLDivElement>(null);
     const sentinelRef = useRef<HTMLDivElement>(null);
@@ -77,27 +72,15 @@ export default function SkillList({ skills }: { skills: UmaSkill[] }) {
 
         // Stop observing once every skill is rendered
         // or the sentinel is no longer present.
-        if (!sentinel || count >= skills.length) {
-            setObserverStatus(
-                count >= skills.length
-                    ? "All skills loaded"
-                    : "No observer detected",
-            );
-            return;
-        }
+        if (!sentinel || count >= skills.length) return;
 
         // Load the next batch when the sentinel enters the viewport.
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setObserverStatus(
-                    `Intersection at ${count}: ${entry.isIntersecting}`,
-                );
-
                 if (!entry.isIntersecting) return;
 
                 // Prevent multiple requests for the same batch.
                 observer.disconnect();
-                setObserverStatus(`Loading after ${count}`);
 
                 startTransition(() => {
                     setRenderState((current) => ({
@@ -139,27 +122,21 @@ export default function SkillList({ skills }: { skills: UmaSkill[] }) {
                     <div
                         ref={sentinelRef}
                         aria-hidden="true"
+                        // Sentinel requires an explicit height
                         style={{ height: 1 }}
                     />
                 )}
             </Card>
             {isPending && <LinearProgress color="info" />}
-            <Stack spacing={1}>
-                <Text
-                    variant="subtitle2"
-                    weight="highlight"
-                    sx={{ textAlign: "center" }}
-                >
-                    {`Displaying ${count} / ${skills.length} Skills`}
-                </Text>
-                <Text
-                    variant="subtitle2"
-                    weight="highlight"
-                    sx={{ textAlign: "center" }}
-                >
-                    {observerStatus}
-                </Text>
-            </Stack>
+            <Text
+                variant="subtitle1"
+                weight="highlight"
+                sx={{ textAlign: "center", userSelect: "none" }}
+            >
+                {skills.length > 0
+                    ? `Displaying ${count} / ${skills.length} Skill${skills.length > 1 ? "s" : ""}`
+                    : "No skills match the selected criteria"}
+            </Text>
         </>
     );
 }
