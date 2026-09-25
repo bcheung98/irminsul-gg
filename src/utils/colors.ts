@@ -13,6 +13,7 @@ export interface HSL {
 }
 
 export type ColorFormat = "rgb" | "hex";
+export type ColorTransform = "alpha" | "adjust";
 
 export default class Color {
     private readonly _rgb: RGB;
