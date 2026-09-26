@@ -7,12 +7,12 @@ import FlexBox from "@/components/FlexBox";
 import ContentDialog from "@/components/ContentDialog";
 import Text from "@/components/Text";
 import { default as Tabs } from "@/components/Tabs";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -141,22 +141,12 @@ export default function CharacterSplash({
                     >
                         <KeyboardArrowLeftIcon />
                     </IconButton>
-                    <Button
-                        variant="outlined"
+                    <InfoButton
+                        title="View Outfits"
+                        icons={false}
                         onClick={handleDialogOpen}
                         disableRipple
-                        sx={{
-                            p: "4px 16px",
-                            backgroundColor: theme.background(0, "dark"),
-                            borderRadius: "4px",
-                            borderColor: theme.border.color.primary,
-                            "&:hover": {
-                                backgroundColor: theme.background(0),
-                            },
-                        }}
-                    >
-                        <Text variant="subtitle1">View Outfits</Text>
-                    </Button>
+                    />
                     <IconButton
                         onClick={handleTabChangeRight}
                         disableRipple

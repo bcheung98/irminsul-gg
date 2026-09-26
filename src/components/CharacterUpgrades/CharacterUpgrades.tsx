@@ -11,6 +11,7 @@ import SkillCard from "@/components/SkillCard";
 import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
 import FlexBox from "@/components/FlexBox";
+import InfoButton from "@/components/InfoButton";
 import MindscapeCinemaPopup from "@/components/_zzz/MindscapeCinemaPopup";
 import SnapshotPopup from "@/components/_endfield/SnapshotPopup";
 
@@ -19,7 +20,6 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
 // Helper imports
 import { useGameTag, useSkillContext, useSkillVersionContext } from "@/context";
@@ -148,26 +148,12 @@ export default function CharacterUpgrades({
                     actions={
                         <FlexBox spacing={2}>
                             {["zzz", "endfield"].includes(game) && (
-                                <Button
-                                    variant="outlined"
+                                <InfoButton
+                                    title="View Art"
+                                    icons={false}
                                     onClick={handleClickOpenMCArt}
                                     disableRipple
-                                    sx={{
-                                        p: "4px 16px",
-                                        backgroundColor: theme.background(
-                                            0,
-                                            "dark",
-                                        ),
-                                        borderRadius: "4px",
-                                        borderColor: theme.border.color.primary,
-                                        "&:hover": {
-                                            backgroundColor:
-                                                theme.background(0),
-                                        },
-                                    }}
-                                >
-                                    <Text variant="subtitle1">View Art</Text>
-                                </Button>
+                                />
                             )}
                             <CharacterBuffs {...buffs} />
                         </FlexBox>
