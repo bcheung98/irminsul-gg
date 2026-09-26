@@ -9,7 +9,7 @@ import SkillIcon from "@/components/SkillIcon";
 import SkillDescription from "@/components/SkillDescription";
 import LevelSlider from "@/components/LevelSlider";
 import CharacterSkillAdvancedStats from "@/components/_hsr/CharacterSkillAdvancedStats";
-import CharacterCoreSkillScaling from "../_zzz/CharacterCoreSkillScaling";
+import CharacterCoreSkillScaling from "@/components/_zzz/CharacterCoreSkillScaling";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -26,9 +26,9 @@ import {
 } from "@/helpers/skills";
 
 // Type imports
-import { CharacterSkillDescriptionProps } from "./CharacterSkills.types";
-import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
-import { HSRCharacterSkill } from "@/types/hsr/character";
+import type { CharacterSkillDescriptionProps } from "./CharacterSkills.types";
+import type { CharacterSkillsList, SkillKeyword } from "@/types/skill";
+import type { HSRCharacterSkill } from "@/types/hsr/character";
 
 export default function CharacterSkillDescription({
     skill,
@@ -47,10 +47,7 @@ export default function CharacterSkillDescription({
     const textColor = useTextColor(theme.text);
     const getSkillKeyword = useSkillKeyword()[game];
 
-    const color =
-        game === "zzz" && attributes.colors?.accent
-            ? attributes.colors.accent
-            : textColor(game, attributes.element);
+    const color = textColor(game, attributes.element);
 
     const skillIconURL = formatSkillIconURL(
         skillIconURLs[game][skillKey],

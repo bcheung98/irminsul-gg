@@ -10,6 +10,7 @@ import { default as Tabs } from "@/components/Tabs";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -23,7 +24,7 @@ import { useSettingsStore } from "@/stores";
 import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
-import { CharacterOutfit } from "@/types/character";
+import type { CharacterOutfit } from "@/types/character";
 
 export default function CharacterSplash({
     id,
@@ -33,6 +34,7 @@ export default function CharacterSplash({
     outfits: CharacterOutfit[];
 }) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const game = useGameTag();
 
@@ -140,12 +142,20 @@ export default function CharacterSplash({
                         <KeyboardArrowLeftIcon />
                     </IconButton>
                     <Button
-                        variant="contained"
-                        color="primary"
+                        variant="outlined"
                         onClick={handleDialogOpen}
                         disableRipple
+                        sx={{
+                            p: "4px 16px",
+                            backgroundColor: theme.background(0, "dark"),
+                            borderRadius: "4px",
+                            borderColor: theme.border.color.primary,
+                            "&:hover": {
+                                backgroundColor: theme.background(0),
+                            },
+                        }}
                     >
-                        View Outfits
+                        <Text variant="subtitle1">View Outfits</Text>
                     </Button>
                     <IconButton
                         onClick={handleTabChangeRight}
@@ -159,7 +169,8 @@ export default function CharacterSplash({
             <ContentDialog
                 open={dialogOpen}
                 setOpen={setDialogOpen}
-                maxWidth="xl"
+                maxWidth={false}
+                fullScreen={!matches}
                 header="Outfits"
                 contentProps={{ padding: 0 }}
             >

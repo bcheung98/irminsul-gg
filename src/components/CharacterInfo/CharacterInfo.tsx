@@ -15,9 +15,9 @@ import { useTextColor } from "@/helpers/styles";
 import { useGameTag } from "@/context";
 
 // Type imports
-import { AttributeData } from "@/types";
-import { Materials } from "@/types/materials";
-import { TCharacterStats } from "@/components/StatsDisplay/StatsDisplay.types";
+import type { AttributeData } from "@/types";
+import type { Materials } from "@/types/materials";
+import type { TCharacterStats } from "@/components/StatsDisplay/StatsDisplay.types";
 
 interface CharacterInfoProps {
     stats: TCharacterStats;
@@ -33,9 +33,7 @@ export default function CharacterInfo(props: CharacterInfoProps) {
     const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
-    const color =
-        props.attributes.colors?.accent ||
-        textColor(game, props.attributes.element);
+    const color = textColor(game, props.attributes.element);
 
     return (
         <ContentBox

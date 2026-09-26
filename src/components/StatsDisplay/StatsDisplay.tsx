@@ -15,8 +15,8 @@ import { useTextColor } from "@/helpers/styles";
 import { useStore, useSettingsStore } from "@/stores";
 
 // Type imports
-import { StatsDisplayProps, TStats } from "./StatsDisplay.types";
-import { SkillDisplay } from "@/types";
+import type { StatsDisplayProps, TStats } from "./StatsDisplay.types";
+import type { SkillDisplay } from "@/types";
 
 export default function StatsDisplay<T extends TStats>({
     title = "Stats",
@@ -31,8 +31,7 @@ export default function StatsDisplay<T extends TStats>({
     const { levels, data } = getStats({ game, stats, attributes });
 
     const textColor = useTextColor(theme.text);
-    const color =
-        attributes.colors?.accent || textColor(game, attributes.element);
+    const color = textColor(game, attributes.element);
 
     const currentStatDisplay =
         useStore(useSettingsStore, (state) => state.statDisplay) || "slider";
