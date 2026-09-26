@@ -27,6 +27,7 @@ export default function KofiButton() {
                 "&:hover": {
                     backgroundColor: "#ce3833da",
                 },
+                transition: "background-color 0.15s",
             }}
         >
             <TextLabel

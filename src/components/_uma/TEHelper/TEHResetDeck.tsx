@@ -4,10 +4,10 @@ import { useState } from "react";
 import ContentDialog from "@/components/ContentDialog";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
@@ -40,26 +40,12 @@ export default function TEHResetDeck() {
 
     return (
         <>
-            <Button
-                variant="contained"
-                color="info"
+            <InfoButton
+                title="Reset"
+                icons={{ start: RestartAltIcon }}
                 onClick={handleClickOpen}
-                disableRipple
-                startIcon={<RestartAltIcon />}
                 disabled={isDeckEmpty}
-                sx={{
-                    p: "4px 16px",
-                    "&.Mui-disabled": {
-                        backgroundColor: theme.palette.info.main,
-                        color: theme.text.primary,
-                        opacity: 0.5,
-                    },
-                }}
-            >
-                <Text variant="body2" weight="highlight">
-                    Reset
-                </Text>
-            </Button>
+            />
             <ContentDialog
                 open={open}
                 setOpen={setOpen}
@@ -91,28 +77,18 @@ export default function TEHResetDeck() {
                         wrap
                         sx={{ justifyContent: "right" }}
                     >
-                        <Button
-                            variant="contained"
-                            color="info"
+                        <InfoButton
+                            title="Cancel"
+                            icons={false}
+                            color={theme.background(0, "light")}
                             onClick={handleClose}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Cancel
-                            </Text>
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="error"
+                        />
+                        <InfoButton
+                            title="Reset"
+                            icons={false}
+                            color={theme.palette.error.main}
                             onClick={handleClickReset}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Reset
-                            </Text>
-                        </Button>
+                        />
                     </FlexBox>
                 </Stack>
             </ContentDialog>

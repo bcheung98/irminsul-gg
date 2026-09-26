@@ -3,13 +3,13 @@ import { useEffect } from "react";
 // Component imports
 import Text from "@/components/Text";
 import ToggleButtons from "@/components/ToggleButtons";
+import InfoButton from "@/components/InfoButton";
 import InfoGallerySearch from "./InfoGallerySearch";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import ViewCompactIcon from "@mui/icons-material/ViewCompact";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import TableRowsIcon from "@mui/icons-material/TableRows";
@@ -97,25 +97,20 @@ export default function InfoGalleryHeader({
             )}
             {!hideFilters && (
                 <Grid size={{ xs: 12, sm: "auto" }}>
-                    <Button
+                    <InfoButton
+                        title="Filters"
+                        icons={{
+                            start:
+                                matches && rightDrawerOpen
+                                    ? KeyboardArrowRightIcon
+                                    : TuneIcon,
+                        }}
+                        color={theme.background(2)}
                         onClick={toggleDrawerState}
-                        variant="contained"
-                        color="primary"
-                        disableElevation
                         disableRipple
-                        startIcon={
-                            matches && rightDrawerOpen ? (
-                                <KeyboardArrowRightIcon />
-                            ) : (
-                                <TuneIcon />
-                            )
-                        }
+                        hoverAdjust={0.05}
                         sx={{ height: "32px" }}
-                    >
-                        <Text variant="body2" weight="highlight">
-                            Filters
-                        </Text>
-                    </Button>
+                    />
                 </Grid>
             )}
         </Grid>

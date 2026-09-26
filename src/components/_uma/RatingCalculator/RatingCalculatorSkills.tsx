@@ -6,11 +6,11 @@ import RatingCalculatorSkill from "./RatingCalculatorSkill";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Switch from "@/components/Switch";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 // Helper imports
@@ -24,8 +24,8 @@ import {
 } from "@/helpers/uma/calculator";
 
 // Type imports
-import { UmaSkill } from "@/types/uma/skill";
-import { UmaSkillOption } from "@/types/uma/calculator";
+import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaSkillOption } from "@/types/uma/calculator";
 
 export default function RatingCalculatorSkills() {
     const { characters } = useTEHelperData();
@@ -135,15 +135,11 @@ export default function RatingCalculatorSkills() {
                     <Text variant="h6" weight="highlight">
                         Skills
                     </Text>
-                    <Button
-                        color="info"
-                        variant="contained"
-                        size="small"
+                    <InfoButton
+                        title="Clear All Skills"
                         onClick={clearInput}
-                        startIcon={<DeleteIcon />}
-                    >
-                        Clear All Skills
-                    </Button>
+                        icons={{ start: DeleteIcon }}
+                    />
                 </FlexBox>
             </Stack>
             <Grid container spacing={2}>

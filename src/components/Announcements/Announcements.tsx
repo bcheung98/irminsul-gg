@@ -5,13 +5,13 @@ import ContentDialog from "@/components/ContentDialog";
 import Text from "@/components/Text";
 import FlexBox from "@/components/FlexBox";
 import InfoChip from "@/components/InfoChip";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import ButtonBase from "@mui/material/ButtonBase";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 // Helper imports
@@ -105,60 +105,19 @@ export default function Announcements() {
                         justifyContent: "right",
                     }}
                 >
-                    <ButtonBase
+                    <InfoButton
+                        title="Dismiss"
+                        color={theme.background(0, "light")}
+                        icons={false}
                         onClick={() => setAnnouncementOpen(false)}
-                        disableRipple
-                        sx={{
-                            width: "max-content",
-                            height: "28px",
-                            px: 2,
-                            borderRadius: "4px",
-                            backgroundColor: theme.background(0, "light"),
-                            "&:hover": {
-                                backgroundColor: theme.background(0),
-                                transition: "background-color 0.15s",
-                            },
-                        }}
-                    >
-                        <Text variant="body2" weight="highlight">
-                            Dismiss
-                        </Text>
-                    </ButtonBase>
+                    />
                     {announcement.link && (
-                        <ButtonBase
+                        <InfoButton
                             href={announcement.link}
+                            title="View full changelog"
+                            icons={{ end: OpenInNewIcon }}
                             onClick={() => setAnnouncementOpen(false)}
-                            disableRipple
-                            sx={{
-                                width: "max-content",
-                                height: "28px",
-                                px: 2,
-                                borderRadius: "4px",
-                                backgroundColor: theme.palette.info.main,
-                                "&:hover": {
-                                    backgroundColor: theme.palette.info.dark,
-                                    transition: "background-color 0.15s",
-                                },
-                            }}
-                        >
-                            <FlexBox
-                                spacing={1}
-                                sx={{ justifyContent: "space-between" }}
-                            >
-                                <Text variant="body2" weight="highlight">
-                                    View full changelog
-                                </Text>
-                                <OpenInNewIcon
-                                    sx={{
-                                        color: theme.text.primary,
-                                        fontSize: {
-                                            xs: "16px",
-                                            sm: "18px",
-                                        },
-                                    }}
-                                />
-                            </FlexBox>
-                        </ButtonBase>
+                        />
                     )}
                 </FlexBox>
             </Stack>
