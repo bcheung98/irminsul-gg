@@ -45,9 +45,9 @@ export default function InfoSplash({
         <Image
             src={src}
             style={{
-                width: matches ? "100%" : width,
-                maxWidth,
-                height: height ? (matches ? "100%" : height) : "auto",
+                width: matches ? maxWidth : width,
+                height: matches ? "auto" : height,
+                maxWidth: "100%",
                 padding,
                 backgroundColor: backgroundColor ?? theme.background(1),
                 backgroundImage: rarity
