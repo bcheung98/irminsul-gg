@@ -188,9 +188,7 @@ export default function CharacterPotential({
                             minWidth: "100px",
                             maxWidth: "300px",
                             ml: 2,
-                            color:
-                                attributes.colors?.accent ||
-                                theme.text.selected,
+                            color: theme.text.selected,
                         }}
                     />
                 </Box>

@@ -17,8 +17,8 @@ import { range } from "@/utils";
 import { useTextColor } from "@/helpers/styles";
 
 // Type imports
-import { AttributeData } from "@/types";
-import { EndfieldCharacterSnapshot } from "@/types/endfield/character";
+import type { AttributeData } from "@/types";
+import type { EndfieldCharacterSnapshot } from "@/types/endfield/character";
 
 export default function SnapshotPopup({
     snapshots,
@@ -31,8 +31,7 @@ export default function SnapshotPopup({
     const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const textColor = useTextColor(theme.text);
-    const color =
-        attributes.colors?.accent || textColor("endfield", attributes.element);
+    const color = textColor("endfield", attributes.element);
 
     const [sliderValue, setSliderValue] = useState(1);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {

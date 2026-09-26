@@ -5,19 +5,19 @@ import ContentDialog from "@/components/ContentDialog";
 import FlexBox from "@/components/FlexBox";
 import Tooltip from "@/components/Tooltip";
 import Text from "@/components/Text";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
-import Button, { ButtonProps } from "@mui/material/Button";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import IconButton, { type IconButtonProps } from "@mui/material/IconButton";
 import DoneIcon from "@mui/icons-material/Done";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { SvgIconProps } from "@mui/material/SvgIcon";
+import { type SvgIconProps } from "@mui/material/SvgIcon";
 
 // Helper imports
 import { usePlannerStore } from "@/stores";
@@ -86,11 +86,6 @@ export default function PlannerCardActions({
                 sm: "18px",
             },
         },
-    };
-
-    const buttonProps: ButtonProps = {
-        variant: "contained",
-        size: "small",
     };
 
     return (
@@ -168,20 +163,18 @@ export default function PlannerCardActions({
                         </Text>
                     </Stack>
                     <FlexBox spacing={2} sx={{ justifyContent: "right" }}>
-                        <Button
-                            {...buttonProps}
-                            color="info"
+                        <InfoButton
+                            title="Cancel"
+                            color={theme.background(0, "light")}
+                            icons={false}
                             onClick={handleAlertClose}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            {...buttonProps}
-                            color="error"
+                        />
+                        <InfoButton
+                            title="Delete"
+                            color={theme.palette.error.main}
+                            icons={false}
                             onClick={handleDelete}
-                        >
-                            Delete
-                        </Button>
+                        />
                     </FlexBox>
                 </Stack>
             </ContentDialog>

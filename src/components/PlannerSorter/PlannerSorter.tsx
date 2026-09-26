@@ -22,6 +22,7 @@ import {
 import PlannerSorterItem from "./PlannerSorterItem";
 import ContentDialog from "@/components/ContentDialog";
 import TextLabel from "@/components/TextLabel";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -90,28 +91,12 @@ export default function PlannerSorter() {
     return (
         <>
             {items.length > 1 && (
-                <Button
+                <InfoButton
+                    game
+                    title="Adjust Order"
+                    icons={{ start: MoveUpIcon }}
                     onClick={handleClickOpen}
-                    variant="contained"
-                    color="info"
-                >
-                    <TextLabel
-                        icon={
-                            <MoveUpIcon
-                                fontSize="small"
-                                sx={{
-                                    color: theme.text.primary,
-                                    fontSize: {
-                                        xs: "16px",
-                                        sm: "18px",
-                                    },
-                                }}
-                            />
-                        }
-                        title="Adjust Order"
-                        titleProps={{ variant: "subtitle2" }}
-                    />
-                </Button>
+                />
             )}
             <ContentDialog
                 open={open}

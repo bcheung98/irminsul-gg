@@ -6,11 +6,11 @@ import TEHDeckSupportCard from "./TEHDeckSupportCard";
 import ContentDialog from "@/components/ContentDialog";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -19,7 +19,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useTEHelperStore } from "@/stores";
 
 // Type imports
-import { TEHDeck } from "@/types/uma/te-helper";
+import type { TEHDeck } from "@/types/uma/te-helper";
 
 export default function TEHCopyDeck() {
     const theme = useTheme();
@@ -58,46 +58,14 @@ export default function TEHCopyDeck() {
         handleClose();
     };
 
-    function DeckRow({ deck }: { deck: TEHDeck }) {
-        return (
-            <FlexBox
-                spacing={2}
-                wrap
-                sx={{
-                    alignItems: "flex-start",
-                    justifyContent: { xs: "center", md: "left" },
-                }}
-            >
-                <TEHDeckCharacterCard data={deck.character} mini />
-                {deck.supports.slice(0, 6).map((support, index) => (
-                    <TEHDeckSupportCard key={index} data={support} mini />
-                ))}
-            </FlexBox>
-        );
-    }
-
     return (
         <>
-            <Button
-                variant="contained"
-                color="info"
+            <InfoButton
+                title="Copy"
+                icons={{ start: ContentCopyIcon }}
                 onClick={handleClickOpen}
-                disableRipple
-                startIcon={<ContentCopyIcon />}
                 disabled={isDeckEmpty}
-                sx={{
-                    p: "4px 16px",
-                    "&.Mui-disabled": {
-                        backgroundColor: theme.palette.info.main,
-                        color: theme.text.primary,
-                        opacity: 0.5,
-                    },
-                }}
-            >
-                <Text variant="body2" weight="highlight">
-                    Copy
-                </Text>
-            </Button>
+            />
             <ContentDialog
                 open={open}
                 setOpen={setOpen}
@@ -127,29 +95,13 @@ export default function TEHCopyDeck() {
                                     {deck.name}
                                 </Text>
                                 <FlexBox spacing={[1, 2]} wrap>
-                                    <Button
-                                        variant="contained"
-                                        color="info"
+                                    <InfoButton
+                                        title="Copy here"
+                                        size="small"
+                                        icons={false}
                                         onClick={() => handleAlertOpen(index)}
-                                        disableRipple
                                         disabled={index === currentDeck}
-                                        sx={{
-                                            p: "4px 16px",
-                                            "&.Mui-disabled": {
-                                                backgroundColor:
-                                                    theme.palette.info.main,
-                                                color: theme.text.primary,
-                                                opacity: 0.5,
-                                            },
-                                        }}
-                                    >
-                                        <Text
-                                            variant="body2"
-                                            weight="highlight"
-                                        >
-                                            Copy here
-                                        </Text>
-                                    </Button>
+                                    />
                                     <DeckRow deck={deck} />
                                 </FlexBox>
                             </Stack>
@@ -200,31 +152,38 @@ export default function TEHCopyDeck() {
                         wrap
                         sx={{ justifyContent: "right" }}
                     >
-                        <Button
-                            variant="contained"
-                            color="info"
+                        <InfoButton
+                            title="Cancel"
+                            icons={false}
+                            color={theme.background(0, "light")}
                             onClick={handleAlertClose}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Cancel
-                            </Text>
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="success"
+                        />
+                        <InfoButton
+                            title="Overwrite"
+                            icons={false}
                             onClick={handleCopy}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Overwrite
-                            </Text>
-                        </Button>
+                        />
                     </FlexBox>
                 </Stack>
             </ContentDialog>
         </>
+    );
+}
+
+function DeckRow({ deck }: { deck: TEHDeck }) {
+    return (
+        <FlexBox
+            spacing={2}
+            wrap
+            sx={{
+                alignItems: "flex-start",
+                justifyContent: { xs: "center", md: "left" },
+            }}
+        >
+            <TEHDeckCharacterCard data={deck.character} mini />
+            {deck.supports.slice(0, 6).map((support, index) => (
+                <TEHDeckSupportCard key={index} data={support} mini />
+            ))}
+        </FlexBox>
     );
 }

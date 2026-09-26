@@ -3,28 +3,26 @@ import { useMemo } from "react";
 // Component imports
 import TextLabel from "@/components/TextLabel";
 import Image from "@/components/Image";
+import InfoButton from "@/components/InfoButton";
 import CurrentBannersContent from "@/components/CurrentBanners/CurrentBannersContent";
 
 // MUI imports
-import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import ButtonBase from "@mui/material/ButtonBase";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Skeleton from "@mui/material/Skeleton";
 
 // Helper imports
 import { useServerStore } from "@/stores";
-import { getContrastText } from "@/utils/getContrastText";
 import { BannerDataContext } from "@/components/BannerArchive/BannerArchive.utils";
 import { getBannerGroups } from "@/helpers/filterBanners";
 import { createBannerLookup } from "@/helpers/banners";
 
 // Type imports
-import { Banner, BannerOption } from "@/types/banner";
-import { SearchResult } from "@/components/SiteSearch";
-import { GameInfo } from "@/types";
+import type { Banner, BannerOption } from "@/types/banner";
+import type { SearchResult } from "@/components/SiteSearch";
+import type { GameInfo } from "@/types";
 
 export default function HomePageGameBanners(props: {
     game: GameInfo;
@@ -66,8 +64,6 @@ export default function HomePageGameBanners(props: {
         })) as BannerOption[];
 
     const loaded = characters.length > 0 && weapons.length > 0;
-
-    const textColor = getContrastText(theme.text.primary, game.color);
 
     const lookup = useMemo(
         () => createBannerLookup(characters, weapons),
@@ -115,41 +111,11 @@ export default function HomePageGameBanners(props: {
                                     </Stack>
                                 )}
                             </div>
-                            <ButtonBase
+                            <InfoButton
+                                game={game.tag}
                                 href={`/${game.tag}/banners`}
-                                sx={{
-                                    width: "max-content",
-                                    height: "28px",
-                                    px: 2,
-                                    borderRadius: "4px",
-                                    backgroundColor: game.color,
-                                    "&:hover": {
-                                        backgroundColor: alpha(
-                                            game.color,
-                                            0.75,
-                                        ),
-                                    },
-                                    transition: "background-color 0.15s",
-                                }}
-                            >
-                                <TextLabel
-                                    icon={
-                                        <ChevronRightIcon
-                                            sx={{
-                                                color: textColor,
-                                                fontSize: "18px",
-                                            }}
-                                        />
-                                    }
-                                    title={`View all ${game.shortName} Banners`}
-                                    titleProps={{
-                                        variant: "body2",
-                                        color: textColor,
-                                    }}
-                                    spacing={0.5}
-                                    reverse
-                                />
-                            </ButtonBase>
+                                title={`View all ${game.shortName} Banners`}
+                            />
                         </Stack>
                     </Stack>
                 </BannerDataContext>

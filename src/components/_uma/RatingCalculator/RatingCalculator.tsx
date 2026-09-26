@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // Component imports
 import Text from "@/components/Text";
+import InfoButton from "@/components/InfoButton";
 import ContentDialog from "@/components/ContentDialog";
 import RatingCalculatorCharacterSelect from "./RatingCalculatorCharacterSelect";
 import RatingCalculatorStats from "./RatingCalculatorStats";
@@ -21,7 +22,6 @@ import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Grow from "@mui/material/Grow";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
@@ -64,15 +64,11 @@ export default function RatingCalculator() {
                                     divider={<Divider />}
                                     sx={{ display: "unset" }} // Required for sticky element
                                 >
-                                    <Button
-                                        color="info"
-                                        variant="contained"
-                                        size="small"
-                                        startIcon={<IosShareIcon />}
+                                    <InfoButton
+                                        title="Generate Showcase Card"
+                                        icons={{ start: IosShareIcon }}
                                         onClick={handleDialogOpen}
-                                    >
-                                        Generate Showcase Card
-                                    </Button>
+                                    />
                                     <Grid
                                         container
                                         spacing={4}

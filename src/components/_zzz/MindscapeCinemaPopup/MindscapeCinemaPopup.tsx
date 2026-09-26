@@ -27,8 +27,7 @@ export default function MindscapeCinemaPopup({
     const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const textColor = useTextColor(theme.text);
-    const color =
-        attributes.colors?.accent || textColor("zzz", attributes.element);
+    const color = textColor("zzz", attributes.element);
 
     const [sliderValue, setSliderValue] = useState(1);
     const handleSliderChange = (_: Event, newValue: number | number[]) => {

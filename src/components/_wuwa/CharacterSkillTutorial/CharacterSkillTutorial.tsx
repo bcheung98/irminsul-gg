@@ -6,10 +6,10 @@ import SkillCard from "@/components/SkillCard";
 import SkillDescription from "@/components/SkillDescription";
 import Image from "@/components/Image";
 import Text from "@/components/Text";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 // Helper imports
@@ -40,22 +40,11 @@ export default function CharacterSkillTutorial({
 
     return (
         <>
-            <Button
-                variant="outlined"
+            <InfoButton
+                title="View Tutorial"
+                icons={false}
                 onClick={handleClickOpen}
-                disableRipple
-                sx={{
-                    p: "4px 16px",
-                    backgroundColor: theme.background(0, "dark"),
-                    borderRadius: "4px",
-                    borderColor: theme.border.color.primary,
-                    "&:hover": {
-                        backgroundColor: theme.background(0),
-                    },
-                }}
-            >
-                <Text variant="subtitle1">View Tutorial</Text>
-            </Button>
+            />
             <ContentDialog
                 open={open}
                 setOpen={setOpen}

@@ -3,11 +3,11 @@ import { useCallback, useEffect, useState } from "react";
 // Component imports
 import ContentDialog from "@/components/ContentDialog";
 import FlexBox from "@/components/FlexBox";
-import Text from "@/components/Text";
 import SearchBar from "@/components/SearchBar";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
-import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 
@@ -15,6 +15,8 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 import { useTEHelperStore } from "@/stores";
 
 export default function TEHRenameDeck() {
+    const theme = useTheme();
+
     const { decks, currentDeck, renameDeck } = useTEHelperStore();
     const name = decks[currentDeck].name;
 
@@ -42,18 +44,11 @@ export default function TEHRenameDeck() {
 
     return (
         <>
-            <Button
-                variant="contained"
-                color="info"
+            <InfoButton
+                title="Rename"
+                icons={{ start: DriveFileRenameOutlineIcon }}
                 onClick={handleClickOpen}
-                disableRipple
-                startIcon={<DriveFileRenameOutlineIcon />}
-                sx={{ p: "4px 16px" }}
-            >
-                <Text variant="body2" weight="highlight">
-                    Rename
-                </Text>
-            </Button>
+            />
             <ContentDialog
                 open={open}
                 setOpen={setOpen}
@@ -81,28 +76,17 @@ export default function TEHRenameDeck() {
                         wrap
                         sx={{ justifyContent: "right" }}
                     >
-                        <Button
-                            variant="contained"
-                            color="info"
+                        <InfoButton
+                            title="Cancel"
                             onClick={handleClose}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Cancel
-                            </Text>
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="success"
+                            color={theme.background(0, "light")}
+                            icons={false}
+                        />
+                        <InfoButton
+                            title="Rename"
                             onClick={handleClickRename}
-                            disableRipple
-                            sx={{ p: "4px 16px" }}
-                        >
-                            <Text variant="body2" weight="highlight">
-                                Rename
-                            </Text>
-                        </Button>
+                            icons={false}
+                        />
                     </FlexBox>
                 </Stack>
             </ContentDialog>

@@ -5,6 +5,7 @@ import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import SearchBar from "@/components/SearchBar";
 import NumberField from "@/components/NumberField";
+import InfoButton from "@/components/InfoButton";
 import { AddCustomAttribute } from "./AddCustomAttribute";
 import { AddCustomMaterial } from "./AddCustomMaterial";
 
@@ -192,37 +193,19 @@ export function CustomItemCreator({
                 </Stack>
             </Stack>
             <FlexBox spacing={[1, 2]} wrap sx={{ justifyContent: "right" }}>
-                <Button
-                    variant="contained"
-                    color="error"
+                <InfoButton
+                    title="Cancel"
+                    color={theme.palette.error.main}
+                    icons={false}
                     onClick={handleClose}
-                    disableRipple
-                    sx={{ p: "4px 16px" }}
-                >
-                    <Text variant="body2" weight="highlight">
-                        Cancel
-                    </Text>
-                </Button>
-                <Button
-                    variant="contained"
-                    color="success"
-                    onClick={handleSubmit}
-                    disableRipple
-                    sx={{
-                        p: "4px 16px",
-                        "&.Mui-disabled": {
-                            backgroundColor: theme.palette.success.main,
-                            color: theme.text.primary,
-                            opacity: 0.5,
-                            cursor: "not-allowed",
-                        },
-                    }}
+                />
+                <InfoButton
+                    title="Add"
+                    color={theme.palette.success.main}
+                    icons={false}
                     disabled={!valid}
-                >
-                    <Text variant="body2" weight="highlight">
-                        Add
-                    </Text>
-                </Button>
+                    onClick={handleSubmit}
+                />
             </FlexBox>
         </Stack>
     );
@@ -299,7 +282,6 @@ function NTEAddCustomLifeSkills({
                                     variant="contained"
                                     color={!index ? "info" : "error"}
                                     onClick={handleCountChange}
-                                    disableRipple
                                     sx={{ p: "4px 16px" }}
                                 >
                                     <Text variant="body2" weight="highlight">

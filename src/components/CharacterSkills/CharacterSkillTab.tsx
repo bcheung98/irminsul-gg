@@ -24,9 +24,9 @@ import { useTextColor } from "@/helpers/styles";
 import { skillKeys } from "@/data/skills";
 
 // Type imports
-import { CharacterSkillProps } from "./CharacterSkills.types";
-import { Skill, CharacterSkillsList } from "@/types/skill";
-import { SkillDisplay } from "@/types";
+import type { CharacterSkillProps } from "./CharacterSkills.types";
+import type { Skill, CharacterSkillsList } from "@/types/skill";
+import type { SkillDisplay } from "@/types";
 
 export default function CharacterSkillTab({
     skillKey,
@@ -40,8 +40,7 @@ export default function CharacterSkillTab({
     const game = useGameTag();
 
     const textColor = useTextColor(theme.text);
-    const color =
-        attributes.colors?.accent || textColor(game, attributes.element);
+    const color = textColor(game, attributes.element);
 
     const currentStatDisplay =
         useStore(useSettingsStore, (state) => state.statDisplay) || "slider";

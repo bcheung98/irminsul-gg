@@ -9,7 +9,7 @@ import { useGameTag } from "@/context";
 import { useTextColor } from "@/helpers/styles";
 
 // Type imports
-import { AttributeData } from "@/types";
+import type { AttributeData } from "@/types";
 
 export default function SkillIcon({
     icon,
@@ -37,7 +37,6 @@ export default function SkillIcon({
     const game = useGameTag();
 
     const color =
-        attributes?.colors?.accent ||
         useTextColor(theme.text)(game, attributes?.element) ||
         theme.border.color.primary;
 

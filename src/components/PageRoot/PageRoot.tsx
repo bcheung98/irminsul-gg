@@ -2,20 +2,16 @@
 
 // Component imports
 import Text from "@/components/Text";
-import TextLabel from "@/components/TextLabel";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Grid, { GridProps } from "@mui/material/Grid";
+import Grid, { type GridProps } from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { useGame } from "@/context";
 import { navItems } from "@/data/navItems";
-import { getContrastText } from "@/utils/getContrastText";
-import Color from "@/utils/colors";
 
 type PageNode = React.ReactNode | React.ReactNode[] | undefined;
 type PageColumnSize = GridProps["size"];
@@ -123,8 +119,6 @@ export function InfoPageRoot({
 }
 
 function NavButtons() {
-    const theme = useTheme();
-
     const game = useGame();
 
     return (
@@ -139,34 +133,12 @@ function NavButtons() {
             >
                 {navItems[game.tag].slice(1).map((item) => (
                     <Grid key={item.href} size="auto">
-                        <ButtonBase
+                        <InfoButton
+                            game={game.tag}
                             href={`${game.tag}/${item.href}`}
-                            sx={{
-                                width: "max-content",
-                                height: "28px",
-                                px: 2,
-                                borderRadius: "4px",
-                                backgroundColor: game.color,
-                                "&:hover": {
-                                    backgroundColor: new Color(game.color)
-                                        .darken(0.1)
-                                        .toString(),
-                                },
-                                transition: "background-color 0.15s",
-                            }}
-                        >
-                            <TextLabel
-                                title={item.title}
-                                titleProps={{
-                                    variant: "subtitle2",
-                                    color: getContrastText(
-                                        theme.text.primary,
-                                        game.color,
-                                    ),
-                                }}
-                                spacing={1}
-                            />
-                        </ButtonBase>
+                            title={item.title}
+                            size="small"
+                        />
                     </Grid>
                 ))}
             </Grid>

@@ -1,7 +1,8 @@
+// Component imports
+import InfoButton from "@/components/InfoButton";
+
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 // Helper imports
@@ -34,27 +35,14 @@ export default function FilterActions({
     };
 
     return (
-        <Grid container spacing={1} sx={{ alignItems: "center" }}>
-            <Grid size="auto">
-                <Button
-                    onClick={clearFilters}
-                    disabled={!activeFilters}
-                    variant="contained"
-                    color={activeFilters ? "info" : "primary"}
-                    disableElevation
-                    startIcon={<RestartAltIcon sx={{ fontSize: 20 }} />}
-                    sx={{
-                        minWidth: "24px",
-                        height: "28px",
-                        "&.Mui-disabled": {
-                            opacity: 0.35,
-                            color: theme.text.primary,
-                        },
-                    }}
-                >
-                    Reset
-                </Button>
-            </Grid>
-        </Grid>
+        <InfoButton
+            title="Reset"
+            icons={{ start: RestartAltIcon }}
+            color={
+                activeFilters ? theme.palette.info.main : theme.background(2)
+            }
+            disabled={!activeFilters}
+            onClick={clearFilters}
+        />
     );
 }

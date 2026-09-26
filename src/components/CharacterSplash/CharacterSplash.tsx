@@ -7,11 +7,12 @@ import FlexBox from "@/components/FlexBox";
 import ContentDialog from "@/components/ContentDialog";
 import Text from "@/components/Text";
 import { default as Tabs } from "@/components/Tabs";
+import InfoButton from "@/components/InfoButton";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -23,7 +24,7 @@ import { useSettingsStore } from "@/stores";
 import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
-import { CharacterOutfit } from "@/types/character";
+import type { CharacterOutfit } from "@/types/character";
 
 export default function CharacterSplash({
     id,
@@ -33,6 +34,7 @@ export default function CharacterSplash({
     outfits: CharacterOutfit[];
 }) {
     const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("md"));
 
     const game = useGameTag();
 
@@ -139,14 +141,12 @@ export default function CharacterSplash({
                     >
                         <KeyboardArrowLeftIcon />
                     </IconButton>
-                    <Button
-                        variant="contained"
-                        color="primary"
+                    <InfoButton
+                        title="View Outfits"
+                        icons={false}
                         onClick={handleDialogOpen}
                         disableRipple
-                    >
-                        View Outfits
-                    </Button>
+                    />
                     <IconButton
                         onClick={handleTabChangeRight}
                         disableRipple
@@ -159,7 +159,8 @@ export default function CharacterSplash({
             <ContentDialog
                 open={dialogOpen}
                 setOpen={setDialogOpen}
-                maxWidth="xl"
+                maxWidth={false}
+                fullScreen={!matches}
                 header="Outfits"
                 contentProps={{ padding: 0 }}
             >

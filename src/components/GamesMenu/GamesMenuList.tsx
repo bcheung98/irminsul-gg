@@ -35,6 +35,7 @@ export default function GamesMenuList({
                     sm: 0,
                 },
                 borderRadius: "4px",
+                py: { xs: 0, sm: 1 },
             }}
         >
             <Text
