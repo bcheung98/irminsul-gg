@@ -82,12 +82,11 @@ export default function GamesMenu() {
                 open={open}
                 onClose={handleMenuClose}
                 sx={{
-                    "& .MuiMenu-paper": {
+                    "& .MuiMenu-list": {
+                        p: 0,
+                        backgroundColor: theme.background(2, "light"),
                         border: `1px solid ${theme.appbar.backgroundColor.hover}`,
                         borderRadius: "8px",
-                    },
-                    "& .MuiMenu-list": {
-                        backgroundColor: theme.background(2, "light"),
                     },
                 }}
             >

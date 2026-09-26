@@ -12,9 +12,10 @@ import Box from "@mui/material/Box";
 
 // Helper imports
 import { useGameList, useGameTag } from "@/context";
+import Color from "@/utils/colors";
 
 // Type imports
-import { GameInfo } from "@/types";
+import type { GameInfo } from "@/types";
 
 export default function GamesMenuItem({
     game,
@@ -39,6 +40,8 @@ export default function GamesMenuItem({
         const index = games.findIndex(() => isLinkActive);
         index > -1 && games.unshift(games.splice(index, 1)[0]);
     }
+
+    const color = new Color(game.color);
 
     const rootStyle = {
         position: "relative",
@@ -70,18 +73,20 @@ export default function GamesMenuItem({
         },
         hover &&
             !isLinkActive && {
-                borderColor: game.color,
+                borderColor: color.toString(),
                 borderRadius: "0 8px 8px 0",
             },
         isLinkActive && {
             top: 0,
             height: { xs: "34px", md: "40px" },
-            borderColor: game.color,
+            borderColor: color.toString(),
             borderRadius: "0 8px 8px 0",
         },
         hover &&
             isLinkActive && {
-                borderColor: theme.drawer.indicator.hover,
+                borderColor: color
+                    .adjust(game.tag === "endfield" ? -0.1 : 0.25)
+                    .toString(),
             },
     ];
 
