@@ -45,6 +45,7 @@ const textColors = {
     description: "rgb(205, 205, 205)",
     header: "rgb(255, 204, 51)",
     star: "rgb(255, 204, 51)",
+    page: "rgb(255, 255, 255)",
 };
 
 const iconBackgrounds = ["rgb(8, 8, 8)", "rgb(16, 16, 16)", "rgb(40, 40, 40)"];

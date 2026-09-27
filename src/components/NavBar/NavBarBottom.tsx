@@ -80,6 +80,7 @@ export default function NavBarBottom() {
                             variant="body2"
                             weight="highlight"
                             sx={{
+                                color: theme.text.page,
                                 userSelect: "none",
                                 borderBottom: {
                                     xs: `1px solid ${theme.border.color.primary}`,
@@ -98,7 +99,10 @@ export default function NavBarBottom() {
                                     <Text
                                         variant="body2"
                                         weight="highlight"
-                                        sx={{ userSelect: "none" }}
+                                        sx={{
+                                            color: theme.text.page,
+                                            userSelect: "none",
+                                        }}
                                     >
                                         GitHub:
                                     </Text>
@@ -123,7 +127,10 @@ export default function NavBarBottom() {
                                     <Text
                                         variant="body2"
                                         weight="highlight"
-                                        sx={{ userSelect: "none" }}
+                                        sx={{
+                                            color: theme.text.page,
+                                            userSelect: "none",
+                                        }}
                                     >
                                         Made with:
                                     </Text>
@@ -239,6 +246,7 @@ function TextLink({
             variant="subtitle2"
             weight="highlight"
             sx={(theme) => ({
+                color: theme.text.page,
                 "&:hover": {
                     color: theme.text.selected,
                     textDecoration: "underline",

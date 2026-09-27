@@ -67,7 +67,8 @@ export default function InfoGalleryHeader({
             <Grid size="auto">
                 <Text
                     variant="h5"
-                    sx={{ fontWeight: theme.font.weight.highlight }}
+                    weight="highlight"
+                    sx={{ color: theme.text.page }}
                 >
                     {title}
                 </Text>

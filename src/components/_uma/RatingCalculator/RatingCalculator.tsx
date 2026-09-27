@@ -46,7 +46,11 @@ export default function RatingCalculator() {
     return (
         <>
             <Stack spacing={2} sx={{ px: 1, py: { xs: 1, sm: 2, lg: 1 } }}>
-                <Text variant="h5" weight="highlight">
+                <Text
+                    variant="h5"
+                    weight="highlight"
+                    sx={{ color: theme.text.page }}
+                >
                     Rating Calculator
                 </Text>
                 <Card
