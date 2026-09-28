@@ -64,7 +64,11 @@ export default function Planner({
                     maxWidth: theme.breakpoints.values.xl,
                 }}
             >
-                <Text variant="h5" weight="highlight">
+                <Text
+                    variant="h5"
+                    weight="highlight"
+                    sx={{ color: theme.text.page }}
+                >
                     Ascension Planner
                 </Text>
                 <ContentBox

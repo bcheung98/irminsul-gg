@@ -6,6 +6,7 @@ import Text from "@/components/Text";
 import BannerArchiveSettings from "./BannerArchiveSettings";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -14,13 +15,15 @@ import { BannerDataContext } from "./BannerArchive.utils";
 import { useBannerArchive } from "./BannerArchive.hooks";
 
 // Type imports
-import { BannerOption } from "@/types/banner";
-import { BannerArchiveProps } from "./BannerArchive.types";
+import type { BannerOption } from "@/types/banner";
+import type { BannerArchiveProps } from "./BannerArchive.types";
 
 export default function BannerArchive<
     T extends BannerOption,
     U extends BannerOption,
 >(props: BannerArchiveProps<T, U>) {
+    const theme = useTheme();
+
     const {
         loading,
         sortDirection,
@@ -70,14 +73,18 @@ export default function BannerArchive<
         <BannerDataContext value={bannerContext}>
             <Stack
                 spacing={2}
-                sx={(theme) => ({
+                sx={{
                     px: 1,
                     py: { xs: 1, sm: 2, lg: 1 },
                     maxWidth: theme.breakpoints.values.xl,
-                })}
+                }}
             >
                 <Stack spacing={2}>
-                    <Text variant="h5" weight="highlight">
+                    <Text
+                        variant="h5"
+                        weight="highlight"
+                        sx={{ color: theme.text.page }}
+                    >
                         Banner Archive
                     </Text>
                     <BannerArchiveSettings {...settingsParams} />
