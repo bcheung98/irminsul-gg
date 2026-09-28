@@ -16,8 +16,8 @@ import Stack from "@mui/material/Stack";
 import { range } from "@/utils";
 
 // Type imports
-import { WuWaSkillTutorial } from "@/types/wuwa/character";
-import { AttributeData } from "@/types";
+import type { WuWaSkillTutorial } from "@/types/wuwa/character";
+import type { AttributeData } from "@/types";
 
 export default function CharacterSkillTutorial({
     attributes,
@@ -68,7 +68,12 @@ export default function CharacterSkillTutorial({
                             <Image
                                 key={index}
                                 src={`wuwa/tutorials/${attributes.id}_${index}`}
-                                style={{ width: "100%", maxWidth: "600px" }}
+                                style={{
+                                    width: "100%",
+                                    maxWidth: "600px",
+                                    maxHeight: "152px",
+                                    aspectRatio: 1668 / 152,
+                                }}
                             />
                         ))}
                     </Stack>

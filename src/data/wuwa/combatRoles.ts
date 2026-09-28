@@ -243,6 +243,12 @@ export const combatRoles = [
         color: "#ff7777",
         icon: "wuwa/icons/tags/I7",
     },
+    {
+        name: "Unison",
+        description: "Triggers Unison-related effects for specific Resonators in the team",
+        color: "#ff7777",
+        icon: "wuwa/icons/tags/I8",
+    },
 ];
 
 export const combatRoleNames = combatRoles.map((tag) => tag.name);

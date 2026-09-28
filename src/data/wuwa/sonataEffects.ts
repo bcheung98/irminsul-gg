@@ -19,7 +19,7 @@ export const sonataEffects: SonataEffect[] = [
         displayName: "Molten Rift",
         setEffect: {
             "2": '<span class="text-fusion">Fusion DMG</span> +10%.',
-            "5": '<span class="text-fusion">Fusion DMG</span> + 30% for 15s after releasing Resonance Skill.',
+            "5": '<span class="text-fusion">Fusion DMG</span> +30% for 15s after releasing Resonance Skill.',
         },
         release: {
             version: "1.0",
@@ -54,8 +54,8 @@ export const sonataEffects: SonataEffect[] = [
         name: "Celestial Light",
         displayName: "Celestial Light",
         setEffect: {
-            "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
-            "5": '<span class="text-spectro">Spectro DMG</span> + 30% for 15s after releasing Intro Skill.',
+            "2": '<span class="text-spectro">Spectro DMG</span> +10%.',
+            "5": '<span class="text-spectro">Spectro DMG</span> +30% for 15s after releasing Intro Skill.',
         },
         release: {
             version: "1.0",
@@ -126,7 +126,7 @@ export const sonataEffects: SonataEffect[] = [
         name: "Eternal Radiance",
         displayName: "Eternal Radiance",
         setEffect: {
-            "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
+            "2": '<span class="text-spectro">Spectro DMG</span> +10%.',
             "5": 'Inflicting enemies with <span class="text-spectro">Spectro Frazzle</span> increases Crit. Rate by 20% for 15s. Attacking enemies with 10 stacks of <span class="text-spectro">Spectro Frazzle</span> grants 15% <span class="text-spectro">Spectro DMG Bonus</span> for 15s.',
         },
         release: {
@@ -265,7 +265,7 @@ export const sonataEffects: SonataEffect[] = [
         name: "Pact of Neonlight Leap",
         displayName: "Pact of Neonlight Leap",
         setEffect: {
-            "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
+            "2": '<span class="text-spectro">Spectro DMG</span> +10%.',
             "5": "Casting Outro Skill increases the ATK of the incoming Resonator by 15%, with each point of Tune Break Boost additionally increasing ATK by 0.3%, up to 15%. This effect lasts for 15s, or until the Resonator is switched out.",
         },
         release: {
@@ -277,7 +277,7 @@ export const sonataEffects: SonataEffect[] = [
         name: "Halo of Starry Radiance",
         displayName: "Halo of Starry Radiance",
         setEffect: {
-            "2": "Healing Bonus + 10%.",
+            "2": "Healing Bonus +10%.",
             "5": "When healing a Resonator in the team, every 1% of Off-Tune Buildup Rate grants a 0.2% ATK increase to all Resonators in the team for 4s, up to 25%. Effects of the same name cannot be stacked.",
         },
         release: {
@@ -289,7 +289,7 @@ export const sonataEffects: SonataEffect[] = [
         name: "Rite of Gilded Revelation",
         displayName: "Rite of Gilded Revelation",
         setEffect: {
-            "2": '<span class="text-spectro">Spectro DMG</span> + 10%.',
+            "2": '<span class="text-spectro">Spectro DMG</span> +10%.',
             "5": 'Dealing Basic Attack DMG increases <span class="text-spectro">Spectro DMG</span> by 10% for 5s, stacking up to 3 times. With 3 stacks, casting Resonance Liberation grants 40% Basic Attack DMG Bonus.',
         },
         release: {
@@ -349,7 +349,7 @@ export const sonataEffects: SonataEffect[] = [
         name: "Reel of Spliced Memories",
         displayName: "Reel of Spliced Memories",
         setEffect: {
-            "2": "ATK +10%",
+            "2": "ATK +10%.",
             "5": 'Inflicting <span class="text-highlight">Tune Rupture - Shifting</span> or <span class="text-highlight">Tune Strain - Shifting</span> on enemies increases the Tune Break Boost of Resonators in the team by 20 for 30s. Effects of the same name do not stack.',
         },
         release: {
@@ -372,8 +372,8 @@ export const sonataEffects: SonataEffect[] = [
         name: "Song of Feathered Trace",
         displayName: "Song of Feathered Trace",
         setEffect: {
-            "2": "Energy Regen +10%",
-            "5": "Upon inflicting <span class=\"text-havoc\">Havoc Bane</span>, gain Xuanling's Feather, which grants a 20% increase in Crit. Rate and 35% increase in Heavy Attack DMG Bonus to the Resonator, lasting 15s.<br />Upon inflicting <span class=\"text-glacio\">Glacio Chafe</span>, gain Chongming's Feather, which grants a 0.1% increase in ATK to Resonators in the team for every 1% of the Resonator's Energy Regen, up to 25%, lasting 10s.",
+            "2": "Energy Regen +10%.",
+            "5": 'Upon inflicting <span class="text-havoc">Havoc Bane</span>, gain Xuanling\'s Feather, which grants a 20% increase in Crit. Rate and 35% increase in Heavy Attack DMG Bonus to the Resonator, lasting 15s.<br />Upon inflicting <span class="text-glacio">Glacio Chafe</span>, gain Chongming\'s Feather, which grants a 0.1% increase in ATK to Resonators in the team for every 1% of the Resonator\'s Energy Regen, up to 25%, lasting 10s.',
         },
         release: {
             version: "3.5",
@@ -384,8 +384,8 @@ export const sonataEffects: SonataEffect[] = [
         name: "Heart of Evil's Purge",
         displayName: "Heart of Evil's Purge",
         setEffect: {
-            "2": "Aero DMG +10%",
-            "5": 'Inflicting <span class="text-highlight">Tune Rupture - Shifting</span> increases Crit. DMG by 20% and Aero DMG Bonus 30% for 15s.',
+            "2": '<span class="text-aero">Aero DMG</span> +10%.',
+            "5": 'Inflicting <span class="text-highlight">Tune Rupture - Shifting</span> increases Crit. DMG by 20% and <span class="text-aero">Aero DMG Bonus</span> 30% for 15s.',
         },
         release: {
             version: "3.5",
@@ -396,11 +396,47 @@ export const sonataEffects: SonataEffect[] = [
         name: "Lamp of Nether Road",
         displayName: "Lamp of Nether Road",
         setEffect: {
-            "2": "HP +10%",
+            "2": "HP +10%.",
             "5": 'Upon gaining a Shield, gain 5% increase in Crit. Rate for 5s, max 4 stacks. This effect can be triggered every 0.5s. At max stacks, gain 15% <span class="text-fusion">Fusion DMG Bonus</span>.',
         },
         release: {
             version: "3.5",
+        },
+    },
+    {
+        id: 36,
+        name: "Heart of Sworn Vigil",
+        displayName: "Heart of Sworn Vigil",
+        setEffect: {
+            "2": '<span class="text-electro">Electro DMG</span> +10%.',
+            "5": 'Inflicting <span class="text-electro">Electro Flare</span> on the target, obtaining Unison, or triggering Unison Response increases the Resonator\'s Crit. Rate by 15% and grants them 22.5% <span class="text-electro">Electro DMG</span> for 30s.',
+        },
+        release: {
+            version: "3.7",
+        },
+    },
+    {
+        id: 37,
+        name: "Flash of Electric Reflection",
+        displayName: "Flash of Electric Reflection",
+        setEffect: {
+            "2": '<span class="text-electro">Electro DMG</span> +10%.',
+            "5": 'When the Resonator inflicts <span class="text-electro">Electro Flare</span> on enemies, they gain the following effects: Gain 10% <span class="text-electro">Electro DMG Bonus</span> for 15s. While this effect is active, casting Outro Skill grants the incoming Resonator 25% <span class="text-electro">Electro DMG Bonus</span> for 15s.',
+        },
+        release: {
+            version: "3.7",
+        },
+    },
+    {
+        id: 38,
+        name: "Flower of Tinged Yearning",
+        displayName: "Flower of Tinged Yearning",
+        setEffect: {
+            "2": "Healing Bonus +10%.",
+            "5": "Healing a Resonator in the team increases the ATK of all Resonators in the team by 10% for 30s. Effects of the same name cannot be stacked. While the effect is active, if the Resonator gains Unison or triggers Unison Response, their ATK is further increased by 15%.",
+        },
+        release: {
+            version: "3.7",
         },
     },
 ];

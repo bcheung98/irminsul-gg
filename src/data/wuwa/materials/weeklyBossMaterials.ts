@@ -89,4 +89,13 @@ export const weeklyBossMaterials = [
         source: "Thousand-Puppet Pavilion",
         release: { version: "3.5" },
     },
+    {
+        id: 41400354,
+        category: "weekly",
+        name: "Remnant of the Wheel",
+        tag: "Remnant of the Wheel",
+        rarity: 4,
+        source: "Suhsin the Inevitable",
+        release: { version: "3.7" },
+    },
 ];

@@ -271,4 +271,20 @@ export const localMaterials = [
         rarity: 1,
         release: { version: "3.5" },
     },
+    {
+        id: 42601630,
+        category: "local",
+        name: "Bloom of Hearkening",
+        tag: "Bloom of Hearkening",
+        rarity: 1,
+        release: { version: "3.7" },
+    },
+    {
+        id: 42601640,
+        category: "local",
+        name: "Miasmic Branch",
+        tag: "Miasmic Branch",
+        rarity: 1,
+        release: { version: "3.7" },
+    },
 ];
