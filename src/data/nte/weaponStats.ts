@@ -169,6 +169,16 @@ export const subStats: Record<NTEWeaponBaseATK, NTEWeaponSubStatInfo> = {
             "24%",
             "24%",
         ],
+        "CRIT DMG": [
+            "19.2",
+            "24%",
+            "28.8%",
+            "33.6%",
+            "38.4%",
+            "43.2%",
+            "48%",
+            "48%",
+        ],
     },
     "43": {
         "CRIT Rate": [
