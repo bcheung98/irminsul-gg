@@ -16,7 +16,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 // Helper imports
 import { useGameTag } from "@/context";
 import { categoryImgURLs } from "@/data/categories";
-import { useRarityColors } from "@/helpers/rarityColors";
+import { getRarityColors } from "@/helpers/rarityColors";
 import { filterOptions } from "./BannerArchive.utils";
 import {
     formatCharacterTitle,
@@ -24,10 +24,10 @@ import {
 } from "@/helpers/uma/formatTitle";
 
 // Type imports
-import { BannerArchiveSelectorProps } from "./BannerArchive.types";
-import { BannerOption } from "@/types/banner";
-import { UmaCharacter, UmaSupport } from "@/types/uma";
-import { Game } from "@/types";
+import type { BannerArchiveSelectorProps } from "./BannerArchive.types";
+import type { BannerOption } from "@/types/banner";
+import type { UmaCharacter, UmaSupport } from "@/types/uma";
+import type { Game } from "@/types";
 
 export default function BannerArchiveSelector({
     options,
@@ -96,7 +96,6 @@ function BannerRow({
     const theme = useTheme();
 
     const game = useGameTag();
-    const rarityColors = useRarityColors()[game];
 
     const title = getOptionLabel(option, game);
 
@@ -109,6 +108,8 @@ function BannerRow({
             border = "0px";
         }
     }
+
+    const rarityColor = getRarityColors(game, rarity);
 
     return (
         <MenuItem
@@ -136,9 +137,7 @@ function BannerRow({
                 icon={categoryImgURLs[`${game}/${option.category}`](option.id)}
                 iconProps={{
                     size: 32,
-                    styles: {
-                        border: `${border} solid ${rarityColors(rarity)}`,
-                    },
+                    styles: { border: `${border} solid ${rarityColor}` },
                 }}
                 title={title}
                 titleProps={{

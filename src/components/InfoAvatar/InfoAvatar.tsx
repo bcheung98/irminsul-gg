@@ -10,7 +10,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { formatHref } from "@/utils";
-import { useRarityColors } from "@/helpers/rarityColors";
+import { getRarityColors } from "@/helpers/rarityColors";
 
 // Type imports
 import type { InfoAvatarProps } from "./InfoAvatar.types";
@@ -32,7 +32,7 @@ export default function InfoAvatar({
 
     const game = tag.split("/")[0] as Game;
 
-    const rarityColors = useRarityColors()[game];
+    const rarityColor = getRarityColors(game, rarity);
 
     let imageUrl = `${tag}/${id}`;
     if (url) {
@@ -62,7 +62,7 @@ export default function InfoAvatar({
                     height: { xs: size - size * 0.125, md: size },
                     border: `${
                         theme.infoAvatar.border.width
-                    }px solid ${rarityColors(rarity)}`,
+                    }px solid ${rarityColor}`,
                     borderRadius: theme.infoAvatar.border.radius,
                     backgroundColor: background || theme.background(1),
                     backgroundImage: !tag.startsWith("uma")

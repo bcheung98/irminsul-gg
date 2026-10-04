@@ -11,14 +11,14 @@ import { useGameTag } from "@/context";
 import { formatHref, splitJoin } from "@/utils";
 import { useSettingsStore } from "@/stores";
 import { categories, categoryImgURLs } from "@/data/categories";
-import { useRarityColors } from "@/helpers/rarityColors";
+import { getRarityColors } from "@/helpers/rarityColors";
 import { getDataIconURL } from "@/helpers/dataIcon";
 import { getCharacterImageURLs } from "@/helpers/characterImage";
 
 // Type imports
-import { GameNoUma } from "@/types";
-import { InfoChipProps } from "../InfoChip/InfoChip.types";
-import { PlannerCardHeaderProps } from "./PlannerCardRoot.types";
+import type { GameNoUma } from "@/types";
+import type { InfoChipProps } from "@/components/InfoChip/InfoChip.types";
+import type { PlannerCardHeaderProps } from "./PlannerCardRoot.types";
 
 export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
     const { type, chipColor, textVariant, href } = props;
@@ -43,15 +43,15 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             ? 5
             : item.rarity;
 
-    const rarityColors = useRarityColors()[game];
+    const rarityColor = getRarityColors(game, rarity);
 
-    function getURL() {
+    const resolvedUrl = (() => {
         return `${splitJoin(
             categories[`${game}/${type}`],
             " ",
             "",
         ).toLowerCase()}/${formatHref(href)}`;
-    }
+    })();
 
     const { src: elementSrc, tooltip: elementTooltip } = getDataIconURL({
         game,
@@ -90,7 +90,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             iconProps={{
                 size: 48,
                 styles: {
-                    border: `2px solid ${rarityColors(rarity)}`,
+                    border: `2px solid ${rarityColor}`,
                     backgroundColor: theme.background(2),
                     backgroundImage: theme.materialCard.backgroundImage(rarity),
                     backgroundSize: "contain",
@@ -124,7 +124,7 @@ export default function PlannerCardHeader(props: PlannerCardHeaderProps) {
             }
             spacing={2}
             textSpacing={0.5}
-            href={href && getURL()}
+            href={href && resolvedUrl}
         />
     );
 }

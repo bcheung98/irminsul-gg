@@ -15,13 +15,13 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { formatHref } from "@/utils";
-import { useRarityColors } from "@/helpers/rarityColors";
+import { getRarityColors } from "@/helpers/rarityColors";
 import { gearStats } from "@/data/endfield/gearStats";
 import { useFilterStore } from "@/stores";
 
 // Type imports
-import { EndfieldGear } from "@/types/endfield";
-import { EndfieldGearAttributes } from "@/types/endfield/gear";
+import type { EndfieldGear } from "@/types/endfield";
+import type { EndfieldGearAttributes } from "@/types/endfield/gear";
 
 export default memo(function GearCard({ gear }: { gear: EndfieldGear }) {
     const theme = useTheme();
@@ -35,7 +35,7 @@ export default memo(function GearCard({ gear }: { gear: EndfieldGear }) {
         (state) => state["endfield/gear"].attributes,
     );
 
-    const backgroundColor = useRarityColors()["endfield"](gear.rarity);
+    const backgroundColor = getRarityColors("endfield", gear.rarity);
 
     return (
         <Grid size={{ xs: 12, sm: 6, md: 4 }}>

@@ -8,8 +8,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 // Helper imports
 import { useGameTag } from "@/context";
 import {
-    useBackgroundRarityColors,
-    useRarityColors,
+    getBackgroundRarityColors,
+    getRarityColors,
 } from "@/helpers/rarityColors";
 
 interface InfoSplashProps {
@@ -25,7 +25,7 @@ interface InfoSplashProps {
 
 export default function InfoSplash({
     src,
-    rarity,
+    rarity = 3,
     width = "96px",
     height,
     padding = 0,
@@ -38,8 +38,8 @@ export default function InfoSplash({
 
     const game = useGameTag();
 
-    const rarityColors = useRarityColors()[game];
-    const backgroundColors = useBackgroundRarityColors()[game];
+    const rarityColor = getRarityColors(game, rarity);
+    const backgroundRarityColor = getBackgroundRarityColors(game, rarity);
 
     return (
         <Image
@@ -61,11 +61,9 @@ export default function InfoSplash({
                         ? `1px solid ${theme.border.color.primary}`
                         : "none",
                 border:
-                    !hideBorder && rarity
-                        ? `2px solid ${rarityColors(rarity)}`
-                        : "none",
+                    !hideBorder && rarity ? `2px solid ${rarityColor}` : "none",
                 boxShadow: rarity
-                    ? `inset 0 0 24px 16px ${backgroundColors(rarity)}`
+                    ? `inset 0 0 24px 16px ${backgroundRarityColor}`
                     : "none",
             }}
             fadeOnLoad={matches}

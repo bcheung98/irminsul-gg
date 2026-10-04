@@ -1,6 +1,6 @@
-import { CSSProperties, SxProps, Theme } from "@mui/material/styles";
-import { useRarityColors } from "@/helpers/rarityColors";
-import { Game } from "@/types";
+import { getRarityColors } from "@/helpers/rarityColors";
+import type { CSSProperties, SxProps, Theme } from "@mui/material/styles";
+import type { Game } from "@/types";
 
 interface InfoCardStylesProps {
     game: Game;
@@ -59,8 +59,9 @@ export const infoCardStyles = ({
     }),
     textContainer: (): SxProps => () => ({
         p: 1,
-        borderTop: `calc(${imgSize} / 20) solid ${useRarityColors()[game](
-            rarity
+        borderTop: `calc(${imgSize} / 20) solid ${getRarityColors(
+            game,
+            rarity,
         )}`,
     }),
     text: (): SxProps<Theme> => (theme) => ({

@@ -2,12 +2,12 @@
 import Text from "@/components/Text";
 
 // MUI imports
-import { TypographyVariant } from "@mui/material/styles";
+import type { TypographyVariant } from "@mui/material/styles";
 
 // Helper imports
 import { range } from "@/utils";
 import { useGameTag } from "@/context";
-import { useRarityColors } from "@/helpers/rarityColors";
+import { getRarityColors } from "@/helpers/rarityColors";
 
 export default function RarityStars({
     rarity = 3,
@@ -24,16 +24,14 @@ export default function RarityStars({
 }) {
     const game = useGameTag();
 
-    const rarityColors = useRarityColors()[game || "genshin"];
+    const rarityColor = getRarityColors(game || "genshin", rarity);
 
     return (
         <Text
             component="span"
             variant={variant}
             sx={(theme) => ({
-                color: useRarityColor
-                    ? rarityColors(rarity)
-                    : color || theme.text.star,
+                color: useRarityColor ? rarityColor : color || theme.text.star,
                 userSelect: "none",
                 lineHeight: theme.typography[variant].fontSize,
                 fontWeight: theme.font.weight.highlight,
