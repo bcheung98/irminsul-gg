@@ -1,10 +1,14 @@
 import { sortBy } from "@/utils";
-import { distances, strategies, terrain } from "@/data/uma/common";
+import { distances, strategies } from "@/data/uma/common";
 import { badgeSpriteMap, ranks, sheetSize, statScores } from "@/data/uma/ranks";
-import { UmaAptitude, UmaRank } from "@/types/uma";
-import { DataArray, StatArray, UmaSkillOption } from "@/types/uma/calculator";
-import { UmaCharacter, UmaCharacterAptitude } from "@/types/uma/character";
-import { UmaSkill } from "@/types/uma/skill";
+import type { UmaAptitude, UmaRank } from "@/types/uma";
+import type { UmaCharacter, UmaCharacterAptitude } from "@/types/uma/character";
+import type { UmaSkill } from "@/types/uma/skill";
+import type {
+    DataArray,
+    StatArray,
+    UmaSkillOption,
+} from "@/types/uma/calculator";
 
 function getAptitudeMultipler(grade: UmaRank) {
     switch (grade) {
@@ -25,8 +29,8 @@ function getAptitudeMultipler(grade: UmaRank) {
 
 function getScoreMultiplier(aptitudes: UmaAptitude[], multipliers: number[]) {
     let res = 1.0;
+
     if (
-        aptitudes.every((apt) => terrain.includes(apt)) ||
         aptitudes.every((apt) => distances.includes(apt)) ||
         aptitudes.every((apt) => strategies.includes(apt))
     ) {
@@ -34,33 +38,37 @@ function getScoreMultiplier(aptitudes: UmaAptitude[], multipliers: number[]) {
     } else {
         res = multipliers.reduce((a, c) => a * c);
     }
+
     return res;
 }
 
-const valueOverrides: Record<number, number> = {
+const VALUE_OVERRIDES: Record<number, number> = {
     300041: 0,
     1100011: -500,
     202141: -174,
     202181: -174,
 };
-const purpleSkillIcons = [
+
+const PURPLE_SKILL_ICON_IDS = new Set([
     10014, 10024, 10034, 10044, 10054, 20014, 20015, 20024, 20044, 20045, 20064,
-];
+]);
 
 function getBaseSkillRatingValue(skill: UmaSkillOption) {
     const value = Number(skill.values[0]);
     if (!Number.isFinite(value)) return value;
     if (value < 0) return value;
 
-    if (skill.id in valueOverrides) {
-        return valueOverrides[skill.id];
+    if (skill.id in VALUE_OVERRIDES) {
+        return VALUE_OVERRIDES[skill.id];
     }
-    if (purpleSkillIcons.includes(skill.icon)) {
+
+    if (PURPLE_SKILL_ICON_IDS.has(skill.icon)) {
         if (value >= 100) return -262;
         if (value >= 70) return -174;
         if (value <= 0) return 0;
         return -129;
     }
+
     return value;
 }
 
@@ -85,24 +93,30 @@ export function calculateSkillScore(
         );
         return 0;
     }
-    const checkType = skill.values[5];
+
     let score = getBaseSkillRatingValue(skill);
-    if (checkType) {
+
+    const checkType = skill.values[5];
+
+    if (checkType && !["Turf", "Dirt"].includes(checkType)) {
         const aptitudeMatch = checkType.split("/") as UmaAptitude[];
         const multipliers: number[] = [];
+
         aptitudeMatch.forEach((apt) => {
             let aptRank = "";
-            if (terrain.includes(apt)) {
-                aptRank = aptitude.surface[apt.toLowerCase()];
-            } else if (distances.includes(apt)) {
+
+            if (distances.includes(apt)) {
                 aptRank = aptitude.distance[apt.toLowerCase()];
             } else if (strategies.includes(apt)) {
                 aptRank = aptitude.strategy[apt.toLowerCase()];
             }
+
             multipliers.push(getAptitudeMultipler(aptRank as UmaRank));
         });
+
         score *= getScoreMultiplier(aptitudeMatch, multipliers);
     }
+
     return Math.round(score);
 }
 
@@ -113,9 +127,11 @@ export function calculateTotalSkillScore(
 ) {
     return skills.reduce((total, skill) => {
         let value = 0;
+
         if (!hidden.includes(skill.id)) {
             value = calculateSkillScore(aptitude, skill);
         }
+
         return total + value;
     }, 0);
 }
@@ -123,13 +139,16 @@ export function calculateTotalSkillScore(
 export function calculateRank(score: number) {
     let rank: keyof typeof ranks = "G";
     let min = 0;
+
     for (const [nextRank, threshold] of Object.entries(ranks)) {
         if (score < threshold) {
             return { rank, min, nextRank, threshold };
         }
+
         rank = nextRank as keyof typeof ranks;
         min = threshold;
     }
+
     return { rank, min, nextRank: "G+", threshold: 300 };
 }
 
@@ -147,22 +166,27 @@ export function getScore({
     let statsScore = [],
         uniqueScore = 0,
         skillScore = 0;
+
     statsScore = calculateStatsScore(stats);
     uniqueScore = calculateUniqueLevelScore(stats[5], stats[6]);
     skillScore = calculateTotalSkillScore(aptitude, skills, hiddenSkills);
+
     return { statsScore, uniqueScore, skillScore };
 }
 
 // NOTE: The following code block was adapated from daftuyda.moe's rating calculator
 export function getRankBadge(rank: keyof typeof ranks, size = 88) {
     const badge = badgeSpriteMap[rank];
+
     const renderWidth = size;
     const renderHeight = size;
+
     const scale = Math.min(renderWidth / badge.w, renderHeight / badge.h);
     const scaledSpriteWidth = sheetSize.w * scale;
     const scaledSpriteHeight = sheetSize.h * scale;
     const scaledRectWidth = badge.w * scale;
     const scaledRectHeight = badge.h * scale;
+
     const offsetX = (renderWidth - scaledRectWidth) / 2 - badge.x * scale;
     const offsetY = (renderHeight - scaledRectHeight) / 2 - badge.y * scale;
 
@@ -185,11 +209,13 @@ export function getUniqueSkill(
 ) {
     let skill = skills.filter((skill) => skill.unique === charID);
     const char = characters.find((char) => char.id === charID);
+
     if ((char?.rarity || 3) < 3) {
         skill = skill.filter(
             (skill) => skill.rarity === (stats[5] < 3 ? 3 : 4),
         );
     }
+
     return createSkillOptions(skill)[0];
 }
 
@@ -204,6 +230,8 @@ export function createSkillOptions(skills: UmaSkill[]): UmaSkillOption[] {
         values: skill.values || [],
     }));
 }
+
+const SPECIAL_GREEN_SKILLS = new Set([201631, 201632, 201641, 202161]);
 
 // Custom sort to emulate in-game sorting order
 export function sortSkills(skills: UmaSkillOption[]) {
@@ -224,8 +252,8 @@ export function sortSkills(skills: UmaSkillOption[]) {
         }
         // Green skills with no aptitude requirement (excluding Lone Wolf, Sympathy, Lucky Seven, and Restraint)
         else if (
-            ![201631, 201632, 201641, 202161].includes(skill.id) &&
-            skill.icon < 10061 &&
+            !SPECIAL_GREEN_SKILLS.has(skill.id) &&
+            skill.icon < 10061 && // IDs 10061, 10062, 10066, correspond to Lucky Seven
             skill.values[5] === ""
         ) {
             skillTypes.greens.push(skill);

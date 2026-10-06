@@ -1,4 +1,4 @@
-import { GameData } from "@/types";
+import type { Game } from "@/types";
 import {
     getGenshinBackgroundColor,
     getGenshinRarityColor,
@@ -16,28 +16,44 @@ import {
 } from "./endfield/rarityColors";
 import { getNTEBackgroundColor, getNTERarityColor } from "./nte/rarityColors";
 
-export function useRarityColors(): GameData<(rarity?: number) => string> {
-    return {
-        genshin: getGenshinRarityColor,
-        hsr: getHSRRarityColor,
-        wuwa: getWuWaRarityColor,
-        zzz: getZZZRarityColor,
-        uma: getUmaRarityColor,
-        endfield: getEndfieldRarityColor,
-        nte: getNTERarityColor,
-    };
+export function getRarityColors(game: Game, rarity: number): string {
+    switch (game) {
+        case "genshin":
+            return getGenshinRarityColor(rarity);
+        case "hsr":
+            return getHSRRarityColor(rarity);
+        case "wuwa":
+            return getWuWaRarityColor(rarity);
+        case "zzz":
+            return getZZZRarityColor(rarity);
+        case "uma":
+            return getUmaRarityColor(rarity);
+        case "endfield":
+            return getEndfieldRarityColor(rarity);
+        case "nte":
+            return getNTERarityColor(rarity);
+    }
 }
 
-export function useBackgroundRarityColors(): GameData<
-    (rarity: number, opacity?: number) => string
-> {
-    return {
-        genshin: getGenshinBackgroundColor,
-        hsr: getHSRBackgroundColor,
-        wuwa: getWuWaBackgroundColor,
-        zzz: getZZZBackgroundColor,
-        uma: getUmaBackgroundColor,
-        endfield: getEndfieldBackgroundColor,
-        nte: getNTEBackgroundColor,
-    };
+export function getBackgroundRarityColors(
+    game: Game,
+    rarity: number,
+    opacity?: number,
+): string {
+    switch (game) {
+        case "genshin":
+            return getGenshinBackgroundColor(rarity, opacity);
+        case "hsr":
+            return getHSRBackgroundColor(rarity, opacity);
+        case "wuwa":
+            return getWuWaBackgroundColor(rarity, opacity);
+        case "zzz":
+            return getZZZBackgroundColor(rarity, opacity);
+        case "uma":
+            return getUmaBackgroundColor(rarity, opacity);
+        case "endfield":
+            return getEndfieldBackgroundColor(rarity, opacity);
+        case "nte":
+            return getNTEBackgroundColor(rarity, opacity);
+    }
 }
