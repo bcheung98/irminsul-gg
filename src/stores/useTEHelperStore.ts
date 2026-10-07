@@ -1,8 +1,8 @@
-import { range } from "@/utils";
-import { scenarios } from "@/data/uma/scenarios";
-import { TEHDeck, TEHDeckData, TEHSettings } from "@/types/uma/te-helper";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { range } from "@/utils";
+import { scenarios } from "@/data/uma/scenarios";
+import type { TEHDeck, TEHDeckData, TEHSettings } from "@/types/uma/te-helper";
 
 export interface TEHelperState {
     decks: TEHDeck[];
@@ -48,72 +48,95 @@ export const useTEHelperStore = create(
         (set, get) => ({
             ...initialState,
             addCharacter: function (character) {
-                const deck = get()["decks"][get()["currentDeck"]];
-                deck.character = character;
+                const currentDeck = get().currentDeck;
+
                 return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
+                    decks: state.decks.map((deck, index) =>
+                        index === currentDeck ? { ...deck, character } : deck,
+                    ),
                 }));
             },
             addSupport: function (index, support) {
-                const deck = get()["decks"][get()["currentDeck"]];
-                deck.supports[index] = support;
+                const currentDeck = get().currentDeck;
+
                 return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
+                    decks: state.decks.map((deck, deckIndex) => {
+                        if (deckIndex !== currentDeck) return deck;
+
+                        const supports: TEHDeck["supports"] = [
+                            ...deck.supports,
+                        ];
+                        supports[index] = support;
+
+                        return {
+                            ...deck,
+                            supports,
+                        };
+                    }),
                 }));
             },
             addScenario: function (scenario) {
-                const deck = get()["decks"][get()["currentDeck"]];
-                deck.scenario = scenario;
+                const currentDeck = get().currentDeck;
+
                 return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
+                    decks: state.decks.map((deck, index) =>
+                        index === currentDeck ? { ...deck, scenario } : deck,
+                    ),
                 }));
             },
-            setCurrentDeck: function (deckID) {
-                return set((state) => ({
-                    ...state,
-                    currentDeck: deckID,
-                }));
-            },
+            setCurrentDeck: (deckID) => set({ currentDeck: deckID }),
             renameDeck: function (newName) {
-                const deck = get()["decks"][get()["currentDeck"]];
-                deck.name = newName;
+                const currentDeck = get().currentDeck;
+
                 return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
+                    decks: state.decks.map((deck, index) =>
+                        index === currentDeck
+                            ? { ...deck, name: newName }
+                            : deck,
+                    ),
                 }));
             },
             copyDeck: function (deckID) {
-                const decks = get()["decks"];
-                const index = get()["currentDeck"];
-                const newDeck = { ...decks[index] };
-                const name = decks[index].name;
-                newDeck.supports[6] = -1;
-                decks[deckID] = newDeck;
-                decks[deckID].name = `Copy of ${name}`;
-                return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
-                }));
+                const currentDeck = get().currentDeck;
+
+                return set((state) => {
+                    const source = state.decks[currentDeck];
+
+                    const supports: TEHDeck["supports"] = [...source.supports];
+                    supports[6] = -1;
+
+                    const copy: TEHDeck = {
+                        ...source,
+                        name: `Copy of ${source.name}`,
+                        supports,
+                    };
+
+                    return {
+                        decks: state.decks.map((deck, index) =>
+                            index === deckID ? copy : deck,
+                        ),
+                    };
+                });
             },
             resetDeck: function (deckID) {
-                get()["decks"][deckID] = defaultDecks[deckID];
                 return set((state) => ({
-                    ...state,
-                    decks: get()["decks"],
+                    decks: state.decks.map((deck, index) => {
+                        if (index !== deckID) return deck;
+
+                        const supports: TEHDeck["supports"] = [
+                            ...defaultDecks[deckID].supports,
+                        ];
+
+                        return {
+                            ...defaultDecks[deckID],
+                            supports,
+                        };
+                    }),
                 }));
             },
-            setSettings: function (settings) {
-                return set((state) => ({
-                    ...state,
-                    settings: settings,
-                }));
-            },
+            setSettings: (settings) => set({ settings }),
             setShowAll: function (value) {
                 return set((state) => ({
-                    ...state,
                     settings: {
                         ...state.settings,
                         showAll: value,
@@ -122,7 +145,6 @@ export const useTEHelperStore = create(
             },
             setExpanded: function (value) {
                 return set((state) => ({
-                    ...state,
                     settings: {
                         ...state.settings,
                         expanded: value,
@@ -130,6 +152,6 @@ export const useTEHelperStore = create(
                 }));
             },
         }),
-        { name: "v2/uma-te-helper" }
-    )
+        { name: "v2/uma-te-helper" },
+    ),
 );

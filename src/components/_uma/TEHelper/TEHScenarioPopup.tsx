@@ -1,3 +1,5 @@
+import { useShallow } from "zustand/react/shallow";
+
 // Component imports
 import FlexBox from "@/components/FlexBox";
 import TextLabel from "@/components/TextLabel";
@@ -19,8 +21,12 @@ export default function TEHScenarioPopup({
     const server = useStore(useServerStore, (state) => state.uma);
     const hideUnreleasedContent = server === "NA";
 
-    const { decks, currentDeck, addScenario } = useTEHelperStore();
-    const deck = decks[currentDeck];
+    const { deck, addScenario } = useTEHelperStore(
+        useShallow((state) => ({
+            deck: state.decks[state.currentDeck],
+            addScenario: state.addScenario,
+        })),
+    );
 
     let items = scenarios;
     if (hideUnreleasedContent) {
@@ -28,7 +34,15 @@ export default function TEHScenarioPopup({
     }
 
     return (
-        <Stack spacing={1}>
+        <Stack
+            spacing={1}
+            sx={{
+                p: 2,
+                maxHeight: { xs: "90vh", sm: "640px" },
+                overflowY: "auto",
+                scrollbarWidth: "thin",
+            }}
+        >
             {items.map((item) => {
                 const invalid = item.id === deck.scenario;
                 return (
