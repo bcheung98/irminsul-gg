@@ -1,15 +1,11 @@
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
 // Component imports
-import SearchDialog from "@/components/SearchDialog";
+import SearchDialog, { SearchLoader } from "@/components/SearchDialog";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Switch from "@/components/Switch";
-import {
-    Loader,
-    SearchHistory,
-    SearchResults,
-} from "./SiteSearchPopup.components";
+import { SearchHistory, SearchResults } from "./SiteSearchPopup.components";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
@@ -26,9 +22,9 @@ import { getItems } from "./SiteSearch.utils";
 import { useSiteSearchPopup } from "./SiteSearchPopup.hooks";
 
 // Type imports
-import { Game } from "@/types";
-import { SearchResult } from "./SiteSearch";
-import { ContentDialogProps } from "@/components/ContentDialog";
+import type { Game } from "@/types";
+import type { SearchResult } from "./SiteSearch";
+import type { ContentDialogProps } from "@/components/ContentDialog";
 
 interface SiteSearchPopupProps extends ContentDialogProps {
     open: boolean;
@@ -163,7 +159,7 @@ export default function SiteSearchPopup({
         >
             <Stack spacing={2}>
                 {gameFilterSwitch}
-                {!dataLoading ? searchContent : <Loader />}
+                {!dataLoading ? searchContent : <SearchLoader />}
             </Stack>
         </SearchDialog>
     );

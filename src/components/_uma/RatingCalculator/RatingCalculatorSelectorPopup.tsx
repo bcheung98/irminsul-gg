@@ -1,35 +1,33 @@
 import {
+    memo,
     useCallback,
+    useDeferredValue,
     useEffect,
     useMemo,
     useState,
-    useTransition,
 } from "react";
 
 // Component imports
-import SearchDialog from "@/components/SearchDialog";
-import { ContentDialogProps } from "@/components/ContentDialog";
+import SearchDialog, { SearchNoResults } from "@/components/SearchDialog";
 import FlexBox from "@/components/FlexBox";
 import TextLabel from "@/components/TextLabel";
-import Text from "@/components/Text";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
-import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
 import { useStore, useServerStore } from "@/stores";
+import { useProgressiveResults } from "@/hooks";
 import { searchResultStyle, useTEHelperData } from "../TEHelper/TEHelper.utils";
 import { transformItems } from "@/helpers/transformItems";
 import { filterUnreleasedContent } from "@/helpers/isUnreleasedContent";
 
 // Type imports
-import { UmaCharacter } from "@/types/uma";
+import type { UmaCharacter } from "@/types/uma";
+import type { ContentDialogProps } from "@/components/ContentDialog";
 
-interface Props extends ContentDialogProps {
-    open: boolean;
+interface RatingCalculatorSelectorPopupProps extends ContentDialogProps {
     handleClose: () => void;
     addCharacter: (char: number | null) => void;
 }
@@ -39,104 +37,73 @@ export default function RatingCalculatorSelectorPopup({
     setOpen,
     handleClose,
     addCharacter,
-}: Props) {
-    const theme = useTheme();
-
+}: RatingCalculatorSelectorPopupProps) {
     const { characters } = useTEHelperData();
 
     const server = useStore(useServerStore, (state) => state.uma);
     const hideUnreleasedContent = server === "NA";
 
-    const [hitsLoading, startHitsTransition] = useTransition();
-
-    let data: UmaCharacter[] = filterUnreleasedContent(
-        hideUnreleasedContent,
-        characters,
-        "uma",
-    );
-
     const [searchValue, setSearchValue] = useState("");
     const handleInputChange = useCallback((event: React.BaseSyntheticEvent) => {
-        setSearchValue(() => event.target.value);
+        setSearchValue(event.target.value);
     }, []);
 
-    const [searchResults, setSearchResults] = useState<UmaCharacter[]>([]);
-    useEffect(() => {
-        startHitsTransition(() => {
-            setSearchResults(() =>
-                transformItems("uma", data, {}, searchValue, {
-                    sortBy: "id",
-                    sortDirection: "asc",
-                }),
-            );
+    const deferredSearchValue = useDeferredValue(searchValue);
+
+    const hits = useMemo<UmaCharacter[]>(() => {
+        const data = filterUnreleasedContent(
+            hideUnreleasedContent,
+            characters,
+            "uma",
+        );
+
+        return transformItems("uma", data, {}, deferredSearchValue, {
+            sortBy: "id",
+            sortDirection: "asc",
         });
-    }, [open, searchValue]);
-    const hits = useMemo(() => [...searchResults], [data, searchResults]);
+    }, [characters, hideUnreleasedContent, deferredSearchValue]);
 
-    const handleSelect = (char: number | null) => {
-        if (char) {
-            addCharacter(char);
-        } else {
-            addCharacter(null);
-        }
-        handleClose();
-    };
+    const { visibleResultCount, resetVisibleResults, handleContentScroll } =
+        useProgressiveResults({
+            resultCount: hits.length,
+        });
 
-    const Loader = (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
+    const visibleHits = useMemo(
+        () => hits.slice(0, visibleResultCount),
+        [hits, visibleResultCount],
     );
 
-    function SearchResultCard({ char }: { char: UmaCharacter }) {
-        const title = `${char.name} (${char.outfit || "Original"})`;
-        return (
-            <FlexBox sx={searchResultStyle()}>
-                <TextLabel
-                    icon={`uma/characters/${char.id}`}
-                    iconProps={{ size: 48 }}
-                    title={title}
-                    spacing={2}
-                />
-            </FlexBox>
-        );
-    }
+    useEffect(() => {
+        resetVisibleResults();
+    }, [deferredSearchValue, resetVisibleResults]);
 
-    const NoHits =
-        searchValue !== "" && !hitsLoading ? (
-            <Text sx={{ textAlign: "center", pt: 2 }}>
-                {`No results for "`}
-                <span style={{ fontWeight: theme.font.weight.highlight }}>
-                    {searchValue}
-                </span>
-                {`"`}
-            </Text>
-        ) : null;
+    useEffect(() => {
+        if (!open) return;
+
+        setSearchValue("");
+    }, [open]);
+
+    const handleSelect = useCallback(
+        (char: number) => {
+            addCharacter(char);
+            handleClose();
+        },
+        [addCharacter, handleClose],
+    );
 
     const SearchResults =
-        hits.length > 0 || searchValue === "" ? (
+        hits.length > 0 ? (
             <Stack spacing={1}>
-                {!hitsLoading
-                    ? hits.map((item) => {
-                          return (
-                              <ButtonBase
-                                  key={item.id}
-                                  onClick={() => handleSelect(item.id)}
-                                  sx={{
-                                      display: "inline",
-                                      "&:hover": {
-                                          cursor: "pointer",
-                                      },
-                                  }}
-                              >
-                                  <SearchResultCard char={item} />
-                              </ButtonBase>
-                          );
-                      })
-                    : Loader}
+                {visibleHits.map((item) => (
+                    <SearchResult
+                        key={item.id}
+                        item={item}
+                        onSelect={handleSelect}
+                    />
+                ))}
             </Stack>
         ) : (
-            NoHits
+            <SearchNoResults searchValue={deferredSearchValue} />
         );
 
     return (
@@ -145,11 +112,44 @@ export default function RatingCalculatorSelectorPopup({
             setOpen={setOpen}
             value={searchValue}
             handleInputChange={handleInputChange}
-            placeholder={`Add Character`}
+            placeholder={`Select Character`}
+            onContentScroll={handleContentScroll}
         >
-            <Stack spacing={2}>
-                <Stack spacing={1}>{SearchResults}</Stack>
-            </Stack>
+            <Stack spacing={1}>{SearchResults}</Stack>
         </SearchDialog>
     );
 }
+
+interface SearchResultProps {
+    item: UmaCharacter;
+    onSelect: (id: number) => void;
+}
+
+export const SearchResult = memo(function SearchResult({
+    item,
+    onSelect,
+}: SearchResultProps) {
+    const title = `${item.name} (${item.outfit || "Original"})`;
+
+    return (
+        <ButtonBase
+            key={item.id}
+            onClick={() => onSelect(item.id)}
+            sx={{
+                display: "inline",
+                "&:hover": {
+                    cursor: "pointer",
+                },
+            }}
+        >
+            <FlexBox sx={searchResultStyle()}>
+                <TextLabel
+                    icon={`uma/characters/${item.id}`}
+                    iconProps={{ size: 48 }}
+                    title={title}
+                    spacing={2}
+                />
+            </FlexBox>
+        </ButtonBase>
+    );
+});

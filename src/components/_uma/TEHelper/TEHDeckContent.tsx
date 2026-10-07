@@ -16,7 +16,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 
 // Type imports
-import { TEHDeck, TEHItemCategory } from "@/types/uma/te-helper";
+import type { TEHDeck, TEHItemCategory } from "@/types/uma/te-helper";
 
 export default function TEHDeckContent({ deck }: { deck: TEHDeck }) {
     const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
@@ -117,6 +117,7 @@ export default function TEHDeckContent({ deck }: { deck: TEHDeck }) {
                 open={selectOpen}
                 setOpen={setSelectOpen}
                 header="Select Scenario"
+                contentProps={{ padding: 0 }}
                 sx={{
                     ".MuiDialog-paper": {
                         maxWidth: "600px",

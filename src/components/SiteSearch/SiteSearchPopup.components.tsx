@@ -3,25 +3,17 @@ import SiteSearchResult from "./SiteSearchResult";
 import FlexBox from "@/components/FlexBox";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
+import { SearchNoResults } from "@/components/SearchDialog";
 
 // MUI imports
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import HistoryIcon from "@mui/icons-material/History";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 // Type imports
-import { SearchResult } from "./SiteSearch";
-
-export function Loader() {
-    return (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
-    );
-}
+import type { SearchResult } from "./SiteSearch";
 
 interface PinnedSearchesProps {
     pinnedSearches: SearchResult[];
@@ -196,24 +188,6 @@ export function SearchHistory({
     );
 }
 
-export function NoHits({ searchValue }: { searchValue: string }) {
-    return (
-        <Text
-            sx={(theme) => ({
-                textAlign: "center",
-                pt: 2,
-                "& span": {
-                    fontWeight: theme.font.weight.highlight,
-                },
-            })}
-        >
-            {`No results for "`}
-            <span>{searchValue}</span>
-            {`"`}
-        </Text>
-    );
-}
-
 interface SearchResultsProps {
     searchResults: SearchResult[];
     visibleSearchResults: SearchResult[];
@@ -234,7 +208,7 @@ export function SearchResults({
     handleSelect,
 }: SearchResultsProps) {
     if (searchResults.length === 0) {
-        return <NoHits searchValue={searchValue} />;
+        return <SearchNoResults searchValue={searchValue} />;
     }
 
     return (
