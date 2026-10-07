@@ -70,7 +70,11 @@ export default function PlannerSelectorPopup({
     const data = useMemo(() => {
         const items = type === "characters" ? characters : weapons;
 
-        return filterUnreleasedContent(hideUnreleasedContent, items, game);
+        return filterUnreleasedContent(
+            hideUnreleasedContent,
+            items,
+            game,
+        ).filter((item) => item.url);
     }, [type, characters, weapons, hideUnreleasedContent, game]);
 
     const availableItems = useMemo(() => {
@@ -137,6 +141,8 @@ export default function PlannerSelectorPopup({
     }, [type, game, element, specialty, weaponType, rarity]);
 
     useEffect(() => {
+        if (!open) return;
+
         setSearchValue("");
         setFilters(initialFilters);
     }, [open]);
