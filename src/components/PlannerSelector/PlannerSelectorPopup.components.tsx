@@ -1,17 +1,15 @@
 import { memo, useEffect, useState } from "react";
 
 // Component imports
-import FlexBox from "@/components/FlexBox";
-import Text from "@/components/Text";
 import PlannerCardHeader from "@/components/PlannerCardRoot/PlannerCardHeader";
 import PlannerCustomItem from "@/components/PlannerCustomItem";
+import { SearchLoader, SearchNoResults } from "@/components/SearchDialog";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import ButtonBase from "@mui/material/ButtonBase";
-import CircularProgress from "@mui/material/CircularProgress";
 
 // Helper imports
 import { useGameTag } from "@/context";
@@ -76,7 +74,7 @@ export function SearchResults({
                     type={type}
                 />
             )}
-            {!!hits.length && showLoader && <Loader />}
+            {!!hits.length && showLoader && <SearchLoader />}
             {hits.length ? (
                 <Stack
                     spacing={1}
@@ -94,7 +92,12 @@ export function SearchResults({
                     ))}
                 </Stack>
             ) : (
-                !showLoader && <NoHits searchValue={searchValue} />
+                !showLoader && (
+                    <SearchNoResults searchValue={searchValue}>
+                        The item you are looking for may have already been
+                        selected.
+                    </SearchNoResults>
+                )
             )}
         </Stack>
     );
@@ -131,28 +134,3 @@ const SearchResultCard = memo(function ({
         </ButtonBase>
     );
 });
-
-function NoHits({ searchValue }: Pick<SearchResultsProps, "searchValue">) {
-    if (!searchValue) return null;
-
-    return (
-        <Text sx={{ textAlign: "center", pt: 2 }}>
-            {`No results for "`}
-            <Text component="span" weight="highlight">
-                {searchValue}
-            </Text>
-            {`"`}
-            <br />
-            <br />
-            The item you are looking for may have already been selected.
-        </Text>
-    );
-}
-
-function Loader() {
-    return (
-        <FlexBox sx={{ justifyContent: "center", pt: 3 }}>
-            <CircularProgress color="info" />
-        </FlexBox>
-    );
-}

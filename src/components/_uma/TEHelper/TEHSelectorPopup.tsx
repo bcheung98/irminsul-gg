@@ -8,10 +8,9 @@ import {
 import { useShallow } from "zustand/react/shallow";
 
 // Component imports
-import SearchDialog from "@/components/SearchDialog";
+import SearchDialog, { SearchNoResults } from "@/components/SearchDialog";
 import FilterButtonsLocal from "@/components/Filters/FilterButtonsLocal";
 import Dropdown from "@/components/Dropdown";
-import Text from "@/components/Text";
 import { DeleteOption, SearchResult } from "./TEHSelectorPopup.components";
 
 // MUI imports
@@ -256,19 +255,9 @@ export default function TEHSelectorPopup({
                     );
                 })}
             </Stack>
-        ) : deferredSearchValue !== "" ? (
-            <Text sx={{ textAlign: "center", pt: 2 }}>
-                {`No results for "`}
-                <span
-                    style={{
-                        fontWeight: theme.font.weight.highlight,
-                    }}
-                >
-                    {deferredSearchValue}
-                </span>
-                {`"`}
-            </Text>
-        ) : null;
+        ) : (
+            <SearchNoResults searchValue={deferredSearchValue} />
+        );
 
     const showDeleteOption =
         (category === "character" && deck.character !== null) ||

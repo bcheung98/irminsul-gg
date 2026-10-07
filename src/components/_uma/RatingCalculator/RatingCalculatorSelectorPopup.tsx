@@ -8,13 +8,11 @@ import {
 } from "react";
 
 // Component imports
-import SearchDialog from "@/components/SearchDialog";
+import SearchDialog, { SearchNoResults } from "@/components/SearchDialog";
 import FlexBox from "@/components/FlexBox";
 import TextLabel from "@/components/TextLabel";
-import Text from "@/components/Text";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import ButtonBase from "@mui/material/ButtonBase";
 
@@ -40,8 +38,6 @@ export default function RatingCalculatorSelectorPopup({
     handleClose,
     addCharacter,
 }: RatingCalculatorSelectorPopupProps) {
-    const theme = useTheme();
-
     const { characters } = useTEHelperData();
 
     const server = useStore(useServerStore, (state) => state.uma);
@@ -106,15 +102,9 @@ export default function RatingCalculatorSelectorPopup({
                     />
                 ))}
             </Stack>
-        ) : deferredSearchValue !== "" ? (
-            <Text sx={{ textAlign: "center", pt: 2 }}>
-                {`No results for "`}
-                <span style={{ fontWeight: theme.font.weight.highlight }}>
-                    {deferredSearchValue}
-                </span>
-                {`"`}
-            </Text>
-        ) : null;
+        ) : (
+            <SearchNoResults searchValue={deferredSearchValue} />
+        );
 
     return (
         <SearchDialog
