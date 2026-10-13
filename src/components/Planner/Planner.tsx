@@ -4,6 +4,7 @@ import { useEffect, useMemo } from "react";
 
 // Component imports
 import PlannerTeams from "@/components/PlannerTeams";
+import PlannerSettings from "./PlannerSettings";
 import PlannerSelector from "@/components/PlannerSelector";
 import PlannerSorter from "@/components/PlannerSorter";
 import PlannerTotalCost from "@/components/PlannerTotalCost";
@@ -100,7 +101,10 @@ export default function Planner({
                 >
                     Ascension Planner
                 </Text>
-                <ContentBox header={<PlannerTeams />}>
+                <ContentBox
+                    header={<PlannerTeams />}
+                    actions={<PlannerSettings />}
+                >
                     <Stack spacing={2} divider={<Divider />}>
                         {displayedItems.length > 0 ? (
                             <Dropdown
