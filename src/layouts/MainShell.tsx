@@ -8,6 +8,7 @@ import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 import NavBarMini from "@/components/NavBarMini";
 import Announcements from "@/components/Announcements";
+import { SettingsSync } from "@/components/Settings/SettingsSync";
 
 // MUI imports
 import Box from "@mui/material/Box";
@@ -18,9 +19,9 @@ import { GameContext } from "@/context";
 import { games } from "@/data/games";
 
 // Type imports
-import { Game } from "@/types";
+import type { Game } from "@/types";
 
-export default function RouteShell({
+export default function MainShell({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -46,6 +47,7 @@ export default function RouteShell({
     return (
         <GameContext value={games[gameTag]}>
             <Announcements />
+            <SettingsSync />
             <NavBar />
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ display: { xs: "flex", lg: "none" } }}>

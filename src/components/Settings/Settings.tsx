@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 // Component imports
 import NavButton from "@/components/NavButton";
@@ -14,7 +14,11 @@ import Box from "@mui/material/Box";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
-import { useStore, useSettingsStore } from "@/stores";
+import {
+    settingsRequireReload,
+    useSettingsStore,
+    type SettingsState,
+} from "@/stores/useSettingsStore";
 
 export default function Settings() {
     const theme = useTheme();
@@ -22,26 +26,23 @@ export default function Settings() {
 
     const [open, setOpen] = useState(false);
 
+    const settings = useSettingsStore((state) => state);
+
+    const settingsOnOpen = useRef<SettingsState | null>(null);
+
     const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
-        if (
-            !newOpen &&
-            unreleasedContentOld.current !== settings?.hideUnreleasedContent
+        if (newOpen) {
+            settingsOnOpen.current = { ...settings };
+        } else if (
+            settingsOnOpen.current &&
+            settingsRequireReload(settingsOnOpen.current, settings)
         ) {
-            if (window) window.dispatchEvent(new Event("storage"));
+            window.location.reload();
+            return;
         }
+
+        setOpen(newOpen);
     };
-
-    const settings = useStore(useSettingsStore, (state) => state);
-    const unreleasedContentOld = useRef(settings?.hideUnreleasedContent);
-
-    useEffect(() => {
-        window.addEventListener("storage", (event) => {
-            if (event.key === "v2/settings") {
-                window.location.reload();
-            }
-        });
-    }, [open]);
 
     return (
         <>
@@ -60,7 +61,7 @@ export default function Settings() {
             <Drawer
                 open={open}
                 onClose={toggleDrawer(false)}
-                anchor={matches ? "right" : "top"}
+                anchor="right"
                 sx={{
                     zIndex: theme.zIndex.drawer + 1,
                     boxSizing: "content-box",
@@ -79,7 +80,7 @@ export default function Settings() {
                         header="Settings"
                         actions={
                             <CloseButton
-                                onClick={() => setOpen(false)}
+                                onClick={toggleDrawer(false)}
                                 hoverColor={theme.drawer.backgroundColor.hover}
                             />
                         }
