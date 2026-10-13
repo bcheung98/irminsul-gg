@@ -1,55 +1,59 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { createPlannerSlice } from "./createPlannerSlice";
 import type { GameNoUma } from "@/types";
 import type { CostValue } from "@/types/costs";
-import type { PlannerItemData, SetItemValuesProps } from "@/types/planner";
-import {
-    createGenshinSlice,
-    type GenshinPlannerSlice,
-} from "./planner/useGenshinStore";
-import { createHSRSlice, type HSRPlannerSlice } from "./planner/useHSRStore";
-import { createWuWaSlice, type WuWaPlannerSlice } from "./planner/useWuWaStore";
-import { createZZZSlice, type ZZZPlannerSlice } from "./planner/useZZZStore";
-import {
-    createEndfieldSlice,
-    type EndfieldPlannerSlice,
-} from "./planner/useEndfieldStore";
-import { createNTESlice, type NTEPlannerSlice } from "./planner/useNTEStore";
+import type {
+    PlannerItemData,
+    PlannerTeam,
+    SetItemValuesProps,
+} from "@/types/planner";
 
-export interface PlannerSlice {
+interface PlannerState {
     totalCost: Record<number, Record<string, CostValue>>;
     items: PlannerItemData[];
     hidden: number[];
     completed: CompletedMaterialKey[];
+    teams: PlannerTeam[];
+    activeTeamId: string | null;
+}
+
+interface PlannerActions {
     setItems: (items: PlannerItemData[]) => void;
+    addItem: (item: PlannerItemData) => void;
     deleteItem: (id: number) => void;
     setItemValues: (item: SetItemValuesProps) => void;
     setHiddenItems: (id: number) => void;
     updateTotalCosts: (id?: number, costs?: Record<string, CostValue>) => void;
     toggleCompleted: (key: CompletedMaterialKey) => void;
+    createTeam: (options?: { itemID?: number; activate?: boolean }) => void;
+    renameTeam: (id: string, name: string) => void;
+    deleteTeam: (id: string) => void;
+    setActiveTeam: (id: string | null) => void;
+    setTeamItem: (itemID: number, teamID: string, included: boolean) => void;
+    setTeamItemOrder: (teamID: string, itemIDs: number[]) => void;
 }
+
+export type PlannerSlice = PlannerState & PlannerActions;
 
 export type GamePlannerSlice<G extends GameNoUma, T> = {
     [K in keyof T as `${G}/${string & K}`]: T[K];
 };
 
-export type CombinedPlannerSlice = GenshinPlannerSlice &
-    HSRPlannerSlice &
-    WuWaPlannerSlice &
-    ZZZPlannerSlice &
-    EndfieldPlannerSlice &
-    NTEPlannerSlice;
+export type CombinedPlannerSlice = {
+    [K in keyof PlannerSlice as `${GameNoUma}/${string & K}`]: PlannerSlice[K];
+};
 
 export const usePlannerStore = create(
     persist<CombinedPlannerSlice>(
         (...args) => ({
-            ...createGenshinSlice(...args),
-            ...createHSRSlice(...args),
-            ...createWuWaSlice(...args),
-            ...createZZZSlice(...args),
-            ...createEndfieldSlice(...args),
-            ...createNTESlice(...args),
+            ...createPlannerSlice("genshin")(...args),
+            ...createPlannerSlice("hsr")(...args),
+            ...createPlannerSlice("wuwa")(...args),
+            ...createPlannerSlice("zzz")(...args),
+            ...createPlannerSlice("endfield")(...args),
+            ...createPlannerSlice("nte")(...args),
         }),
         {
             name: "v2/planner",

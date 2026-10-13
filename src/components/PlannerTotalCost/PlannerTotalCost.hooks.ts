@@ -12,13 +12,29 @@ export function useTotalCosts(game: GameNoUma) {
     const totalCosts = usePlannerStore((state) => state[`${game}/totalCost`]);
     const items = usePlannerStore((state) => state[`${game}/items`]);
     const hiddenItems = usePlannerStore((state) => state[`${game}/hidden`]);
+    const teams = usePlannerStore((state) => state[`${game}/teams`]);
+    const activeTeamId = usePlannerStore(
+        (state) => state[`${game}/activeTeamId`],
+    );
 
     const materialCosts = useMemo(() => {
         const result: Record<string, CostValue> = {};
-        const hiddenIds = new Set(hiddenItems);
+
+        const activeTeam =
+            activeTeamId === null
+                ? null
+                : teams.find((team) => team.id === activeTeamId);
+
+        const includedIDs =
+            activeTeamId === null ? null : new Set(activeTeam?.itemIDs ?? []);
+
+        const hiddenIDs = activeTeamId === null ? new Set(hiddenItems) : null;
 
         for (const [itemID, costs] of Object.entries(totalCosts)) {
-            if (hiddenIds.has(Number(itemID))) continue;
+            const id = Number(itemID);
+
+            if (includedIDs && !includedIDs.has(id)) continue;
+            if (hiddenIDs?.has(id)) continue;
 
             for (const [key, value] of Object.entries(costs)) {
                 const category = (result[key] ??= {});
@@ -30,7 +46,7 @@ export function useTotalCosts(game: GameNoUma) {
         }
 
         return result;
-    }, [totalCosts, hiddenItems]);
+    }, [totalCosts, hiddenItems, teams, activeTeamId]);
 
     const customMaterials = useMemo(
         () =>

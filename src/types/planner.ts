@@ -1,13 +1,8 @@
-import type { CustomMaterials } from "./materials";
 import type { BaseDataWithRelease } from ".";
+import type { Materials, CustomMaterials } from "./materials";
 import type { EndfieldClass, EndfieldStatAttribute } from "./endfield";
 import type { EndfieldCharacterPassive } from "./endfield/character";
-import type {
-    HSRCharacterTraceNodeMain,
-    HSRCharacterTraceNodeSmall,
-    HSRCharacterTraceStats,
-} from "./hsr/character";
-import type { Materials } from "./materials";
+import type { HSRCharacterTraceStats } from "./hsr/character";
 import type { WuWaCharacterBonusStats } from "./wuwa/character";
 
 export type PlannerType = "characters" | "weapons";
@@ -32,6 +27,12 @@ export interface PlannerItemData extends BaseDataWithRelease {
     lifeSkills?: number[];
     talents?: EndfieldCharacterPassive[];
     values: Record<string, CostSliderValues>;
+}
+
+export interface PlannerTeam {
+    id: string;
+    name: string;
+    itemIDs: number[];
 }
 
 export interface CostSliderValues {

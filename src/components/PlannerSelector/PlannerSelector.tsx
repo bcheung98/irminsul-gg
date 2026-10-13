@@ -19,20 +19,18 @@ import type { PlannerItemData, PlannerType } from "@/types/planner";
 export default function PlannerSelector({ type }: { type: PlannerType }) {
     const game = useGameTag() as GameNoUma;
 
+    const addItem = usePlannerStore((state) => state[`${game}/addItem`]);
+
     const [searchOpen, setSearchOpen] = useState(false);
     const handleSearchOpen = () => setSearchOpen(true);
     const handleSearchClose = () => setSearchOpen(false);
 
     const handleSelect = useCallback(
         (item: PlannerItemData | null) => {
-            if (item) {
-                usePlannerStore.setState((state) => ({
-                    [`${game}/items`]: [item, ...state[`${game}/items`]],
-                }));
-            }
+            if (item) addItem(item);
             setSearchOpen(false);
         },
-        [game],
+        [addItem],
     );
 
     const categoryLabel = categories[`${game}/${type}`].slice(0, -1);
