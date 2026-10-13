@@ -48,15 +48,15 @@ export default function StatusIndicator({
     );
 
     const StatusDot = (
-        <FlexBox sx={styles.dotRoot()}>
-            <Box sx={styles.dotInner()} />
-            <Box sx={styles.dotOuter()} />
+        <FlexBox sx={styles.dotRoot}>
+            <Box sx={styles.dotInner} />
+            <Box sx={styles.dotOuter} />
         </FlexBox>
     );
 
     if (!data || error) {
         return (
-            <Card sx={styles.indicatorRoot()}>
+            <Card sx={styles.indicatorRoot}>
                 <TextLabel
                     title={
                         error?.message || `Could not get latest data details`
@@ -89,7 +89,7 @@ export default function StatusIndicator({
     return (
         <>
             <Box onClick={handleClickOpen}>
-                <Card sx={styles.indicatorRoot()}>
+                <Card sx={styles.indicatorRoot}>
                     <TextLabel
                         title={`${type === "app" ? "Build" : "Data"}: ${updateAvailable ? "Update available" : "Up to date"}`}
                         titleProps={{ variant: "subtitle2" }}
