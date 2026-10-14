@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 // Component imports
 import Text from "@/components/Text";
 import TextLabel from "@/components/TextLabel";
-import FlexBox from "@/components/FlexBox";
+import { StatusDot } from "./StatusIndicator.components";
 import {
     StatusAlert,
-    AppDetails,
-    DataDetails,
+    type AppDetails,
+    type DataDetails,
 } from "@/components/StatusIndicator";
 
 // MUI imports
@@ -22,7 +22,6 @@ import { statusIndicatorStyles } from "./StatusIndicator.styles";
 export default function StatusIndicator({
     data,
     error,
-    currentBuildId,
     updateAvailable,
 }: {
     data?: AppDetails | DataDetails;
@@ -43,16 +42,12 @@ export default function StatusIndicator({
 
     let type: "app" | "data";
 
-    const styles = statusIndicatorStyles(
-        !data || error ? "error" : updateAvailable ? "warning" : "success",
-    );
+    const status =
+        !data || error ? "error" : updateAvailable ? "warning" : "success";
 
-    const StatusDot = (
-        <FlexBox sx={styles.dotRoot}>
-            <Box sx={styles.dotInner} />
-            <Box sx={styles.dotOuter} />
-        </FlexBox>
-    );
+    const styles = statusIndicatorStyles(status);
+
+    const indicator = <StatusDot status={status} />;
 
     if (!data || error) {
         return (
@@ -62,7 +57,7 @@ export default function StatusIndicator({
                         error?.message || `Could not get latest data details`
                     }
                     titleProps={{ variant: "subtitle2" }}
-                    icon={StatusDot}
+                    icon={indicator}
                     alignItems="baseline"
                     spacing={1}
                 />
@@ -93,7 +88,7 @@ export default function StatusIndicator({
                     <TextLabel
                         title={`${type === "app" ? "Build" : "Data"}: ${updateAvailable ? "Update available" : "Up to date"}`}
                         titleProps={{ variant: "subtitle2" }}
-                        icon={StatusDot}
+                        icon={indicator}
                         alignItems="baseline"
                         spacing={1}
                     />
@@ -105,14 +100,14 @@ export default function StatusIndicator({
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: "top",
-                    horizontal: "center",
+                    horizontal: "left",
                 }}
                 transformOrigin={{
                     vertical: "bottom",
-                    horizontal: "center",
+                    horizontal: "left",
                 }}
             >
-                <Card sx={{ p: 2 }}>
+                <Card sx={{ p: 1.5 }}>
                     {type === "app" && (
                         <Text variant="subtitle2" weight="highlight">
                             {`${

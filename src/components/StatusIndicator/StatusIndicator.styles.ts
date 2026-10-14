@@ -1,12 +1,13 @@
-import { keyframes, SxProps, Theme } from "@mui/material/styles";
+import { keyframes, type SxProps, type Theme } from "@mui/material/styles";
 
 export const statusIndicatorStyles = (
     status: "info" | "success" | "warning" | "error",
+    size = 8,
 ) => ({
     dotRoot: ((): SxProps => () => ({
         position: "relative",
-        width: "8px",
-        height: "8px",
+        width: `${size}px`,
+        height: `${size}px`,
         justifyContent: "center",
     }))(),
     dotInner: ((): SxProps<Theme> => (theme) => ({
