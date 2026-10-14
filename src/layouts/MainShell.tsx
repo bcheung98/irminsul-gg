@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import NavBarBottom from "@/components/NavBar/NavBarBottom";
 import NavBarMini from "@/components/NavBarMini";
-import Announcements from "@/components/Announcements";
+import NotificationPopupRoot from "@/components/Notifications/NotificationPopupRoot";
 import { SettingsSync } from "@/components/Settings/SettingsSync";
 
 // MUI imports
@@ -46,7 +46,7 @@ export default function MainShell({
 
     return (
         <GameContext value={games[gameTag]}>
-            <Announcements />
+            <NotificationPopupRoot />
             <SettingsSync />
             <NavBar />
             <Box sx={{ display: "flex" }}>

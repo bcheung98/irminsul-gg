@@ -15,12 +15,12 @@ import { games } from "@/data/games";
 import Color from "@/utils/colors";
 
 // Type imports
-import type { AnnouncementContentProps } from "@/data/announcements";
+import type { NotificationContentProps } from "@/notifications";
 import type { SvgIconProps } from "@mui/material/SvgIcon";
 
-export default function TwoYearAnniAnnouncement({
+export default function TwoYearAnniNotification({
     onDismiss,
-}: AnnouncementContentProps) {
+}: NotificationContentProps) {
     const theme = useTheme();
 
     const buttonStyles = {
@@ -79,8 +79,8 @@ export default function TwoYearAnniAnnouncement({
                 sx={{
                     p: 2,
                     borderRadius: theme.contentBox.border.radius,
-                    border: `1px solid ${games.genshin.color}`,
-                    backgroundColor: new Color(games.genshin.color)
+                    border: `1px solid ${theme.palette.info.main}`,
+                    backgroundColor: new Color(theme.palette.info.main)
                         .alpha(0.5)
                         .darken(0.5)
                         .toString(),

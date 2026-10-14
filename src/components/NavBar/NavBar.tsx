@@ -6,7 +6,7 @@ import RandomButton from "@/components/RandomButton";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
 import SiteSearch from "@/components/SiteSearch";
-import AnnnouncementsList from "@/components/Announcements/AnnouncementsList";
+import Notifications from "@/components/Notifications";
 import Settings from "@/components/Settings";
 import FlexBox from "@/components/FlexBox";
 
@@ -79,7 +79,7 @@ export default function NavBar() {
                             <KofiButton />
                         </FlexBox>
                         <SiteSearch />
-                        <AnnnouncementsList />
+                        <Notifications />
                         <Settings />
                     </FlexBox>
                 </FlexBox>

@@ -1,10 +1,10 @@
 import { useStore } from "./useStore";
-import { useAnnouncementStore } from "./useAnnouncementStore";
 import { useCalendarStore } from "./useCalendarStore";
 import { useDrawerStore } from "./useDrawerStore";
 import { useFilterStore } from "./useFilterStore";
 import { useGalleryStore } from "./useGalleryStore";
 import { useLayoutStore } from "./useLayoutStore";
+import { useNotificationsStore } from "./useNotificationsStore";
 import { usePlannerStore } from "./usePlannerStore";
 import { useServerStore } from "./useServerStore";
 import { useSettingsStore } from "./useSettingsStore";
@@ -14,12 +14,12 @@ import { useRatingCalculatorStore } from "./useRatingCalculatorStore";
 
 export {
     useStore,
-    useAnnouncementStore,
     useCalendarStore,
     useDrawerStore,
     useFilterStore,
     useGalleryStore,
     useLayoutStore,
+    useNotificationsStore,
     usePlannerStore,
     useServerStore,
     useSettingsStore,

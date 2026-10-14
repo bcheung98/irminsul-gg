@@ -10,7 +10,7 @@ export interface VersionInfo {
     version: string;
     name: string;
     releaseDate?: string;
-    announcementDate?: string;
+    notificationDate?: string;
 }
 
 export interface UmaVersion extends Version {
