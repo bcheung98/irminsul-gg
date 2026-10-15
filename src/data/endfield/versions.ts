@@ -2,6 +2,11 @@ import { VersionInfo } from "@/types/version";
 
 export const endfieldVersions: VersionInfo[] = [
     {
+        version: "1.6",
+        name: "Sanctuary of Ink",
+        releaseDate: "2026-10-15 12:00:00 UTC+8",
+    },
+    {
         version: "1.5",
         name: "Dreamscape of Wind and Snow",
         releaseDate: "2026-09-02 12:00:00 UTC+8",

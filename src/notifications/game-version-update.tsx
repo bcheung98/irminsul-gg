@@ -227,7 +227,11 @@ function VersionUpdateCategory({
                                 titleProps={{
                                     variant: "body2",
                                 }}
-                                href={`${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`}
+                                href={
+                                    item.url
+                                        ? `${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
+                                        : ""
+                                }
                             />
                         </Grid>
                     );

@@ -6,13 +6,14 @@ import Text from "@/components/Text";
 import Image from "@/components/Image";
 
 // MUI imports
+import { useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 
 // Helper imports
-import { useStore, useServerStore } from "@/stores";
+import { useServerStore } from "@/stores";
 import { urls } from "@/api";
 import { formatHref, sortBy } from "@/utils";
 import { rarityMap } from "@/data/uma/common";
@@ -37,6 +38,8 @@ export default function SkillSources({
     skill: UmaSkill;
     backgroundColor?: string;
 }) {
+    const theme = useTheme();
+
     const characters: UmaCharacter[] = useSWR(
         urls["uma/characters"],
         (url: string) => fetch(url).then((r) => r.json()),
@@ -45,8 +48,7 @@ export default function SkillSources({
         fetch(url).then((r) => r.json()),
     ).data;
 
-    const store = useServerStore();
-    const server = store["uma"];
+    const server = useServerStore((state) => state.uma);
 
     const { id } = skill;
 
@@ -63,7 +65,8 @@ export default function SkillSources({
         .filter((char) =>
             [
                 char.skills.awakening.map((skill) => Number(skill)),
-                char.skills.awakeningJP?.map((skill) => Number(skill)),
+                server === "Asia" &&
+                    char.skills.awakeningJP?.map((skill) => Number(skill)),
                 char.skills.innate.map((skill) => Number(skill)),
                 char.skills.unique.map((skill) => Number(skill)),
                 server === "Asia" &&
@@ -122,10 +125,10 @@ export default function SkillSources({
 
     return (
         <Card
-            sx={(theme) => ({
+            sx={{
                 backgroundColor: backgroundColor || theme.background(1),
                 p: backgroundColor ? 1 : 0,
-            })}
+            }}
         >
             <Stack spacing={1}>
                 {Object.entries(sourceList).map(

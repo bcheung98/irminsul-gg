@@ -39,4 +39,12 @@ export const rareMaterials = [
         rarity: 5,
         release: { version: "1.0" },
     },
+    {
+        id: "item_char_skill_specialize_6",
+        category: "rare",
+        name: "Warp Plasma-Coated Slide",
+        tag: "Warp Plasma-Coated Slide",
+        rarity: 5,
+        release: { version: "1.6" },
+    },
 ];
