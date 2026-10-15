@@ -21,9 +21,9 @@ import { weaponSubStats } from "@/data/endfield/weaponStats";
 import { getKeywordPopupTitle, useSkillKeyword } from "@/helpers/skills";
 
 // Type imports
-import { TWeaponStats } from "@/components/StatsDisplay/StatsDisplay.types";
-import { EndfieldWeaponAttribute } from "@/types/endfield/weapon";
-import { SkillKeyword } from "@/types/skill";
+import type { TWeaponStats } from "@/components/StatsDisplay/StatsDisplay.types";
+import type { EndfieldWeaponAttribute } from "@/types/endfield/weapon";
+import type { SkillKeyword } from "@/types/skill";
 
 export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
     const theme = useTheme();
@@ -78,116 +78,126 @@ export default function WeaponPassive({ stats }: { stats: TWeaponStats }) {
         setCurrentKeyword(null);
     };
 
-    function EndfieldWeaponSkill(props: {
-        attributes: EndfieldWeaponAttribute;
-    }) {
-        const stat = weaponSubStats[props.attributes.stat];
-        return (
-            <Stack spacing={1}>
-                <Text weight="highlight">{`${stat.title} [${props.attributes.scaling}]`}</Text>
-                <Text
-                    component="span"
-                    variant="subtitle1"
-                    sx={{
-                        color: theme.text.description,
+    useEffect(() => {
+        const targets = document.getElementsByClassName(className);
+        passive!.scaling?.forEach(
+            (subScaling: (string | number)[], index: number) => {
+                const target = targets[index];
+                if (target) {
+                    target.innerHTML = subScaling[sliderValue].toString();
+                }
+            },
+        );
+    }, [sliderValue]);
+
+    if (!passive) return null;
+
+    let passiveName = passive.name;
+    if (passive.tag) passiveName = `${passive.tag}: ${passiveName}`;
+
+    return (
+        <>
+            <Stack spacing={2}>
+                <Card sx={{ p: 2, backgroundColor: theme.background(0) }}>
+                    <Stack spacing={2}>
+                        {"attributes" in stats && (
+                            <>
+                                <EndfieldWeaponSkill
+                                    attributes={stats.attributes.primary}
+                                    value={sliderValue}
+                                />
+                                {stats.attributes.secondary && (
+                                    <EndfieldWeaponSkill
+                                        attributes={stats.attributes.secondary}
+                                        value={sliderValue}
+                                    />
+                                )}
+                            </>
+                        )}
+                        <Stack spacing={1}>
+                            <Text weight="highlight">{passiveName}</Text>
+                            <Text
+                                component="span"
+                                variant="subtitle1"
+                                sx={{
+                                    color: theme.text.description,
+                                }}
+                            >
+                                <SkillDescription
+                                    game={game}
+                                    description={passive.description}
+                                    targetClassName="text-refinement"
+                                    newClassName={className}
+                                    onClick={handleDialogOpen}
+                                />
+                            </Text>
+                        </Stack>
+                    </Stack>
+                </Card>
+                {passive.scaling && (
+                    <Box sx={{ width: { xs: "90%", md: "30vw" } }}>
+                        <Slider
+                            value={sliderValue}
+                            marks={marks}
+                            step={1}
+                            min={0}
+                            max={maxLevel - 1}
+                            onChange={handleSliderChange}
+                            size={matches ? "medium" : "small"}
+                            sx={{
+                                minWidth: "100px",
+                                maxWidth:
+                                    game === "endfield" ? "400px" : "200px",
+                                ml: 2,
+                            }}
+                        />
+                    </Box>
+                )}
+            </Stack>
+            <ContentDialog
+                open={dialogOpen}
+                setOpen={setDialogOpen}
+                onClose={handleDialogClose}
+                header={getKeywordPopupTitle(game, currentKeyword)}
+                maxWidth="md"
+            >
+                <KeywordPopup keyword={currentKeyword} attributes={{}} />
+            </ContentDialog>
+        </>
+    );
+}
+
+function EndfieldWeaponSkill({
+    attributes,
+    value,
+}: {
+    attributes: EndfieldWeaponAttribute;
+    value: number;
+}) {
+    const theme = useTheme();
+
+    const stat = weaponSubStats[attributes.stat];
+
+    return (
+        <Stack spacing={1}>
+            <Text weight="highlight">{`${stat.title} [${attributes.scaling}]`}</Text>
+            <Text
+                component="span"
+                variant="subtitle1"
+                sx={{
+                    color: theme.text.description,
+                }}
+            >
+                {`${stat.description || attributes.stat} `}
+                <span
+                    style={{
+                        color: theme.text.endfield.value,
+                        fontWeight: theme.font.weight.highlight,
                     }}
                 >
-                    {`${stat.description || props.attributes.stat} `}
-                    <span
-                        style={{
-                            color: theme.text.endfield.value,
-                            fontWeight: theme.font.weight.highlight,
-                        }}
-                    >{`+${stat.scaling[props.attributes.scaling][sliderValue]}`}</span>
-                </Text>
-            </Stack>
-        );
-    }
-
-    if (passive) {
-        useEffect(() => {
-            const targets = document.getElementsByClassName(className);
-            passive.scaling?.forEach(
-                (subScaling: (string | number)[], index: number) => {
-                    const target = targets[index];
-                    if (target) {
-                        target.innerHTML = subScaling[sliderValue].toString();
-                    }
-                },
-            );
-        }, [sliderValue]);
-
-        return (
-            <>
-                <Stack spacing={2}>
-                    <Card sx={{ p: 2, backgroundColor: theme.background(0) }}>
-                        <Stack spacing={2}>
-                            {"attributes" in stats && (
-                                <>
-                                    <EndfieldWeaponSkill
-                                        attributes={stats.attributes.primary}
-                                    />
-                                    {stats.attributes.secondary && (
-                                        <EndfieldWeaponSkill
-                                            attributes={
-                                                stats.attributes.secondary
-                                            }
-                                        />
-                                    )}
-                                </>
-                            )}
-                            <Stack spacing={1}>
-                                <Text weight="highlight">{passive.name}</Text>
-                                <Text
-                                    component="span"
-                                    variant="subtitle1"
-                                    sx={{
-                                        color: theme.text.description,
-                                    }}
-                                >
-                                    <SkillDescription
-                                        game={game}
-                                        description={passive.description}
-                                        targetClassName="text-refinement"
-                                        newClassName={className}
-                                        onClick={handleDialogOpen}
-                                    />
-                                </Text>
-                            </Stack>
-                        </Stack>
-                    </Card>
-                    {passive.scaling && (
-                        <Box sx={{ width: { xs: "90%", md: "30vw" } }}>
-                            <Slider
-                                value={sliderValue}
-                                marks={marks}
-                                step={1}
-                                min={0}
-                                max={maxLevel - 1}
-                                onChange={handleSliderChange}
-                                size={matches ? "medium" : "small"}
-                                sx={{
-                                    minWidth: "100px",
-                                    maxWidth:
-                                        game === "endfield" ? "400px" : "200px",
-                                    ml: 2,
-                                }}
-                            />
-                        </Box>
-                    )}
-                </Stack>
-                <ContentDialog
-                    open={dialogOpen}
-                    setOpen={setDialogOpen}
-                    onClose={handleDialogClose}
-                    header={getKeywordPopupTitle(game, currentKeyword)}
-                    maxWidth="md"
-                >
-                    <KeywordPopup keyword={currentKeyword} attributes={{}} />
-                </ContentDialog>
-            </>
-        );
-    } else {
-        return <></>;
-    }
+                    {`+${stat.scaling[attributes.scaling][value]}`}
+                </span>
+            </Text>
+        </Stack>
+    );
 }
