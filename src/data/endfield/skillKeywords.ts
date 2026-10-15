@@ -20,6 +20,12 @@ export const skillKeywords: SkillKeyword[] = [
             'Various Physical and Arts debuffs can be ended early. For example, Icon_Crush <span class="text-physical">Crush</span> consumes Icon_Vulnerable <span class="text-physical">Vulnerable</span> debuffs, while Icon_Combustion <span class="text-heat">Combustion</span> consumes <span class="text-highlight">Arts Infliction</span> debuffs.',
     },
     {
+        tag: "absorb",
+        name: "Absorb",
+        description:
+            'A way to end a Physical or Arts debuff early. <span class="text-highlight">Absorb</span> is not the same as <span class="tooltip" data-tag="debuff consume">consume</span>.',
+    },
+    {
         tag: "sp return",
         name: "SP Return",
         description:
@@ -245,6 +251,12 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Slow",
         description:
             "Slowed targets temporarily suffer movement speed reduction. The number represents the degree of reduction. When there are multiple effects of the same type, only the most powerful applies.",
+    },
+    {
+        tag: "immobilization",
+        name: "Immobilization",
+        description:
+            "A target affected by Immobilization cannot perform any actions for the duration of this effect.",
     },
     {
         tag: "stagger node",
