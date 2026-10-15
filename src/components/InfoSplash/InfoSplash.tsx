@@ -25,7 +25,7 @@ interface InfoSplashProps {
 
 export default function InfoSplash({
     src,
-    rarity = 3,
+    rarity,
     width = "96px",
     height,
     padding = 0,
@@ -38,8 +38,8 @@ export default function InfoSplash({
 
     const game = useGameTag();
 
-    const rarityColor = getRarityColors(game, rarity);
-    const backgroundRarityColor = getBackgroundRarityColors(game, rarity);
+    const rarityColor = getRarityColors(game, rarity ?? 3);
+    const backgroundRarityColor = getBackgroundRarityColors(game, rarity ?? 3);
 
     return (
         <Image

@@ -17,7 +17,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // Helper imports
 import { getBannerLabel } from "../BannerArchive/BannerArchive.utils";
-import { getContrastText } from "@/utils/getContrastText";
 import { games } from "@/data/games";
 import { useCalendarStore } from "@/stores";
 
@@ -63,9 +62,7 @@ export default function CalendarEvent({
     const titleBase = getBannerLabel(eventProps, "NA", "version");
     const title = `${titleBase}${isFuture ? " *" : ""}`;
 
-    const textColor = isFuture
-        ? theme.text.primary
-        : getContrastText(theme.text.primary, games[game].color);
+    const textColor = isFuture ? theme.text.page : games[game].textColor;
 
     const backgroundColor = !isFuture ? color : alpha(color, 0.25);
     const backgroundColorHover = isFuture

@@ -186,6 +186,9 @@ export const endfieldCharacterFilters: EndfieldCharacterFilterState = {
 export const endfieldWeaponFilters: EndfieldWeaponFilterState = {
     weaponType: [],
     rarity: [],
+    mainAttr: [],
+    secondaryAttr: [],
+    essence: [],
 };
 
 export const endfieldGearFilters: EndfieldGearFilterState = {

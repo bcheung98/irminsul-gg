@@ -13,6 +13,11 @@ import {
     weapons,
     gearTypes,
 } from "@/data/endfield/common";
+import {
+    weaponEssences,
+    weaponSubStats,
+    type EndfieldWeaponSubStat,
+} from "@/data/endfield/weaponStats";
 import { gearSets, nonSetGear } from "@/data/endfield/gearSets";
 import { gearStats } from "@/data/endfield/gearStats";
 import type { FilterState } from "@/stores/useFilterStore";
@@ -22,6 +27,17 @@ import { splitJoin, toTitleCase } from "@/utils";
 import type { FilterGroupsProps, FilterGroups } from "@/types/filters";
 
 export { EndfieldCharacterFilters, EndfieldWeaponFilters, EndfieldGearFilters };
+
+const mainAttributes = [
+    "Strength",
+    "Agility",
+    "Intellect",
+    "Will",
+    "Main Attribute Boost",
+];
+const secondaryAttributes = Object.keys(weaponSubStats).filter(
+    (attr) => !mainAttributes.includes(attr),
+);
 
 export function endfieldFilters({ key }: FilterGroupsProps): FilterGroups {
     const rarities = ((key: keyof FilterState) => {
@@ -73,6 +89,32 @@ export function endfieldFilters({ key }: FilterGroupsProps): FilterGroups {
                 ),
             })),
             padding: "4px 8px",
+        },
+        mainAttr: {
+            name: "Primary Attr.",
+            tag: "mainAttr",
+            buttons: createFilterButtons({
+                items: mainAttributes,
+                getLabel: (item: EndfieldWeaponSubStat) =>
+                    weaponSubStats[item].title,
+            }),
+        },
+        secondaryAttr: {
+            name: "Secondary Attr.",
+            tag: "secondaryAttr",
+            buttons: createFilterButtons({
+                items: secondaryAttributes,
+                getLabel: (item: EndfieldWeaponSubStat) =>
+                    weaponSubStats[item].title,
+            }),
+        },
+        essence: {
+            name: "Essence",
+            tag: "essence",
+            buttons: createFilterButtons({
+                items: weaponEssences,
+                getLabel: (item: string) => item,
+            }),
         },
         type: {
             name: "Type",

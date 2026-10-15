@@ -38,15 +38,30 @@ export default function InfoButton({
 
     const gameTag = useGameTag();
 
-    const backgroundColor = (() => {
-        if (color) return color;
-        if (typeof game === "string" && isGame(game)) return games[game].color;
-        if (game === true && isGame(gameTag)) return games[gameTag].color;
-        return theme.palette.info.main;
+    const { textColor, backgroundColor } = (() => {
+        if (color) {
+            return { backgroundColor: color };
+        }
+        if (typeof game === "string" && isGame(game)) {
+            return {
+                textColor: games[game].textColor,
+                backgroundColor: games[game].color,
+            };
+        }
+        if (game === true && isGame(gameTag)) {
+            return {
+                textColor: games[gameTag].textColor,
+                backgroundColor: games[gameTag].color,
+            };
+        }
+        return {
+            backgroundColor: theme.palette.info.main,
+        };
     })();
 
     const styles = infoButtonStyles({
         size,
+        textColor,
         backgroundColor,
         hoverBackgroundColor,
         hoverAdjust,

@@ -56,6 +56,9 @@ export interface AttributeData {
     colors?: CharacterColors;
     specialty?: string;
     outfit?: string;
+    mainAttr?: string;
+    secondaryAttr?: string;
+    essence?: string;
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {
@@ -78,6 +81,7 @@ export interface GameInfo {
     shortName: string;
     enabled: boolean;
     color: string;
+    textColor: string;
     dev: string;
 }
 export type GameData<T> = Record<Game, T>;

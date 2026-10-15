@@ -8,6 +8,7 @@ import {
     versionSort,
     getItemName,
     statPropertyNameSort,
+    subStatSort,
 } from "@/helpers/_sort";
 import { sortBy } from "@/utils";
 import { elements, weapons, opClasses } from "@/data/endfield/common";
@@ -16,6 +17,7 @@ import { gearSets } from "@/data/endfield/gearSets";
 // Type imports
 import type { Item } from "@/types";
 import type { SortHandlers, SortProps } from "@/helpers/_sort";
+import type { EndfieldWeapon } from "@/types/endfield";
 
 const gearSetNames = new Map(gearSets.map((set) => [set.id, set.displayName]));
 
@@ -27,6 +29,17 @@ const endfieldSortHandlers: SortHandlers = {
     specialty: orderedPropertySort("specialty", opClasses),
     nation: propertySort("faction"),
     baseATK: statPropertyNameSort("atk"),
+    mainAttr: subStatSort<EndfieldWeapon>(getMainAttrLabel),
+    secondaryAttr: subStatSort<EndfieldWeapon>(getSecondaryAttrLabel),
+    essence: (a, b, reverse) => {
+        const aEssence = a.stats.passive.tag ?? "zzzz";
+        const bEssence = b.stats.passive.tag ?? "zzzz";
+        return (
+            sortBy(aEssence, bEssence, !reverse) ||
+            sortBy(b.rarity, a.rarity, !reverse) ||
+            sortBy(a.id, b.id)
+        );
+    },
     release: releaseSort,
     version: versionSort(),
     set: (a, b, reverse) => {
@@ -44,6 +57,19 @@ const endfieldSortHandlers: SortHandlers = {
         sortBy(b.rarity, a.rarity, !reverse) ||
         sortBy(getItemName(b), getItemName(a), reverse),
 };
+
+function getMainAttrLabel(weapon: EndfieldWeapon) {
+    const attribute = weapon.stats.attributes.primary;
+
+    return `${attribute.stat} [${attribute.scaling}]`;
+}
+
+function getSecondaryAttrLabel(weapon: EndfieldWeapon) {
+    const attribute = weapon.stats.attributes.secondary;
+    if (!attribute) return "";
+
+    return `${attribute.stat} [${attribute.scaling}]`;
+}
 
 export default function sortEndfieldItems<T extends Item>(props: SortProps<T>) {
     return sortItems(endfieldSortHandlers, props);

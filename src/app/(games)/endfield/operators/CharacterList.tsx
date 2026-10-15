@@ -9,8 +9,8 @@ import { useGameTag } from "@/context";
 import { useStore, useServerStore, useSettingsStore } from "@/stores";
 
 // Type imports
-import { EndfieldCharacter } from "@/types/endfield/character";
-import { SortTableRow } from "@/components/SortTable/SortTable.types";
+import type { EndfieldCharacter } from "@/types/endfield/character";
+import type { SortTableRow } from "@/components/SortTable/SortTable.types";
 
 export default function CharacterList({
     characters,
@@ -47,7 +47,9 @@ export default function CharacterList({
                         size: 48,
                         borderRadius: "4px",
                     },
-                    href: `operators/${formatHref(character.url)}`,
+                    href: character.url
+                        ? `operators/${formatHref(character.url)}`
+                        : "",
                 },
             },
             rarity: {
@@ -66,6 +68,7 @@ export default function CharacterList({
                 label: {
                     title: character.element,
                     icon: `endfield/elements/${character.element}`,
+                    iconProps: { size: 24 },
                 },
             },
             specialty: {

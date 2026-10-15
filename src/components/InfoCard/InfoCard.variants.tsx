@@ -534,7 +534,10 @@ export function EndfieldWeaponInfoCard({
             rarity={weapon.rarity}
             badgeLeft={{
                 weaponType: weapon.weaponType,
+                mainAttr: weapon.stats.attributes.primary.stat,
+                secondaryAttr: weapon.stats.attributes.secondary?.stat,
             }}
+            badgeRight={{ essence: weapon.stats.passive?.tag }}
             url=""
             href={weapon.url}
             {...props}
