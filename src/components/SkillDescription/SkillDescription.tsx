@@ -17,7 +17,7 @@ import { useTextColor } from "@/helpers/styles";
 import { toTitleCase } from "@/utils";
 
 // Type imports
-import { AttributeData, Game } from "@/types";
+import type { AttributeData, Game } from "@/types";
 
 export default function SkillDescription({
     game,
@@ -348,6 +348,7 @@ export default function SkillDescription({
                 `Icon_ArtsSusceptibility`,
                 `<span class="icon artsSusceptibility"></span>`,
             )
+            .replaceAll(`Icon_Haste`, `<span class="icon haste"></span>`)
             .replaceAll(`Icon_Slow`, `<span class="icon slow"></span>`)
             .replaceAll(`Icon_Weaken`, `<span class="icon weaken"></span>`)
             .replaceAll(`Icon_Link`, `<span class="icon link"></span>`)
