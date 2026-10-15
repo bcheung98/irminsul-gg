@@ -1,4 +1,4 @@
-import { EndfieldWeaponAttrScaling } from "@/types/endfield/weapon";
+import type { EndfieldWeaponAttrScaling } from "@/types/endfield/weapon";
 
 export type EndfieldWeaponBaseATK = keyof typeof baseATKScaling;
 
@@ -12,6 +12,7 @@ export const baseATKScaling = {
     "42": [42, 120, 203, 286, 369, 411],
     "34": [34, 100, 169, 238, 307, 341],
     "29": [29, 83, 140, 197, 254, 283],
+    "": [0, 0, 0, 0, 0, 0],
 };
 
 export type EndfieldWeaponSubStat =
