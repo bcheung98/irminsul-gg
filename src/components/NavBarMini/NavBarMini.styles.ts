@@ -1,4 +1,4 @@
-import { SxProps, Theme, alpha } from "@mui/material/styles";
+import { alpha, type SxProps, type Theme } from "@mui/material/styles";
 
 export const navBarMiniStyles = (open?: boolean) => {
     return {
@@ -18,16 +18,6 @@ export const navBarMiniStyles = (open?: boolean) => {
             width: "24px",
             height: "24px",
             color: theme.drawer.color.primary,
-            backgroundColor: {
-                lg: open ? theme.palette.info.main : "transparent",
-            },
-            "&:hover": {
-                lg: {
-                    backgroundColor: open
-                        ? theme.palette.info.light
-                        : theme.drawer.backgroundColor.hover,
-                },
-            },
         }),
         menuIcon: (): SxProps => ({
             width: "22.5px",

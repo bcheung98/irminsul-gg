@@ -5,12 +5,14 @@ import type { InfoButtonProps } from "./InfoButton.types";
 
 export const infoButtonStyles = ({
     size = "medium",
+    textColor,
     backgroundColor,
     hoverBackgroundColor,
     hoverAdjust = -0.15,
     icons,
 }: {
     size?: "small" | "medium";
+    textColor?: string;
     backgroundColor: string;
     hoverBackgroundColor?: string;
     hoverAdjust?: InfoButtonProps["hoverAdjust"];
@@ -38,10 +40,13 @@ export const infoButtonStyles = ({
                     ? `6px ${icons ? 12 : 16}px`
                     : `4px ${icons ? 10 : 16}px`,
             borderRadius: "4px",
-            color: getContrastText(theme.text.primary, bgColor.toString()),
+            color:
+                textColor ??
+                getContrastText(theme.text.page, bgColor.toString()),
             backgroundColor: bgColor.toString(),
             "&:hover": {
-                color: getContrastText(theme.text.primary, hoverBgColor),
+                color:
+                    textColor ?? getContrastText(theme.text.page, hoverBgColor),
                 backgroundColor: hoverBgColor,
             },
             "&.Mui-disabled": {

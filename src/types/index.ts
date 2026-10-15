@@ -81,6 +81,7 @@ export interface GameInfo {
     shortName: string;
     enabled: boolean;
     color: string;
+    textColor: string;
     dev: string;
 }
 export type GameData<T> = Record<Game, T>;

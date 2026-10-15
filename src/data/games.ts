@@ -1,4 +1,4 @@
-import { Game, GameInfo } from "@/types";
+import type { Game, GameInfo } from "@/types";
 
 export const gameNames = [
     "genshin",
@@ -17,6 +17,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "Genshin",
         enabled: true,
         color: "rgb(11, 110, 175)",
+        textColor: "rgb(255, 255, 255)",
         dev: "HoYoverse",
     },
     hsr: {
@@ -25,6 +26,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "HSR",
         enabled: true,
         color: "rgb(168, 53, 179)",
+        textColor: "rgb(255, 255, 255)",
         dev: "HoYoverse",
     },
     wuwa: {
@@ -33,6 +35,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "WuWa",
         enabled: true,
         color: "rgb(131, 106, 53)",
+        textColor: "rgb(255, 255, 255)",
         dev: "Kuro Games",
     },
     zzz: {
@@ -41,6 +44,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "ZZZ",
         enabled: true,
         color: "rgb(209, 111, 12)",
+        textColor: "rgb(255, 255, 255)",
         dev: "HoYoverse",
     },
     uma: {
@@ -49,6 +53,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "Uma",
         enabled: true,
         color: "rgb(44, 159, 4)",
+        textColor: "rgb(255, 255, 255)",
         dev: "Cygames",
     },
     endfield: {
@@ -57,6 +62,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "Endfield",
         enabled: true,
         color: "rgb(255, 241, 0)",
+        textColor: "rgb(24, 24, 24)",
         dev: "Gryphline",
     },
     nte: {
@@ -65,6 +71,7 @@ export const games: Record<Game, GameInfo> = {
         shortName: "NTE",
         enabled: true,
         color: "rgb(0, 146, 136)",
+        textColor: "rgb(255, 255, 255)",
         dev: "Hotta Studio",
     },
 } as const;
