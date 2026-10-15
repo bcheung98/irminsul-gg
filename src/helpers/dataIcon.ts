@@ -1,20 +1,26 @@
 import {
-    GenshinWeaponSubStat,
+    type GenshinWeaponSubStat,
     weaponSubStats as genshinWeaponSubStats,
 } from "@/data/genshin/weaponStats";
-import { formatWeaponStats, WuWaWeaponSubStat } from "@/data/wuwa/weaponStats";
 import {
-    ZZZWeaponSubStat,
+    formatWeaponStats,
+    type WuWaWeaponSubStat,
+} from "@/data/wuwa/weaponStats";
+import {
+    type ZZZWeaponSubStat,
     weaponSubStats as zzzWeaponSubStats,
 } from "@/data/zzz/weaponStats";
 import {
-    NTEWeaponSubStat,
+    type EndfieldWeaponSubStat,
+    weaponSubStats as endfieldWeaponSubStats,
+} from "@/data/endfield/weaponStats";
+import {
+    type NTEWeaponSubStat,
     weaponSubStats as nteWeaponSubStats,
 } from "@/data/nte/weaponStats";
 import { sonataEffects } from "@/data/wuwa/sonataEffects";
-import { AttributeDataKey, Game } from "@/types";
-import { CharacterColors } from "@/types/character";
-import { splitJoin } from "@/utils";
+import type { AttributeDataKey, Game } from "@/types";
+import type { CharacterColors } from "@/types/character";
 
 interface Props {
     game: Game;
@@ -106,11 +112,19 @@ export function getDataIconURL({ game, key, value }: Props) {
             tooltip = `${value}`;
         }
         if (key === "weaponType" && value) {
-            src = `endfield/icons/weapons/${splitJoin(`${value}`)}`;
+            src = `endfield/icons/weapons/${value}`;
             tooltip = `${value}`;
         }
         if (key === "specialty" && value) {
             src = `endfield/classes/${value}`;
+            tooltip = `${value}`;
+        }
+        if ((key === "mainAttr" || key == "secondaryAttr") && value) {
+            src = `endfield/icons/stat-icons/${endfieldWeaponSubStats[value as EndfieldWeaponSubStat].icon}`;
+            tooltip = `${endfieldWeaponSubStats[value as EndfieldWeaponSubStat].title}`;
+        }
+        if (key === "essence" && value) {
+            src = `endfield/essences/${value}`;
             tooltip = `${value}`;
         }
     }
@@ -120,7 +134,7 @@ export function getDataIconURL({ game, key, value }: Props) {
             tooltip = `${value}`;
         }
         if (key === "weaponType" && value) {
-            src = `nte/icons/arcs/${splitJoin(`${value}`)}`;
+            src = `nte/icons/arcs/${value}`;
             tooltip = `${value}`;
         }
         if (key === "subStat" && value) {

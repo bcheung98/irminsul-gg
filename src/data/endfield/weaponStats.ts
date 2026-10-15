@@ -37,6 +37,7 @@ export type EndfieldWeaponSubStat =
 interface WeaponSubStatInfo {
     title: string;
     description?: string;
+    icon?: string;
     scaling: Record<EndfieldWeaponAttrScaling, string[]>;
 }
 
@@ -45,6 +46,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         HP: {
             title: "HP Boost",
             description: "Max HP",
+            icon: "HP",
             scaling: {
                 S: [
                     "6%",
@@ -84,6 +86,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         ATK: {
             title: "Attack Boost",
             description: "Attack",
+            icon: "ATK",
             scaling: {
                 S: [
                     "3%",
@@ -122,6 +125,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         Strength: {
             title: "Strength Boost",
+            icon: "STR",
             scaling: {
                 S: ["12", "21", "31", "40", "50", "60", "69", "79", "93"],
                 M: ["16", "28", "41", "54", "67", "80", "92", "105", "124"],
@@ -130,6 +134,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         Agility: {
             title: "Agility Boost",
+            icon: "AGI",
             scaling: {
                 S: ["12", "21", "31", "40", "50", "60", "69", "79", "93"],
                 M: ["16", "28", "41", "54", "67", "80", "92", "105", "124"],
@@ -138,6 +143,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         Intellect: {
             title: "Intellect Boost",
+            icon: "INT",
             scaling: {
                 S: ["12", "21", "31", "40", "50", "60", "69", "79", "93"],
                 M: ["16", "28", "41", "54", "67", "80", "92", "105", "124"],
@@ -146,6 +152,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         Will: {
             title: "Will Boost",
+            icon: "WIL",
             scaling: {
                 S: ["12", "21", "31", "40", "50", "60", "69", "79", "93"],
                 M: ["16", "28", "41", "54", "67", "80", "92", "105", "124"],
@@ -155,6 +162,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Main Attribute Boost": {
             title: "Main Attribute Boost",
             description: "Main attribute",
+            icon: "Main Attribute Boost",
             scaling: {
                 S: ["8", "15", "21", "28", "35", "42", "48", "55", "65"],
                 M: [],
@@ -164,6 +172,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "CRIT Rate": {
             title: "Critical Rate Boost",
             description: "Critical Rate",
+            icon: "Crit Rate",
             scaling: {
                 S: [],
                 M: [],
@@ -183,6 +192,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Arts DMG": {
             title: "Arts Boost",
             description: "Arts DMG Dealt",
+            icon: "Arts DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -221,6 +231,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         "Arts Intensity": {
             title: "Arts Intensity Boost",
+            icon: "Arts Intensity",
             scaling: {
                 S: [],
                 M: ["8", "14", "20", "27", "33", "40", "46", "52", "62"],
@@ -229,6 +240,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         "Ultimate Gain Efficiency": {
             title: "Ultimate Gain Efficiency",
+            icon: "Ultimate Gain Efficiency",
             scaling: {
                 S: [],
                 M: [
@@ -257,6 +269,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         },
         "Treatment Efficiency": {
             title: "Treatment Efficiency Boost",
+            icon: "Treatment Bonus",
             scaling: {
                 S: [],
                 M: [
@@ -286,6 +299,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Physical DMG": {
             title: "Physical DMG Boost",
             description: "Physical DMG Dealt",
+            icon: "Physical DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -325,6 +339,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Cryo DMG": {
             title: "Cryo DMG Boost",
             description: "Cryo DMG Dealt",
+            icon: "Cryo DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -364,6 +379,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Electric DMG": {
             title: "Electric DMG Boost",
             description: "Electric DMG Dealt",
+            icon: "Electric DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -403,6 +419,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Heat DMG": {
             title: "Heat DMG Boost",
             description: "Heat DMG Dealt",
+            icon: "Heat DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -442,6 +459,7 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
         "Nature DMG": {
             title: "Nature DMG Boost",
             description: "Nature DMG Dealt",
+            icon: "Nature DMG Bonus",
             scaling: {
                 S: [
                     "3.33%",
@@ -479,3 +497,20 @@ export const weaponSubStats: Record<EndfieldWeaponSubStat, WeaponSubStatInfo> =
             },
         },
     };
+
+export const weaponEssences = [
+    "Assault",
+    "Brutality",
+    "Combative",
+    "Crusher",
+    "Detonate",
+    "Efficacy",
+    "Flow",
+    "Fracture",
+    "Infliction",
+    "Inspiring",
+    "Medicant",
+    "Pursuit",
+    "Suppression",
+    "Twilight",
+] as const;

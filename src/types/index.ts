@@ -56,6 +56,9 @@ export interface AttributeData {
     colors?: CharacterColors;
     specialty?: string;
     outfit?: string;
+    mainAttr?: string;
+    secondaryAttr?: string;
+    essence?: string;
 }
 export type AttributeDataKey = keyof AttributeData;
 export interface AttributeDataMisc {
