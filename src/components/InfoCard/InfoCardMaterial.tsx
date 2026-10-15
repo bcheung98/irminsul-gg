@@ -73,60 +73,68 @@ export default function InfoCardMaterial({
         };
     }
 
+    const content = (
+        <>
+            <Box sx={styles.imageContainer()}>
+                <Image
+                    src={imgURL}
+                    id={componentID}
+                    size={size}
+                    responsive
+                    responsiveSize={0.25}
+                />
+                <Grid
+                    container
+                    spacing={0.5}
+                    sx={{
+                        alignContent: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    {Object.entries(materials).map(([category, material]) => (
+                        <MaterialIcon
+                            key={category}
+                            game={game}
+                            material={material}
+                            category={category}
+                            imgSize={imgSize}
+                            badgeLeft={badgeLeft}
+                        />
+                    ))}
+                </Grid>
+            </Box>
+            <Box sx={styles.textContainer()}>
+                <Text
+                    variant={
+                        name.length > 20
+                            ? matches
+                                ? "body3"
+                                : "body2"
+                            : matches
+                              ? "body2"
+                              : "body1"
+                    }
+                    sx={styles.text()}
+                >
+                    {name}
+                </Text>
+            </Box>
+        </>
+    );
+
     return (
         <Card sx={styles.root()} elevation={2}>
             <Card elevation={0} sx={styles.card()}>
-                <ButtonBase
-                    href={`/${tag}/${formatHref(href)}`}
-                    LinkComponent={NavLink}
-                >
-                    <Box sx={styles.imageContainer()}>
-                        <Image
-                            src={imgURL}
-                            id={componentID}
-                            size={size}
-                            responsive
-                            responsiveSize={0.25}
-                        />
-                        <Grid
-                            container
-                            spacing={0.5}
-                            sx={{
-                                alignContent: "center",
-                                justifyContent: "center",
-                            }}
-                        >
-                            {Object.entries(materials).map(
-                                ([category, material]) => (
-                                    <MaterialIcon
-                                        key={category}
-                                        game={game}
-                                        material={material}
-                                        category={category}
-                                        imgSize={imgSize}
-                                        badgeLeft={badgeLeft}
-                                    />
-                                ),
-                            )}
-                        </Grid>
-                    </Box>
-                    <Box sx={styles.textContainer()}>
-                        <Text
-                            variant={
-                                name.length > 20
-                                    ? matches
-                                        ? "body3"
-                                        : "body2"
-                                    : matches
-                                      ? "body2"
-                                      : "body1"
-                            }
-                            sx={styles.text()}
-                        >
-                            {name}
-                        </Text>
-                    </Box>
-                </ButtonBase>
+                {href ? (
+                    <ButtonBase
+                        href={`/${tag}/${formatHref(href)}`}
+                        LinkComponent={NavLink}
+                    >
+                        {content}
+                    </ButtonBase>
+                ) : (
+                    content
+                )}
             </Card>
             {badgeLeft && (
                 <InfoBadge
