@@ -6,6 +6,7 @@ import RandomButton from "@/components/RandomButton";
 import DiscordButton from "@/components/DiscordButton";
 import KofiButton from "@/components/KofiButton";
 import SiteSearch from "@/components/SiteSearch";
+import Notifications from "@/components/Notifications";
 import Settings from "@/components/Settings";
 import FlexBox from "@/components/FlexBox";
 
@@ -69,7 +70,7 @@ export default function NavBar() {
                             </FlexBox>
                         </FlexBox>
                     </FlexBox>
-                    <FlexBox spacing={{ xs: 2, md: 3 }}>
+                    <FlexBox spacing={2}>
                         <FlexBox
                             spacing={2}
                             sx={{ display: { xs: "none", sm: "flex" } }}
@@ -78,6 +79,7 @@ export default function NavBar() {
                             <KofiButton />
                         </FlexBox>
                         <SiteSearch />
+                        <Notifications />
                         <Settings />
                     </FlexBox>
                 </FlexBox>

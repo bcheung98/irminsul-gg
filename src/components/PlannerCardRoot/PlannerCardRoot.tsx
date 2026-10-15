@@ -44,8 +44,10 @@ export default function PlannerCardRoot(props: PlannerCardProps) {
 
     const item = validatePlannerItem(props.item, characters, weapons);
 
-    const hidden = usePlannerStore((state) =>
-        state[`${game}/hidden`].includes(item.id),
+    const hidden = usePlannerStore(
+        (state) =>
+            state[`${game}/activeTeamId`] === null &&
+            state[`${game}/hidden`].includes(item.id),
     );
 
     const [mode, setMode] = useState<CardMode>("view");

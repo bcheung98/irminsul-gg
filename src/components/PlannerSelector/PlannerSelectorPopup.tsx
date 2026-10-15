@@ -67,6 +67,16 @@ export default function PlannerSelectorPopup({
 
     const selectedItems = usePlannerStore((state) => state[`${game}/items`]);
 
+    const existingItemIDs = useMemo(
+        () => new Set(selectedItems.map((item) => item.id)),
+        [selectedItems],
+    );
+
+    const teams = usePlannerStore((state) => state[`${game}/teams`]);
+    const activeTeamId = usePlannerStore(
+        (state) => state[`${game}/activeTeamId`],
+    );
+
     const data = useMemo(() => {
         const items = type === "characters" ? characters : weapons;
 
@@ -78,10 +88,16 @@ export default function PlannerSelectorPopup({
     }, [type, characters, weapons, hideUnreleasedContent, game]);
 
     const availableItems = useMemo(() => {
-        const selectedIds = new Set(selectedItems.map((item) => item.id));
+        const selectedIds =
+            activeTeamId === null
+                ? new Set(selectedItems.map((item) => item.id))
+                : new Set(
+                      teams.find((team) => team.id === activeTeamId)?.itemIDs ??
+                          [],
+                  );
 
         return data.filter((item) => !selectedIds.has(item.id));
-    }, [data, selectedItems]);
+    }, [data, selectedItems, teams, activeTeamId]);
 
     const [filters, setFilters] =
         useState<PlannerSelectorFilters>(initialFilters);
@@ -94,20 +110,40 @@ export default function PlannerSelectorPopup({
     const deferredSearchValue = useDeferredValue(searchValue);
     const deferredFilters = useDeferredValue(filters);
 
-    const hits = useMemo(
-        () =>
-            transformItems(
-                game,
-                availableItems,
-                deferredFilters,
-                deferredSearchValue,
-                {
-                    sortBy: "version",
-                    sortDirection: "asc",
-                },
-            ),
-        [game, availableItems, deferredFilters, deferredSearchValue],
-    );
+    const hits = useMemo(() => {
+        const results = transformItems(
+            game,
+            availableItems,
+            deferredFilters,
+            deferredSearchValue,
+            {
+                sortBy: "version",
+                sortDirection: "asc",
+            },
+        );
+
+        if (activeTeamId === null) return results;
+
+        const existing: typeof results = [];
+        const newItems: typeof results = [];
+
+        for (const item of results) {
+            if (existingItemIDs.has(item.id)) {
+                existing.push(item);
+            } else {
+                newItems.push(item);
+            }
+        }
+
+        return [...existing, ...newItems];
+    }, [
+        game,
+        availableItems,
+        deferredFilters,
+        deferredSearchValue,
+        activeTeamId,
+        existingItemIDs,
+    ]);
 
     const hitsLoading =
         filters !== deferredFilters || searchValue !== deferredSearchValue;
@@ -124,7 +160,12 @@ export default function PlannerSelectorPopup({
 
     useEffect(() => {
         resetVisibleResults();
-    }, [deferredSearchValue, deferredFilters, resetVisibleResults]);
+    }, [
+        deferredSearchValue,
+        deferredFilters,
+        activeTeamId,
+        resetVisibleResults,
+    ]);
 
     const { element, weaponType, rarity, specialty } = useFilterGroups(game, {
         key: `${game}/${type}`,

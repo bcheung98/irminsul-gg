@@ -1,15 +1,16 @@
-import { keyframes, SxProps, Theme } from "@mui/material/styles";
+import { keyframes, type SxProps, type Theme } from "@mui/material/styles";
 
 export const statusIndicatorStyles = (
-    status: "success" | "warning" | "error",
+    status: "info" | "success" | "warning" | "error",
+    size = 8,
 ) => ({
-    dotRoot: (): SxProps => () => ({
+    dotRoot: ((): SxProps => () => ({
         position: "relative",
-        width: "8px",
-        height: "8px",
+        width: `${size}px`,
+        height: `${size}px`,
         justifyContent: "center",
-    }),
-    dotInner: (): SxProps<Theme> => (theme) => ({
+    }))(),
+    dotInner: ((): SxProps<Theme> => (theme) => ({
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -17,8 +18,8 @@ export const statusIndicatorStyles = (
         zIndex: 2,
         backgroundColor: theme.palette[status].light,
         boxShadow: `0 0 6px ${theme.palette[status].light}`,
-    }),
-    dotOuter: (): SxProps<Theme> => (theme) => ({
+    }))(),
+    dotOuter: ((): SxProps<Theme> => (theme) => ({
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -26,7 +27,7 @@ export const statusIndicatorStyles = (
         zIndex: 1,
         backgroundColor: theme.palette[status].light,
         animation:
-            status === "success"
+            status === "success" || status === "info"
                 ? `${keyframes`
                     75%, 100% {
                         transform: scale(2.5);
@@ -34,8 +35,8 @@ export const statusIndicatorStyles = (
                     }
                 `} 2s cubic-bezier(0, 0, 0.2, 1) infinite`
                 : "none",
-    }),
-    indicatorRoot: (): SxProps<Theme> => (theme) => ({
+    }))(),
+    indicatorRoot: ((): SxProps<Theme> => (theme) => ({
         px: 2,
         py: 0.5,
         outline: `1px solid ${theme.palette[status].dark}`,
@@ -55,5 +56,5 @@ export const statusIndicatorStyles = (
         "&:hover": {
             backgroundColor: theme.background(1, "light"),
         },
-    }),
+    }))(),
 });

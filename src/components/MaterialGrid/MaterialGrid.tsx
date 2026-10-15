@@ -2,6 +2,7 @@ import { usePathname } from "next/navigation";
 
 // Component imports
 import MaterialCard from "@/components/MaterialCard";
+import MaterialLabel from "@/components/MaterialLabel";
 import Text from "@/components/Text";
 
 // MUI imports
@@ -9,6 +10,7 @@ import Grid, { type GridProps } from "@mui/material/Grid";
 
 // Helper imports
 import { useGameTag } from "@/context";
+import { useSettingsStore } from "@/stores";
 import { getCustomMaterial } from "@/helpers/materials";
 
 // Type imports
@@ -35,6 +37,8 @@ export default function MaterialGrid({
 
     const game = useGameTag() as GameNoUma;
 
+    const view = useSettingsStore((state) => state.plannerMaterialView);
+
     const sortedMaterials = sortMaterialByKey(Object.keys(costs), pathname);
 
     const materialArray: React.ReactNode[] = [];
@@ -44,26 +48,50 @@ export default function MaterialGrid({
             ([material, cost]: [string | number, number]) =>
                 cost &&
                 materialArray.push(
-                    <Grid key={material}>
-                        <MaterialCard
-                            game={game}
-                            materialKey={key}
-                            material={material}
-                            customMaterial={getCustomMaterial(
-                                material,
-                                customMaterials,
-                            )}
-                            cost={cost}
-                            size={size}
-                            interactive={interactive}
-                        />
-                    </Grid>,
+                    pathname.endsWith("planner") && view === "list" ? (
+                        <Grid
+                            key={material}
+                            size={{
+                                xs: 12,
+                                sm: 4,
+                                md: 3,
+                                lg: interactive ? 3 : 4,
+                            }}
+                        >
+                            <MaterialLabel
+                                game={game}
+                                materialKey={key}
+                                material={material}
+                                customMaterial={getCustomMaterial(
+                                    material,
+                                    customMaterials,
+                                )}
+                                cost={cost}
+                                interactive={interactive}
+                            />
+                        </Grid>
+                    ) : (
+                        <Grid key={material}>
+                            <MaterialCard
+                                game={game}
+                                materialKey={key}
+                                material={material}
+                                customMaterial={getCustomMaterial(
+                                    material,
+                                    customMaterials,
+                                )}
+                                cost={cost}
+                                size={size}
+                                interactive={interactive}
+                            />
+                        </Grid>
+                    ),
                 ),
         ),
     );
 
     return materialArray.length > 0 ? (
-        <Grid container spacing={spacing}>
+        <Grid container spacing={spacing} sx={{ alignItems: "center" }}>
             {materialArray.map((card) => card)}
         </Grid>
     ) : (

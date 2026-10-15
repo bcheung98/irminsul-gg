@@ -23,8 +23,9 @@ export default function IrminsulLogo({
         theme.irminsulLogo;
 
     const today = new Date();
-    if (today.getMonth() === 5) {
-        textBackground = `linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(255, 210, 64, 1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(166, 121, 255, 1) 70%, rgba(207, 75, 255, 1) 80%, rgba(255, 0, 221, 1) 90%)`;
+    const isJune = today.getMonth() === 5;
+    if (isJune) {
+        textBackground = `linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(255, 210, 64, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(166, 121, 255, 1) 70%, rgba(207, 75, 255, 1) 80%, rgba(255, 0, 221, 1) 90%)`;
     }
 
     return (
@@ -36,7 +37,7 @@ export default function IrminsulLogo({
                     size={size}
                     responsive
                     responsiveSize={0.2}
-                    style={{ filter: filter }}
+                    style={{ filter }}
                 />
                 {showText && (
                     <Text
@@ -46,7 +47,7 @@ export default function IrminsulLogo({
                             lineHeight: `${size}px`,
                             display: {
                                 "@": "none",
-                                "@300": "block",
+                                "@350": "block",
                             },
                             background: textBackground,
                             backgroundClip: "text",
@@ -56,6 +57,7 @@ export default function IrminsulLogo({
                                 backgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                             },
+                            transition: !isJune ? "background 0.15s" : "none",
                         }}
                     >
                         IRMINSUL.GG

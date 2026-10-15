@@ -1,5 +1,3 @@
-import { VoiceActorData } from ".";
-
 export interface Version {
     version: string;
 }
@@ -11,6 +9,8 @@ export interface VersionWithDate extends Version {
 export interface VersionInfo {
     version: string;
     name: string;
+    releaseDate?: string;
+    notificationDate?: string;
 }
 
 export interface UmaVersion extends Version {

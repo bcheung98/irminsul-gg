@@ -12,8 +12,6 @@ import VersionReleaseDate from "./VersionReleaseDate";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import { SelectChangeEvent } from "@mui/material/Select";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
@@ -25,17 +23,18 @@ import {
     textLabelIcon,
     textLabelTitle,
 } from "./VersionHighlights.utils";
-import {
-    useVersionContent,
-    useVersionReleaseDate,
-} from "./VersionHighlights.hooks";
+import { useVersionContent } from "./VersionHighlights.hooks";
 
 // Type imports
-import { VersionHighlightsProps } from "./VersionHighlights.types";
+import type { Game } from "@/types";
+import type {
+    VersionCategory,
+    VersionHighlightsProps,
+    VersionItemData,
+} from "./VersionHighlights.types";
+import type { SelectChangeEvent } from "@mui/material/Select";
 
 export default function VersionHighlights(props: VersionHighlightsProps) {
-    const theme = useTheme();
-
     const game = useGameTag();
 
     const updates = versions[game];
@@ -55,8 +54,7 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         }
     };
 
-    const { version, name } = updates[index];
-    const releaseDate = useVersionReleaseDate(game, version);
+    const { version, name, releaseDate } = updates[index];
     const { characters, weapons, equipment, bangboos } = useVersionContent(
         game,
         props,
@@ -71,133 +69,102 @@ export default function VersionHighlights(props: VersionHighlightsProps) {
         handleIndexChangeRight,
     };
 
-    const gridContainerStyle = {
-        minWidth: "40%",
-        maxWidth: "100%",
-    };
-
-    const gridStyle = {
-        p: 2,
-        maxHeight: "720px",
-        overflowY: "auto",
-        scrollbarWidth: "thin",
-    };
+    const categories = [
+        { category: "characters", items: characters },
+        { category: "weapons", items: weapons },
+        { category: "equipment", items: equipment },
+        { category: "bangboos", items: bangboos ?? [] },
+    ] satisfies {
+        category: VersionCategory;
+        items: VersionItemData[];
+    }[];
 
     return (
-        <Box>
-            <ContentBox
-                header="Version Highlights"
-                actions={
-                    <SelectWithArrows {...selectProps}>
-                        {updates.map((version, index) => (
-                            <MenuItem key={version.version} value={index}>
-                                <Text
-                                    variant="subtitle1"
-                                    sx={{ textAlign: "center" }}
-                                >
-                                    {version.version}
-                                </Text>
-                            </MenuItem>
-                        ))}
-                    </SelectWithArrows>
-                }
-                contentProps={{ padding: "16px 24px", overflowX: "clip" }}
-            >
-                <Stack spacing={3}>
-                    <Stack spacing={1}>
-                        <Text variant="h6" weight="highlight">
-                            {version} - <i>{name}</i>
-                        </Text>
-                        <VersionReleaseDate releaseDate={releaseDate} />
-                    </Stack>
-                    <Grid
-                        container
-                        columnSpacing={{ xs: 6, md: 10 }}
-                        rowSpacing={3}
-                    >
-                        {characters.length > 0 && (
-                            <Grid sx={gridContainerStyle} size="auto">
-                                <TextLabel
-                                    icon={textLabelIcon(game, "characters")}
-                                    iconProps={{ size: 32 }}
-                                    title={textLabelTitle(game, "characters")}
-                                    titleProps={{ variant: "h6" }}
-                                />
-                                <Grid container spacing={3} sx={gridStyle}>
-                                    {characters.map((character) =>
-                                        renderInfoCard(
-                                            game,
-                                            "characters",
-                                            character,
-                                            theme.background(0),
-                                        ),
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )}
-                        {weapons.length > 0 && (
-                            <Grid sx={gridContainerStyle} size="auto">
-                                <TextLabel
-                                    icon={textLabelIcon(game, "weapons")}
-                                    iconProps={{ size: 32 }}
-                                    title={textLabelTitle(game, "weapons")}
-                                    titleProps={{ variant: "h6" }}
-                                />
-                                <Grid container spacing={3} sx={gridStyle}>
-                                    {weapons.map((weapon) =>
-                                        renderInfoCard(game, "weapons", weapon),
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )}
-                        {equipment.length > 0 && (
-                            <Grid sx={gridContainerStyle} size="auto">
-                                <TextLabel
-                                    icon={textLabelIcon(game, "equipment")}
-                                    iconProps={{ size: 32 }}
-                                    title={textLabelTitle(game, "equipment")}
-                                    titleProps={{ variant: "h6" }}
-                                />
-                                <Grid container spacing={3} sx={gridStyle}>
-                                    {equipment.map((item) =>
-                                        renderInfoCard(game, "equipment", item),
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )}
-                        {bangboos && bangboos.length > 0 && (
-                            <Grid sx={gridContainerStyle} size="auto">
-                                <TextLabel
-                                    icon={textLabelIcon(game, "bangboos")}
-                                    iconProps={{ size: 32 }}
-                                    title={textLabelTitle(game, "bangboos")}
-                                    titleProps={{ variant: "h6" }}
-                                />
-                                <Grid container spacing={3} sx={gridStyle}>
-                                    {bangboos.map((item) =>
-                                        renderInfoCard(game, "bangboos", item),
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )}
-                        {/* cards && cards.length > 0 && (
-                            <Grid sx={gridContainerStyle} size="auto">
-                                <TextLabel
-                                    icon={textLabelIcon(game, "cards")}
-                                    iconProps={{ size: 32 }}
-                                    title={textLabelTitle(game, "cards")}
-                                    titleProps={{ variant: "h6" }}
-                                />
-                                <Grid container spacing={3} sx={gridStyle}>
-                                    {cards.map((item) =>
-                                        renderInfoCard(game, "cards", item)
-                                    )}
-                                </Grid>
-                            </Grid>
-                        )*/}
-                    </Grid>
+        <ContentBox
+            header="Version Highlights"
+            actions={
+                <SelectWithArrows {...selectProps}>
+                    {updates.map((version, index) => (
+                        <MenuItem key={version.version} value={index}>
+                            <Text
+                                variant="subtitle1"
+                                sx={{ textAlign: "center" }}
+                            >
+                                {version.version}
+                            </Text>
+                        </MenuItem>
+                    ))}
+                </SelectWithArrows>
+            }
+            contentProps={{ padding: "16px 24px", overflowX: "clip" }}
+        >
+            <Stack spacing={3}>
+                <Stack spacing={1}>
+                    <Text variant="h6" weight="highlight">
+                        {version} - <i>{name}</i>
+                    </Text>
+                    <VersionReleaseDate releaseDate={releaseDate} />
                 </Stack>
-            </ContentBox>
-        </Box>
+                <Grid
+                    container
+                    columnSpacing={{ xs: 6, md: 10 }}
+                    rowSpacing={3}
+                >
+                    {categories.map(({ category, items }) => (
+                        <VersionHighlightCategory
+                            key={category}
+                            game={game}
+                            category={category}
+                            items={items}
+                        />
+                    ))}
+                </Grid>
+            </Stack>
+        </ContentBox>
+    );
+}
+
+function VersionHighlightCategory({
+    game,
+    category,
+    items,
+}: {
+    game: Game;
+    category: keyof VersionHighlightsProps;
+    items: VersionItemData[];
+}) {
+    const theme = useTheme();
+
+    if (!items.length) return null;
+
+    return (
+        <Grid
+            sx={{
+                minWidth: "40%",
+                maxWidth: "100%",
+            }}
+            size="auto"
+        >
+            <TextLabel
+                icon={textLabelIcon(game, category)}
+                iconProps={{ size: 32 }}
+                title={textLabelTitle(game, category)}
+                titleProps={{ variant: "h6" }}
+            />
+            <Grid
+                container
+                spacing={3}
+                sx={{
+                    p: 2,
+                    maxHeight: "720px",
+                    overflowY: "auto",
+                    scrollbarWidth: "thin",
+                }}
+            >
+                {items.map((item) =>
+                    renderInfoCard(game, category, item, theme.background(0)),
+                )}
+            </Grid>
+        </Grid>
     );
 }

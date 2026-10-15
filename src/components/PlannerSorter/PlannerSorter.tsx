@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import {
     DndContext,
     closestCenter,
     useSensor,
     useSensors,
-    DragEndEvent,
     TouchSensor,
     MouseSensor,
+    type DragEndEvent,
 } from "@dnd-kit/core";
 import {
     arrayMove,
@@ -21,13 +21,10 @@ import {
 // Component imports
 import PlannerSorterItem from "./PlannerSorterItem";
 import ContentDialog from "@/components/ContentDialog";
-import TextLabel from "@/components/TextLabel";
 import InfoButton from "@/components/InfoButton";
 
 // MUI imports
-import { useTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
 
 // Helper imports
@@ -39,14 +36,36 @@ import type { GameNoUma } from "@/types";
 import type { PlannerItemData } from "@/types/planner";
 
 export default function PlannerSorter() {
-    const theme = useTheme();
-
     const game = useGameTag() as GameNoUma;
 
     const items = usePlannerStore((state) => state[`${game}/items`]);
+    const setItems = usePlannerStore((state) => state[`${game}/setItems`]);
+
+    const teams = usePlannerStore((state) => state[`${game}/teams`]);
+    const activeTeamId = usePlannerStore(
+        (state) => state[`${game}/activeTeamId`],
+    );
+    const setTeamItemOrder = usePlannerStore(
+        (state) => state[`${game}/setTeamItemOrder`],
+    );
+
+    const displayedItems = useMemo(() => {
+        if (activeTeamId === null) return items;
+
+        const activeTeam = teams.find((team) => team.id === activeTeamId);
+
+        if (!activeTeam) return [];
+
+        const itemsById = new Map(items.map((item) => [item.id, item]));
+
+        return activeTeam.itemIDs
+            .map((id) => itemsById.get(id))
+            .filter((item): item is PlannerItemData => item !== undefined);
+    }, [items, teams, activeTeamId]);
 
     const [open, setOpen] = useState(false);
     const handleClickOpen = () => {
+        setList(displayedItems);
         setOpen(true);
     };
     const handleClose = () => {
@@ -59,38 +78,31 @@ export default function PlannerSorter() {
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
-        if (!over) return;
 
-        const activeItem = list.find((item) => item.id === active.id);
-        const overItem = list.find((item) => item.id === over.id);
-
-        if (!activeItem || !overItem) {
-            return;
-        }
+        if (!over || active.id === over.id) return;
 
         const activeIndex = list.findIndex((item) => item.id === active.id);
         const overIndex = list.findIndex((item) => item.id === over.id);
 
-        if (activeIndex !== overIndex) {
-            setList((prev) =>
-                arrayMove<PlannerItemData>(prev, activeIndex, overIndex),
+        if (activeIndex === -1 || overIndex === -1) return;
+
+        const reordered = arrayMove(list, activeIndex, overIndex);
+
+        setList(reordered);
+
+        if (activeTeamId === null) {
+            setItems(reordered);
+        } else {
+            setTeamItemOrder(
+                activeTeamId,
+                reordered.map((item) => item.id),
             );
         }
     };
 
-    useEffect(() => {
-        usePlannerStore.setState(() => ({
-            [`${game}/items`]: list,
-        }));
-    }, [list]);
-
-    useEffect(() => {
-        setList(items);
-    }, [open]);
-
     return (
         <>
-            {items.length > 1 && (
+            {displayedItems.length > 1 && (
                 <InfoButton
                     game
                     title="Adjust Order"

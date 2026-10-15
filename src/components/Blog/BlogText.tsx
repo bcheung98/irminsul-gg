@@ -48,6 +48,7 @@ export function Description({ children, weight, sx }: TextProps) {
         <Text
             variant="subtitle1"
             weight={weight}
+            component="span"
             sx={{
                 color: theme.text.description,
                 ...sx,
@@ -66,6 +67,7 @@ export function DescriptionSmall({ children, weight, sx }: TextProps) {
         <Text
             variant="body2"
             weight={weight}
+            component="span"
             sx={{
                 lineHeight: theme.typography.subtitle2.lineHeight,
                 color: theme.text.description,

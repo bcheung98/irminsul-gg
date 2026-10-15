@@ -8,6 +8,7 @@ import StatusIndicator from "./StatusIndicator";
 // MUI imports
 import { useTheme, keyframes } from "@mui/material/styles";
 import Snackbar from "@mui/material/Snackbar";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -18,6 +19,7 @@ import {
     useAppUpdateAvailable,
     useDataUpdateAvailable,
 } from "./StatusIndicator.hooks";
+import { statusIndicatorStyles } from "./StatusIndicator.styles";
 
 export function AppStatus() {
     const { data, error, updateAvailable } = useAppUpdateAvailable();
@@ -40,6 +42,23 @@ export function DataStatus() {
             error={error}
             updateAvailable={updateAvailable}
         />
+    );
+}
+
+export function StatusDot({
+    status,
+    size,
+}: {
+    status: "info" | "success" | "warning" | "error";
+    size?: number;
+}) {
+    const styles = statusIndicatorStyles(status, size);
+
+    return (
+        <FlexBox sx={styles.dotRoot}>
+            <Box sx={styles.dotInner} />
+            <Box sx={styles.dotOuter} />
+        </FlexBox>
     );
 }
 
