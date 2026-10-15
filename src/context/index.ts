@@ -1,10 +1,10 @@
 import { createContext, useContext } from "react";
-import { Game, GameInfo } from "@/types";
-import { CharacterSkillsList, SkillKeyword } from "@/types/skill";
-import { CharacterBuffs } from "@/types/character";
-import { UmaSkill } from "@/types/uma/skill";
-import { EventList, Events } from "@/types/uma/event";
-import { UmaCharacterProfile } from "@/types/uma/character";
+import type { Game, GameInfo } from "@/types";
+import type { CharacterSkillsList, SkillKeyword } from "@/types/skill";
+import type { CharacterBuffs } from "@/types/character";
+import type { UmaSkill } from "@/types/uma/skill";
+import type { EventList } from "@/types/uma/event";
+import type { UmaCharacterProfile } from "@/types/uma/character";
 
 const defaultGameInfo = {
     tag: "" as Game,
@@ -12,6 +12,7 @@ const defaultGameInfo = {
     shortName: "",
     enabled: true,
     color: "rgb(11, 110, 175)",
+    textColor: "rgb(255, 255, 255)",
     dev: "",
 };
 
