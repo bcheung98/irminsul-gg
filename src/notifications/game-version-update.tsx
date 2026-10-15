@@ -190,6 +190,22 @@ function VersionUpdateCategory({
 
     if (!items.length) return null;
 
+    const resolvedImageURL = (item: VersionItemData) => {
+        if (category === "equipment") {
+            return categoryImgURLs[`${game}/equipment`](
+                game === "endfield" ? item.stringId : item.id,
+                item.name,
+            );
+        } else {
+            return getImageURL({
+                game,
+                tag: categoryURLs[`${game}/${category}`],
+                id: item.id,
+                gender,
+            });
+        }
+    };
+
     return (
         <Stack spacing={1}>
             <TextLabel
@@ -197,45 +213,29 @@ function VersionUpdateCategory({
                 titleProps={{ variant: "subtitle1" }}
             />
             <Grid container spacing={2}>
-                {items.map((item) => {
-                    let imageURL;
-                    if (category === "equipment") {
-                        imageURL = categoryImgURLs[`${game}/equipment`](
-                            item.id,
-                            item.name,
-                        );
-                    } else {
-                        imageURL = getImageURL({
-                            game,
-                            tag: categoryURLs[`${game}/${category}`],
-                            id: item.id,
-                            gender,
-                        });
-                    }
-                    return (
-                        <Grid key={item.id} size={{ xs: 12, sm: 6 }}>
-                            <TextLabel
-                                icon={imageURL}
-                                iconProps={{
-                                    size: 28,
-                                    styles: {
-                                        outline: `1px solid ${getRarityColors(game, item.rarity)}`,
-                                        backgroundColor: theme.background(2),
-                                    },
-                                }}
-                                title={item.displayName}
-                                titleProps={{
-                                    variant: "body2",
-                                }}
-                                href={
-                                    item.url
-                                        ? `${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
-                                        : ""
-                                }
-                            />
-                        </Grid>
-                    );
-                })}
+                {items.map((item) => (
+                    <Grid key={item.id} size={{ xs: 12, sm: 6 }}>
+                        <TextLabel
+                            icon={resolvedImageURL(item)}
+                            iconProps={{
+                                size: 28,
+                                styles: {
+                                    outline: `1px solid ${getRarityColors(game, item.rarity)}`,
+                                    backgroundColor: theme.background(2),
+                                },
+                            }}
+                            title={item.displayName}
+                            titleProps={{
+                                variant: "body2",
+                            }}
+                            href={
+                                item.url
+                                    ? `${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
+                                    : ""
+                            }
+                        />
+                    </Grid>
+                ))}
             </Grid>
         </Stack>
     );
