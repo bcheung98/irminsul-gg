@@ -102,6 +102,11 @@ const filterHandlers: Record<string, FilterHandler> = {
     // Stats
     ascStat: (item, values) => values.includes(item.stats.ascensionStat),
     subStat: (item, values) => values.includes(item.stats.subStat),
+    mainAttr: (item, values) =>
+        values.includes(item.stats.attributes.primary.stat),
+    secondaryAttr: (item, values) =>
+        values.includes(item.stats.attributes.secondary?.stat),
+    essence: (item, values) => values.includes(item.stats.passive?.tag),
 
     // Materials
     talentBook: (item, values) => values.includes(`${item.materials.talent}3`),

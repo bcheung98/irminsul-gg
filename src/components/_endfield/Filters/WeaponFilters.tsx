@@ -11,21 +11,25 @@ import type { EndfieldRarity, EndfieldWeaponType } from "@/types/endfield";
 export interface EndfieldWeaponFilterState extends Filters {
     weaponType: EndfieldWeaponType[];
     rarity: EndfieldRarity[];
+    mainAttr: string[];
+    secondaryAttr: string[];
+    essence: string[];
 }
 
 export default function WeaponFilters() {
     const game = "endfield";
     const key = "endfield/weapons";
 
-    const { weaponType, rarity } = useFilterGroups(game, {
-        key,
-    });
+    const { weaponType, rarity, mainAttr, secondaryAttr, essence } =
+        useFilterGroups(game, {
+            key,
+        });
 
     return (
         <FilterRoot
             initialState={endfieldWeaponFilters}
             filterKey={key}
-            filters={[weaponType, rarity]}
+            filters={[weaponType, rarity, mainAttr, secondaryAttr, essence]}
         />
     );
 }
