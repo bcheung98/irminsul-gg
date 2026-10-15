@@ -7,8 +7,8 @@ import { formatHref } from "@/utils";
 import { baseATKScaling } from "@/data/endfield/weaponStats";
 
 // Type imports
-import { EndfieldWeapon } from "@/types/endfield/weapon";
-import { SortTableRow } from "@/components/SortTable/SortTable.types";
+import type { EndfieldWeapon } from "@/types/endfield/weapon";
+import type { SortTableRow } from "@/components/SortTable/SortTable.types";
 
 export default function WeaponList({
     weapons,
@@ -63,7 +63,7 @@ export default function WeaponList({
             },
             baseATK: {
                 label: {
-                    title: baseATK,
+                    title: baseATK || "?",
                 },
             },
             version: {
