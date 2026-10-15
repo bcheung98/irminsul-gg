@@ -29,11 +29,12 @@ import Color from "@/utils/colors";
 
 // Type imports
 import type { NotificationContentProps } from "@/notifications";
+import type { Game } from "@/types";
 import type {
+    VersionCategory,
     VersionHighlightsProps,
     VersionItemData,
-} from "@/components/VersionHighlights/VersionHighlights.types";
-import type { Game } from "@/types";
+} from "@/components/VersionHighlights";
 
 export default function GameVersionUpdateNotification({
     tag,
@@ -78,8 +79,6 @@ function GameVersionUpdateContent({
         />
     );
 }
-
-type VersionCategory = "characters" | "weapons" | "equipment" | "bangboos";
 
 interface VersionUpdateDetailsProps extends VersionHighlightsProps {
     game: Game;

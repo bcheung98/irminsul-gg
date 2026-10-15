@@ -11,7 +11,6 @@ import Stack from "@mui/material/Stack";
 import DateObject from "@/helpers/dates";
 import versions from "@/data/versions";
 import { games as gamesList } from "@/data/games";
-import { useVersionReleaseDates } from "@/components/VersionHighlights/VersionHighlights.hooks";
 
 // Type imports
 import { GameInfo } from "@/types";
@@ -21,7 +20,9 @@ export default function CurrentVersions() {
         (game) => game.enabled && game.tag !== "uma",
     );
 
-    const releaseDates = useVersionReleaseDates(games);
+    const releaseDates = Object.fromEntries(
+        games.map((game) => [game.tag, versions[game.tag][0].releaseDate]),
+    );
 
     const sortedGames = [...games].sort((a, b) => {
         const aDate = releaseDates?.[a.tag];

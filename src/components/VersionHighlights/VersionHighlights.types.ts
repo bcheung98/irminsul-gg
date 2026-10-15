@@ -1,4 +1,10 @@
-import { BaseDataWithRelease } from "@/types";
+import type { BaseDataWithRelease } from "@/types";
+
+export type VersionCategory =
+    | "characters"
+    | "weapons"
+    | "equipment"
+    | "bangboos";
 
 export interface VersionItemData extends BaseDataWithRelease {
     [key: string]: any;
