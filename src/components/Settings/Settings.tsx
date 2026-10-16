@@ -2,15 +2,15 @@ import { useState, useRef } from "react";
 
 // Component imports
 import NavButton from "@/components/NavButton";
-import ContentBox from "@/components/ContentBox";
 import SettingsList from "./SettingsList";
-import CloseButton from "@/components/CloseButton";
+import Text from "@/components/Text";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Drawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
+import Popover from "@mui/material/Popover";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 // Helper imports
@@ -22,18 +22,24 @@ import {
 
 export default function Settings() {
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.up("sm"));
-
-    const [open, setOpen] = useState(false);
-
-    const settings = useSettingsStore((state) => state);
 
     const settingsOnOpen = useRef<SettingsState | null>(null);
 
-    const toggleDrawer = (newOpen: boolean) => () => {
-        if (newOpen) {
-            settingsOnOpen.current = { ...settings };
-        } else if (
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
+    const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        settingsOnOpen.current = {
+            ...useSettingsStore.getState(),
+        };
+
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        const settings = useSettingsStore.getState();
+
+        if (
             settingsOnOpen.current &&
             settingsRequireReload(settingsOnOpen.current, settings)
         ) {
@@ -41,13 +47,14 @@ export default function Settings() {
             return;
         }
 
-        setOpen(newOpen);
+        settingsOnOpen.current = null;
+        setAnchorEl(null);
     };
 
     return (
         <>
             <NavButton
-                onClick={toggleDrawer(!open)}
+                onClick={handleMenuOpen}
                 title="Settings"
                 sx={{
                     p: 0.5,
@@ -58,43 +65,35 @@ export default function Settings() {
             >
                 <SettingsIcon />
             </NavButton>
-            <Drawer
-                open={open}
-                onClose={toggleDrawer(false)}
-                anchor="right"
-                sx={{
-                    zIndex: theme.zIndex.drawer + 1,
-                    boxSizing: "content-box",
-                    "& .MuiDrawer-paper": {
-                        backgroundColor: theme.drawer.backgroundColor.main,
-                    },
+            <Popover
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
                 }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
+                open={open}
+                onClose={handleMenuClose}
             >
-                <Box
+                <Card
                     sx={{
-                        width: { xs: "100vw", sm: "500px" },
-                        height: "100vh",
+                        width: { xs: "90vw", sm: "400px" },
+                        p: 2,
+                        backgroundColor: theme.background(2, "light"),
+                        border: `1px solid ${theme.border.color.primary}`,
                     }}
                 >
-                    <ContentBox
-                        header="Settings"
-                        actions={
-                            <CloseButton
-                                onClick={toggleDrawer(false)}
-                                hoverColor={theme.drawer.backgroundColor.hover}
-                            />
-                        }
-                        elevation={0}
-                        headerProps={{
-                            textVariant: "body1",
-                            padding: matches ? "4px 24px" : "4px 16px",
-                            dense: true,
-                        }}
-                    >
-                        <SettingsList />
-                    </ContentBox>
-                </Box>
-            </Drawer>
+                    <Stack spacing={2} divider={<Divider />}>
+                        <Stack spacing={2}>
+                            <Text weight="highlight">Settings</Text>
+                            <SettingsList />
+                        </Stack>
+                    </Stack>
+                </Card>
+            </Popover>
         </>
     );
 }
