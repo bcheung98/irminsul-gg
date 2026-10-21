@@ -7,8 +7,8 @@ import { rarityMap } from "@/data/zzz/common";
 import { weaponMainStats, weaponSubStats } from "@/data/zzz/weaponStats";
 
 // Type imports
-import { ZZZWeapon } from "@/types/zzz/weapon";
-import { SortTableRow } from "@/components/SortTable/SortTable.types";
+import type { ZZZWeapon } from "@/types/zzz/weapon";
+import type { SortTableRow } from "@/components/SortTable/SortTable.types";
 
 export default function WeaponList({
     weapons,
@@ -46,7 +46,7 @@ export default function WeaponList({
                 label: {
                     title: weapon.displayName,
                     titleProps: { variant: "body1" },
-                    icon: `zzz/w-engines/${weapon.id}`,
+                    icon: `zzz/w-engines/${weapon.id}_large`,
                     iconProps: {
                         size: 48,
                         borderRadius: "4px",

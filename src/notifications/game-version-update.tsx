@@ -197,12 +197,16 @@ function VersionUpdateCategory({
                 item.name,
             );
         } else {
-            return getImageURL({
+            let url = getImageURL({
                 game,
                 tag: categoryURLs[`${game}/${category}`],
                 id: item.id,
                 gender,
             });
+            if (game === "zzz" && category === "weapons") {
+                url += "_large";
+            }
+            return url;
         }
     };
 
