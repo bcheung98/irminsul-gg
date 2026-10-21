@@ -26,25 +26,30 @@ import TCGCard from "@/components/_genshin/TCGCard";
 import { categories } from "@/data/categories";
 
 // Type imports
-import { Game, GameData } from "@/types";
-import {
+import type { Game, GameData } from "@/types";
+import type {
     VersionHighlightsProps,
     VersionItemData,
 } from "./VersionHighlights.types";
-import {
+import type {
     GenshinArtifact,
     GenshinCharacter,
     GenshinWeapon,
 } from "@/types/genshin";
-import { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
-import { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
-import { ZZZBangboo, ZZZCharacter, ZZZDriveDisc, ZZZWeapon } from "@/types/zzz";
-import {
+import type { HSRCharacter, HSRRelic, HSRWeapon } from "@/types/hsr";
+import type { WuWaCharacter, WuWaWeapon, WuWaEcho } from "@/types/wuwa";
+import type {
+    ZZZBangboo,
+    ZZZCharacter,
+    ZZZDriveDisc,
+    ZZZWeapon,
+} from "@/types/zzz";
+import type {
     EndfieldCharacter,
     EndfieldGear,
     EndfieldWeapon,
 } from "@/types/endfield";
-import { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
+import type { NTECartridge, NTECharacter, NTEWeapon } from "@/types/nte";
 
 type Data<T> = Partial<Record<keyof VersionHighlightsProps, T>>;
 
@@ -80,7 +85,7 @@ export function textLabelIcon(game: Game, tag: keyof VersionHighlightsProps) {
         endfield: {
             characters: "endfield/icons/Operators",
             weapons: "endfield/icons/Weapons",
-            equipment: "",
+            equipment: "endfield/icons/Gear",
         },
         nte: {
             characters: "nte/icons/Esper",
