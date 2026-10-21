@@ -2,6 +2,11 @@ import { VersionInfo } from "@/types/version";
 
 export const zzzVersions: VersionInfo[] = [
     {
+        version: "3.3",
+        name: "Journey to the Sky",
+        releaseDate: "2026-10-21 11:00:00 UTC+8",
+    },
+    {
         version: "3.2",
         name: "Their Secret Histories",
         releaseDate: "2026-09-09 11:00:00 UTC+8",

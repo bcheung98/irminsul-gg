@@ -1,5 +1,5 @@
 // Component imports
-import SettingsItem, { SettingsItemProps } from "./SettingsItem";
+import SettingsItem, { type SettingsItemProps } from "./SettingsItem";
 import Text from "@/components/Text";
 import ToggleButtons from "@/components/ToggleButtons";
 
@@ -19,21 +19,26 @@ import {
 } from "@/data/settings";
 
 // Type imports
-import { Game, Gender, Server, SkillDisplay } from "@/types";
+import type { Game, Gender, Server, SkillDisplay } from "@/types";
 
 export default function SettingsList() {
     const game = useGame();
 
-    const {
-        theme: themeIndex,
-        statDisplay,
-        gender,
-        hideUnreleasedContent,
-        setTheme,
-        setStatDisplay,
-        setGender,
-        setUnreleasedContent,
-    } = useSettingsStore();
+    const themeIndex = useSettingsStore((state) => state.theme);
+    const setTheme = useSettingsStore((state) => state.setTheme);
+
+    const statDisplay = useSettingsStore((state) => state.statDisplay);
+    const setStatDisplay = useSettingsStore((state) => state.setStatDisplay);
+
+    const gender = useSettingsStore((state) => state.gender);
+    const setGender = useSettingsStore((state) => state.setGender);
+
+    const hideUnreleasedContent = useSettingsStore(
+        (state) => state.hideUnreleasedContent,
+    );
+    const setUnreleasedContent = useSettingsStore(
+        (state) => state.setUnreleasedContent,
+    );
 
     const server = useServerStore();
 
@@ -187,7 +192,11 @@ export default function SettingsList() {
             {settings.map((group, index) => (
                 <Stack key={index} spacing={2}>
                     {group.map((setting) => (
-                        <SettingsItem key={setting.label} {...setting} />
+                        <SettingsItem
+                            key={setting.label}
+                            textVariant="body2"
+                            {...setting}
+                        />
                     ))}
                 </Stack>
             ))}
