@@ -4,7 +4,6 @@ import { useState } from "react";
 import Slider from "@/components/Slider";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
-import ToggleButtons from "@/components/ToggleButtons";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -14,6 +13,7 @@ import Box from "@mui/material/Box";
 // Helper imports
 import { range } from "@/utils";
 import { useTextColor } from "@/helpers/styles";
+import { useSettingsStore } from "@/stores";
 
 // Type imports
 import { AttributeData } from "@/types";
@@ -34,7 +34,7 @@ export default function MindscapeCinemaPopup({
         setSliderValue(newValue as number);
     };
 
-    const [gender, setGender] = useState<"M" | "F">("M");
+    const gender = useSettingsStore((state) => state.gender);
 
     const marks = range(1, 3).map((level) => ({
         value: level,
@@ -54,7 +54,7 @@ export default function MindscapeCinemaPopup({
 
     let imgURL = `zzz/mindscapes/${attributes.id}_${sliderValue}`;
     if (attributes.id === 1551) {
-        imgURL += gender;
+        imgURL += gender.slice(0, 1);
     }
 
     return (
@@ -75,26 +75,6 @@ export default function MindscapeCinemaPopup({
                         color,
                     }}
                 />
-            </Box>
-            <Box sx={{ p: 2 }}>
-                {attributes.id === 1551 && (
-                    <ToggleButtons
-                        value={gender}
-                        onChange={(_, v) => v && setGender(v)}
-                        exclusive
-                        padding={4}
-                        buttons={[
-                            {
-                                label: <Text>Male</Text>,
-                                value: "M",
-                            },
-                            {
-                                label: <Text>Female</Text>,
-                                value: "F",
-                            },
-                        ]}
-                    />
-                )}
             </Box>
             <Image
                 src={imgURL}
