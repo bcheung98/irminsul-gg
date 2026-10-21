@@ -174,11 +174,9 @@ export default function SettingsList() {
                 gameTag,
             )
         ) {
-            group1.push(statDisplaySettings);
+            group1.push(statDisplaySettings, genderSettings);
         }
-        if (["genshin", "hsr", "wuwa", "endfield", "nte"].includes(gameTag)) {
-            group1.push(genderSettings);
-        }
+
         group1.push(serverSettings);
 
         // Remove unreleased content setting

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Slider from "@/components/Slider";
 import Text from "@/components/Text";
 import Image from "@/components/Image";
-import ToggleButtons from "@/components/ToggleButtons";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -15,6 +14,7 @@ import Stack from "@mui/material/Stack";
 // Helper imports
 import { range } from "@/utils";
 import { useTextColor } from "@/helpers/styles";
+import { useSettingsStore } from "@/stores";
 
 // Type imports
 import type { AttributeData } from "@/types";
@@ -38,7 +38,7 @@ export default function SnapshotPopup({
         setSliderValue(newValue as number);
     };
 
-    const [gender, setGender] = useState<"M" | "F">("M");
+    const gender = useSettingsStore((state) => state.gender);
 
     const marks = range(1, snapshots.length).map((level) => ({
         value: level,
@@ -58,7 +58,7 @@ export default function SnapshotPopup({
 
     let imgURL = `endfield/snapshots/${attributes.id}_${sliderValue}`;
     if (attributes.id === 1003) {
-        imgURL += gender;
+        imgURL += gender.slice(0, 1);
     }
 
     return (
@@ -79,26 +79,6 @@ export default function SnapshotPopup({
                         color,
                     }}
                 />
-            </Box>
-            <Box sx={{ px: 2 }}>
-                {attributes.id === 1003 && (
-                    <ToggleButtons
-                        value={gender}
-                        onChange={(_, v) => v && setGender(v)}
-                        exclusive
-                        padding={4}
-                        buttons={[
-                            {
-                                label: <Text>Male</Text>,
-                                value: "M",
-                            },
-                            {
-                                label: <Text>Female</Text>,
-                                value: "F",
-                            },
-                        ]}
-                    />
-                )}
             </Box>
             <Stack spacing={1} sx={{ px: 2, pb: 2 }}>
                 <Text variant="h6" weight="highlight">

@@ -175,6 +175,11 @@ export default function CharacterSplash({
                             icon={
                                 <Image
                                     src={getIconImg(index)}
+                                    fallbackSrc={
+                                        game === "zzz"
+                                            ? `zzz/agents/${id}_icon${index || ""}`
+                                            : ""
+                                    }
                                     size={72}
                                     responsive
                                     style={{
