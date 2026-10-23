@@ -234,7 +234,7 @@ function VersionUpdateCategory({
                             }}
                             href={
                                 item.url
-                                    ? `${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
+                                    ? `/${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
                                     : ""
                             }
                         />
