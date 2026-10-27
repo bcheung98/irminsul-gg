@@ -97,4 +97,11 @@ export const scenarios: UmaScenario[] = [
         nameJP: "Tracen-ken",
         global: false,
     },
+    {
+        id: 15,
+        name: "Shuntaisai",
+        displayName: "Unraveling Our Shared History: The Shuntaisai Festival",
+        nameJP: "Shuntaisai",
+        global: false,
+    },
 ];
