@@ -345,6 +345,33 @@ export const statusEffects: StatusEffect[] = [
             "マイルは短期決戦！ペースが掴めず無理ゲー！もう帰りたい……動揺から足がもつれ、マイルのレースで全力を発揮できない",
     },
     {
+        id: 45,
+        name: "Recuperation",
+        description:
+            "Balancing training and rest is important! Restores Energy once at the start of a turn when Energy is at or below a certain threshold.",
+        nameJP: "疲労回復",
+        descriptionJP:
+            "トレーニングにはメリハリも大事！　体力が一定以下になると一度だけターン開始時に体力が回復する",
+    },
+    {
+        id: 46,
+        name: "Pursuing a Cherished Dream",
+        description:
+            "Bearing her family's wish passed down through generations and the hopes of everyone who supported her, she gives her all to claim a special crown.",
+        nameJP: "宿願への勇躍",
+        descriptionJP:
+            "連綿と続く一族の願いと支えてくれた人々の想いを背負い特別な栄冠をもたらすために全力を発揮する",
+    },
+    {
+        id: 47,
+        name: "Helping Hand",
+        description:
+            "A mysterious power granted by Uma Musume with the Assistance Teaching. Slightly increases Training Effectiveness for up to 3 training sessions.",
+        nameJP: "助力の支え",
+        descriptionJP:
+            "助力の教えを持つウマ娘から得られる不思議な力3回までトレーニング効果がわずかに上がる",
+    },
+    {
         id: 100,
         name: "Pure Passion: Team Sirius",
         description:

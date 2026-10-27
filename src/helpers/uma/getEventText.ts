@@ -112,6 +112,7 @@ export function getEventText({
             multi: null,
             showCount: true,
         })} ${value}`,
+        lowest_stat: `Lowest Stat ${value}`,
         skill_points: `Skill points ${value}`,
         bond: `${getCharacter(data || charID)} bond ${value}`,
         this_card_bond: `This card bond ${value}`,
@@ -235,6 +236,8 @@ export function getEventText({
         scen_gl_hype: `Hype Level ${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value}`,
         scen_gl_songs: `${value && Array.isArray(value) ? `${value[0]}-${value[1]}` : value} songs learned (excluding GIRLS' LEGEND U)`,
         season: `${value}`,
+        ken_ing: `Secret ingredients ${value}`,
+        shun_act_low: `Lowest-level Performance ${value}`,
 
         // Secret conditions
         nc: "※ These conditions are unconfirmed, and require additional testing",
