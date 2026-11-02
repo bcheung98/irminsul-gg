@@ -431,4 +431,13 @@ export const bossMaterials = [
         rarity: 4,
         release: { version: "7.1" },
     },
+    {
+        id: 113093,
+        category: "boss",
+        tag: "Shattered Stability Anchor",
+        name: "Shattered Stability Anchor",
+        source: "Wavebinder",
+        rarity: 4,
+        release: { version: "7.2" },
+    },
 ];

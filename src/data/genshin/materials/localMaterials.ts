@@ -548,4 +548,22 @@ export const localMaterials = [
         source: "Snezhnaya",
         release: { version: "7.0" },
     },
+    {
+        id: 101273,
+        category: "local",
+        name: "Fairy Wormwood",
+        tag: "Fairy Wormwood",
+        rarity: 1,
+        source: "Snezhnaya",
+        release: { version: "7.2" },
+    },
+    {
+        id: 101274,
+        category: "local",
+        name: "Kristallfold",
+        tag: "Kristallfold",
+        rarity: 1,
+        source: "Snezhnaya",
+        release: { version: "7.2" },
+    },
 ];
