@@ -2,6 +2,12 @@ import { VersionInfo } from "@/types/version";
 
 export const genshinVersions: VersionInfo[] = [
     {
+        version: "7.2",
+        name: "Hour of Ruin",
+        releaseDate: "2026-11-04 11:00:00 UTC+8",
+        notificationDate: "2026-11-02 19:00:00 UTC+0",
+    },
+    {
         version: "7.1",
         name: "A Rekviem for the Underworld",
         releaseDate: "2026-09-23 11:00:00 UTC+8",

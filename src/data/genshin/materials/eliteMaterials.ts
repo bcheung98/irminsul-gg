@@ -1034,4 +1034,41 @@ export const eliteMaterials = [
             version: "7.0",
         },
     },
+    {
+        id: 33,
+        category: "elite",
+        name: "Snowborn Heart",
+        tag: "Snowborn",
+        release: { version: "7.2" },
+    },
+    {
+        id: 112158,
+        category: "elite",
+        name: "Snowborn Heartshard",
+        tag: "Snowborn1",
+        rarity: 2,
+        release: {
+            version: "7.2",
+        },
+    },
+    {
+        id: 112159,
+        category: "elite",
+        name: "Snowborn Mirrorheart",
+        tag: "Snowborn2",
+        rarity: 3,
+        release: {
+            version: "7.2",
+        },
+    },
+    {
+        id: 112160,
+        category: "elite",
+        name: "Snowborn Heart of Ignorance",
+        tag: "Snowborn3",
+        rarity: 4,
+        release: {
+            version: "7.2",
+        },
+    },
 ];
