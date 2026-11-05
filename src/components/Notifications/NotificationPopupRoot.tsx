@@ -73,6 +73,7 @@ export default function NotificationPopupRoot() {
     const handleDismiss = () => {
         if (notification) {
             acknowledgeNotification(notification.slug);
+            setOpen(false);
         }
     };
 

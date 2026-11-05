@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import ButtonBase from "@mui/material/ButtonBase";
 
 // Helper imports
 import { formatHref } from "@/utils";
@@ -38,22 +39,29 @@ import type {
 
 export default function GameVersionUpdateNotification({
     tag,
+    onDismiss,
 }: NotificationContentProps) {
     const parsed = parseVersionTag(tag);
 
     if (!parsed) return null;
 
     return (
-        <GameVersionUpdateContent game={parsed.game} version={parsed.version} />
+        <GameVersionUpdateContent
+            game={parsed.game}
+            version={parsed.version}
+            onDismiss={onDismiss}
+        />
     );
 }
 
 function GameVersionUpdateContent({
     game,
     version,
+    onDismiss,
 }: {
     game: keyof typeof versionDataKeys;
     version: string;
+    onDismiss?: () => void;
 }) {
     const { characters, weapons, equipment, isLoading, error } =
         useGameVersionData(game);
@@ -75,6 +83,7 @@ function GameVersionUpdateContent({
         <VersionUpdateDetails
             game={game}
             version={version}
+            onDismiss={onDismiss}
             {...versionContent}
         />
     );
@@ -83,6 +92,7 @@ function GameVersionUpdateContent({
 interface VersionUpdateDetailsProps extends VersionHighlightsProps {
     game: Game;
     version: string;
+    onDismiss?: () => void;
 }
 
 function VersionUpdateDetails({
@@ -92,6 +102,7 @@ function VersionUpdateDetails({
     weapons,
     equipment,
     bangboos,
+    onDismiss,
 }: VersionUpdateDetailsProps) {
     const theme = useTheme();
 
@@ -166,6 +177,7 @@ function VersionUpdateDetails({
                                 game={game}
                                 category={category}
                                 items={items}
+                                onDismiss={onDismiss}
                             />
                         ))}
                     </Stack>
@@ -179,10 +191,12 @@ function VersionUpdateCategory({
     game,
     category,
     items,
+    onDismiss,
 }: {
     game: Game;
     category: VersionCategory;
     items: VersionItemData[];
+    onDismiss?: () => void;
 }) {
     const theme = useTheme();
 
@@ -219,25 +233,31 @@ function VersionUpdateCategory({
             <Grid container spacing={2}>
                 {items.map((item) => (
                     <Grid key={item.id} size={{ xs: 12, sm: 6 }}>
-                        <TextLabel
-                            icon={resolvedImageURL(item)}
-                            iconProps={{
-                                size: 28,
-                                styles: {
-                                    outline: `1px solid ${getRarityColors(game, item.rarity)}`,
-                                    backgroundColor: theme.background(2),
-                                },
-                            }}
-                            title={item.displayName}
-                            titleProps={{
-                                variant: "body2",
-                            }}
-                            href={
-                                item.url
-                                    ? `/${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
-                                    : ""
-                            }
-                        />
+                        <ButtonBase
+                            onClick={onDismiss}
+                            disableRipple
+                            disableTouchRipple
+                        >
+                            <TextLabel
+                                icon={resolvedImageURL(item)}
+                                iconProps={{
+                                    size: 28,
+                                    styles: {
+                                        outline: `1px solid ${getRarityColors(game, item.rarity)}`,
+                                        backgroundColor: theme.background(2),
+                                    },
+                                }}
+                                title={item.displayName}
+                                titleProps={{
+                                    variant: "body2",
+                                }}
+                                href={
+                                    item.url
+                                        ? `/${categoryURLs[`${game}/${category}`]}/${formatHref(item.url)}`
+                                        : ""
+                                }
+                            />
+                        </ButtonBase>
                     </Grid>
                 ))}
             </Grid>
