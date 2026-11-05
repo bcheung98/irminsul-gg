@@ -38,7 +38,7 @@ export default function NotificationItem({
                 </FlexBox>
             </Stack>
             <Stack spacing={2}>
-                <Content tag={tag} />
+                <Content tag={tag} onDismiss={toggleDrawer(false)} />
                 {link && (
                     <InfoButton
                         title={linkTitle}
