@@ -62,6 +62,8 @@ export default function EventText({
                 return SkillHint({ event: outcome, isHint: true });
             case "obtain_skill":
                 return SkillHint({ event: outcome, isHint: false });
+            case "lose_skill":
+                return SkillHint({ event: outcome, isHint: false, lose: true });
             case "obtain_status":
                 return StatusEffect({
                     effectID: data,

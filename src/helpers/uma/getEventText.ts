@@ -244,7 +244,7 @@ export function getEventText({
         obj: "※ Objective-related, but the event will vary depends on your result",
         unknown: "Unknown conditions",
         pop: `Be the #${pop} favorite for the current race`,
-        use_strategy: `Use the ${strategy} strategy`,
+        use_strategy: `Use the ${getStrategy(strategy)} strategy`,
         clear_objective: `Clear objective #${value}`,
         win_g1: `Win ${countText({
             count,
