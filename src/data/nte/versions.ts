@@ -2,6 +2,11 @@ import { VersionInfo } from "@/types/version";
 
 export const nteVersions: VersionInfo[] = [
     {
+        version: "1.5",
+        name: "Once Upon a Glitched Call",
+        releaseDate: "2026-11-11 11:00:00 UTC+8",
+    },
+    {
         version: "1.4",
         name: "For Whom the Verses Mourn",
         releaseDate: "2026-09-30 11:00:00 UTC+8",

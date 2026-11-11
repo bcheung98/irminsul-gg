@@ -84,6 +84,7 @@ export const skillIconURLs: GameData<Record<string, string>> = {
         "memo-skill": "hsr/skills/{id}_memo_skill",
         "memo-talent": "hsr/skills/{id}_memo_talent",
         elation: "hsr/skills/{id}_elation",
+        ex: "hsr/skills/{id}_ex",
     },
     wuwa: {
         attack: "wuwa/skills/Attack_{weaponType}",

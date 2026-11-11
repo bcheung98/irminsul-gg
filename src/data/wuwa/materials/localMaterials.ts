@@ -287,4 +287,12 @@ export const localMaterials = [
         rarity: 1,
         release: { version: "3.7" },
     },
+    {
+        id: 42601650,
+        category: "local",
+        name: "Reverie Lily",
+        tag: "Reverie Lily",
+        rarity: 1,
+        release: { version: "3.8" },
+    },
 ];

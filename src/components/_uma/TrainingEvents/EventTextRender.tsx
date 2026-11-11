@@ -50,10 +50,12 @@ export function SkillHint({
     event,
     isHint,
     heal,
+    lose,
 }: {
     event: EventRewards;
     isHint: boolean;
     heal?: boolean;
+    lose?: boolean;
 }) {
     const theme = useTheme();
 
@@ -70,7 +72,7 @@ export function SkillHint({
 
     let text = "";
     if (heal) text = "Heal ";
-    else if (!isHint) text = "Obtain ";
+    else if (!isHint) text = lose ? "Lose " : "Obtain ";
     if (skill) {
         hint = (
             <>

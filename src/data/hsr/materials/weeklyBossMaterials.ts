@@ -80,4 +80,13 @@ export const weeklyBossMaterials = [
         source: "Asat Pramad",
         release: { version: "4.4" },
     },
+    {
+        id: 110510,
+        category: "weekly",
+        name: "Ravenous Baby Tooth",
+        tag: "Ravenous Baby Tooth",
+        rarity: 4,
+        source: "Divine Skull of Indulgence",
+        release: { version: "4.7" },
+    },
 ];

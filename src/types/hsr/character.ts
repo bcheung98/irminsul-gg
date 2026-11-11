@@ -19,6 +19,7 @@ export interface HSRCharacter extends BaseData {
     skills: HSRCharacterSkills;
     memosprite?: HSRCharacterMemosprite;
     traces: (HSRCharacterTraceNodeMain | HSRCharacterTraceNodeSmall)[];
+    potential?: Skill[];
     upgrades: Skill[];
     keywords?: SkillKeyword[];
     stats: HSRCharacterStats;

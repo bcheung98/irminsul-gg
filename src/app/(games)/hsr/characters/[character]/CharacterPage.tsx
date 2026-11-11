@@ -8,6 +8,7 @@ import CharacterInfoMisc from "@/components/CharacterInfoMisc";
 import CharacterSkills from "@/components/CharacterSkills";
 import CharacterTraces from "@/components/_hsr/CharacterTraces";
 import CharacterUpgrades from "@/components/CharacterUpgrades";
+import CharacterPotential from "@/components/_hsr/CharacterPotential";
 import InfoSplash from "@/components/InfoSplash";
 import BetaTag from "@/components/BetaTag";
 
@@ -89,6 +90,16 @@ export default function CharacterPage({
         />
     );
 
+    const Potential = character.potential ? (
+        <CharacterPotential
+            potential={character.potential}
+            keywords={character.keywords}
+            attributes={attributes}
+        />
+    ) : (
+        <></>
+    );
+
     const Upgrades = (
         <CharacterUpgrades
             title="Eidolons"
@@ -110,6 +121,7 @@ export default function CharacterPage({
     const children = [Skills];
     if (character.memosprite) children.push(Memosprite);
     children.push(Traces, Upgrades);
+    if (character.potential) children.push(Potential);
     if (!matches_up_md) children.unshift(InfoMain, Splash, InfoMisc);
 
     return (

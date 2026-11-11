@@ -91,4 +91,16 @@ export const skillKeywords: SkillKeyword[] = [
         description:
             'A target enters this state when they are hit by <span class="text-highlight">Tune Break</span> under the <span class="text-highlight">Tune Strain - Shifting</span> state. Resonators who can respond to <span class="text-highlight">Tune Strain - Interfered</span> cause additional effects when attacking targets in this state.',
     },
+    {
+        tag: "unison boon",
+        name: "Unison Boon",
+        description:
+            'Each stack of <span class="text-highlight">Unison Boon</span> increases DMG dealt by Resonators in the team who can trigger <span class="text-highlight">Unison Response</span> by 3%, up to 2 stacks.',
+    },
+    {
+        tag: "unison response",
+        name: "Unison Response",
+        description:
+            'This Resonator can trigger <span class="text-highlight">Unison Response</span>, but not in Co-op Mode.<br />When a Resonator in the team has <span class="text-highlight">Unison</span>, this Resonator triggers <span class="text-highlight">Unison Response</span> when they are switched in and casts <span class="text-highlight">Intro Skill</span>, granting all Resonators in the team 1 stacks of <span class="text-highlight">Unison Boon</span> for 30s.<br />This Resonator can grant up to 1 stacks of <span class="text-highlight">Unison Boon</span> in this way. Gaining it again only resets the duration.',
+    },
 ];

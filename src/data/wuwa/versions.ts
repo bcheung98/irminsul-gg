@@ -2,6 +2,12 @@ import { VersionInfo } from "@/types/version";
 
 export const wuwaVersions: VersionInfo[] = [
     {
+        version: "3.8",
+        name: "Lilies in a Dying Dream",
+        releaseDate: "2026-11-12 11:00:00 UTC+8",
+        notificationDate: "2026-11-11 10:00:00 UTC+8",
+    },
+    {
         version: "3.7",
         name: "Prism's Illusion, Heart's Illumination",
         releaseDate: "2026-09-30 11:00:00 UTC+8",
