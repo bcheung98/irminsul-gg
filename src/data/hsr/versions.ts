@@ -2,6 +2,11 @@ import { VersionInfo } from "@/types/version";
 
 export const hsrVersions: VersionInfo[] = [
     {
+        version: "4.7",
+        name: "Now, Lay Laughter to All Stars",
+        releaseDate: "2026-11-11 10:00:00 UTC+8",
+    },
+    {
         version: "4.6",
         name: "Dance With the Beast Before Moonrise",
         releaseDate: "2026-09-28 10:00:00 UTC+8",

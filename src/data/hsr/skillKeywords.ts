@@ -82,7 +82,7 @@ export const skillKeywords: SkillKeyword[] = [
         tag: "crowd control debuff",
         name: "Crowd Control debuff",
         description:
-            "Freeze, Entanglement, Imprisonment, Dominance, Outrage, Strong Reverberation, Alien Dream, Snarelock, Terrified, Action Lock, Happiness Puppet.",
+            "Freeze, Entanglement, Imprisonment, Dominance, Outrage, Strong Reverberation, Alien Dream, Snarelock, Terrified, Action Lock, Happiness Puppet, Grudge Ablaze, Paralysis.",
     },
     {
         tag: "debuff",
@@ -202,5 +202,29 @@ export const skillKeywords: SkillKeyword[] = [
         name: "Weakness Break State",
         description:
             "When enemy targets' Toughness is reduced to 0, they will enter the Weakness Break State, which delays their actions.",
+    },
+    {
+        tag: "elation ascension",
+        name: '"Elation" Path Ascension',
+        description:
+            'While Aeon ★ Aha holds the "Faces of Elation" state, "Punchline" and "Certified Banger" get enhanced to "Bliss" and "Party Trick" respectively, and ally characters on the Path of Elation will activate their "Innate Trace" effects.',
+    },
+    {
+        tag: "bliss",
+        name: "Bliss",
+        description:
+            "Gaining Bliss is considered as gaining Punchline. At the end of the Aha Instant, a portion of the consumed value is regained as Bliss.",
+    },
+    {
+        tag: "party trick",
+        name: "Party Trick",
+        description:
+            'When gaining the "Party Trick" state, it is considered as gaining the "Certified Banger" state. The "Party Trick" value will affect the "Innate Trace" effects of Elation ally characters.',
+    },
+    {
+        tag: "elation debt",
+        name: "Elation Debt",
+        description:
+            "Elation Debt will claim part of Max HP. Any current HP within the claimed portion is lost immediately.",
     },
 ];
