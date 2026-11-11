@@ -62,4 +62,13 @@ export const weeklyBossMaterials = [
         source: "Debt Collector",
         release: { version: "1.1" },
     },
+    {
+        id: "weeklycloneboss_a4_01",
+        category: "weekly",
+        name: "Hollowflower Seeds",
+        tag: "Hollowflower Seeds",
+        rarity: 5,
+        source: "Amber Broodmother",
+        release: { version: "1.5" },
+    },
 ];
