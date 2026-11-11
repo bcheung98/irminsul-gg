@@ -184,6 +184,7 @@ export const nextThemeData = {
             quantum: "#6778fd",
             imaginary: "#e5b909",
             special: "#f9b0f0",
+            elation: "#cb2f2f",
         },
         wuwa: {
             highlight: "#f7ca2f",
