@@ -25,6 +25,7 @@ import { urls } from "@/api";
 import type { AttributeData } from "@/types";
 import type {
     UmaCharacter,
+    UmaCharacterEvoSkill,
     UmaCharacterProfile,
     UmaCharacterSkills,
 } from "@/types/uma/character";
@@ -66,14 +67,41 @@ export default function CharacterPage({
     let awakeningSkills = character.skills.awakening;
     if (server === "Asia" && character.skills.awakeningJP)
         awakeningSkills = character.skills.awakeningJP;
+
+    const goldSkills = awakeningSkills
+        .filter((skillID) => {
+            const skill = skills.find((skill) => skill.id === skillID);
+            if (skill && skill.rarity === 2 && skill.evolutions) {
+                return skillID;
+            }
+            return false;
+        })
+        .filter(Boolean);
+
+    const evoSkills: UmaCharacterEvoSkill[] = [];
+    goldSkills.forEach((skillID) => {
+        const skill = skills.find((skill) => skill.id === skillID);
+        const evos = skill!.evolutions!.find(
+            (evo) => evo.cardID === character.id,
+        )?.evos;
+        if (evos) {
+            evos.map((evo) => ({ new: evo, old: skillID })).forEach((evo) =>
+                evoSkills.push(evo),
+            );
+        }
+    });
+
     let eventSkills = character.skills.event;
     if (server === "Asia" && character.skills.eventJP)
         eventSkills = character.skills.eventJP;
+
     const charSkills: UmaCharacterSkills = {
         ...character.skills,
         awakening: awakeningSkills,
         event: eventSkills,
+        evo: evoSkills,
     };
+
     delete charSkills.awakeningJP;
     delete charSkills.eventJP;
 
