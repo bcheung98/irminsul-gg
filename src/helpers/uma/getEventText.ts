@@ -72,6 +72,7 @@ export function getEventText({
         pop = props?.pop || 1,
         stat = props?.stat || 1,
         mood = props?.mood || 3,
+        moodList = props?.moodList || [3, 4],
         eventName = props?.eventName || "",
         eventNumber = props?.eventNumber || 1,
         eventOption = props?.eventOption || 1,
@@ -83,14 +84,6 @@ export function getEventText({
 
     charName = getCharacter(event.props?.charName);
     gradeList = event.props?.gradeList || [1, 2];
-    let mood1 = 3;
-    let mood2 = 3;
-    if (mood && mood > 10) {
-        [mood1, mood2] = mood
-            .toString()
-            .split("")
-            .map((i) => Number(i));
-    }
 
     const textMap: { [key: string]: string } = {
         // Event Rewards
@@ -186,12 +179,12 @@ export function getEventText({
         result_bad: "※ Bad result",
         wins_exact: `※ ${count} wins`,
         mood: `Mood ${value}`,
-        mood_good: "※ Mood Good or better",
-        mood_bad: "※ Mood Normal or worse",
-        mood_min: `※ Mood ${getMood(mood)} or better`,
-        mood_max: `※ Mood ${getMood(mood)} or worse`,
-        mood_exact: `※ Mood ${getMood(mood)}`,
-        mood_or: `※ Mood ${mood1} or ${mood2}`,
+        mood_good: "※ Mood is Good or better",
+        mood_bad: "※ Mood is Normal or lower",
+        mood_min: `※ Mood is ${getMood(mood)} or better`,
+        mood_max: `※ Mood is ${getMood(mood)} or lower`,
+        mood_exact: `※ Mood is ${getMood(mood)}`,
+        mood_or: `※ Mood is ${getMood(moodList[0])} or ${getMood(moodList[1])}`,
         scenario_link: `※ Scenario link: This event will grant higher rewards in the ${getScenario(
             Number(data),
         )} scenario.`,

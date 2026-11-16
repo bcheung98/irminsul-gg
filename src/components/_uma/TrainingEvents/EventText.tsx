@@ -233,6 +233,19 @@ export default function EventText({
                 return props?.conditions?.map((con, i) => (
                     <EventText key={i} outcome={con} prefix="※" />
                 ));
+            case "di_s":
+                return (
+                    <Text
+                        variant="body2"
+                        weight="highlight"
+                        sx={{
+                            my: 1,
+                            color: theme.text.uma.highlight,
+                        }}
+                    >
+                        or
+                    </Text>
+                );
             default:
                 return (
                     <span style={{ color: textColor, fontWeight: textWeight }}>

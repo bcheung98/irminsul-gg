@@ -124,6 +124,7 @@ export interface EventExtraProps {
     pop?: number;
     stat?: number;
     mood?: number;
+    moodList?: number[];
     statusEffect?: number;
     eventName?: string;
     eventNumber?: number;
