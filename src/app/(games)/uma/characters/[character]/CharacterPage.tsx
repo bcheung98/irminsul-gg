@@ -25,22 +25,24 @@ import { urls } from "@/api";
 import type { AttributeData } from "@/types";
 import type {
     UmaCharacter,
-    UmaCharacterEvoSkill,
     UmaCharacterProfile,
     UmaCharacterSkills,
 } from "@/types/uma/character";
 import type { EventList } from "@/types/uma/event";
 import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaCharacterEvoSkills } from "@/types/uma/character";
 
 export default function CharacterPage({
     character,
     profile,
     skills,
+    evolutions,
     events,
 }: {
     character: UmaCharacter;
     profile: UmaCharacterProfile;
     skills: UmaSkill[];
+    evolutions: UmaCharacterEvoSkills[];
     events: Partial<EventList>;
 }) {
     const profiles: UmaCharacterProfile[] = useSWR(
@@ -68,29 +70,6 @@ export default function CharacterPage({
     if (server === "Asia" && character.skills.awakeningJP)
         awakeningSkills = character.skills.awakeningJP;
 
-    const goldSkills = awakeningSkills
-        .filter((skillID) => {
-            const skill = skills.find((skill) => skill.id === skillID);
-            if (skill && skill.rarity === 2 && skill.evolutions) {
-                return skillID;
-            }
-            return false;
-        })
-        .filter(Boolean);
-
-    const evoSkills: UmaCharacterEvoSkill[] = [];
-    goldSkills.forEach((skillID) => {
-        const skill = skills.find((skill) => skill.id === skillID);
-        const evos = skill!.evolutions!.find(
-            (evo) => evo.cardID === character.id,
-        )?.evos;
-        if (evos) {
-            evos.map((evo) => ({ new: evo, old: skillID })).forEach((evo) =>
-                evoSkills.push(evo),
-            );
-        }
-    });
-
     let eventSkills = character.skills.event;
     if (server === "Asia" && character.skills.eventJP)
         eventSkills = character.skills.eventJP;
@@ -99,7 +78,8 @@ export default function CharacterPage({
         ...character.skills,
         awakening: awakeningSkills,
         event: eventSkills,
-        evo: evoSkills,
+        evo:
+            evolutions.find((evo) => evo.id === character.id)?.evolutions || [],
     };
 
     delete charSkills.awakeningJP;
@@ -140,7 +120,7 @@ export default function CharacterPage({
     if (!profiles) return <Loader />;
 
     return (
-        <UmaContext value={{ skills, events, profiles }}>
+        <UmaContext value={{ skills, events, profiles, evolutions }}>
             <InfoPageRoot
                 header={header}
                 leftColumn={leftColumn.length > 0 && leftColumn}

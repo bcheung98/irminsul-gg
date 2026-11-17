@@ -30,6 +30,7 @@ import type {
 import type { UmaSkill } from "@/types/uma/skill";
 import type { UmaScenario } from "@/types/uma/scenario";
 import type { Server } from "@/types";
+import type { UmaCharacterEvoSkills } from "@/types/uma/character";
 
 export default function SkillSources({
     skill,
@@ -47,12 +48,17 @@ export default function SkillSources({
     const supports: UmaSupport[] = useSWR(urls["uma/supports"], (url: string) =>
         fetch(url).then((r) => r.json()),
     ).data;
+    const evolutions: UmaCharacterEvoSkills[] = useSWR(
+        urls["uma/evolutions"],
+        (url: string) => fetch(url).then((r) => r.json()),
+    ).data;
 
     const server = useServerStore((state) => state.uma);
 
     const { id } = skill;
 
-    if (!characters || !supports) return <LinearProgress color="info" />;
+    if (!characters || !supports || !evolutions)
+        return <LinearProgress color="info" />;
 
     function filterSources(item: UmaCharacter | UmaSupport) {
         if (server === "NA") {
@@ -69,13 +75,22 @@ export default function SkillSources({
                     char.skills.awakeningJP?.map((skill) => Number(skill)),
                 char.skills.innate.map((skill) => Number(skill)),
                 char.skills.unique.map((skill) => Number(skill)),
-                server === "Asia" &&
-                    char.skills.evo.map((skill) => Number(skill.new)),
             ]
                 .flat()
                 .includes(id),
         )
         .filter(filterSources);
+
+    if (skill.rarity === 6) {
+        const evoChar = characters.find(
+            (char) =>
+                char.id ===
+                evolutions.filter((evo) =>
+                    evo.evolutions.map((e) => e.new).includes(id),
+                )[0].id,
+        );
+        if (evoChar) characterSources.push(evoChar);
+    }
 
     const characterEventSources = characters
         .filter((char) => {

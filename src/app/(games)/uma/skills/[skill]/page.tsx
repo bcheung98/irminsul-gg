@@ -11,7 +11,8 @@ import { getMetadata } from "@/helpers/metadata";
 
 // Type imports
 import type { Metadata } from "next";
-import { UmaSkill } from "@/types/uma/skill";
+import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaCharacterEvoSkills } from "@/types/uma/character";
 
 interface Props {
     params: Promise<{ skill: string }>;
@@ -51,6 +52,8 @@ export default async function Page({ params }: Props) {
         "uma/skills",
         (s) => s.id.toString() === skill,
     );
+    const evolutionData =
+        await getDataSet<UmaCharacterEvoSkills>("uma/evolutions");
 
     if (!skillData || !skillList) {
         notFound();
@@ -58,7 +61,11 @@ export default async function Page({ params }: Props) {
 
     return (
         <Suspense fallback={<Loader />}>
-            <SkillPage skills={skillList} skill={skillData} />
+            <SkillPage
+                skills={skillList}
+                skill={skillData}
+                evolutions={evolutionData}
+            />
         </Suspense>
     );
 }

@@ -36,14 +36,23 @@ export default function SkillAttributes({
 
     const server = useStore(useServerStore, (state) => state.uma);
 
-    const { skills } = useUmaContext();
+    const { skills, evolutions } = useUmaContext();
     let skillVersions = skill.versions || [];
     if (server === "NA") {
         skillVersions = skillVersions.filter(
             (v) => skills.find((skill) => skill.id === v)?.global,
         );
     }
-    if (skill.evo) skillVersions = [skill.evo.old];
+
+    const isEvoSkill = skill.rarity === 6;
+
+    if (isEvoSkill) {
+        const oldSkillID = evolutions
+            ?.map((evo) => evo.evolutions)
+            .flat()
+            .find((evo) => evo.new === skill.id)?.old;
+        if (oldSkillID) skillVersions = [oldSkillID];
+    }
 
     const page = !Boolean(handleClick);
 
@@ -98,13 +107,12 @@ export default function SkillAttributes({
                         )}
                     </Stack>
                 </Grid>
-                {(skillVersions.length > 0 ||
-                    (skill.evolutions && skill.evolutions.length > 0)) && (
+                {skillVersions.length > 0 && (
                     <Grid size={{ xs: 12, lg: 5 }}>
                         <Stack spacing={2}>
                             <SkillVersions
                                 skills={skillVersions}
-                                evo={Boolean(skill.evo)}
+                                evo={isEvoSkill}
                                 handleClick={handleClick}
                             />
                             <SkillEvo
