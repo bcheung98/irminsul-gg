@@ -11,34 +11,22 @@ import { formatAptitude } from "./formatConditions";
 import { raceConditions } from "@/data/uma/races";
 import { racetracks } from "@/data/uma/racetracks";
 import { scenarios } from "@/data/uma/scenarios";
-import { UmaCharacterProfile } from "@/types/uma/character";
-import { EventRewards } from "@/types/uma/event";
-import { Server } from "@/types";
-
-const eventNames: Record<Server, Record<string, string>> = {
-    NA: {
-        "501023520": "Battle With a Raging Dragon",
-        "501037525": "The Outcome of Flash's Plan",
-        "501043524": "いたずら大計画、始動なのだ！",
-    },
-    Asia: {
-        "501023520": "暴れ龍との攻防",
-        "501037525": "結果：フラッシュプラン",
-        "501043524": "いたずら大計画、始動なのだ！",
-    },
-    EU: {},
-};
+import type { UmaCharacterProfile } from "@/types/uma/character";
+import type { EventNames, EventRewards } from "@/types/uma/event";
+import type { Server } from "@/types";
 
 export function getEventText({
     event,
     profiles,
     charID,
     server = "NA",
+    eventNames,
 }: {
     event: EventRewards;
     profiles: UmaCharacterProfile[];
     charID: number | string;
     server?: Server;
+    eventNames?: EventNames[];
 }) {
     const { tag, value, count, data, props = {} } = event;
 
@@ -73,7 +61,7 @@ export function getEventText({
         stat = props?.stat || 1,
         mood = props?.mood || 3,
         moodList = props?.moodList || [3, 4],
-        eventName = props?.eventName || "",
+        eventName = props?.eventName || 0,
         eventNumber = props?.eventNumber || 1,
         eventOption = props?.eventOption || 1,
         eventOptions = props?.eventOptions || [1],
@@ -156,7 +144,8 @@ export function getEventText({
             showCount: true,
         })}`,
         event_count: `${value}`,
-        event_trigger: `Event 「${eventNames[server][value as string]}」 will occur next turn`,
+        event_trigger: `Event 「${getEventName(eventNames, eventName, server)}」 will occur next turn`,
+        event_block: `Event 「${getEventName(eventNames, eventName, server)}」 will not occur this run`,
         track_hint: `Relevant track skill hint ${value}`,
         stat_not_disabled: `Stat that didn't have its facility disabled ${value}`,
         expensive_races: "Racing consumes more energy",
@@ -469,47 +458,61 @@ export function getEventText({
             single: "once",
             multi: `at least ${count} times`,
         })}: ${getCharacterList(charList)}`,
-        mo_ev: `Trigger the 「${
-            eventName || value
-        }」 training event while having at least ${getMood(mood)} mood`,
-        ev: `Trigger the 「${eventName || value}」 training event`,
-        evn: `Trigger the 「${
-            eventName || value
-        }」 training event ${count} times`,
-        ev_trc_t: `After the 「${
-            eventName || value
-        }」 event, train in the facility that wasn't locked ${countText({
+        mo_ev: `Trigger the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 training event while having at least ${getMood(mood)} mood`,
+        ev: `Trigger the 「${getEventName(eventNames, eventName, server)}」 training event`,
+        evn: `Trigger the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 training event ${count} times`,
+        ev_trc_t: `After the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 event, train in the facility that wasn't locked ${countText({
             count,
             single: "",
             multi: "times",
         })}`,
-        p_ev_s: `Fulfill a promise to your fans in the 「${
-            eventName || value
-        }」 event`,
+        p_ev_s: `Fulfill a promise to your fans in the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 event`,
         e_ev: `Trigger any training event that grants ${data} ${countText({
             count,
             single: "",
             multi: `$X times`,
         })}`,
-        ev_ac_on: `In the 「${eventName || value}」 training event, get the ${
+        ev_ac_on: `In the 「${getEventName(eventNames, eventName, server)}」 training event, get the ${
             eventOutcomes[eventOutcome]
         } outcome after selecting one of the following choices: ${getOptionList(
             eventOptions,
         )}`,
-        ev_ac_on_nooutcome: `In the 「${
-            eventName || value
-        }」 training event, select one of the following choices: ${getOptionList(
+        ev_ac_on_nooutcome: `In the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 training event, select one of the following choices: ${getOptionList(
             eventOptions,
         )}`,
-        ev_cn_on: `In the 「${eventName || value}」 training event, get the ${
+        ev_cn_on: `In the 「${getEventName(eventNames, eventName, server)}」 training event, get the ${
             eventOutcomes[eventOutcome]
         } outcome after selecting choice #${eventOption}`,
-        ev_cn_on_nochoice: `In the 「${
-            eventName || value
-        }」 training event, get the ${eventOutcomes[eventOutcome]} outcome`,
-        ev_cn_on_nooutcome: `In the 「${
-            eventName || value
-        }」 training event, select choice #${eventOption}`,
+        ev_cn_on_nochoice: `In the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 training event, get the ${eventOutcomes[eventOutcome]} outcome`,
+        ev_cn_on_nooutcome: `In the 「${getEventName(
+            eventNames,
+            eventName,
+            server,
+        )}」 training event, select choice #${eventOption}`,
         no_fail_training: "Don't fail a single training during the run",
         scen_uaf_wf: "Win the U.A.F. Showdown",
         scen_uaf_wa: "Win all the U.A.F. tournaments",
@@ -618,6 +621,18 @@ function getOptionList(o = [1]) {
     return o
         .map((x, i) => (i < o.length - 1 ? `#${x}, ` : `or #${x}`))
         .join("");
+}
+
+function getEventName(
+    events: EventNames[] | undefined,
+    eventID: number,
+    server: Server,
+) {
+    if (!events) return "";
+    const e = events.find((event) => event.id === eventID);
+    if (!e) return "";
+    if (server === "Asia") return e.nameJP;
+    return e.name;
 }
 
 const years = ["Debut", "Classic", "Senior"];

@@ -61,9 +61,14 @@ export default function EventCharacter({
         eventSlowMetabolism({ props: characterEvents.props }),
     );
     recEvents = characterEvents.events.recreation;
-    secretEvents = characterEvents.events.secret?.filter((event) =>
-        didNotExist(server, event.didNotExist),
-    );
+    secretEvents = characterEvents.events.secret
+        ?.filter((event) => didNotExist(server, event.didNotExist))
+        .filter((event) =>
+            event.conditions?.some(
+                (con) =>
+                    !con.tag.startsWith("obj_") && con.tag !== "participate",
+            ),
+        );
     eventMisc({ props: characterEvents.props }).forEach((event) =>
         otherEvents.push(event),
     );

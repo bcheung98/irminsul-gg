@@ -18,6 +18,7 @@ export const history = [
     "pre_yhs",
     "pre_santa_anita",
     "pre_breeders",
+    "pre_tracen_ken",
     "present",
 ];
 

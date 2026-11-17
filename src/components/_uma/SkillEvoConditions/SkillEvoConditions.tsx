@@ -43,7 +43,7 @@ export default function SkillEvoConditions({
                         <Box key={index} sx={{ p: 1 }}>
                             {condition.map((con, i) => (
                                 <Box key={i}>
-                                    <EventText outcome={con} />
+                                    <EventText index={i} outcome={con} />
                                     {i < condition.length - 1 && (
                                         <Text
                                             variant="body2"
