@@ -18,21 +18,26 @@ import { useCharIDContext, useUmaContext } from "@/context";
 import { getOrdinal } from "@/utils";
 import { getEventText, getStrategy } from "@/helpers/uma/getEventText";
 import { useStore, useServerStore } from "@/stores";
+import { getCharacterEventNames } from "@/helpers/uma/getEventNames";
 
 // Type imports
 import { EventRewards } from "@/types/uma/event";
 
 export default function EventText({
+    index,
     outcome,
     prefix = "",
 }: {
+    index: number;
     outcome: EventRewards;
     prefix?: string;
 }) {
     const theme = useTheme();
 
     const charID = useCharIDContext();
-    const { profiles } = useUmaContext();
+    const { profiles, events } = useUmaContext();
+
+    const eventNames = getCharacterEventNames(events);
 
     const { tag, value, data, count, props, random } = outcome;
 
@@ -57,7 +62,7 @@ export default function EventText({
     function renderEventText(tag: string) {
         switch (tag) {
             case "nl":
-                return <br />;
+                return index ? <br /> : null;
             case "skill_hint":
                 return SkillHint({ event: outcome, isHint: true });
             case "obtain_skill":
@@ -179,6 +184,11 @@ export default function EventText({
                     race: props?.raceName,
                     text: "Do not run in the",
                 });
+            case "obj_win":
+                return Race({
+                    race: value?.toString(),
+                    text: "Win the <> objective race",
+                });
             case "pick_and_win":
                 return Race({
                     race: value?.toString(),
@@ -212,8 +222,8 @@ export default function EventText({
                 return RaceSeries({ tag });
             case "race_change":
                 return Race({
-                    race: value?.toString() || data?.toString(),
-                    text: `Objective race changed to`,
+                    race: data?.toString(),
+                    text: `Objective ${value} changed to`,
                 });
             case "race_cancelled":
                 return Race({
@@ -231,8 +241,21 @@ export default function EventText({
                 return SkillTextRandom({ eventHints: props?.eventHints });
             case "conditions":
                 return props?.conditions?.map((con, i) => (
-                    <EventText key={i} outcome={con} prefix="※" />
+                    <EventText key={i} index={i} outcome={con} prefix="※" />
                 ));
+            case "di_s":
+                return (
+                    <Text
+                        variant="body2"
+                        weight="highlight"
+                        sx={{
+                            my: 1,
+                            color: theme.text.uma.highlight,
+                        }}
+                    >
+                        or
+                    </Text>
+                );
             default:
                 return (
                     <span style={{ color: textColor, fontWeight: textWeight }}>
@@ -241,6 +264,7 @@ export default function EventText({
                             profiles,
                             charID,
                             server,
+                            eventNames,
                         })}
                     </span>
                 );

@@ -1,6 +1,7 @@
-import { UmaRank, UmaRarity } from ".";
-import { BaseData, VoiceActorData } from "..";
-import { UmaVersion } from "../version";
+import type { UmaRank, UmaRarity } from ".";
+import type { BaseData, VoiceActorData } from "..";
+import type { UmaVersion } from "../version";
+import type { EventRewards } from "./event";
 
 export interface UmaCharacter extends BaseData {
     charID: number;
@@ -61,9 +62,16 @@ export interface UmaCharacterSkills {
 
 export type UmaSkillKey = keyof UmaCharacterSkills;
 
+export interface UmaCharacterEvoSkills {
+    id: number;
+    evolutions: UmaCharacterEvoSkill[];
+}
+
 export interface UmaCharacterEvoSkill {
     new: number;
     old: number;
+    conditions: EventRewards[][];
+    global: boolean;
 }
 
 export interface UmaCharacterProfile {

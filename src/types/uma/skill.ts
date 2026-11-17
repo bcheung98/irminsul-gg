@@ -1,7 +1,6 @@
-import { skillEffects, skillTargets } from "@/data/uma/skills";
-import { UmaNames, UmaRarity, UmaSkillRarity } from ".";
-import { UmaVersion } from "../version";
-import { EventRewards } from "./event";
+import type { skillEffects, skillTargets } from "@/data/uma/skills";
+import type { UmaNames, UmaRarity, UmaSkillRarity } from ".";
+import type { UmaVersion } from "../version";
 
 export interface UmaSkill {
     id: number;
@@ -16,7 +15,6 @@ export interface UmaSkill {
     conditions: UmaSkillCondition[];
     conditionsEN?: UmaSkillCondition[];
     evolutions?: UmaSkillEvolution[];
-    evo?: UmaSkillEvo;
     tags: string[];
     scenarioEvents?: number[];
     versions?: number[];
@@ -43,11 +41,6 @@ export interface UmaSkillEvolution {
     cardID?: number;
     scenarioID?: number;
     evos: number[];
-}
-
-export interface UmaSkillEvo {
-    old: number;
-    evoConditions: EventRewards[][];
 }
 
 export type UmaSkillEffect = keyof typeof skillEffects;

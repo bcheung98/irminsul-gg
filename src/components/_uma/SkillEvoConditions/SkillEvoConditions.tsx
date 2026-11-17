@@ -9,21 +9,17 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 
 // Helper imports
-import { useUmaContext } from "@/context";
 import ContentBox from "@/components/ContentBox";
 
-export default function SkillEvoConditions({ skillID }: { skillID: number }) {
+// Type imports
+import type { EventRewards } from "@/types/uma/event";
+
+export default function SkillEvoConditions({
+    conditions,
+}: {
+    conditions: EventRewards[][];
+}) {
     const theme = useTheme();
-
-    const { skills } = useUmaContext();
-    const skill = skills.find((skill) => skill.id === skillID);
-
-    if (!skill) {
-        console.warn(`Could not find skill with ID ${skillID}`);
-        return null;
-    }
-
-    if (!skill.evo) return null;
 
     return (
         <Stack
@@ -43,11 +39,11 @@ export default function SkillEvoConditions({ skillID }: { skillID: number }) {
                     sx={{ backgroundColor: theme.background(0), px: 1 }}
                     divider={<Divider />}
                 >
-                    {skill.evo.evoConditions.map((condition, index) => (
+                    {conditions.map((condition, index) => (
                         <Box key={index} sx={{ p: 1 }}>
                             {condition.map((con, i) => (
                                 <Box key={i}>
-                                    <EventText outcome={con} />
+                                    <EventText index={i} outcome={con} />
                                     {i < condition.length - 1 && (
                                         <Text
                                             variant="body2"

@@ -30,16 +30,19 @@ import type {
 } from "@/types/uma/character";
 import type { EventList } from "@/types/uma/event";
 import type { UmaSkill } from "@/types/uma/skill";
+import type { UmaCharacterEvoSkills } from "@/types/uma/character";
 
 export default function CharacterPage({
     character,
     profile,
     skills,
+    evolutions,
     events,
 }: {
     character: UmaCharacter;
     profile: UmaCharacterProfile;
     skills: UmaSkill[];
+    evolutions: UmaCharacterEvoSkills[];
     events: Partial<EventList>;
 }) {
     const profiles: UmaCharacterProfile[] = useSWR(
@@ -66,14 +69,19 @@ export default function CharacterPage({
     let awakeningSkills = character.skills.awakening;
     if (server === "Asia" && character.skills.awakeningJP)
         awakeningSkills = character.skills.awakeningJP;
+
     let eventSkills = character.skills.event;
     if (server === "Asia" && character.skills.eventJP)
         eventSkills = character.skills.eventJP;
+
     const charSkills: UmaCharacterSkills = {
         ...character.skills,
         awakening: awakeningSkills,
         event: eventSkills,
+        evo:
+            evolutions.find((evo) => evo.id === character.id)?.evolutions || [],
     };
+
     delete charSkills.awakeningJP;
     delete charSkills.eventJP;
 
@@ -112,7 +120,7 @@ export default function CharacterPage({
     if (!profiles) return <Loader />;
 
     return (
-        <UmaContext value={{ skills, events, profiles }}>
+        <UmaContext value={{ skills, events, profiles, evolutions }}>
             <InfoPageRoot
                 header={header}
                 leftColumn={leftColumn.length > 0 && leftColumn}

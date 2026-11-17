@@ -4,7 +4,10 @@ import type { CharacterSkillsList, SkillKeyword } from "@/types/skill";
 import type { CharacterBuffs } from "@/types/character";
 import type { UmaSkill } from "@/types/uma/skill";
 import type { EventList } from "@/types/uma/event";
-import type { UmaCharacterProfile } from "@/types/uma/character";
+import type {
+    UmaCharacterEvoSkills,
+    UmaCharacterProfile,
+} from "@/types/uma/character";
 
 const defaultGameInfo = {
     tag: "" as Game,
@@ -25,6 +28,7 @@ interface UmaContext {
     skills: UmaSkill[];
     events: Partial<EventList>;
     profiles: UmaCharacterProfile[];
+    evolutions?: UmaCharacterEvoSkills[];
 }
 
 export const GameListContext = createContext<GameInfo[]>([]);
@@ -41,6 +45,7 @@ export const UmaContext = createContext<UmaContext>({
     skills: [],
     events: {},
     profiles: [],
+    evolutions: [],
 });
 
 export function useGameList() {

@@ -14,6 +14,7 @@ import { getMetadata } from "@/helpers/metadata";
 import type { Metadata } from "next";
 import { UmaCharacter, UmaCharacterProfile } from "@/types/uma/character";
 import { UmaSkill } from "@/types/uma/skill";
+import { UmaCharacterEvoSkills } from "@/types/uma/character";
 import { EventList } from "@/types/uma/event";
 
 interface Props {
@@ -61,14 +62,17 @@ export default async function Page({ params }: Props) {
         (char) => charData.charID === char.id,
     );
     const skillData = await getDataSet<UmaSkill>("uma/skills");
+    const evolutionData =
+        await getDataSet<UmaCharacterEvoSkills>("uma/evolutions");
     const charEventData = await getUmaEvents("character");
     const charOutfitEventData = await getUmaEvents("character-outfit");
 
-    const [char, profile, skills, charEvent, charOutfitEvent] =
+    const [char, profile, skills, evolutions, charEvent, charOutfitEvent] =
         await Promise.all([
             charData,
             profileData,
             skillData,
+            evolutionData,
             charEventData,
             charOutfitEventData,
         ]);
@@ -84,6 +88,7 @@ export default async function Page({ params }: Props) {
                 character={char}
                 profile={profile}
                 skills={skills}
+                evolutions={evolutions}
                 events={events}
             />
         </Suspense>

@@ -16,7 +16,7 @@ import Card from "@mui/material/Card";
 // Helper imports
 import { range } from "@/utils";
 
-const levels = ["1", "20", "40", "60", "80", "90", "90"];
+const levels = ["1", "20", "40", "60", "80", "90", "90", "90"];
 
 export default function SpecialWeaponInfo({ id }: { id: number }) {
     const theme = useTheme();
@@ -52,7 +52,7 @@ export default function SpecialWeaponInfo({ id }: { id: number }) {
     }));
 
     const index = sliderValue - 1;
-    const passiveLevels = [1, 1, 2, 2, 3, 3, 4];
+    const passiveLevels = [1, 1, 2, 2, 3, 3, 4, 5];
     const refinementLevel = passiveLevels[index];
 
     return (
@@ -154,6 +154,7 @@ const weapons = {
             "Solitary Drifting of the Astral Vessel",
             "Grand Wish of the Shifting Stars",
             "Twilight of Fallen Stars",
+            "Everflow of the Astral Cluster",
         ],
         data: [
             ["Level", ...levels],
@@ -166,6 +167,7 @@ const weapons = {
                 532,
                 608,
                 608,
+                608,
             ],
             [
                 "CRIT Rate|genshin/icons/stat-icons/CRIT_Rate",
@@ -174,6 +176,7 @@ const weapons = {
                 "18.5%",
                 "24.4%",
                 "30.2%",
+                "33.1%",
                 "33.1%",
                 "33.1%",
             ],
@@ -186,6 +189,9 @@ const weapons = {
                 'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">24%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
                 'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">32%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
                 'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">40%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
+                'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">40%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
+                'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">40%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
+                'When the Traveler equips this, their CRIT DMG increases by 6% for every Element they have resonated with. Additionally, the Traveler\'s ATK will also increase by <span class="text-value">40%</span> for 8s, and regenerate <span class="text-value">5</span> Elemental Energy, after they attack and hit an opponent. This effect can trigger once every 5s. This can be triggered even when the character is not on the field.',
             ],
             splash: [
                 "",
@@ -194,7 +200,8 @@ const weapons = {
                 "In some corner of the universe, there must be answers and hope.<br />How much time has slipped way since someone looked up at the starry sky with such a thought?",
                 "Perhaps humans are no different from moths drawn to a flame.<br />But so be it. Even the most ordinary life yearns to survive.",
                 "The darkness cannot dull the traveler's edge. With swords and plowshares aboard, a new beginning is well within reach.",
-                "",
+                "The traveler's vision is like a fleeting dream; when dawn arrives, the dream descends into reality.",
+                "Deeds and trophies, memories and partings — memories become stars that adorn the heart's galaxy. The traveler is never lonely on the journey.",
             ],
         },
     },

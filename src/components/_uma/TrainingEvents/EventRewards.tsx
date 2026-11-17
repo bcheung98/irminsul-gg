@@ -31,7 +31,7 @@ export default function EventRewards(props: {
                         </Text>
                     )}
                     {outcome.map((reward, index) => (
-                        <EventText key={index} outcome={reward} />
+                        <EventText key={index} index={index} outcome={reward} />
                     ))}
                 </Stack>
             ))}

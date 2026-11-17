@@ -32,6 +32,7 @@ export const urls = {
     "uma/character-profiles": "https://api.irminsul.gg/v2/uma/character-profiles.json",
     "uma/supports": "https://api.irminsul.gg/v2/uma/supports.json",
     "uma/skills": "https://api.irminsul.gg/v2/uma/skills.json",
+    "uma/evolutions": "https://api.irminsul.gg/v2/uma/evolutions.json",
     "uma/banner-characters": "https://api.irminsul.gg/v2/uma/banner-characters.json",
     "uma/banner-supports": "https://api.irminsul.gg/v2/uma/banner-supports.json",
     // Endfield

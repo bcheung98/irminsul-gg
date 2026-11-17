@@ -13,7 +13,7 @@ import { useStore, useServerStore } from "@/stores";
 import { toTitleCase } from "@/utils";
 
 // Type imports
-import {
+import type {
     UmaCharacterEvoSkill,
     UmaCharacterSkills,
     UmaSkillKey,
@@ -26,58 +26,18 @@ export default function CharacterSkills({
 }) {
     const server = useStore(useServerStore, (state) => state.uma);
 
-    const showSkill = (key: UmaSkillKey) => {
+    const shouldShowSkill = (key: UmaSkillKey) => {
         if (skills[key]?.length === 0) return false;
         if (key === "evo") return server === "Asia";
         return true;
     };
-
-    const renderSkill = (key: UmaSkillKey, skills: number[]) => (
-        <Grid container spacing={2}>
-            {skills.map((skill, index) => (
-                <Grid key={index} size={12}>
-                    <SkillInfo skillID={skill} expand={key === "unique"} />
-                </Grid>
-            ))}
-        </Grid>
-    );
-
-    const renderEvoSkill = (skills: UmaCharacterEvoSkill[]) => (
-        <Stack spacing={4}>
-            {skills.map((skill, index) => (
-                <Stack key={index} spacing={0.5}>
-                    <SkillEvoConditions skillID={skill.new} />
-                    {Object.values(skill)
-                        .reverse()
-                        .map((s, i) => (
-                            <Grid
-                                key={i}
-                                container
-                                columnSpacing={2}
-                                alignItems="center"
-                            >
-                                <Grid size={i === 0 ? { xs: 10, sm: 4 } : 12}>
-                                    <SkillInfo
-                                        skillID={s}
-                                        expand={Boolean(i)}
-                                    />
-                                </Grid>
-                                <Grid size="auto">
-                                    {i == 0 && <Text>❯❯❯</Text>}
-                                </Grid>
-                            </Grid>
-                        ))}
-                </Stack>
-            ))}
-        </Stack>
-    );
 
     return (
         <ContentBox header="Skills">
             <Grid container spacing={2}>
                 {Object.entries(skills).map(
                     ([key, skills]) =>
-                        showSkill(key as UmaSkillKey) && (
+                        shouldShowSkill(key as UmaSkillKey) && (
                             <Grid
                                 key={key}
                                 size={
@@ -93,17 +53,17 @@ export default function CharacterSkills({
                                             key === "evo" &&
                                             " (JP server only)"}
                                     </Text>
-                                    {key !== "evo"
-                                        ? renderSkill(
-                                              key as UmaSkillKey,
-                                              skills as number[]
-                                          )
-                                        : renderEvoSkill(
-                                              skills as UmaCharacterEvoSkill[]
-                                          )}
+                                    {key !== "evo" ? (
+                                        <Skill
+                                            skillKey={key as UmaSkillKey}
+                                            skills={skills}
+                                        />
+                                    ) : (
+                                        <EvoSkill skills={skills} />
+                                    )}
                                 </Stack>
                             </Grid>
-                        )
+                        ),
                 )}
             </Grid>
         </ContentBox>
@@ -112,4 +72,49 @@ export default function CharacterSkills({
 
 function formatTitle(key: string) {
     return key === "evo" ? "Evolved" : toTitleCase(key);
+}
+
+function Skill({
+    skillKey,
+    skills,
+}: {
+    skillKey: UmaSkillKey;
+    skills: number[];
+}) {
+    return (
+        <Grid container spacing={2}>
+            {skills.map((skill, index) => (
+                <Grid key={index} size={12}>
+                    <SkillInfo skillID={skill} expand={skillKey === "unique"} />
+                </Grid>
+            ))}
+        </Grid>
+    );
+}
+
+function EvoSkill({ skills }: { skills: UmaCharacterEvoSkill[] }) {
+    return (
+        <Stack spacing={4}>
+            {skills.map((skill, index) => (
+                <Stack key={index} spacing={0.5}>
+                    <SkillEvoConditions conditions={skill.conditions} />
+                    {[skill.old, skill.new].map((s, i) => (
+                        <Grid
+                            key={i}
+                            container
+                            columnSpacing={2}
+                            alignItems="center"
+                        >
+                            <Grid size={i === 0 ? { xs: 10, sm: 4 } : 12}>
+                                <SkillInfo skillID={s} expand={Boolean(i)} />
+                            </Grid>
+                            <Grid size="auto">
+                                {i == 0 && <Text>❯❯❯</Text>}
+                            </Grid>
+                        </Grid>
+                    ))}
+                </Stack>
+            ))}
+        </Stack>
+    );
 }

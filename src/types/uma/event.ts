@@ -53,6 +53,13 @@ export interface Event {
     cardID?: number;
 }
 
+export interface EventNames {
+    id: number | undefined;
+    name: string;
+    nameJP: string;
+}
+[];
+
 export interface EventOptions {
     optionName?: string;
     rewards: EventRewards[];
@@ -124,8 +131,9 @@ export interface EventExtraProps {
     pop?: number;
     stat?: number;
     mood?: number;
+    moodList?: number[];
     statusEffect?: number;
-    eventName?: string;
+    eventName?: number;
     eventNumber?: number;
     eventOption?: number;
     eventOptions?: number[];

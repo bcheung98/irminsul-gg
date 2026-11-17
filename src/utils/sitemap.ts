@@ -6,6 +6,7 @@ const EXCLUDED_DYNAMIC_ROUTES = new Set([
     "genshin/tcg",
     "genshin/tcg-keywords",
     "uma/character-profiles",
+    "uma/evolutions",
     "nte/cartridges",
 ]);
 
