@@ -1,247 +1,55 @@
 // Component imports
 import Text from "@/components/Text";
-import {
-    SkillHint,
-    StatusEffect,
-    Race,
-    RaceMulti,
-    RaceSeries,
-    SkillText,
-    SkillTextRandom,
-} from "./EventTextRender";
+import EventTextRace, { isRaceTag } from "./EventTextRace";
+import EventTextSkill, { isSkillTag } from "./EventTextSkill";
+import EventTextStatus, { isStatusTag } from "./EventTextStatus";
+import EventTextPlain from "./EventTextPlain";
+import { RaceRewards } from "./EventText.components";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
 
-// Helper imports
-import { useCharIDContext, useUmaContext } from "@/context";
-import { getOrdinal } from "@/utils";
-import { getEventText, getStrategy } from "@/helpers/uma/getEventText";
-import { useStore, useServerStore } from "@/stores";
-import { getCharacterEventNames } from "@/helpers/uma/getEventNames";
-
 // Type imports
-import { EventRewards } from "@/types/uma/event";
+import type { EventRewards } from "@/types/uma/event";
 
 export default function EventText({
-    index,
     outcome,
     prefix = "",
 }: {
-    index: number;
     outcome: EventRewards;
     prefix?: string;
 }) {
     const theme = useTheme();
 
-    const charID = useCharIDContext();
-    const { profiles, events } = useUmaContext();
+    const { tag, props, random } = outcome;
 
-    const eventNames = getCharacterEventNames(events);
+    const content = (() => {
+        if (isRaceTag(tag)) {
+            return <EventTextRace event={outcome} />;
+        }
 
-    const { tag, value, data, count, props, random } = outcome;
+        if (isSkillTag(tag)) {
+            return <EventTextSkill event={outcome} />;
+        }
 
-    const character = profiles.find(
-        (character) => character.id === Number(data),
-    );
-    let charName = "";
-    if (character) {
-        charName = character.name || character.nameJP;
-    }
-    const textColor = ["event_chain_end", "rec_enabled"].includes(tag)
-        ? theme.text.uma.highlight
-        : theme.text.primary;
-    const textWeight = ["event_chain_end", "rec_enabled"].includes(tag)
-        ? theme.font.weight.highlight
-        : theme.font.weight.primary;
+        if (isStatusTag(tag)) {
+            return <EventTextStatus event={outcome} />;
+        }
 
-    if (random) prefix = "(Random) ";
-
-    const server = useStore(useServerStore, (state) => state["uma"]);
-
-    function renderEventText(tag: string) {
         switch (tag) {
             case "nl":
-                return index ? <br /> : null;
-            case "skill_hint":
-                return SkillHint({ event: outcome, isHint: true });
-            case "obtain_skill":
-                return SkillHint({ event: outcome, isHint: false });
-            case "lose_skill":
-                return SkillHint({ event: outcome, isHint: false, lose: true });
-            case "obtain_status":
-                return StatusEffect({
-                    effectID: data,
-                    text: "Obtain",
-                });
-            case "heal_status":
-                if (data) {
-                    return StatusEffect({
-                        effectID: data,
-                        text: "Heal",
-                    });
-                } else {
-                    return "Heal a negative status effect";
-                }
-            case "heal_debuff":
-                return SkillHint({ event: outcome, isHint: false, heal: true });
-            case "cond":
-                return StatusEffect({
-                    effectID: props?.statusEffect,
-                    text: "Get the <> status effect",
-                });
-            case "cond_e":
-                return StatusEffect({
-                    effectID: props?.statusEffect,
-                    text: "Have the <> status effect at the end of training",
-                    count,
-                });
-            case "debuff_healed":
-                return SkillText({
-                    event: outcome,
-                    text: "※ <> was healed",
-                });
-            case "debuff_not_healed":
-                return SkillText({
-                    event: outcome,
-                    text: "※ <> was not healed",
-                });
-            case "status_healed":
-                return StatusEffect({
-                    effectID: data,
-                    text: "※ <> was healed",
-                });
-            case "status_not_healed":
-                return StatusEffect({
-                    effectID: data,
-                    text: "※ <> was not healed",
-                });
-            case "se_has":
-                return StatusEffect({
-                    effectID: data,
-                    text: "※ has <>",
-                });
-            case "win":
-                return Race({ race: props?.raceName });
-            case "lose":
-                return Race({ race: props?.raceName, text: "Lose the" });
-            case "do_not_win":
-                return Race({ race: props?.raceName, text: "Do not win the " });
-            case "win_all":
-                return RaceMulti({ races: props?.raceList });
-            case "win_any":
-                return RaceMulti({
-                    races: props?.raceList,
-                    text: "Win any of the following races:",
-                });
-            case "win_or":
-                return RaceMulti({
-                    races: props?.raceList,
-                    text: "Win the",
-                    divider: " or the ",
-                });
-            case "win_on_streak":
-                return Race({
-                    race: value?.toString(),
-                    text: `Without breaking the win streak, win the`,
-                });
-            case "win_as_strat":
-                return Race({
-                    race: value?.toString(),
-                    text: `Win the <> as a ${getStrategy(props?.strategy)}`,
-                });
-            case "win_as_not_strat":
-                return Race({
-                    race: value?.toString(),
-                    text: `Win the <> with any style other than ${getStrategy(
-                        props?.strategy,
-                    )}`,
-                });
-            case "win_n_of":
-                return RaceMulti({
-                    races: props?.raceList,
-                    text: `Win at least ${count} of the following races:`,
-                });
-            case "race_w2":
-                return Race({
-                    race: value?.toString(),
-                    text: `Win the <> twice`,
-                });
-            case "race_pn":
-                return Race({
-                    race: value?.toString(),
-                    text: `Place ${getOrdinal(
-                        props?.position,
-                    )} or better in the`,
-                });
-            case "participate":
-                return Race({
-                    race: props?.raceName,
-                    text: "Run in the",
-                });
-            case "do_not_participate":
-                return Race({
-                    race: props?.raceName,
-                    text: "Do not run in the",
-                });
-            case "obj_win":
-                return Race({
-                    race: value?.toString(),
-                    text: "Win the <> objective race",
-                });
-            case "pick_and_win":
-                return Race({
-                    race: value?.toString(),
-                    text: "Pick the <> as an objective and win",
-                });
-            case "dont_pick_and_win":
-                return Race({
-                    race: value?.toString(),
-                    text: "Enter the <> as an optional race and win",
-                });
-            case "beat_rival":
-                return Race({
-                    race: value?.toString(),
-                    text: `Run in the <> and beat ${charName}`,
-                });
-            case "rival_draw":
-                return Race({
-                    race: value?.toString(),
-                    text: `Both you and ${charName} lose the`,
-                });
-            case "lose_to_rival":
-                return Race({
-                    race: value?.toString(),
-                    text: `Run in the <> and lose to ${charName}`,
-                });
-            case "triple_crown":
-            case "triple_tiara":
-            case "spring_triple_crown":
-            case "autumn_triple_crown_senior":
-            case "autumn_triple_crown_same_year":
-                return RaceSeries({ tag });
-            case "race_change":
-                return Race({
-                    race: data?.toString(),
-                    text: `Objective ${value} changed to`,
-                });
-            case "race_cancelled":
-                return Race({
-                    race: value?.toString(),
-                    text: `Objective race <> cancelled`,
-                });
-            case "race_harder":
-                return Race({
-                    race: value?.toString(),
-                    text: `Increased difficulty of `,
-                });
-            case "skill":
-                return SkillText({ event: outcome });
-            case "skill_random":
-                return SkillTextRandom({ eventHints: props?.eventHints });
-            case "conditions":
+                return <br />;
+            case "rr":
+                return (
+                    <RaceRewards
+                        placement={props?.placement}
+                        raceType={props?.raceType}
+                    />
+                );
+
+            case "sc":
                 return props?.conditions?.map((con, i) => (
-                    <EventText key={i} index={i} outcome={con} prefix="※" />
+                    <EventText key={i} outcome={con} prefix="※" />
                 ));
             case "di_s":
                 return (
@@ -249,6 +57,7 @@ export default function EventText({
                         variant="body2"
                         weight="highlight"
                         sx={{
+                            display: "block",
                             my: 1,
                             color: theme.text.uma.highlight,
                         }}
@@ -257,24 +66,14 @@ export default function EventText({
                     </Text>
                 );
             default:
-                return (
-                    <span style={{ color: textColor, fontWeight: textWeight }}>
-                        {getEventText({
-                            event: outcome,
-                            profiles,
-                            charID,
-                            server,
-                            eventNames,
-                        })}
-                    </span>
-                );
+                return <EventTextPlain event={outcome} />;
         }
-    }
+    })();
 
     return (
         <Text variant="body2" component="span">
-            {`${prefix} `}
-            {renderEventText(tag)}
+            {random ? "(Random) " : prefix ? `${prefix} ` : null}
+            {content}
         </Text>
     );
 }

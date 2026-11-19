@@ -1,3 +1,5 @@
+import { EventRewards } from "./event";
+
 export interface Race {
     id: string;
     raceID: number;
@@ -19,3 +21,22 @@ export interface Racetrack {
 export interface RaceSeries {
     [key: string]: { name: string; races: string[] };
 }
+
+export interface RaceTypeOption {
+    label: string;
+    value: string;
+}
+
+export interface RaceRewardEntry {
+    placement: [number, number] | null;
+    rewards: EventRewards[];
+    bond?: number | null;
+}
+
+export interface RaceRewardTable {
+    base: RaceRewardEntry[];
+    postTracenKen?: RaceRewardEntry[];
+    fixed?: boolean;
+}
+
+export type PlacementRange = [number, number];

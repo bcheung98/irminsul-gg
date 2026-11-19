@@ -19,8 +19,8 @@ import {
 import { didNotExist } from "@/data/uma/history";
 
 // Type imports
-import { UmaCharacter } from "@/types/uma";
-import { CharacterEvents, Event } from "@/types/uma/event";
+import type { UmaCharacter } from "@/types/uma";
+import type { CharacterEvents, Event } from "@/types/uma/event";
 
 export default function EventCharacter({
     character,
@@ -37,6 +37,7 @@ export default function EventCharacter({
     let outfitEvents: Event[] | undefined = [];
     let eventsWithChoices: Event[] | undefined = [];
     let recEvents: Event[] | undefined = [];
+    let raceEvents: Event[] | undefined = [];
     let secretEvents: Event[] | undefined = [];
     let otherEvents: Event[] = [];
 
@@ -54,32 +55,52 @@ export default function EventCharacter({
     if (!characterEvents) return <Loader />;
 
     let commonEvents = eventsCommon({ props: characterEvents.props });
-    eventsWithChoices = characterEvents.events.character?.filter(
-        (event) => event.options.length > 1 || event.forceHasChoices,
-    );
-    eventsWithChoices?.push(
-        eventSlowMetabolism({ props: characterEvents.props }),
-    );
-    recEvents = characterEvents.events.recreation;
-    secretEvents = characterEvents.events.secret
-        ?.filter((event) => didNotExist(server, event.didNotExist))
-        .filter((event) =>
-            event.conditions?.some(
-                (con) =>
-                    !con.tag.startsWith("obj_") && con.tag !== "participate",
-            ),
+
+    if (characterEvents.events.character) {
+        eventsWithChoices = characterEvents.events.character.filter(
+            (event) => event.options.length > 1 || event.forceHasChoices,
         );
+        eventsWithChoices.push(
+            eventSlowMetabolism({ props: characterEvents.props }),
+        );
+
+        secretEvents.push(
+            ...characterEvents.events.character
+                .filter((event) => event.secret)
+                .filter((event) => didNotExist(server, event.didNotExist)),
+        );
+
+        characterEvents.events.character
+            .filter((event) => {
+                if (
+                    event.forceHasChoices !== undefined &&
+                    !event.forceHasChoices
+                ) {
+                    return true;
+                }
+                return event.options.length === 1;
+            })
+            .filter((event) => !event.secret)
+            .forEach((event) => otherEvents.push(event));
+    }
+
+    if (characterEvents.events.recreation) {
+        recEvents = characterEvents.events.recreation;
+    }
+
+    if (characterEvents.events.race) {
+        secretEvents.push(
+            ...characterEvents.events.race.filter((event) => event.secret),
+        );
+
+        raceEvents = characterEvents.events.race.filter(
+            (event) => !event.secret,
+        );
+    }
+
     eventMisc({ props: characterEvents.props }).forEach((event) =>
         otherEvents.push(event),
     );
-    characterEvents.events.character
-        ?.filter((event) => {
-            if (event.forceHasChoices !== undefined && !event.forceHasChoices) {
-                return true;
-            }
-            return event.options.length == 1;
-        })
-        .forEach((event) => otherEvents.push(event));
 
     const eventList = {
         "Outfit Events": outfitEvents,
@@ -87,6 +108,7 @@ export default function EventCharacter({
         "Recreation Events": recEvents,
         "Secret Events": secretEvents,
         "Special Events": commonEvents,
+        "Race Events": raceEvents,
         "After a Race": eventsRace,
         "Other Events": otherEvents,
     };

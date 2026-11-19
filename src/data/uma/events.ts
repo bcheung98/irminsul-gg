@@ -1,4 +1,4 @@
-import { Event, EventPropData } from "@/types/uma/event";
+import type { Event, EventPropData } from "@/types/uma/event";
 
 export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
     return [
@@ -39,7 +39,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+20",
                         },
                     ],
@@ -47,7 +47,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "skill_points",
+                            tag: "pt",
                             value: "+20",
                         },
                     ],
@@ -61,7 +61,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+30",
                         },
                     ],
@@ -69,7 +69,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "all_stats",
+                            tag: "5s",
                             value: "+5",
                         },
                     ],
@@ -77,7 +77,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "skill_points",
+                            tag: "pt",
                             value: "+35",
                         },
                     ],
@@ -91,19 +91,19 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "-5",
                         },
                         {
-                            tag: "last_trained_stat",
+                            tag: "ls",
                             value: "+5",
                         },
                         {
-                            tag: "heal_status_one",
+                            tag: "he",
                             random: true,
                         },
                         {
-                            tag: "bond",
+                            tag: "bo",
                             value: "+5",
                             data: 9002,
                         },
@@ -112,7 +112,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+5",
                         },
                     ],
@@ -126,7 +126,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "power",
+                            tag: "po",
                             value: "+10",
                         },
                     ],
@@ -134,7 +134,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "guts",
+                            tag: "gu",
                             value: "+10",
                         },
                     ],
@@ -148,15 +148,15 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                         {
-                            tag: "last_trained_stat",
+                            tag: "ls",
                             value: "-5",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 6,
                             random: true,
                         },
@@ -165,15 +165,15 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                         {
-                            tag: "last_trained_stat",
+                            tag: "ls",
                             value: "-10",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 6,
                             random: true,
                         },
@@ -181,7 +181,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                             tag: "di",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 10,
                         },
                     ],
@@ -195,24 +195,24 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+10",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-2",
                         },
                         {
-                            tag: "last_trained_stat",
+                            tag: "ls",
                             value: "-10",
                         },
                         {
-                            tag: "random_stats",
+                            tag: "rs",
                             value: "-10",
                             data: 2,
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 6,
                             random: true,
                         },
@@ -221,20 +221,20 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-3",
                         },
                         {
-                            tag: "last_trained_stat",
+                            tag: "ls",
                             value: "-10",
                         },
                         {
-                            tag: "random_stats",
+                            tag: "rs",
                             value: "-10",
                             data: 2,
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 6,
                             random: true,
                         },
@@ -242,11 +242,11 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                             tag: "di",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+10",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 10,
                         },
                     ],
@@ -261,20 +261,20 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                     chances: [30, 70],
                     rewards: [
                         {
-                            tag: "all_stats",
+                            tag: "5s",
                             value: "+20",
                         },
                         { tag: "di" },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-2",
                         },
                         {
-                            tag: "all_stats",
+                            tag: "5s",
                             value: "-15",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 1,
                         },
                     ],
@@ -283,22 +283,22 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                     chances: [45, 55],
                     rewards: [
                         {
-                            tag: "obtain_skill",
+                            tag: "sg",
                             data: 200352,
                         },
                         {
-                            tag: "obtain_skill",
+                            tag: "sg",
                             data: 200382,
                         },
                         {
                             tag: "di",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "-20",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-2",
                         },
                     ],
@@ -307,29 +307,29 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                     chances: [70, 30],
                     rewards: [
                         {
-                            tag: "max_energy",
+                            tag: "me",
                             value: "+12",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+40",
                         },
                         {
-                            tag: "heal_status_all",
+                            tag: "ha",
                         },
                         {
                             tag: "di",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "-20",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-2",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 1,
                         },
                     ],
@@ -338,30 +338,30 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                     chances: [85, 15],
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+20",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "+1",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 8,
                         },
                         {
                             tag: "di",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "-10/-20",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 6,
                             random: true,
                         },
@@ -370,7 +370,7 @@ export const eventsCommon = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+10",
                         },
                     ],
@@ -392,11 +392,11 @@ export const eventSlowMetabolism = ({
             {
                 rewards: [
                     {
-                        tag: "energy",
+                        tag: "en",
                         value: "+10",
                     },
                     {
-                        tag: "skill_points",
+                        tag: "pt",
                         value: "+5",
                     },
                 ],
@@ -405,34 +405,34 @@ export const eventSlowMetabolism = ({
                 chances: [90, 10],
                 rewards: [
                     {
-                        tag: "energy",
+                        tag: "en",
                         value: "+30",
                     },
                     {
-                        tag: "skill_points",
+                        tag: "pt",
                         value: "+10",
                     },
                     {
                         tag: "di",
                     },
                     {
-                        tag: "energy",
+                        tag: "en",
                         value: "+30",
                     },
                     {
-                        tag: "skill_points",
+                        tag: "pt",
                         value: "+10",
                     },
                     {
-                        tag: "speed",
+                        tag: "sp",
                         value: "-5",
                     },
                     {
-                        tag: "power",
+                        tag: "po",
                         value: "+5",
                     },
                     {
-                        tag: "obtain_status",
+                        tag: "se",
                         data: 4,
                     },
                 ],
@@ -450,11 +450,11 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: props?.masterTrainer || "random_stats",
+                            tag: props?.masterTrainer || "rs",
                             value: "+10",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 10,
                             random: true,
                         },
@@ -469,11 +469,11 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "+1",
                         },
                         {
-                            tag: "skill_points",
+                            tag: "pt",
                             value: "+30",
                         },
                     ],
@@ -487,11 +487,11 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "all_stats",
+                            tag: "5s",
                             value: "+5",
                         },
                         {
-                            tag: "skill_points",
+                            tag: "pt",
                             value: "+5",
                         },
                     ],
@@ -505,7 +505,7 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                     ],
@@ -519,11 +519,11 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "-10",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                     ],
@@ -537,19 +537,19 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "all_stats",
+                            tag: "5s",
                             value: "+5",
                         },
                         {
-                            tag: "skill_points",
+                            tag: "pt",
                             value: "+30",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "+2",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 7,
                             random: true,
                         },
@@ -564,30 +564,30 @@ export const eventMisc = ({ props }: { props?: EventPropData }): Event[] => {
                 {
                     rewards: [
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+15",
                         },
                         {
-                            tag: "guts",
+                            tag: "gu",
                             value: "-5",
                         },
                         {
-                            tag: "mood",
+                            tag: "mo",
                             value: "-1",
                         },
                         {
                             tag: "di",
                         },
                         {
-                            tag: "energy",
+                            tag: "en",
                             value: "+15",
                         },
                         {
-                            tag: "guts",
+                            tag: "gu",
                             value: "-5",
                         },
                         {
-                            tag: "obtain_status",
+                            tag: "se",
                             data: 2,
                         },
                     ],
@@ -604,66 +604,23 @@ export const eventsRace: Event[] = [
         options: [
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-15",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+10 / +8 / +5",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-15" },
+                    { tag: "rr", props: { raceType: "optional_win" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-5",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+10 / +8 / +5",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-5" },
+                    { tag: "rr", props: { raceType: "optional_win" } },
+                    { tag: "race_related_hint", random: true },
                     { tag: "di" },
-                    {
-                        tag: "energy",
-                        value: "-20",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+10 / +8 / +5",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-20" },
+                    { tag: "rr", props: { raceType: "optional_win" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
         ],
-        headers: ["race_rewards"],
     },
     {
         name: "Solid Showing",
@@ -671,66 +628,23 @@ export const eventsRace: Event[] = [
         options: [
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-20",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+8 / +5 / +3",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-20" },
+                    { tag: "rr", props: { raceType: "optional_place" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-10",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+8 / +5 / +3",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-10" },
+                    { tag: "rr", props: { raceType: "optional_place" } },
+                    { tag: "race_related_hint", random: true },
                     { tag: "di" },
-                    {
-                        tag: "energy",
-                        value: "-30",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+8 / +5 / +3",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-30" },
+                    { tag: "rr", props: { raceType: "optional_place" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
         ],
-        headers: ["race_rewards"],
     },
     {
         name: "Defeat",
@@ -738,66 +652,23 @@ export const eventsRace: Event[] = [
         options: [
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-25",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-25" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-15",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-15" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "race_related_hint", random: true },
                     { tag: "di" },
-                    {
-                        tag: "energy",
-                        value: "-35",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
+                    { tag: "en", value: "-35" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "race_related_hint", random: true },
                 ],
             },
         ],
-        headers: ["race_rewards"],
     },
     {
         name: "Etsuko's Elated Coverage",
@@ -805,40 +676,15 @@ export const eventsRace: Event[] = [
         options: [
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-15",
-                    },
-                    {
-                        tag: "mood",
-                        value: "+1",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+10 / +8 / +5",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+45 / +35 / +30",
-                    },
-                    {
-                        tag: "fans",
-                        value: "+500",
-                    },
-                    {
-                        tag: "race_related_hint",
-                        random: true,
-                    },
-                    {
-                        tag: "bond",
-                        value: "+15",
-                        data: 9003,
-                    },
+                    { tag: "en", value: "-15" },
+                    { tag: "mo", value: "+1" },
+                    { tag: "rr", props: { raceType: "optional_win" } },
+                    { tag: "fa", value: "+500" },
+                    { tag: "race_related_hint", random: true },
+                    { tag: "bo", value: "+15", data: 9003 },
                 ],
             },
         ],
-        headers: ["race_rewards"],
     },
     {
         name: "Etsuko's Exhaustive Coverage",
@@ -846,78 +692,24 @@ export const eventsRace: Event[] = [
         options: [
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-25",
-                    },
-                    {
-                        tag: "mood",
-                        value: "-1",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "bond",
-                        value: "-10",
-                        data: 9003,
-                    },
-                    {
-                        tag: "di",
-                    },
-                    {
-                        tag: "energy",
-                        value: "-15",
-                    },
-                    {
-                        tag: "mood",
-                        value: "+1",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "bond",
-                        value: "+15",
-                        data: 9003,
-                    },
+                    { tag: "en", value: "-25" },
+                    { tag: "mo", value: "-1" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "bo", value: "-10", data: 9003 },
+                    { tag: "di" },
+                    { tag: "en", value: "-15" },
+                    { tag: "mo", value: "+1" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "bo", value: "+15", data: 9003 },
                 ],
             },
             {
                 rewards: [
-                    {
-                        tag: "energy",
-                        value: "-20",
-                    },
-                    {
-                        tag: "random_stats",
-                        value: "+4 / +3 / +0",
-                        data: 1,
-                    },
-                    {
-                        tag: "skill_points",
-                        value: "+25 / +20 / +10",
-                    },
-                    {
-                        tag: "bond",
-                        value: "+10",
-                        data: 9003,
-                    },
+                    { tag: "en", value: "-20" },
+                    { tag: "rr", props: { raceType: "optional_lose" } },
+                    { tag: "bo", value: "+10", data: 9003 },
                 ],
             },
         ],
-        headers: ["race_rewards"],
     },
 ];

@@ -31,7 +31,7 @@ export default function EventRewards(props: {
                         </Text>
                     )}
                     {outcome.map((reward, index) => (
-                        <EventText key={index} index={index} outcome={reward} />
+                        <EventText key={index} outcome={reward} />
                     ))}
                 </Stack>
             ))}
@@ -41,7 +41,7 @@ export default function EventRewards(props: {
 
 function getRewards(rewards: EventRewards[]) {
     if (!rewards) {
-        return [[{ tag: "nothing" }]];
+        return [[{ tag: "no" }]];
     }
     const res: EventRewards[][] = [];
     const tags = rewards.map((reward) => reward.tag);

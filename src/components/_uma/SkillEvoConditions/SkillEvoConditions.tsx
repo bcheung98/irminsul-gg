@@ -1,6 +1,6 @@
 // Component imports
 import Text from "@/components/Text";
-import EventText from "../TrainingEvents/EventText";
+import EventText from "@/components/_uma/TrainingEvents/EventText";
 
 // MUI imports
 import { useTheme } from "@mui/material/styles";
@@ -43,7 +43,7 @@ export default function SkillEvoConditions({
                         <Box key={index} sx={{ p: 1 }}>
                             {condition.map((con, i) => (
                                 <Box key={i}>
-                                    <EventText index={i} outcome={con} />
+                                    <EventText outcome={con} />
                                     {i < condition.length - 1 && (
                                         <Text
                                             variant="body2"

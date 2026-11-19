@@ -27,6 +27,7 @@ export interface EventPropData {
 export interface EventData {
     character?: Event[];
     recreation?: Event[];
+    race?: Event[];
     secret?: Event[];
     outfit?: Event[];
     common?: Event[];
@@ -51,6 +52,8 @@ export interface Event {
     forceHasChoices?: boolean;
     scenarioLink?: number;
     cardID?: number;
+    turn?: number;
+    secret?: boolean;
 }
 
 export interface EventNames {
@@ -58,7 +61,6 @@ export interface EventNames {
     name: string;
     nameJP: string;
 }
-[];
 
 export interface EventOptions {
     optionName?: string;
@@ -88,7 +90,7 @@ export interface CharacterEvents extends Events {
 }
 export type CharacterEventData = Pick<
     EventData,
-    "character" | "recreation" | "secret" | "outfit"
+    "character" | "recreation" | "race" | "secret" | "outfit"
 >;
 
 export interface SupportEvents extends Events {
@@ -123,11 +125,13 @@ export interface EventExtraProps {
     length?: number;
     raceName?: number | string;
     raceList?: (number | string)[];
+    raceType?: string;
     trackName?: number | string;
     trackList?: (number | string)[];
     trackCond?: number;
     trackConds?: number[];
     position?: number;
+    placement?: number[];
     pop?: number;
     stat?: number;
     mood?: number;
@@ -142,7 +146,11 @@ export interface EventExtraProps {
     charList?: number[];
     conditions?: EventRewards[];
     eventHints?: EventSubHint;
+    date?: EventDate;
+    dateRange?: [EventDate, EventDate];
 }
+
+export type EventDate = [number, number, number];
 
 export type EventSubHint = Required<EventRewards>[];
 
