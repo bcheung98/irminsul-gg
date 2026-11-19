@@ -6,4 +6,4 @@ export * from "./EventPopup";
 export * from "./EventRewards";
 export * from "./EventSupport";
 export * from "./EventText";
-export * from "./EventTextRender";
+export * from "./EventText.components";

@@ -22,7 +22,7 @@ export default function EventConditions({
                 <ul>
                     {conditions.map((con, index) => (
                         <li key={index}>
-                            <EventText index={index} outcome={con} />
+                            <EventText outcome={con} />
                         </li>
                     ))}
                 </ul>
