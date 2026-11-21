@@ -34,7 +34,7 @@ function incrementVersionNumber(version: string, game: Game) {
         return "7.0";
     }
 
-    if (game === "endfield" && versionNumber === "1.7") {
+    if (game === "endfield" && versionNumber === "1.8") {
         return "2.0";
     }
 
